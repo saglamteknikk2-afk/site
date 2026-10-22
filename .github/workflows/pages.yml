@@ -38,7 +38,7 @@ jobs:
           find preview-parts -name 'part-*.txt' -print | LC_ALL=C sort | xargs cat | tr -d '\n\r' | base64 -d > site-preview.zip
           echo '1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b  site-preview.zip' | sha256sum -c -
           mkdir -p _site
-          unzip -q site-preview.zip -d _site
+          unzip -oq site-preview.zip -d _site
           test -s _site/index.html
           grep -qi 'noindex' _site/index.html
           test ! -f _site/api.php
