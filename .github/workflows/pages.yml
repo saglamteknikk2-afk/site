@@ -1,0 +1,52 @@
+name: Sağlam Teknik Test Sitesi — Ön İzleme Yayını
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site-preview.zip'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: saglam-test-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ hashFiles('site-preview.zip') != '' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kaynak dosyaları al
+        uses: actions/checkout@v4
+
+      - name: GitHub Pages yapılandır
+        uses: actions/configure-pages@v5
+
+      - name: Test sitesini hazırla
+        run: |
+          mkdir -p _site
+          unzip -q site-preview.zip -d _site
+          test -s _site/index.html
+          grep -qi 'noindex' _site/index.html
+          test ! -f _site/api.php
+          test ! -f _site/owner-admin.html
+          test ! -f _site/telegram-setup.php
+          echo 'Test paketi doğrulandı.'
+
+      - name: Sayfa dosyalarını aktar
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Ön izlemeyi yayınla
+        id: deployment
+        uses: actions/deploy-pages@v4
