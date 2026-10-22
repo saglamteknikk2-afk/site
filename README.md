@@ -1,13 +1,14 @@
-# Sağlam Teknik – Krem Renkli Test Sitesi
+# Sağlam Teknik — Krem Renkli Test Sitesi
 
-Bu depo yalnızca yeni krem renkli kombi/klima sitesinin **statik test ön izlemesi** içindir.
+Bu GitHub deposu, kullanıcının **site kremrenklı.zip** dosyasındaki tasarımın gerçek telefondan, tabletten ve bilgisayardan test edilebilmesi için ayrılmış bir **statik ön izleme** projesidir.
 
-**Ana saglamkombiklima.com.tr sitesi** ve **saglam-ai-usta Usta Topluluğu** kodları değiştirilmez.
+- Ana site **saglamkombiklima.com.tr** değişmedi. `saglam-ai-usta` Usta Topluluğu deposuna dokunulmadı.
+- Ön izleme kullanıcıya ait **saglamkombiklima.com** alan adına bağlanmış değildir; yalnızca GitHub Pages varsayılan adresinde sunulur.
+- **PHP/Gemini/Telegram/admin/veritabanı/müşteri kayıtları bu statik ön izlemede çalışmaz.** Krem renkli HTML/CSS/JS, görseller ve bağlantıların görünümü test edilir.
+- Gizli anahtarlar veya müşteri kayıtları depoya konmamıştır. Tüm kullanıcı sayfalarında `noindex`, ayrıca `robots.txt` ile botlara erişim engeli bulunur.
+- `preview-parts/part-*.txt` dosyaları güvenli ön izleme ZIP arşivinin base64 parçalarıdır. GitHub Actions otomatik birleştirir, SHA256 doğrular ve GitHub Pages'e yayınlar.
+- GitHub'da **Settings → Pages → Build and deployment → Source: GitHub Actions** etkinleştirilmeden dışarıdan açılan adres çalışmayabilir.
 
-Klasördeki `preview-parts/chunk-*.txt` dosyaları, 487 statik dosyadan oluşan temizlenmiş test ZIP'inin kodlanmış parçalarıdır. GitHub Actions parçaları SHA-256 ile doğrular, açar ve GitHub Pages'e aktarır.
+**Ön izleme adresi (Pages etkinleştirilirse):** https://saglamteknikk2-afk.github.io/site/
 
-**Önemli:** GitHub Pages PHP çalıştırmadığından Gemini, Telegram, servis kaydı, gerçek veritabanı ve yönetici sistemi bu ön izleme ortamında devre dışıdır. Bu depo hiçbir gizli Gemini anahtarı veya müşteri verisi içermez. Test sayfalarında noindex işaretlemesi ve robots.txt engeli vardır.
-
-Pages etkinse test adresi: https://saglamteknikk2-afk.github.io/site/
-
-İlk etkinleştirme: GitHub depo **Settings → Pages → Build and deployment → Source: GitHub Actions**. Başarılı yayın kontrolü: **Actions → Saglam Teknik Krem Test Yayini**.
+Kaynak paket SHA-256: `1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b`

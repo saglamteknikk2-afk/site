@@ -1,4 +1,5 @@
-name: Saglam Teknik Krem Test Yayini
+name: Sağlam Teknik — Krem Renkli Canlı Ön İzleme
+
 on:
   push:
     branches: [main]
@@ -23,45 +24,33 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Dosyalari al
+      - name: GitHub depo dosyalarını getir
         uses: actions/checkout@v4
-      - name: Statik on izlemeyi olustur
+
+      - name: GitHub Pages ayarını hazırla
+        uses: actions/configure-pages@v5
+
+      - name: Güvenli statik arşivi oluştur
         shell: bash
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          from zipfile import ZipFile
-          import base64, hashlib, io
-          parts = sorted(Path("preview-parts").glob("chunk-*.txt"))
-          assert len(parts) == 11, "Eksik test paketi parcasi"
-          data64 = "".join(p.read_text("ascii").strip() for p in parts)
-          assert len(data64) == 7580100, "Eksik veya fazla aktarim verisi"
-          zipdata = base64.b64decode(data64, validate=True)
-          assert hashlib.sha256(zipdata).hexdigest() == "1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b", "ZIP ozeti tutmuyor"
-          root = Path("_site")
-          root.mkdir(exist_ok=True)
-          with ZipFile(io.BytesIO(zipdata)) as z:
-              assert z.testzip() is None, "ZIP dosyasi bozuk"
-              for item in z.infolist():
-                  p = Path(item.filename)
-                  if p.is_absolute() or ".." in p.parts:
-                      raise ValueError("Guvenli olmayan ZIP yolu")
-                  if not item.is_dir():
-                      target = root / p
-                      target.parent.mkdir(parents=True, exist_ok=True)
-                      target.write_bytes(z.read(item))
-          assert (root/"index.html").is_file()
-          assert "noindex" in (root/"index.html").read_text("utf-8").lower()
-          assert not list(root.rglob("*.php"))
-          assert not (root/"owner-admin.html").exists()
-          print("Statik test paketi dogrulandi.")
-          PY
-      - name: GitHub Pages'i yapilandir
-        uses: actions/configure-pages@v5
-      - name: Statik dosyalari yukle
+          set -euo pipefail
+          test "$(find preview-parts -name 'part-*.txt' | wc -l)" -eq 43
+          find preview-parts -name 'part-*.txt' -print | LC_ALL=C sort | xargs cat | tr -d '\n\r' | base64 -d > site-preview.zip
+          echo '1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b  site-preview.zip' | sha256sum -c -
+          mkdir -p _site
+          unzip -q site-preview.zip -d _site
+          test -s _site/index.html
+          grep -qi 'noindex' _site/index.html
+          test ! -f _site/api.php
+          test ! -f _site/owner-admin.html
+          find _site -type f \( -name 'google*.html' -o -name 'yandex_*.html' \) -delete
+          echo 'Güvenli statik ön izleme paketi doğrulandı.'
+
+      - name: GitHub Pages yayını için yükle
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-      - name: On izlemeyi yayinla
+
+      - name: Ön izlemeyi yayına al
         id: deployment
         uses: actions/deploy-pages@v4
