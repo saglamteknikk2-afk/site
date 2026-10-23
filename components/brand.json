@@ -1,18 +1,17 @@
 {
-  "logo": "/assets/brand/logo-flame-ice.png",
-  "favicon": "/assets/brand/favicon-flame-ice.png",
-  "source": "User-approved flame-and-ice redesign of the original blue S ribbon, generated using the original as a local image reference. Transparent padding cropped; resized for header and favicon.",
-  "source_sha256": "5103095a3a4c821a9b971d43af208deabca5ec5b694e4e933d6c515188393878",
+  "logo": "/assets/brand/logo-ribbon.png",
+  "favicon": "/assets/brand/favicon.png",
+  "source": "Kullanıcının sağladığı özgün mavi S kurdelesinin depoda bulunan temiz PNG sürümü. Küçük başlık, mobil ve favicon boyutlarında okunabilirlik için seçildi.",
   "logo_dimensions": [
-    172,
+    216,
     256
   ],
   "favicon_dimensions": [
     64,
     64
   ],
-  "alt": "Sağlam Teknik alev ve buz S simgesi",
+  "alt": "Sağlam Teknik mavi S kurdele simgesi",
   "logo_aliases": [
-    "/assets/brand/logo-ribbon.png"
+    "/assets/brand/logo-flame-ice.png"
   ]
 }
