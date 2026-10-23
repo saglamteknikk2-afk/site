@@ -22,6 +22,12 @@
 
 Google Search, Gemini, ChatGPT ve diğer servislerin tarama/eğitim kontrolleri birbirinin yerine geçmez. Canlı hesap katılım ayarları veya bot erişimi bu depo üzerinden doğrulanmış değildir. Reklam satın almak organik görünürlük satın almak anlamına gelmez.
 
+Son yerel SEO incelemesinde 203 ziyaretçi sayfasından 404 ve seçim ekranı dışındaki 201 sayfanın sitemap'te tek kez yer aldığı; canonical adreslerinin doğru ve tek olduğu görüldü. FAQ işaretlemesindeki soru/cevaplar görünür HTML ile eşleşiyordu. Bu, JSON-LD'nin arama sonucu zengin görünümü veya AI atfı kazanacağını kanıtlamaz. `check_site.py` bağlantı, H1, JSON sözdizimi ve önizleme ayrımına ek olarak üretimde tek self canonical ve sitemap ile dizine uygun sayfaların bire bir eşleşmesini denetler. İçerik ve kaynak doğruluğu ayrıca incelenmelidir.
+
+Beş semt sayfası şu aşamada kısa yerel giriş ve ilgili hizmet/ilçe bağlantıları sunan gezinme rehberleridir; bağımsız araştırılmış uzun yerel makaleler sayılmamalıdır. Bu sayfalarda ayrı organik hedef büyütülecekse gerçek yerel bilgi ve kullanıcı ihtiyacı eklenmeli; ek değer oluşmuyorsa ilgili ilçe rehberinde toplama değerlendirilmelidir. Kısa sayfa veya ortak hizmet açıklaması tek başına spam ya da ceza kanıtı değildir. Mevcut model verisinde Baykan–kombi ile General, Altus, İklimsa, Vessen ve Copa–klima için doğrulanmış modele özel kod tablosu eksikleri kayıtlıdır; katalog seçeneği bulunması bu boşluğu kapatmaz.
+
+Hız değerlendirmesi gerçek sunucuda yapılmalıdır. Ana sayfa model ve organik katalog dosyalarını başlangıçta yükler; ham dosya boyutu, sıkıştırılmış ağ aktarımı veya Core Web Vitals sonucu değildir. Yayın sonrası ölçümde bu dosyaların indirme/ayrıştırma maliyeti sorun oluşturursa ihtiyaca göre yükleme ve önbellek davranışı incelenebilir. Yerel taklit ağdaki ekran görüntüleri, gerçek mobil bağlantı hızını kanıtlamaz.
+
 ## AI, haritalar ve özel yapılandırma
 
 Gemini anahtarları yalnız web kökü dışındaki `private/saglam-teknik/site_apileri,.txt` içinde tutulur; `site_apileri.txt` eski adı da okunabilir, virgüllü dosya önceliklidir. Mevcut dosya ve veritabanı korunur. Farklı dizilimde `SAGLAM_PRIVATE_DIR` kullanılır; özel klasörün web kökü içine veya buraya yönlenen sembolik bağlantıya yerleştirilmesi reddedilir. Gerçek anahtarlar Git'e, statik önizlemeye, loglara veya dağıtım ZIP'ine eklenmez. Örneklerin gerçek yeri `templates/private/saglam-teknik/` klasörüdür.
@@ -46,7 +52,7 @@ Reklam hesabı bağlantısı, harcama yetkisi veya çalışan otomatik reklam y�
 
 ## Kontrollerin kapsamı ve tekrar çalıştırma
 
-İnceleme sırasında mevcut yerel raporlarda önizlemenin 203 ziyaretçi sayfasının tamamında `noindex` bulunduğu ve önizlemede PHP olmadığı görüldü. Derleme kontrolleri, önizleme engelleyicisi ve model akışı raporları yerel kanıttır. Son yerel tarayıcı raporu beş görünümün tamamında başarılıdır: eksik görsel, JavaScript hatası, yatay taşma veya gerçek API/dış ağ isteği bulunmadı. Armut rozeti gerçekten yüklendi ve görünür; mobilde kedi-köpek fotoğrafı kesilmeden gösterildi. Model akışında 32 kontrol, önizleme engelleyicisinde 15 doğrulama geçti. Önceki SVG üretim ve kontrast sorunları giderildi. Bu yerel sonuçlar canlı sağlayıcı bağlantısını kanıtlamaz; GitHub Actions yayın sonucu ayrıca doğrulanmalıdır.
+Son yerel kontrolde 203 önizleme sayfası noindex, üretimde 201 dizine uygun sayfa bulundu; her iki modda bağlantı ve SEO kontrolleri hatasızdır. 35 birim testi, tek AI Usta akışında 45 tarayıcı kontrolü, ortak marka kaynağında 21 tarayıcı kontrolü ve önizleme engelleyicisinde 15 kontrol geçti. Son görsel tarayıcı raporundaki yedi görünümde 320–1440 piksel aralığında eksik görsel, JavaScript hatası veya yatay taşma yoktur. Armut rozeti ve ortak mavi ribbon logo yüklendi; on AI adım görüntüsü ayrıca kaydedildi. Testlerde gerçek AI/ileti/form isteği gönderilmedi. Bu yerel sonuçlar canlı sağlayıcı bağlantısını kanıtlamaz; GitHub Actions yayın sonucu ayrıca doğrulanır.
 
 ```sh
 python scripts/build_site.py --mode preview --output _site --base-path /site

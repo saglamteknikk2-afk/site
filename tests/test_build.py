@@ -31,6 +31,8 @@ class BuildTests(unittest.TestCase):
         (cls.root/'overrides/assets/premium.js').write_text('window.premium=true;')
         (cls.root/'overrides/private').mkdir();(cls.root/'overrides/private/example.db').write_text('not public')
         (cls.root/'components').mkdir()
+        shutil.copy2(ROOT/'components/brand.json',cls.root/'components/brand.json')
+        shutil.copytree(ROOT/'overrides/assets/brand',cls.root/'overrides/assets/brand')
         (cls.root/'components/header.html').write_text('<header class="at-header" data-shared="header"><a href="/index.html">Sağlam Teknik</a></header>')
         (cls.root/'components/footer.html').write_text('<footer class="at-footer" data-shared="footer">Ortak alt bilgi</footer><nav class="at-mobile-contact">Tek menü</nav>')
         cls.preview=Path(cls.temp.name)/'preview';cls.production=Path(cls.temp.name)/'production'
@@ -48,8 +50,17 @@ class BuildTests(unittest.TestCase):
     def test_shared_mobile_nav_not_duplicated(self):
         for page in self.preview.glob('*.html'):self.assertEqual(page.read_text().count('class="at-mobile-contact"'),1)
     def test_private_never_in_preview(self):self.assertFalse((self.preview/'private').exists())
-    def test_legacy_favicon_uses_small_svg(self):
-        for page in self.preview.glob('*.html'):self.assertNotRegex(page.read_text(),r'rel="icon"[^>]*logo\.png')
+    def test_legacy_logo_and_favicon_use_supplied_artwork(self):
+        for page in self.preview.glob('*.html'):
+            text=page.read_text()
+            self.assertRegex(text,r'rel="icon"[^>]*href="/site/assets/brand/favicon\.png"')
+            self.assertNotRegex(text,r'''["'](?:/site/|/|\./)?logo\.(?:svg|png)["']''')
+    def test_brand_rewrites_legacy_jsonld_and_relative_references(self):
+        brand=json.loads((self.root/'components/brand.json').read_text())
+        source='{"logo":"https://saglamkombiklima.com.tr/logo.png"}<img src="/logo.svg"><img src="logo.png">'
+        actual=builder.apply_brand(source,brand)
+        self.assertIn('https://saglamkombiklima.com.tr/assets/brand/logo-ribbon.png',actual)
+        self.assertEqual(actual.count('assets/brand/logo-ribbon.png'),3)
     def test_package_has_webroot_not_parent_folder(self):
         archive=Path(self.temp.name)/'production.zip';names=packager.package(self.production,archive)
         self.assertIn('index.html',names);self.assertIn('api.php',names)

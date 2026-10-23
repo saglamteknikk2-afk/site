@@ -97,6 +97,17 @@ def production_seo(text: str, tags: list[str]) -> str:
         additions.append(tag)
     return insert_head(text, ''.join(additions))
 
+def apply_brand(text: str, brand: dict) -> str:
+    """Replace legacy business-logo references with the supplied image, centrally."""
+    def favicon(match):
+        tag = re.sub(r'href=["\'][^"\']*["\']', 'href="' + brand['favicon'] + '"', match[0])
+        tag = re.sub(r'\s+(?:type|sizes)=["\'][^"\']*["\']', '', tag)
+        return tag[:-1] + ' type="image/png">'
+    text = re.sub(r'<link\b(?=[^>]*rel=["\'](?:shortcut )?icon["\'])[^>]*>', favicon, text, flags=re.I)
+    text = re.sub(r'(?P<quote>["\'])(?P<origin>https://saglamkombiklima\.com\.tr)?(?:/site/|/|\./)?logo\.(?:png|svg)(?P=quote)',
+                  lambda m: m['quote'] + (m['origin'] or '') + brand['logo'] + m['quote'], text)
+    return text
+
 def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     output = output.resolve()
     protected = [root / name for name in ('overrides', 'server', 'scripts', 'tests', 'docs', 'components', 'preview-parts', '.git')]
@@ -106,6 +117,16 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     if mode == 'production':
         overlay(files, root / 'server')
     overlay(files, root / 'overrides')
+    brand = json.loads((root / 'components/brand.json').read_text())
+    for key in ('logo', 'favicon'):
+        if not brand[key].startswith('/assets/brand/') or brand[key].lstrip('/') not in files:
+            raise ValueError('Missing canonical brand asset: ' + key)
+    registry_path = root / 'scripts/brand_registry.py'
+    if registry_path.exists():
+        spec = importlib.util.spec_from_file_location('saglam_brand_registry', registry_path)
+        registry = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(registry)
+        registry.build_registry(files)
     home_renderer_path = root / 'scripts/render_home.py'
     if home_renderer_path.exists():
         spec = importlib.util.spec_from_file_location('saglam_render_home', home_renderer_path)
@@ -134,14 +155,6 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         if path.suffix in TEXT_SUFFIXES:
             text = content.decode('utf-8')
             if visitor(Path(name)):
-                def favicon(match):
-                    tag = match[0]
-                    if not re.search(r'href=["\'](?:/site/|/|\./)?logo\.png["\']', tag):
-                        return tag
-                    tag = re.sub(r'href=["\'][^"\']*["\']', 'href="/logo.svg"', tag)
-                    tag = re.sub(r'\s+type=["\'][^"\']*["\']', '', tag)
-                    return tag[:-1] + ' type="image/svg+xml">'
-                text = re.sub(r'<link\b(?=[^>]*rel=["\'](?:shortcut )?icon["\'])[^>]*>', favicon, text, flags=re.I)
                 for element, css_class in [('header','at-header'), ('footer','at-footer')]:
                     component = root / 'components' / (element + '.html')
                     if component.exists():
@@ -153,6 +166,8 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
             if visitor(Path(name)):
                 text = clean_preview_html(text)
                 text = re.sub(r'(<body\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + m[2], text, count=1, flags=re.I)
+                if 'assets/brand-registry.js' in files and 'assets/brand-registry.js' not in text:
+                    text = insert_head(text, f'<script src="{prefix}/assets/brand-registry.js" defer></script>')
                 if mode == 'preview':
                     text = insert_head(text, '<meta name="robots" content="noindex,nofollow,noarchive">' + PREVIEW_MARKER
                         + '<meta http-equiv="Content-Security-Policy" content="form-action &#39;none&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; worker-src &#39;none&#39;; base-uri &#39;self&#39;">'
@@ -176,8 +191,11 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                         target = '</head>' if asset.endswith('.css') else '</body>'
                         text = text.replace(target, tag + target)
                 text = re.sub(r'<meta\b[^>]*\bcharset\s*=[^>]*>', '', text, flags=re.I)
+                if not re.search(r'<link\b[^>]*rel=["\'](?:shortcut )?icon["\']', text, re.I):
+                    text = insert_head(text, f'<link rel="icon" href="{brand["favicon"]}" type="image/png">')
                 text = insert_head(text, '<meta charset="UTF-8">')
                 html_count += 1
+            text = normalize_paths(apply_brand(text, brand), prefix)
             content = text.encode('utf-8')
         built[name] = content
     if mode == 'preview':

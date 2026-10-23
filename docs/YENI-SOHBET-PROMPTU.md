@@ -17,13 +17,13 @@ Yerel çalışma varsa kökü `/workspace/work/github-premium`; başka ortamda d
 **Düzenlenebilir kaynaklar:**
 
 - `components/`: ana sayfa, ortak başlık/alt bilgi, AI Usta ve servis talebi parçaları.
-- `overrides/`: düzenlenmiş sayfalar; `assets/` altında premium tasarım, model arayıcı, AI akışı, yorumlar ve harita arayüzü.
+- `overrides/`: düzenlenmiş sayfalar; `assets/` altında premium tasarım, model arayıcı, AI akışı, yorumlar ve harita arayüzü. Marka kaynağı `assets/brand-registry.json`; AI Usta/model kütüphanesi/markalar/servis seçicileri aynı veriden üretilir. Isısan tarihî tedarikçidir; Bosch/Buderus kodlarına bağlama. Ayrıntılar `docs/BRAND-COVERAGE.md`.
 - `server/`: yalnız üretim paketine alınan PHP ve sunucu dosyaları; üretimde içerikleri web köküne gelir.
 - `templates/business-maps-section.html` ve `templates/private/saglam-teknik/`: harita parçası ve **boş** özel ayar örnekleri.
 - `scripts/`: derleme, ana sayfa birleştirme, model sayfası iyileştirmeleri ve kontroller.
 - `tests/`: yerel kontroller. `preview-parts/part-000.txt`–`part-042.txt` doğrulanan eski arşivdir; sayfa düzenlemek için parçaları değiştirme.
 
-`_site/` ve `build/production/` üretilmiş çıktıdır; asıl düzeltmeyi bunlarda yapma. Çalışan krem/bej, koyu yeşil ve sınırlı bakır kimliği ile mevcut Sağlam Teknik logosunu koru. Mobil okunabilirlik, doğru cihaz görselleri ve kolay iletişim önceliklidir.
+`_site/` ve `build/production/` üretilmiş çıktıdır; asıl düzeltmeyi bunlarda yapma. Krem/bej, koyu yeşil ve sınırlı bakır kimliği koru. Logo kararı kesindir: kullanıcının mavi ribbon görseli. `components/brand.json` tüm logo ve favicon yollarının tek kaynağıdır; basit SVG ile yeniden çizme. `assets/brand/` içindeki PNG’ler özgün görselin boş şeffaf kenarları kırpılmış küçük kopyalarıdır. Slogan tam olarak “Mevsim değişse de konforunuz değişmesin.” olmalıdır. Ana görselde kombi, klima ve petek birlikte, kedi peteğin üstünde, köpek halının ortasındadır. Mobil okunabilirlik, doğru cihaz görselleri ve kolay iletişim önceliklidir.
 
 **Mevcut durum ve sınırlar:**
 
@@ -34,7 +34,7 @@ Yerel çalışma varsa kökü `/workspace/work/github-premium`; başka ortamda d
 
 **AI Usta ve özel ayarlar:**
 
-Butonlu akış: cihaz → belirti → gerekiyorsa marka/tam model/kod. İsteyen yazabilsin. Güvenli ön bilgi hemen görünsün; AI bağlantısı başarısız olunca yerel rehber kaybolmasın. Doğal davet kullan: “İsterseniz cihaz ve belirti bilgilerini WhatsApp'tan iletip servis uygunluğunu görüşebilirsiniz.” WhatsApp mesajını kullanıcı gönderir. Gaz kokusunda 187; yangın/yaralanmada 112 ticari çağrıdan önce gelir. Kesin teşhis veya tehlikeli müdahale önerme.
+Ana sayfada tek AI Usta akışı vardır; ayrı ikinci marka/model arama çubuğu ekleme. Butonlu akış: cihaz → belirti → gerekiyorsa marka/tam model/kod. İsteyen yazabilsin. Güvenli ön bilgi hemen görünsün; AI bağlantısı başarısız olunca yerel rehber kaybolmasın. Doğal davet kullan: “İsterseniz cihaz ve belirti bilgilerini WhatsApp'tan iletip servis uygunluğunu görüşebilirsiniz.” WhatsApp mesajını kullanıcı gönderir. Gaz kokusunda 187; yangın/yaralanmada 112 ticari çağrıdan önce gelir. Kesin teşhis veya tehlikeli müdahale önerme.
 
 Gemini sağlayıcısını ve sunucu tarafındaki dört anahtar yuvasını koru. Gerçek dosya web kökü dışındaki `private/saglam-teknik/site_apileri,.txt`; virgülsüz eski ad da desteklenir. Dört anahtar aynı projedeyse bağımsız kota sayılmaz. Anahtarları sohbete, Git'e, tarayıcıya veya indirilebilir pakete koyma; model adı, kota ve erişim uygunluğunu varsayma. Haritalar için aynı özel klasörde `haritalar.json` kullanılır; örneği `templates/private/saglam-teknik/haritalar.json.ornek`. Farklı kurulumda `SAGLAM_PRIVATE_DIR` mevcut özel klasöre işaret eder. Mevcut özel ayarları/veritabanını ezme. Gerçek AI/Telegram isteği, webhook veya cron kurulumu bu önizleme testi değildir.
 

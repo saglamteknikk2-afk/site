@@ -5,7 +5,8 @@ Bu depo yalnızca GitHub Pages test ön izlemesidir. Ana siteye, alan adına vey
 ## Düzenlenebilir kaynaklar
 
 - `overrides/`: yeni ana sayfa, CSS, JavaScript, görseller ve public veri dosyaları. Aynı yoldaki arşiv veya sunucu dosyasının üzerine yazar.
-- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları.
+- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları. `brand.json` kullanıcının mavi ribbon logosunun ve favicon’un tek yol kaynağıdır; görsel yeniden çizilmez.
+- `overrides/assets/brand-registry.json`: AI Usta, model kütüphanesi, markalar ve servis seçimlerinin ortak marka kaynağı. Doğrulanmış model belgeleri ayrıca mevcut katalogdan bağlanır; marka eklemek kod tablosu üretmez.
 - `server/`: yalnızca üretim paketine alınan PHP ve özgün sunucu dosyaları. İçeriği üretim web köküne taşınır; `/server/` URL'si oluşturulmaz.
 - `templates/private/`: boş yapılandırma örnekleri; web köküne kopyalanmaz. Gerçek anahtar, müşteri kaydı veya veritabanı depoya konmaz. `templates/business-maps-section.html` yalnızca sayfa parçasıdır.
 - `preview-parts/part-000.txt` … `part-042.txt`: önceki statik sürümün değişmeyen ZIP arşivi. Yeni sayfa düzenlemek için bu parçaları değiştirmeyin.

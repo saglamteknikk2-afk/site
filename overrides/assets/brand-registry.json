@@ -1,0 +1,865 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-23",
+  "policy": "Marka seçimi servis uygunluğu veya tüm model kodlarının doğrulandığı anlamına gelmez. Kılavuz kapsamı yalnız verified-faults.json model kayıtlarından türetilir. İlişkili şirketler ve tedarikçiler kod eşdeğeri değildir.",
+  "brands": [
+    {
+      "id": "baymak",
+      "name": "Baymak",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "buderus",
+      "name": "Buderus",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "vaillant",
+      "name": "Vaillant",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": [
+        {
+          "url": "https://www.vaillant.com.tr/urunler/klimalar/",
+          "title": "Vaillant Türkiye klima ürünleri",
+          "device": "klima",
+          "locator": "Üretici ürün kataloğu",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    },
+    {
+      "id": "demirdokum",
+      "name": "Demirdöküm",
+      "aliases": [
+        "Demir Döküm"
+      ],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "eca",
+      "name": "ECA",
+      "aliases": [
+        "E.C.A.",
+        "E C A"
+      ],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": [
+        {
+          "url": "https://eca.com.tr/urun/ecotech-serisi-duvar-tipi-klima",
+          "title": "E.C.A. Ecotech seri duvar tipi klima",
+          "device": "klima",
+          "locator": "Üretici ürün kataloğu",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    },
+    {
+      "id": "bosch",
+      "name": "Bosch",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "viessmann",
+      "name": "Viessmann",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "ariston",
+      "name": "Ariston",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "ferroli",
+      "name": "Ferroli",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "airfel",
+      "name": "Airfel",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "alarko",
+      "name": "Alarko",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "protherm",
+      "name": "Protherm",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "arcelik",
+      "name": "Arçelik",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "beko",
+      "name": "Beko",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "immergas",
+      "name": "Immergas",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "daikin",
+      "name": "Daikin",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "baykan",
+      "name": "Baykan",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "copa",
+      "name": "Copa",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "emko",
+      "name": "Emko",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "termoteknik",
+      "name": "Termoteknik",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "warmhaus",
+      "name": "Warmhaus",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "sanica",
+      "name": "Sanica",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "maktek",
+      "name": "Maktek",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "baxi",
+      "name": "Baxi",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "beretta",
+      "name": "Beretta",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "fondital",
+      "name": "Fondital",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "de-dietrich",
+      "name": "De Dietrich",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "remeha",
+      "name": "Remeha",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "wolf",
+      "name": "Wolf",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "unical",
+      "name": "Unical",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "saunier-duval",
+      "name": "Saunier Duval",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "termodinamik",
+      "name": "Termodinamik",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "mitsubishi-electric",
+      "name": "Mitsubishi Electric",
+      "aliases": [
+        "mitsubishi elektrik"
+      ],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "mitsubishi-heavy-industries",
+      "name": "Mitsubishi Heavy Industries",
+      "aliases": [
+        "mitsubishi heavy",
+        "mitsubishi heavy industry",
+        "mhi"
+      ],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "toshiba",
+      "name": "Toshiba",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "fujitsu",
+      "name": "Fujitsu",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "general",
+      "name": "General",
+      "aliases": [
+        "fujitsu general"
+      ],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "panasonic",
+      "name": "Panasonic",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "lg",
+      "name": "LG",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "samsung",
+      "name": "Samsung",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "gree",
+      "name": "Gree",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "midea",
+      "name": "Midea",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "haier",
+      "name": "Haier",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "hitachi",
+      "name": "Hitachi",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "carrier",
+      "name": "Carrier",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "vestel",
+      "name": "Vestel",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "regal",
+      "name": "Regal",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "altus",
+      "name": "Altus",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "profilo",
+      "name": "Profilo",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "siemens",
+      "name": "Siemens",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "york",
+      "name": "York",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "iklimsa",
+      "name": "İklimsa",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "service_network",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "vessen",
+      "name": "Vessen",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "airwell",
+      "name": "Airwell",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "existing-site-catalog",
+      "sources": []
+    },
+    {
+      "id": "isisan",
+      "name": "Isısan",
+      "aliases": [
+        "Isisan",
+        "ISISAN"
+      ],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "legacy_supplier",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "official-source-audit",
+      "notes": "Tarihî ısıtma ve klima tedarikçisi kaydıdır. Cihaz etiketindeki gerçek ürün markası ve tam model ayrıca kontrol edilir. Bosch veya Buderus ile model/kod eşdeğerliği kurulmaz.",
+      "sources": [
+        {
+          "url": "https://www.rekabet.gov.tr/Karar?kararId=e5d4a975-b3bd-49df-a4b1-b514b6b9e7c6",
+          "title": "Rekabet Kurumu, 07-01/10-5 (11.01.2007)",
+          "device": "kombi,klima",
+          "locator": "H.2.1, basılı s.4; resmî kararın indekslenmiş metni",
+          "checked_at": "2026-10-23",
+          "official": true
+        },
+        {
+          "url": "https://www.rekabet.gov.tr/Dosya/dergi/33-pdf",
+          "title": "Rekabet Dergisi 33",
+          "device": "kombi,klima",
+          "locator": "s.65, karar özeti",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    },
+    {
+      "id": "daylux",
+      "name": "Daylux",
+      "aliases": [],
+      "devices": [
+        "kombi",
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "official-source-audit",
+      "notes": "Marka ve cihaz türü doğrulandı; bu kayıt tüm modeller için hata kodu tablosu içermez.",
+      "sources": [
+        {
+          "url": "https://daylux.com.tr/",
+          "title": "Daylux resmî ürün kataloğu",
+          "device": "klima",
+          "locator": "Üretici ürün kataloğu",
+          "checked_at": "2026-10-23",
+          "official": true
+        },
+        {
+          "url": "https://www.daikin.com.tr/daikin-kis-gelmeden-kombinizin-bakimini-yaptirin-daikinden-avantajli-bakim-kampanyasi",
+          "title": "Daikin Türkiye: Daikin, Airfel ve Daylux kombi bakım kapsamı",
+          "device": "kombi",
+          "locator": "Üretici duyurusu, Daylux kombi cihazları",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    },
+    {
+      "id": "kaira",
+      "name": "Kaira",
+      "aliases": [],
+      "devices": [
+        "klima"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "official-source-audit",
+      "notes": "",
+      "sources": [
+        {
+          "url": "https://www.daikin.com.tr/yeni-kaira-9000-btuh-duvar-tipi-r32-inverter-split-klima_183421",
+          "title": "Daikin Türkiye Kaira klima ürün sayfası",
+          "device": "klima",
+          "locator": "Üretici ürün kataloğu",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    },
+    {
+      "id": "daxom",
+      "name": "Daxom",
+      "aliases": [],
+      "devices": [
+        "kombi"
+      ],
+      "kind": "brand",
+      "service_intake": true,
+      "service_status": "model-confirmation-required",
+      "provenance": "official-source-audit",
+      "notes": "Bu kayıtta doğrulanan cihaz türü elektrikli kombidir; doğalgazlı model veya kod eşdeğerliği varsayılmaz.",
+      "sources": [
+        {
+          "url": "https://www.daxom.com/urunler/elektrikli-kombiler",
+          "title": "Daxom elektrikli kombi ürünleri",
+          "device": "kombi",
+          "locator": "Üretici ürün kataloğu",
+          "checked_at": "2026-10-23",
+          "official": true
+        }
+      ]
+    }
+  ]
+}

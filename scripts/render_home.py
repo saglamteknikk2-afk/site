@@ -12,7 +12,7 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
     head = re.sub(r'<meta\b[^>]*property=["\']og:image["\'][^>]*>', '', head, flags=re.I)
     head += '<meta property="og:image" content="https://saglamkombiklima.com.tr/assets/comfort-pets.webp">'
     styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'ai-usta.css', 'premium.css', 'premium-reviews.css', 'business-maps.css']
-    head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261023-premium">' for name in styles)
+    head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261023-ribbon-flow">' for name in styles)
     body = template.read_text()
     sources = {'HEADER':'components/header.html','FOOTER':'components/footer.html','AI_PANEL':'components/ai-panel.html',
                'TICKET_MODAL':'components/ticket-modal.html','REVIEWS':'overrides/reviews-section.html','MAPS':'templates/business-maps-section.html'}
@@ -25,5 +25,5 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
         raise ValueError('Unresolved home component')
     scripts = ['site.js','location.js','verified-faults.js','fault-lookup.js','fault-advisories.js','diagnostic-guide.js',
                'home.js','servis-verileri.js','organic-catalog.js','servis-search.js','ai-usta.js','atelier.js','premium-reviews.js','business-maps.js','premium.js']
-    body += ''.join(f'<script src="/assets/{name}?v=20261023-premium" defer></script>' for name in scripts)
+    body += ''.join(f'<script src="/assets/{name}?v=20261023-ribbon-flow" defer></script>' for name in scripts)
     files['index.html'] = ('<!doctype html><html lang="tr"><head>'+head+'</head><body class="at-site" data-page-kind="home">'+body+'</body></html>').encode('utf-8')

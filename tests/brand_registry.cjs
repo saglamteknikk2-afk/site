@@ -1,0 +1,46 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4187').replace(/\/$/,'');
+(async()=>{
+  const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+  const page=await browser.newPage({viewport:{width:375,height:812}}),errors=[],checks=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
+  const check=(name,condition)=>{assert.ok(condition,name);checks.push(name);};
+  for(const device of ['kombi','klima']){
+    await page.goto(origin+'/model-ariza-kodlari.html?device='+device);
+    await page.waitForFunction(()=>window.STModelBrowser&&window.STBrands);
+    const library=await page.locator('#modelBrand option').evaluateAll(nodes=>nodes.map(n=>n.value).filter(Boolean).sort());
+    const expected=await page.evaluate(device=>STBrands.names(device).sort(),device);
+    check(device+' library uses shared registry',JSON.stringify(library)===JSON.stringify(expected));
+    await page.goto(origin+'/');await page.waitForFunction(()=>window.STUstaWizard&&window.STBrands);
+    await page.evaluate(device=>STUstaWizard.open(device),device==='kombi'?'Kombi':'Klima');
+    await page.locator('#ustaStep [data-choice=error]').click();
+    const wizard=await page.locator('#ustaBrand option').evaluateAll(nodes=>nodes.map(n=>n.value).filter(Boolean).sort());
+    check(device+' AI and library brands match',JSON.stringify(wizard)===JSON.stringify(expected));
+    const service=await page.evaluate(device=>ST_SERVICE_DATA.devices[device].brands.slice().sort(),device);
+    check(device+' search service and library brands match',JSON.stringify(service)===JSON.stringify(expected));
+    await page.selectOption('#ustaBrand','Isısan');
+    check(device+' Isısan has honest missing-table notice',(await page.locator('#ustaStep').innerText()).includes('doğrulanmış bir kod tablosu henüz yok'));
+    check(device+' Isısan cannot select another manufacturer model',await page.locator('#ustaVerifiedModel').count()===0);
+    check(device+' legacy identity cannot verify Bosch/Buderus code',await page.evaluate(device=>STFaults.models(device,'Isısan').length===0&&!STFaults.lookup({device,brand:'Isısan',code:'E01'}).verified,device));
+  }
+  await page.goto(origin+'/markalar.html');await page.waitForFunction(()=>window.STBrands);
+  const cards=await page.locator('[data-brand][data-device]').evaluateAll(nodes=>nodes.map(n=>n.dataset.device+'|'+n.dataset.brand).sort());
+  const registry=await page.evaluate(()=>STBrands.list().flatMap(b=>b.devices.map(device=>device+'|'+b.name)).sort());
+  check('brand list has all and only registry device entries',JSON.stringify(cards)===JSON.stringify(registry));
+  await page.fill('#brandSearch','Isisan');
+  check('brand page Turkish alias searchable',await page.locator('[data-brand="Isısan"]:visible').count()===2);
+  await page.goto(origin+'/model-ariza-kodlari.html?device=kombi&brand=Isisan');await page.waitForFunction(()=>window.STModelBrowser);
+  check('model library canonicalizes Isisan alias',await page.inputValue('#modelBrand')==='Isısan');
+  check('Isısan has no invented guide cards',await page.locator('[data-model-card]').count()===0);
+  check('library missing guide note is visible',await page.locator('#modelEmpty').isVisible()&&(await page.locator('#modelEmpty').innerText()).includes('Tarihî'));
+  const link=await page.locator('#modelEmpty a').getAttribute('href');
+  check('intake link uses real AI section anchor',link.includes('?')&&link.endsWith('#ai-usta'));
+  await page.locator('#modelEmpty a').click();await page.waitForFunction(()=>window.STUstaWizard);
+  check('AI intake preserves canonical device and brand',await page.evaluate(()=>{const c=STUstaWizard.getContext();return c.brand==='Isısan'&&c.device==='Kombi'&&!c.model_id&&!c.code;}));
+  const queries=[['Isisan kombi E01','kombi','Isısan'],['ISISAN klima E01','klima','Isısan'],['E.C.A. klima E01','klima','ECA'],['Vaillant klima E01','klima','Vaillant'],['Daylux kombi E01','kombi','Daylux'],['Daylux klima E01','klima','Daylux'],['Kaira klima E01','klima','Kaira'],['Daxom kombi E01','kombi','Daxom']];
+  check('new brand searches retain identity without borrowed code meanings',await page.evaluate(queries=>queries.every(([query,device,brand])=>{const r=STResolveQuery(ST_SERVICE_DATA,query);return r.device===device&&r.brand===brand&&!r.code_definition_verified&&!r.fault_meaning;}),queries));
+  check('no page errors',errors.length===0);
+  console.log(JSON.stringify({passed:checks.length,checks,errors},null,2));await browser.close();
+})().catch(error=>{console.error(error);process.exit(1);});

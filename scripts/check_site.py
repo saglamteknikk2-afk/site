@@ -10,16 +10,20 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+BUSINESS_ORIGIN = 'https://saglamkombiklima.com.tr'
+SITEMAP_NS = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+
 class Page(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.ids=[]; self.refs=[]; self.robots=[]; self.scripts=[]; self.h1=0; self.mode=''; self.jsonld=[]; self.ld_active=False; self.ld_buffer=[]
+        self.ids=[]; self.refs=[]; self.robots=[]; self.canonicals=[]; self.scripts=[]; self.h1=0; self.mode=''; self.jsonld=[]; self.ld_active=False; self.ld_buffer=[]
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
         if a.get('id'): self.ids.append(a['id'])
         if tag=='h1': self.h1+=1
         if tag=='body': self.mode=a.get('data-st-mode','')
         if tag=='meta' and a.get('name','').lower()=='robots': self.robots.append(a.get('content',''))
+        if tag=='link' and 'canonical' in (a.get('rel') or '').lower().split(): self.canonicals.append(a.get('href',''))
         if tag=='script' and a.get('src'): self.scripts.append(a['src'])
         if tag=='script' and a.get('type','').lower()=='application/ld+json': self.ld_active=True;self.ld_buffer=[]
         for attr in ('href','src','action','poster'):
@@ -32,8 +36,26 @@ class Page(HTMLParser):
     def handle_endtag(self,tag):
         if tag=='script' and self.ld_active:self.jsonld.append(''.join(self.ld_buffer));self.ld_active=False
 
+def check_sitemap(root: Path, indexable: set[str], errors: list[str]) -> None:
+    path=root/'sitemap.xml'
+    if not path.is_file():
+        errors.append('Missing sitemap.xml'); return
+    try:
+        sitemap=ElementTree.parse(path).getroot()
+    except (ElementTree.ParseError, OSError):
+        errors.append('sitemap.xml: invalid or unreadable XML'); return
+    if sitemap.tag != SITEMAP_NS+'urlset':
+        errors.append('sitemap.xml: expected sitemap urlset'); return
+    urls=[(node.text or '').strip() for node in sitemap.findall(SITEMAP_NS+'url/'+SITEMAP_NS+'loc')]
+    for url,count in Counter(urls).items():
+        if not url: errors.append('sitemap.xml: empty URL')
+        if count>1: errors.append(f'sitemap.xml: duplicate URL {url}')
+    actual=set(urls)
+    for url in sorted(indexable-actual): errors.append(f'sitemap.xml: missing indexable URL {url}')
+    for url in sorted(actual-indexable): errors.append(f'sitemap.xml: URL is not an indexable visitor page {url}')
+
 def check(root: Path, mode: str, base_path: str='/site') -> dict:
-    errors=[]; warnings=[]; refs=0; pages=0; noindex=0; schemas=0; id_cache={}
+    errors=[]; warnings=[]; refs=0; pages=0; noindex=0; schemas=0; id_cache={}; indexable=set()
     if not (root/'index.html').is_file(): errors.append('Missing index.html')
     for path in sorted(root.rglob('*')):
         if not path.is_file(): continue
@@ -51,7 +73,15 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
             try:json.loads(value);schemas+=1
             except (ValueError,TypeError):errors.append(f'{rel}: invalid JSON-LD')
         if page.h1 != 1: errors.append(f'{rel}: expected one H1, got {page.h1}')
-        if any('noindex' in r.lower() for r in page.robots): noindex+=1
+        is_noindex=any('noindex' in r.lower() for r in page.robots)
+        if is_noindex: noindex+=1
+        if mode=='production' and not is_noindex:
+            expected=BUSINESS_ORIGIN+('/' if rel=='index.html' else '/'+rel)
+            indexable.add(expected)
+            if len(page.canonicals)!=1:
+                errors.append(f'{rel}: expected exactly one canonical, got {len(page.canonicals)}')
+            elif page.canonicals[0]!=expected:
+                errors.append(f'{rel}: canonical must be {expected}, got {page.canonicals[0]}')
         if page.mode!=mode: errors.append(f'{rel}: missing/wrong build mode marker')
         if mode=='preview':
             if not any('noindex' in r.lower() for r in page.robots): errors.append(f'{rel}: noindex missing')
@@ -85,6 +115,8 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
     if mode=='preview':
         robots=(root/'robots.txt').read_text() if (root/'robots.txt').exists() else ''
         if re.search(r'Disallow:\s*/\s*$', robots,re.M): errors.append('robots.txt blocks noindex crawling')
+    elif mode=='production':
+        check_sitemap(root,indexable,errors)
     report={'passed':not errors,'mode':mode,'visitor_pages':pages,'noindex_pages':noindex,'jsonld_blocks':schemas,'references_checked':refs,'errors':errors,'warnings':warnings}
     return report
 
