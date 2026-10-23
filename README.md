@@ -5,7 +5,7 @@ Bu depo yalnızca GitHub Pages test ön izlemesidir. Ana siteye, alan adına vey
 ## Düzenlenebilir kaynaklar
 
 - `overrides/`: yeni ana sayfa, CSS, JavaScript, görseller ve public veri dosyaları. Aynı yoldaki arşiv veya sunucu dosyasının üzerine yazar.
-- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları. `brand.json` kullanıcının mavi ribbon logosunun ve favicon’un tek yol kaynağıdır; görsel yeniden çizilmez.
+- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları. `brand.json` sade alev-buz S logosunun ve favicon’un tek yol kaynağıdır. Eski mavi ribbon başvuruları da güncel logoya dönüştürülür.
 - `overrides/assets/brand-registry.json`: AI Usta, model kütüphanesi, markalar ve servis seçimlerinin ortak marka kaynağı. Doğrulanmış model belgeleri ayrıca mevcut katalogdan bağlanır; marka eklemek kod tablosu üretmez.
 - `server/`: yalnızca üretim paketine alınan PHP ve özgün sunucu dosyaları. İçeriği üretim web köküne taşınır; `/server/` URL'si oluşturulmaz.
 - `templates/private/`: boş yapılandırma örnekleri; web köküne kopyalanmaz. Gerçek anahtar, müşteri kaydı veya veritabanı depoya konmaz. `templates/business-maps-section.html` yalnızca sayfa parçasıdır.
@@ -40,3 +40,13 @@ GitHub Actions; `overrides/`, `components/`, `server/`, testler, scriptler ve be
 Derleme sırası: SHA-256 doğrulanan arşiv → üretimde `server/` → `overrides/` → ortak parçalar ve moda göre URL/SEO/gönderim ayarları. Aynı kaynaklardan aynı içerik özeti üretilir; tarih veya ortam yolu çıktı içeriğine eklenmez.
 
 Özgün arşiv SHA-256: `1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b`.
+
+## Premium tasarım ve organik içerik denetimi
+
+Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Marka ve tam model önerileri aynı arama alanından ilerler; belge kapsamı kullanıcı onayı olmadan doğrulanmış sayılmaz.
+
+`components/service-assurances.json` varış, garanti ve mesleki belge beyanlarının durumunu yönetir. `pending` bir beyan kesin bir süre veya garanti olarak yayımlanmaz. Bölgesel süre koşulları, garanti kapsamı ve geçerli mesleki belge işletmeden teyit edilmeden `verified` yapılmamalıdır.
+
+`python scripts/audit_content.py build/production --strict --report build/content-audit.json` yalnız ziyaretçi HTML ana içeriğini tarar. Kopya sinyalleri editoryal inceleme içindir; Google/AI sıralama puanı değildir. Kaynak, güvenlik ve ortak gezinme metni gerekli yerlerde korunur. Strict mod kaynak/FAQ/JSON-LD/ana içerik bütünlüğünü ve tam gövde klonlarını denetler. Pages iş akışı hem önizlemeyi hem üretim dosyalarını doğrular; yalnız test sitesi yayımlanır.
+
+`assets/ad-landing-map.json` derlemede mevcut servis adreslerinden üretilir. Reklamın nihai URL’si ilgili servis sayfası olmalıdır; kelime sırasına göre yeni sayfa veya otomatik yönlendirme oluşturulmaz. İlgili sayfalardaki WhatsApp taslağı hizmet başlığını ve sayfa adresini taşır. Bu harita reklam hesabı, bütçe veya dönüşüm ölçümü bağlantısı kurmaz. `site-zip.yml` kaynak değişikliklerinde güncel üretim ZIP artifact’ini hazırlar; ana siteye yüklemez.

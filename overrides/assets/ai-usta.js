@@ -16,6 +16,59 @@
   const selectedModel = () => models().find(m => m.id === state.model_id);
   const symptomText = () => state.symptom === 'other' ? 'Kendi anlatımım' : symptoms[state.device]?.find(s => s[0] === state.symptom)?.[1] || '';
   const hasCode = () => state.symptom === 'error' || !!state.code;
+  // The single text field suggests known names; it never confirms a document scope.
+  let inputSuggestion = {brand:'',model_id:'',model:'',code:''};
+  const normalize = value => window.STBrands?.normalize(value) || String(value||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i').replace(/[^a-z0-9]+/g,' ').trim();
+  const contains = (text,term) => !!term && (' '+text+' ').includes(' '+term+' ');
+  function recognizeInput(value) {
+    const text=normalize(value),device=state.device.toLowerCase();
+    const registry=window.STBrands?.list(device) || brands().map(name=>({name,aliases:[]}));
+    const brandMatches=registry.filter(item=>[item.name,...(item.aliases||[])].some(name=>contains(text,normalize(name))));
+    let brand=brandMatches.length===1?brandMatches[0].name:'';
+    const candidates=[];
+    if(brandMatches.length<=1)for(const model of window.ST_VERIFIED_FAULTS?.models||[]) {
+      if(model.device!==device||model.matchable===false)continue;
+      const modelBrand=window.STBrands?.find(model.brand,device)?.name||model.brand;
+      if(brand&&normalize(modelBrand)!==normalize(brand))continue;
+      for(const name of model.model_names||[]) {
+        const term=normalize(name);
+        if(term.length<5||/^\d+(?: \d+)*(?: kw| btu| btu h)?$/.test(term))continue;
+        // A bare family alias or generic single word cannot establish a model.
+        if(!brand&&!/\d/.test(term)&&term.split(' ').length<2)continue;
+        if(contains(text,term))candidates.push({brand:modelBrand,model_id:model.id,model:name,length:term.length});
+      }
+    }
+    const longest=Math.max(0,...candidates.map(item=>item.length));
+    const exact=candidates.filter(item=>item.length===longest);
+    const unique=[...new Map(exact.map(item=>[item.model_id+'|'+item.model,item])).values()];
+    const match=unique.length===1?unique[0]:null;
+    if(match)brand=match.brand;
+    const definition=match?(window.ST_VERIFIED_FAULTS?.models||[]).find(model=>model.id===match.model_id):null;
+    return {brand,model_id:match?.model_id||'',model:match?.model||'',code:window.STFaults?.extract(value,definition)||''};
+  }
+  function updateInputHint() {
+    const hint=el('ustaInputHint');if(!hint)return;
+    const found=recognizeInput(state.detail);
+    const parts=[found.brand,found.model,found.code&&'Kod: '+found.code].filter(Boolean);
+    hint.textContent=parts.length?'Öneri: '+parts.join(' · ')+'. Sonraki adımda kontrol edebilirsiniz.':'';
+    hint.hidden=!parts.length;
+  }
+  function applyInput() {
+    inputSuggestion=recognizeInput(state.detail);
+    if((inputSuggestion.brand&&inputSuggestion.brand!==state.brand)||(inputSuggestion.model_id&&inputSuggestion.model_id!==state.model_id))resetModel();
+    if(inputSuggestion.brand)state.brand=inputSuggestion.brand;
+    state.code=inputSuggestion.code;
+  }
+  function modelSuggestion() {
+    if(!inputSuggestion.model_id||inputSuggestion.brand!==state.brand||state.model_id===inputSuggestion.model_id&&state.model===inputSuggestion.model)return '';
+    if(!models().some(model=>model.id===inputSuggestion.model_id))return '';
+    return `<p class="usta-note">Yazdığınız tam model için öneri:</p><button type="button" class="usta-choice" id="ustaUseSuggestedModel" data-suggested-model="${esc(inputSuggestion.model_id+'|'+inputSuggestion.model)}">${esc(inputSuggestion.model)}<small>Etiketteki ad aynıysa seçin.</small></button>`;
+  }
+  function useModel(value) {
+    const priorCode=state.model_id?'':state.code;resetModel();state.code=priorCode;
+    if(value){const split=value.indexOf('|');state.model_id=value.slice(0,split);state.model=value.slice(split+1);}
+    clearResult();render(false);
+  }
   function clearResult() { el('aiResultBox')?.classList.add('hidden'); }
   function resetModel() { Object.assign(state, {model:'',model_id:'',scope_confirmed:false,code:''}); }
   function compose() {
@@ -49,7 +102,7 @@
         options += `<option value="${esc(model.id+'|'+name)}"${state.model_id===model.id&&state.model===name?' selected':''}>${esc(label.toLowerCase().startsWith(model.brand.toLowerCase())?label:model.brand+' '+label)}</option>`;
       }
     }
-    return `<p class="usta-note"><strong>${esc(state.brand)}</strong> · Etiketteki tam adı biliyorsanız seçin. Bilmiyorsanız atlayabilirsiniz.</p>${list.length?`<label class="usta-field-label">Tam model / üretici belgesi<select id="ustaVerifiedModel" class="usta-field"><option value="">Modeli seçin / bilmiyorum</option>${options}</select></label>`:'<p class="usta-note">Bu marka için modele özel doğrulanmış bir kod tablosu henüz yok. Başka markanın kodlarını bu cihaza uygulamıyoruz.</p>'}<label class="usta-field-label">Model listede yoksa <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model_id?'':state.model)}" placeholder="Etiketteki tam model adını yazabilirsiniz"></label>${scopeFields()}`;
+    return `<p class="usta-note"><strong>${esc(state.brand)}</strong> · Etiketteki tam adı seçin veya bu adımı atlayın.</p>${modelSuggestion()}${list.length?`<label class="usta-field-label">Model<select id="ustaVerifiedModel" class="usta-field"><option value="">Modeli seçin / bilmiyorum</option>${options}</select></label>`:'<p class="usta-note">Bu marka için modele özel doğrulanmış bir kod tablosu henüz yok. Başka markanın kodlarını bu cihaza uygulamıyoruz.</p>'}<label class="usta-field-label">Model listede yoksa <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model_id?'':state.model)}" placeholder="Etiketteki tam model adını yazabilirsiniz"></label>${scopeFields()}`;
   }
   function codeFields() {
     const codes = (selectedModel()?.codes || []).filter(code => code.matchable!==false && !code.source_conflict);
@@ -93,26 +146,23 @@
     el('ustaStepLabel').textContent=(position+1)+' / '+sequence.length+' · '+labels[state.step];
     const progress=el('ustaProgress'); progress.setAttribute('aria-valuemax',sequence.length); progress.setAttribute('aria-valuenow',position+1);
     progress.replaceChildren(...sequence.map((_,i)=>{const span=document.createElement('span');span.classList.toggle('is-complete',i<=position);return span;}));
-    const titles=['Hangi cihazda sorun var?','Ne sorun yaşıyorsunuz?','Cihazın markası nedir?',hasCode()?'Model ve ekrandaki kod':'Modelini biliyor musunuz?','İlk yönlendirmeniz hazır'];
-    const notes=['Bir cihaz seçerek başlayın.','Bir belirti seçin veya aşağıya kendi cümlenizle yazın.','Markayı seçin; bilmiyorsanız bu soruyu atlayabilirsiniz.','Tam model, kodları doğru belgeyle değerlendirmemize yardımcı olur. Bu adımı atlayabilirsiniz.','Bilgileriniz aşağıda. İsterseniz bu bilgilerle arayın veya WhatsApp’a aktarın.'];
+    const titles=['Cihazınızı seçin','Sık görülen belirtiler','Markayı seçin',hasCode()?'Model ve kod':'Modeli seçin','Rehberiniz hazır'];
+    const notes=['Kombi, klima veya petek.','İsterseniz bir butonla devam edin.','Bilmiyorsanız atlayabilirsiniz.','Kodu doğru belgeyle değerlendirmek için tam model önemlidir.','Güvenli ilk bilgi aşağıda. İsterseniz arayın veya WhatsApp’a aktarın.'];
     const view=el('ustaStep'); view.innerHTML=`<h3 id="ustaQuestion">${esc(titles[state.step])}</h3><p>${esc(notes[state.step])}</p>${fields()}`;
     view.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
       clearResult();
       if (state.step===0) {
         const device=button.dataset.choice;
-        if (state.device!==device) { resetModel(); Object.assign(state,{brand:'',symptom:'',answer:'',detail:'',skip_model:false});el('ustaExtraIssue').value=''; }
+        if (state.device!==device) { resetModel(); Object.assign(state,{brand:'',symptom:'',answer:'',detail:'',skip_model:false});el('ustaExtraIssue').value='';inputSuggestion={brand:'',model_id:'',model:'',code:''}; }
         state.device=device; go(1);
       } else {
-        state.symptom=button.dataset.choice;state.answer='';state.detail=el('ustaExtraIssue').value.trim();state.code=window.STFaults?.extract(state.detail)||'';afterSymptom();
+        state.symptom=button.dataset.choice;state.answer='';state.detail=el('ustaExtraIssue').value.trim();applyInput();afterSymptom();
       }
     }));
     view.querySelectorAll('[data-brand]').forEach(button=>button.addEventListener('click',()=>chooseBrand(button.dataset.brand)));
     el('ustaBrand')?.addEventListener('change',event=>{if(event.target.value)chooseBrand(event.target.value);});
-    el('ustaVerifiedModel')?.addEventListener('change',event=>{
-      const value=event.target.value,priorCode=state.model_id?'':state.code;resetModel();state.code=priorCode;
-      if(value){const split=value.indexOf('|');state.model_id=value.slice(0,split);state.model=value.slice(split+1);}
-      clearResult();render(false);
-    });
+    el('ustaVerifiedModel')?.addEventListener('change',event=>useModel(event.target.value));
+    el('ustaUseSuggestedModel')?.addEventListener('click',event=>useModel(event.currentTarget.dataset.suggestedModel));
     el('ustaModel')?.addEventListener('input',event=>{state.model=event.target.value.trim();state.model_id='';state.scope_confirmed=false;state.code='';el('ustaModelScope')?.remove();if(el('ustaVerifiedModel'))el('ustaVerifiedModel').value='';compose();clearResult();});
     const bind=(id,key)=>el(id)?.addEventListener('input',event=>{state[key]=event.target.value.trim();compose();clearResult();safetyCheck();});
     bind('ustaCode','code');bind('ustaNeighborhood','neighborhood');
@@ -121,10 +171,11 @@
     el('ustaCodeSelect')?.addEventListener('change',event=>{state.code=event.target.value;if(el('ustaCode'))el('ustaCode').value=state.code;compose();});
     view.querySelectorAll('[data-fault-code]').forEach(button=>button.addEventListener('click',()=>{state.code=button.dataset.faultCode;compose();result(3);}));
     view.querySelector('[data-unknown-code]')?.addEventListener('click',()=>result(3));
-    el('ustaBack').hidden=state.step===0;el('ustaNext').hidden=state.step!==3;el('ustaNext').textContent='İlk yönlendirmeyi göster →';
+    el('ustaBack').hidden=state.step===0;el('ustaNext').hidden=state.step!==3;el('ustaNext').textContent='Rehberi göster →';
     el('ustaExtraWrap').hidden=state.step!==1;el('ustaSubmitWrap').hidden=state.step!==4;
     const contacts=root.querySelector('.usta-direct-contacts');if(contacts)contacts.hidden=state.step===4||!!root.dataset.emergency;
-    if(focus)view.focus({preventScroll:true});
+    updateInputHint();
+    if(focus)(state.step===1?el('ustaExtraWrap'):view).focus({preventScroll:true});
     if(state.step===4)showLocal();
   }
   function go(step) { state.step=step;render(); }
@@ -145,30 +196,31 @@
   }
   function reset() {
     Object.assign(state,{step:0,device:'',brand:'',model:'',model_id:'',scope_confirmed:false,symptom:'',answer:'',code:'',district:'',neighborhood:'',detail:'',last_detail_step:1,skip_model:false});
-    delete root.dataset.emergency;el('ustaExtraIssue').value='';clearResult();safetyCheck();render();
+    inputSuggestion={brand:'',model_id:'',model:'',code:''};delete root.dataset.emergency;el('ustaExtraIssue').value='';clearResult();safetyCheck();render();
   }
   el('ustaBack').addEventListener('click',()=>{clearResult();go(state.step===4?state.last_detail_step:Math.max(0,state.step-1));});
   el('ustaNext').addEventListener('click',()=>{if(!safetyCheck())result(3);});
   el('ustaRestart').addEventListener('click',reset);
-  el('ustaExtraIssue').addEventListener('input',event=>{state.detail=event.target.value.trim();compose();clearResult();safetyCheck();});
+  el('ustaExtraIssue').addEventListener('input',event=>{state.detail=event.target.value.trim();updateInputHint();compose();clearResult();safetyCheck();});
   el('ustaFreeNext').addEventListener('click',()=>{
     if(!state.device){go(0);return;}
     if(state.detail.length<3){el('ustaExtraIssue').setCustomValidity('Lütfen belirtinizi birkaç kelimeyle yazın.');el('ustaExtraIssue').reportValidity();el('ustaExtraIssue').addEventListener('input',()=>el('ustaExtraIssue').setCustomValidity(''),{once:true});return;}
-    state.symptom='other';state.answer='';state.code=window.STFaults?.extract(state.detail)||'';afterSymptom();
+    state.symptom='other';state.answer='';applyInput();afterSymptom();
   });
+  el('ustaExtraIssue').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();el('ustaFreeNext').click();}});
   el('ustaGas').addEventListener('click',()=>showEmergency('gas'));el('ustaFire').addEventListener('click',()=>showEmergency('burn'));
-  el('ustaSafetyDismiss').addEventListener('click',()=>{delete root.dataset.emergency;state.answer='';state.detail='';el('ustaExtraIssue').value='';safetyCheck();compose();const contacts=root.querySelector('.usta-direct-contacts');if(contacts)contacts.hidden=state.step===4;});
+  el('ustaSafetyDismiss').addEventListener('click',()=>{delete root.dataset.emergency;state.answer='';state.detail='';el('ustaExtraIssue').value='';updateInputHint();safetyCheck();compose();const contacts=root.querySelector('.usta-direct-contacts');if(contacts)contacts.hidden=state.step===4;});
   el('ustaLocalGuide').addEventListener('click',showLocal);
   if(!root.querySelector('.usta-direct-contacts')){
     const contacts=document.createElement('div');contacts.className='usta-direct-contacts';contacts.style.cssText='display:flex;gap:20px;flex-wrap:wrap;padding:18px 0;font-size:15px';
     contacts.innerHTML='<a href="tel:05346225515">Servisi ara ↗</a><a id="ustaQuickWhatsapp" href="https://wa.me/905346225515" target="_blank" rel="noopener noreferrer">WhatsApp’a aktar ↗</a>';
-    el('ustaExtraWrap').after(contacts);
+    el('ustaStep').after(contacts);
     contacts.querySelector('a:last-child').addEventListener('click',()=>{compose();contacts.querySelector('a:last-child').href='https://wa.me/905346225515?text='+encodeURIComponent('Merhaba Sağlam Teknik. Cihaz: '+(state.device||'Belirtilmedi')+'. '+el('issueInput').value+'\nServis uygunluğunu görüşmek istiyorum.');});
   }
   window.STUstaWizard={
     open(device){
       if(['Kombi','Klima','Petek'].includes(device)){
-        if(state.device!==device){resetModel();Object.assign(state,{brand:'',symptom:'',answer:'',detail:'',skip_model:false});el('ustaExtraIssue').value='';}
+        if(state.device!==device){resetModel();Object.assign(state,{brand:'',symptom:'',answer:'',detail:'',skip_model:false});el('ustaExtraIssue').value='';inputSuggestion={brand:'',model_id:'',model:'',code:''};}
         state.device=device;go(1);
       }else go(0);
       root.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});

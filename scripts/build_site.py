@@ -106,7 +106,21 @@ def apply_brand(text: str, brand: dict) -> str:
     text = re.sub(r'<link\b(?=[^>]*rel=["\'](?:shortcut )?icon["\'])[^>]*>', favicon, text, flags=re.I)
     text = re.sub(r'(?P<quote>["\'])(?P<origin>https://saglamkombiklima\.com\.tr)?(?:/site/|/|\./)?logo\.(?:png|svg)(?P=quote)',
                   lambda m: m['quote'] + (m['origin'] or '') + brand['logo'] + m['quote'], text)
+    for alias in brand.get('logo_aliases', []):
+        text = text.replace(alias, brand['logo'])
     return text
+
+def version_assets(text: str, files: dict[str, bytes]) -> str:
+    """HTML asset URLs follow their contents, so returning visitors see updates."""
+    def rewrite(match):
+        path = match['path']
+        key = path.removeprefix('/site/').lstrip('/')
+        if key not in files:
+            return match[0]
+        version = hashlib.sha256(files[key]).hexdigest()[:10]
+        return match['start'] + match['quote'] + path + '?v=' + version + match['quote']
+    return re.sub(r'(?P<start>\b(?:src|href)=)(?P<quote>["\'])(?P<path>/(?:site/)?assets/[^"\'?]+\.(?:css|js))(?:\?[^"\']*)?(?P=quote)',
+                  rewrite, text)
 
 def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     output = output.resolve()
@@ -140,6 +154,12 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         enhancer = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(enhancer)
         enhancement_count = enhancer.enhance_files(files)
+    landing_path = root / 'scripts/landing_actions.py'
+    if landing_path.exists():
+        spec = importlib.util.spec_from_file_location('saglam_landing_actions', landing_path)
+        landings = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(landings)
+        landings.enhance_landings(files)
     files.pop('TEST-KAPSAMI.txt', None)
     files.pop('CNAME', None)
     files.pop('reviews-section.html', None)  # source fragment, not a public route
@@ -165,7 +185,7 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
             text = normalize_paths(text, prefix)
             if visitor(Path(name)):
                 text = clean_preview_html(text)
-                text = re.sub(r'(<body\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + m[2], text, count=1, flags=re.I)
+                text = re.sub(r'(<body\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + re.sub(r'\s+data-st-mode=["\'][^"\']*["\']', '', m[2], flags=re.I), text, count=1, flags=re.I)
                 if 'assets/brand-registry.js' in files and 'assets/brand-registry.js' not in text:
                     text = insert_head(text, f'<script src="{prefix}/assets/brand-registry.js" defer></script>')
                 if mode == 'preview':
@@ -196,6 +216,8 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                 text = insert_head(text, '<meta charset="UTF-8">')
                 html_count += 1
             text = normalize_paths(apply_brand(text, brand), prefix)
+            if visitor(Path(name)):
+                text = version_assets(text, files)
             content = text.encode('utf-8')
         built[name] = content
     if mode == 'preview':

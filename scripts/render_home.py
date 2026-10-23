@@ -1,6 +1,17 @@
 """Render the editable home components, with no external dependencies."""
 from pathlib import Path
+import html
+import json
 import re
+
+def render_assurances(data: dict) -> tuple[str, str]:
+    cards, notes = [], []
+    for item in data['items']:
+        # Pending business claims never become published guarantees by implication.
+        title = item['declared_title'] if item['status'] == 'verified' else item['title']
+        cards.append('<a href="#servis-kosullari"><strong>' + html.escape(title) + '</strong><span>' + html.escape(item['detail']) + '</span></a>')
+        notes.append('<details><summary>' + html.escape(title) + '</summary><p>' + html.escape(item['conditions']) + '</p></details>')
+    return ''.join(cards), ''.join(notes)
 
 def render_home(files: dict[str, bytes], root: Path) -> None:
     template = root / 'components/home.html'
@@ -12,8 +23,10 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
     head = re.sub(r'<meta\b[^>]*property=["\']og:image["\'][^>]*>', '', head, flags=re.I)
     head += '<meta property="og:image" content="https://saglamkombiklima.com.tr/assets/comfort-pets.webp">'
     styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'ai-usta.css', 'premium.css', 'premium-reviews.css', 'business-maps.css']
-    head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261023-ribbon-flow">' for name in styles)
+    head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261024-hybrid">' for name in styles)
     body = template.read_text()
+    assurances, notes = render_assurances(json.loads((root / 'components/service-assurances.json').read_text()))
+    body = body.replace('{{ASSURANCES}}', assurances).replace('{{PROMISE_NOTES}}', notes)
     sources = {'HEADER':'components/header.html','FOOTER':'components/footer.html','AI_PANEL':'components/ai-panel.html',
                'TICKET_MODAL':'components/ticket-modal.html','REVIEWS':'overrides/reviews-section.html','MAPS':'templates/business-maps-section.html'}
     for token, path in sources.items():
@@ -25,5 +38,5 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
         raise ValueError('Unresolved home component')
     scripts = ['site.js','location.js','verified-faults.js','fault-lookup.js','fault-advisories.js','diagnostic-guide.js',
                'home.js','servis-verileri.js','organic-catalog.js','servis-search.js','ai-usta.js','atelier.js','premium-reviews.js','business-maps.js','premium.js']
-    body += ''.join(f'<script src="/assets/{name}?v=20261023-ribbon-flow" defer></script>' for name in scripts)
+    body += ''.join(f'<script src="/assets/{name}?v=20261024-hybrid" defer></script>' for name in scripts)
     files['index.html'] = ('<!doctype html><html lang="tr"><head>'+head+'</head><body class="at-site" data-page-kind="home">'+body+'</body></html>').encode('utf-8')

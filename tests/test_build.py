@@ -26,6 +26,7 @@ class BuildTests(unittest.TestCase):
         (cls.root/'overrides/assets').mkdir(parents=True)
         (cls.root/'overrides/custom.txt').write_text('override wins')
         regions=builder.archive_files(cls.root)['bolgeler.html'].decode().replace('href="/site/logo.png"','href="logo.png"')
+        regions=regions.replace('<body', '<body data-st-mode="production"', 1)
         (cls.root/'overrides/bolgeler.html').write_text(regions)
         (cls.root/'overrides/assets/premium.css').write_text('body{color:green}')
         (cls.root/'overrides/assets/premium.js').write_text('window.premium=true;')
@@ -51,16 +52,28 @@ class BuildTests(unittest.TestCase):
         for page in self.preview.glob('*.html'):self.assertEqual(page.read_text().count('class="at-mobile-contact"'),1)
     def test_private_never_in_preview(self):self.assertFalse((self.preview/'private').exists())
     def test_legacy_logo_and_favicon_use_supplied_artwork(self):
+        brand=json.loads((self.root/'components/brand.json').read_text())
         for page in self.preview.glob('*.html'):
             text=page.read_text()
-            self.assertRegex(text,r'rel="icon"[^>]*href="/site/assets/brand/favicon\.png"')
+            self.assertIn('href="/site'+brand['favicon']+'" type="image/png"',text)
             self.assertNotRegex(text,r'''["'](?:/site/|/|\./)?logo\.(?:svg|png)["']''')
     def test_brand_rewrites_legacy_jsonld_and_relative_references(self):
         brand=json.loads((self.root/'components/brand.json').read_text())
-        source='{"logo":"https://saglamkombiklima.com.tr/logo.png"}<img src="/logo.svg"><img src="logo.png">'
+        source='{"logo":"https://saglamkombiklima.com.tr/logo.png"}<img src="/logo.svg"><img src="logo.png"><img src="/assets/brand/logo-ribbon.png">'
         actual=builder.apply_brand(source,brand)
-        self.assertIn('https://saglamkombiklima.com.tr/assets/brand/logo-ribbon.png',actual)
-        self.assertEqual(actual.count('assets/brand/logo-ribbon.png'),3)
+        self.assertIn('https://saglamkombiklima.com.tr'+brand['logo'],actual)
+        self.assertEqual(actual.count(brand['logo']),4)
+    def test_old_mode_marker_is_replaced_once(self):
+        text=(self.preview/'bolgeler.html').read_text()
+        self.assertEqual(text.count('data-st-mode='),1)
+        self.assertIn('data-st-mode="preview"',text)
+    def test_changed_assets_get_fresh_urls(self):
+        source='<script src="/site/assets/a.js?v=old"></script><a href="/guide.html">Guide</a>'
+        first=builder.version_assets(source,{'assets/a.js':b'first'})
+        second=builder.version_assets(source,{'assets/a.js':b'second'})
+        self.assertNotEqual(first,second);self.assertNotIn('?v=old',first)
+        self.assertIn('<a href="/guide.html">',first)
+        self.assertIn('src="/site/assets/a.js?v=',first)
     def test_package_has_webroot_not_parent_folder(self):
         archive=Path(self.temp.name)/'production.zip';names=packager.package(self.production,archive)
         self.assertIn('index.html',names);self.assertIn('api.php',names)

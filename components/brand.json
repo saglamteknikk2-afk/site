@@ -1,6 +1,18 @@
 {
-  "logo": "/assets/brand/logo-ribbon.png",
-  "favicon": "/assets/brand/favicon.png",
-  "source": "User supplied blue ribbon; transparent padding cropped and resized, artwork unchanged.",
-  "source_sha256": "704f0afb26ed152f0af6fc5a2b8f88f1cd4cde71cf6aea0ca5be5abc1a90131f"
+  "logo": "/assets/brand/logo-flame-ice.png",
+  "favicon": "/assets/brand/favicon-flame-ice.png",
+  "source": "User-approved flame-and-ice redesign of the original blue S ribbon, generated using the original as a local image reference. Transparent padding cropped; resized for header and favicon.",
+  "source_sha256": "5103095a3a4c821a9b971d43af208deabca5ec5b694e4e933d6c515188393878",
+  "logo_dimensions": [
+    172,
+    256
+  ],
+  "favicon_dimensions": [
+    64,
+    64
+  ],
+  "alt": "Sağlam Teknik alev ve buz S simgesi",
+  "logo_aliases": [
+    "/assets/brand/logo-ribbon.png"
+  ]
 }
