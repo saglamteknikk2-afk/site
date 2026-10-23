@@ -1,85 +1,108 @@
-name: Sağlam Teknik — Krem Renkli Canlı Ön İzleme
+name: Sağlam Teknik — Premium Test Ön İzlemesi
 
 on:
   push:
     branches: [main]
     paths:
       - 'preview-parts/**'
+      - 'overrides/**'
+      - 'components/**'
+      - 'templates/**'
+      - 'server/**'
+      - 'private-examples/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'docs/**'
+      - 'README.md'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'preview-parts/**'
+      - 'overrides/**'
+      - 'components/**'
+      - 'templates/**'
+      - 'server/**'
+      - 'private-examples/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'docs/**'
+      - 'README.md'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
+    inputs:
+      production_package:
+        description: 'Üretim ZIP taslağı oluştur (ana siteye yüklemez)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: saglam-test-pages
+  group: saglam-test-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Derleme ayrımı ve arşiv bütünlüğünü test et
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: JavaScript ve PHP sözdizimini doğrula
+        shell: bash
+        run: |
+          set -euo pipefail
+          find overrides scripts -type f \( -name '*.js' -o -name '*.cjs' \) -print0 | xargs -0 -r -n1 node --check
+          find server -type f -name '*.php' -print0 | xargs -0 -r -n1 php -l
+      - name: Düzenlenebilir kaynaklardan güvenli Pages ön izlemesini derle
+        run: |
+          python scripts/build_site.py --mode preview --output _site --base-path /site
+          python scripts/check_site.py _site --mode preview --report build/preview-check.json
+      - name: Derleme kontrol raporları
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-build-report
+          path: |
+            build/preview-check.json
+            _site/build-info.json
+      - name: GitHub Pages dosyalarını hazırla
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: İsteğe bağlı üretim paketi (yayın yok)
+        if: github.event_name == 'workflow_dispatch' && inputs.production_package
+        run: |
+          python scripts/build_site.py --mode production --output build/production
+          python scripts/check_site.py build/production --mode production --report build/production-check.json
+          python scripts/package_production.py build/production --output build/saglam-teknik-production-draft.zip
+      - name: Üretim taslak ZIP dosyasını indirilebilir yap
+        if: github.event_name == 'workflow_dispatch' && inputs.production_package
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-draft-NOT-DEPLOYED
+          path: |
+            build/saglam-teknik-production-draft.zip
+            build/production-check.json
+            templates/private/
+
+  deploy-preview:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub depo dosyalarını getir
-        uses: actions/checkout@v4
-
-      - name: GitHub Pages ayarını hazırla
-        uses: actions/configure-pages@v5
-
-      - name: Güvenli statik arşivi oluştur
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(find preview-parts -name 'part-*.txt' | wc -l)" -eq 43
-          find preview-parts -name 'part-*.txt' -print | LC_ALL=C sort | xargs cat | tr -d '\n\r' | base64 -d > site-preview.zip
-          echo '1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b  site-preview.zip' | sha256sum -c -
-          mkdir -p _site
-          unzip -oq site-preview.zip -d _site
-          test -s _site/index.html
-          grep -qi 'noindex' _site/index.html
-          test ! -f _site/api.php
-          test ! -f _site/owner-admin.html
-          find _site -type f \( -name 'google*.html' -o -name 'yandex_*.html' \) -delete
-          # Tasarımı bozmadan yalnızca GitHub test ön izlemesinde yazıları büyüt
-          cp preview-readability.css _site/assets/preview-readability.css
-          find _site -maxdepth 1 -type f -name '*.html' -print0 |
-            xargs -0 -r sed -i 's#</head>#<link rel="stylesheet" href="./assets/preview-readability.css?v=20261023a"></head>#'
-          # SADECE GITHUB TEST SÜRÜMÜ: görünür ve model seçmeli iyileştirmeler
-          test -s preview-enhancements.css
-          test -s preview-enhancements.js
-          node --check preview-enhancements.js
-          cp preview-enhancements.css _site/assets/preview-enhancements.css
-          cp preview-enhancements.js _site/assets/preview-enhancements.js
-          for art in klima-servisi petek-temizligi kombi-servisi; do
-            test -s "preview-art/$art.svg"
-            cp "preview-art/$art.svg" "_site/assets/page-art/$art.svg"
-          done
-          find _site -maxdepth 1 -type f -name '*.html' -print0 |
-            xargs -0 -r sed -i 's#</head>#<link rel="stylesheet" href="/site/assets/preview-enhancements.css?v=20261023b"></head>#'
-          # Model seçici tarayıcıda çalışır; gerçek sırlar ve PHP içermez.
-          sed -i 's#</body>#<script src="/site/assets/preview-enhancements.js?v=20261023b" defer></script></body>#' \
-            _site/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html
-          # Aynı resim URL'leri tarayıcı önbelleğinde kalmasın.
-          for art in klima-servisi petek-temizligi kombi-servisi; do
-            sed -i "s#page-art/$art.svg#page-art/$art.svg?v=20261023b#g" _site/index.html
-          done
-          test -s _site/assets/preview-enhancements.css
-          test -s _site/assets/page-art/klima-servisi.svg
-          test -s _site/assets/page-art/petek-temizligi.svg
-          grep -q 'preview-enhancements.js' _site/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html
-          grep -q 'preview-enhancements.css' _site/index.html
-          echo 'Görsel iyileştirmeler ve model seçici yerleştirildi.'
-          echo 'Güvenli statik ön izleme paketi doğrulandı.'
-
-      - name: GitHub Pages yayını için yükle
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: Ön izlemeyi yayına al
+      - uses: actions/configure-pages@v5
+      - name: Yalnızca GitHub test ön izlemesini yayınla
         id: deployment
         uses: actions/deploy-pages@v4

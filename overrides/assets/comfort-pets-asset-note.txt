@@ -1,0 +1,9 @@
+COMFORT PETS — ASSET NOTE
+Created: 2026-10-23
+Source: Original image generated with image_gen for this project; no stock photograph or customer reference photo used.
+Style: Photorealistic contemporary apartment, ivory/cream and forest-green accents; natural daylight, white panel radiator, sleeping ginger cat and cream dog. No text, logos, watermark, circular background or orange graphic.
+Processing: Pillow used only for proportional resizing and WebP format conversion. No semantic image edits or composites.
+Usage: Decorative home-comfort hero image; do not describe it as a real customer home, completed job or testimonial.
+Large: comfort-pets.webp, 1400 x 933, quality 84, 159752 bytes.
+Small: comfort-pets-480.webp, 480 x 320, quality 84, 30608 bytes.
+Suggested alt: Beyaz radyatörün önünde uyuyan kedi ve köpekle sıcak, huzurlu bir ev.

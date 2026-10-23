@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /api.php
+Disallow: /worker.php
+Disallow: /yonetim.php
+Disallow: /yonetim-api.php
+Disallow: /__yonetim
+Sitemap: https://saglamkombiklima.com.tr/sitemap.xml
+Disallow: /fault-catalog.php
+Disallow: /fault-advisories.php
+Disallow: /notification-support.php
+Disallow: /telegram-setup.php

@@ -1,0 +1,44 @@
+<section id="yorumlar" class="premium-reviews" data-premium-reviews aria-labelledby="premiumReviewsTitle">
+  <div class="pr-shell">
+    <div class="pr-intro">
+      <div><p class="pr-eyebrow">HİZMETİN ARDINDAN</p><h2 id="premiumReviewsTitle" class="pr-title">İyi işin ardından,<br><em>söz sizde.</em></h2></div>
+      <div class="pr-intro-copy"><p>Kombi, klima ve petek hizmeti alanların paylaştığı deneyimler. Siz de aldığınız hizmeti kendi sözlerinizle anlatın.</p><p id="premiumReviewStatus" class="pr-source-note" role="status">Mevcut sitedeki değerlendirmeler yükleniyor.</p></div>
+    </div>
+    <aside class="pr-endorsement" aria-label="Armut müşteri değerlendirme rozeti">
+      <img src="/oneri.png" width="771" height="712" loading="lazy" alt="Sağlam Teknik için sağlanan Armut Tavsiye Edilen Hizmet Veren rozeti, 4.8 puan, 2026">
+      <div><p class="pr-eyebrow">MÜŞTERİ DENEYİMLERİ</p><h3>Bir hizmetin en iyi anlatıcısı,<br>onu deneyimleyen kişidir.</h3><p>Sağlam Teknik değerlendirmelerini okuyun; hizmet aldıysanız siz de deneyiminizi paylaşın.</p></div>
+      <a href="#yorumFormKutusu" class="pr-endorsement-link">Yorum yaz <span aria-hidden="true">↗</span></a>
+    </aside>
+    <div class="pr-grid">
+      <div class="pr-reading">
+        <div id="filterBtnGroup" class="pr-filters" role="group" aria-label="Yorumları hizmete göre süz">
+          <button id="btnCatAll" type="button" class="is-active" data-review-category="all" aria-pressed="true">Tümü</button>
+          <button id="btnCatKombi" type="button" data-review-category="kombi" aria-pressed="false">Kombi</button>
+          <button id="btnCatKlima" type="button" data-review-category="klima" aria-pressed="false">Klima</button>
+          <button id="btnCatPetek" type="button" data-review-category="petek" aria-pressed="false">Petek</button>
+        </div>
+        <label class="pr-search" for="reviewSearchInput"><span>Yorumlarda ara</span><input id="reviewSearchInput" type="search" placeholder="İsim, hizmet veya bir sözcük" autocomplete="off"></label>
+        <p id="premiumReviewCount" class="pr-count" aria-live="polite" aria-atomic="true"></p>
+        <div id="reviewsContainer" class="pr-review-list" aria-label="Müşteri değerlendirmeleri"></div>
+        <button id="premiumReviewsMore" class="pr-more" type="button" hidden>Diğer değerlendirmeleri göster <span aria-hidden="true">↓</span></button>
+        <noscript><p class="pr-empty">Değerlendirmeleri okumak ve yorum formunu kullanmak için JavaScript’i etkinleştirin.</p></noscript>
+      </div>
+      <div id="yorumFormKutusu" class="pr-form-card">
+        <p class="pr-eyebrow">SİZİN DENEYİMİNİZ</p><h3>Bir sonraki kişiye<br>yol göstersin.</h3><p class="pr-form-intro">Hizmet aldıysanız deneyiminizi paylaşın. Yorumlar, yayın onayınızla incelemeye iletilir.</p>
+        <p class="pr-preview-note" data-review-preview-note hidden>Bu ön izlemede yorum gönderimi kapalıdır. Buraya yazdığınız bilgiler gönderilmez. <a data-review-live-site href="https://saglamkombiklima.com.tr/#yorumFormKutusu">Yayındaki sitede yorum yazın ↗</a></p>
+        <form id="musteriYorumFormu">
+          <div class="pr-form-pair"><label for="yorumIsim">Adınız / rumuzunuz<input id="yorumIsim" name="author" required minlength="2" maxlength="80" autocomplete="name" placeholder="Nasıl hitap edelim?"></label><label for="yorumIlce">İlçeniz<input id="yorumIlce" name="district" required minlength="2" maxlength="80" list="premiumReviewDistricts" placeholder="Örn. Küçükçekmece"></label></div>
+          <datalist id="premiumReviewDistricts"><option value="Arnavutköy"><option value="Avcılar"><option value="Bağcılar"><option value="Bahçelievler"><option value="Bakırköy"><option value="Başakşehir"><option value="Bayrampaşa"><option value="Beşiktaş"><option value="Beylikdüzü"><option value="Beyoğlu"><option value="Büyükçekmece"><option value="Çatalca"><option value="Esenler"><option value="Esenyurt"><option value="Eyüpsultan"><option value="Fatih"><option value="Gaziosmanpaşa"><option value="Güngören"><option value="Kağıthane"><option value="Küçükçekmece"><option value="Sarıyer"><option value="Silivri"><option value="Sultangazi"><option value="Şişli"><option value="Zeytinburnu"></datalist>
+          <div class="pr-form-pair"><label for="yorumHizmet">Aldığınız hizmet<select id="yorumHizmet" name="service" required><option value="">Hizmeti seçin</option><option value="Kombi Bakımı / Onarımı">Kombi bakımı / onarımı</option><option value="Klima Bakımı / Montajı">Klima bakımı / montajı</option><option value="Makineli Petek Temizliği">Petek temizliği</option><option value="Acil Servis Hizmeti">Acil servis hizmeti</option></select></label><label for="yorumPuan">Puanınız<select id="yorumPuan" name="rating" required><option value="5">★★★★★ · 5 / 5</option><option value="4">★★★★☆ · 4 / 5</option><option value="3">★★★☆☆ · 3 / 5</option><option value="2">★★☆☆☆ · 2 / 5</option><option value="1">★☆☆☆☆ · 1 / 5</option></select></label></div>
+          <label for="yorumMetni">Deneyiminiz<textarea id="yorumMetni" name="comment" required minlength="10" maxlength="2000" rows="5" placeholder="Hangi hizmeti aldınız? Deneyiminiz nasıldı?"></textarea></label>
+          <label class="pr-consent" for="yorumYayinOnayi"><input id="yorumYayinOnayi" name="consent" type="checkbox" required><span>Yorumumun ad/rumuz ve ilçe bilgisiyle yönetici onayından sonra yayımlanmasını istiyorum. <a data-review-privacy href="aydinlatma.html">Aydınlatma metnini</a> okudum.</span></label>
+          <div class="pr-honey" aria-hidden="true"><label>Web sitesi<input id="yorumWebsite" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <p id="yorumError" class="pr-form-error" role="alert" hidden></p>
+          <button id="yorumGonderBtn" class="pr-submit" type="submit">Yorumu onaya gönder <span aria-hidden="true">↗</span></button>
+          <p id="yorumOnayMsg" class="pr-form-success" role="status" hidden></p>
+          <p class="pr-form-footnote">Yorumunuz anında yayımlanmaz. Telefon veya adres gibi kişisel bilgileri yorumunuza eklemeyin.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

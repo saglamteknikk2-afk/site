@@ -1,0 +1,48 @@
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Plesk/Nginx TLS sonlandirmasinda yonlendirme dongusunu onler.
+RewriteCond %{HTTP_HOST} ^(?:www\.)?saglamkombiklima\.com\.tr$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+RewriteRule ^ https://saglamkombiklima.com.tr%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.saglamkombiklima\.com\.tr$ [NC]
+RewriteRule ^ https://saglamkombiklima.com.tr%{REQUEST_URI} [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^(?:private|source|tests|build|site-kaynaklari|pc-kaynaklari|icerik-plani|tam-eslesmeler)(?:/|$) - [F,L]
+RewriteRule ^site_apileri.* - [F,L,NC]
+RewriteRule ^YONETIMI_AC\.txt$ - [F,L,NC]
+RewriteRule ^(?:bekleyen-yorumlar|onayli-yorumlar)\.json$ - [F,L,NC]
+</IfModule>
+<FilesMatch "(?i)\.(sqlite|db|ini|log|bak|py|zip|env|key)$">
+Require all denied
+</FilesMatch>
+<FilesMatch "(?i)^(site_apileri.*|YONETIMI_AC\.txt|bekleyen-yorumlar\.json|onayli-yorumlar\.json)$">
+Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Permissions-Policy "geolocation=(self), camera=(), microphone=()"
+<FilesMatch "\.(css|js|woff2|ttf|svg|png)$">
+Header set Cache-Control "public, max-age=86400"
+</FilesMatch>
+<FilesMatch "\.html$">
+Header set Cache-Control "no-cache, max-age=0, must-revalidate"
+</FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Saglam Teknik guvenli yayin — arşiv/ayar/tespit dosyalarını erişime kapat.
+<FilesMatch "(?i)^(?:\.|.*\.(?:zip|rar|7z|tar|gz|sql|sqlite|db|db3|bak|backup|old|orig|save|log|ini|conf|env|key|pem|p12|pfx|md|lock|map)|site_apileri.*|.*(?:_yedek|_backup).*)$">
+Require all denied
+</FilesMatch>
+# PHP tarafından include edilen betikler HTTP üzerinden doğrudan çalıştırılmaz.
+<FilesMatch "(?i)^(?:ai-koruma|fault-catalog|fault-advisories|notification-support|telegram-setup|worker)\.php$">
+Require all denied
+</FilesMatch>

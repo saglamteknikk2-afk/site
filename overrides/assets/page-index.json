@@ -1,0 +1,1017 @@
+[
+  {
+    "path": "/404.html",
+    "title": "Sayfa bulunamadı",
+    "kind": "error"
+  },
+  {
+    "path": "/500-evler-servisi.html",
+    "title": "500 Evler kombi ve klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/airfel-klima-lcq140vy1-common-manual-codes-ariza-kodlari.html",
+    "title": "Airfel LCQ140VY1 / LQS140VY1 kaset — iki tabloya ortak doğrulanmış kodlar klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/airfel-klima-vibe-ltxq-av1b-202603-ariza-kodlari.html",
+    "title": "Airfel Vibe LTXQ25/35/50/71AV1B — 2026.03 Türkiye kılavuzu klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/airfel-kombi-maestro-optimum-a2cbp020-ariza-kodlari.html",
+    "title": "Airfel Maestro Optimum A2CBP020AATR kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/airfel-kombi-maestro-smart-a2cpp-ariza-kodlari.html",
+    "title": "Airfel Maestro Smart A2CPP024AATR / A2CPP028AATR kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/airwell-klima-hdle-09m25-ariza-kodlari.html",
+    "title": "Airwell HDLE Aura 09M25 klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/alarko-klima-flair-multi-kaset-bm-cai-ariza-kodlari.html",
+    "title": "Alarko Flair Multi Kaset FLR-BM…CAI klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/alarko-kombi-seradens-super-srs-2026-ariza-kodlari.html",
+    "title": "Alarko Seradens Super SRS 20/24/28/36 (2026) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/alarko-kombi-super-fit-suf-2026-ariza-kodlari.html",
+    "title": "Alarko Super Fit SUF 24/28/35 (2026 kılavuzu) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/arcelik-klima-portatif-09215p-12215p-ariza-kodlari.html",
+    "title": "Arçelik 09215 P / 12215 P mobil-portatif klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/arcelik-klima-servisi.html",
+    "title": "Arçelik klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/arcelik-kombi-dgk-hp-lcd-ariza-kodlari.html",
+    "title": "Arçelik DGK HP / HPT LCD kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/ariston-kombi-clas-one-gb-ie-3301043-ariza-kodlari.html",
+    "title": "Ariston CLAS ONE 24/30/38 GB-IE (ülke/ürün kodu teyidi gerekir) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/ariston-kombi-servisi.html",
+    "title": "Ariston kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/ariza-rehberi.html",
+    "title": "Kombi ve klima arıza rehberi",
+    "kind": "article"
+  },
+  {
+    "path": "/arnavutkoy-klima-servisi.html",
+    "title": "Arnavutköy klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/arnavutkoy-kombi-servisi.html",
+    "title": "Arnavutköy kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/avcilar-klima-servisi.html",
+    "title": "Avcılar klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/avcilar-kombi-servisi.html",
+    "title": "Avcılar kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/aydinlatma.html",
+    "title": "Gizlilik ve aydınlatma",
+    "kind": "policy"
+  },
+  {
+    "path": "/bagcilar-klima-servisi.html",
+    "title": "Bağcılar klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bagcilar-kombi-servisi.html",
+    "title": "Bağcılar kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bahcelievler-klima-servisi.html",
+    "title": "Bahçelievler klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bahcelievler-kombi-servisi.html",
+    "title": "Bahçelievler kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bahcesehir-servisi.html",
+    "title": "Bahçeşehir kombi ve klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/bakirkoy-klima-servisi.html",
+    "title": "Bakırköy klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bakirkoy-kombi-servisi.html",
+    "title": "Bakırköy kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/basaksehir-klima-servisi.html",
+    "title": "Başakşehir klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/basaksehir-kombi-servisi.html",
+    "title": "Başakşehir kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/baxi-kombi-combi-2-uk-ariza-kodlari.html",
+    "title": "Baxi 200 / 400 / 600 / 800 / Assure 500 Combi 2 (UK) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html",
+    "title": "Baxi Duo-tec / Platinum / EcoBlue ve üreticinin Other grubundaki kombiler (UK) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-e1-hatasi.html",
+    "title": "Baymak E1 hatası: önce model ve kodu doğrulayın",
+    "kind": "article"
+  },
+  {
+    "path": "/baymak-klima-elegant-air-300037670-ariza-kodlari.html",
+    "title": "Baymak Elegant Air 09 / 12 / 18 / 24 klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-klima-servisi.html",
+    "title": "Baymak klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/baymak-kombi-duotec-33-42-45-ariza-kodlari.html",
+    "title": "Baymak Duotec 33 · kod rehberi",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-kombi-lambert-attivo-240-310-ariza-kodlari.html",
+    "title": "Baymak Lambert Attivo 240 / 310 — 300032131 Rev.2 (2018) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-kombi-luna-avant-24-ln-ariza-kodlari.html",
+    "title": "Baymak Luna Avant 24 LN — 300035616 Rev.00 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-kombi-lunatec-24-30-35-ariza-kodlari.html",
+    "title": "Baymak Lunatec 24 / 30 / 35 — 300036785 Rev.00 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/baymak-kombi-servisi.html",
+    "title": "Baymak kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/bayrampasa-klima-servisi.html",
+    "title": "Bayrampaşa klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bayrampasa-kombi-servisi.html",
+    "title": "Bayrampaşa kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/beko-klima-portatif-20915p-21215p-ariza-kodlari.html",
+    "title": "Beko 20915 P / 21215 P mobil-portatif klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/beko-klima-servisi.html",
+    "title": "Beko klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/beko-kombi-bk-hplcd-ariza-kodlari.html",
+    "title": "Beko BK 20 / 26 HPLCD kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/beretta-kombi-mynute-s-24-csi-ariza-kodlari.html",
+    "title": "Beretta Mynute S 24 C.S.I. kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/besiktas-klima-servisi.html",
+    "title": "Beşiktaş klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/besiktas-kombi-servisi.html",
+    "title": "Beşiktaş kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/beylikduzu-klima-servisi.html",
+    "title": "Beylikdüzü klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/beylikduzu-kombi-servisi.html",
+    "title": "Beylikdüzü kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/beyoglu-klima-servisi.html",
+    "title": "Beyoğlu klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/beyoglu-kombi-servisi.html",
+    "title": "Beyoğlu kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/bolgeler.html",
+    "title": "İstanbul Avrupa Yakası hizmet bölgeleri",
+    "kind": "regions"
+  },
+  {
+    "path": "/bosch-klima-climate7000i-2026-ariza-kodlari.html",
+    "title": "Bosch Climate 7000i (6721100504, 2026/05) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-class-2000-w-ariza-kodlari.html",
+    "title": "Bosch Class 2000 W kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-class-6000-w-ariza-kodlari.html",
+    "title": "Bosch Class 6000 W kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-classic-silver-classicplus-ariza-kodlari.html",
+    "title": "Bosch Classic Silver / ClassicPlus kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-comfort-condense-ariza-kodlari.html",
+    "title": "Bosch Comfort Condense kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-condens-2300i-w-ariza-kodlari.html",
+    "title": "Bosch Condens 2300i W kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-condens-2500-w-ariza-kodlari.html",
+    "title": "Bosch Condens 2500 W kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-condens-7000i-w-ariza-kodlari.html",
+    "title": "Bosch Condens 7000i W kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-exclusive-ariza-kodlari.html",
+    "title": "Bosch Exclusive / Comfort kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/bosch-kombi-servisi.html",
+    "title": "Bosch kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/buderus-kombi-logamax-plus-gb012-ariza-kodlari.html",
+    "title": "Buderus Logamax plus GB012 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-plus-gb062-gb042-ariza-kodlari.html",
+    "title": "Buderus Logamax plus GB062 / Logamax plus GB042 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-plus-gb072-ariza-kodlari.html",
+    "title": "Buderus Logamax plus GB072 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-plus-gb122i-gb022i-ariza-kodlari.html",
+    "title": "Buderus Logamax plus GB122i / Logamax plus GB022i kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-plus-gb172i-ariza-kodlari.html",
+    "title": "Buderus Logamax plus GB172i kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-u022-u072-ariza-kodlari.html",
+    "title": "Buderus Logamax U022 / Logamax U072 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-u052-ariza-kodlari.html",
+    "title": "Buderus Logamax U052 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-logamax-u062-ariza-kodlari.html",
+    "title": "Buderus Logamax U062 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/buderus-kombi-servisi.html",
+    "title": "Buderus kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/buyukcekmece-klima-servisi.html",
+    "title": "Büyükçekmece klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/buyukcekmece-kombi-servisi.html",
+    "title": "Büyükçekmece kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/carrier-klima-40maqb-us-ca-01sm-2016-ariza-kodlari.html",
+    "title": "Carrier 40MAQB 09–36 — 40MAQ-01SM, 08/2016 (US/CA) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/catalca-klima-servisi.html",
+    "title": "Çatalca klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/catalca-kombi-servisi.html",
+    "title": "Çatalca kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/copa-kombi-e-lecto-24-ariza-kodlari.html",
+    "title": "Copa e-Lecto 24 kW (elektrikli) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/daikin-klima-ftx-kmv1b-ariza-kodlari.html",
+    "title": "Daikin FTX25/35KMV1B klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/daikin-klima-servisi.html",
+    "title": "Daikin klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/daikin-kombi-ndj-a1abtr-ariza-kodlari.html",
+    "title": "Daikin NDJ Premix A1ABTR / NDJ Smart Premix ASTR kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html",
+    "title": "De Dietrich PMC-S MI (Fransa, 2019) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/demirdokum-klima-kion-inverter-ariza-kodlari.html",
+    "title": "Demirdöküm Kion Inverter 09 / 12 / 18 / 24 klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/demirdokum-kombi-nitromix-p24-p28-p35-ng-hep-ariza-kodlari.html",
+    "title": "Demirdöküm Nitromix P 24 / P 28 / P 35 NG (HEP) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/demirdokum-kombi-servisi.html",
+    "title": "Demirdöküm kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/eca-kombi-citius-premix-hm-tr-ariza-kodlari.html",
+    "title": "ECA Citius Premix HM 14/20/24/28 — Türkiye kılavuzu kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/eca-kombi-confeo-premix-hm-tr-ariza-kodlari.html",
+    "title": "ECA Confeo Premix HM 14/20/24/28/30/35 — Türkiye kılavuzu kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html",
+    "title": "ECA Proteus Premix HM 14/20/24/28/30/35/42/45 — Türkiye kılavuzu kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/eca-kombi-servisi.html",
+    "title": "ECA kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/emko-kombi-diamond-dia-24-28-35-ariza-kodlari.html",
+    "title": "Emko Diamond DIA 24 / DIA 28 / DIA 35 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/esenler-klima-servisi.html",
+    "title": "Esenler klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/esenler-kombi-servisi.html",
+    "title": "Esenler kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/esenyurt-klima-servisi.html",
+    "title": "Esenyurt klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/esenyurt-kombi-servisi.html",
+    "title": "Esenyurt kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/eyupsultan-klima-servisi.html",
+    "title": "Eyüpsultan klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/eyupsultan-kombi-servisi.html",
+    "title": "Eyüpsultan kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/fatih-klima-servisi.html",
+    "title": "Fatih klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/fatih-kombi-servisi.html",
+    "title": "Fatih kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html",
+    "title": "Ferroli DIVAtech D C24/C32 — BY belge kapsamı kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html",
+    "title": "Ferroli DIVAtech D F24/F32/F37 — RU/BY belge kapsamı kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/ferroli-kombi-domiproject-f24-d-tr-abm01-sw01-ariza-kodlari.html",
+    "title": "Ferroli DOMIPROJECT F24 D (TR) — ABM01 SW01 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/fondital-kombi-itaca-kb-24-32-2019-ariza-kodlari.html",
+    "title": "Fondital Itaca KB 24 / KB 32 (01/2019) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/fujitsu-klima-aseg-kmte-ariza-kodlari.html",
+    "title": "Fujitsu ASEG18KMTE / ASEG24KMTE klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/gaziosmanpasa-klima-servisi.html",
+    "title": "Gaziosmanpaşa klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/gaziosmanpasa-kombi-servisi.html",
+    "title": "Gaziosmanpaşa kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/gree-klima-vireo-r32-ariza-kodlari.html",
+    "title": "Gree Vireo R32 (Kuzey Amerika) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/gungoren-klima-servisi.html",
+    "title": "Güngören klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/gungoren-kombi-servisi.html",
+    "title": "Güngören kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/haier-klima-flexis-plus-as25s2sf1fa-wh-ariza-kodlari.html",
+    "title": "Haier Flexis Plus AS25S2SF1FA-WH klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/hakkimizda.html",
+    "title": "Hakkımızda",
+    "kind": "about"
+  },
+  {
+    "path": "/hitachi-klima-airhome300-ch18-ch24-pcasv-ariza-kodlari.html",
+    "title": "Hitachi airHome 300 RAK/RAC-CH18PCASV / CH24PCASV klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/hizmetler.html",
+    "title": "Hizmetlerimiz",
+    "kind": "services"
+  },
+  {
+    "path": "/iletisim.html",
+    "title": "İletişim ve servis talebi",
+    "kind": "contact"
+  },
+  {
+    "path": "/immergas-kombi-alpha-eco-28-ariza-kodlari.html",
+    "title": "Immergas ALPHA ECO 28 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/immergas-kombi-victrix-tera-24-1-e-ariza-kodlari.html",
+    "title": "Immergas VICTRIX TERA 24 1 E kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/",
+    "title": "İstanbul Kombi ve Klima Servisi",
+    "kind": "home"
+  },
+  {
+    "path": "/isletme-bilgileri.html",
+    "title": "Sağlam Teknik işletme bilgileri",
+    "kind": "policy"
+  },
+  {
+    "path": "/kagithane-klima-servisi.html",
+    "title": "Kağıthane klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/kagithane-kombi-servisi.html",
+    "title": "Kağıthane kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/kaynak-ve-yayin-ilkeleri.html",
+    "title": "Kaynak ve yayın ilkeleri",
+    "kind": "policy"
+  },
+  {
+    "path": "/kilyos-servisi.html",
+    "title": "Kilyos kombi ve klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-bakimi.html",
+    "title": "Klima bakımı ve temizliği",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-buzlaniyor.html",
+    "title": "Klima buzlanıyor veya borusu buz tutuyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-calismiyor.html",
+    "title": "Klima çalışmıyor veya kapanıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-filtre-temizligi.html",
+    "title": "Klima filtre temizliği: Kullanıcı bakımının sınırı nedir?",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-gaz-kontrolu.html",
+    "title": "Klima gaz ve kaçak kontrolü",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-hata-kodu.html",
+    "title": "Klima hata kodu veya kumanda sorunu",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-isitmiyor.html",
+    "title": "Klima ısıtmıyor veya soğuk üflüyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-koku-yapiyor.html",
+    "title": "Klima koku yapıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-modeli-nasil-ogrenilir.html",
+    "title": "Klima modeli nasıl bulunur? İç ünite, dış ünite ve kumanda",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-montaji.html",
+    "title": "Klima montajı",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-servisi.html",
+    "title": "Klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-sesli-calisiyor.html",
+    "title": "Klima sesli çalışıyor veya titreşim yapıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-sogutmuyor.html",
+    "title": "Klima soğutmuyor veya az soğutuyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-sokumu.html",
+    "title": "Klima sökümü ve yer değişimi",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-su-akitiyor.html",
+    "title": "Klima su akıtıyor veya su damlatıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/klima-tamiri.html",
+    "title": "Klima tamiri",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-atesleme.html",
+    "title": "Kombi ateşleme yapmıyor veya alev sönüyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-bakimi-ne-zaman-yapilir.html",
+    "title": "Kombi bakımı ne zaman yapılır? Bakım ile arızayı ayırın",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-bakimi.html",
+    "title": "Kombi bakımı",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-basinci.html",
+    "title": "Kombi basıncı düşüyor veya yükseliyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-calismiyor.html",
+    "title": "Kombi çalışmıyor, kapanıyor veya hata veriyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-hata-kodu.html",
+    "title": "Kombi hata kodu nasıl okunur ve kaydedilir?",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-modeli-nasil-ogrenilir.html",
+    "title": "Kombi modeli nasıl öğrenilir? Etiket ve belge rehberi",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-petek-isitmiyor.html",
+    "title": "Kombi petekleri ısıtmıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-servisi.html",
+    "title": "Kombi servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-sesli-calisiyor.html",
+    "title": "Kombi sesli çalışıyor veya uğultu yapıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-sicak-su.html",
+    "title": "Kombi sıcak su vermiyor veya su dalgalanıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-sicaklik-ayari.html",
+    "title": "Kombi sık devreye giriyor veya sıcaklık ayarı tutmuyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-su-akitiyor.html",
+    "title": "Kombi su akıtıyor",
+    "kind": "article"
+  },
+  {
+    "path": "/kombi-tamiri.html",
+    "title": "Kombi tamiri ve arıza tespiti",
+    "kind": "article"
+  },
+  {
+    "path": "/kucukcekmece-klima-servisi.html",
+    "title": "Küçükçekmece klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/kucukcekmece-kombi-servisi.html",
+    "title": "Küçükçekmece kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/lg-klima-s09et-ariza-kodlari.html",
+    "title": "LG S09ET klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/lg-klima-servisi.html",
+    "title": "LG klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/maktek-kombi-epsilon-eco-24-30-ariza-kodlari.html",
+    "title": "Maktek Epsilon Eco 24 / 30 kW kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/maktek-kombi-omega-lcd-2025-ariza-kodlari.html",
+    "title": "Maktek Omega LCD (elektrikli, 2025) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/markalar.html",
+    "title": "Kombi ve klima marka rehberi",
+    "kind": "brands"
+  },
+  {
+    "path": "/merter-servisi.html",
+    "title": "Merter kombi ve klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html",
+    "title": "Midea Xtreme Save Connect AGV-I R32 (Brezilya) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html",
+    "title": "Mitsubishi Electric MSZ-FX NL-CA1 (Kanada) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/mitsubishi-electric-klima-servisi.html",
+    "title": "Mitsubishi Electric klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/mitsubishi-heavy-industries-klima-servisi.html",
+    "title": "Mitsubishi Heavy Industries klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/mitsubishi-heavy-klima-srk-zs-w-ariza-kodlari.html",
+    "title": "Mitsubishi Heavy Industries SRK20–50ZS-W / WB / WT / SRK20–60ZSX-W / WB / WT klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/model-ariza-kodlari.html",
+    "title": "Kombi ve klima modeline göre hata kodu rehberleri",
+    "kind": "model-hub"
+  },
+  {
+    "path": "/panasonic-klima-z25-z35-tkea-eu-ariza-kodlari.html",
+    "title": "Panasonic CS-Z25TKEA / CS-Z35TKEA klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/petek-temizligi.html",
+    "title": "Petek temizliği ve ısıtma kontrolü",
+    "kind": "article"
+  },
+  {
+    "path": "/profilo-klima-ksi-kso-vw-xb32n-ec-ariza-kodlari.html",
+    "title": "Profilo KSI/KSO 09–24 VW32N ve XB32N — EC göstergesi klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/protherm-kombi-lynx-condens-24-28-ariza-kodlari.html",
+    "title": "Protherm Lynx Condens 24 / 28 — 0020277895_05 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/regal-klima-r32-inverter-20234676-ariza-kodlari.html",
+    "title": "Regal A++ R32 Inverter — kılavuz 20234676 klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/remeha-kombi-avanta-ace-ariza-kodlari.html",
+    "title": "Remeha Avanta Ace kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/samsung-klima-fjm-hsf-r410a-ariza-kodlari.html",
+    "title": "Samsung FJM R410A HSFN/HSFS duvar tipi (Avrupa) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/samsung-klima-servisi.html",
+    "title": "Samsung klima servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/sanica-kombi-fiji-24-28-hermetik-ariza-kodlari.html",
+    "title": "Sanica Fiji 24 / 28 kW (hermetik) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/sariyer-klima-servisi.html",
+    "title": "Sarıyer klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/sariyer-kombi-servisi.html",
+    "title": "Sarıyer kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html",
+    "title": "Saunier Duval ThemaPlus Condens 25/30/35 A/B (H-FR) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/sefakoy-servisi.html",
+    "title": "Sefaköy kombi ve klima servisi",
+    "kind": "article"
+  },
+  {
+    "path": "/servis-oncesi-guvenli-kontrol.html",
+    "title": "Servis öncesi güvenli kontrol: Neyi gözlemleyebilirsiniz?",
+    "kind": "article"
+  },
+  {
+    "path": "/servis-sec.html",
+    "title": "Bölge, marka ve arızaya göre kombi ve klima servisi",
+    "kind": "selector"
+  },
+  {
+    "path": "/siemens-klima-as-ivw32n-ec-ariza-kodlari.html",
+    "title": "Siemens AS09/12/18/24 IVW32N–OVW32N — EC göstergesi klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/silivri-klima-servisi.html",
+    "title": "Silivri klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/silivri-kombi-servisi.html",
+    "title": "Silivri kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/sisli-klima-servisi.html",
+    "title": "Şişli klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/sisli-kombi-servisi.html",
+    "title": "Şişli kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/sultangazi-klima-servisi.html",
+    "title": "Sultangazi klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/sultangazi-kombi-servisi.html",
+    "title": "Sultangazi kombi servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/termodinamik-kombi-ek-dokunmatik-td20230200-ariza-kodlari.html",
+    "title": "Termodinamik EK Serisi Dokunmatik Ekran Elektrikli Kombi (9–40 kW) — TD-20230200 · kod rehberi",
+    "kind": "model"
+  },
+  {
+    "path": "/termoteknik-kombi-logic-2024-ariza-kodlari.html",
+    "title": "Termoteknik LOGIC 20/24 / 26/35 / 31/35 (10/2024) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/toshiba-klima-smmsi-r410a-a11-005-ariza-kodlari.html",
+    "title": "Toshiba SMMS-i R410A — MMY-MAP0804/1004/1204/1404/1604 aileleri klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/unical-kombi-konm-c-18-24-28-35-ariza-kodlari.html",
+    "title": "Unical KONm C18 / C24 / C28 / C35 — Regolafacile kodları kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/vaillant-kombi-ecotec-pro-236-286-5-3-ariza-kodlari.html",
+    "title": "Vaillant ecoTEC pro VUW TR 236/5-3 / 286/5-3 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/vaillant-kombi-servisi.html",
+    "title": "Vaillant kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/vestel-klima-flora-doga-wifi-ariza-kodlari.html",
+    "title": "Vestel Flora Doğa Inverter A++ WIFI / Vega Plus Inverter G A++ WIFI / Vega Plus Inverter A++ WIFI klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html",
+    "title": "Viessmann Vitoclima 300-S/HE dış ünite (Polonya 2020) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/viessmann-kombi-servisi.html",
+    "title": "Viessmann kombi servisi",
+    "kind": "brand"
+  },
+  {
+    "path": "/viessmann-kombi-vitodens-vitotronic-200-300-ariza-kodlari.html",
+    "title": "Viessmann Vitodens 200/300 ailesi, Vitotronic kontrol (nesil teyidi gerekir) kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/warmhaus-kombi-ewa-20-24-ariza-kodlari.html",
+    "title": "Warmhaus Ewa 20 / Ewa 24 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/warmhaus-kombi-minerwa-25-ariza-kodlari.html",
+    "title": "Warmhaus MinerWa 25 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/wolf-kombi-cgb-2k-20-24-ariza-kodlari.html",
+    "title": "Wolf CGB-2K-20 / CGB-2K-24 kombi hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/york-klima-r-series-dhr18-48-us-ariza-kodlari.html",
+    "title": "York R Series DHR18–48 CSB/NDB/NKB/NCB21S (ABD) klima hata ve uyarı kodları",
+    "kind": "model"
+  },
+  {
+    "path": "/zeytinburnu-klima-servisi.html",
+    "title": "Zeytinburnu klima servisi",
+    "kind": "district"
+  },
+  {
+    "path": "/zeytinburnu-kombi-servisi.html",
+    "title": "Zeytinburnu kombi servisi",
+    "kind": "district"
+  }
+]

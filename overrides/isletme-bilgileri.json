@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "name": "Sağlam Teknik",
+  "url": "https://saglamkombiklima.com.tr/",
+  "telephone": "+905346225515",
+  "business_type": "Markalardan bağımsız kombi, klima ve petek teknik servisi",
+  "service_area": "İstanbul Avrupa Yakası",
+  "districts": [
+    "Arnavutköy",
+    "Avcılar",
+    "Bahçelievler",
+    "Bakırköy",
+    "Bayrampaşa",
+    "Bağcılar",
+    "Başakşehir",
+    "Beylikdüzü",
+    "Beyoğlu",
+    "Beşiktaş",
+    "Büyükçekmece",
+    "Esenler",
+    "Esenyurt",
+    "Eyüpsultan",
+    "Fatih",
+    "Gaziosmanpaşa",
+    "Güngören",
+    "Kağıthane",
+    "Küçükçekmece",
+    "Sarıyer",
+    "Silivri",
+    "Sultangazi",
+    "Zeytinburnu",
+    "Çatalca",
+    "Şişli"
+  ],
+  "services": [
+    {
+      "name": "Kombi servisi",
+      "url": "https://saglamkombiklima.com.tr/kombi-servisi.html"
+    },
+    {
+      "name": "Klima servisi",
+      "url": "https://saglamkombiklima.com.tr/klima-servisi.html"
+    },
+    {
+      "name": "Petek temizliği",
+      "url": "https://saglamkombiklima.com.tr/petek-temizligi.html"
+    }
+  ],
+  "source": "https://saglamkombiklima.com.tr/isletme-bilgileri.html",
+  "editorial_policy": "https://saglamkombiklima.com.tr/kaynak-ve-yayin-ilkeleri.html",
+  "updated": "2026-10-22",
+  "limitations": "Adres, çalışma saatleri, fiyatlar, değerlendirme puanları ve sertifika bilgileri doğrulanmadığı için bu veri setinde belirtilmez. Randevu uygunluğu görüşmede netleştirilir."
+}

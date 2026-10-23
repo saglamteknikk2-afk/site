@@ -1,0 +1,9 @@
+# Özel ayarlar — örnekler
+
+Bu klasörün içeriği web köküne dağıtılmaz. Varsayılan yerleşim, aynı üst dizinde `httpdocs/` ve `private/saglam-teknik/` şeklindedir. Farklı kurulumda sunucunun `SAGLAM_PRIVATE_DIR` ortam değişkenini mevcut özel klasörün mutlak yoluna ayarlayın. Web kökü veya onun altındaki yollar ve bu köke yönelen sembolik bağlantılar reddedilir.
+
+Mevcut `site_apileri,.txt` dosyası aynen kullanılır; virgülsüz `site_apileri.txt` eski adı da desteklenir. İkisi varsa virgüllü ad önceliklidir. Mevcut değerler otomatik değiştirilmez. Yeni kurulumun örnek API dosyasında bütün anahtar yuvaları boştur. Üretimde gerçek `.txt` veya `.json` ayarlarını Git'e eklemeyin.
+
+Haritalar için `haritalar.json.ornek` dosyasını özel klasörde `haritalar.json` adıyla kopyalayın. Yalnız işletmenizin gerçek Google Maps ve Yandex Maps paylaşım bağlantılarını ilgili `google_url` ve `yandex_url` alanlarına yapıştırın. İsteğe bağlı `google_embed_url` ve `yandex_embed_url` alanlarına yalnız üreticinin iframe **src URL'si** yazılabilir; iframe/HTML kodu kabul edilmez. `maps.json` eski adı da okunabilir; `haritalar.json` önceliklidir. Boş veya geçersiz bağlantıda kart pasif kalır. API hiçbir harita servisine istek yapmaz ve API anahtarı istemez; yerleşik harita yalnız ziyaretçi ayrıca açmayı seçerse yüklenir.
+
+Bildirimler HTTP isteğinde gönderilmez; önce mevcut SQLite outbox kuyruğuna kaydedilir. Üretimde cron üzerinden, örneğin dakikada bir `php /tam/yol/httpdocs/worker.php` çalıştırın. Worker mevcut Telegram teslim/yeniden deneme ve günlük rapor mekanizmasını kullanır. Bu düzenleme test sırasında hiçbir gerçek mesaj veya AI isteği göndermez. Gemini'nin sahibi tarafından yapılandırılan dört yuvası korunur; bütün AI denemeleri tek 10,5 saniyelik ağ bütçesine tabidir. Kota/faturalandırma/yetki hatasında başka anahtarla devam edilmez.

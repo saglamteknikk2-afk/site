@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+<title id="title">Petek ve sıcak yuva</title><desc id="desc">Beyaz kalorifer peteğinin önünde yumuşak minder üzerinde uyuyan sevimli tekir kedi</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8f6ed"/><stop offset="1" stop-color="#e5eadc"/></linearGradient>
+ <linearGradient id="radiator" x1="0" x2="1"><stop stop-color="#e1e9dc"/><stop offset=".35" stop-color="#fffef8"/><stop offset=".72" stop-color="#f1f6ed"/><stop offset="1" stop-color="#cedccf"/></linearGradient>
+ <linearGradient id="cat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d4a47a"/><stop offset=".65" stop-color="#b78055"/><stop offset="1" stop-color="#886047"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="13"/></filter>
+</defs>
+<rect width="800" height="520" fill="url(#bg)"/>
+<path d="M50 423H743" stroke="#c6d2c2" stroke-width="2"/>
+<ellipse cx="395" cy="429" rx="300" ry="25" fill="#153b31" opacity=".08" filter="url(#shadow)"/>
+<!-- pale radiator with visible fins -->
+<g transform="translate(105 104)">
+ <rect x="-5" y="5" width="596" height="289" rx="16" fill="#1a4839" opacity=".1" filter="url(#shadow)"/>
+ <rect width="587" height="287" rx="15" fill="#f8faf3" stroke="#aabbaf" stroke-width="5"/>
+ <g fill="url(#radiator)" stroke="#b5c7b8" stroke-width="1.8">
+  <rect x="18" y="13" width="43" height="259" rx="16"/><rect x="65" y="13" width="43" height="259" rx="16"/>
+  <rect x="112" y="13" width="43" height="259" rx="16"/><rect x="159" y="13" width="43" height="259" rx="16"/>
+  <rect x="206" y="13" width="43" height="259" rx="16"/><rect x="253" y="13" width="43" height="259" rx="16"/>
+  <rect x="300" y="13" width="43" height="259" rx="16"/><rect x="347" y="13" width="43" height="259" rx="16"/>
+  <rect x="394" y="13" width="43" height="259" rx="16"/><rect x="441" y="13" width="43" height="259" rx="16"/>
+  <rect x="488" y="13" width="43" height="259" rx="16"/><rect x="535" y="13" width="35" height="259" rx="16"/>
+ </g>
+ <path d="M585 65h39v21h-39" fill="none" stroke="#91afa0" stroke-width="8" stroke-linecap="round"/>
+ <circle cx="630" cy="74" r="17" fill="#f5f5ee" stroke="#91afa0" stroke-width="4"/>
+ <path d="M66 286v16m452-16v16" stroke="#93aa9c" stroke-width="12"/>
+</g>
+<!-- fabric cushion in front, not a technical manual/book -->
+<ellipse cx="390" cy="415" rx="255" ry="53" fill="#d8e2cf" stroke="#c3d3bc" stroke-width="4"/>
+<path d="M181 409q208 49 430-2" fill="none" stroke="#b1c6ad" stroke-width="3" opacity=".6"/>
+<!-- curled cat body -->
+<g transform="translate(180 257)">
+ <path d="M83 149C29 117 66 44 155 47C232 38 306 70 330 116C361 173 305 185 266 173C238 165 214 144 183 151C150 164 115 169 83 149Z" fill="url(#cat)" stroke="#805d45" stroke-width="4"/>
+ <path d="M88 144C40 150 23 117 46 93C63 74 80 88 87 100" fill="none" stroke="#92644a" stroke-width="27" stroke-linecap="round"/>
+ <path d="M151 60c9 33 28 59 53 84M205 54c4 31 17 58 39 84M261 71c2 30 18 53 35 76" fill="none" stroke="#795744" stroke-width="10" opacity=".53" stroke-linecap="round"/>
+ <!-- sleeping head with pointy ears -->
+ <path d="M253 109L255 46L284 68L315 50L327 93Q365 127 331 164Q300 190 264 160Q247 140 253 109Z" fill="#d0a17c" stroke="#865b44" stroke-width="4"/>
+ <path d="M264 62L270 83L281 71Z M307 68L317 59L319 82Z" fill="#e7bea6"/>
+ <path d="M268 122q12 9 24 0M309 124q13 8 24-1" stroke="#554a3e" stroke-width="4" fill="none" stroke-linecap="round"/>
+ <path d="M296 139l7-4l7 4l-6 6Z" fill="#aa785f"/>
+ <path d="M302 145q-4 6-13 5m13-5q5 6 13 5" stroke="#654d3f" stroke-width="2" fill="none"/>
+ <path d="M279 143l-31 0m31 6l-31 7m73-13l29-3m-29 8l29 7" stroke="#a18a79" stroke-width="2.2" stroke-linecap="round"/>
+ <ellipse cx="190" cy="161" rx="43" ry="19" fill="#d7b291"/>
+</g>
+<!-- restrained warming accents, no decorative circles/compasses -->
+<g fill="none" stroke="#d18a5d" stroke-width="5" stroke-linecap="round" opacity=".55"><path d="M302 75q-18-20 0-41t0-29"/><path d="M398 76q-18-20 0-41t0-29"/><path d="M498 76q-18-20 0-41t0-29"/></g>
+</svg>
