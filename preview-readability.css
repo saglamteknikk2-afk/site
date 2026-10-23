@@ -1,0 +1,39 @@
+/* Sağlam Teknik / yalnızca GitHub Pages test sürümü: okunabilirlik */
+.at-site .at-nav > a { font-size: 14px; }
+.at-site .at-breadcrumb { font-size: 13px; }
+.at-site .at-eyebrow { font-size: 12px; }
+.at-site .at-lead { font-size: clamp(16px, 1.25vw, 18px); line-height: 1.75; }
+.at-site .at-content p, .at-site .at-content li { font-size: 16px; line-height: 1.7; }
+.at-site .at-content .fault-scope p,
+.at-site .at-content .fault-small,
+.at-site .at-content .fault-filter-label { font-size: 14px !important; }
+.at-site .at-footer .at-eyebrow { font-size: 12px; }
+.atelier-home .ah-eyebrow { font-size: 12px !important; }
+.atelier-home .ah-service-card p { font-size: 16px !important; line-height: 1.65; }
+.atelier-home .ah-card-link { font-size: 14px !important; }
+.atelier-home .ah-library-copy > p:not(.ah-eyebrow),
+.atelier-home .ah-local p:not(.ah-eyebrow) { font-size: 16px !important; }
+.atelier-home .ah-review-form label, .atelier-home .ah-modal label,
+.atelier-home .ah-library label, .atelier-home .ah-review-search { font-size: 14px !important; }
+.atelier-home .ah-form-note, .atelier-home .ah-modal-card > p:not(.ah-eyebrow) { font-size: 14px !important; }
+.usta-panel .usta-eyebrow, .usta-panel .usta-intro-note,
+.usta-panel .usta-progress-top, .usta-panel .usta-reset,
+.usta-panel .usta-free summary, .usta-panel .usta-ticket,
+.usta-panel .usta-emergency-links { font-size: 12px !important; }
+.usta-panel .usta-step > p, .usta-panel .usta-intro > div > p:last-child,
+.usta-panel .usta-free > p { font-size: 14px !important; }
+.usta-panel .usta-choice, .usta-panel .usta-grid--devices .usta-choice,
+.usta-panel .usta-field { font-size: 16px !important; }
+.usta-panel .usta-choice small, .usta-panel .usta-grid--devices .usta-choice small { font-size: 13px !important; }
+.usta-panel .usta-fields label, .usta-panel .usta-field-label,
+.usta-panel .usta-next, .usta-panel .usta-back { font-size: 14px !important; }
+.usta-panel .usta-result-grid p, .usta-panel .usta-result-grid > .usta-result-main p,
+.usta-panel .usta-local-guide, .usta-panel .usta-guide-link { font-size: 15px !important; }
+.usta-panel .usta-note, .usta-panel .usta-submit, .usta-panel .usta-scope-check,
+.usta-panel .usta-result-actions > button, .usta-panel .usta-result-actions > a { font-size: 13px !important; }
+@media (max-width: 700px) {
+  .at-site .at-content p, .at-site .at-content li { font-size: 16px; }
+  .at-site .at-breadcrumb { font-size: 12px; }
+  .at-site .at-nav > a { font-size: 16px; }
+  .usta-panel .usta-choice { line-height: 1.5; }
+}
