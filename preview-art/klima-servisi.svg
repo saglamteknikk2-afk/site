@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+<title id="title">Klima servisi</title><desc id="desc">Duvara monte klima iç ünitesi ve dış ünite, temiz hava çizgileri</desc>
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f4eb"/><stop offset="1" stop-color="#e8ebdf"/></linearGradient>
+  <linearGradient id="indoor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffefa"/><stop offset=".62" stop-color="#f2f6ed"/><stop offset="1" stop-color="#c9d7ca"/></linearGradient>
+  <linearGradient id="outdoor" x1="0" x2=".9" y1="0" y2="1"><stop stop-color="#fbfcf7"/><stop offset="1" stop-color="#cedaca"/></linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="15"/></filter>
+</defs>
+<rect width="800" height="520" fill="url(#wall)"/>
+<path d="M74 433H730" stroke="#ccd7c8" stroke-width="2"/>
+<ellipse cx="415" cy="432" rx="290" ry="19" fill="#365b49" opacity=".09" filter="url(#soft)"/>
+<!-- indoor unit: long, slim air conditioner rather than boiler -->
+<g transform="translate(95 78)">
+ <rect x="10" y="14" width="590" height="174" rx="40" fill="#194537" opacity=".08" filter="url(#soft)"/>
+ <rect width="600" height="174" rx="40" fill="url(#indoor)" stroke="#c7d8c7" stroke-width="3"/>
+ <path d="M24 48C145 25 405 28 568 48" fill="none" stroke="#fff" stroke-width="8" opacity=".92"/>
+ <path d="M44 122Q304 149 560 122L551 150Q301 173 49 150Z" fill="#174639"/>
+ <path d="M64 145Q310 158 538 142" stroke="#669583" stroke-width="4" fill="none"/>
+ <rect x="475" y="65" width="42" height="5" rx="2" fill="#94b0a2"/>
+ <circle cx="534" cy="68" r="4" fill="#d37f50"/>
+ <path d="M84 164Q150 202 205 193 M242 169Q319 211 390 189 M426 162Q490 198 525 174" fill="none" stroke="#78ab9c" stroke-width="5" opacity=".7" stroke-linecap="round"/>
+</g>
+<!-- outdoor condenser with clearly visible fan -->
+<g transform="translate(468 302)">
+ <rect x="7" y="13" width="231" height="161" rx="16" fill="#204b3a" opacity=".08" filter="url(#soft)"/>
+ <rect width="231" height="161" rx="15" fill="url(#outdoor)" stroke="#b8c9ba" stroke-width="3"/>
+ <rect x="15" y="16" width="137" height="126" rx="12" fill="#d9e3d9" stroke="#95ada1" stroke-width="3"/>
+ <circle cx="83" cy="79" r="51" fill="#c2d1c8" stroke="#4c7b68" stroke-width="3"/>
+ <g fill="#799d8e" opacity=".9"><path d="M81 80C57 39 82 26 94 44C105 63 93 75 81 80Z"/><path d="M84 79C124 56 146 74 132 89C112 103 96 89 84 79Z"/><path d="M84 80C77 125 48 125 44 107C40 91 69 81 84 80Z"/></g>
+ <circle cx="84" cy="80" r="12" fill="#f8f9f2" stroke="#547b68" stroke-width="3"/>
+ <path d="M174 35h40M174 51h40M174 67h40M174 83h40M174 99h40M174 115h40" stroke="#8fae9e" stroke-width="7" stroke-linecap="round"/>
+ <path d="M38 160v10m158-10v10" stroke="#7b9386" stroke-width="8"/>
+</g>
+<path d="M650 252Q681 267 681 302" stroke="#709988" stroke-width="5" fill="none"/>
+<g fill="#d27c4b"><circle cx="83" cy="339" r="4"/><circle cx="716" cy="212" r="3"/><circle cx="390" cy="380" r="3"/></g>
+<path d="M69 338h28m-14-14v28M722 206h24m-12-12v24" stroke="#8db2a5" stroke-width="2" opacity=".7"/>
+</svg>
