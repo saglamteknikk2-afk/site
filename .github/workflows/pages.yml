@@ -44,6 +44,10 @@ jobs:
           test ! -f _site/api.php
           test ! -f _site/owner-admin.html
           find _site -type f \( -name 'google*.html' -o -name 'yandex_*.html' \) -delete
+          # Tasarımı bozmadan yalnızca GitHub test ön izlemesinde yazıları büyüt
+          cp preview-readability.css _site/assets/preview-readability.css
+          find _site -maxdepth 1 -type f -name '*.html' -print0 |
+            xargs -0 -r sed -i 's#</head>#<link rel="stylesheet" href="./assets/preview-readability.css?v=20261023a"></head>#'
           echo 'Güvenli statik ön izleme paketi doğrulandı.'
 
       - name: GitHub Pages yayını için yükle
