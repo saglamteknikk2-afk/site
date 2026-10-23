@@ -63,6 +63,10 @@ jobs:
           # Model seçici tarayıcıda çalışır; gerçek sırlar ve PHP içermez.
           sed -i 's#</body>#<script src="/site/assets/preview-enhancements.js?v=20261023b" defer></script></body>#' \
             _site/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html
+          # Aynı resim URL'leri tarayıcı önbelleğinde kalmasın.
+          for art in klima-servisi petek-temizligi kombi-servisi; do
+            sed -i "s#page-art/$art.svg#page-art/$art.svg?v=20261023b#g" _site/index.html
+          done
           test -s _site/assets/preview-enhancements.css
           test -s _site/assets/page-art/klima-servisi.svg
           test -s _site/assets/page-art/petek-temizligi.svg
