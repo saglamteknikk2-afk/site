@@ -12,6 +12,37 @@
       });
     });
 
+    function stDiagnosticGuideURL(value) {
+      let home;
+      try {
+        const anchor=document.querySelector('.at-header .at-brand[href]');
+        home=new URL(anchor?.getAttribute('href')||'./',location.href);
+        if(home.origin!==location.origin)throw new Error('Unexpected home origin');
+      } catch (_) { home=new URL('./',location.href); }
+      home.pathname=home.pathname.replace(/\/index\.html$/i,'/');
+      if(!home.pathname.endsWith('/'))home.pathname+='/';
+      home.search='';home.hash='';
+      const fallback=new URL('ariza-rehberi.html',home);
+      const entry=path=>{
+        if(typeof path!=='string'||!path)return null;
+        try {
+          const url=new URL(path,home);
+          if(url.origin!==home.origin||url.username||url.password)return null;
+          const file=url.pathname.startsWith(home.pathname)?url.pathname.slice(home.pathname.length):url.pathname.slice(1);
+          if(!/^[a-z0-9-]+\.html$/.test(file)||url.hash&&!/^#[a-z0-9-]+$/.test(url.hash))return null;
+          return {url,file};
+        } catch (_) { return null; }
+      };
+      const published=new Set(['ariza-rehberi.html']);
+      const paths=[...(window.ST_ORGANIC_CATALOG?.published_routes||[]),...(window.ST_DIAGNOSTIC_DATA||[]).map(row=>row.path),...(window.ST_VERIFIED_FAULTS?.models||[]).map(model=>model.path)];
+      for(const path of paths){const known=entry(path);if(known)published.add(known.file);}
+      const selected=entry(value);
+      if(!selected||!published.has(selected.file))return fallback.pathname;
+      const target=new URL(selected.file,home);
+      target.search=selected.url.search;target.hash=selected.url.hash;
+      return target.pathname+target.search+target.hash;
+    }
+
     function renderDiagnostic(data) {
       const box=document.getElementById('aiResultBox'),response=document.getElementById('aiResponseText');
       stAiContact(data.emergency_phone);
@@ -34,8 +65,8 @@
       const guide=document.getElementById('aiGuideLink');
       if(guide){
         const local=window.STDiagnosticGuide?.(document.getElementById('deviceSelect').value,document.getElementById('issueInput').value);
-        const path=data.guide_path||local?.guide_path||'/ariza-rehberi.html';
-        guide.href=/^\/[a-z0-9-]+\.html(?:#[a-z0-9-]+)?$/.test(path)?path:'/ariza-rehberi.html';
+        const path=data.guide_path||local?.guide_path||'';
+        guide.href=stDiagnosticGuideURL(path);
         guide.hidden=data.source==='emergency'||data.source==='advisory';
       }
       const reference=document.getElementById('aiManualReference');

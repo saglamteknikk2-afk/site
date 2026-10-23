@@ -86,7 +86,7 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
         if mode=='preview':
             if not any('noindex' in r.lower() for r in page.robots): errors.append(f'{rel}: noindex missing')
             if 'id="st-preview-banner"' not in text: errors.append(f'{rel}: preview banner missing')
-            if not page.scripts or not page.scripts[0].endswith('/assets/preview-guard.js'): errors.append(f'{rel}: preview guard is not first script')
+            if not page.scripts or not urlsplit(page.scripts[0]).path.endswith('/assets/preview-guard.js'): errors.append(f'{rel}: preview guard is not first script')
         elif 'st-preview-banner' in text or 'preview-guard.js' in text or 'static-preview' in text:
             errors.append(f'{rel}: preview controls leaked into production')
         for tag,attr,value in page.refs:

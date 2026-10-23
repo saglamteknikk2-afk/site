@@ -55,21 +55,59 @@ def overlay(files: dict[str, bytes], directory: Path) -> None:
         if path.is_file():
             files[path.relative_to(directory).as_posix()] = path.read_bytes()
 
-def normalize_paths(text: str, prefix: str) -> str:
+def local_url(url: str, prefix: str) -> str:
+    """Mount one root URL exactly once; keep external/protocol-relative URLs intact."""
+    if not url.startswith('/') or url.startswith('//'):
+        return url
+    if prefix and (url == prefix or url.startswith(prefix + '/') or url.startswith(prefix + '#') or url.startswith(prefix + '?')):
+        return url
     # The immutable archive was exported for /site/. Editable sources use /.
-    text = re.sub(r'(["\'`])/site/', lambda m: m[1] + '/', text)
-    text = re.sub(r'url\(\s*/site/', 'url(/', text)
-    def srcset(match):
-        value = re.sub(r'(^|,\s*)/site/', lambda m: m[1] + '/', match[2])
-        if prefix:
-            value = re.sub(r'(^|,\s*)/(?!/)', lambda m: m[1] + prefix + '/', value)
-        return 'srcset=' + match[1] + value + match[1]
-    # Each srcset candidate is a URL, including candidates after a comma.
-    text = re.sub(r'\bsrcset=(["\'])(.*?)\1', srcset, text)
-    if prefix:
-        text = re.sub(r'(["\'`])/(?!/)([^"\'`<>\s]*)(?=\1)', lambda m: m[0] if m[2].startswith(prefix.lstrip('/') + '/') else m[1] + prefix + '/' + m[2], text)
-        text = re.sub(r'url\(\s*/(?!/)', 'url(' + prefix + '/', text)
-    return text
+    if url.startswith('/site/'):
+        url = url[len('/site'):]
+    elif url == '/site':
+        url = '/'
+    return prefix + url
+
+def normalize_javascript(text: str, prefix: str, files: dict[str, bytes]) -> str:
+    """Rewrite published file URLs, never JS path predicates or base fragments.
+
+    A '/' or '/maps/embed' literal may describe an external URL or a comparison;
+    it is not evidence of site navigation. Real home navigation uses the shared
+    header URL. Template HTML and generated data use the same known-file rule.
+    """
+    def rewrite(match):
+        url = match[2]
+        candidate = url
+        if prefix and (candidate == prefix or candidate.startswith(prefix + '/')):
+            candidate = candidate[len(prefix):] or '/'
+        if candidate.startswith('/site/'):
+            candidate = candidate[len('/site'):]
+        key = re.split(r'[?#]', candidate, maxsplit=1)[0].lstrip('/')
+        if key not in files:
+            return match[0]
+        return match[1] + local_url(url, prefix) + match[1]
+    return re.sub(r'(["\'`])(/(?!/)[^"\'`<>\s]*)(?=\1)\1', rewrite, text)
+
+def normalize_paths(text: str, prefix: str, files: dict[str, bytes] | None = None) -> str:
+    """Idempotent markup/CSS URL normalization, with semantic inline JS handling."""
+    def markup(part):
+        def srcset(match):
+            value = re.sub(r'(^|,\s*)(/(?!/)[^,\s]+)', lambda m: m[1] + local_url(m[2], prefix), match[2])
+            return 'srcset=' + match[1] + value + match[1]
+        part = re.sub(r'\bsrcset=(["\'])(.*?)\1', srcset, part)
+        part = re.sub(r'(["\'`])(/(?!/)[^"\'`<>\s]*)(?=\1)\1',
+                      lambda m: m[1] + local_url(m[2], prefix) + m[1], part)
+        return re.sub(r'url\(\s*(/(?!/)[^\s)]+)', lambda m: 'url(' + local_url(m[1], prefix), part)
+    if files is None:
+        return markup(text)
+    chunks = re.split(r'(<script\b[^>]*>[\s\S]*?</script\s*>)', text, flags=re.I)
+    for i, part in enumerate(chunks):
+        script = re.fullmatch(r'(<script\b[^>]*>)([\s\S]*?)(</script\s*>)', part, flags=re.I)
+        if script:
+            chunks[i] = markup(script[1]) + normalize_javascript(script[2], prefix, files) + script[3]
+        else:
+            chunks[i] = markup(part)
+    return ''.join(chunks)
 
 def clean_preview_html(text: str) -> str:
     if re.search(r'<meta\b[^>]*name=["\']saglam-test-site["\']', text, re.I):
@@ -110,16 +148,17 @@ def apply_brand(text: str, brand: dict) -> str:
         text = text.replace(alias, brand['logo'])
     return text
 
-def version_assets(text: str, files: dict[str, bytes]) -> str:
-    """HTML asset URLs follow their contents, so returning visitors see updates."""
+def version_assets(text: str, files: dict[str, bytes], prefix: str = '/site') -> str:
+    """Version HTML assets from final served bytes, including custom mounts."""
     def rewrite(match):
         path = match['path']
-        key = path.removeprefix('/site/').lstrip('/')
-        if key not in files:
+        key = path[len(prefix):] if prefix and path.startswith(prefix + '/') else path
+        key = key.lstrip('/')
+        if not key.startswith('assets/') or key not in files:
             return match[0]
         version = hashlib.sha256(files[key]).hexdigest()[:10]
         return match['start'] + match['quote'] + path + '?v=' + version + match['quote']
-    return re.sub(r'(?P<start>\b(?:src|href)=)(?P<quote>["\'])(?P<path>/(?:site/)?assets/[^"\'?]+\.(?:css|js))(?:\?[^"\']*)?(?P=quote)',
+    return re.sub(r'(?P<start>\b(?:src|href)=)(?P<quote>["\'])(?P<path>/(?!/)[^"\'?]+\.(?:css|js))(?:\?[^"\']*)?(?P=quote)',
                   rewrite, text)
 
 def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
@@ -182,7 +221,6 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                             text = re.sub(r'<nav\b[^>]*class=["\'][^"\']*\bat-mobile-contact\b[^"\']*["\'][^>]*>[\s\S]*?</nav>', '', text, flags=re.I)
                         pattern = r'<' + element + r'\b[^>]*class=["\'][^"\']*\b' + css_class + r'\b[^"\']*["\'][^>]*>[\s\S]*?</' + element + '>'
                         text = re.sub(pattern, lambda _: component.read_text(), text, count=1, flags=re.I)
-            text = normalize_paths(text, prefix)
             if visitor(Path(name)):
                 text = clean_preview_html(text)
                 text = re.sub(r'(<body\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + re.sub(r'\s+data-st-mode=["\'][^"\']*["\']', '', m[2], flags=re.I), text, count=1, flags=re.I)
@@ -215,9 +253,11 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                     text = insert_head(text, f'<link rel="icon" href="{brand["favicon"]}" type="image/png">')
                 text = insert_head(text, '<meta charset="UTF-8">')
                 html_count += 1
-            text = normalize_paths(apply_brand(text, brand), prefix)
-            if visitor(Path(name)):
-                text = version_assets(text, files)
+            text = apply_brand(text, brand)
+            if path.suffix in {'.js', '.json'}:
+                text = normalize_javascript(text, prefix, files)
+            elif path.suffix in {'.html', '.svg', '.css'}:
+                text = normalize_paths(text, prefix, files)
             content = text.encode('utf-8')
         built[name] = content
     if mode == 'preview':
@@ -226,6 +266,11 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         built['robots.txt'] = b'User-agent: *\nAllow: /\n'
         built.pop('sitemap.xml', None)
     built['.nojekyll'] = b''
+    # All runtime assets are transformed now. Hash the bytes actually served,
+    # rather than source bytes which may have different deployment paths.
+    for name in built:
+        if visitor(Path(name)):
+            built[name] = version_assets(built[name].decode('utf-8'), built, prefix).encode('utf-8')
     digest = hashlib.sha256()
     for name, content in sorted(built.items()):
         digest.update(name.encode() + b'\0' + hashlib.sha256(content).digest())

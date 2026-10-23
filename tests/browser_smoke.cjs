@@ -61,6 +61,26 @@ async function stickyBarAudit(page,width){
  if(!mobile&&facts.visible)throw Error('Desktop/tablet view must not show the mobile fixed contact bar');
  await page.evaluate(()=>window.scrollTo(0,0));return {passed:true,...facts};
 }
+async function brandPresentation(page,width,capture){
+ const rows=await page.evaluate(()=>{
+  const fold=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('tr-TR').replace(/ı/g,'i').replace(/\s+/g,'');
+  return ['.premium-header .premium-brand','.premium-footer .premium-footer-brand'].map(selector=>{
+   const anchor=document.querySelector(selector),tagline=anchor?.querySelector('small');if(!anchor||!tagline)return {selector,passed:false,error:'Missing brand or full descriptor'};
+   const walker=document.createTreeWalker(anchor,NodeFilter.SHOW_TEXT),rects=[],words=[];let node;
+   while(node=walker.nextNode()){if(!node.textContent.trim()||node.parentElement.closest('small,svg'))continue;const range=document.createRange();range.selectNodeContents(node);const boxes=[...range.getClientRects()].filter(r=>r.width>0&&r.height>0);if(boxes.length){words.push(node.textContent);rects.push(...boxes.map(r=>({top:r.top,left:r.left,right:r.right,bottom:r.bottom})));}}
+   const a=anchor.getBoundingClientRect(),t=tagline.getBoundingClientRect(),range=document.createRange();range.selectNodeContents(tagline);const tr=range.getBoundingClientRect(),style=getComputedStyle(tagline),tops=rects.map(r=>r.top),horizontal=tops.length>0&&Math.max(...tops)-Math.min(...tops)<=2;
+   const main=words.join(' '),descriptor=tagline.textContent.replace(/\s+/g,' ').trim();
+   // Font glyphs may extend beyond their CSS line box when overflow is visible.
+   // Only an ancestor that actually clips those glyphs makes the descriptor hidden.
+   const clippingAncestors=[];for(let node=tagline;node&&node!==document.documentElement;node=node.parentElement){const s=getComputedStyle(node),r=node.getBoundingClientRect(),clipsX=/^(hidden|clip|auto|scroll)$/.test(s.overflowX),clipsY=/^(hidden|clip|auto|scroll)$/.test(s.overflowY);if((clipsX&&(tr.left<r.left-.5||tr.right>r.right+.5))||(clipsY&&(tr.top<r.top-.5||tr.bottom>r.bottom+.5)))clippingAncestors.push(node.tagName.toLowerCase()+'.'+node.className);}
+   const fullDescriptor=fold(descriptor)==='isitma&sogutmateknolojileri',notClipped=tr.left>=a.left-1&&tr.right<=a.right+1&&!clippingAncestors.length,visible=style.display!=='none'&&style.visibility!=='hidden'&&Number(style.opacity)>0&&t.width>0&&t.height>0;
+   return {selector,passed:fold(main)==='saglamteknik'&&horizontal&&fullDescriptor&&notClipped&&visible,main_text:main.replace(/\s+/g,' ').trim(),horizontal_line:horizontal,line_tops:tops,descriptor,descriptor_font_size:style.fontSize,full_descriptor:fullDescriptor,descriptor_not_clipped:notClipped,descriptor_visible:visible,clipping_ancestors:clippingAncestors};
+  });
+ });
+ const screenshots=[];
+ if(capture){for(const [name,selector] of [['header','.premium-header'],['footer','.premium-footer .premium-footer-brand']]){const target=path.join(output,'screenshots',`brand-${name}-${width}.png`);await page.locator(selector).screenshot({path:target,type:'png',animations:'disabled',style:'.premium-mobile-contact,.at-mobile-contact{visibility:hidden!important}'});screenshots.push(target);}await page.evaluate(()=>window.scrollTo({top:0,left:0,behavior:'instant'}));}
+ return {passed:rows.every(row=>row.passed),rows,screenshots};
+}
 async function exerciseWizard(page,width){
  const stages=[];const capture=[390,1440].includes(width);
  async function stage(name,expectedStep){
@@ -135,6 +155,7 @@ async function exerciseWizard(page,width){
     if(width===390){badge.screenshot=path.join(output,'screenshots','endorsement-390.jpg');await page.screenshot({path:badge.screenshot,type:'jpeg',quality:85,animations:'disabled'});}
    }
    await page.evaluate(()=>window.scrollTo(0,0));
+   const brandLayout=await brandPresentation(page,width,filename==='index.html');
    const hero=filename==='index.html'?await page.evaluate(()=>{
     const rgb=s=>s.match(/[\d.]+/g).slice(0,3).map(Number);
     const luminance=c=>c.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
@@ -150,11 +171,11 @@ async function exerciseWizard(page,width){
    const stickyBar=await stickyBarAudit(page,width);
    const facts=await page.evaluate(()=>({title:document.title,h1:document.querySelector('h1')?.textContent.trim(),overflow:document.documentElement.scrollWidth>innerWidth+1,width:innerWidth,scroll_width:document.documentElement.scrollWidth,preview:window.ST_PREVIEW===true,noindex:document.querySelector('meta[name=robots]')?.content.includes('noindex'),failed_images:[...document.images].filter(x=>!x.complete||!x.naturalWidth).map(x=>x.currentSrc||x.src),logos:[...document.querySelectorAll('.premium-header img,.premium-footer img')].map(img=>({url:img.currentSrc,natural_width:img.naturalWidth})),favicon:document.querySelector('link[rel="icon"]')?.href}));
    const screenshot=path.join(output,'screenshots',filename.replace('.html','')+'-'+width+'.jpg');await page.screenshot({path:screenshot,type:'jpeg',quality:80,fullPage,animations:'disabled'});
-   results.push({route:base+'/'+(filename==='index.html'?'':filename),width,height,full_page:fullPage,screenshot,...facts,badge,hero,localDiagnostic,contactIntent,stickyBar,errors,blocked,missing,unnecessaryLogoPng});await page.close();
+   results.push({route:base+'/'+(filename==='index.html'?'':filename),width,height,full_page:fullPage,screenshot,...facts,badge,hero,localDiagnostic,contactIntent,stickyBar,brandLayout,errors,blocked,missing,unnecessaryLogoPng});await page.close();
   }
  }finally{await browser.close();}
  const buildEnd=JSON.parse(fs.readFileSync(path.join(root,'build-info.json'),'utf8'));
  const changedDuringCapture=buildStart.content_sha256!==buildEnd.content_sha256;
- const report={passed:!changedDuringCapture&&routes.passed&&results.every(x=>!x.overflow&&!x.errors.length&&!x.blocked.length&&!x.missing.length&&!x.failed_images.length&&!x.unnecessaryLogoPng.length&&x.preview&&x.noindex&&x.logos.length===2&&x.logos.every(logo=>assetMatches(logo.url,expectedLogo)&&logo.natural_width>0)&&assetMatches(x.favicon,expectedFavicon)&&x.stickyBar.passed&&(!x.contactIntent||x.contactIntent.passed)&&(!x.hero||(x.hero.buttons.length===2&&x.hero.buttons.every(b=>b.contrast>=4.5&&b.visible_above_fixed_bar)&&x.hero.photo.natural_width>0&&x.hero.photo.inside_figure&&assetMatches(x.hero.logo.url,expectedLogo)&&x.hero.logo.natural_width>0&&(layoutOnly||x.localDiagnostic.passed)&&x.contactIntent.passed))&&(!x.badge.required||(x.badge.visible&&x.badge.image_visible&&x.badge.natural_width>0&&x.badge.rendered_width>0&&x.badge.rendered_height>0&&Number(x.badge.opacity)>0))),scope:layoutOnly?'preliminary layout/contact; AI journey skipped':'full preview UI/contact/AI journey',build_start:buildStart,build_end:buildEnd,changed_during_capture:changedDuringCapture,routes_audit:routes,brand_manifest:{logo:expectedLogo,favicon:expectedFavicon},pages:results};
+ const report={passed:!changedDuringCapture&&routes.passed&&results.every(x=>!x.overflow&&!x.errors.length&&!x.blocked.length&&!x.missing.length&&!x.failed_images.length&&!x.unnecessaryLogoPng.length&&x.preview&&x.noindex&&x.brandLayout.passed&&x.logos.length===2&&x.logos.every(logo=>assetMatches(logo.url,expectedLogo)&&logo.natural_width>0)&&assetMatches(x.favicon,expectedFavicon)&&x.stickyBar.passed&&(!x.contactIntent||x.contactIntent.passed)&&(!x.hero||(x.hero.buttons.length===2&&x.hero.buttons.every(b=>b.contrast>=4.5&&b.visible_above_fixed_bar)&&x.hero.photo.natural_width>0&&x.hero.photo.inside_figure&&assetMatches(x.hero.logo.url,expectedLogo)&&x.hero.logo.natural_width>0&&(layoutOnly||x.localDiagnostic.passed)&&x.contactIntent.passed))&&(!x.badge.required||(x.badge.visible&&x.badge.image_visible&&x.badge.natural_width>0&&x.badge.rendered_width>0&&x.badge.rendered_height>0&&Number(x.badge.opacity)>0))),scope:layoutOnly?'preliminary layout/contact; AI journey skipped':'full preview UI/contact/AI journey',build_start:buildStart,build_end:buildEnd,changed_during_capture:changedDuringCapture,routes_audit:routes,brand_manifest:{logo:expectedLogo,favicon:expectedFavicon},pages:results};
  fs.writeFileSync(path.join(output,'browser-smoke.json'),JSON.stringify(report,null,2)+'\n');process.stdout.write(JSON.stringify(report,null,2)+'\n');if(!report.passed)process.exitCode=1;
 })().catch(e=>{fs.mkdirSync(output,{recursive:true});fs.writeFileSync(path.join(output,'browser-smoke.json'),JSON.stringify({passed:false,error:e.message},null,2)+'\n');process.stderr.write(e.stack+'\n');process.exitCode=1;});

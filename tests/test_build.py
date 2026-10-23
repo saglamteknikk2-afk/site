@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Behavior tests for release separation; no browser, PHP, or network needed."""
 import importlib.util
+import hashlib
 import json
 import shutil
 import tempfile
@@ -93,6 +94,38 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(builder.normalize_paths('"https://manufacturer.example/site/manual.pdf"','/site'),'"https://manufacturer.example/site/manual.pdf"')
         self.assertEqual(builder.normalize_paths('srcset="/site/a.webp 480w, /assets/b.webp 1400w"','/site'),'srcset="/site/a.webp 480w, /site/assets/b.webp 1400w"')
         self.assertEqual(builder.normalize_paths('<stop stop-color="#fff"/><input value=""/>','/site'),'<stop stop-color="#fff"/><input value=""/>')
+    def test_mounted_urls_are_idempotent(self):
+        source='<a href="/#ai-usta"><img src="/site/assets/a.webp" srcset="/assets/a.webp 480w, /site/assets/b.webp 1400w"><style>.a{background:url(/assets/a.webp)}</style>'
+        for prefix in ['', '/site', '/preview/v2']:
+            with self.subTest(prefix=prefix):
+                once=builder.normalize_paths(source,prefix)
+                self.assertEqual(once,builder.normalize_paths(once,prefix))
+                self.assertIn('href="'+prefix+'/#ai-usta"',once)
+                self.assertIn('srcset="'+prefix+'/assets/a.webp 480w, '+prefix+'/assets/b.webp 1400w"',once)
+                self.assertIn('url('+prefix+'/assets/a.webp)',once)
+    def test_javascript_rewrites_only_published_file_urls(self):
+        source="const root='/';const embed='/maps/embed';const legacy='/site';const file='/site/guide.html#kodlar';const api='/api.php?action=ai';"
+        files={'guide.html':b'', 'api.php':b''}
+        for prefix in ['', '/site', '/preview/v2']:
+            with self.subTest(prefix=prefix):
+                actual=builder.normalize_javascript(source,prefix,files)
+                self.assertIn("root='/'",actual)
+                self.assertIn("embed='/maps/embed'",actual)
+                self.assertIn("legacy='/site'",actual)
+                self.assertIn("file='"+prefix+"/guide.html#kodlar'",actual)
+                self.assertIn("api='"+prefix+"/api.php?action=ai'",actual)
+                self.assertEqual(actual,builder.normalize_javascript(actual,prefix,files))
+    def test_inline_javascript_path_predicates_not_mounted(self):
+        source='<a href="/"><script>const root="/";const target="/guide.html";</script>'
+        actual=builder.normalize_paths(source,'/preview/v2',{'guide.html':b''})
+        self.assertIn('<a href="/preview/v2/">',actual)
+        self.assertIn('root="/"',actual)
+        self.assertIn('target="/preview/v2/guide.html"',actual)
+    def test_custom_mount_asset_versions_use_served_bytes(self):
+        asset=b'window.route="/preview/v2/guide.html";'
+        source='<script src="/preview/v2/assets/a.js?v=old"></script>'
+        actual=builder.version_assets(source,{'assets/a.js':asset},'/preview/v2')
+        self.assertIn('?v='+hashlib.sha256(asset).hexdigest()[:10],actual)
     def test_deterministic(self):self.assertEqual(self.p,builder.build(self.root,Path(self.temp.name)/'second','preview','/site'))
     def test_corrupt_archive_rejected(self):
         p=self.root/'preview-parts/part-000.txt';old=p.read_bytes();p.write_bytes(b'!'+old[1:])
