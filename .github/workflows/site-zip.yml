@@ -1,0 +1,32 @@
+name: Güncel site ZIP dosyası
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/site-zip.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Güncel üretim dosyalarını derle ve doğrula
+        run: |
+          python scripts/build_site.py --mode production --output build/production
+          python scripts/check_site.py build/production --mode production --report build/production-check.json
+          python scripts/package_production.py build/production --output build/validated-production.zip
+      - name: Site dosyalarını doğrudan ZIP köküne paketle
+        uses: actions/upload-artifact@v4
+        with:
+          name: saglam-teknik-guncel
+          path: build/production/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
