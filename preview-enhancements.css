@@ -1,0 +1,67 @@
+/* SAĞLAM TEKNİK: GITHUB TEST ÖN İZLEMESİ
+   Üretim .com.tr sayfasında kullanılmaz; minimum 14/16 px okunabilirlik */
+:root { -webkit-text-size-adjust: 100%; }
+.at-site .at-breadcrumb { font-size: 13px !important; line-height: 1.6 !important; }
+.at-site .at-eyebrow,
+.atelier-home .ah-eyebrow { font-size: 12px !important; line-height: 1.5 !important; }
+.at-site .at-nav a { font-size: 14px !important; }
+.at-site .at-lead { font-size: clamp(17px,1.4vw,20px) !important; line-height: 1.65 !important; }
+.at-site .at-content p:not(.fault-notice),
+.at-site .at-content li { font-size: 16px !important; line-height: 1.72 !important; }
+.at-site .at-content h2 { line-height: 1.24 !important; }
+.at-site .fault-table-section table { font-size: 15px !important; }
+.at-site .fault-table-section table small { font-size: 13px !important; }
+.at-site .at-footer, .at-site .at-footer a { font-size: 14px !important; }
+.atelier-home .ah-card-top { font-size: 12px !important; }
+.atelier-home .ah-service-card p { font-size: 16px !important; line-height: 1.7 !important; }
+.atelier-home .ah-card-link { font-size: 15px !important; }
+.atelier-home .ah-section-head > p:last-child:not(.ah-eyebrow) { font-size: 17px !important; }
+.atelier-home .ah-review-form label, .atelier-home .ah-modal label { font-size: 15px !important; }
+.atelier-home .ah-form-note { font-size: 14px !important; }
+.atelier-home .ah-service-card > img { object-fit:contain; padding: 3px; background:#eff0e4; }
+.usta-panel .usta-intro-note,
+.usta-panel .usta-eyebrow,
+.usta-panel .usta-progress-top,
+.usta-panel .usta-reset { font-size: 13px !important; }
+.usta-panel .usta-step > p { font-size: 15px !important; line-height:1.65 !important; }
+.usta-panel button.usta-choice,
+.usta-panel .usta-choice { font-size: 16px !important; line-height:1.5 !important; padding: 18px !important; }
+.usta-panel .usta-choice small { font-size: 14px !important; }
+.usta-panel .usta-intro > div > p,
+.usta-panel .usta-result-main p { font-size:15px !important; line-height:1.7 !important; }
+.usta-panel .usta-free summary,
+.usta-panel .usta-field-label { font-size:14px !important; }
+.at-site .at-header-call { font-size:16px !important; }
+.at-site .at-brand small { font-size: 10px !important; }
+[hidden] { display:none !important; }
+.st-model-picker {
+  display:grid; gap:12px; border:1px solid #bdcdb8; background:linear-gradient(120deg,#ebf0e4,#faf9f2);
+  padding:clamp(22px,3vw,36px); margin:16px 0 24px; border-radius:8px;
+}
+.st-model-picker h2 { margin:0 0 6px; color:#113f34; font-size:clamp(23px,2.3vw,30px); line-height:1.25; font-weight:600; }
+.st-model-picker label { display:block; font-weight:700; font-size:15px; color:#2b4e41; }
+.st-model-picker select {
+  display:block; width:100%; max-width:560px; font-size:17px; line-height:1.4;
+  min-height:55px; border:1px solid #9fb3a1; border-radius:6px;
+  padding:14px 18px; background:#fffdfa; color:#163e34; cursor:pointer;
+}
+.st-model-picker select:focus-visible { outline:3px solid #bd7848; outline-offset:3px; }
+.st-model-picker .st-model-status { padding:14px 16px; border-radius:5px; margin:0; font-size:15px; line-height:1.62; }
+.st-model-wait { background:#f8f9f4; color:#405f51; border-left:4px solid #a7bfa6; }
+.st-model-warning { background:#fff2e6; color:#6d452c; border-left:4px solid #d5793f; }
+.st-model-ok { background:#e2efe0; color:#214936; border-left:4px solid #3b865d; }
+.st-model-source { font-size:13px; color:#597261; line-height:1.6; margin:0; }
+.st-source-notes { margin-top:14px; border:1px solid #d1d8cc; padding:14px 16px; border-radius:4px; }
+.st-source-notes summary { font-size:14px; font-weight:650; cursor:pointer; }
+.st-source-notes p { font-size:14px !important; margin:12px 0 0; }
+@media (max-width:760px) {
+  .at-site .at-breadcrumb { font-size:12px !important; }
+  .at-site .at-nav a { font-size:16px !important; }
+  .at-site .at-lead { font-size:17px !important; }
+  .at-site .at-content p:not(.fault-notice),
+  .at-site .at-content li { font-size:16px !important; }
+  .at-site .at-brand small { font-size:10px !important; }
+  .usta-panel .usta-step > h3 { font-size:23px !important; }
+  .st-model-picker { padding:20px 15px; }
+  .st-model-picker select { font-size:16px; }
+}
