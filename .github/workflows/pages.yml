@@ -48,6 +48,27 @@ jobs:
           cp preview-readability.css _site/assets/preview-readability.css
           find _site -maxdepth 1 -type f -name '*.html' -print0 |
             xargs -0 -r sed -i 's#</head>#<link rel="stylesheet" href="./assets/preview-readability.css?v=20261023a"></head>#'
+          # SADECE GITHUB TEST SÜRÜMÜ: görünür ve model seçmeli iyileştirmeler
+          test -s preview-enhancements.css
+          test -s preview-enhancements.js
+          node --check preview-enhancements.js
+          cp preview-enhancements.css _site/assets/preview-enhancements.css
+          cp preview-enhancements.js _site/assets/preview-enhancements.js
+          for art in klima-servisi petek-temizligi kombi-servisi; do
+            test -s "preview-art/$art.svg"
+            cp "preview-art/$art.svg" "_site/assets/page-art/$art.svg"
+          done
+          find _site -maxdepth 1 -type f -name '*.html' -print0 |
+            xargs -0 -r sed -i 's#</head>#<link rel="stylesheet" href="/site/assets/preview-enhancements.css?v=20261023b"></head>#'
+          # Model seçici tarayıcıda çalışır; gerçek sırlar ve PHP içermez.
+          sed -i 's#</body>#<script src="/site/assets/preview-enhancements.js?v=20261023b" defer></script></body>#' \
+            _site/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html
+          test -s _site/assets/preview-enhancements.css
+          test -s _site/assets/page-art/klima-servisi.svg
+          test -s _site/assets/page-art/petek-temizligi.svg
+          grep -q 'preview-enhancements.js' _site/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html
+          grep -q 'preview-enhancements.css' _site/index.html
+          echo 'Görsel iyileştirmeler ve model seçici yerleştirildi.'
           echo 'Güvenli statik ön izleme paketi doğrulandı.'
 
       - name: GitHub Pages yayını için yükle
