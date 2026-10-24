@@ -52,6 +52,16 @@ try{
         $f=$public.'/assets/notifications/'.$name;
         $check(is_file($f)&&file_get_contents($f,false,null,0,8)==="\x89PNG\r\n\x1a\n",'Özgün bildirim görseli: '.$name);
     }
+    $check(function_exists('st_deliver_now'),'Doğrudan Telegram teslim fonksiyonu üretim kodunda var');
+    $baseCount=(int)$db->query('SELECT COUNT(*) FROM outbox')->fetchColumn();
+    st_enqueue($db,'visit:direct-qa',['text'=>'Sadece sentetik ziyaret testi']);
+    st_deliver_now('visit:direct-qa');
+    $q=$db->query("SELECT sent,attempts FROM outbox WHERE id='visit:direct-qa'")->fetch(PDO::FETCH_ASSOC);
+    $check((int)$q['sent']===0&&(int)$q['attempts']===0,'Bot ayarı yoksa anlık girişim canlı ağa bağlanmadan kuyrukta korunur');
+    st_deliver_now('visit:direct-qa');
+    $check((int)$db->query('SELECT COUNT(*) FROM outbox')->fetchColumn()===$baseCount+1,'Tekrar denemek aynı ziyareti çoğaltmaz');
+    $original=$db->query("SELECT sent FROM outbox WHERE id='visit:direct-qa'")->fetchColumn();
+    $check($original!==false,'Ziyaret olayı saklandı');
     foreach(['visit','review','ticket'] as $kind){
         $rows=st_notification_rows($kind.':synthetic',['text'=>'Sentetik bildirim']);
         $check(($rows[0][1]['_method']??'')==='sendPhoto','Telegram görsel yöntemi: '.$kind);
