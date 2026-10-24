@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import html
 import io
 import importlib.util
 import json
@@ -21,6 +22,11 @@ TEXT_SUFFIXES = {'.html', '.js', '.css', '.json', '.xml', '.txt', '.svg', '.php'
 PRIVATE_NAMES = {'owner-admin.html', 'owner-admin.js', 'trusted-proxies.json'}
 PREVIEW_MARKER = '<meta name="saglam-test-site" content="static-preview">'
 LOCAL_PREVIEW_FORMS = {'regionFinder', 'svcSearchForm', 'homeGuideSearch'}
+# Same manufacturer document 300032122 Rev.04; repair its malformed archive URL.
+SOURCE_URL_REPLACEMENTS = {
+    'https://www.baymak.com.tr/media/4994/baymak-duotec-premix-tam-yogusmali-kombi-kullanma-k%E8%80%83avuzu.pdf':
+    'https://www.baymak.com.tr/media/4608/baymak-duotec-premix-tam-yogusmali-kombi-kullanma-k%C4%B1lavuzu.pdf',
+}
 
 def visitor(path: Path) -> bool:
     return path.suffix == '.html' and path.name not in PRIVATE_NAMES and not re.match(r'(google|yandex_).*\.html$', path.name)
@@ -60,6 +66,52 @@ def overlay(files: dict[str, bytes], directory: Path) -> None:
             raise ValueError(f'Symlinks are not build inputs: {path}')
         if path.is_file():
             files[path.relative_to(directory).as_posix()] = path.read_bytes()
+
+def sync_catalog_data(files: dict[str, bytes]) -> None:
+    """Publish backend JSON and browser/search data from the same reviewed rows.
+
+    A data addition without its readable HTML destination is a build error.
+    Existing explanatory search entries remain; scoped definitions are derived.
+    """
+    if 'assets/verified-faults.json' not in files:
+        return
+    faults = json.loads(files['assets/verified-faults.json'])
+    for model in faults['models']:
+        page = PurePosixPath(model['path']).name
+        text = files.get(page, b'').decode('utf-8')
+        if model.get('manual', {}).get('source_available') is False:
+            if any(row.get('matchable') is not False for row in model['codes']):
+                raise ValueError('Unavailable manual must not have automatic code definitions: ' + model['id'])
+            unavailable = model['manual']['url']
+            def source_link(match):
+                return '<span aria-disabled="true">Üretici kaynağı (bağlantı şu anda kullanılamıyor)</span>' if html.unescape(match[2]) == unavailable else match[0]
+            text = re.sub(r'<a\b[^>]*\bhref=(["\'])(.*?)\1[^>]*>[\s\S]*?</a>', source_link, text, flags=re.I)
+            note = '<aside class="mb-scope-note" data-manual-unavailable="true" role="note"><strong>Üretici belgesine şu anda erişilemiyor.</strong> Aşağıdaki tablo geçmiş belge kaydıdır; güncel teknik açıklama olarak otomatik kullanılmaz. Tam model ve belge sürümü yeniden doğrulanmalıdır.</aside>'
+            if 'data-manual-unavailable=' not in text:
+                text = re.sub(r'(<section\b[^>]*class="[^"\n]*\bfault-table-section\b[^"\n]*"[^>]*>)', lambda m: note + m[0], text, count=1)
+            files[page] = text.encode('utf-8')
+        for row in model['codes']:
+            if not re.search(r'\bid=["\']' + re.escape(row['anchor']) + r'["\']', text):
+                raise ValueError('Fault definition has no readable HTML anchor: ' + model['id'] + ' / ' + row['code'])
+    encode = lambda data: json.dumps(data, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+    files['assets/verified-faults.js'] = b'window.ST_VERIFIED_FAULTS=' + encode(faults) + b';\n'
+    if 'assets/organic-catalog.json' in files:
+        catalog = json.loads(files['assets/organic-catalog.json'])
+        unavailable_ids = {model['id'] for model in faults['models'] if model.get('manual', {}).get('source_available') is False}
+        for model in catalog.get('models', []):
+            if model.get('id') in unavailable_ids:
+                model.update(code_definitions_verified=False, verified_source=False, source_unavailable=True)
+        catalog['guides'] = [row for row in catalog['guides'] if not row.get('code_definition_verified')]
+        for model in faults['models']:
+            for row in model['codes']:
+                if row.get('matchable') is False or row.get('source_conflict'):
+                    continue
+                catalog['guides'].append({'device':model['device'], 'brand':model['brand'], 'model':model['label'], 'model_id':model['id'], 'error_code':row['code'], 'path':model['path']+'#'+row['anchor'], 'status':'published', 'code_definition_verified':True, 'verified_source':True})
+        payload = encode(catalog)
+        files['assets/organic-catalog.json'] = payload + b'\n'
+        files['assets/organic-catalog.js'] = b'window.ST_ORGANIC_CATALOG=' + payload + b';\n'
+        if 'organic-catalog.js' in files:
+            files['organic-catalog.js'] = files['assets/organic-catalog.js']
 
 def local_url(url: str, prefix: str) -> str:
     """Mount one root URL exactly once; keep external/protocol-relative URLs intact."""
@@ -221,6 +273,12 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         if installation.is_file():
             files['KURULUM-ONCESI.txt'] = installation.read_bytes()
     overlay(files, root / 'overrides')
+    for name, content in list(files.items()):
+        if PurePosixPath(name).suffix in TEXT_SUFFIXES:
+            for old, new in SOURCE_URL_REPLACEMENTS.items():
+                content = content.replace(old.encode('utf-8'), new.encode('utf-8'))
+            files[name] = content
+    sync_catalog_data(files)
     brand = json.loads((root / 'components/brand.json').read_text())
     for key in ('logo', 'favicon'):
         if not brand[key].startswith('/assets/brand/') or brand[key].lstrip('/') not in files:

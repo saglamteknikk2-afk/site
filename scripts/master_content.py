@@ -1,7 +1,8 @@
 """Persist the supplied master copy without replacing researched local bodies.
 
-The JSON fixture stores the owner's exact matrix cells and metadata. It is not
-an official model-code registry and is never imported into diagnostic matching.
+The JSON fixture keeps the owner's table structure and district metadata.
+Reviewed cells name a specific source/model or ask for the matching document;
+they never supply brand-wide code meanings to diagnostic matching.
 Call enhance_files(files) after existing content/link hooks and before SEO graph
 generation. Only root HTML bytes are changed; no new public route is created.
 """
@@ -18,10 +19,11 @@ DATA_PATH = Path(__file__).resolve().parents[1] / 'components/master-content.jso
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
         'meta', 'param', 'source', 'track', 'wbr'}
 MATRIX_NOTE = (
-    'İşletmenin paylaştığı marka/model ve kod örnekleridir. “Sık” başlıkları '
-    'ilçe bazında ölçülmüş arıza sıklığı göstermez. Kod anlamı, eşdeğer yazımlar '
-    've basınç değeri tam modelin üretici kılavuzuyla doğrulanır; farklı '
-    'modellerde E1/E01 otomatik eşdeğer değildir.'
+    'Model ve belge örnekleri servis görüşmesine yardımcı olmak içindir; '
+    'ilçe bazında arıza sıklığı ölçümü değildir. Kod örnekleri yalnız adı '
+    'yazılı model ve üretici belgesi kapsamında okunur. Başka model, ülke '
+    'veya kontrolcüye aktarılmaz; basınç değeri ve eşdeğer kod yazımı '
+    'cihazın kendi kılavuzundan doğrulanır.'
 )
 
 

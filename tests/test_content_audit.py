@@ -61,6 +61,34 @@ class ContentAuditTests(unittest.TestCase):
         self.assertEqual(len(row['missing_manual_links']),1);self.assertEqual(len(row['faq_visible_mismatches']),2)
         reasons={v['reason'] for v in auditor.audit(self.root)['strict_violations']}
         self.assertEqual(reasons,{'missing_manual_link','faq_visible_mismatch'})
+    def unavailable_model(self,enabled=False):
+        assets=self.root/'assets';assets.mkdir(exist_ok=True)
+        (assets/'verified-faults.json').write_text(json.dumps({'models':[{'id':'archived-model','path':'/a.html','manual':{'url':'https://manufacturer.invalid/missing.pdf','source_available':False},'codes':[{'code':'E1','matchable':enabled}]}]}))
+    def test_unavailable_manual_requires_notice_muted_link_and_disabled_rows(self):
+        self.unavailable_model()
+        note='<aside data-manual-unavailable="true">Üretici belgesine şu anda erişilemiyor. Geçmiş tablo otomatik kullanılmaz.</aside>'
+        self.page('a.html',note+'<span aria-disabled="true">Önceki kaynak bağlantısı kullanılamıyor.</span>')
+        report=auditor.audit(self.root)
+        self.assertEqual(report['strict_violations'],[])
+        self.assertEqual(report['summary']['missing_manual_link_pages'],0)
+        self.assertEqual(report['pages'][0]['unavailable_manual_urls'],['https://manufacturer.invalid/missing.pdf'])
+        for label,body,enabled,reason in [
+            ('missing notice','<p>Geçmiş belge kaydı</p>',False,'missing_visible_unavailable_notice'),
+            ('hidden notice','<div hidden>'+note+'</div>',False,'missing_visible_unavailable_notice'),
+            ('collapsed notice','<details><summary>Kaynak</summary>'+note+'</details>',False,'missing_visible_unavailable_notice'),
+            ('dead link',note+'<a href="https://manufacturer.invalid/missing.pdf">Kaynak</a>',False,'dead_manual_still_clickable'),
+            ('enabled code',note,True,'unavailable_manual_codes_still_enabled'),
+        ]:
+            with self.subTest(label=label):
+                self.unavailable_model(enabled);self.page('a.html',body)
+                result=auditor.audit(self.root)
+                self.assertEqual(result['strict_violations'],[{'page':'a.html','reason':'unsafe_unavailable_manual'}])
+                self.assertIn(reason,{r['reason'] for r in result['pages'][0]['unavailable_manual_violations']})
+    def test_available_manual_still_requires_its_clickable_source(self):
+        assets=self.root/'assets';assets.mkdir()
+        (assets/'verified-faults.json').write_text(json.dumps({'models':[{'path':'/a.html','manual':{'url':'https://manufacturer.invalid/live.pdf','source_available':True}}]}))
+        self.page('a.html','<aside data-manual-unavailable="true">Üretici belgesine şu anda erişilemiyor. Geçmiş tablo otomatik kullanılmaz.</aside>')
+        self.assertEqual(auditor.audit(self.root)['strict_violations'],[{'page':'a.html','reason':'missing_manual_link'}])
     def test_strict_flags_a_full_editorial_clone_not_just_a_repeated_paragraph(self):
         self.page('a.html','<p>'+PROSE+'</p>');self.page('b.html','<p>'+PROSE+'</p>')
         self.assertEqual(auditor.audit(self.root)['strict_violations'],[])

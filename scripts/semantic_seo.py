@@ -307,11 +307,12 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     for model in faults.get('models', []):
         name = urlsplit(model.get('path', '')).path.removeprefix('/site/').lstrip('/')
         if name in pages: models.setdefault(name, []).append(model)
+    unavailable_pages = {name for name, rows in models.items() if any(model.get('manual', {}).get('source_available') is False for model in rows)}
     counts = Counter()
     for name, page in pages.items():
         graph = build_graph(name, page, files, districts, models.get(name, []))
         text = metadata(files[name].decode('utf-8'), name, graph)
-        if name in FOREIGN_MODEL_PAGES:
+        if name in FOREIGN_MODEL_PAGES | unavailable_pages:
             text = robots_meta(text, 'noindex,nofollow,noarchive' if preview else 'noindex,follow')
             page.noindex = True
         files[name] = text.encode('utf-8')
@@ -319,7 +320,7 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     for name in list(files):
         if PurePosixPath(name).name != 'owner-admin.html': continue
         files[name] = robots_meta(files[name].decode('utf-8'), 'noindex,nofollow').encode('utf-8')
-    published = {name for name, page in pages.items() if name not in SYSTEM_PAGES | FOREIGN_MODEL_PAGES and (preview or not page.noindex)}
+    published = {name for name, page in pages.items() if name not in SYSTEM_PAGES | FOREIGN_MODEL_PAGES | unavailable_pages and (preview or not page.noindex)}
     business = json.loads(files.get('isletme-bilgileri.json', b'{}'))
     files['llms.txt'] = llms(pages, districts, models, published, business).encode('utf-8')
     if preview:

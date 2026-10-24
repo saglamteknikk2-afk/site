@@ -1,0 +1,239 @@
+/* Service request dialog: independent of the retired home-page stylesheet. */
+body.ah-dialog-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+#serviceTicketModal,
+#serviceTicketModal * {
+  box-sizing: border-box;
+}
+
+#serviceTicketModal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: #102c25b8;
+  backdrop-filter: blur(6px);
+  color: var(--p-ink, #182f2b);
+  line-height: 1.6;
+}
+
+#serviceTicketModal.hidden,
+#serviceTicketModal[hidden],
+#serviceTicketModal .hidden,
+#serviceTicketModal [hidden] {
+  display: none !important;
+}
+
+#serviceTicketModal .ah-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  min-width: 0;
+  padding: 36px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  border: 1px solid #d0d8c8;
+  border-radius: 14px;
+  background: var(--p-paper, #f4f1e8);
+  box-shadow: 0 24px 80px #102c2540;
+  overflow-wrap: anywhere;
+}
+
+#serviceTicketModal .ah-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #d0d8c8;
+  border-radius: 7px;
+  background: #fffdf8;
+  color: #123f35;
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#serviceTicketModal .ah-eyebrow {
+  margin: 0 0 12px;
+  padding-right: 42px;
+  color: #536c5b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+#serviceTicketModal h2 {
+  margin: 0 0 12px;
+  padding-right: 20px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(30px, 4vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #123f35;
+}
+
+#serviceTicketModal .ah-modal-card > p:not(.ah-eyebrow) {
+  margin: 0 0 24px;
+  color: #53645a;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+#serviceTicketModal form {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+#serviceTicketModal label {
+  display: block;
+  min-width: 0;
+  color: #314e40;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.6;
+}
+
+#serviceTicketModal input:not([type="checkbox"]),
+#serviceTicketModal select,
+#serviceTicketModal textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  margin-top: 6px;
+  padding: 11px 12px;
+  border: 1px solid #b9c7b6;
+  border-radius: 6px;
+  background: #fffdf8;
+  color: #182f2b;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#serviceTicketModal textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+#serviceTicketModal .ah-form-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  min-width: 0;
+}
+
+#serviceTicketModal .ah-form-note {
+  margin: 0;
+  color: #53645a;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+#serviceTicketModal a {
+  color: #123f35;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+#serviceTicketModal .ah-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 18px;
+  border: 1px solid #123f35;
+  border-radius: 6px;
+  background: #123f35;
+  color: #fffdf8;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+#serviceTicketModal .ah-button:hover { background: #205647; }
+#serviceTicketModal .ah-button:disabled { opacity: .6; cursor: wait; }
+#serviceTicketModal :focus-visible { outline: 3px solid #25836c; outline-offset: 3px; }
+
+#serviceTicketModal .st-form-error {
+  margin: 0;
+  color: #9f3b2b;
+  font-size: 14px;
+}
+
+#serviceTicketModal .ah-form-success,
+#serviceTicketModal .st-location-widget {
+  padding: 14px;
+  border: 1px solid #c8d3bc;
+  border-radius: 7px;
+  background: #e8efdf;
+  color: #36533f;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+#serviceTicketModal .ah-form-success p,
+#serviceTicketModal .st-location-widget p { margin: 0 0 10px; }
+#serviceTicketModal .st-location-widget p:last-child { margin-bottom: 0; }
+
+#serviceTicketModal .st-location-widget button {
+  min-height: 44px;
+  margin: 0 6px 8px 0;
+  padding: 9px 12px;
+  border: 1px solid #a9b99e;
+  border-radius: 5px;
+  background: #fffdf8;
+  color: #36533f;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#serviceTicketModal .st-location-widget button[data-clear] { background: transparent; }
+#serviceTicketModal .st-honey {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  #serviceTicketModal { padding: 12px; }
+  #serviceTicketModal .ah-modal-card {
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    padding: 24px 20px;
+    border-radius: 10px;
+  }
+  #serviceTicketModal .ah-form-pair { grid-template-columns: minmax(0, 1fr); }
+  #serviceTicketModal .ah-eyebrow { padding-right: 48px; }
+}

@@ -73,6 +73,12 @@ try{
  $assert($verified['scope_warning']!==''&&strpos($verified['text'],$verified['scope_warning'])!==false,'Country warning remains visible in the response');
  $assert($verified['source_url']===$scope['manual']['url']&&$verified['source_locator']===$scope['codes'][0]['source_locator'],'Every selected meaning retains its source locator');
  foreach(['qa-split'=>'E001','qa-collision'=>'F04','qa-scope'=>'F12'] as $id=>$code){$answer=st_fault_response(['model_id'=>$id,'code'=>$code]);$assert($answer['source']==='guide'&&($answer['requires_document_review']??false)===true&&empty($answer['code_definition_verified']),'Conflicting rows require document review: '.$id);}
+ $missing=st_fault_response(['code'=>'E99']);
+ $assert($missing['requires_model']===true&&empty($missing['code_definition_verified'])&&strpos($missing['text'],'E1/E01')===false,'Missing model asks for model without unrelated code examples');
+ $unknown=st_fault_response(['code'=>'E99','model_unknown'=>true]);
+ $assert($unknown['requires_model']===false&&$unknown['source']==='guide','Explicit unknown model can finish safely');
+ $uncovered=st_fault_response(['model_id'=>'qa-scope','code'=>'E99']);
+ $assert($uncovered['requires_document_review']===true&&$uncovered['requires_model']===false&&empty($uncovered['code_definition_verified']),'Uncovered selected-model code requires document review');
  $assert(st_fault_flex_key('E01')===st_fault_flex_key('E1')&&st_fault_key('E01')!==st_fault_key('E1'),'Exact key stays distinct while flex normalizes zero padding');
  $assert(st_fault_flex_key('E10')!==st_fault_flex_key('E1')&&st_fault_flex_key('H.01.00')!==st_fault_flex_key('H.1.0'),'Unrelated and multipart codes remain separate');
  $assert(st_fault_advisory('Baymak Güneş Premix 35 kW')===null,'Recall advisory cannot cross Baykan/Baymak brands');

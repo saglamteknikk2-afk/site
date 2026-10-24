@@ -33,7 +33,7 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
     head = re.sub(r'<link\b[^>]*rel=["\']stylesheet["\'][^>]*>', '', head, flags=re.I)
     head = re.sub(r'<meta\b[^>]*property=["\']og:image["\'][^>]*>', '', head, flags=re.I)
     head += '<meta property="og:image" content="https://saglamkombiklima.com.tr/assets/comfort-pets.webp">'
-    styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'ai-usta.css', 'premium.css', 'premium-reviews.css', 'business-maps.css']
+    styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'ai-usta.css', 'premium.css', 'ticket-modal.css', 'premium-reviews.css', 'business-maps.css']
     head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261024-hybrid">' for name in styles)
     body = template.read_text()
     assurances, notes = render_assurances(json.loads((root / 'components/service-assurances.json').read_text()))

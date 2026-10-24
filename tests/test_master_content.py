@@ -93,15 +93,20 @@ class MasterContentTests(unittest.TestCase):
         self.assertEqual(len(self.data['brand_meta']), 8)
         self.assertEqual(len(self.data['region_chips']), 12)
         self.assertEqual(set(self.data['matrix_html']), {'kombi', 'klima'})
-        template_hashes = {'kombi': 'd10faae168585e4d968a634e6245564cdbf33b3db587910f4ed19d8a115d69fd',
-                           'klima': '2f4eed7de55a1a6351b449f2e9a77111dc1696312943eef21fe4884f8b358e86'}
         for device, rows in [('kombi', 8), ('klima', 5)]:
-            self.assertEqual(hashlib.sha256(self.data['matrix_html'][device].encode()).hexdigest(), template_hashes[device])
             page = ReadPage(self.data['matrix_html'][device])
             self.assertEqual(len(page.cells), (rows + 1) * 4, device)
-        # Guard entire rows/cells, including the final brands, against truncation.
-        self.assertIn('501 (5P3), 108, 101, 104, 601', ReadPage(self.data['matrix_html']['kombi']).cells)
-        self.assertIn('E1, E3, E4, E6, F0, F1, H3, P0, EC', ReadPage(self.data['matrix_html']['klima']).cells)
+            self.assertNotIn('Sık', ' '.join(page.cells))
+            self.assertNotIn('1.5 bar olmalı', ' '.join(page.cells))
+            self.assertTrue(any(url.startswith('https://') for url in page.links))
+        # The final rows remain present, without unsafe cross-model equivalences.
+        boiler = ' '.join(ReadPage(self.data['matrix_html']['kombi']).cells)
+        climate = ' '.join(ReadPage(self.data['matrix_html']['klima']).cells)
+        self.assertIn('Ariston', boiler)
+        self.assertIn('GB/IE', boiler)
+        self.assertNotIn('501 (5P3)', boiler)
+        self.assertIn('Baymak Elegant Air', climate)
+        self.assertIn('E1: İç ünite oda sıcaklık sensörü uyarısı', climate)
 
     def test_all50_receive_the_exact_source_cells_and_district_metadata(self):
         self.assertEqual((self.report['district_pages'], self.report['kombi_district_pages'], self.report['klima_district_pages']), (50, 25, 25))

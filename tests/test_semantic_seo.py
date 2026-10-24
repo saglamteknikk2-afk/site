@@ -23,6 +23,18 @@ def rows(data):
 
 
 class SemanticSeoTests(unittest.TestCase):
+    def test_unavailable_manual_is_excluded_from_sitemap_and_ai_listing_in_both_modes(self):
+        name = 'qa-source-unavailable-ariza-kodlari.html'
+        for preview in (False, True):
+            files = self.files(preview)
+            files[name] = document('Kaynağı yeniden incelenen model', preview=preview)
+            files['assets/verified-faults.json'] = json.dumps({'models':[{'path':'/'+name, 'manual':{'source_available':False}}]}).encode()
+            seo.enhance_files(files)
+            self.assertTrue(seo.parse(files[name].decode()).noindex)
+            self.assertNotIn(seo.page_url(name), files['llms.txt'].decode())
+            if not preview:
+                self.assertNotIn(seo.page_url(name), files['sitemap.xml'].decode())
+
     def files(self, preview=False):
         return {
             'index.html': document('Sağlam Teknik', preview=preview),

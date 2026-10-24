@@ -50,4 +50,9 @@ check('Diagnostic result exposes selected foreign document immediately',guide.so
 const conflict=context.window.STDiagnosticGuide('Kombi','hata kodu E001',{brand:'Fixture',model_id:'fixture-padding-conflict',code:'E001'});
 check('Ambiguous diagnostic asks for document review rather than selecting meaning',conflict.source==='guide'&&conflict.requires_document_review===true&&!conflict.text.includes('Birinci açıklama'));
 check('Emergency priority still precedes manual matching',context.window.STDiagnosticGuide('Kombi','Gaz kokusu var',{brand:'Fixture',model_id:'fixture-main',code:'E1'}).emergency_phone==='187');
+const missing=context.window.STDiagnosticGuide('Kombi','hata kodu E99',{brand:'Fixture',code:'E99'});
+check('Missing model requests exact model without unrelated code examples',missing.requires_model===true&&missing.text.includes('E99')&&!missing.text.includes('E1/E01')&&!missing.code_definition_verified);
+check('Explicit unknown model can finish with an honest guide',context.window.STDiagnosticGuide('Kombi','hata kodu E99',{brand:'Fixture',code:'E99',model_unknown:true}).requires_model===false);
+const uncovered=context.window.STDiagnosticGuide('Kombi','hata kodu E99',{brand:'Fixture',model_id:'fixture-main',code:'E99'});
+check('Unsupported selected-model code requires document review without borrowing another meaning',uncovered.requires_document_review===true&&uncovered.requires_model===false&&!uncovered.text.includes('Yalnız diğer modelde')&&!uncovered.code_definition_verified);
 const report={passed:true,checks,results,provider_requests:0};const output=path.join(repository,'build/fault-lookup-report.json');fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({passed:true,checks,provider_requests:0}));

@@ -1,0 +1,676 @@
+{
+  "checked_at": "2026-10-24",
+  "scope": "74 unique catalog manufacturer/manual URLs opened through web tool. Opened responses may be cached/indexed; this is not independent semantic validation or direct origin status monitoring. Size-limit/inaccessible outcomes are not proven dead links.",
+  "counts": {
+    "opened_or_indexed": 53,
+    "tool_size_limit": 13,
+    "tool_inaccessible": 4,
+    "http_404_reported": 4
+  },
+  "records": [
+    {
+      "url": "https://www.bosch-homecomfort.com/tr/tr/residential/servis-hizmetlerimiz/ariza-kodlari-ve-cozumleri/",
+      "models": [
+        "bosch-kombi-condens-2300i-w",
+        "bosch-kombi-condens-7000i-w",
+        "bosch-kombi-condens-2500-w",
+        "bosch-kombi-comfort-condense",
+        "bosch-kombi-class-2000-w",
+        "bosch-kombi-class-6000-w",
+        "bosch-kombi-classic-silver-classicplus",
+        "bosch-kombi-exclusive",
+        "bosch-kombi-comfort"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Bosch Kombi Arıza Kodları & Çözümleri | Bosch Home Comfort (https://www.bosch-homecomfort.com/tr/tr/residential/servis-hizmetlerimiz/ariza-kodlari-ve-cozumleri/"
+    },
+    {
+      "url": "https://www.buderus.com/tr/tr/hizmetler/ariza-kodlari-ve-cozumleri/",
+      "models": [
+        "buderus-kombi-logamax-plus-gb122i-gb022i",
+        "buderus-kombi-logamax-plus-gb172i",
+        "buderus-kombi-logamax-plus-gb062-gb042",
+        "buderus-kombi-logamax-plus-gb012",
+        "buderus-kombi-logamax-plus-gb072",
+        "buderus-kombi-logamax-u022-u072",
+        "buderus-kombi-logamax-u052",
+        "buderus-kombi-logamax-u062"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Arıza Kodları ve Çözümleri | Buderus Türkiye (https://www.buderus.com/tr/tr/hizmetler/ariza-kodlari-ve-cozumleri/)"
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/4608/baymak-duotec-premix-tam-yogusmali-kombi-kullanma-k%C4%B1lavuzu.pdf",
+      "models": [
+        "baymak-kombi-duotec-33-42-45"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.baymak.com.tr/media/4608/baymak-duotec-premix-tam-yogusmali-kombi-kullanma-k%C4%B1lavuzu.pdf: (400) Content length is too large: 10704642"
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/2902/300032124-kullanma-kilavuzu-lambert-lpy-24-28-33-42-45_tr_r2.pdf",
+      "models": [
+        "baymak-kombi-lambert-lpy-24-28-33-42-45"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.baymak.com.tr/media/2902/300032124-kullanma-kilavuzu-lambert-lpy-24-28-33-42-45_tr_r2.pdf)"
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/2900/300032131-kullanma-kilavuzu-lambert-attivo_tr_r2.pdf",
+      "models": [
+        "baymak-kombi-lambert-attivo-240-310"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.baymak.com.tr/media/2900/300032131-kullanma-kilavuzu-lambert-attivo_tr_r2.pdf)"
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/4785/baymak-luna-avant-24-ln-yogusmali-kombi-kullanma-kilavuzu.pdf",
+      "models": [
+        "baymak-kombi-luna-avant-24-ln"
+      ],
+      "status": "opened_or_indexed",
+      "title": "300035616 KULLANMA KILAVUZU LUNA AVANT 24 LN_TR_Rev.00_03072020 (https://www.baymak.com.tr/media/4785/baymak-luna-avant-24-ln-yogusmali-kombi-kullanma-kilavuzu."
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/5622/baymak-lunatec-tam-yogusmali-kombi-kullanma-kilavuzu.pdf",
+      "models": [
+        "baymak-kombi-lunatec-24-30-35"
+      ],
+      "status": "opened_or_indexed",
+      "title": "300036785_KULLANMA KILAVUZU BAYMAK LUNATEC- Rev.00_15092021 (https://www.baymak.com.tr/media/5622/baymak-lunatec-tam-yogusmali-kombi-kullanma-kilavuzu.pdf)"
+    },
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-pro_1496267.pdf",
+      "models": [
+        "vaillant-kombi-ecotec-pro-236-286-5-3"
+      ],
+      "status": "opened_or_indexed",
+      "title": "0020228723_05.pdf (https://www.vaillant.com.tr/api/download/product/tr/_ecotec-pro_1496267.pdf)"
+    },
+    {
+      "url": "https://www.demirdokum.com.tr/downloads/products-1/nitromix-mk-0020309469-02-2557204.pdf",
+      "models": [
+        "demirdokum-kombi-nitromix-p24-p28-p35-ng-hep"
+      ],
+      "status": "opened_or_indexed",
+      "title": "0020309469_02.pdf (https://www.demirdokum.com.tr/downloads/products-1/nitromix-mk-0020309469-02-2557204.pdf)"
+    },
+    {
+      "url": "https://www.protherm.com.tr/_temp/9f5d42a3-1164-4218-9071-c17074493302.pdf",
+      "models": [
+        "protherm-kombi-lynx-condens-24-28"
+      ],
+      "status": "opened_or_indexed",
+      "title": "0020277895_05.pdf (https://www.protherm.com.tr/_temp/9f5d42a3-1164-4218-9071-c17074493302.pdf)"
+    },
+    {
+      "url": "https://www.baxi.co.uk/professional/services/technical-support/error-codes",
+      "models": [
+        "baxi-kombi-combi-2-uk",
+        "baxi-kombi-duotec-platinum-ecoblue-uk"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Boiler Error Codes | Baxi (https://www.baxi.co.uk/professional/services/technical-support/error-codes)"
+    },
+    {
+      "url": "https://www.saunierduval.fr/france/download/chaudiere-condensation/notices/notice-installation-et-maintenance-themaplus-condens-1516686.pdf",
+      "models": [
+        "saunier-duval-kombi-themaplus-condens-h-fr"
+      ],
+      "status": "opened_or_indexed",
+      "title": "0020238207_06.pdf (https://www.saunierduval.fr/france/download/chaudiere-condensation/notices/notice-installation-et-maintenance-themaplus-condens-1516686.pdf)"
+    },
+    {
+      "url": "https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-super-fit-kombi-kk-tr.pdf",
+      "models": [
+        "alarko-kombi-super-fit-suf-2026"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-super-fit-kombi-kk-tr.pdf)"
+    },
+    {
+      "url": "https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-kombi-srs-kk-2026-tr.pdf",
+      "models": [
+        "alarko-kombi-seradens-super-srs-2026"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-kombi-srs-kk-2026-tr.pdf)"
+    },
+    {
+      "url": "https://airfel.com/uploads/files/Airfel_Maestro_smart_kullan%C3%ACm_k%C3%AClavuzu.pdf",
+      "models": [
+        "airfel-kombi-maestro-smart-a2cpp"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://airfel.com/uploads/files/Airfel_Maestro_smart_kullan%C3%ACm_k%C3%AClavuzu.pdf)"
+    },
+    {
+      "url": "https://airfel.com/uploads/files/Airfel__maestro_optimum_Kullan%C4%B1m_K%C4%B1lavuzu.pdf",
+      "models": [
+        "airfel-kombi-maestro-optimum-a2cbp020"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://airfel.com/uploads/files/Airfel__maestro_optimum_Kullan%C4%B1m_K%C4%B1lavuzu.pdf)"
+    },
+    {
+      "url": "https://www.ariston.com/cms/s3Downloader/?file=Clas+One+%26+Clas+System+One+User+manual.pdf&locale=en-uk&sku=clas_one_uk",
+      "models": [
+        "ariston-kombi-clas-one-gb-ie-3301043"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.ariston.com/cms/s3Downloader/?file=Clas+One+%26+Clas+System+One+User+manual.pdf&locale=en-uk&sku=clas_one_uk)"
+    },
+    {
+      "url": "https://www.viessmann.com.tr/tr/bilgi/bakim-ve-onarim/vitodens-200-w-300-w-hata-kodlari.html",
+      "models": [
+        "viessmann-kombi-vitodens-vitotronic-200-300"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Vitodens 200W & Vitodens 300W Hata Kodları | Viessmann Türkiye (https://www.viessmann.com.tr/tr/bilgi/bakim-ve-onarim/vitodens-200-w-300-w-hata-kodlari.html)"
+    },
+    {
+      "url": "https://download.arcelik.com.tr/download.usagemanuals/dgk-20-hp-lcd-hermetik-konvensiyonel-kombi-kombi-kullanim-kilavuzu-tr_TR_DGK_20_HP-_20_HPT-_26_HP_LCD.PDF",
+      "models": [
+        "arcelik-kombi-dgk-hp-lcd"
+      ],
+      "status": "tool_inaccessible",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://download.arcelik.com.tr/download.usagemanuals/dgk-20-hp-lcd-hermetik-konvensiyonel-kombi-kombi-kullanim-kilavuzu-tr_TR_DGK_20_HP-_20_HPT-_26_HP_LCD.PDF: (400) Timeout fetching"
+    },
+    {
+      "url": "https://download.beko.com/Download.UsageManualsBeko/bk-20-hp-lcd-hermetik-kombiler-konvansiyonel-kombiler-kullanim-kilavuzu-tr_TR_201712130902696_User-20Manual-20-20Filetr_TR.pdf",
+      "models": [
+        "beko-kombi-bk-hplcd"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://download.beko.com/Download.UsageManualsBeko/bk-20-hp-lcd-hermetik-kombiler-konvansiyonel-kombiler-kullanim-kilavuzu-tr_TR_201712130902696_User-20Manua"
+    },
+    {
+      "url": "https://st-daikin.mncdn.com/Content/media/img_shared/PDF/Daikin-Premix-Ndj-Tam-Yogusmali-Kombi-Kullanim-Kilavuzu.pdf",
+      "models": [
+        "daikin-kombi-ndj-a1abtr"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://st-daikin.mncdn.com/Content/media/img_shared/PDF/Daikin-Premix-Ndj-Tam-Yogusmali-Kombi-Kullanim-Kilavuzu.pdf)"
+    },
+    {
+      "url": "https://st-daikin.mncdn.com/Content/media/img_shared/PDF/NDJ%20Smart-Premix_Kullanim-Kilavuzu.pdf",
+      "models": [
+        "daikin-kombi-ndj-smart-astr"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://st-daikin.mncdn.com/Content/media/img_shared/PDF/NDJ%20Smart-Premix_Kullanim-Kilavuzu.pdf)"
+    },
+    {
+      "url": "https://www.immergas.com.tr/urun-ariza-kodlari/",
+      "models": [
+        "immergas-kombi-alpha-eco-28",
+        "immergas-kombi-victrix-tera-24-1-e"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Ürün Arıza Kodları – Immergas (https://www.immergas.com.tr/urun-ariza-kodlari/)"
+    },
+    {
+      "url": "https://eca.com.tr/uploads/documents/fbb/acf/66d81c49-fc4e-48e1-a78e-7ada696035db.pdf",
+      "models": [
+        "eca-kombi-confeo-premix-hm-tr"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://eca.com.tr/uploads/documents/fbb/acf/66d81c49-fc4e-48e1-a78e-7ada696035db.pdf: (400) Content length is too large: 17140005"
+    },
+    {
+      "url": "https://eca.com.tr/uploads/documents/fac/cae/ead/ffa/b39f6d60-17ff-4af5-b54b-bd3954fd1f60.pdf",
+      "models": [
+        "eca-kombi-citius-premix-hm-tr"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://eca.com.tr/uploads/documents/fac/cae/ead/ffa/b39f6d60-17ff-4af5-b54b-bd3954fd1f60.pdf: (400) Content length is too large: 23475731"
+    },
+    {
+      "url": "https://eca.com.tr/uploads/documents/fee/fbf/d4df72ae-256d-4973-9503-c503a348ddbd.pdf",
+      "models": [
+        "eca-kombi-proteus-premix-hm-tr"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://eca.com.tr/uploads/documents/fee/fbf/d4df72ae-256d-4973-9503-c503a348ddbd.pdf: (400) Content length is too large: 49205876"
+    },
+    {
+      "url": "https://service.ferroli.ru/files/67764",
+      "models": [
+        "ferroli-kombi-divatech-d-f24-f32-f37-ru-by"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://service.ferroli.ru/files/67764)"
+    },
+    {
+      "url": "https://service.ferroli.by/files/66386",
+      "models": [
+        "ferroli-kombi-divatech-d-c24-c32-by"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://service.ferroli.by/files/66386)"
+    },
+    {
+      "url": "https://service.ferroli.ru/files/4882",
+      "models": [
+        "ferroli-kombi-domiproject-f24-d-tr-abm01-sw01"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Microsoft Word - DomiprojectD_FereasyD_service_ru.doc (https://service.ferroli.ru/files/4882)"
+    },
+    {
+      "url": "https://www.emkoisi.com/wp-content/uploads/2024/09/24-28-35KW-YOGUSMALI-KULLANMA-KILAVUZU-GUNCEL.pdf",
+      "models": [
+        "emko-kombi-diamond-dia-24-28-35"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.emkoisi.com/wp-content/uploads/2024/09/24-28-35KW-YOGUSMALI-KULLANMA-KILAVUZU-GUNCEL.pdf)"
+    },
+    {
+      "url": "https://maktek.com.tr/tr/wp-content/uploads/2021/04/Epsilon-Eco-Kullanma-Kitap%C3%A7%C4%B1%C4%9F%C4%B1-2018.pdf",
+      "models": [
+        "maktek-kombi-epsilon-eco-24-30"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://maktek.com.tr/tr/wp-content/uploads/2021/04/Epsilon-Eco-Kullanma-Kitap%C3%A7%C4%B1%C4%9F%C4%B1-2018.pdf)"
+    },
+    {
+      "url": "https://www.copa.com.tr/tr/images/dokumanlar/53/dokuman.pdf",
+      "models": [
+        "copa-kombi-e-lecto-24"
+      ],
+      "status": "opened_or_indexed",
+      "title": "COPA EON KULLANIM K. Türkçe (https://www.copa.com.tr/tr/images/dokumanlar/53/dokuman.pdf)"
+    },
+    {
+      "url": "https://www.warmhaus.com/storage/product/March2026/MinerWa_Montaj_ve_Kullanim_Kilavuzu_TR_2026-2.pdf",
+      "models": [
+        "warmhaus-kombi-minerwa-25"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.warmhaus.com/storage/product/March2026/MinerWa_Montaj_ve_Kullanim_Kilavuzu_TR_2026-2.pdf)"
+    },
+    {
+      "url": "https://www.warmhaus.com/storage/product/March2026/ewa-montaj-ve-kullanim-kilavuzu-tr-2026.pdf",
+      "models": [
+        "warmhaus-kombi-ewa-20-24"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.warmhaus.com/storage/product/March2026/ewa-montaj-ve-kullanim-kilavuzu-tr-2026.pdf)"
+    },
+    {
+      "url": "https://www.unicalag.it/upload/blocchi/X774allegatoMANUALE_INSTALLAZIONE1-1X_00335660-konm-it.pdf",
+      "models": [
+        "unical-kombi-konm-c-18-24-28-35"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.unicalag.it/upload/blocchi/X774allegatoMANUALE_INSTALLAZIONE1-1X_00335660-konm-it.pdf)"
+    },
+    {
+      "url": "https://www.wolf.eu/download-asset/WnVHeDZvNEoyVkUxZ2xIKzM3alUrUT09",
+      "models": [
+        "wolf-kombi-cgb-2k-20-24"
+      ],
+      "status": "tool_inaccessible",
+      "title": "Internal Error ()",
+      "tool_error": "L0: URL https://www.wolf.eu/download-asset/WnVHeDZvNEoyVkUxZ2xIKzM3alUrUT09 is not accessible via this tool."
+    },
+    {
+      "url": "https://storingswijzer.remeha.be/error-codes-products/avanta-ace/",
+      "models": [
+        "remeha-kombi-avanta-ace"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Avanta Ace Archieven - Storingswijzer (https://storingswijzer.remeha.be/error-codes-products/avanta-ace/)"
+    },
+    {
+      "url": "https://www.berettaheating.com/international/products/residential-boilers?action=download&id=20069385-e2f6cdde32d463cd00adba39ca0a13a6",
+      "models": [
+        "beretta-kombi-mynute-s-24-csi"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Residential Boilers - indoor and condensing boilers for home (https://www.berettaheating.com/international/products/residential-boilers?action=download&id=20069"
+    },
+    {
+      "url": "https://termoteknik.com/wp-content/uploads/2025/05/LOGIC2-Kullanim-Kilavuzu.pdf",
+      "models": [
+        "termoteknik-kombi-logic-2024"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://termoteknik.com/wp-content/uploads/2025/05/LOGIC2-Kullanim-Kilavuzu.pdf)"
+    },
+    {
+      "url": "https://maktek.com.tr/tr/wp-content/uploads/2025/05/OMEGA-LCD-T%C3%9CRK%C3%87E-2025-ERP-WILO-V3_compressed.pdf",
+      "models": [
+        "maktek-kombi-omega-lcd-2025"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://maktek.com.tr/tr/wp-content/uploads/2025/05/OMEGA-LCD-T%C3%9CRK%C3%87E-2025-ERP-WILO-V3_compressed.pdf)"
+    },
+    {
+      "url": "https://www.fondital.com/downloads/8849/4438/IST_ITACA_KB_ERP_GAR_PARA_AEE_EN_compressed.pdf",
+      "models": [
+        "fondital-kombi-itaca-kb-24-32-2019"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.fondital.com/downloads/8849/4438/IST_ITACA_KB_ERP_GAR_PARA_AEE_EN_compressed.pdf)"
+    },
+    {
+      "url": "https://www.sanicaisi.com.tr/wp-content/uploads/2022/10/Fiji-User-Manuel-1810.pdf",
+      "models": [
+        "sanica-kombi-fiji-24-28-hermetik"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.sanicaisi.com.tr/wp-content/uploads/2022/10/Fiji-User-Manuel-1810.pdf)"
+    },
+    {
+      "url": "https://www.dedietrich-thermique.fr/content/download/13211/110351/version/1/file/PMC%20S-7719024-01.pdf",
+      "models": [
+        "de-dietrich-kombi-pmc-s-mi-fr-2019"
+      ],
+      "status": "http_404_reported",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.dedietrich-thermique.fr/content/download/13211/110351/version/1/file/PMC%20S-7719024-01.pdf: (404) Not Found"
+    },
+    {
+      "url": "https://www.daikin.si/content/dam/document-library/operation-manuals/ac/split/ftx-km/FTX25-35KM_3PEN485919-1_Operation%20manual_English.pdf",
+      "models": [
+        "daikin-klima-ftx-kmv1b"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Operation manuals (https://www.daikin.si/content/dam/document-library/operation-manuals/ac/split/ftx-km/FTX25-35KM_3PEN485919-1_Operation%20manual_English.pdf)"
+    },
+    {
+      "url": "https://webstore.uk.generalww.com/product/attachment/ASEG24KMTE/service%20manual.pdf",
+      "models": [
+        "fujitsu-klima-aseg-kmte"
+      ],
+      "status": "opened_or_indexed",
+      "title": "SERVICE MANUAL (https://webstore.uk.generalww.com/product/attachment/ASEG24KMTE/service%20manual.pdf)"
+    },
+    {
+      "url": "https://www.midea.com/content/dam/midea-aem/br/climatizacao/hiwall/xtreme-white-novo/Manual%20de%20usu%C3%A1rio_Xtreme%20Save%20Connect.pdf",
+      "models": [
+        "midea-klima-xtreme-save-connect-agvi-r32"
+      ],
+      "status": "opened_or_indexed",
+      "title": "25608866_MUI SHW Midea AGV_I R-32 (P06).indd (https://www.midea.com/content/dam/midea-aem/br/climatizacao/hiwall/xtreme-white-novo/Manual%20de%20usu%C3%A1rio_Xt"
+    },
+    {
+      "url": "https://www.bosch-homecomfort.com/web-etk/documents/doc?id=575526",
+      "models": [
+        "bosch-klima-climate7000i-2026"
+      ],
+      "status": "opened_or_indexed",
+      "title": "untitled (https://www.bosch-homecomfort.com/web-etk/documents/doc?id=575526)"
+    },
+    {
+      "url": "https://www.arcelik.com.tr/medias/tr-TR-8807121100-202006150846980-User-Manual-File-Long-tr-TR.pdf?attachment=true&context=bWFzdGVyfGltYWdlc3wzNjc4Mjk3fGFwcGxpY2F0aW9uL3BkZnxpbWFnZXMvaGFiL2g2Ni85NTkyMDQ2OTQ0Mjg2LnBkZnw1N2FmZGZhYjA3ZjQ5NTdjYzVlNjJjYjVkYzFkMTkzZDY3NWQwYWU3N2U0MTQ1YWY1ZWE1MzllNmI3N2UxNTVk",
+      "models": [
+        "arcelik-klima-portatif-09215p-12215p"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.arcelik.com.tr/medias/tr-TR-8807121100-202006150846980-User-Manual-File-Long-tr-TR.pdf?attachment=true&context=bWFzdGVyfGltYWdlc3wzNjc4Mjk3fGFwcGx"
+    },
+    {
+      "url": "https://www.beko.com.tr/medias/tr-TR-8807121200-20200615093248-User-Manual-File-Long-tr-TR.pdf?attachment=true&context=bWFzdGVyfGltYWdlc3wzNTY4MjQ4fGFwcGxpY2F0aW9uL3BkZnxpbWFnZXMvaDU1L2g5Yi85NTkyMDQ2ODQ1OTgyLnBkZnw3MjJmYTNkNDE2ZTA5M2I3MDI5NzYwMGM3OGU2Zjg3ODdjNzA4ZjAzYTM0ZGEyMzVmMjNmZjUwZDU3ODQxMjRk",
+      "models": [
+        "beko-klima-portatif-20915p-21215p"
+      ],
+      "status": "http_404_reported",
+      "title": "Internal Error ()",
+      "tool_error": "【turn884037view0】 [wordlim: 200] Source: open({\"ref_id\":\"https://www.beko.com.tr/medias/tr-TR-8807121200-20200615093248-User-Manual-File-Long-tr-TR.pdf?attachment=true&context=bWFzdGVyfGltYWdlc3wzNTY4MjQ4fGFwcGxpY2F0aW9uL3BkZnxpbWFnZXMvaDU1L2g5Yi85NTkyMDQ2ODQ1OTgyLnBkZnw3MjJmYTNkNDE2ZTA5M2I3MDI5NzYw"
+    },
+    {
+      "url": "https://www.greecomfort.com/assets/our-products/vireo-r32/documents/vireo-r32-service-manual-a.pdf",
+      "models": [
+        "gree-klima-vireo-r32"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.greecomfort.com/assets/our-products/vireo-r32/documents/vireo-r32-service-manual-a.pdf: (400) Content length is too large: 23833549"
+    },
+    {
+      "url": "https://www.lg.com/levant_en/support/product/lg-S09ET",
+      "models": [
+        "lg-klima-s09et"
+      ],
+      "status": "opened_or_indexed",
+      "title": "LG S09ET Product Support :Manuals, Warranty & More | LG Jordan (https://www.lg.com/levant_en/support/product/lg-S09ET)"
+    },
+    {
+      "url": "https://www.demirdokum.com.tr/downloads/kion-klima-montaj-bakim-kilavuzu-3005528.pdf",
+      "models": [
+        "demirdokum-klima-kion-inverter"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.demirdokum.com.tr/downloads/kion-klima-montaj-bakim-kilavuzu-3005528.pdf: (400) Content length is too large: 10579643"
+    },
+    {
+      "url": "https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-flair-multi-kaset-ic-unite-2025.pdf?02131939=",
+      "models": [
+        "alarko-klima-flair-multi-kaset-bm-cai"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.alarko-carrier.com.tr/Data/Files/Dokumanlar/kullanim-kilavuzu/alarko-flair-multi-kaset-ic-unite-2025.pdf?02131939=: (400) Content length is too large: 41900519"
+    },
+    {
+      "url": "https://www.airwell.com/wp-content/uploads/2024/03/23.AW_.HDLE_.22-70.R32.SM_.02.23.pdf",
+      "models": [
+        "airwell-klima-hdle-09m25"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.airwell.com/wp-content/uploads/2024/03/23.AW_.HDLE_.22-70.R32.SM_.02.23.pdf: (400) Content length is too large: 23425325"
+    },
+    {
+      "url": "https://statik.vestel.com.tr/webfiles/20235131_k.pdf",
+      "models": [
+        "vestel-klima-flora-doga-wifi",
+        "vestel-klima-vega-plus-g-wifi",
+        "vestel-klima-vega-plus-wifi"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://statik.vestel.com.tr/webfiles/20235131_k.pdf)"
+    },
+    {
+      "url": "https://statik.regal-tr.com/webfiles/20234676_k.pdf",
+      "models": [
+        "regal-klima-r32-inverter-20234676"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://statik.regal-tr.com/webfiles/20234676_k.pdf)"
+    },
+    {
+      "url": "https://images.samsung.com/is/content/samsung/p5/common/techinfo/common-techinfo-fjm-odu-idu-for-europe-r410a-50hz-ver-1-2-tdb.pdf",
+      "models": [
+        "samsung-klima-fjm-hsf-r410a"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://images.samsung.com/is/content/samsung/p5/common/techinfo/common-techinfo-fjm-odu-idu-for-europe-r410a-50hz-ver-1-2-tdb.pdf: (400) Content length is too large: 18945320"
+    },
+    {
+      "url": "https://www.mitsubishitechinfo.ca/sites/default/files/SM_MSZ-FX06_24NL-CA%281%29%282%29_OBH960A_EN.pdf",
+      "models": [
+        "mitsubishi-electric-klima-msz-fx-nl-ca1"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.mitsubishitechinfo.ca/sites/default/files/SM_MSZ-FX06_24NL-CA%281%29%282%29_OBH960A_EN.pdf: (400) Content length is too large: 11855200"
+    },
+    {
+      "url": "https://www.baymak.com.tr/media/6926/elegant-air-montaj-ve-kullanim-kilavuzu.pdf",
+      "models": [
+        "baymak-klima-elegant-air-300037670"
+      ],
+      "status": "opened_or_indexed",
+      "title": "Baymak Elegant Air_Kılavuz_130325 (https://www.baymak.com.tr/media/6926/elegant-air-montaj-ve-kullanim-kilavuzu.pdf)"
+    },
+    {
+      "url": "https://www.mhi-mth.co.jp/en/products/pdf/rlf012a109j_english.pdf",
+      "models": [
+        "mitsubishi-heavy-klima-srk-zs-w"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.mhi-mth.co.jp/en/products/pdf/rlf012a109j_english.pdf)"
+    },
+    {
+      "url": "https://www.mhi-mth.co.jp/en/products/pdf/rlf012a203g_english_s.pdf",
+      "models": [
+        "mitsubishi-heavy-klima-srk-zsx-w"
+      ],
+      "status": "opened_or_indexed",
+      "title": "RLF012A203G_english.pdf (https://www.mhi-mth.co.jp/en/products/pdf/rlf012a203g_english_s.pdf)"
+    },
+    {
+      "url": "https://www.viessmann.pl/content/dam/public-brands/pl/Produkty/Klimatyzatory/Vitoclima-300-S/Viessmann_IOiM_Vitoclima-300-S_jednostki_zewn_2020_07.pdf/_jcr_content/renditions/original./Viessmann_IOiM_Vitoclima-300-S_jednostki_zewn_2020_07.pdf",
+      "models": [
+        "viessmann-klima-vitoclima300s-he-pl-2020"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.viessmann.pl/content/dam/public-brands/pl/Produkty/Klimatyzatory/Vitoclima-300-S/Viessmann_IOiM_Vitoclima-300-S_jednostki_zewn_2020_07.pdf/_jcr_co"
+    },
+    {
+      "url": "https://www.toshiba-aircon.com.sg/catalogues/SMMSi%20Error%20Code%20Quick%20Reference.pdf",
+      "models": [
+        "toshiba-klima-smmsi-r410a-a11-005"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://www.toshiba-aircon.com.sg/catalogues/SMMSi%20Error%20Code%20Quick%20Reference.pdf)"
+    },
+    {
+      "url": "https://www.panasonicproclub.com/uploads/ES/catalogues/2021/RAC/Service%20Manual%20TKEA%20%28Salas%20Servidores%29.pdf",
+      "models": [
+        "panasonic-klima-z25-z35-tkea-eu"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://www.panasonicproclub.com/uploads/ES/catalogues/2021/RAC/Service%20Manual%20TKEA%20%28Salas%20Servidores%29.pdf: (400) Content length is too large: 23609140"
+    },
+    {
+      "url": "https://haier-ac.pl/wp-content/uploads/materialy/instrukcje/flexis_plus/instrukcja-serwisowa-flexis-plus-j-wew-as25s2sf1fa-wh.pdf",
+      "models": [
+        "haier-klima-flexis-plus-as25s2sf1fa-wh"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://haier-ac.pl/wp-content/uploads/materialy/instrukcje/flexis_plus/instrukcja-serwisowa-flexis-plus-j-wew-as25s2sf1fa-wh.pdf: (400) Content length is too large: 26779221"
+    },
+    {
+      "url": "https://warranty-vn.hitachi-homeappliances.com/storage/files/airHome%20300%20RAK-RAC-CH18-24PCASV.pdf",
+      "models": [
+        "hitachi-klima-airhome300-ch18-ch24-pcasv"
+      ],
+      "status": "tool_inaccessible",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://warranty-vn.hitachi-homeappliances.com/storage/files/airHome%20300%20RAK-RAC-CH18-24PCASV.pdf: (400) Timeout fetching"
+    },
+    {
+      "url": "https://media3.bsh-group.com/Documents/8001310847_B.pdf",
+      "models": [
+        "profilo-klima-ksi-kso-vw-xb32n-ec"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://media3.bsh-group.com/Documents/8001310847_B.pdf)"
+    },
+    {
+      "url": "https://media3.bsh-group.com/Documents/8001310852_B.pdf",
+      "models": [
+        "siemens-klima-as-ivw32n-ec"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://media3.bsh-group.com/Documents/8001310852_B.pdf)"
+    },
+    {
+      "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/40MAQ-01SM.pdf",
+      "models": [
+        "carrier-klima-40maqb-us-ca-01sm-2016"
+      ],
+      "status": "opened_or_indexed",
+      "title": "40MAQ-01SM (https://www.shareddocs.com/hvac/docs/1009/Public/00/40MAQ-01SM.pdf)"
+    },
+    {
+      "url": "https://airfel.com/uploads/files/Kaset_Tipi_Kullan%C4%B1m_K%C4%B1lavuzu.pdf",
+      "models": [
+        "airfel-klima-lcq140vy1-common-manual-codes"
+      ],
+      "status": "tool_size_limit",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://airfel.com/uploads/files/Kaset_Tipi_Kullan%C4%B1m_K%C4%B1lavuzu.pdf: (400) Content length is too large: 24921061"
+    },
+    {
+      "url": "https://airfel.com/uploads/files/User_Manual1.pdf",
+      "models": [
+        "airfel-klima-vibe-ltxq-av1b-202603"
+      ],
+      "status": "tool_inaccessible",
+      "title": "Internal Error ()",
+      "tool_error": "L0: URL https://airfel.com/uploads/files/User_Manual1.pdf is not accessible via this tool."
+    },
+    {
+      "url": "https://tdheating.com.tr/kullanim-klavuzlari/ek.pdf",
+      "models": [
+        "termodinamik-kombi-ek-dokunmatik-td20230200"
+      ],
+      "status": "http_404_reported",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://tdheating.com.tr/kullanim-klavuzlari/ek.pdf: (404) Not Found"
+    },
+    {
+      "url": "https://tdheating.com.tr/kullanim-klavuzlari/dek.pdf",
+      "models": [
+        "termodinamik-kombi-dek-dokunmatik-td20230100"
+      ],
+      "status": "http_404_reported",
+      "title": "Internal Error ()",
+      "tool_error": "L0: Failed to fetch https://tdheating.com.tr/kullanim-klavuzlari/dek.pdf: (404) Not Found"
+    },
+    {
+      "url": "https://edison.yorknow.com/pub/media/documentation/Minisplit_%20Rseries_tech.pdf",
+      "models": [
+        "york-klima-r-series-dhr18-48-us"
+      ],
+      "status": "opened_or_indexed",
+      "title": " (https://edison.yorknow.com/pub/media/documentation/Minisplit_%20Rseries_tech.pdf)"
+    }
+  ],
+  "follow_up": {
+    "basis": "Bounded official replacement checks after the initial74URL observation; original observations retained above.",
+    "beko-klima-portatif-20915p-21215p": {
+      "status": "replaced-with-accessible-official-revision",
+      "current_url": "https://download.beko.com/Download.UsageManualsBeko/20915-p-mobil-portatif-klima-klimalar-kullanim-kilavuzu-tr_TR_201806181404558_User-20Manual-20-20File-20-28Long-29tr_TR.pdf",
+      "proof": "24page officialPDF;20915P/21215P cover; revision1518-01; PDFpage12(P11),section4.2 E1=room-temperature-sensor warning. ExistingonlyE1meaning confirmed; partial table retained. URL/title/locators clearly identify newrevision."
+    },
+    "de-dietrich-kombi-pmc-s-mi-fr-2019": {
+      "status": "unavailable-source-muted-and-automatic-answers-disabled",
+      "reason": "Exact7719024-v01-09012019 remains officialindexed, directorigin404 reported. No verified equivalent officialURL found; thirdparty copy not substituted asofficial."
+    },
+    "termodinamik-kombi-ek-dokunmatik-td20230200": {
+      "status": "unavailable-source-muted-and-automatic-answers-disabled",
+      "reason": "DirectPDF404 reported; root preserves historic context and noindex pending-source HTML."
+    },
+    "termodinamik-kombi-dek-dokunmatik-td20230100": {
+      "status": "unavailable-source-muted-and-automatic-answers-disabled",
+      "reason": "DirectPDF404 reported; root preserves historic context and noindex pending-source HTML."
+    },
+    "baymak-kombi-duotec-33-42-45": {
+      "status": "garbledURL-replaced-before74URL-audit",
+      "current_url": "https://www.baymak.com.tr/media/4608/baymak-duotec-premix-tam-yogusmali-kombi-kullanma-k%C4%B1lavuzu.pdf",
+      "proof": "Officialindexed300032122Rev04; file10704642bytes exceedswebtoolsize limit. Same reviewed modeldocument, not a new code mapping."
+    },
+    "effective_source_outcomes": {
+      "opened_or_indexed": 54,
+      "tool_size_limit": 13,
+      "tool_inaccessible_or_timeout": 4,
+      "unavailable_automatic_answers_disabled": 3
+    },
+    "limitations": "Tool-opened sources may be indexed/cached; all74 live origin availability and every full manual meaning are not independently guaranteed."
+  }
+}

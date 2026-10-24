@@ -4,7 +4,8 @@
   if (!root) return;
   const el = id => document.getElementById(id);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const state = {step:0,device:'',brand:'',model:'',model_id:'',scope_confirmed:false,symptom:'',answer:'',code:'',district:'',neighborhood:'',detail:'',last_detail_step:1,skip_model:false};
+  const state = {step:0,device:'',brand:'',model:'',model_id:'',model_unknown:false,scope_confirmed:false,symptom:'',answer:'',code:'',district:'',neighborhood:'',detail:'',last_detail_step:1,skip_model:false};
+  let modelPrompt=false;
   const symptoms = {
     Kombi:[['heat','Petekler ısınmıyor'],['water','Sıcak su yok / değişiyor'],['pressure','Basınç değişiyor'],['leak','Su akıtıyor'],['noise','Sesli çalışıyor'],['off','Hiç çalışmıyor'],['error','Hata kodu var']],
     Klima:[['cool','Soğutmuyor'],['heat','Isıtmıyor'],['leak','Su damlatıyor'],['noise','Sesli çalışıyor'],['ice','Buzlanıyor'],['odor','Koku yapıyor'],['off','Hiç çalışmıyor'],['error','Hata kodu var']],
@@ -70,7 +71,7 @@
     clearResult();render(false);
   }
   function clearResult() { el('aiResultBox')?.classList.add('hidden'); }
-  function resetModel() { Object.assign(state, {model:'',model_id:'',scope_confirmed:false,code:''}); }
+  function resetModel() { Object.assign(state, {model:'',model_id:'',model_unknown:false,scope_confirmed:false,code:''});modelPrompt=false; }
   function compose() {
     el('deviceSelect').value = state.device || 'Kombi';
     el('issueInput').value = [state.brand && 'Marka: '+state.brand, state.model && 'Model: '+state.model, symptomText(), state.code && 'Ekrandaki hata kodu: '+state.code, state.answer, state.district && 'İlçe: '+state.district, state.neighborhood && 'Mahalle / semt: '+state.neighborhood, state.detail && 'Açıklamam: '+state.detail].filter(Boolean).join('. ').slice(0,1200);
@@ -89,7 +90,17 @@
     const model = selectedModel();
     if (!model) return '';
     const warning = window.STFaults?.lookup({device:state.device.toLowerCase(),brand:state.brand,model_id:model.id}).scope_warning || '';
-    return `<div id="ustaModelScope">${model.market?`<p class="usta-note"><strong>Belgenin pazarı / bölgesi:</strong> ${esc(model.market)}</p>`:''}${model.scope_note?`<p class="usta-note">${esc(model.scope_note)}</p>`:''}${model.matchable===false?'<p class="usta-note">Bu belge kapasiteye veya benzer ada bakılarak otomatik eşleştirilemez. Cihazın belge ve ürün numarası ayrıca kontrol edilmelidir.</p>':''}${model.requires_document_match?`<p class="usta-note"><strong>Seçilen üretici belgesi:</strong> ${esc(model.manual?.title||model.label)}</p>`:''}${warning?`<p class="usta-note" data-model-source-notice>${esc(warning)}</p>`:''}<details class="usta-free"><summary>Model kapsamı ve üretici kaynağı</summary><p class="usta-note">${esc((model.model_names||[]).join(' · '))}</p>${model.manual?.url?`<a href="${esc(model.manual.url)}" target="_blank" rel="noopener noreferrer">Üretici belgesini aç ↗</a>`:''}</details></div>`;
+    return `<div id="ustaModelScope">${model.market?`<p class="usta-note"><strong>Belgenin pazarı / bölgesi:</strong> ${esc(model.market)}</p>`:''}${model.scope_note?`<p class="usta-note">${esc(model.scope_note)}</p>`:''}${model.matchable===false?'<p class="usta-note">Bu belge kapasiteye veya benzer ada bakılarak otomatik eşleştirilemez. Cihazın belge ve ürün numarası ayrıca kontrol edilmelidir.</p>':''}${model.requires_document_match?`<p class="usta-note"><strong>Seçilen üretici belgesi:</strong> ${esc(model.manual?.title||model.label)}</p>`:''}${warning?`<p class="usta-note" data-model-source-notice>${esc(warning)}</p>`:''}<details class="usta-free"><summary>Model kapsamı ve üretici kaynağı</summary><p class="usta-note">${esc((model.model_names||[]).join(' · '))}</p>${model.manual?.source_available!==false&&model.manual?.url?`<a href="${esc(model.manual.url)}" target="_blank" rel="noopener noreferrer">Üretici belgesini aç ↗</a>`:''}</details></div>`;
+  }
+  function modelChoices(list) {
+    if (!hasCode() || selectedModel()) return '';
+    return `<div id="ustaModelChoices" aria-label="${esc(state.brand)} modelleri">${list.map(model=>{
+      const names=model.matchable===false&&model.requires_document_match?[model.label]:model.model_names?.length?model.model_names:[model.label];
+      const words=names[0].split(' ');let shared=words.length;
+      for(const name of names)while(shared&&words.slice(0,shared).join(' ')!==name.split(' ').slice(0,shared).join(' '))shared--;
+      const title=names.length>1&&shared>=2?words.slice(0,shared).join(' '):model.label;
+      return `<details class="usta-free"${modelPrompt&&list.length===1?' open':''}><summary>${esc(title)}<span aria-hidden="true">⌄</span></summary><div class="usta-grid">${names.map(name=>`<button type="button" class="usta-choice" data-model-choice="${esc(model.id+'|'+name)}">${esc(/^\d+\s*(?:kw|btu)?$/i.test(name)?model.label:name)}</button>`).join('')}</div></details>`;
+    }).join('')}</div>`;
   }
   function modelFields() {
     if (!state.brand) return '<p class="usta-note">Marka ve tam model bilinmeden kodun anlamını tahmin etmiyoruz. Ekrandaki kodu not edebilir veya doğrudan güvenli yönlendirmeye geçebilirsiniz.</p>';
@@ -102,11 +113,12 @@
         options += `<option value="${esc(model.id+'|'+name)}"${state.model_id===model.id&&state.model===name?' selected':''}>${esc(label.toLowerCase().startsWith(model.brand.toLowerCase())?label:model.brand+' '+label)}</option>`;
       }
     }
-    return `<p class="usta-note"><strong>${esc(state.brand)}</strong> · Etiketteki tam adı seçin veya bu adımı atlayın.</p>${modelSuggestion()}${list.length?`<label class="usta-field-label">Model<select id="ustaVerifiedModel" class="usta-field"><option value="">Modeli seçin / bilmiyorum</option>${options}</select></label>`:'<p class="usta-note">Bu marka için modele özel doğrulanmış bir kod tablosu henüz yok. Başka markanın kodlarını bu cihaza uygulamıyoruz.</p>'}<label class="usta-field-label">Model listede yoksa <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model_id?'':state.model)}" placeholder="Etiketteki tam model adını yazabilirsiniz"></label>${scopeFields()}`;
+    const prompt=modelPrompt?`<p id="ustaModelPrompt" class="usta-note" role="status">${esc(state.code?state.code+' kodu için':'Hata kodunu yorumlamak için')} ${esc(state.brand)} cihazınızın tam modelini seçin. Bilmiyorsanız “Modeli bilmiyorum” ile ön bilgiye geçebilirsiniz.</p>`:'';
+    return `<p class="usta-note"><strong>${esc(state.brand)}</strong> · Cihaz etiketindeki tam model adını seçin.</p>${prompt}${modelSuggestion()}${modelChoices(list)}${list.length?`<label class="usta-field-label">Tüm modeller<select id="ustaVerifiedModel" class="usta-field"><option value="">Modeli seçin</option>${options}</select></label>`:'<p class="usta-note">Bu marka için modele özel doğrulanmış bir kod tablosu henüz yok. Başka markanın kodlarını bu cihaza uygulamıyoruz.</p>'}<label class="usta-field-label">Model listede yoksa <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model_id?'':state.model)}" placeholder="Etiketteki tam model adını yazabilirsiniz"></label>${scopeFields()}`;
   }
   function codeFields() {
     const codes = (selectedModel()?.codes || []).filter(code => code.matchable!==false && !code.source_conflict);
-    return `${hasCode()&&codes.length?`<p class="usta-note">Bu modelin belgesindeki kodlardan birini seçin:</p><div class="usta-code-grid">${codes.slice(0,8).map(c=>`<button type="button" class="usta-code" data-fault-code="${esc(c.code)}">${esc(c.code)}</button>`).join('')}</div><label class="usta-field-label">Diğer kodlar<select id="ustaCodeSelect" class="usta-field"><option value="">Kod seçin / aşağıya yazın</option>${codes.map(c=>`<option${state.code===c.code?' selected':''}>${esc(c.code)}</option>`).join('')}</select></label>`:''}<label class="usta-field-label">${hasCode()?'Ekrandaki kod':'Varsa ekrandaki kod'} <span>(isteğe bağlı)</span><input id="ustaCode" class="usta-field" maxlength="40" value="${esc(state.code)}" placeholder="E1, E01, F.28… aynen yazın" autocomplete="off"></label><p class="usta-note">Seçilen modelde E1/E01 ve F4/F04 gibi sıfır eklenmiş yazımlar eşleştirilir. Modeli bilmeden bir kod anlamı seçmeyiz.</p>`;
+    return `${hasCode()&&codes.length?`<p class="usta-note">Bu modelin belgesindeki kodlardan birini seçin:</p><div class="usta-code-grid">${codes.slice(0,8).map(c=>`<button type="button" class="usta-code" data-fault-code="${esc(c.code)}">${esc(c.code)}</button>`).join('')}</div><label class="usta-field-label">Diğer kodlar<select id="ustaCodeSelect" class="usta-field"><option value="">Kod seçin / aşağıya yazın</option>${codes.map(c=>`<option${state.code===c.code?' selected':''}>${esc(c.code)}</option>`).join('')}</select></label>`:''}<label class="usta-field-label">${hasCode()?'Ekrandaki kod':'Varsa ekrandaki kod'} <span>(isteğe bağlı)</span><input id="ustaCode" class="usta-field" maxlength="40" value="${esc(state.code)}" placeholder="Ekrandaki kodu aynen yazın" autocomplete="off"></label><p class="usta-note">Kodun anlamı modele göre değişebilir. Yalnızca seçtiğiniz modelin üretici belgesini esas alırız.</p>`;
   }
   function fields() {
     if (state.step===0) return `<div class="usta-grid usta-grid--devices">${['Kombi','Klima','Petek'].map(d=>choice(d,deviceIcon(d)+d,d==='Kombi'?'Isıtma / sıcak su':d==='Klima'?'Isıtma / soğutma':'Radyatör / tesisat')).join('')}</div>`;
@@ -115,7 +127,7 @@
       const names = brands();
       return `<div class="usta-grid">${names.slice(0,6).map(name=>`<button class="usta-choice" type="button" data-brand="${esc(name)}">${esc(name)}</button>`).join('')}</div><label class="usta-field-label">Tüm markalar<select id="ustaBrand" class="usta-field"><option value="">Marka seçin</option>${names.map(name=>`<option${state.brand===name?' selected':''}>${esc(name)}</option>`).join('')}</select></label>${state.brand?`<button type="button" class="usta-next" data-brand="${esc(state.brand)}">${esc(state.brand)} ile devam et →</button>`:''}<button type="button" class="usta-back" data-brand="">Markayı bilmiyorum, devam et →</button>`;
     }
-    if (state.step===3) return modelFields()+codeFields()+`<button type="button" class="usta-back" data-unknown-code>Modeli / kodu bilmiyorum, devam et →</button>`;
+    if (state.step===3) return modelFields()+codeFields()+`<button type="button" class="usta-back" data-unknown-code>${state.code&&!selectedModel()?'Modeli bilmiyorum, ön bilgiye geç':'Modeli / kodu bilmiyorum, devam et'} →</button>`;
     return `<dl class="usta-summary"><dt>Cihaz / belirti</dt><dd>${esc(state.device+' · '+symptomText())}</dd>${state.brand||state.model?`<dt>Marka / model</dt><dd>${esc([state.brand,state.model].filter(Boolean).join(' · '))}</dd>`:''}${state.code?`<dt>Ekrandaki kod</dt><dd>${esc(state.code)}</dd>`:''}${state.detail?`<dt>Anlatımınız</dt><dd>${esc(state.detail)}</dd>`:''}</dl><details id="ustaLocationContext" class="usta-free"><summary>Servis için bölge ekleyin <span>(isteğe bağlı)</span></summary><div class="usta-fields"><label>İlçe<select id="ustaDistrict" class="usta-field"><option value="">Daha sonra paylaşırım</option>${(catalog().districts||[]).map(d=>`<option${state.district===d?' selected':''}>${esc(d)}</option>`).join('')}</select></label><label>Mahalle / semt<input id="ustaNeighborhood" class="usta-field" maxlength="80" value="${esc(state.neighborhood)}" placeholder="Örn. Atakent"></label></div></details>`;
   }
   function showLocal() {
@@ -123,7 +135,13 @@
     if (safetyCheck()) return;
     if (typeof window.STDiagnosticGuide==='function' && typeof window.renderDiagnostic==='function') window.renderDiagnostic(window.STDiagnosticGuide(state.device,el('issueInput').value,{...state}));
   }
-  function result(from) { state.last_detail_step=from; go(4); }
+  function requestModel() {
+    state.model_unknown=false;state.skip_model=false;modelPrompt=true;clearResult();go(3);
+  }
+  function result(from) {
+    if(hasCode()&&state.brand&&!selectedModel()&&!state.model_unknown){requestModel();return;}
+    state.last_detail_step=from;go(4);
+  }
   function afterSymptom() {
     compose();
     if (safetyCheck()) return;
@@ -162,14 +180,15 @@
     view.querySelectorAll('[data-brand]').forEach(button=>button.addEventListener('click',()=>chooseBrand(button.dataset.brand)));
     el('ustaBrand')?.addEventListener('change',event=>{if(event.target.value)chooseBrand(event.target.value);});
     el('ustaVerifiedModel')?.addEventListener('change',event=>useModel(event.target.value));
+    view.querySelectorAll('[data-model-choice]').forEach(button=>button.addEventListener('click',()=>useModel(button.dataset.modelChoice)));
     el('ustaUseSuggestedModel')?.addEventListener('click',event=>useModel(event.currentTarget.dataset.suggestedModel));
-    el('ustaModel')?.addEventListener('input',event=>{state.model=event.target.value.trim();state.model_id='';state.scope_confirmed=false;state.code='';el('ustaModelScope')?.remove();if(el('ustaVerifiedModel'))el('ustaVerifiedModel').value='';compose();clearResult();});
-    const bind=(id,key)=>el(id)?.addEventListener('input',event=>{state[key]=event.target.value.trim();compose();clearResult();safetyCheck();});
+    el('ustaModel')?.addEventListener('input',event=>{state.model=event.target.value.trim();state.model_id='';state.model_unknown=false;state.scope_confirmed=false;el('ustaModelScope')?.remove();if(el('ustaVerifiedModel'))el('ustaVerifiedModel').value='';compose();clearResult();});
+    const bind=(id,key)=>el(id)?.addEventListener('input',event=>{state[key]=event.target.value.trim();if(key==='code')state.model_unknown=false;compose();clearResult();safetyCheck();});
     bind('ustaCode','code');bind('ustaNeighborhood','neighborhood');
     el('ustaDistrict')?.addEventListener('change',event=>{state.district=event.target.value;state.neighborhood='';compose();if(el('ustaNeighborhood'))el('ustaNeighborhood').value='';});
     el('ustaCodeSelect')?.addEventListener('change',event=>{state.code=event.target.value;if(el('ustaCode'))el('ustaCode').value=state.code;compose();});
     view.querySelectorAll('[data-fault-code]').forEach(button=>button.addEventListener('click',()=>{state.code=button.dataset.faultCode;compose();result(3);}));
-    view.querySelector('[data-unknown-code]')?.addEventListener('click',()=>result(3));
+    view.querySelector('[data-unknown-code]')?.addEventListener('click',()=>{state.model_unknown=!selectedModel();result(3);});
     el('ustaBack').hidden=state.step===0;el('ustaNext').hidden=state.step!==3;el('ustaNext').textContent='Rehberi göster →';
     el('ustaExtraWrap').hidden=state.step!==1;el('ustaSubmitWrap').hidden=state.step!==4;
     const contacts=root.querySelector('.usta-direct-contacts');if(contacts)contacts.hidden=state.step===4||!!root.dataset.emergency;
@@ -195,7 +214,7 @@
     el('ustaSafety').hidden=true;el('askBtn').disabled=false;return false;
   }
   function reset() {
-    Object.assign(state,{step:0,device:'',brand:'',model:'',model_id:'',scope_confirmed:false,symptom:'',answer:'',code:'',district:'',neighborhood:'',detail:'',last_detail_step:1,skip_model:false});
+    Object.assign(state,{step:0,device:'',brand:'',model:'',model_id:'',model_unknown:false,scope_confirmed:false,symptom:'',answer:'',code:'',district:'',neighborhood:'',detail:'',last_detail_step:1,skip_model:false});modelPrompt=false;
     inputSuggestion={brand:'',model_id:'',model:'',code:''};delete root.dataset.emergency;el('ustaExtraIssue').value='';clearResult();safetyCheck();render();
   }
   el('ustaBack').addEventListener('click',()=>{clearResult();go(state.step===4?state.last_detail_step:Math.max(0,state.step-1));});
@@ -226,9 +245,11 @@
       root.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
     },
     getContext(){return {...state};},
+    requestModel,
     submit(){
       compose();if(safetyCheck())return;
       if(state.step!==4){if(state.device&&state.symptom)result(state.step);else go(state.device?1:0);return;}
+      if(hasCode()&&!selectedModel()){showLocal();return;}
       if(window.ST_PREVIEW){showLocal();const source=el('aiSource');if(source)source.textContent+=' · Test sürümünde AI bağlantısı kapalı';return;}
       if(typeof window.diagnoseIssue==='function')window.diagnoseIssue();
     }

@@ -34,7 +34,7 @@ class MainContent(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.stack=[]; self.paragraphs=[]; self.main_text=[]; self.links=[]; self.metadata=defaultdict(list)
-        self.active=None; self.title=False; self.h1=False; self.ld=False; self.buffer=[]; self.schemas=[];self.main_seen=False
+        self.active=None; self.title=False; self.h1=False; self.ld=False; self.buffer=[]; self.schemas=[];self.main_seen=False;self.manual_notices=[]
     def handle_starttag(self, tag, pairs):
         a=dict(pairs)
         if tag=='main': self.main_seen=True
@@ -44,6 +44,12 @@ class MainContent(HTMLParser):
         if tag=='script' and a.get('type')=='application/ld+json': self.ld=True; self.buffer=[]
         parent=self.stack[-1] if self.stack else {'main':False,'hidden':False}
         frame={'tag':tag,'main':parent['main'] or tag=='main','hidden':parent['hidden'] or tag in HIDDEN,'attrs':' '.join(str(a.get(k) or '') for k in ['class','id','role']) + (' st-master-matrix' if 'data-st-master-matrix' in a else '')}
+        frame['display_hidden']=parent.get('display_hidden',False) or 'hidden' in a or a.get('aria-hidden')=='true' or bool(re.search(r'(?:display\s*:\s*none|visibility\s*:\s*hidden)',a.get('style',''),re.I))
+        frame['closed_details']=parent.get('closed_details',False) or tag=='details' and 'open' not in a
+        frame['manual_notice']=None
+        if frame['main'] and a.get('data-manual-unavailable')=='true':
+            frame['manual_notice']={'text':[],'visible':not(frame['hidden'] or frame['display_hidden'] or frame['closed_details'])}
+            self.manual_notices.append(frame['manual_notice'])
         if tag not in VOID: self.stack.append(frame)
         if frame['main'] and not frame['hidden']:
             if tag in BLOCK: self.main_text.append(' ')
@@ -51,6 +57,8 @@ class MainContent(HTMLParser):
             if tag=='a' and a.get('href'): self.links.append(a['href'])
             if tag=='p' and self.active is None: self.active={'text':[],'linked':[],'category':module_kind(self.stack),'depth':len(self.stack)}
     def handle_data(self, text):
+        for frame in self.stack:
+            if frame.get('manual_notice') is not None:frame['manual_notice']['text'].append(text)
         if self.title: self.metadata['title'].append(text)
         if self.ld: self.buffer.append(text)
         if not self.stack or not self.stack[-1]['main'] or self.stack[-1]['hidden']: return
@@ -137,8 +145,17 @@ def audit(root: Path) -> dict:
             substantial.append(item); exact[p['text'].casefold()].append({'page':name,'index':i,'category':item['category']})
         body=[p for p in substantial if p['category']=='body']
         prose=normalized(' '.join(p['text'] for p in body)); text=normalized(''.join(parser.main_text))
-        expected=sorted({m.get('manual',{}).get('url','') for m in models.get(path.name,[])}-{''})
+        page_models=models.get(path.name,[])
+        expected=sorted({m.get('manual',{}).get('url','') for m in page_models if m.get('manual',{}).get('source_available') is not False}-{''})
         missing=[url for url in expected if url not in parser.links]
+        unavailable=[m for m in page_models if m.get('manual',{}).get('source_available') is False]
+        unavailable_violations=[]
+        notices=[n for n in parser.manual_notices if n['visible'] and re.search(r'erişilemiyor|ulaşılamıyor|kullanılamıyor',normalized(''.join(n['text'])),re.I) and re.search(r'otomatik[^.]{0,120}(?:kullanılmaz|sunulmaz|üretilmez)',normalized(''.join(n['text'])),re.I)]
+        for model in unavailable:
+            manual=model['manual'];identifier=model.get('id',manual.get('url',''))
+            if not notices:unavailable_violations.append({'model':identifier,'reason':'missing_visible_unavailable_notice'})
+            if manual.get('url') in parser.links:unavailable_violations.append({'model':identifier,'reason':'dead_manual_still_clickable'})
+            if any(code.get('matchable') is not False for code in model.get('codes',[])):unavailable_violations.append({'model':identifier,'reason':'unavailable_manual_codes_still_enabled'})
         faq=[]
         for schema in parser.schemas:
             for obj in walk(schema):
@@ -148,6 +165,7 @@ def audit(root: Path) -> dict:
                         plain=normalized(''.join(visible.main_text))
                         if plain and plain not in text: faq.append({'field':label,'excerpt':plain[:160]})
         row={'path':name,'kind':kind,'main_present':parser.main_seen,'main_words':len(words(text)),'body_substantive_words':len(words(prose)),'substantive_paragraphs':len(substantial),'body_substantive_paragraphs':len(body),'paragraph_categories':dict(Counter(p['category'] for p in substantial)),'metadata':{k:normalized(' '.join(v)) if k in {'title','h1'} else v for k,v in parser.metadata.items()},'source_links':sorted({u for u in parser.links if urlsplit(u).scheme in {'http','https'} and urlsplit(u).hostname not in {'wa.me','saglamkombiklima.com.tr'}}),'expected_manual_urls':expected,'missing_manual_links':missing,'faq_visible_mismatches':faq,'claim_mentions':[m.group(0) for m in re.finditer(r'\b40\s*(?:dk|dakika)|\b1\s*yıl|\bMYK\b',text,re.I)]}
+        row.update(unavailable_manual_urls=sorted({m['manual']['url'] for m in unavailable}),unavailable_manual_violations=unavailable_violations)
         for key in ['title','description','canonical']:
             values=row['metadata'].get(key,[]); values=[values] if isinstance(values,str) else values
             for value in values:
@@ -179,13 +197,14 @@ def audit(root: Path) -> dict:
         row=item['row']
         if not row['main_present']: violations.append({'page':name,'reason':'missing_main'})
         if row['missing_manual_links']: violations.append({'page':name,'reason':'missing_manual_link'})
+        if row['unavailable_manual_violations']:violations.append({'page':name,'reason':'unsafe_unavailable_manual'})
         if row['faq_visible_mismatches']: violations.append({'page':name,'reason':'faq_visible_mismatch'})
         if row['metadata'].get('invalid_jsonld'): violations.append({'page':name,'reason':'invalid_jsonld'})
         if row['body_substantive_words']>=80 and row['kind'] not in {'model_guide','directory','system_tool'}:
             body_clones[item['body'].casefold()].append(name)
     for used in body_clones.values():
         if len(used)>1: violations.append({'pages':used,'reason':'exact_editorial_body_clone'})
-    return {'schema_version':1,'methodology':{'scope':'Visitor HTML MAIN only; no network requests. Scripts, forms, tables, navigation, headers and footers excluded. Paragraphs under the internal word threshold remain counted in MAIN words.','substantive_min_words':MIN_WORDS,'near_repeat':'Five-word shingle Jaccard on substantive body prose; raw >=0.65 or entity-masked >=0.75. Model documents and directories excluded from body-pair scoring. Entities come from the local catalog.','strict':'Fails only missing MAIN, missing expected model-manual link, invalid JSON-LD, FAQ/visible-text mismatch, or exact editorial body clones of at least80 words. Shared modules, near-repeat signals and individual repeated paragraphs require editorial review; they do not fail strict mode.','limitations':'These are editorial review signals, not Google/Yandex/AI scores, indexing predictions or proof of spam. Unique wording alone does not establish usefulness or factual accuracy. Shared safety, navigation, sources and documented model context may be necessary.'},'summary':{'pages':len(pages),'kinds':dict(Counter(p['kind'] for p in pages)),'editorial_duplicate_groups':sum(g['classification']=='editorial_review' for g in duplicate_groups),'shared_duplicate_groups':sum(g['classification']!='editorial_review' for g in duplicate_groups),'near_repeat_pairs':len(near),'missing_manual_link_pages':sum(bool(p['missing_manual_links']) for p in pages),'faq_mismatch_pages':sum(bool(p['faq_visible_mismatches']) for p in pages),'strict_violations':len(violations)},'pages':pages,'exact_duplicate_groups':duplicate_groups,'exact_main_groups':[v for v in main_exact.values() if len(v)>1],'near_repeat_pairs':near,'strict_violations':violations,'duplicate_metadata':{key:[{'value':value,'pages':used} for value,used in values.items() if len(used)>1] for key,values in metadata_groups.items()}}
+    return {'schema_version':1,'methodology':{'scope':'Visitor HTML MAIN only; no network requests. Scripts, forms, tables, navigation, headers and footers excluded. Paragraphs under the internal word threshold remain counted in MAIN words.','substantive_min_words':MIN_WORDS,'near_repeat':'Five-word shingle Jaccard on substantive body prose; raw >=0.65 or entity-masked >=0.75. Model documents and directories excluded from body-pair scoring. Entities come from the local catalog.','strict':'Fails missing MAIN, missing expected available model-manual link, unsafe unavailable-manual handling, invalid JSON-LD, FAQ/visible-text mismatch, or exact editorial body clones of at least80 words. Unavailable manuals require a visible explanatory note, no clickable dead source and disabled automatic code rows. Shared modules, near-repeat signals and individual repeated paragraphs require editorial review; they do not fail strict mode.','limitations':'These are editorial review signals, not Google/Yandex/AI scores, indexing predictions or proof of spam. Unique wording alone does not establish usefulness or factual accuracy. Shared safety, navigation, sources and documented model context may be necessary.'},'summary':{'pages':len(pages),'kinds':dict(Counter(p['kind'] for p in pages)),'editorial_duplicate_groups':sum(g['classification']=='editorial_review' for g in duplicate_groups),'shared_duplicate_groups':sum(g['classification']!='editorial_review' for g in duplicate_groups),'near_repeat_pairs':len(near),'missing_manual_link_pages':sum(bool(p['missing_manual_links']) for p in pages),'unavailable_manual_pages':sum(bool(p['unavailable_manual_urls']) for p in pages),'unsafe_unavailable_manual_pages':sum(bool(p['unavailable_manual_violations']) for p in pages),'faq_mismatch_pages':sum(bool(p['faq_visible_mismatches']) for p in pages),'strict_violations':len(violations)},'pages':pages,'exact_duplicate_groups':duplicate_groups,'exact_main_groups':[v for v in main_exact.values() if len(v)>1],'near_repeat_pairs':near,'strict_violations':violations,'duplicate_metadata':{key:[{'value':value,'pages':used} for value,used in values.items() if len(used)>1] for key,values in metadata_groups.items()}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('directory',type=Path);p.add_argument('--report',type=Path);p.add_argument('--strict',action='store_true');a=p.parse_args()

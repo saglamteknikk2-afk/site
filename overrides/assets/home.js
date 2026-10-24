@@ -44,6 +44,7 @@
     }
 
     function renderDiagnostic(data, options={}) {
+      if(data.requires_model&&typeof window.STUstaWizard?.requestModel==='function'){window.STUstaWizard.requestModel();return;}
       const box=document.getElementById('aiResultBox'),response=document.getElementById('aiResponseText');
       stAiContact(data.emergency_phone);
       const actions=document.querySelector('#aiResultBox .usta-result-actions');if(actions)actions.hidden=data.source==='advisory'||data.source==='emergency';
@@ -90,12 +91,13 @@
       lastDiagnosedIssue=`${device}: ${issue}`;
       const initial=showFallbackDiagnostic(device,issue,{record:false});
       // Güvenlik yönlendirmesi ve belirti rehberi bağlantıyı beklemeden görünür.
-      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review){renderDiagnostic(initial);return;}
+      if(initial.requires_model)return;
+      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review||initial.code_unverified){renderDiagnostic(initial);return;}
       button.disabled=true;document.getElementById('aiLoading').classList.remove('hidden');
       const source=document.getElementById('aiSource');if(source)source.textContent='Belirti rehberi · AI değerlendirmesi bekleniyor…';
       try {
         const context=window.STUstaWizard?.getContext()||{};
-        const data=await stApi('ai',{device,issue,model_id:context.model_id||'',code:context.code||'',scope_confirmed:context.scope_confirmed===true},requestKey);
+        const data=await stApi('ai',{device,issue,model_id:context.model_id||'',code:context.code||'',model_unknown:context.model_unknown===true,scope_confirmed:context.scope_confirmed===true},requestKey);
         if(data.text)renderDiagnostic(data);else showFallbackDiagnostic(device,issue);
       }catch(error){showFallbackDiagnostic(device,issue);if(source)source.textContent='Belirti rehberi · AI bağlantısı kurulamadı';}
       finally{button.disabled=false;button.classList.remove('hidden');document.getElementById('aiLoading').classList.add('hidden');}
@@ -137,6 +139,7 @@
         modal.classList.remove('hidden');
         modal.setAttribute('aria-hidden','false');
         document.body.classList.add('ah-dialog-open');
+        const card=modal.querySelector('.ah-modal-card');if(card)card.scrollTop=0;
         document.getElementById('ticketName').focus({preventScroll:true});
       } else {
         modal.classList.add('hidden');

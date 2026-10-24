@@ -641,13 +641,13 @@ function st_ai(array $a): array {
     $device=st_text($a,'device',2,40);$issue=st_text($a,'issue',3,1200);
     $fallback=st_guide($device,$issue);if($fallback['source']==='emergency')return $fallback;
     $notice=st_fault_advisory($issue);if($notice)return $notice;
-    $manual=st_fault_response(['device'=>stripos($device,'klima')!==false?'klima':'kombi','query'=>$issue,'model_id'=>is_string($a['model_id']??null)?$a['model_id']:'','code'=>is_string($a['code']??null)?substr($a['code'],0,64):'','scope_confirmed'=>($a['scope_confirmed']??false)===true]);
+    $manual=st_fault_response(['device'=>stripos($device,'klima')!==false?'klima':'kombi','query'=>$issue,'model_id'=>is_string($a['model_id']??null)?$a['model_id']:'','code'=>is_string($a['code']??null)?substr($a['code'],0,64):'','model_unknown'=>($a['model_unknown']??false)===true,'scope_confirmed'=>($a['scope_confirmed']??false)===true]);
     if($manual)return $manual;
     // Model kilavuzu ile dogrulanmamis bir koda yapay zeka anlami atamaz.
     if(preg_match('/(?<![a-z0-9])((?:CH|EA|EC|E|F|A|C|H|J|L|P|U)[ .-]?[0-9]{1,3}|EA|EC)(?![a-z0-9])/i',$issue,$code)
         || preg_match('/\b(?:hata|ariza|kod|kodu)\s+([0-9]{2,3})\b/',st_normalize($issue),$code)) {
         $shown=strtoupper(preg_replace('/[ .-]/','',$code[1]));
-        return ['ok'=>true,'source'=>'guide','text'=>$shown.' kodunu not ettik. Kodun anlamı tam model ve üretici kaydıyla doğrulanmalıdır. Önce tam kod aranır; E1/E01 veya F4/F04 gibi baştaki sıfır varyantları yalnız seçili modelde tek ve çelişkisiz bir kayda bağlanıyorsa eşleştirilir. Farklı modellerin kod açıklamaları birbirine aktarılmaz. Model adını, kodun ekrandaki tam yazımını ve hangi kullanımda oluştuğunu paylaşın. Kapağı açmayın, gaz veya elektrik aksamına müdahale etmeyin ve tekrarlayan uyarıda reseti sürekli denemeyin. Sağlam Teknik: 0534 622 5515.','guide_path'=>stripos($device,'klima')!==false?'/klima-hata-kodu.html':'/kombi-hata-kodu.html'];
+        return ['ok'=>true,'source'=>'guide','text'=>$shown.' kodunu not ettik. Bu kodun anlamını belirlemek için cihaz etiketindeki tam model ve üretici belgesi gerekli. Modeli bilmiyorsanız etiketin fotoğrafını WhatsApp ile paylaşabilirsiniz. Kapağı açmayın ve reseti sürekli tekrarlamayın.','requires_model'=>empty($a['model_unknown']),'guide_path'=>stripos($device,'klima')!==false?'/klima-hata-kodu.html':'/kombi-hata-kodu.html'];
     }
     
     // Up to four owner-configured slots, used only for transient availability failover.

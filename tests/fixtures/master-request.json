@@ -75,58 +75,58 @@
     "kombi": {
       "headers": [
         "Kombi Markası",
-        "{$ilce} Bölgesinde Sık Bakılan Modeller",
-        "Sık Arıza / Hata Kodları",
-        "Arıza Belirtisi ve İlk Kontrol"
+        "{$ilce} için model / belge örneği",
+        "Seçilen belgeye ait kod örnekleri",
+        "Belge kapsamı ve ilk bilgi"
       ],
       "rows": [
         [
           "Baymak",
-          "Duotec Compact, Lambert LPY, Lunatec, Luna Avant, Dolcevita, Eco 4",
-          "E01 (E1), E03 (E3), E05, E06, E10, E25, E35",
-          "E01/E1 ateşleme ve gaz yokluğu; E10 düşük su basıncı (1.5 bar olmalı); E03 hava akış/fan; E06 sıcak su sensörü."
+          "Baymak Duotec 33 / 42 / 45 — 300032122 Rev.04",
+          "E01 / E02",
+          "E01: Ateşleme tamamlanamıyor; E02: Beklenmeyen alev sinyali. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "DemirDöküm",
-          "Nitromix, Atromix, Atron, Aden, Nepto, Kalisto, Isofast",
-          "F4 (F04), F5 (F05), F10 (F1), F22, F28",
-          "F4/F04 ve F28 ateşleme/gaz kesintisi; F5 prosestat/hava akışı; F10 ve F22 tesisat su basıncı düşüklüğü."
+          "Demirdöküm Nitromix P 24 / P 28 / P 35 NG (HEP)",
+          "F.00 / F.01",
+          "F.00: Gidiş algılayıcısı devresi açık; F.01: Dönüş algılayıcısı devresi açık. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "E.C.A.",
-          "Proteus Premix, Citius Premix, Confeo Plus, Calora, Eurostar",
-          "E01 (E1), E02, F37, F47, T1, T3, L4",
-          "E01/E1 alev oluşmama uyarısı; F37 düşük su basıncı; T1/T3 aşırı ısınma ve NTC sensör kontrolü."
+          "ECA Confeo Premix HM 14/20/24/28/30/35 — Türkiye kılavuzu",
+          "E01 / E02",
+          "E01: Ateşleme başarısızlığı; E02: Yanlış alev sinyali. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "Vaillant",
-          "ecoTEC Pro, ecoTEC Plus, ecoTEC Intro, turboTEC Pro/Plus",
-          "F.28 (F28), F.29, F.22 (F22), F.75, F.62",
-          "F28/F29 ateşleme ve gaz valfi; F22 susuz çalışma/düşük basınç; F75 pompa ve basınç sensörü algılama."
+          "Vaillant ecoTEC pro VUW TR 236/5-3 / 286/5-3",
+          "F.00 / F.01",
+          "F.00: Gidiş algılayıcısı devresi açık; F.01: Dönüş algılayıcısı devresi açık. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "Buderus",
-          "Logamax Plus GB062, GB122i, GB072, GB012, GB172i, U072, U052",
-          "6A (227), 6C, 4C, 2E, H07, 3L, 3A",
-          "6A/227 ve 6C alev algılamama/iyonizasyon; 2E ve H07 düşük su basıncı; 4C aşırı ısınma/dolaşım."
+          "Buderus Logamax plus GB122i / Logamax plus GB022i",
+          "227 / 356",
+          "227: Yanma alevi algılanamıyor; 356: Cihaz besleme voltajı yetersiz. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "Bosch",
-          "Condens 2200iW, 2300iW, 2500W, 7000iW, Classic, Comfort, Exclusive",
-          "EA, E9, CE (H07), C6, ER, F0",
-          "EA alev/ateşleme hatası; CE/H07 tesisat su basıncı uyarısı; C6 fan/prosestat; E9 limit termostat."
+          "Bosch Condens 2300i W",
+          "227 / 356",
+          "227: Ateşleme alevi doğrulanamıyor; 356: Cihaz besleme voltajı yetersiz. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "Viessmann",
-          "Vitodens 050-W, Vitodens 100-W, Vitodens 200-W, Vitopend 100-W",
-          "F4 (F04), EE, F2 (F02), F30, F51, E1",
-          "F4/EE alev oluşmama; F2 emniyet termostatı; F30/F51 sensör arızası; E1 yanma/iyonizasyon kontrolü."
+          "Viessmann Vitodens 200/300 ailesi, Vitotronic kontrol (nesil teyidi gerekir)",
+          "10 / 18",
+          "10: Dış sıcaklık sensöründe kısa devre; 18: Dış sıcaklık sensörü hattında kopukluk. Yalnız bu belgenin kapsadığı model için örnektir. Ülke, ürün son eki ve kontrolcü nesli ayrıca eşleşmelidir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "Ariston",
-          "Clas One, Genus One, Cares Premium, Alteas One, Egis Plus",
-          "501 (5P3), 108, 101, 104, 601",
-          "501/5P3 ateşleme kesintisi; 108 düşük su basıncı; 101/104 aşırı ısınma ve sirkülasyon kontrolü."
+          "Ariston CLAS ONE 24/30/38 GB-IE (ülke/ürün kodu teyidi gerekir)",
+          "Tam model ve ürün kodu ile kendi tablosu seçilmeli.",
+          "Model / belge kapsamını inceleyin. Belge pazarı: GB/IE. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağı"
         ]
       ],
       "links": [
@@ -143,40 +143,40 @@
     "klima": {
       "headers": [
         "Klima Markası",
-        "{$ilce} Bölgesinde Sık Bakılan Seriler",
-        "Sık Hata / Uyarı Kodları",
-        "Belirti ve Teknik Kontrol Kapsamı"
+        "{$ilce} için model / belge örneği",
+        "Seçilen belgeye ait kod örnekleri",
+        "Belge kapsamı ve ilk bilgi"
       ],
       "rows": [
         [
           "Daikin",
-          "Shira Eco, Sensira FTX, Emura, Zeta, VRV / Inverter Serileri",
-          "U0, U4, A5, A6, H6, E7, L5",
-          "U0 soğutucu gaz eksikliği; U4 iç-dış ünite iletişim; A6/E7 fan motoru; L5 inverter kompresör kontrolü."
+          "Daikin FTX25/35KMV1B",
+          "Tam model ve ürün kodu ile kendi tablosu seçilmeli.",
+          "Model / belge kapsamını inceleyin. Belge pazarı: EU. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağı"
         ],
         [
           "Mitsubishi",
-          "Mitsubishi Electric (MSZ/Kirigamine/Hare) & Heavy (SRK-ZS)",
-          "E1, E6, P1, P2, P5, P8, U4",
-          "P8 dış ünite/boru sıcaklığı ve soğutmama; P5 drenaj/su taşma; E6 iç-dış ünite haberleşme kontrolü."
+          "Mitsubishi Electric MSZ-FX NL-CA1 (Kanada)Mitsubishi Heavy Industries SRK20–50ZS-W / WB / WT",
+          "Tam model ve ürün kodu ile kendi tablosu seçilmeli.Tam model ve ürün kodu ile kendi tablosu seçilmeli.",
+          "Model / belge kapsamını inceleyin. Belge pazarı: CA. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağıModel / belge kapsamını inceleyin. Belge pazarı: Global/EU. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağı"
         ],
         [
           "Arçelik & Beko",
-          "Ekolojik Inverter, Prosmart, Mirror, Mobil/Portatif Seriler",
-          "CH01, CH02, CH05, CH10, CH38, E1, FL",
-          "CH05 haberleşme hatası; CH38 soğutucu gaz azalması; CH10 iç fan motoru; FL yoğuşma suyu haznesi dolu."
+          "Arçelik 09215 P / 12215 P mobil-portatifBeko 20915 P / 21215 P mobil-portatif",
+          "E1 / E2E1",
+          "E1: Oda sıcaklık sensörü uyarısı; E2: Evaporatör sıcaklık sensörü uyarısı. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağıE1: Oda sıcaklık sensörü uyarısı. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ],
         [
           "LG & Samsung",
-          "LG DualCool (S09ET/Sirius), Samsung WindFree & AR35 Inverter",
-          "CH05, CH21, CH38 / E101, E121, E464, CF",
-          "CH05/E101 iletişim uyarısı; CH38 gaz kaçağı/eksikliği; E121 iç ortam sensörü; CF filtre temizlik uyarısı."
+          "LG S09ETSamsung FJM R410A HSFN/HSFS duvar tipi (Avrupa)",
+          "Tam model ve ürün kodu ile kendi tablosu seçilmeli.Tam model ve ürün kodu ile kendi tablosu seçilmeli.",
+          "Model / belge kapsamını inceleyin. Belge pazarı: Levant. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağıModel / belge kapsamını inceleyin. Belge pazarı: Europe R410A 50Hz. Türkiye cihazıyla eşleştiği varsayılmaz. Üretici kaynağı"
         ],
         [
           "Baymak & Diğerleri",
-          "Baymak Elegant Plus/Air, Airfel, Vestel Flora/Vega, Bosch, Gree, Midea",
-          "E1, E3, E4, E6, F0, F1, H3, P0, EC",
-          "F0/EC gaz eksikliği ve kaçak koruması; E1/E6 iletişim hatası; H3 kompresör aşırı yük koruması."
+          "Baymak Elegant Air 09 / 12 / 18 / 24Diğer markalarda kendi model ve belge seçimi gerekir.",
+          "E1 / E2",
+          "E1: İç ünite oda sıcaklık sensörü uyarısı; E2: İç ünite bakır boru sıcaklık sensörü uyarısı. Yalnız bu belgenin kapsadığı model için örnektir. Tam modelin kodları · Üretici kaynağı"
         ]
       ],
       "links": [
