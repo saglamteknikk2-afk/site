@@ -217,6 +217,9 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     files = archive_files(root, archive_integrity)
     if mode == 'production':
         overlay(files, root / 'server')
+        installation = root / 'docs/PLESK-KURULUM.md'
+        if installation.is_file():
+            files['KURULUM-ONCESI.txt'] = installation.read_bytes()
     overlay(files, root / 'overrides')
     brand = json.loads((root / 'components/brand.json').read_text())
     for key in ('logo', 'favicon'):

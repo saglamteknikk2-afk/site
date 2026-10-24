@@ -22,7 +22,7 @@ try{
     putenv('SAGLAM_PRIVATE_DIR='.$private);
     define('ST_LIBRARY_MODE',true);
     require $public.'/api.php';
-    require $public.'/report-support.php';
+    require_once $public.'/report-support.php';
     $db=st_db();
     $ins=$db->prepare('INSERT INTO daily_stats(day,metric,val) VALUES(?,?,?)');
     foreach([
@@ -32,14 +32,16 @@ try{
         ['2026-11-01','visits',4]
     ] as $row)$ins->execute($row);
     $now=new DateTimeImmutable('2026-11-02 00:03:00',new DateTimeZone('Europe/Istanbul'));
+    // Simulate upgrading on this test date: earlier unique counts are legacy.
+    $db->prepare("UPDATE meta SET v=? WHERE k='analytics_started_at'")->execute([(string)$now->getTimestamp()]);
     $w=st_report_window('weekly',$now);
     $m=st_report_window('monthly',$now);
     $check($w['from']==='2026-10-26'&&$w['to']==='2026-11-01','Geçen hafta pazartesi–pazar');
     $check($m['from']==='2026-10-01'&&$m['to']==='2026-10-31','Önceki ay tam takvim ayı');
     $wt=st_build_period_report($db,$w);
     $mt=st_build_period_report($db,$m);
-    $check(strpos($wt,'Toplam ziyaret: 12')!==false&&strpos($wt,'AI Usta soruları: 2')!==false,'Haftalık ziyaret ve AI toplamları');
-    $check(strpos($mt,'Toplam ziyaret: 15')!==false&&strpos($mt,'Servis talepleri: 1')!==false,'Aylık ziyaret ve servis toplamları');
+    $check(strpos($wt,'Günlük tekil oturum toplamı: 12')!==false&&strpos($wt,'AI Usta kullanımları: 2')!==false&&strpos($wt,'eski toplam ziyaret verisi yok')!==false,'Haftalık günlük tekil oturum ve AI toplamları; eski toplam ziyaret bilinmiyor');
+    $check(strpos($mt,'Günlük tekil oturum toplamı: 15')!==false&&strpos($mt,'Servis talepleri: 1')!==false&&strpos($mt,'eski toplam ziyaret verisi yok')!==false,'Aylık günlük tekil oturum ve servis toplamları; eski toplam ziyaret bilinmiyor');
     $check(st_enqueue_period_report('weekly',$now)&&st_enqueue_period_report('monthly',$now),'İki dönem bir kez kuyruğa yazıldı');
     $check(!st_enqueue_period_report('weekly',$now)&&!st_enqueue_period_report('monthly',$now),'Tekrar bildirim oluşmaz');
     $rows=$db->query("SELECT id,payload FROM outbox WHERE id LIKE 'weekly:%' OR id LIKE 'monthly:%'")->fetchAll(PDO::FETCH_ASSOC);

@@ -26,10 +26,52 @@ async function stApi(action,data,key){
  if(window.stAttachLocation&&(action==='review'||action==='ticket'))stAttachLocation(data);
  for(let attempt=0;attempt<2;attempt++){
   const token=await stToken();
-  try{return await stFetchJson(stSiteURL('api.php?action='+encodeURIComponent(action)),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':token,...(key?{'Idempotency-Key':key}:{})},body:JSON.stringify(data)},action==='ai'?18000:20000);}
+  try{return await stFetchJson(stSiteURL('api.php?action='+encodeURIComponent(action)),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':token,...(key?{'Idempotency-Key':key}:{})},body:JSON.stringify(data)},action==='ai'?18000:['visit','activity'].includes(action)?6000:20000);}
   catch(error){if(attempt===0&&error.status===403&&error.message==='Sayfayı yenileyip tekrar deneyin.'){stBootstrap=null;stTokenTime=0;continue;}throw error;}
  }
 }
+// Optional measurement never delays the displayed answer or a service request.
+// A retry retains the same event key, so the backend can keep one durable row.
+function stRecordingAllowed(){return window.ST_PREVIEW!==true&&!window.STEnvironment?.preview&&location.protocol!=='file:'}
+async function stBackgroundEvent(action,payload,key){
+ if(!stRecordingAllowed())return null;
+ try{return await stApi(action,payload,key)}catch(error){
+  if(error.code==='PREVIEW_DISABLED'||error.status&&error.status<500)return null;
+  await new Promise(resolve=>setTimeout(resolve,1000));
+  try{return await stApi(action,payload,key)}catch(_){return null}
+ }
+}
+const stCompletedAnswers=new Map();
+function stRecordAIResult(value){
+ if(!stRecordingAllowed()||value?.activity_recorded===true)return Promise.resolve(null);
+ const source=String(value?.source||'guide');
+ if(!['manual','guide','emergency','advisory','ai'].includes(source))return Promise.resolve(null);
+ const payload={type:'ai_result',device:String(value?.device||'Kombi'),brand:String(value?.brand||''),model:String(value?.model||''),model_id:String(value?.model_id||''),issue:String(value?.issue||''),answer:String(value?.answer||'').trim(),source,page:location.pathname,code:String(value?.code||''),server_activity_id:String(value?.activity_id||''),server_activity_token:String(value?.activity_token||'')};
+ if(!payload.answer||!payload.issue)return Promise.resolve(null);
+ const signature=JSON.stringify(payload);
+ if(stCompletedAnswers.has(signature))return stCompletedAnswers.get(signature);
+ const event_id=stId();payload.event_id=event_id;
+ const pending=stBackgroundEvent('activity',payload,event_id);
+ stCompletedAnswers.set(signature,pending);
+ return pending;
+}
+let stPageVisit=null;
+function stVisitSource(){
+ try{const referrer=document.referrer;if(!referrer)return 'direct';const host=new URL(referrer).hostname.toLowerCase();if(host===location.hostname)return 'direct';if(/(^|\.)google\./.test(host))return 'google';if(/(^|\.)yandex\./.test(host))return 'yandex';return 'other'}catch(_){return 'direct'}
+}
+function stVisitDay(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+function stRecordVisit(fresh=false){
+ if(!stRecordingAllowed())return Promise.resolve(null);
+ const day=stVisitDay();
+ if(fresh||!stPageVisit||stPageVisit.day!==day){
+  const search=new URLSearchParams(location.search),query=(search.get('arama')||search.get('query')||search.get('q')||'').trim().slice(0,200);
+  const event_id=stId();stPageVisit={day,event_id,payload:{event_id,page:location.pathname,source:stVisitSource(),...(query?{query}:{})},pending:null};
+ }
+ if(!stPageVisit.pending)stPageVisit.pending=stBackgroundEvent('visit',stPageVisit.payload,stPageVisit.event_id);
+ return stPageVisit.pending;
+}
+window.addEventListener('pageshow',event=>{if(event.persisted)stRecordVisit(true)});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')stRecordVisit()});
 function stEscape(value){return String(value??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]))}
 function stError(id,message){const e=document.getElementById(id);if(e){e.textContent=message;e.classList.toggle('hidden',!message)}}
 function stAiContact(phone){const box=document.getElementById('aiResultBox');const link=box?.querySelector('a[href^="tel:"]');const button=box?.querySelector('button');if(link){link.href='tel:'+(phone||'05346225515');link.innerHTML='<i class="fa-solid fa-phone"></i> '+(phone?phone+' Acil Hattını Ara':'Ustayı Hemen Ara')}if(button)button.classList.toggle('hidden',!!phone)}
@@ -47,7 +89,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const updateCurrent=()=>nav.querySelectorAll('a').forEach(a=>{const url=new URL(a.href,location.href);if(url.pathname===location.pathname&&url.hash===location.hash)a.setAttribute('aria-current',url.hash?'location':'page');else a.removeAttribute('aria-current')});
   updateCurrent();window.addEventListener('hashchange',updateCurrent);
  }
- if(document.getElementById('regionSearch'))filterRegions();if(!sessionStorage.getItem('st_visit_try')){stApi('visit',{page:location.pathname,source:(()=>{try{const r=document.referrer;if(!r)return 'direct';const h=new URL(r).hostname.toLowerCase();if(h===location.hostname)return 'direct';if(/(^|\.)google\./.test(h))return 'google';if(/(^|\.)yandex\./.test(h))return 'yandex';return 'other'}catch(e){return 'other'}})()}).then(a=>{if(a.enabled)sessionStorage.setItem('st_visit_try','1')}).catch(()=>{})}
+ if(document.getElementById('regionSearch'))filterRegions();stRecordVisit();
 });
 // Eski logo hedefleri de ortak başlığın manifestten gelen görselini kullanır.
 window.addEventListener('DOMContentLoaded',()=>{

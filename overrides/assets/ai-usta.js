@@ -118,23 +118,10 @@
     if (state.step===3) return modelFields()+codeFields()+`<button type="button" class="usta-back" data-unknown-code>Modeli / kodu bilmiyorum, devam et →</button>`;
     return `<dl class="usta-summary"><dt>Cihaz / belirti</dt><dd>${esc(state.device+' · '+symptomText())}</dd>${state.brand||state.model?`<dt>Marka / model</dt><dd>${esc([state.brand,state.model].filter(Boolean).join(' · '))}</dd>`:''}${state.code?`<dt>Ekrandaki kod</dt><dd>${esc(state.code)}</dd>`:''}${state.detail?`<dt>Anlatımınız</dt><dd>${esc(state.detail)}</dd>`:''}</dl><details id="ustaLocationContext" class="usta-free"><summary>Servis için bölge ekleyin <span>(isteğe bağlı)</span></summary><div class="usta-fields"><label>İlçe<select id="ustaDistrict" class="usta-field"><option value="">Daha sonra paylaşırım</option>${(catalog().districts||[]).map(d=>`<option${state.district===d?' selected':''}>${esc(d)}</option>`).join('')}</select></label><label>Mahalle / semt<input id="ustaNeighborhood" class="usta-field" maxlength="80" value="${esc(state.neighborhood)}" placeholder="Örn. Atakent"></label></div></details>`;
   }
-  const reportedGuides=new Set();
   function showLocal() {
     compose();
     if (safetyCheck()) return;
-    if (typeof window.STDiagnosticGuide==='function' && typeof window.renderDiagnostic==='function') {
-      window.renderDiagnostic(window.STDiagnosticGuide(state.device,el('issueInput').value,{...state}));
-      const issue=el('issueInput').value.trim();
-      const answer=el('aiResponseText')?.innerText?.trim()||'';
-      const fingerprint=state.device+'|'+issue;
-      // Do not send on mere typing; only after the user has completed the guide.
-      if(issue.length>=3&&answer.length>=3&&!reportedGuides.has(fingerprint)
-          &&!window.ST_PREVIEW&&!window.STEnvironment?.preview&&typeof window.stApi==='function'){
-        reportedGuides.add(fingerprint);
-        window.stApi('ai-local',{device:state.device,issue,answer:answer.slice(0,2400)})
-          .catch(()=>reportedGuides.delete(fingerprint));
-      }
-    }
+    if (typeof window.STDiagnosticGuide==='function' && typeof window.renderDiagnostic==='function') window.renderDiagnostic(window.STDiagnosticGuide(state.device,el('issueInput').value,{...state}));
   }
   function result(from) { state.last_detail_step=from; go(4); }
   function afterSymptom() {
@@ -198,6 +185,7 @@
     el('ustaSafetyCall').href='tel:'+phone;el('ustaSafetyCall').textContent=phone+' Acil hattını ara';el('askBtn').disabled=true;root.dataset.emergency=type;
     const contacts=root.querySelector('.usta-direct-contacts');if(contacts)contacts.hidden=true;
     el('ustaSafety').focus();
+    if(typeof window.stRecordAIResult==='function')window.stRecordAIResult({device:state.device||'Kombi',brand:state.brand,model:state.model,model_id:state.model_id,code:state.code,issue:[el('issueInput').value,gas?'Gaz kokusu':'Duman veya yangın'].filter(Boolean).join('. '),answer:[el('ustaSafetyTitle').textContent,el('ustaSafetyText').textContent,el('ustaSafetyCall').textContent].join('\n'),source:'emergency'});
   }
   function safetyCheck() {
     const text=[state.detail,state.answer].join(' ').toLocaleLowerCase('tr-TR');

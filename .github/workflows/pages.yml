@@ -54,7 +54,7 @@ jobs:
           python-version: '3.12'
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.2'
           extensions: curl, pdo_sqlite, mbstring
           coverage: none
       - name: Derleme ayrımı ve arşiv bütünlüğünü test et
@@ -77,6 +77,11 @@ jobs:
           python scripts/internal_links.py build/production --report build/crawl-check.json --check
           php tests/business-runtime.php
           php tests/notification-reports.php build/production
+          php tests/notification-dispatch.php
+          php tests/config-notification-failure.php
+          php tests/storage.php
+          php tests/analytics.php
+          php tests/installation-diagnostics.php
           php tests/fault-catalog.php
           php tests/brand_registry.php build/production
           php tests/backend-http.php build/production
@@ -108,6 +113,7 @@ jobs:
           node tests/environment.cjs
           node tests/portable_deploy.cjs
           node tests/fault_lookup.cjs
+          node tests/frontend_events.cjs
           node tests/district_matrix.cjs
           python tests/run_model_checks.py
           node tests/editorial_links.cjs
@@ -131,9 +137,11 @@ jobs:
             build/qa-interactions-extras/interactions-final.json
             build/editorial-links-browser.json
             build/backend-qa/backend-browser.json
+            build/backend-qa/backend-http.json
             build/qa-portable/*.json
             build/qa-master-matrix/*.json
             build/fault-lookup-report.json
+            build/frontend-events-report.json
             _site/build-info.json
       - name: GitHub Pages dosyalarını hazırla
         if: github.event_name != 'pull_request'

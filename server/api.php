@@ -26,6 +26,10 @@ if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
 }
 
 require_once __DIR__.'/notification-support.php';
+require_once __DIR__.'/notification-dispatch.php';
+require_once __DIR__.'/storage.php';
+require_once __DIR__.'/analytics.php';
+require_once __DIR__.'/activity.php';
 
 function st_private(): string {
     return st_business_private_directory();
@@ -58,6 +62,10 @@ function st_config(bool $reload=false): array {
         'gemini_model'=>'gemini-3-flash-preview',
         'visit_notifications'=>true,
         'daily_report'=>true,
+        'weekly_report'=>true,
+        'monthly_report'=>true,
+        'database_path'=>'',
+        'configuration_errors'=>[],
         'telegram_polling'=>false,
         'ip_location_lookup'=>true,
         'trusted_proxy_cidrs'=>[],
@@ -78,7 +86,7 @@ function st_config(bool $reload=false): array {
     $custom=[]; $gemini_slots=[];
     if(is_file($file)) {
         if(filesize($file)>65536)throw new RuntimeException('TXT ayar dosyası beklenenden büyük.');
-        $fields=['SITE_URL'=>'site_url','TELEGRAM_BOT_TOKEN'=>'telegram_token','TELEGRAM_CHAT_ID'=>'telegram_chat_id','TELEGRAM_ADMIN_IDS'=>'telegram_admin_ids','TELEGRAM_WEBHOOK_SECRET'=>'telegram_webhook_secret','GEMINI_API_KEY'=>'gemini_key','GEMINI_MODEL'=>'gemini_model','DAILY_REPORT'=>'daily_report','VISIT_NOTIFICATIONS'=>'visit_notifications','TELEGRAM_POLLING'=>'telegram_polling','IP_LOCATION_LOOKUP'=>'ip_location_lookup','TRUSTED_PROXY_CIDRS'=>'trusted_proxy_cidrs','GEOIP_CSV'=>'geoip_csv','PENDING_RETENTION_DAYS'=>'pending_retention_days','TICKET_RETENTION_DAYS'=>'ticket_retention_days','ADMIN_ACCESS_KEY'=>'admin_access_key'];
+        $fields=['SITE_URL'=>'site_url','TELEGRAM_BOT_TOKEN'=>'telegram_token','TELEGRAM_CHAT_ID'=>'telegram_chat_id','TELEGRAM_ADMIN_IDS'=>'telegram_admin_ids','TELEGRAM_WEBHOOK_SECRET'=>'telegram_webhook_secret','GEMINI_API_KEY'=>'gemini_key','GEMINI_MODEL'=>'gemini_model','DAILY_REPORT'=>'daily_report','WEEKLY_REPORT'=>'weekly_report','MONTHLY_REPORT'=>'monthly_report','DATABASE_PATH'=>'database_path','VISIT_NOTIFICATIONS'=>'visit_notifications','TELEGRAM_POLLING'=>'telegram_polling','IP_LOCATION_LOOKUP'=>'ip_location_lookup','TRUSTED_PROXY_CIDRS'=>'trusted_proxy_cidrs','GEOIP_CSV'=>'geoip_csv','PENDING_RETENTION_DAYS'=>'pending_retention_days','TICKET_RETENTION_DAYS'=>'ticket_retention_days','ADMIN_ACCESS_KEY'=>'admin_access_key'];
         foreach($fields as $field)$fields[strtoupper($field)]=$field;
         $raw=file_get_contents($file);if($raw===false)throw new RuntimeException('TXT ayar dosyası okunamadı.');
         $raw=preg_replace('/^\xEF\xBB\xBF/','',$raw);
@@ -95,7 +103,7 @@ function st_config(bool $reload=false): array {
             if(count($parts)!==2 || !$field)throw new RuntimeException('TXT ayar dosyasının satır biçimini kontrol edin.');
             $v=trim($parts[1]);if(strlen($v)>=2 && in_array($v[0],['"',"'"],true) && $v[strlen($v)-1]===$v[0])$v=substr($v,1,-1);
             if(preg_match('/[\x00-\x1f]/',$v))throw new RuntimeException('TXT ayar değeri tek satır olmalıdır.');
-            if(in_array($field,['visit_notifications','daily_report','telegram_polling','ip_location_lookup'],true)) {
+            if(in_array($field,['visit_notifications','daily_report','weekly_report','monthly_report','telegram_polling','ip_location_lookup'],true)) {
                 $word=strtolower($v);$yes=['1','true','yes','evet','acik','açık'];$no=['0','false','no','hayir','hayır','kapali','kapalı',''];
                 if(!in_array($word,array_merge($yes,$no),true))throw new RuntimeException('TXT açma/kapama değerleri 1 veya 0 olmalıdır.');
                 $custom[$field]=in_array($word,$yes,true);
@@ -121,8 +129,8 @@ function st_config(bool $reload=false): array {
     // IP_LOCATION_LOOKUP secenegini TXT'de ayarlandigi gibi kullan.
     $c['ip_location_lookup']=(bool)$c['ip_location_lookup'];
 
-    if($c['telegram_token']!=='' && !preg_match('/^[0-9]{6,15}:[A-Za-z0-9_-]{25,180}$/D',$c['telegram_token']))throw new RuntimeException('TXT Telegram anahtarı biçimi geçersiz.');
-    if($c['telegram_chat_id']!=='' && !preg_match('/^-?[0-9]{1,20}$/D',$c['telegram_chat_id']))throw new RuntimeException('TXT chat ID sayısal olmalıdır.');
+    if($c['telegram_token']!=='' && !preg_match('/^[0-9]{6,15}:[A-Za-z0-9_-]{25,180}$/D',$c['telegram_token']))$c['configuration_errors'][]='TXT Telegram anahtarı biçimi geçersiz; müşteri kayıtları korunur.';
+    if($c['telegram_chat_id']!=='' && !preg_match('/^-?[0-9]{1,20}$/D',$c['telegram_chat_id']))$c['configuration_errors'][]='TXT Telegram chat ID sayısal olmalıdır; müşteri kayıtları korunur.';
     // Yanlis Telegram yonetici ID'si, yorum/servis kaydi/AI isteklerini durdurmasin.
     // Gecersiz kimlige asla onay yetkisi verme; sadece gecerli sayisal ID'leri tut.
     $valid_admin_ids=[];
@@ -138,7 +146,7 @@ function st_config(bool $reload=false): array {
     return $c;
 }
 function st_config_save_unlocked(array $c): void {
-    $fields=['SITE_URL'=>'site_url','TELEGRAM_BOT_TOKEN'=>'telegram_token','TELEGRAM_CHAT_ID'=>'telegram_chat_id','TELEGRAM_ADMIN_IDS'=>'telegram_admin_ids','TELEGRAM_WEBHOOK_SECRET'=>'telegram_webhook_secret','GEMINI_API_KEY'=>'gemini_key','GEMINI_MODEL'=>'gemini_model','DAILY_REPORT'=>'daily_report','VISIT_NOTIFICATIONS'=>'visit_notifications','TELEGRAM_POLLING'=>'telegram_polling','IP_LOCATION_LOOKUP'=>'ip_location_lookup','TRUSTED_PROXY_CIDRS'=>'trusted_proxy_cidrs','GEOIP_CSV'=>'geoip_csv','PENDING_RETENTION_DAYS'=>'pending_retention_days','TICKET_RETENTION_DAYS'=>'ticket_retention_days','ADMIN_ACCESS_KEY'=>'admin_access_key'];
+    $fields=['SITE_URL'=>'site_url','TELEGRAM_BOT_TOKEN'=>'telegram_token','TELEGRAM_CHAT_ID'=>'telegram_chat_id','TELEGRAM_ADMIN_IDS'=>'telegram_admin_ids','TELEGRAM_WEBHOOK_SECRET'=>'telegram_webhook_secret','GEMINI_API_KEY'=>'gemini_key','GEMINI_MODEL'=>'gemini_model','DAILY_REPORT'=>'daily_report','WEEKLY_REPORT'=>'weekly_report','MONTHLY_REPORT'=>'monthly_report','DATABASE_PATH'=>'database_path','VISIT_NOTIFICATIONS'=>'visit_notifications','TELEGRAM_POLLING'=>'telegram_polling','IP_LOCATION_LOOKUP'=>'ip_location_lookup','TRUSTED_PROXY_CIDRS'=>'trusted_proxy_cidrs','GEOIP_CSV'=>'geoip_csv','PENDING_RETENTION_DAYS'=>'pending_retention_days','TICKET_RETENTION_DAYS'=>'ticket_retention_days','ADMIN_ACCESS_KEY'=>'admin_access_key'];
     if(!preg_match('~^https?://[^\s/?#]+$~D',$c['site_url']))throw new DomainException('Site adresini kontrol edin.');
     if($c['telegram_token'] && !preg_match('/^[0-9]{6,15}:[A-Za-z0-9_-]{25,180}$/D',$c['telegram_token']))throw new DomainException('Telegram bot anahtarı biçimini kontrol edin.');
     if($c['telegram_chat_id'] && !preg_match('/^-?[0-9]{1,20}$/D',$c['telegram_chat_id']))throw new DomainException('Chat ID sayısal olmalıdır.');
@@ -333,7 +341,7 @@ function st_resolve_query(string $query,string $preferred,array $catalog,?array 
 function st_db(): PDO {
     static $db;
     if ($db) return $db;
-    $db = new PDO('sqlite:'.st_private().'/site.sqlite', null, null, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);
+    $db = new PDO('sqlite:'.st_storage_database_path(st_private(),st_business_webroot(),st_config()['database_path']??null), null, null, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);
     $db->exec('PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000; PRAGMA foreign_keys=ON;');
     $db->exec("CREATE TABLE IF NOT EXISTS meta(k TEXT PRIMARY KEY,v TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS reviews(id TEXT PRIMARY KEY,author TEXT NOT NULL,district TEXT NOT NULL,service TEXT NOT NULL,cat TEXT NOT NULL,rating INTEGER NOT NULL,comment TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'pending',nonce TEXT NOT NULL,created INTEGER NOT NULL,decided INTEGER,consent INTEGER NOT NULL,notification_sent INTEGER NOT NULL DEFAULT 0,telegram_message_id INTEGER);
@@ -351,19 +359,13 @@ function st_db(): PDO {
             $columns=array_column($db->query('PRAGMA table_info('.$table.')')->fetchAll(),'name');
             foreach(['notification_sent'=>'INTEGER NOT NULL DEFAULT 0','telegram_message_id'=>'INTEGER'] as $name=>$declaration)if(!in_array($name,$columns,true))$db->exec('ALTER TABLE '.$table.' ADD COLUMN '.$name.' '.$declaration);
         }
-        st_backfill_receipts($db);$db->exec('COMMIT');
+        st_backfill_receipts($db);st_analytics_schema($db);st_activity_schema($db);$db->exec('COMMIT');
     }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
     $q=$db->prepare('INSERT OR IGNORE INTO meta(k,v) VALUES(?,?)'); $q->execute(['secret',bin2hex(random_bytes(32))]);
-    $q->execute(['last_daily_report', date('Y-m-d')]);
     return $db;
 }
 function st_stat_inc(string $metric, int $amount=1): void {
-    try {
-        $db = st_db();
-        $day = date('Y-m-d');
-        $q = $db->prepare('INSERT INTO daily_stats(day,metric,val) VALUES(?,?,?) ON CONFLICT(day,metric) DO UPDATE SET val=val+excluded.val');
-        $q->execute([$day, $metric, $amount]);
-    } catch (Throwable $e) {}
+    st_analytics_increment(st_db(),$metric,$amount);
 }
 function st_session_track(string $session, string $type, string $query=''): void {
     try {
@@ -390,66 +392,23 @@ function st_session_info(string $session): array {
     return ['searched'=>false, 'last_query'=>'', 'ticket_sent'=>false];
 }
 function st_build_daily_report(string $day): string {
-    $db = st_db();
-    $q = $db->prepare('SELECT metric,val FROM daily_stats WHERE day=?');
-    $q->execute([$day]);
-    $stats = [];
-    foreach ($q->fetchAll() as $row) {
-        $stats[$row['metric']] = (int)$row['val'];
-    }
-    $visits = $stats['visits'] ?? 0;
-    $s_found = $stats['search_found'] ?? 0;
-    $s_not_found = $stats['search_not_found'] ?? 0;
-    $s_total = $s_found + $s_not_found;
-    $ai_count = $stats['ai_questions'] ?? 0;
-    $tickets = $stats['tickets'] ?? 0;
-    $reviews = $stats['reviews'] ?? 0;
-
-    $formatted_date = date('d.m.Y', strtotime($day));
-    $search_status = $s_total > 0
-        ? "✅ Yapıldı (" . $s_total . " arama | 🎯 " . $s_found . " bulundu, ⚠️ " . $s_not_found . " bulunamadı)"
-        : "❌ Siteden arama yapılmadı (0)";
-    $ai_status = $ai_count > 0 ? "✅ " . $ai_count . " soru yanıtlandı" : "➖ Soru sorulmadı (0)";
-    $ticket_status = $tickets > 0 ? "✅ " . $tickets . " servis talebi alındı" : "❌ Servis talebi oluşturulmadı (0)";
-    $review_status = $reviews > 0 ? "✅ " . $reviews . " yeni yorum geldi" : "➖ Yeni yorum gelmedi (0)";
-
-    return "📊 GÜNLÜK GENEL SİTE RAPORU (00:00)\n"
-        . "📅 Rapor Tarihi: " . $formatted_date . "\n"
-        . "🕒 Rapor Saati: " . date('H:i') . " (İstanbul)\n\n"
-        . "👥 Toplam Site Ziyareti: " . $visits . "\n"
-        . "🔍 Siteden Arama: " . $search_status . "\n"
-        . "🤖 AI Usta Kullanımı: " . $ai_status . "\n"
-        . "🛠 Servis Talepleri: " . $ticket_status . "\n"
-        . "⭐ Müşteri Yorumları: " . $review_status;
+    return st_analytics_report(st_db(),'daily',$day,$day)['text'];
 }
 function st_check_daily_report(bool $force_today=false): bool {
-    try {
-        if(!$force_today && !st_config()['daily_report'])return false;
-        $db = st_db();
-        $today = date('Y-m-d');
-        if ($force_today) {
-            $text = st_build_daily_report($today);
-            $id = 'daily-test:' . $today . ':' . bin2hex(random_bytes(4));
-            st_enqueue($db, $id, ['text' => $text]);
-            return true;
-        }
-        $q = $db->prepare("SELECT v FROM meta WHERE k='last_daily_report'");
-        $q->execute();
-        $last = (string)$q->fetchColumn();
-        if ($last === '') {
-            $db->prepare("INSERT OR IGNORE INTO meta(k,v) VALUES('last_daily_report',?)")->execute([$today]);
-            return false;
-        }
-        if ($last < $today) {
-            $report_day = date('Y-m-d', strtotime('-1 day'));
-            $db->prepare("UPDATE meta SET v=? WHERE k='last_daily_report'")->execute([$today]);
-            $text = st_build_daily_report($report_day);
-            $id = 'daily:' . $report_day;
-            st_enqueue($db, $id, ['text' => $text]);
-            return true;
-        }
-    } catch (Throwable $e) {}
-    return false;
+    if($force_today){
+        $today=date('Y-m-d');$id='daily-test:'.$today.':'.bin2hex(random_bytes(4));
+        st_enqueue(st_db(),$id,['text'=>st_build_daily_report($today)]);
+        st_delivery_attempt($id);return true;
+    }
+    return count(st_analytics_queue_due(st_db(),st_config()))>0;
+}
+function st_request_maintenance(): void {
+    static $registered=false;if($registered)return;$registered=true;
+    register_shutdown_function(static function():void {
+        if(function_exists('fastcgi_finish_request'))fastcgi_finish_request();
+        try{st_analytics_queue_due(st_db(),st_config());st_deliver_outbox(st_db(),st_config(),6,null,null,2000);}
+        catch(Throwable $error){@error_log('Sağlam Teknik: zamanlanmış kuyruk yedeği tamamlanamadı.');}
+    });
 }
 
 function st_secret(): string { return (string) st_db()->query("SELECT v FROM meta WHERE k='secret'")->fetchColumn(); }
@@ -547,14 +506,17 @@ function st_telegram_error(int $code,string $description='',array $parameters=[]
     elseif($code===429)$message='Telegram gönderim sınırına ulaşıldı; belirtilen sürenin sonunda yeniden denenecek.';
     return new STTelegramError($message,min(86400,max(0,(int)($parameters['retry_after']??0))));
 }
-function st_telegram(string $method,array $payload): array {
-    $token=st_config()['telegram_token']; if(!$token)throw new STTelegramError('Telegram bot anahtarı ayarlanmadı.');
+function st_telegram(string $method,array $payload,int $timeoutMs=8000): array {
+    $cfg=st_config();$token=$cfg['telegram_token']; if(!$token)throw new STTelegramError('Telegram bot anahtarı ayarlanmadı.');
+    if(!preg_match('/^[0-9]{6,15}:[A-Za-z0-9_-]{25,180}$/D',$token))throw new STTelegramError('Telegram bot anahtarı biçimi geçersiz; bildirim kuyrukta.');
+    if(isset($payload['chat_id'])&&!preg_match('/^-?[0-9]{1,20}$/D',(string)$payload['chat_id']))throw new STTelegramError('Telegram sohbet kimliği biçimi geçersiz; bildirim kuyrukta.');
     if(!function_exists('curl_init'))throw new STTelegramError('PHP cURL uzantısı etkin değil; Telegram gönderimi yapılamıyor.');
     $ch=curl_init('https://api.telegram.org/bot'.$token.'/'.$method);
     $photo=$method==='sendPhoto';
-    curl_setopt_array($ch,[CURLOPT_POST=>true,CURLOPT_HTTPHEADER=>$photo?[]:['Content-Type: application/json'],CURLOPT_POSTFIELDS=>$photo?st_photo_fields($payload):json_encode($payload),CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>3,CURLOPT_TIMEOUT=>8]);
-    $raw=curl_exec($ch);$status=curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);
+    curl_setopt_array($ch,[CURLOPT_POST=>true,CURLOPT_HTTPHEADER=>$photo?[]:['Content-Type: application/json'],CURLOPT_POSTFIELDS=>$photo?st_photo_fields($payload):json_encode($payload),CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT_MS=>min(1500,max(100,$timeoutMs)),CURLOPT_TIMEOUT_MS=>max(100,min(8000,$timeoutMs))]);
+    $raw=curl_exec($ch);$status=curl_getinfo($ch,CURLINFO_HTTP_CODE);$curl_error=curl_errno($ch);curl_close($ch);
     $a=is_string($raw)?json_decode($raw,true):null;
+    if($status===0)throw new STTelegramError('Telegram bağlantısı kurulamadı (cURL kodu '.(int)$curl_error.'); bildirim kuyrukta.');
     if($status!==200 || !is_array($a) || empty($a['ok']))throw st_telegram_error((int)($a['error_code']??$status),(string)($a['description']??''),is_array($a['parameters']??null)?$a['parameters']:[]);return $a;
 }
 function st_backfill_receipts(PDO $db): void {
@@ -582,6 +544,9 @@ function st_cleanup(): void {
         $q=$db->prepare('DELETE FROM idempotency WHERE created<?');$q->execute([time()-86400*30]);
         $q=$db->prepare('DELETE FROM outbox WHERE (sent=1 AND created<?) OR (sent=0 AND created<?)');$q->execute([time()-86400*7,time()-86400*90]);
         $db->prepare('DELETE FROM session_state WHERE updated<?')->execute([time()-86400*2]);
+        st_analytics_cleanup($db);
+        $db->prepare('DELETE FROM ai_events WHERE created<?')->execute([time()-max(1,(int)$cfg['pending_retention_days'])*86400]);
+        $db->prepare('DELETE FROM activity_replays WHERE created<?')->execute([time()-max(1,(int)$cfg['pending_retention_days'])*86400]);
         // Gunluk ziyaret sayim anahtarlari en fazla 32 gun saklanir.
         $db->prepare("DELETE FROM meta WHERE k LIKE 'visitor:%' AND substr(k,9,10) < ?")
             ->execute([date('Y-m-d',time()-86400*32)]);
@@ -589,53 +554,10 @@ function st_cleanup(): void {
     }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
 }
 function st_worker(int $limit=20,?string $event_id=null,bool $on_request=false): array {
-    $db=st_db();$cfg=st_config();
-    if(!$on_request)st_cleanup();
-    if(!$cfg['telegram_token'] || !$cfg['telegram_chat_id']) return ['sent'=>0,'configured'=>false];
-    // Visitor requests must not install webhooks or run global cleanup.
-    if(!$on_request){st_ensure_webhook(false);st_check_daily_report(false);}
-    $sent=0;$failed=0;
-    for($i=0;$i<$limit;$i++) {
-        $db->exec('BEGIN IMMEDIATE');
-        $filter=$event_id!==null?' AND (id=? OR id LIKE ?)':'';
-        $q=$db->prepare('SELECT * FROM outbox WHERE sent=0 AND due<=? AND lease<?'.$filter.' ORDER BY due,id LIMIT 1');
-        $q->execute(array_merge([time(),time()],$event_id!==null?[$event_id,$event_id.':%']:[]));$row=$q->fetch();
-        if(!$row){$db->exec('COMMIT');break;}
-        $q=$db->prepare('UPDATE outbox SET lease=? WHERE id=?');$q->execute([time()+30,$row['id']]);$db->exec('COMMIT');
-        try {
-            $payload=json_decode($row['payload'],true);$method=$payload['_method']??'sendMessage';unset($payload['_method']);
-            if($method==='answerCallbackQuery' && (int)$row['created']<time()-30){$q=$db->prepare('UPDATE outbox SET sent=1,lease=0 WHERE id=?');$q->execute([$row['id']]);continue;}
-            if(in_array($method,['sendMessage','sendPhoto'],true))$payload['chat_id']=$cfg['telegram_chat_id'];
-            if($method==='sendPhoto'){
-                $photo_name=(string)($payload['_photo']??'');
-                $photo_path=__DIR__.'/assets/notifications/'.$photo_name;
-                if(!in_array($photo_name,['visit.png','review.png','ticket.png'],true) || !is_file($photo_path) || !is_readable($photo_path)){
-                    // Gorsel eksikse metin ve yorum onay butonlarini koruyarak bildir.
-                    $text_payload=['chat_id'=>$cfg['telegram_chat_id'],'text'=>(string)($payload['caption']??'Saglam Teknik bildirimi')];
-                    if(isset($payload['reply_markup']))$text_payload['reply_markup']=$payload['reply_markup'];
-                    $payload=$text_payload;$method='sendMessage';
-                }
-            }
-            $receipt=st_telegram($method,$payload);$message_id=$receipt['result']['message_id']??null;
-            if(in_array($method,['sendMessage','sendPhoto'],true) && (!is_int($message_id) || $message_id<=0))throw new STTelegramError('Telegram teslim onayı alınamadı; bildirim kuyrukta.');
-            $db->exec('BEGIN IMMEDIATE');
-            try{
-                $q=$db->prepare("UPDATE outbox SET sent=1,lease=0,last_error='',telegram_message_id=?,delivered=? WHERE id=?");$q->execute([in_array($method,['sendMessage','sendPhoto'],true)?$message_id:null,time(),$row['id']]);
-                if(in_array($method,['sendMessage','sendPhoto'],true))st_delivery_receipt($db,$row['id'],$message_id);
-                $db->exec('COMMIT');
-            }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
-            $sent++;
-        }catch(Throwable $e){$n=(int)$row['attempts']+1;$error=$e instanceof STTelegramError?$e->getMessage():'Telegram’a ulaşılamadı; bildirim kuyrukta.';$delay=max($e instanceof STTelegramError?$e->retry_after:0,min(3600,30*(2**min($n,7))));$q=$db->prepare('UPDATE outbox SET attempts=?,due=?,lease=0,last_error=? WHERE id=?');$q->execute([$n,time()+$delay,$error,$row['id']]);$failed++;}
-    }
-    return ['sent'=>$sent,'failed'=>$failed,'configured'=>true];
+    if(!$on_request){st_cleanup();st_check_daily_report(false);}
+    return st_deliver_outbox(st_db(),st_config(),$limit,$event_id,null,$on_request?4000:30000);
 }
-function st_deliver_now(string $event_id): void {
-    // One event and its companion photo/AI chunks. Duplicates are claimed by outbox leases.
-    // Network errors must never cause a saved customer request to fail.
-    try{if(!st_db()->inTransaction())st_worker(12,$event_id,true);}catch(Throwable $e){
-        @error_log('SaglamTeknik: anlik Telegram iletimi siraya alindi ('.get_class($e).').');
-    }
-}
+function st_deliver_now(string $event_id): void { st_delivery_attempt($event_id); }
 function st_finish_record(array $response,string $action,int $code=200): void {
     $event_id=$action.':'.$response['id'];
     st_deliver_now($event_id);
@@ -663,6 +585,16 @@ function st_device(string $ua): string {
     $browser='Diğer';foreach(['Edg'=>'Edge','OPR'=>'Opera','Firefox'=>'Firefox','Chrome'=>'Chrome','Safari'=>'Safari'] as $k=>$v)if(stripos($ua,$k)!==false){$browser=$v;break;}
     return $device.' / '.$os.' / '.$browser;
 }
+function st_review_apply_decision(PDO $db,string $id,string $status): bool {
+    $changed=st_analytics_transaction($db,static function()use($db,$id,$status):bool{
+        $q=$db->prepare("UPDATE reviews SET status=?,decided=? WHERE id=? AND status='pending'");$q->execute([$status,time(),$id]);
+        if($q->rowCount()===0)return false;
+        st_enqueue($db,'review-decision:'.$id,['text'=>"⭐ YORUM KARARI\n🆔 Kayıt: ".$id."\n🕒 Tarih/saat: ".date('d.m.Y H:i:s')." (İstanbul)\n".($status==='approved'?'✅ Yorum onaylandı ve yayımlandı.':'❌ Yorum reddedildi; halka açık listede gösterilmez.')]);
+        return true;
+    });
+    if($changed)st_delivery_attempt('review-decision:'.$id);
+    return $changed;
+}
 function st_decide(array $query): string {
     $cfg=st_config();$from=(string)($query['from']['id']??'');$chat=(string)($query['message']['chat']['id']??'');
     $allowed_admins = array_map('strval', $cfg['telegram_admin_ids']);
@@ -672,8 +604,8 @@ function st_decide(array $query): string {
     if(!preg_match('/^r:([ar]):([a-f0-9]{24}):([a-f0-9]{16})$/D',$data,$m)) throw new DomainException('Geçersiz onay.');
     $db=st_db();$q=$db->prepare('SELECT status,nonce FROM reviews WHERE id=?');$q->execute([$m[2]]);$r=$q->fetch();
     if(!$r || !hash_equals($r['nonce'],$m[3])) throw new DomainException('Geçersiz onay.');
-    $status=$m[1]==='a'?'approved':'rejected';$q=$db->prepare("UPDATE reviews SET status=?,decided=? WHERE id=? AND status='pending'");$q->execute([$status,time(),$m[2]]);
-    return $q->rowCount()>0?($status==='approved'?'✅ Yorum onaylandı ve sitede yayınlandı.':'❌ Yorum reddedildi.'):'Bu yorum daha önce işlendi.';
+    $status=$m[1]==='a'?'approved':'rejected';$changed=st_review_apply_decision($db,$m[2],$status);
+    return $changed?($status==='approved'?'✅ Yorum onaylandı ve sitede yayınlandı.':'❌ Yorum reddedildi.'):'Bu yorum daha önce işlendi.';
 }
 // A single wall-clock budget covers the whole owner-configured key pool.
 // Quota, billing, authorization and request errors stop the pool immediately.
@@ -777,31 +709,19 @@ function st_dispatch(): void {
         st_json(['ok'=>true]);
     }
     if($action==='bootstrap' && $method==='GET'){
-        // Re-enable the previous no-cron fallback: first request after midnight
-        // sends the completed daily summary if a cron job was unavailable.
-        if(st_check_daily_report(false))st_deliver_now('daily:'.date('Y-m-d',strtotime('-1 day')));
-        $period_file=__DIR__.'/report-support.php';
-        if(is_file($period_file)){
-            require_once $period_file;
-            foreach(['weekly','monthly'] as $period){
-                try{if(st_enqueue_period_report($period)){
-                    $window=st_report_window($period);
-                    st_deliver_now($window['id']);
-                }}catch(Throwable $e){@error_log('SaglamTeknik: donem raporu kuyruga alinamadi ('.get_class($e).').');}
-            }
-        }
+        st_analytics_queue_due(st_db(),st_config());st_request_maintenance();
         st_json(['ok'=>true,'csrf'=>st_csrf(st_session())]);
     }
     if($action==='reviews' && $method==='GET') {
-        $rows=st_db()->query("SELECT id,author,district,service,cat,rating,comment,created FROM reviews WHERE status='approved' ORDER BY created DESC LIMIT 500")->fetchAll();
-        foreach($rows as &$r){$r['rating']=(int)$r['rating'];$r['date']=date('d.m.Y',(int)$r['created']);if($r['district']!=='')$r['service'].=' ('.$r['district'].')';$r['source']='site';unset($r['district'],$r['created']);}
+        $rows=st_db()->query("SELECT id,author,district,service,cat,rating,comment,created FROM reviews WHERE status='approved' ORDER BY created DESC,id DESC LIMIT 500")->fetchAll();
+        foreach($rows as &$r){$r['rating']=(int)$r['rating'];$r['date']=date('d.m.Y',(int)$r['created']);if($r['district']!=='')$r['service'].=' ('.$r['district'].')';$r['source']='site';$r['created']=(int)$r['created'];unset($r['district']);}
         st_json(['ok'=>true,'reviews'=>$rows]);
     }
     if($method!=='POST')st_fail('İşlem bulunamadı.',404);
     $session=st_require_csrf();$a=st_body();
+    st_request_maintenance();
     if($action==='activity'){
-        // Compatibility: suppress repeated 404s. Activity measurements are not recorded in rollback mode.
-        st_json(['ok'=>true,'recorded'=>false]);
+        st_rate('activity',60);st_json(st_activity_record($session,$a));
     }
     if($action==='query'){
         st_rate('query',120);
@@ -834,83 +754,34 @@ function st_dispatch(): void {
         st_json($res);
     }
     if($action==='visit') {
-        st_rate('visit',60);$page=st_text($a,'page',1,160);$page=explode('?',$page)[0];
+        st_rate('visit',120);$page=st_text($a,'page',1,200);$page=explode('?',$page)[0];
         if(!preg_match('#^/[a-zA-Z0-9_./-]*$#D',$page)||strpos($page,'..')!==false)st_fail('Sayfa bilgisi geçersiz.');
-        // Ziyaret bildirimi kapali olsa da gunluk sayac calisir. Bir oturum/gun = bir ziyaretci.
-        $visit_day=date('Y-m-d');
-        $visit_key='visitor:'.$visit_day.':'.hash_hmac('sha256',$session,st_secret());
-        $visit_db=st_db();
-        $visit_insert=$visit_db->prepare('INSERT OR IGNORE INTO meta(k,v) VALUES(?,?)');
-        $visit_insert->execute([$visit_key,'1']);
-        if($visit_insert->rowCount()===1)st_stat_inc('visits');
-        if(!st_config()['visit_notifications'])st_json(['ok'=>true,'enabled'=>false]);
-        $s_info = st_session_info($session);
-        $search_line = $s_info['searched']
-            ? "✅ Yapıldı (" . $s_info['last_query'] . ")"
-            : "❌ Yapılmadı";
-        $ticket_line = $s_info['ticket_sent']
-            ? "✅ Servis talebi oluşturdu"
-            : "➖ Henüz talep oluşturmadı";
-        $gps=st_gps_description($a);
-        $id=($gps?'visit-location:':'visit:').hash_hmac('sha256',$session,st_secret()).':'.intdiv(time(),300);
-        $text="🌐 Site ziyareti\n"
-            . "🕒 Tarih/saat: ".date('d.m.Y H:i:s')." (İstanbul)\n"
-            . "📄 Sayfa: ".$page."\n"
-            . "📱 Cihaz: ".st_device($_SERVER['HTTP_USER_AGENT']??'')."\n"
-            . "📍 Konum: ".($gps?:st_location())."\n"
-            . "🔍 Siteden Arama: ".$search_line."\n"
-            . "🛠 Talep Durumu: ".$ticket_line;
-        st_enqueue(st_db(),$id,['text'=>$text]);st_deliver_now($id);st_json(['ok'=>true,'enabled'=>true]);
+        $sid=hash_hmac('sha256',$session,st_secret());$gps=st_gps_description($a);
+        $event=is_string($a['event_id']??null)?$a['event_id']:'';
+        // Older cached location.js reports explicit GPS separately, not a new visit.
+        $locationOnly=$gps!==''&&$event==='';
+        if($event==='')$event='legacy-'.hash('sha256',$page.'|'.intdiv(time(),300));
+        if(!preg_match('/^[A-Za-z0-9_-]{16,100}$/D',$event))st_fail('Ziyaret anahtarı geçersiz.');
+        $record=$locationOnly?['recorded'=>true,'bot'=>st_analytics_is_bot($_SERVER['HTTP_USER_AGENT']??''),'unique_session'=>false,'repeat_visit'=>false,'day'=>date('Y-m-d'),'event_id'=>$event]:st_analytics_record_visit(st_db(),$sid,$event,$_SERVER['HTTP_USER_AGENT']??'');
+        $enabled=(bool)st_config()['visit_notifications'];
+        if($record['bot']||!$record['recorded']||!$enabled)st_json(array_merge(['ok'=>true,'enabled'=>$enabled],$record));
+        $query=st_activity_optional($a,'query',200);$info=st_session_info($session);if($query==='')$query=$info['last_query'];
+        $id=($locationOnly?'visit-location:':'visit:').$record['day'].':'.hash('sha256',$sid.'|'.$event);
+        $text="🌐 YENİ ZİYARETÇİ\n📅 Tarih: ".date('d.m.Y')."\n🕒 Saat: ".date('H:i:s')." (İstanbul)\n📍 Yaklaşık bölge: ".($gps?:st_location())
+            ."\n📱 Cihaz / işletim sistemi / tarayıcı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')
+            ."\n📄 Giriş sayfası: ".$page."\n🔍 Sitede yapılan arama: ".($query!==''?$query:'Henüz yok')
+            ."\n🔁 Oturum durumu: ".($record['unique_session']?'Günün ilk oturumu':($locationOnly?'İzinli konum güncellemesi':'Günlük tekrar ziyaret'));
+        st_enqueue(st_db(),$id,['text'=>$text]);st_delivery_attempt($id);st_json(array_merge(['ok'=>true,'enabled'=>true],$record));
     }
     if($action==='ai-local'){
-        // A completed on-device guide is an AI Usta interaction too.
-        // Record only a deliberate completed result; no Gemini request or IP/GPS lookup.
-        st_rate('ai-local',24);
-        $device=st_text($a,'device',2,40);
-        if(!in_array($device,['Kombi','Klima','Petek'],true))st_fail('Cihaz türü geçersiz.');
-        $issue=st_text($a,'issue',3,1200);
-        $answer=st_text($a,'answer',3,2400);
-        $id='ai:local:'.hash_hmac('sha256',$session.'|'.$device.'|'.$issue,st_secret()).':'.intdiv(time(),600);
-        $db=st_db();
-        $exists=$db->prepare('SELECT 1 FROM outbox WHERE id=?');$exists->execute([$id]);
-        if(!$exists->fetchColumn()){
-            $text="🤖 AI USTA · YEREL REHBER\n"
-                ."🕒 Tarih/saat: ".date('d.m.Y H:i:s')." (İstanbul)\n"
-                ."🔧 Cihaz: ".$device."\n\n"
-                ."❓ Sorulan soru / belirti:\n".$issue."\n\n"
-                ."💡 Gösterilen ilk rehber:\n".$answer."\n\n"
-                ."📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'');
-            st_enqueue($db,$id,['text'=>$text]);
-            st_stat_inc('ai_questions');
-            st_deliver_now($id);
-        }
-        st_json(['ok'=>true,'recorded'=>true]);
+        st_rate('ai-local',24);st_json(st_activity_record($session,$a,true));
     }
     if($action==='ai'){
-        st_rate('ai',12);
-        st_stat_inc('ai_questions');
-        $res = st_ai($a);
-        try {
-            $device_txt = isset($a['device']) && is_string($a['device']) ? trim($a['device']) : 'Belirtilmedi';
-            $issue_txt = isset($a['issue']) && is_string($a['issue']) ? trim($a['issue']) : 'Belirtilmedi';
-            $ans_txt = $res['text'] ?? '';
-            $src_label = ($res['source'] ?? '') === 'ai' ? '✨ Gemini AI' : (($res['source'] ?? '') === 'emergency' ? '🚨 Acil Durum Uyarı' : '📘 Belirti Rehberi');
-            $s_info = st_session_info($session);
-            $search_line = $s_info['searched'] ? "✅ Yapıldı (" . $s_info['last_query'] . ")" : "❌ Yapılmadı";
-            $gps = st_gps_description($a);
-            $ai_id = 'ai:' . bin2hex(random_bytes(12));
-            $ai_text = "🤖 AI Usta Soru & Cevap\n"
-                . "🕒 Tarih/saat: " . date('d.m.Y H:i:s') . " (İstanbul)\n"
-                . "🔧 Cihaz: " . $device_txt . "\n"
-                . "📡 Yanıt Kaynağı: " . $src_label . "\n\n"
-                . "❓ Sorulan Soru:\n" . $issue_txt . "\n\n"
-                . "💡 Verilen Cevap:\n" . $ans_txt . "\n\n"
-                . "🔍 Siteden Arama: " . $search_line . "\n"
-                . "📱 Ziyaretçi cihazı: " . st_device($_SERVER['HTTP_USER_AGENT'] ?? '') . "\n"
-                . "📍 Konum: " . ($gps ?: 'Konum paylaşılmadı (AI yanıtı için IP konum servisi çağrılmaz).');
-            st_enqueue(st_db(), $ai_id, ['text' => $ai_text]);
-            st_deliver_now($ai_id);
-        } catch (Throwable $e) {}
+        st_rate('ai',12);$res=st_ai($a);
+        // A signed receipt lets the UI acknowledge its exact final rendered answer.
+        // No duplicate notice is sent for the earlier local loading fallback.
+        try{$res=array_merge($res,st_activity_generated($session,$a,$res));}
+        catch(Throwable $error){$res['activity_recorded']=false;@error_log('Sağlam Teknik: yanıt kayıt durumu doğrulanamadı.');}
         st_json($res);
     }
     if(!in_array($action,['review','ticket'],true))st_fail('İşlem bulunamadı.',404);

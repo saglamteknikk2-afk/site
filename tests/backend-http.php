@@ -12,7 +12,7 @@ $remove=function(string $path)use(&$remove):void{if(is_link($path)||!is_dir($pat
 $process=null;$checks=[];$requests=0;$cookie='';$csrf='';
 $assert=static function(bool $ok,string $name)use(&$checks):void{$checks[]=['name'=>$name,'passed'=>$ok];if(!$ok)throw new RuntimeException($name);};
 try{
- foreach(['api.php','business-config.php','ai-koruma.php','fault-catalog.php','fault-advisories.php','notification-support.php','yonetim-api.php'] as $file){if(!is_file($public.'/'.$file)||!copy($public.'/'.$file,$doc.'/'.$file))throw new RuntimeException('Missing public PHP fixture file: '.$file);}
+ foreach(['api.php','business-config.php','ai-koruma.php','fault-catalog.php','fault-advisories.php','notification-support.php','notification-dispatch.php','analytics.php','storage.php','activity.php','kurulum-kontrol.php','yonetim-api.php'] as $file){if(!is_file($public.'/'.$file)||!copy($public.'/'.$file,$doc.'/'.$file))throw new RuntimeException('Missing public PHP fixture file: '.$file);}
  foreach(['servis-katalog.json','organic-catalog.json','verified-faults.json','brand-registry.json','trusted-proxies.json'] as $file){if(is_file($public.'/assets/'.$file))copy($public.'/assets/'.$file,$doc.'/assets/'.$file);}
  $socket=stream_socket_server('tcp://127.0.0.1:0',$errno,$error);if(!$socket)throw new RuntimeException('Loopback socket unavailable.');
  $address=stream_socket_get_name($socket,false);fclose($socket);$origin='http://'.$address;
@@ -91,18 +91,55 @@ try{
  $r=$request('POST','/api.php?action=webhook',$wrong,$headers);$assert($r['status']===403,'Webhook rejects incorrect review nonce');
  // Callback id is intentionally absent: approval logic runs, provider acknowledgement does not.
  $r=$request('POST','/api.php?action=webhook',$callback,$headers);$assert($r['status']===200&&$db->query('SELECT status FROM reviews WHERE id='.$db->quote($webhookId))->fetchColumn()==='approved','Authorized synthetic webhook approves pending review without contacting Telegram');
+ $r=$request('GET','/kurulum-kontrol.php');$assert($r['status']===404,'Installation diagnostics are CLI-only and expose no public paths');
  $r=$request('GET','/api.php?action=business-maps');$assert($r['status']===200&&!$r['data']['configured'],'Missing map configuration has an honest empty response');
  file_put_contents($private.'/haritalar.json',json_encode(['google_url'=>'https://maps.app.goo.gl/SyntheticQAMap','google_embed_url'=>'https://www.google.com/maps/embed?pb=synthetic','telegram_token'=>'SYNTHETIC_MAP_SECRET_NEVER_PUBLIC']));
  $r=$request('GET','/api.php?action=business-maps');$assert($r['status']===200&&$r['data']['configured']&&strpos($r['raw'],'SYNTHETIC_MAP_SECRET_NEVER_PUBLIC')===false,'Maps endpoint exposes only allowlisted public map fields');
+ // Preserve the already-published ai-local contract for older cached clients.
  $local=['device'=>'Kombi','issue'=>'Kombi su akıtıyor; ilk rehberi tamamladım','answer'=>'İlk rehber: Cihaza müdahale etmeden gözlemi not edin.'];
  $beforeLocal=(int)$db->query("SELECT COUNT(*) FROM outbox WHERE id LIKE 'ai:local:%'")->fetchColumn();
  $r=$request('POST','/api.php?action=ai-local',$local);
- $assert($r['status']===200&&($r['data']['recorded']??false)===true,'Completed local AI Usta guide notifies without Gemini');
+ $assert($r['status']===200&&($r['data']['recorded']??false)===true,'Completed legacy local AI Usta guide records without Gemini');
  $r=$request('POST','/api.php?action=ai-local',$local);
  $afterLocal=(int)$db->query("SELECT COUNT(*) FROM outbox WHERE id LIKE 'ai:local:%'")->fetchColumn();
- $assert($r['status']===200&&$afterLocal===$beforeLocal+1,'Repeated guide within ten minutes never duplicates Telegram notice');
+ $assert($r['status']===200&&$afterLocal===$beforeLocal+1,'Repeated legacy guide within ten minutes never duplicates Telegram notice');
+ $beforeInvalidLocal=$count('ai_events');
+ foreach([['missing answer',array_diff_key($local,['answer'=>true])],['invalid device',array_replace($local,['device'=>'Buzdolabı'])]] as [$name,$body]){$r=$request('POST','/api.php?action=ai-local',$body);$assert($r['status']===400,'Legacy local guide rejects '.$name);}
+ $assert($count('ai_events')===$beforeInvalidLocal,'Invalid legacy activities leave the durable log unchanged');
+ // Navigation-event totals and daily unique sessions are different measurements.
+ $visit=['event_id'=>'qa-visit-pageview-00001','page'=>'/kucukcekmece-kombi-servisi.html','source'=>'direct'];
+ $r=$request('POST','/api.php?action=visit',$visit);
+ $assert($r['status']===200&&($r['data']['recorded']??false)===true&&($r['data']['unique_session']??false)===true,'First navigation event creates one daily unique session');
+ $r=$request('POST','/api.php?action=visit',$visit);
+ $assert($r['status']===200&&($r['data']['recorded']??true)===false,'A retry of the same pageview is not counted twice');
+ $r=$request('POST','/api.php?action=visit',array_replace($visit,['event_id'=>'qa-visit-pageview-00002']));
+ $assert($r['status']===200&&($r['data']['recorded']??false)===true&&($r['data']['unique_session']??true)===false&&($r['data']['repeat_visit']??false)===true,'A return navigation is counted separately from the same daily session');
+ $metrics=[];$day=(new DateTimeImmutable('now',new DateTimeZone('Europe/Istanbul')))->format('Y-m-d');
+ $q=$db->prepare('SELECT metric,val FROM daily_stats WHERE day=?');$q->execute([$day]);foreach($q->fetchAll() as $row)$metrics[$row['metric']]=(int)$row['val'];
+ $assert(($metrics['visit_events']??0)===2&&($metrics['visits']??0)===1&&($metrics['visit_returns']??0)===1,'SQLite distinguishes two visits, one daily unique and one return');
+ $r=$request('POST','/api.php?action=visit',array_replace($visit,['event_id'=>'qa-visit-bot-000000003']),['User-Agent'=>'Googlebot/2.1 (+http://www.google.com/bot.html)']);
+ $assert($r['status']===200&&($r['data']['bot']??false)===true&&($r['data']['recorded']??true)===false,'Known crawler user agents are excluded from human visit counts');
+ // A local answer is recorded without pretending a Gemini call occurred.
+ $activity=['type'=>'ai_result','event_id'=>'qa-guide-result-000001','device'=>'Klima','brand'=>'Daikin','model'=>'Sentetik QA model','model_id'=>'','issue'=>'Klima soğutmuyor; sentetik yerel değerlendirme.','answer'=>'Sentetik yerel rehber cevabı: filtre durumunu gözlemleyin, cihaz kapağını açmayın.','source'=>'guide','page'=>'/','code'=>''];
+ $beforeAI=$count('ai_events');$r=$request('POST','/api.php?action=activity',$activity,['Idempotency-Key'=>$activity['event_id']]);
+ $assert($r['status']===200&&($r['data']['recorded']??false)===true,'Local result creates a durable AI activity record through real PHP');
+ $q=$db->prepare('SELECT device,brand,model,issue,answer,source FROM ai_events WHERE answer=?');$q->execute([$activity['answer']]);$logged=$q->fetch();$q->closeCursor();
+ $assert($logged&&$logged['source']==='guide'&&$logged['brand']==='Daikin'&&$logged['issue']===$activity['issue'],'Stored activity preserves actual displayed answer, device, model and truthful local source');
+ $activityQueue=$count('outbox');$r=$request('POST','/api.php?action=activity',$activity,['Idempotency-Key'=>$activity['event_id']]);
+ $assert($r['status']===200&&$count('ai_events')===$beforeAI+1&&$count('outbox')===$activityQueue,'Local-result replay cannot duplicate activity or notification');
+ $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-forged-gemini-00001','source'=>'ai']),['Idempotency-Key'=>'qa-forged-gemini-00001']);
+ $assert($r['status']===400,'Client activity cannot claim an unobserved Gemini response');
  $r=$request('POST','/api.php?action=ai',['device'=>'Kombi','issue'=>'Bosch Condens 2300i W hata kodu 227','model_id'=>'bosch-kombi-condens-2300i-w','code'=>'227']);
  $assert($r['status']===200&&$r['data']['source']==='manual'&&$r['data']['code_definition_verified']===true,'Known scoped model/code uses the verified manual without Gemini');
+ $receipt=$r['data'];$shown=['type'=>'ai_result','event_id'=>'qa-rendered-server-00001','device'=>'Kombi','issue'=>'Bosch Condens 2300i W hata kodu 227','answer'=>'Tam ekranda gösterilen sentetik açıklama ve güvenli gözlem.','source'=>'ai','page'=>'/','server_activity_id'=>$receipt['activity_id'],'server_activity_token'=>str_repeat('0',64)];
+ $r=$request('POST','/api.php?action=activity',$shown);$assert($r['status']===403,'Forged display receipt cannot modify the generated server answer');
+ $shown['server_activity_token']=$receipt['activity_token'];$r=$request('POST','/api.php?action=activity',$shown);
+ $assert($r['status']===200&&($r['data']['recorded']??false),'Signed display receipt records the final rendered answer');
+ $q=$db->prepare('SELECT source,answer,displayed FROM ai_events WHERE id=?');$q->execute([$receipt['activity_id']]);$savedAnswer=$q->fetch();$q->closeCursor();
+ $assert($savedAnswer['source']==='manual'&&$savedAnswer['answer']===$shown['answer']&&(int)$savedAnswer['displayed']===1,'Server-bound source overrides a forged Gemini label while keeping actual displayed text');
+ $beforeReplay=$count('outbox');$r=$request('POST','/api.php?action=activity',$shown);$assert($r['status']===200&&$count('outbox')===$beforeReplay,'Acknowledging the same displayed answer twice does not duplicate notification');
+ $r=$request('POST','/api.php?action=activity',array_replace($shown,['answer'=>'Değiştirilmiş başka sentetik cevap.']));$assert($r['status']===409,'Display replay cannot replace an already recorded answer');
+
  foreach(['E1','E01'] as $code){$r=$request('POST','/api.php?action=ai',['device'=>'Kombi','issue'=>'Modelini bilmiyorum; hata kodu '.$code,'code'=>$code]);$assert($r['status']===200&&$r['data']['source']==='guide'&&empty($r['data']['code_definition_verified']),'Unknown model '.$code.' never gets an invented meaning');}
  $data=json_decode(file_get_contents($doc.'/assets/verified-faults.json'),true);$foreign=null;$documentOnly=null;
  foreach($data['models'] as $model){$usable=array_values(array_filter($model['codes'],static function($row){return($row['matchable']??true)!==false&&empty($row['source_conflict']);}));if(!$usable)continue;$model['test_code']=$usable[0]['code'];if(!$foreign&&($model['matchable']??true)!==false&&!empty($model['requires_scope_confirmation']))$foreign=$model;if(!$documentOnly&&($model['matchable']??true)===false)$documentOnly=$model;}

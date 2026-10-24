@@ -1,4 +1,4 @@
-/* Existing published site reviews + moderated production API. No preview submissions. */
+/* Existing published reviews plus newest approved production reviews on first load. */
 (() => {
   'use strict';
   const script = document.currentScript;
@@ -42,6 +42,36 @@
       node.textContent = message;
       node.hidden = !message;
       node.classList.toggle('hidden', !message);
+    }
+    function reviewTime(review) {
+      if (Number.isFinite(Number(review.created)) && Number(review.created) > 0) return Number(review.created) * 1000;
+      const date = normalize(review.date).trim();
+      const numeric = date.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
+      if (numeric) return Date.UTC(Number(numeric[3]), Number(numeric[2]) - 1, Number(numeric[1]));
+      const months = {oca: 0, sub: 1, mar: 2, nis: 3, may: 4, haz: 5, tem: 6, agu: 7, eyl: 8, eki: 9, kas: 10, ara: 11};
+      const turkish = date.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
+      if (turkish && months[turkish[2].slice(0, 3)] !== undefined) return Date.UTC(Number(turkish[3]), months[turkish[2].slice(0, 3)], Number(turkish[1]));
+      const timestamp = Date.parse(date);
+      return Number.isFinite(timestamp) ? timestamp : 0;
+    }
+    function mergeApproved(approved) {
+      const contentKey = review => {
+        const author = normalize(review.author).replace(/[^a-z0-9]+/g, ' ').trim();
+        const comment = normalize(review.comment).replace(/[^a-z0-9]+/g, ' ').trim();
+        return author && comment ? `${author}\u0000${comment}` : '';
+      };
+      const identifiers = new Set();
+      const content = new Set();
+      // A live copy wins over its build-time copy, without changing stored rows.
+      const merged = [...approved].sort((a, b) => reviewTime(b) - reviewTime(a)).concat(seeds).filter(review => {
+        const id = String(review.id);
+        const identity = contentKey(review);
+        if (identifiers.has(id) || (identity && content.has(identity))) return false;
+        identifiers.add(id);
+        if (identity) content.add(identity);
+        return true;
+      });
+      return merged.sort((a, b) => reviewTime(b) - reviewTime(a));
     }
     function render({append = false, preserveStatic = false} = {}) {
       const query = normalize(byId('reviewSearchInput')?.value.trim());
@@ -96,7 +126,7 @@
       render({append: true});
       const next = container.querySelectorAll('.pr-review')[previous];
       if (next) { next.tabIndex = -1; next.focus({preventScroll: true}); }
-      loadApprovedOnDemand();
+      loadApprovedReviews();
     });
     root.querySelector('[data-review-privacy]')?.setAttribute('href', new URL('aydinlatma.html', siteBase).href);
     root.querySelector('[data-review-live-site]')?.setAttribute('href', 'https://saglamkombiklima.com.tr/#yorumFormKutusu');
@@ -108,7 +138,7 @@
       try {
         const url = new URL('api.php', siteBase);
         url.searchParams.set('action', action);
-        const response = await fetch(url, {credentials: 'same-origin', ...options, signal: controller.signal});
+        const response = await fetch(url, {credentials: 'same-origin', cache: 'no-store', ...options, signal: controller.signal});
         let data;
         try { data = await response.json(); } catch (_) { throw new Error('Yorum sunucusuna ulaşılamadı. Lütfen daha sonra yeniden deneyin.'); }
         if (!response.ok || !data || data.ok !== true) {
@@ -119,22 +149,23 @@
         return data;
       } finally { clearTimeout(timeout); }
     }
-    function loadApprovedOnDemand() {
-      if (preview || liveLoad) return;
+    function loadApprovedReviews() {
+      if (preview || liveLoad || liveLoaded) return;
       liveLoad = request('reviews').then(data => {
         if (!Array.isArray(data.reviews)) throw new Error('Yorum listesi doğrulanamadı.');
         const seen = new Set();
         const approved = data.reviews.filter(review => {
-          if (!review || typeof review !== 'object' || !review.id || seen.has(String(review.id))) return false;
+          if (!review || typeof review !== 'object' || !review.id || typeof review.author !== 'string' || typeof review.comment !== 'string' || (review.status && review.status !== 'approved') || seen.has(String(review.id))) return false;
           seen.add(String(review.id));
           return true;
         }).map(review => ({...review, id: `site-${review.id}`, source: 'site'}));
-        reviews = [...approved, ...seeds];
+        reviews = mergeApproved(approved);
+        liveLoaded = true;
         if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler ve yayımlanması onaylanan site yorumları.';
       }).catch(() => {
         if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Yeni yorumlar şu anda yüklenemedi.';
       }).finally(() => {
-        liveLoaded = true;
+        liveLoad = null;
         render({append: true});
       });
     }
@@ -198,8 +229,8 @@
       root.querySelectorAll('[data-review-preview-note]').forEach(note => { note.hidden = false; });
       if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Diğerlerini düğmeyle açabilirsiniz; ön izlemede yeni yorum gönderilemez.';
     } else {
-      if (status) status.textContent = 'Mevcut sitede yayımlanan değerlendirmeler. Diğer yorumları aşağıdaki düğmeyle açabilirsiniz.';
-      loadApprovedOnDemand();
+      if (status) status.textContent = 'Son onaylanan yorumlar yükleniyor. Mevcut değerlendirmeler gösteriliyor.';
+      loadApprovedReviews();
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once: true});

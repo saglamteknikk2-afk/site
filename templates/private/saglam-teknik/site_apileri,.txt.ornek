@@ -9,3 +9,8 @@ GEMINI_API_KEY_2=
 GEMINI_API_KEY_3=
 GEMINI_API_KEY_4=
 ADMIN_ACCESS_KEY=
+
+# Yalnız mevcut doğru SQLite dosyasını seçmek gerektiğinde mutlak yol girin.
+DATABASE_PATH=
+WEEKLY_REPORT=1
+MONTHLY_REPORT=1

@@ -80,7 +80,19 @@ class InternalLinkTests(unittest.TestCase):
             text = self.built[name].decode()
             self.assertIn('assets/internal-links.css', text)
             self.assertRegex(text, r'class="st-reading-links(?:\s|\")')
-        self.assertNotIn('id="st-hub-directory"', self.built['index.html'].decode())
+        self.assertNotIn('assets/internal-links.css', self.built['index.html'].decode())
+
+    def test_home_keeps_its_existing_navigation_without_the_full_library(self):
+        self.assertEqual(self.files['index.html'], self.original['index.html'])
+        home = self.built['index.html'].decode()
+        self.assertNotIn('id="st-hub-directory"', home)
+        self.assertNotIn('Tüm bölge, marka ve rehber bağlantıları', home)
+        links = {urlsplit(linking.canonical_href(href)).path for href in linking.parse(home).links}
+        for category in ('bolgeler.html', 'hizmetler.html', 'ariza-rehberi.html', 'model-ariza-kodlari.html'):
+            self.assertIn('/' + category, links)
+        depths = {row['path'].lstrip('/'): row['depth'] for row in self.graph['routes']}
+        for category in linking.HUBS:
+            self.assertLessEqual(depths[category], 2)
 
     def test_no_new_route_canonical_schema_model_or_sitemap(self):
         self.assertEqual(set(self.files), set(self.original))
@@ -175,14 +187,13 @@ class InternalLinkTests(unittest.TestCase):
                 for nearby in linking.NEARBY_DISTRICTS[district]:
                     self.assertIn('/' + linking.slug(nearby) + '-' + device + '-servisi.html', links)
 
-    def test_five_library_hubs_keep_static_links_without_cluttering_home(self):
+    def test_five_category_hubs_have_direct_static_links_to_every_published_category(self):
         catalog = json.loads(self.files['assets/servis-katalog.json'])
         index = json.loads(self.files['assets/page-index.json'])
         required = {row['path'] for row in index if row['kind'] in ('district', 'brand')}
         required.update('/' + linking.slug(name) + '-servisi.html' for name in catalog['semts'])
         required.update(row['path'] for config in catalog['devices'].values() for row in config['symptoms'])
         for name in linking.HUBS:
-            if name == 'index.html': continue
             text = self.files[name].decode()
             self.assertIn('data-st-link-directory="hub"', text)
             links = {urlsplit(linking.canonical_href(href, name)).path for href in linking.parse(text).main_links}

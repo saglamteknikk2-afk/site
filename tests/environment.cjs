@@ -78,7 +78,8 @@ const fs = require('fs'), path = require('path'), assert = require('assert/stric
       equal(await page.locator('#st-preview-banner').isHidden(), true, 'Production preview banner hidden');
       equal(await page.evaluate(() => stSiteURL('api.php')), new URL(mount + 'api.php', url).href, 'API mount resolves from local script including nested admin page');
       equal(await page.evaluate(async () => stApi('ticket', {name: 'Fixture'})), {ok: true}, 'Production API stays active');
-      equal(requests.map(r => [r.path, r.method]), [[mount + 'api.php', 'GET'], [mount + 'api.php', 'POST']], 'Only synthetic same-mount bootstrap and write exercised');
+      await page.evaluate(()=>stRecordVisit());
+      equal(requests.map(r => [r.path, r.method, r.action]).sort((a,b)=>a.join().localeCompare(b.join())), [[mount+'api.php','GET','bootstrap'],[mount+'api.php','POST','ticket'],[mount+'api.php','POST','visit']].sort((a,b)=>a.join().localeCompare(b.join())), 'Only one synthetic same-mount bootstrap, automatic visit and explicit form write are exercised');
       equal(errors, [], 'No JavaScript errors');
       reports.push({url, preview: false, requests}); await page.close();
     }
@@ -87,7 +88,8 @@ const fs = require('fs'), path = require('path'), assert = require('assert/stric
       equal(await page.evaluate(() => STEnvironment.officialProduction), false, 'Lookalike official host is not promoted');
       equal(await page.evaluate(() => STEnvironment.preview), false, 'Lookalike GitHub host does not match suffix');
       equal(await page.locator('#st-preview-banner').isVisible(), true, 'Lookalike host cannot hide preview notice');
-      equal(requests.length, 0, 'No fixture provider request'); equal(errors, [], 'No JavaScript errors'); await page.close();
+      await page.evaluate(()=>stRecordVisit());
+      equal(requests.map(r=>[r.path,r.action]).sort((a,b)=>a.join().localeCompare(b.join())), [['/api.php','bootstrap'],['/api.php','visit']], 'Copied production telemetry remains on its own fixture origin and never targets the official host'); equal(errors, [], 'No JavaScript errors'); await page.close();
     }
     const report = {passed: true, checks, reports, real_provider_requests: 0, actual_notification_requests: 0};
     const file = path.join(root, 'build/environment-report.json'); fs.mkdirSync(path.dirname(file), {recursive: true}); fs.writeFileSync(file, JSON.stringify(report, null, 2) + '\n');

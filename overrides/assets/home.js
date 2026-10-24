@@ -43,7 +43,7 @@
       return target.pathname+target.search+target.hash;
     }
 
-    function renderDiagnostic(data) {
+    function renderDiagnostic(data, options={}) {
       const box=document.getElementById('aiResultBox'),response=document.getElementById('aiResponseText');
       stAiContact(data.emergency_phone);
       const actions=document.querySelector('#aiResultBox .usta-result-actions');if(actions)actions.hidden=data.source==='advisory'||data.source==='emergency';
@@ -71,11 +71,14 @@
       }
       const reference=document.getElementById('aiManualReference');
       if(reference){reference.replaceChildren();reference.hidden=!data.source_url;if(data.source_url&&/^https:\/\//.test(data.source_url)){const link=document.createElement('a');link.href=data.source_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Üretici kaynağını aç ↗';reference.append(link,document.createElement('br'),document.createTextNode(data.source_locator||''));}}
+      if(options.record!==false&&typeof stRecordAIResult==='function'){
+        stRecordAIResult({...data,device,brand:context.brand||'',model:context.model||'',model_id:context.model_id||'',code:context.code||'',issue:document.getElementById('issueInput').value.trim(),answer:response.innerText.trim()});
+      }
     }
 
-    function showFallbackDiagnostic(device, issue) {
+    function showFallbackDiagnostic(device, issue, options={}) {
       const data=window.STDiagnosticGuide?window.STDiagnosticGuide(device,issue,window.STUstaWizard?.getContext()||{}):{source:'guide',text:'Marka/modeli, hata kodunu ve sorunun ne zaman oluştuğunu paylaşın. İç parçalara müdahale etmeden Sağlam Teknik ile servis kontrolü planlayabilirsiniz: 0534 622 5515.'};
-      renderDiagnostic(data);return data;
+      renderDiagnostic(data,options);return data;
     }
 
     async function diagnoseIssue() {
@@ -85,9 +88,9 @@
       const button=document.getElementById('askBtn');if(button.disabled)return;
       const requestKey=stId();
       lastDiagnosedIssue=`${device}: ${issue}`;
-      const initial=showFallbackDiagnostic(device,issue);
+      const initial=showFallbackDiagnostic(device,issue,{record:false});
       // Güvenlik yönlendirmesi ve belirti rehberi bağlantıyı beklemeden görünür.
-      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review)return;
+      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review){renderDiagnostic(initial);return;}
       button.disabled=true;document.getElementById('aiLoading').classList.remove('hidden');
       const source=document.getElementById('aiSource');if(source)source.textContent='Belirti rehberi · AI değerlendirmesi bekleniyor…';
       try {
@@ -116,13 +119,15 @@
     let ticketReturnFocus=null;
     function toggleServiceTicketModal(show) {
       const modal = document.getElementById('serviceTicketModal');
+      if(!modal)return false;
       if (show) {
+        if(!modal.classList.contains('hidden'))return true;
         ticketReturnFocus=document.activeElement;
         document.getElementById('ticketSubmitBtn').classList.remove('hidden');
         document.getElementById('ticketSuccessMsg').classList.add('hidden');
         stError('ticketError','');
-        const currentIssue = document.getElementById('issueInput').value.trim();
-        const currentDevice = document.getElementById('deviceSelect').value;
+        const currentIssue = document.getElementById('issueInput')?.value.trim()||'';
+        const currentDevice = document.getElementById('deviceSelect')?.value||'';
         if (currentIssue) {
           document.getElementById('ticketIssue').value = currentIssue;
         }
@@ -130,14 +135,28 @@
           document.getElementById('ticketDevice').value = currentDevice;
         }
         modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden','false');
         document.body.classList.add('ah-dialog-open');
         document.getElementById('ticketName').focus({preventScroll:true});
       } else {
         modal.classList.add('hidden');
+        modal.setAttribute('aria-hidden','true');
         document.body.classList.remove('ah-dialog-open');
         ticketReturnFocus?.focus?.({preventScroll:true});
       }
+      return true;
     }
+    // Capture at the document so old inline HTML and premium.js do not open it twice.
+    document.addEventListener('click',event=>{
+      const control=event.target.closest?.('[data-ticket-open],.usta-ticket,[data-ticket-close],#serviceTicketModal .ah-modal-close');
+      if(!control||!document.getElementById('serviceTicketModal'))return;
+      event.preventDefault();event.stopImmediatePropagation();
+      toggleServiceTicketModal(!control.matches('[data-ticket-close],.ah-modal-close'));
+    },true);
+    document.addEventListener('submit',event=>{
+      if(event.target.id!=='serviceTicketForm')return;
+      event.preventDefault();event.stopImmediatePropagation();submitServiceTicket(event);
+    },true);
     document.addEventListener('keydown',event=>{const modal=document.getElementById('serviceTicketModal');if(!modal||modal.classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();toggleServiceTicketModal(false);return;}if(event.key==='Tab'){const items=[...modal.querySelectorAll('button,a[href],input,select,textarea')].filter(e=>e.offsetParent!==null&&!e.disabled&&e.tabIndex!==-1),first=items[0],last=items[items.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}});
 
     async function submitServiceTicket(e) {
@@ -170,7 +189,9 @@
       const payload = {name,phone,district,device,issue,website:document.getElementById('ticketWebsite').value};
       stError('ticketError','');document.getElementById('ticketSuccessMsg').classList.add('hidden');
       try {
-        await stApi('ticket',payload,stRequestKey(form,payload));
+        const saved=await stApi('ticket',payload,stRequestKey(form,payload));
+        const note=document.querySelector('#ticketSuccessMsg p');
+        if(note)note.textContent=saved.delivery==='sent'?'Talebiniz kaydedildi ve ekibimize bildirildi. Randevu uygunluğunu birlikte netleştireceğiz.':'Talebiniz kaydedildi. Ekibimize bildirim bekliyor; acil destek için bizi arayabilir veya WhatsApp’tan ulaşabilirsiniz.';
         document.getElementById('ticketSuccessMsg').classList.remove('hidden');
         submitBtn.classList.add('hidden');
         delete form.dataset.requestKey; delete form.dataset.requestBody;

@@ -11,7 +11,7 @@ Bu dosya yalnız **GitHub kaynak kodunun üretim taslağı** içindir. GitHub Pa
 - **📊 Haftalık rapor:** bir önceki tamamlanmış pazartesi–pazar haftası, yeni hafta başladığında çalıştırılan worker'da; ilk kurulumda önceki tamamlanmış hafta için bir defalık rapor da oluşabilir.
 - **📊 Aylık rapor:** bir önceki tamamlanmış takvim ayı, yeni ay başladığında çalıştırılan worker'da; ilk kurulumda önceki tamamlanmış ay için bir defalık rapor da oluşabilir.
 
-Raporlardaki **ziyaret** metriği her gün için tekil oturum sayılarının toplamıdır; haftalık/aylık benzersiz gerçek kişi sayısı değildir. Telefon/WhatsApp tıklaması, form kaydı, ücretli tamamlanan iş farklı metriklerdir.
+Raporlarda **kaydedilen toplam giriş**, **günlük tekrar girişleri** ve **günlük tekil oturum toplamı** ayrıdır. Eski sistemin kaydetmediği toplam girişler için kapsam uyarısı gösterilir; günlük tekiller haftalık/aylık benzersiz gerçek kişi sayısı değildir. Telefon/WhatsApp tıklaması, form kaydı, ücretli tamamlanan iş farklı metriklerdir.
 
 ## Özgün görseller
 Üretim paketinde `assets/notifications/visit.png`, `review.png`, `ticket.png` korunur; Telegram'da sendPhoto olarak kullanılır. Görsel eksikse okunabilir metin yedeğine geçilir. AI ve dönem raporları çok satırlı ikonlu metindir; yeni yapay görsel uydurulmaz. Derleme testi özgün PNG varlığını doğrular.
@@ -20,11 +20,13 @@ Raporlardaki **ziyaret** metriği her gün için tekil oturum sayılarının top
 1. **Eski siteye dokunmadan** yeni alan adının ilgili web kökünün ve `private/saglam-teknik/` klasörünün yedeğini alın. Bu depodaki statik Pages çıktısını PHP destekli üretim sanmayın.
 2. Yalnız yeni sitenin üretim dizinindeki PHP dosyaları ile özgün görsel dosyalarının mevcut olduğundan emin olun. Gerçek `site.sqlite` ve `site_apileri,.txt` dosyalarını **üzerine yazmayın**; ayrı özel klasörün izinlerini doğrulayın.
 3. Yeni sitenin **web kökü dışında** mevcut gizli ayar dosyasında `VISIT_NOTIFICATIONS=1` ve `DAILY_REPORT=1` olmalı. Açıkça `VISIT_NOTIFICATIONS=0` yazıyorsa koddaki varsayılan `true` onu geçersiz kılmaz. `IP_LOCATION_LOOKUP=1` yalnızca yaklaşık IP konumu içindir; KVKK aydınlatması ve tercihleri kontrol edilmeli.
-4. Plesk'te **yeni sitenin PHP kullanıcısı ve PHP sürümüyle** her dakika `worker.php` CLI olarak çalıştırılmalı. Sadece web site ziyaretinin olması Telegram kuyruğunu boşaltmaz.
+4. Plesk'te **yeni sitenin PHP kullanıcısı ve PHP sürümüyle** her dakika `worker.php` CLI olarak çalıştırılmalı. Yeni olaylar 4 saniyelik toplam bütçeyle doğrudan denenir; ilk trafik sonrası kuyruk için ayrıca sınırlı yeniden deneme vardır. Görev hiç çalışmazsa tam gece 00:00 teslimi garanti edilemez.
 5. Yeni sitenin kendi çalışma ortamında, ana siteye veya canlı botlara dokunmadan `php worker.php status` çıktısından `telegram_key_set`, `chat_id_set`, `visit_notifications`, `worker_last_run`, `pending_notifications` ve `notifications[].last_error` alanlarını kontrol edin. Gerçek bot testleri yalnız açıkça yetki verilirse yapılır.
 6. Arayüzün servis talebi kabul etmesi Telegram'a teslim yapıldığını kanıtlamaz: kaydın SQLite'a yazılması, outbox kuyruğu, başarılı worker ve Telegram API teslimi ayrı aşamalardır.
 
 ## Sınırlar
-- Saatlik/dakikalık kontrol değil; ziyaret bildirimi **kuyruğa derhal** yazılır, Telegram teslimi en erken cron çalıştığında gerçekleşir (normalde en fazla yaklaşık 1 dakika + ağ gecikmesi).
+- Olay önce kalıcı kuyruğa yazılır, ardından Telegram teslimi doğrudan denenir. Başarısız istek hata ve yeniden deneme zamanı ile korunur; başarılı teslim makbuzu bulunan satır yeniden gönderilmez. Telegram kabulünden sonra ağ yanıtının kaybolması durumunda sağlayıcı tam bir kez teslim garantisi vermez.
 - Konum: IP tabanlı yaklaşık tahmin olabilir ve yanlış ilçe/şehir dönebilir. GPS ancak ziyaretçi izin verir ve istemci veriyi sunucuya gönderirse kullanılır.
 - Gerçek kullanıcı, bot, canlı API veya sunucu testi bu GitHub kaynak değişikliğinden otomatik oluşmaz.
+
+AI üretimi ile gösterilen sonuç ayrıdır: sunucu yanıtı imzalı kayıtla istemciye döner; istemci son ekranda gösterdiği tam cevabı aynı kayda onaylar. Telegram bildirimi ve AI kullanım sayacı bu gösterilen sonuç için bir kez üretilir. Yerel üretici belgesi/rehber de aynı kayıt akışına katılır; Gemini diye etiketlenmez.

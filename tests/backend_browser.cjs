@@ -7,18 +7,19 @@ const {spawn,spawnSync}=require('child_process');
 const {chromium}=require('playwright');
 const repository=path.resolve(__dirname,'..');
 const publicRoot=path.resolve(process.argv[2]||path.join(repository,'build/production'));
-const reportPath=path.join(repository,'build/backend-qa/backend-browser.json');
+const reportPath=path.resolve(process.env.ST_BACKEND_BROWSER_REPORT||path.join(repository,'build/backend-qa/backend-browser.json'));
 const php=process.env.SAGLAM_PHP_BIN||'php';
-const checks=[],requests=[],blocked=[],pageErrors=[],localFailures=[],responseTasks=[];
+const checks=[],requests=[],blocked=[],pageErrors=[],localFailures=[],responseTasks=[],dependencyFailures=[];
 let fixture='',server,browser,origin='',stderr='',beforeHash='';
 function check(ok,name){checks.push({name,passed:!!ok});if(!ok)throw Error(name);}
 function runPHP(args){const r=spawnSync(php,args,{encoding:'utf8',env:{PATH:process.env.PATH||''}});if(r.error||r.status!==0)throw Error('PHP helper failed: '+(r.error?.message||r.stderr));return r.stdout.trim();}
 function snapshot(directory){const hash=crypto.createHash('sha256');let count=0;function walk(dir){for(const name of fs.readdirSync(dir).sort()){const file=path.join(dir,name),stat=fs.lstatSync(file);if(stat.isSymbolicLink())throw Error('Public QA input must not contain symlinks');if(stat.isDirectory())walk(file);else if(stat.isFile()){hash.update(path.relative(directory,file));hash.update('\0');hash.update(fs.readFileSync(file));hash.update('\0');count++;}}}walk(directory);return {sha256:hash.digest('hex'),files:count};}
 async function freePort(){return new Promise((resolve,reject)=>{const socket=net.createServer();socket.once('error',reject);socket.listen(0,'127.0.0.1',()=>{const port=socket.address().port;socket.close(()=>resolve(port));});});}
 async function waitForServer(port){for(let i=0;i<100;i++){if(server.exitCode!==null)throw Error('PHP server exited: '+stderr);const ready=await new Promise(resolve=>{const socket=net.connect(port,'127.0.0.1');socket.once('connect',()=>{socket.destroy();resolve(true);});socket.once('error',()=>resolve(false));});if(ready)return;await new Promise(resolve=>setTimeout(resolve,30));}throw Error('PHP loopback startup timed out');}
-function inspect(){return JSON.parse(runPHP(['-r',String.raw`$db=new PDO('sqlite:'.$argv[1]);$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);echo json_encode(['tickets'=>$db->query('SELECT id,name,phone,district,device,issue,notification_sent FROM tickets ORDER BY created,rowid')->fetchAll(),'reviews'=>$db->query('SELECT id,author,comment,status FROM reviews ORDER BY created,rowid')->fetchAll(),'outbox_count'=>(int)$db->query('SELECT count(*) FROM outbox')->fetchColumn(),'notification_attempts'=>(int)$db->query('SELECT count(*) FROM outbox WHERE sent<>0 OR attempts<>0 OR lease<>0')->fetchColumn()]);`,path.join(fixture,'private/site.sqlite')]));}
+function inspect(){return JSON.parse(runPHP(['-r',String.raw`$db=new PDO('sqlite:'.$argv[1]);$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);echo json_encode(['tickets'=>$db->query('SELECT id,name,phone,district,device,issue,notification_sent FROM tickets ORDER BY created,rowid')->fetchAll(),'reviews'=>$db->query('SELECT id,author,comment,status FROM reviews ORDER BY created,rowid')->fetchAll(),'ai_events'=>$db->query('SELECT id,device,brand,model,issue,answer,source,page FROM ai_events ORDER BY created,rowid')->fetchAll(),'outbox_count'=>(int)$db->query('SELECT count(*) FROM outbox')->fetchColumn(),'notification_attempts'=>(int)$db->query('SELECT count(*) FROM outbox WHERE sent<>0 OR attempts<>0 OR lease<>0')->fetchColumn()]);`,path.join(fixture,'private/site.sqlite')]));}
 function apiResponse(page,action,method='POST'){return page.waitForResponse(response=>new URL(response.url()).pathname==='/api.php'&&new URL(response.url()).searchParams.get('action')===action&&response.request().method()===method);}
 async function savedResponse(promise,name){const response=await promise,data=await response.json();check(response.status()===201&&data.ok===true&&/^[a-f0-9]{24}$/.test(data.id||'')&&data.delivery==='queued',name+' really saves through PHP with queued notification');return data;}
+async function waitForActivity(answer,count=1){for(let i=0;i<80;i++){const rows=inspect().ai_events.filter(row=>row.answer===answer);if(rows.length>=count)return rows;await new Promise(resolve=>setTimeout(resolve,50));}throw Error('Actual displayed AI answer was not persisted in SQLite');}
 async function visibleText(page,selector,pattern){await page.waitForFunction(({selector,source})=>{const el=document.querySelector(selector);return el&&!el.hidden&&!el.classList.contains('hidden')&&new RegExp(source,'i').test(el.textContent);},{selector,source:pattern.source});}
 (async()=>{
  let report;
@@ -50,13 +51,27 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   const cookie=(await context.cookies(origin)).find(cookie=>cookie.name==='st_session');
   check(cookie?.httpOnly&&cookie.sameSite==='Strict','Actual browser stores HttpOnly SameSite Strict session cookie');
   // Submit the actual homepage service form.
-  await page.locator('[data-ticket-open]').first().click();
+  await page.locator('.usta-ticket').click();
+  check(await page.locator('#serviceTicketModal').isVisible(),'Desktop direct-service button opens the real modal');
   await page.locator('#ticketName').fill('QA Browser Modal');await page.locator('#ticketPhone').fill('05340000001');
   await page.locator('#ticketDistrict').fill('Küçükçekmece / Atakent');await page.locator('#ticketDevice').selectOption('Kombi');
   await page.locator('#ticketIssue').fill('Sentetik tarayıcı testi: sıcak su dalgalanıyor.');
   const modalResponse=apiResponse(page,'ticket');await page.locator('#ticketSubmitBtn').click();
   const modal=await savedResponse(modalResponse,'Homepage service modal');await visibleText(page,'#ticketSuccessMsg',/kaydedildi/);
   check(inspect().tickets.some(row=>row.id===modal.id&&row.name==='QA Browser Modal'&&row.notification_sent===0),'Modal form fields are persisted in isolated SQLite, not marked delivered');
+  await page.locator('.ah-modal-close').click();await page.setViewportSize({width:390,height:900});
+  const optionalScript='**/assets/premium.js*';await context.route(optionalScript,route=>{dependencyFailures.push(new URL(route.request().url()).pathname);return route.abort();});
+  await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>typeof stToken==='function'&&window.STUstaWizard);
+  check(dependencyFailures.length===1,'Mobile repair scenario intentionally blocks only optional premium.js');
+  await page.locator('.usta-ticket').click();
+  check(await page.locator('#serviceTicketModal').isVisible(),'Mobile direct-service button opens the modal even when premium.js cannot load');
+  await page.locator('#ticketName').fill('QA Browser Mobile');await page.locator('#ticketPhone').fill('05340000004');
+  await page.locator('#ticketDistrict').fill('Bakırköy');await page.locator('#ticketDevice').selectOption('Petek');
+  await page.locator('#ticketIssue').fill('Sentetik mobil test: petekler eşit ısınmıyor.');
+  const mobileResponse=apiResponse(page,'ticket');await page.locator('#ticketSubmitBtn').click();
+  const mobile=await savedResponse(mobileResponse,'Mobile direct-service modal');await visibleText(page,'#ticketSuccessMsg',/kaydedildi/);
+  check(inspect().tickets.some(row=>row.id===mobile.id&&row.name==='QA Browser Mobile'&&row.device==='Petek'&&row.district==='Bakırköy'&&row.notification_sent===0),'Mobile form saves all actual fields without claiming Telegram delivery');
+  await page.locator('.ah-modal-close').click();await context.unroute(optionalScript);await page.setViewportSize({width:1440,height:1000});
   // A second, independent frontend serializer: contact form.
   await page.goto(origin+'/iletisim.html',{waitUntil:'networkidle'});
   await page.locator('#contactName').fill('QA Browser Contact');await page.locator('#contactPhone').fill('05340000002');
@@ -75,7 +90,7 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   const selectorResponse=apiResponse(page,'ticket');await page.locator('#svcTicketButton').click();
   const selector=await savedResponse(selectorResponse,'Service selector');await visibleText(page,'#svcTicketStatus',/kaydedildi/);
   check(inspect().tickets.some(row=>row.id===selector.id&&row.district==='Küçükçekmece / Atakent'&&row.issue.includes('Baymak')&&row.issue.includes('Sentetik model')),'Selector submits its actual brand/model/location summary to PHP');
-  check(inspect().tickets.length===3,'Three UI journeys create exactly three distinct tickets');
+  check(inspect().tickets.length===4,'Desktop, mobile, contact and selector create exactly four distinct tickets');
   // Submit a genuine pending review, approve through actual owner PHP, then reload.
   await page.goto(origin+'/',{waitUntil:'networkidle'});
   const author='QA Browser Review',comment='Yalnızca izole test veritabanındaki sentetik tarayıcı yorumu.';
@@ -93,31 +108,48 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   const approved=await context.request.post(origin+'/yonetim-api.php?action=decide',{headers:{Origin:origin,'X-CSRF-Token':ownerCsrf,'X-Admin-Key':admin},data:{id:review.id,status:'approved'}});
   requests.push({path:'/yonetim-api.php',action:'decide',method:'POST',status:approved.status(),csrf_valid_shape:/^\d+\.[a-f0-9]{64}$/.test(ownerCsrf),transport:'playwright-shared-cookie-api-context'});
   check(approved.status()===200&&inspect().reviews.find(row=>row.id===review.id)?.status==='approved','Actual authenticated owner endpoint approves synthetic pending review');
-  const publicReviewRequests=requests.filter(row=>row.action==='reviews').length;
-  await page.reload({waitUntil:'networkidle'});
-  check(await page.locator('#reviewsContainer > .pr-review').count()===6,'Reload keeps exactly six build-time review cards');
-  check(requests.filter(row=>row.action==='reviews').length===publicReviewRequests,'Initial page load does not fetch or render every review');
-  const requestedReviews=apiResponse(page,'reviews','GET');
-  await page.locator('#premiumReviewsMore').click();
-  check((await requestedReviews).status()===200,'More explicitly requests real approved reviews');
-  await page.waitForFunction(()=>document.querySelector('#premiumReviewStatus')?.textContent.includes('yayımlanması onaylanan'));
+  const seed=await page.evaluate(()=>window.STPublishedReviewSeeds[0]);
+  runPHP(['-r',String.raw`$db=new PDO('sqlite:'.$argv[1]);$r=json_decode($argv[2],true);$q=$db->prepare('INSERT INTO reviews(id,author,district,service,cat,rating,comment,status,nonce,created,consent) VALUES(?,?,?,?,?,?,?,?,?,?,?)');$q->execute([str_repeat('b',24),$r['author'],'Küçükçekmece',$r['service'],$r['cat'],5,$r['comment'],'approved',str_repeat('b',16),time()-60,1]);$q->execute([str_repeat('c',24),'QA Rejected','Küçükçekmece','Kombi Bakımı / Onarımı','kombi',1,'SENTETİK REDDEDİLEN YORUM GİZLİ KALMALI','rejected',str_repeat('c',16),time(),1]);`,path.join(privateRoot,'site.sqlite'),JSON.stringify(seed)]);
+  await Promise.all(responseTasks);
+  const publicReviewRequests=requests.filter(row=>row.action==='reviews').length,initialApproved=apiResponse(page,'reviews','GET');
+  await page.reload({waitUntil:'networkidle'});check((await initialApproved).status()===200,'Initial load automatically requests actual approved reviews');
+  await page.waitForFunction(comment=>document.querySelector('#reviewsContainer > .pr-review')?.textContent.includes(comment),comment);
+  await Promise.all(responseTasks);
+  check(await page.locator('#reviewsContainer > .pr-review').count()===6,'Initial live list remains limited to six cards');
+  check(requests.filter(row=>row.action==='reviews').length===publicReviewRequests+1,'Initial production page refreshes approved reviews without waiting for More');
+  check((await page.locator('#reviewsContainer > .pr-review').first().innerText()).includes(comment),'Newest approved review is the first real DOM card');
+  check(await page.locator('#reviewsContainer .pr-review').filter({hasText:seed.comment}).count()===1,'Matching live and seeded review appears once, with live record taking priority');
+  check(!(await page.locator('#reviewsContainer').innerText()).includes('SENTETİK REDDEDİLEN YORUM GİZLİ KALMALI'),'Rejected review is never rendered');
+  const beforeMore=await page.locator('#reviewsContainer > .pr-review').count();await page.locator('#premiumReviewsMore').click();
+  check(await page.locator('#reviewsContainer > .pr-review').count()>beforeMore,'More appends the next review batch after eager loading');
   await page.locator('#reviewSearchInput').fill(comment);
   await page.waitForFunction(comment=>document.querySelector('#reviewsContainer')?.textContent.includes(comment),comment);
-  check(await page.locator('.pr-review').filter({hasText:comment}).count()===1,'Explicitly loaded real frontend renders approved review exactly once');
+  check(await page.locator('.pr-review').filter({hasText:comment}).count()===1,'Approved review remains unique after pagination and filtering');
   // Explicit AI opt-in against real PHP with every provider key empty.
+  const aiEventsBefore=inspect().ai_events.length;
   await page.locator('.p-device-shortcuts [data-usta-device="Klima"]').click();
   await page.locator('#ustaStep [data-choice="cool"]').click();await page.locator('#ustaStep [data-brand=""]').click();
   await page.waitForFunction(()=>STUstaWizard.getContext().step===4);
   check(await page.locator('#aiResponseText').innerText().then(text=>text.trim().length>40),'Local symptom guide is useful before any AI submission');
+  const localAnswer=(await page.locator('#aiResponseText').innerText()).trim(),localRecords=await waitForActivity(localAnswer);
+  check(localRecords.length===1&&localRecords[0].source==='guide'&&localRecords[0].device==='Klima','Locally completed guide logs the actual visible answer once with truthful source');
   await Promise.all(responseTasks);
   check(!requests.some(row=>row.action==='ai'),'Guided local answer performs no automatic AI request');
+  const activitiesBeforeExplicit=requests.filter(row=>row.action==='activity').length;
   const aiResponse=apiResponse(page,'ai');await page.locator('#askBtn').click();const ai=await aiResponse,aiData=await ai.json();
   check(ai.status()===200&&aiData.source==='guide'&&String(aiData.text||'').length>40,'Explicit AI request reaches actual PHP and returns safe no-key fallback');
   await page.waitForFunction(()=>document.querySelector('#aiLoading').classList.contains('hidden')&&!document.querySelector('#askBtn').disabled);
   check((await page.locator('#aiSource').innerText()).includes('Belirti rehberi')&&(await page.locator('#aiResponseText').innerText()).trim().length>40,'No-key backend fallback is rendered through the actual UI result contract');
+  for(let i=0;i<80&&inspect().ai_events.length<aiEventsBefore+2;i++)await new Promise(resolve=>setTimeout(resolve,50));
+  check(inspect().ai_events.length===aiEventsBefore+2,'One completed local guide and one explicit server answer create exactly two activity records');
+  await Promise.all(responseTasks);
+  const displayedServer=(await page.locator('#aiResponseText').innerText()).trim();
+  await waitForActivity(displayedServer);await Promise.all(responseTasks);
+  check(requests.filter(row=>row.action==='activity').length===activitiesBeforeExplicit+1,'Displayed server answer acknowledges its signed generated record once');
+  check(inspect().ai_events.filter(row=>row.answer===displayedServer).length>=1,'Stored server activity includes the exact final rendered observation and next-step text');
   await Promise.all(responseTasks);
   const formPosts=requests.filter(row=>row.method==='POST'&&['ticket','review','ai'].includes(row.action));
-  check(formPosts.length===5&&formPosts.every(row=>row.csrf_valid_shape),'All five UI submissions use actual session-bound CSRF tokens');
+  check(formPosts.length===6&&formPosts.every(row=>row.csrf_valid_shape),'All six ticket, review and AI submissions use actual session-bound CSRF tokens');
   check(formPosts.filter(row=>['ticket','review'].includes(row.action)).every(row=>row.idempotency_present),'All UI record submissions send idempotency keys');
   check(requests.some(row=>row.action==='bootstrap'&&row.bootstrap_token_valid),'Browser actually requested PHP bootstrap; no synthetic response');
   const stored=inspect();check(stored.notification_attempts===0&&stored.outbox_count>=4,'Notifications remain durable, unsent and unattempted; no worker runs');
@@ -126,7 +158,7 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   check(blocked.length===0,'Frontend did not attempt external provider/navigation requests');
   check(!/PHP (?:Fatal|Warning)|Uncaught/.test(stderr),'PHP produced no warnings or fatal errors');
   const after=snapshot(publicRoot);check(after.sha256===beforeHash,'Production build stayed frozen throughout joined QA');
-  report={passed:true,php:version,checks:checks.length,cases:checks,production_snapshot:{...original,path:path.relative(repository,publicRoot)},production_frozen:true,actual_requests:requests,actual_php_requests:requests.length,mock_responses:0,external_browser_requests:blocked,provider_requests:0,notification_delivery_attempts:0,production_private_read:false,persisted_tickets:stored.tickets.length,persisted_reviews:stored.reviews.length,scope:'Copied production HTML/assets/PHP, real loopback browser and SQLite, synthetic private configuration, blank provider keys; no live credential/delivery validation'};
+  report={passed:true,php:version,checks:checks.length,cases:checks,production_snapshot:{...original,path:path.relative(repository,publicRoot)},production_frozen:true,actual_requests:requests,actual_php_requests:requests.length,mock_responses:0,external_browser_requests:blocked,provider_requests:0,notification_delivery_attempts:0,intentionally_aborted_optional_scripts:dependencyFailures,production_private_read:false,persisted_tickets:stored.tickets.length,persisted_reviews:stored.reviews.length,scope:'Copied production HTML/assets/PHP, real loopback browser and SQLite, desktop/mobile direct-service flows and eager approved reviews, synthetic private configuration, blank provider keys; no live credential/delivery validation'};
  }catch(error){report={passed:false,error:error.message,checks:checks.length,cases:checks,production_snapshot:{sha256:beforeHash},actual_requests:requests,mock_responses:0,page_errors:pageErrors,local_failures:localFailures,external_browser_requests:blocked,php_error_excerpt:stderr.match(/.*(?:PHP (?:Fatal|Warning)|Uncaught).*/g)||[]};process.stderr.write(error.stack+'\n');process.exitCode=1;
  }finally{
   if(browser)await browser.close();if(server&&server.exitCode===null){server.kill('SIGTERM');await new Promise(resolve=>{server.once('exit',resolve);setTimeout(resolve,1000);});}

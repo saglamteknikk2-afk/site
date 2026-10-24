@@ -35,7 +35,7 @@ Paylaşım linkleri girildiğinde PHP sürümündeki kartlar yol tarifi bağlant
 
 Mevcut API dosyası ve dört Gemini anahtar yuvası korunur. Anahtarları sohbete, GitHub’a veya tarayıcıya koymayın. Kullanılan modelin hesapta erişilebilirliği ve ücretsiz plan sınırları gerçek hesap üzerinden kontrol edilmelidir. Aynı projedeki anahtarlar aynı kotayı paylaşır.
 
-AI cevabı bildirim gönderilmesini beklemez. Bildirimler mevcut kalıcı kuyruğa yazılır; üretimde mevcut `worker.php` görevinin çalışması gerekir. Örnek cron komutu (hostingde gerçek yol kullanılmalı):
+AI cevabı bildirim gönderilmesini beklemez. Son ekranda gösterilen cevap kalıcı kayda onaylandıktan sonra sınırlı doğrudan teslim denenir. Başarısızlar kuyrukta korunur; kesin zamanlı raporlar ve güvenilir yeniden deneme için üretimde `worker.php` görevi kurulmalıdır. Örnek cron komutu (hostingde gerçek yol kullanılmalı):
 
 ```sh
 php /tam/yol/httpdocs/worker.php
