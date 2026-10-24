@@ -46,18 +46,24 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: curl, pdo_sqlite, mbstring
+          coverage: none
       - name: Derleme ayrımı ve arşiv bütünlüğünü test et
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: JavaScript ve PHP sözdizimini doğrula
         shell: bash
         run: |
           set -euo pipefail
-          find overrides scripts -type f \( -name '*.js' -o -name '*.cjs' \) -print0 | xargs -0 -r -n1 node --check
+          find overrides scripts tests -type f \( -name '*.js' -o -name '*.cjs' \) -print0 | xargs -0 -r -n1 node --check
           find server -type f -name '*.php' -print0 | xargs -0 -r -n1 php -l
       - name: Düzenlenebilir kaynaklardan güvenli Pages ön izlemesini derle
         run: |
@@ -68,14 +74,24 @@ jobs:
           python scripts/build_site.py --mode production --output build/production
           python scripts/check_site.py build/production --mode production --report build/production-check.json
           python scripts/audit_content.py build/production --strict --report build/content-audit.json
+          python scripts/internal_links.py build/production --report build/crawl-check.json --check
+          php tests/business-runtime.php
+          php tests/brand_registry.php build/production
+          php tests/backend-http.php build/production
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Gerçek tarayıcı bağlantı testini hazırla
         run: |
+          set -euo pipefail
           npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.62.1
-          npx playwright install --with-deps chromium
-          node -e 'process.stdout.write("CHROMIUM_BIN="+require("playwright").chromium.executablePath()+"\n")' >> "$GITHUB_ENV"
+          SAGLAM_CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          if [ -n "$SAGLAM_CHROME_BIN" ]; then
+            printf 'CHROMIUM_BIN=%s\n' "$SAGLAM_CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+            node -e 'process.stdout.write("CHROMIUM_BIN="+require("playwright").chromium.executablePath()+"\n")' >> "$GITHUB_ENV"
+          fi
       - name: Sayfalardan AI Usta ve model bağlantılarını gerçekten tıkla
         run: |
           python scripts/build_site.py --mode preview --output build/qa-navigation/custom --base-path /qa-preview
@@ -85,6 +101,13 @@ jobs:
           node tests/runtime_paths.cjs build/qa-navigation/custom /qa-preview
           node tests/navigation.cjs
           node tests/browser_smoke.cjs
+          node tests/business-maps.cjs
+          node tests/preview-guard.cjs
+          python tests/run_model_checks.py
+          node tests/editorial_links.cjs
+          node tests/interactions.cjs
+          INTERACTION_EXTRAS_ONLY=1 INTERACTION_OUTPUT=build/qa-interactions-extras node tests/interactions.cjs
+          node tests/backend_browser.cjs build/production
       - name: Derleme kontrol raporları
         uses: actions/upload-artifact@v4
         with:
@@ -93,9 +116,15 @@ jobs:
             build/preview-check.json
             build/production-check.json
             build/content-audit.json
+            build/crawl-check.json
             build/custom-check.json
             build/qa-navigation/navigation-final.json
             build/qa/browser-smoke.json
+            build/qa-model/*.json
+            build/qa-interactions/interactions-final.json
+            build/qa-interactions-extras/interactions-final.json
+            build/editorial-links-browser.json
+            build/backend-qa/backend-browser.json
             _site/build-info.json
       - name: GitHub Pages dosyalarını hazırla
         if: github.event_name != 'pull_request'

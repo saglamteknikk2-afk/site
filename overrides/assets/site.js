@@ -46,5 +46,16 @@ window.addEventListener('DOMContentLoaded',()=>{
  }
  if(document.getElementById('regionSearch'))filterRegions();if(!sessionStorage.getItem('st_visit_try')){stApi('visit',{page:location.pathname,source:(()=>{try{const r=document.referrer;if(!r)return 'direct';const h=new URL(r).hostname.toLowerCase();if(h===location.hostname)return 'direct';if(/(^|\.)google\./.test(h))return 'google';if(/(^|\.)yandex\./.test(h))return 'yandex';return 'other'}catch(e){return 'other'}})()}).then(a=>{if(a.enabled)sessionStorage.setItem('st_visit_try','1')}).catch(()=>{})}
 });
-// Canlı sunucudaki mevcut görsellere öncelik verilir. Bu dosyalar paket tarafından üzerine yazılmaz.
-window.addEventListener('DOMContentLoaded',()=>{const logoTargets=document.querySelectorAll('[data-site-logo]');if(logoTargets.length){const logo=new Image();logo.onload=()=>logoTargets.forEach(img=>img.src='/logo.png');logo.src='/logo.png';}const badge=document.getElementById('svgFallbackBadge');if(badge){const stamp=new Image();stamp.alt='Sağlam Teknik müşteri değerlendirme rozeti';stamp.className='w-full h-full object-cover';stamp.onload=()=>{badge.style.display='none';badge.parentElement.prepend(stamp)};stamp.src='/oneri.png'}});
+// Eski logo hedefleri de ortak başlığın manifestten gelen görselini kullanır.
+window.addEventListener('DOMContentLoaded',()=>{
+ const logoTargets=document.querySelectorAll('[data-site-logo]');
+ if(logoTargets.length){
+  const sharedLogo=document.querySelector('.at-brand img, .premium-footer-brand img');
+  const canonicalLogo=sharedLogo?.getAttribute('src')||'/assets/brand/logo-ribbon.png';
+  const logo=new Image();
+  logo.onload=()=>logoTargets.forEach(img=>{img.removeAttribute('srcset');img.src=canonicalLogo});
+  logo.src=canonicalLogo;
+ }
+ const badge=document.getElementById('svgFallbackBadge');
+ if(badge){const stamp=new Image();stamp.alt='Sağlam Teknik müşteri değerlendirme rozeti';stamp.className='w-full h-full object-cover';stamp.onload=()=>{badge.style.display='none';badge.parentElement.prepend(stamp)};stamp.src='/oneri.png'}
+});

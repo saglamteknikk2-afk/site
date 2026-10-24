@@ -5,7 +5,7 @@ Bu depo yalnızca GitHub Pages test ön izlemesidir. Ana siteye, alan adına vey
 ## Düzenlenebilir kaynaklar
 
 - `overrides/`: yeni ana sayfa, CSS, JavaScript, görseller ve public veri dosyaları. Aynı yoldaki arşiv veya sunucu dosyasının üzerine yazar.
-- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları. `brand.json` sade alev-buz S logosunun ve favicon’un tek yol kaynağıdır. Eski mavi ribbon başvuruları da güncel logoya dönüştürülür.
+- `components/`: bütün ziyaretçi sayfalarının ortak başlık ve alt bilgi parçaları. `brand.json` kullanıcının sağladığı temiz mavi S kurdele logosunun ve favicon’un tek yol kaynağıdır. Önceki alev-buz başvuruları da bu özgün logoya dönüştürülür.
 - `overrides/assets/brand-registry.json`: AI Usta, model kütüphanesi, markalar ve servis seçimlerinin ortak marka kaynağı. Doğrulanmış model belgeleri ayrıca mevcut katalogdan bağlanır; marka eklemek kod tablosu üretmez.
 - `server/`: yalnızca üretim paketine alınan PHP ve özgün sunucu dosyaları. İçeriği üretim web köküne taşınır; `/server/` URL'si oluşturulmaz.
 - `templates/private/`: boş yapılandırma örnekleri; web köküne kopyalanmaz. Gerçek anahtar, müşteri kaydı veya veritabanı depoya konmaz. `templates/business-maps-section.html` yalnızca sayfa parçasıdır.
@@ -50,3 +50,13 @@ Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Ma
 `python scripts/audit_content.py build/production --strict --report build/content-audit.json` yalnız ziyaretçi HTML ana içeriğini tarar. Kopya sinyalleri editoryal inceleme içindir; Google/AI sıralama puanı değildir. Kaynak, güvenlik ve ortak gezinme metni gerekli yerlerde korunur. Strict mod kaynak/FAQ/JSON-LD/ana içerik bütünlüğünü ve tam gövde klonlarını denetler. Pages iş akışı hem önizlemeyi hem üretim dosyalarını doğrular; yalnız test sitesi yayımlanır.
 
 `assets/ad-landing-map.json` derlemede mevcut servis adreslerinden üretilir. Reklamın nihai URL’si ilgili servis sayfası olmalıdır; kelime sırasına göre yeni sayfa veya otomatik yönlendirme oluşturulmaz. İlgili sayfalardaki WhatsApp taslağı hizmet başlığını ve sayfa adresini taşır. Bu harita reklam hesabı, bütçe veya dönüşüm ölçümü bağlantısı kurmaz. `site-zip.yml` kaynak değişikliklerinde güncel üretim ZIP artifact’ini hazırlar; ana siteye yüklemez.
+
+## İç bağlantılar ve işlev testleri
+
+`python scripts/internal_links.py build/production --check --report build/crawl-check.json` yalnız gerçek HTML bağlantılarından sayfa grafiğini çıkarır. Üretimdeki bütün dizine uygun sayfaların ana sayfadan en fazla üç bağlantıda bulunmasını kontrol eder. Bu kontrol Google'ın sayfayı taradığı veya dizine aldığı anlamına gelmez.
+
+`tests/interactions.cjs` her ziyaretçi sayfasının tarayıcıda oluşan denetimlerini listeler; tek tek tıklanan düğmeler, doğrulanan bağlantı hedefleri, gizli durumlar ve ayar bekleyen denetimler ayrı raporlanır. `python tests/run_model_checks.py` tek AI Usta akışı, marka kimliği ve kaynak kapsamı kontrollerini izole kök önizlemede çalıştırır. PHP için `php tests/business-runtime.php`, `php tests/brand_registry.php build/production` ve `php tests/backend-http.php build/production` sentetik veri ve yerel sunucu kullanır; gerçek müşteri veya sağlayıcıya ileti göndermez.
+
+Yayın ve Search Console adımları `docs/INDEXLEME-REHBERI.md` içindedir.
+
+`node tests/backend_browser.cjs build/production` gerçek arayüzü geçici PHP sunucusu ve SQLite ile birlikte çalıştırır. API yanıtları taklit edilmez; üretim anahtarları kullanılmaz. PHP çalıştırıcısı gerekirse `SAGLAM_PHP_BIN` ile seçilir.

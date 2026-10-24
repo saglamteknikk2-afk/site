@@ -1,0 +1,528 @@
+{
+  "schema_version": 1,
+  "scope": "Existing MAIN inline links only; no model/code/source/scope changes. Model query selects a documented name; it never supplies scope_confirmed.",
+  "sources": [
+    "500-evler-servisi.html",
+    "arcelik-klima-servisi.html",
+    "ariston-kombi-servisi.html",
+    "arnavutkoy-kombi-servisi.html",
+    "avcilar-kombi-servisi.html",
+    "bagcilar-kombi-servisi.html",
+    "bahcelievler-kombi-servisi.html",
+    "bahcesehir-servisi.html",
+    "bakirkoy-kombi-servisi.html",
+    "basaksehir-kombi-servisi.html",
+    "baymak-klima-servisi.html",
+    "baymak-kombi-servisi.html",
+    "bayrampasa-kombi-servisi.html",
+    "beko-klima-servisi.html",
+    "besiktas-kombi-servisi.html",
+    "beylikduzu-kombi-servisi.html",
+    "beyoglu-kombi-servisi.html",
+    "bosch-kombi-servisi.html",
+    "buderus-kombi-servisi.html",
+    "buyukcekmece-kombi-servisi.html",
+    "catalca-kombi-servisi.html",
+    "daikin-klima-servisi.html",
+    "demirdokum-kombi-servisi.html",
+    "eca-kombi-servisi.html",
+    "esenler-kombi-servisi.html",
+    "esenyurt-kombi-servisi.html",
+    "eyupsultan-kombi-servisi.html",
+    "fatih-kombi-servisi.html",
+    "gaziosmanpasa-kombi-servisi.html",
+    "gungoren-kombi-servisi.html",
+    "kagithane-kombi-servisi.html",
+    "kilyos-servisi.html",
+    "kucukcekmece-kombi-servisi.html",
+    "lg-klima-servisi.html",
+    "merter-servisi.html",
+    "mitsubishi-electric-klima-servisi.html",
+    "mitsubishi-heavy-industries-klima-servisi.html",
+    "samsung-klima-servisi.html",
+    "sariyer-kombi-servisi.html",
+    "sefakoy-servisi.html",
+    "silivri-kombi-servisi.html",
+    "sisli-kombi-servisi.html",
+    "sultangazi-kombi-servisi.html",
+    "vaillant-kombi-servisi.html",
+    "viessmann-kombi-servisi.html",
+    "zeytinburnu-kombi-servisi.html"
+  ],
+  "links": [
+    {
+      "source": "arcelik-klima-servisi.html",
+      "kind": "model",
+      "anchor": "09215 P",
+      "href": "/arcelik-klima-portatif-09215p-12215p-ariza-kodlari.html?model=09215+P&model_id=arcelik-klima-portatif-09215p-12215p#kodlar",
+      "model_id": "arcelik-klima-portatif-09215p-12215p",
+      "model_name": "09215 P",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E1"
+    },
+    {
+      "source": "baymak-klima-servisi.html",
+      "kind": "model",
+      "anchor": "BAYMAK ELEGANT AIR 09",
+      "href": "/baymak-klima-elegant-air-300037670-ariza-kodlari.html?model=BAYMAK+ELEGANT+AIR+09&model_id=baymak-klima-elegant-air-300037670#kodlar",
+      "model_id": "baymak-klima-elegant-air-300037670",
+      "model_name": "BAYMAK ELEGANT AIR 09",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E1"
+    },
+    {
+      "source": "beko-klima-servisi.html",
+      "kind": "model",
+      "anchor": "20915 P",
+      "href": "/beko-klima-portatif-20915p-21215p-ariza-kodlari.html?model=20915+P&model_id=beko-klima-portatif-20915p-21215p#kodlar",
+      "model_id": "beko-klima-portatif-20915p-21215p",
+      "model_name": "20915 P",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E1"
+    },
+    {
+      "source": "daikin-klima-servisi.html",
+      "kind": "model",
+      "anchor": "FTX25KMV1B",
+      "href": "/daikin-klima-ftx-kmv1b-ariza-kodlari.html?model=FTX25KMV1B&model_id=daikin-klima-ftx-kmv1b#kodlar",
+      "model_id": "daikin-klima-ftx-kmv1b",
+      "model_name": "FTX25KMV1B",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "UA"
+    },
+    {
+      "source": "lg-klima-servisi.html",
+      "kind": "model",
+      "anchor": "S09ET",
+      "href": "/lg-klima-s09et-ariza-kodlari.html?model=S09ET&model_id=lg-klima-s09et#kodlar",
+      "model_id": "lg-klima-s09et",
+      "model_name": "S09ET",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "CH53"
+    },
+    {
+      "source": "mitsubishi-electric-klima-servisi.html",
+      "kind": "model",
+      "anchor": "MSZ-FX06NL-CA1",
+      "href": "/mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html?model=MSZ-FX06NL-CA1&model_id=mitsubishi-electric-klima-msz-fx-nl-ca1#kodlar",
+      "model_id": "mitsubishi-electric-klima-msz-fx-nl-ca1",
+      "model_name": "MSZ-FX06NL-CA1",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "P1"
+    },
+    {
+      "source": "mitsubishi-heavy-industries-klima-servisi.html",
+      "kind": "model",
+      "anchor": "SRK20ZS-W",
+      "href": "/mitsubishi-heavy-klima-srk-zs-w-ariza-kodlari.html?model=SRK20ZS-W&model_id=mitsubishi-heavy-klima-srk-zs-w#kodlar",
+      "model_id": "mitsubishi-heavy-klima-srk-zs-w",
+      "model_name": "SRK20ZS-W",
+      "requires_scope_confirmation": true,
+      "matchable": false,
+      "first_code": "RUN 1 kez / TIMER sabit"
+    },
+    {
+      "source": "samsung-klima-servisi.html",
+      "kind": "model",
+      "anchor": "AR09HSFNBWKNET",
+      "href": "/samsung-klima-fjm-hsf-r410a-ariza-kodlari.html?model=AR09HSFNBWKNET&model_id=samsung-klima-fjm-hsf-r410a#kodlar",
+      "model_id": "samsung-klima-fjm-hsf-r410a",
+      "model_name": "AR09HSFNBWKNET",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "E101"
+    },
+    {
+      "source": "ariston-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "CLAS ONE 24 GB/IE 3301043",
+      "href": "/ariston-kombi-clas-one-gb-ie-3301043-ariza-kodlari.html?model=CLAS+ONE+24+GB%2FIE+3301043&model_id=ariston-kombi-clas-one-gb-ie-3301043#kodlar",
+      "model_id": "ariston-kombi-clas-one-gb-ie-3301043",
+      "model_name": "CLAS ONE 24 GB/IE 3301043",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "101"
+    },
+    {
+      "source": "baymak-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Duotec 33",
+      "href": "/baymak-kombi-duotec-33-42-45-ariza-kodlari.html?model=Duotec+33&model_id=baymak-kombi-duotec-33-42-45#kodlar",
+      "model_id": "baymak-kombi-duotec-33-42-45",
+      "model_name": "Duotec 33",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E01"
+    },
+    {
+      "source": "baymak-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Lambert Attivo 240",
+      "href": "/baymak-kombi-lambert-attivo-240-310-ariza-kodlari.html?model=Lambert+Attivo+240&model_id=baymak-kombi-lambert-attivo-240-310#kodlar",
+      "model_id": "baymak-kombi-lambert-attivo-240-310",
+      "model_name": "Lambert Attivo 240",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E01"
+    },
+    {
+      "source": "baymak-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Luna Avant 24 LN",
+      "href": "/baymak-kombi-luna-avant-24-ln-ariza-kodlari.html?model=Luna+Avant+24+LN&model_id=baymak-kombi-luna-avant-24-ln#kodlar",
+      "model_id": "baymak-kombi-luna-avant-24-ln",
+      "model_name": "Luna Avant 24 LN",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E01"
+    },
+    {
+      "source": "bosch-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Condens 2300i W",
+      "href": "/bosch-kombi-condens-2300i-w-ariza-kodlari.html?model=Condens+2300i+W&model_id=bosch-kombi-condens-2300i-w#kodlar",
+      "model_id": "bosch-kombi-condens-2300i-w",
+      "model_name": "Condens 2300i W",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "227"
+    },
+    {
+      "source": "bosch-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Condens 7000i W",
+      "href": "/bosch-kombi-condens-7000i-w-ariza-kodlari.html?model=Condens+7000i+W&model_id=bosch-kombi-condens-7000i-w#kodlar",
+      "model_id": "bosch-kombi-condens-7000i-w",
+      "model_name": "Condens 7000i W",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "0Y-A1"
+    },
+    {
+      "source": "bosch-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Condens 2500 W",
+      "href": "/bosch-kombi-condens-2500-w-ariza-kodlari.html?model=Condens+2500+W&model_id=bosch-kombi-condens-2500-w#kodlar",
+      "model_id": "bosch-kombi-condens-2500-w",
+      "model_name": "Condens 2500 W",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "A7"
+    },
+    {
+      "source": "buderus-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Logamax plus GB122i",
+      "href": "/buderus-kombi-logamax-plus-gb122i-gb022i-ariza-kodlari.html?model=Logamax+plus+GB122i&model_id=buderus-kombi-logamax-plus-gb122i-gb022i#kodlar",
+      "model_id": "buderus-kombi-logamax-plus-gb122i-gb022i",
+      "model_name": "Logamax plus GB122i",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "227"
+    },
+    {
+      "source": "buderus-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Logamax plus GB172i",
+      "href": "/buderus-kombi-logamax-plus-gb172i-ariza-kodlari.html?model=Logamax+plus+GB172i&model_id=buderus-kombi-logamax-plus-gb172i#kodlar",
+      "model_id": "buderus-kombi-logamax-plus-gb172i",
+      "model_name": "Logamax plus GB172i",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "0Y"
+    },
+    {
+      "source": "buderus-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Logamax plus GB062",
+      "href": "/buderus-kombi-logamax-plus-gb062-gb042-ariza-kodlari.html?model=Logamax+plus+GB062&model_id=buderus-kombi-logamax-plus-gb062-gb042#kodlar",
+      "model_id": "buderus-kombi-logamax-plus-gb062-gb042",
+      "model_name": "Logamax plus GB062",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "3C"
+    },
+    {
+      "source": "demirdokum-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Nitromix P 24 NG (HEP)",
+      "href": "/demirdokum-kombi-nitromix-p24-p28-p35-ng-hep-ariza-kodlari.html?model=Nitromix+P+24+NG+%28HEP%29&model_id=demirdokum-kombi-nitromix-p24-p28-p35-ng-hep#kodlar",
+      "model_id": "demirdokum-kombi-nitromix-p24-p28-p35-ng-hep",
+      "model_name": "Nitromix P 24 NG (HEP)",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "F.00"
+    },
+    {
+      "source": "eca-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Confeo Premix 14 HM",
+      "href": "/eca-kombi-confeo-premix-hm-tr-ariza-kodlari.html?model=Confeo+Premix+14+HM&model_id=eca-kombi-confeo-premix-hm-tr#kodlar",
+      "model_id": "eca-kombi-confeo-premix-hm-tr",
+      "model_name": "Confeo Premix 14 HM",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E01"
+    },
+    {
+      "source": "eca-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Citius Premix 14 HM",
+      "href": "/eca-kombi-citius-premix-hm-tr-ariza-kodlari.html?model=Citius+Premix+14+HM&model_id=eca-kombi-citius-premix-hm-tr#kodlar",
+      "model_id": "eca-kombi-citius-premix-hm-tr",
+      "model_name": "Citius Premix 14 HM",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "A00"
+    },
+    {
+      "source": "eca-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Proteus Premix 14 HM",
+      "href": "/eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html?model=Proteus+Premix+14+HM&model_id=eca-kombi-proteus-premix-hm-tr#kodlar",
+      "model_id": "eca-kombi-proteus-premix-hm-tr",
+      "model_name": "Proteus Premix 14 HM",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "E01"
+    },
+    {
+      "source": "vaillant-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "VUW TR 236/5-3",
+      "href": "/vaillant-kombi-ecotec-pro-236-286-5-3-ariza-kodlari.html?model=VUW+TR+236%2F5-3&model_id=vaillant-kombi-ecotec-pro-236-286-5-3#kodlar",
+      "model_id": "vaillant-kombi-ecotec-pro-236-286-5-3",
+      "model_name": "VUW TR 236/5-3",
+      "requires_scope_confirmation": false,
+      "matchable": true,
+      "first_code": "F.00"
+    },
+    {
+      "source": "viessmann-kombi-servisi.html",
+      "kind": "model",
+      "anchor": "Vitodens 200-W Vitotronic",
+      "href": "/viessmann-kombi-vitodens-vitotronic-200-300-ariza-kodlari.html?model=Vitodens+200-W+Vitotronic&model_id=viessmann-kombi-vitodens-vitotronic-200-300#kodlar",
+      "model_id": "viessmann-kombi-vitodens-vitotronic-200-300",
+      "model_name": "Vitodens 200-W Vitotronic",
+      "requires_scope_confirmation": true,
+      "matchable": true,
+      "first_code": "10"
+    },
+    {
+      "source": "sefakoy-servisi.html",
+      "kind": "guide",
+      "anchor": "sıcak su gelmiyor",
+      "href": "/kombi-sicak-su.html"
+    },
+    {
+      "source": "sefakoy-servisi.html",
+      "kind": "guide",
+      "anchor": "su damlaması",
+      "href": "/klima-su-akitiyor.html"
+    },
+    {
+      "source": "500-evler-servisi.html",
+      "kind": "guide",
+      "anchor": "peteklerin ısınmaması",
+      "href": "/kombi-petek-isitmiyor.html"
+    },
+    {
+      "source": "500-evler-servisi.html",
+      "kind": "guide",
+      "anchor": "Klima bakımında",
+      "href": "/klima-bakimi.html"
+    },
+    {
+      "source": "merter-servisi.html",
+      "kind": "guide",
+      "anchor": "bütün klimalar çalışmıyor",
+      "href": "/klima-calismiyor.html"
+    },
+    {
+      "source": "merter-servisi.html",
+      "kind": "guide",
+      "anchor": "Sıcak su şikâyeti",
+      "href": "/kombi-sicak-su.html"
+    },
+    {
+      "source": "bahcesehir-servisi.html",
+      "kind": "guide",
+      "anchor": "yalnız bir peteğin davranışıyla",
+      "href": "/kombi-petek-isitmiyor.html"
+    },
+    {
+      "source": "bahcesehir-servisi.html",
+      "kind": "guide",
+      "anchor": "Yeni klima yerleşiminde",
+      "href": "/klima-montaji.html"
+    },
+    {
+      "source": "kilyos-servisi.html",
+      "kind": "guide",
+      "anchor": "odalar ısınmıyorsa",
+      "href": "/kombi-petek-isitmiyor.html"
+    },
+    {
+      "source": "kilyos-servisi.html",
+      "kind": "guide",
+      "anchor": "Klima ile ısıtma",
+      "href": "/klima-isitmiyor.html"
+    },
+    {
+      "source": "arnavutkoy-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "avcilar-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Kombi modelini belge kapsamıyla karşılaştırın.",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "bahcelievler-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "bakirkoy-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "tam modeli",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "bayrampasa-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "bagcilar-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "basaksehir-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "beylikduzu-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model adı",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "beyoglu-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "tam modeli",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "besiktas-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "buyukcekmece-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model adı",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "esenler-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Model adı",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "esenyurt-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Model adı",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "eyupsultan-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Kombi modelini belge kapsamıyla karşılaştırın.",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "fatih-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "gaziosmanpasa-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Tam model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "gungoren-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Kombi modelini belge kapsamıyla karşılaştırın.",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "kagithane-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "tam model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "kucukcekmece-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model adı",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "sariyer-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Kombi modelini belge kapsamıyla karşılaştırın.",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "silivri-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Tam model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "sultangazi-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "Kombi modelini belge kapsamıyla karşılaştırın.",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "zeytinburnu-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "tam model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "catalca-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    },
+    {
+      "source": "sisli-kombi-servisi.html",
+      "kind": "model_hub",
+      "anchor": "tam model",
+      "href": "/model-ariza-kodlari.html?device=kombi"
+    }
+  ]
+}

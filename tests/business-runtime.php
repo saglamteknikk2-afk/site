@@ -10,6 +10,13 @@ require $root.'/server/api.php';
 $checks=0;$assert=static function(bool $ok,string $name)use(&$checks):void{$checks++;if(!$ok)throw new RuntimeException($name);};
 $remove=function(string $path)use(&$remove):void{if(is_link($path)||!is_dir($path)){unlink($path);return;}foreach(scandir($path) as $part)if($part!=='.'&&$part!=='..')$remove($path.'/'.$part);rmdir($path);};
 try{
+    $originalRoot=$_SERVER['DOCUMENT_ROOT']??null;$originalCwd=getcwd();
+    try{
+        chdir('/');$_SERVER['DOCUMENT_ROOT']='';
+        $assert(st_business_webroot()===realpath($root.'/server'),'Empty CLI document root never resolves to current directory');
+        unset($_SERVER['DOCUMENT_ROOT']);
+        $assert(st_business_webroot()===realpath($root.'/server'),'Missing CLI document root uses the API directory');
+    }finally{chdir($originalCwd);if($originalRoot===null)unset($_SERVER['DOCUMENT_ROOT']);else $_SERVER['DOCUMENT_ROOT']=$originalRoot;}
     foreach([
         ['https://maps.app.goo.gl/UnitTestLink','google',false,true],
         ['https://www.google.com/maps/place/unit-test/','google',false,true],
@@ -64,6 +71,10 @@ try{
     }
     $calls=0;$r=st_gemini_execute(['one','two'],[],'unit-test-model',static function()use(&$calls):array{$calls++;return $calls===1?['status'=>503,'body'=>null]:['status'=>200,'body'=>['candidates'=>[['content'=>['parts'=>[['thought'=>true,'text'=>'not public'],['text'=>'Synthetic safe response']]]]]]];});
     $assert($calls===2&&$r['text']==='Synthetic safe response','Transient failover succeeds and excludes thought parts');
+    $r=st_gemini_execute(['one'],[],'unit-test-model',static function():array{return ['status'=>200,'body'=>['candidates'=>[['content'=>['parts'=>[['thought'=>true,'text'=>'Synthetic hidden reasoning only']]]]]]];});
+    $assert($r['text']==='','Thought-only provider response is never a public answer');
+    $r=st_gemini_execute(['one'],[],'unit-test-model',static function():array{return ['status'=>200,'body'=>null];});
+    $assert($r['text']==='','Malformed successful provider body preserves fallback');
     $calls=0;st_gemini_execute(['one','two','three','four','five'],[],'unit-test-model',static function()use(&$calls):array{$calls++;return ['status'=>503,'body'=>null];});
     $assert($calls===4,'No more than four owner slots');
     st_enqueue(st_db(),'ai:unit-test',['text'=>'Synthetic queued notification']);

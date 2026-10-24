@@ -2,7 +2,7 @@ const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path');
 const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/,'');
 (async()=>{
- const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_BIN||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
  const page=await browser.newPage({viewport:{width:375,height:812}});
  const errors=[],checks=[];let php=0,aiRequests=0;
  page.on('pageerror',error=>errors.push(error.message));

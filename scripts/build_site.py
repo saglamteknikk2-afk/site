@@ -18,6 +18,7 @@ ARCHIVE_SHA256 = '1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb
 TEXT_SUFFIXES = {'.html', '.js', '.css', '.json', '.xml', '.txt', '.svg', '.php'}
 PRIVATE_NAMES = {'owner-admin.html', 'owner-admin.js', 'trusted-proxies.json'}
 PREVIEW_MARKER = '<meta name="saglam-test-site" content="static-preview">'
+LOCAL_PREVIEW_FORMS = {'regionFinder', 'svcSearchForm', 'homeGuideSearch'}
 
 def visitor(path: Path) -> bool:
     return path.suffix == '.html' and path.name not in PRIVATE_NAMES and not re.match(r'(google|yandex_).*\.html$', path.name)
@@ -117,6 +118,17 @@ def clean_preview_html(text: str) -> str:
     text = re.sub(r'<(?:link|script)\b[^>]*(?:preview-readability|preview-enhancements)[^>]*>(?:</script>)?', '', text, flags=re.I)
     return text
 
+def allow_local_preview_forms(text: str) -> str:
+    """Permit known local navigation/search handlers; keep write forms blocked."""
+    def mark(match):
+        tag = match[0]
+        form_id = re.search(r'\bid=["\']([^"\']+)["\']', tag, re.I)
+        if not form_id or form_id[1] not in LOCAL_PREVIEW_FORMS:
+            return tag
+        tag = re.sub(r'\s+data-preview-local=["\'][^"\']*["\']', '', tag, flags=re.I)
+        return tag[:-1] + ' data-preview-local="true">'
+    return re.sub(r'<form\b[^>]*>', mark, text, flags=re.I)
+
 def insert_head(text: str, addition: str) -> str:
     return re.sub(r'(<head\b[^>]*>)', lambda m: m[1] + addition, text, count=1, flags=re.I)
 
@@ -199,6 +211,12 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         landings = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(landings)
         landings.enhance_landings(files)
+    linking_path = root / 'scripts/internal_links.py'
+    if linking_path.exists():
+        spec = importlib.util.spec_from_file_location('saglam_internal_links', linking_path)
+        linking = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(linking)
+        linking.enhance_files(files)
     files.pop('TEST-KAPSAMI.txt', None)
     files.pop('CNAME', None)
     files.pop('reviews-section.html', None)  # source fragment, not a public route
@@ -227,6 +245,7 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                 if 'assets/brand-registry.js' in files and 'assets/brand-registry.js' not in text:
                     text = insert_head(text, f'<script src="{prefix}/assets/brand-registry.js" defer></script>')
                 if mode == 'preview':
+                    text = allow_local_preview_forms(text)
                     text = insert_head(text, '<meta name="robots" content="noindex,nofollow,noarchive">' + PREVIEW_MARKER
                         + '<meta http-equiv="Content-Security-Policy" content="form-action &#39;none&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; worker-src &#39;none&#39;; base-uri &#39;self&#39;">'
                         + f'<script src="{prefix}/assets/preview-guard.js"></script>')

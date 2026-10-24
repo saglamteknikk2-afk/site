@@ -88,6 +88,16 @@ class BuildTests(unittest.TestCase):
             self.assertIn('/site/assets/premium.css',page.read_text());self.assertIn('/site/assets/premium.js',page.read_text())
     def test_production_has_restored_canonical(self):self.assertIn('https://saglamkombiklima.com.tr/',(self.production/'index.html').read_text());self.assertIn('rel="canonical"',(self.production/'index.html').read_text())
     def test_preview_guard_absent_production(self):self.assertNotIn('preview-guard',(self.production/'index.html').read_text())
+    def test_local_search_forms_work_without_unlocking_writes(self):
+        source='<form id="regionFinder"><input></form><form id="svcSearchForm"></form><form id="serviceTicketForm"></form><form id="musteriYorumFormu"></form>'
+        actual=builder.allow_local_preview_forms(source)
+        self.assertIn('<form id="regionFinder" data-preview-local="true">',actual)
+        self.assertIn('<form id="svcSearchForm" data-preview-local="true">',actual)
+        self.assertIn('<form id="serviceTicketForm">',actual)
+        self.assertIn('<form id="musteriYorumFormu">',actual)
+        self.assertEqual(actual,builder.allow_local_preview_forms(actual))
+        self.assertIn('<form id="svcSearchForm" data-preview-local="true">',(self.preview/'servis-sec.html').read_text())
+        self.assertNotIn('<form id="svcSearchForm" data-preview-local="true">',(self.production/'servis-sec.html').read_text())
     def test_path_conversion(self):
         source='<a href="/site/kombi.html"><img src="/assets/a.svg">';self.assertEqual(builder.normalize_paths(source,'/site'),'<a href="/site/kombi.html"><img src="/site/assets/a.svg">')
         self.assertEqual(builder.normalize_paths(source,''),'<a href="/kombi.html"><img src="/assets/a.svg">')

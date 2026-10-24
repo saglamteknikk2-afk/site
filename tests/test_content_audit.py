@@ -72,5 +72,13 @@ class ContentAuditTests(unittest.TestCase):
         self.assertEqual(json.loads(strict.stdout)['strict_violations'][0]['reason'],'missing_main')
     def test_empty_directory_cannot_pass_as_an_audited_release(self):
         self.assertEqual(auditor.audit(self.root)['strict_violations'],[{'reason':'no_visitor_pages'}])
+    def test_inline_faq_links_do_not_invent_punctuation_mismatches(self):
+        question='Hangi bilgiyi paylaşmalıyım?';answer='Cihazın tam modeli, marka/model bilgisi ve E01 ile F.28 kodlarını iletin.'
+        schema={'@type':'FAQPage','mainEntity':[{'@type':'Question','name':question,'acceptedAnswer':{'@type':'Answer','text':answer}}]}
+        self.page('a.html','<h2>'+question+'</h2><p>Cihazın <a href="/model.html">tam modeli</a>, marka/<a href="/model.html">model</a> bilgisi ve E01 ile F.28 kodlarını iletin.</p><script type="application/ld+json">'+json.dumps(schema)+'</script>')
+        self.assertEqual(auditor.audit(self.root)['pages'][0]['faq_visible_mismatches'],[])
+        for before,after in [('E01','E1'),('F.28','F28')]:
+            self.page('a.html','<h2>'+question+'</h2><p>'+answer.replace(before,after)+'</p><script type="application/ld+json">'+json.dumps(schema)+'</script>')
+            self.assertEqual(len(auditor.audit(self.root)['pages'][0]['faq_visible_mismatches']),1)
 
 if __name__=='__main__':unittest.main()

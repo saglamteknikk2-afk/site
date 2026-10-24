@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 MIN_WORDS = 20
 VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 HIDDEN = {'nav','header','footer','script','style','form','table','noscript'}
+BLOCK = {'main','section','article','aside','div','p','h1','h2','h3','h4','h5','h6','li','ul','ol','details','summary','br','blockquote'}
 
 def normalized(text: str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
@@ -44,6 +45,7 @@ class MainContent(HTMLParser):
         frame={'tag':tag,'main':parent['main'] or tag=='main','hidden':parent['hidden'] or tag in HIDDEN,'attrs':' '.join(str(a.get(k) or '') for k in ['class','id','role'])}
         if tag not in VOID: self.stack.append(frame)
         if frame['main'] and not frame['hidden']:
+            if tag in BLOCK: self.main_text.append(' ')
             if tag=='h1': self.h1=True
             if tag=='a' and a.get('href'): self.links.append(a['href'])
             if tag=='p' and self.active is None: self.active={'text':[],'linked':[],'category':module_kind(self.stack),'depth':len(self.stack)}
@@ -57,6 +59,7 @@ class MainContent(HTMLParser):
             self.active['text'].append(text)
             if any(f['tag']=='a' for f in self.stack): self.active['linked'].append(text)
     def handle_endtag(self, tag):
+        if tag in BLOCK and self.stack and self.stack[-1]['main'] and not self.stack[-1]['hidden']: self.main_text.append(' ')
         if tag=='title': self.title=False
         if tag=='h1': self.h1=False
         if tag=='script' and self.ld:
@@ -65,7 +68,7 @@ class MainContent(HTMLParser):
             self.ld=False
         if tag=='p' and self.active:
             item=self.active; self.active=None
-            text=normalized(' '.join(item['text'])); count=len(words(text))
+            text=normalized(''.join(item['text'])); count=len(words(text))
             category=item['category']
             if count and len(words(' '.join(item['linked'])))/count>.6: category='navigation_cta'
             self.paragraphs.append({'text':text,'words':count,'category':category})
@@ -132,7 +135,7 @@ def audit(root: Path) -> dict:
             if kind=='model_guide' and item['category']=='body': item['category']='model_context'
             substantial.append(item); exact[p['text'].casefold()].append({'page':name,'index':i,'category':item['category']})
         body=[p for p in substantial if p['category']=='body']
-        prose=normalized(' '.join(p['text'] for p in body)); text=normalized(' '.join(parser.main_text))
+        prose=normalized(' '.join(p['text'] for p in body)); text=normalized(''.join(parser.main_text))
         expected=sorted({m.get('manual',{}).get('url','') for m in models.get(path.name,[])}-{''})
         missing=[url for url in expected if url not in parser.links]
         faq=[]
@@ -140,7 +143,8 @@ def audit(root: Path) -> dict:
             for obj in walk(schema):
                 if obj.get('@type')=='Question':
                     for label,value in [('question',obj.get('name','')),('answer',obj.get('acceptedAnswer',{}).get('text',''))]:
-                        plain=normalized(re.sub('<[^>]+>',' ',str(value)))
+                        visible=MainContent();visible.feed('<main>'+str(value)+'</main>')
+                        plain=normalized(''.join(visible.main_text))
                         if plain and plain not in text: faq.append({'field':label,'excerpt':plain[:160]})
         row={'path':name,'kind':kind,'main_present':parser.main_seen,'main_words':len(words(text)),'body_substantive_words':len(words(prose)),'substantive_paragraphs':len(substantial),'body_substantive_paragraphs':len(body),'paragraph_categories':dict(Counter(p['category'] for p in substantial)),'metadata':{k:normalized(' '.join(v)) if k in {'title','h1'} else v for k,v in parser.metadata.items()},'source_links':sorted({u for u in parser.links if urlsplit(u).scheme in {'http','https'} and urlsplit(u).hostname not in {'wa.me','saglamkombiklima.com.tr'}}),'expected_manual_urls':expected,'missing_manual_links':missing,'faq_visible_mismatches':faq,'claim_mentions':[m.group(0) for m in re.finditer(r'\b40\s*(?:dk|dakika)|\b1\s*yıl|\bMYK\b',text,re.I)]}
         for key in ['title','description','canonical']:

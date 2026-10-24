@@ -29,6 +29,7 @@ jobs:
           python scripts/build_site.py --mode production --output build/production
           python scripts/check_site.py build/production --mode production --report build/production-check.json
           python scripts/audit_content.py build/production --strict --report build/content-audit.json
+          python scripts/internal_links.py build/production --report build/crawl-check.json --check
           python scripts/package_production.py build/production --output build/validated-production.zip
       - name: Site dosyalarını doğrudan ZIP köküne paketle
         uses: actions/upload-artifact@v4

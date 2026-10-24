@@ -10,7 +10,10 @@ function st_business_inside(string $path, string $root): bool {
 }
 function st_business_webroot(): string {
     $here=realpath(__DIR__)?:__DIR__;
-    $document=isset($_SERVER['DOCUMENT_ROOT'])?realpath((string)$_SERVER['DOCUMENT_ROOT']):false;
+    // CLI/cron often supplies an empty DOCUMENT_ROOT. realpath('') is the
+    // working directory, which must not become the application's web root.
+    $configured=isset($_SERVER['DOCUMENT_ROOT'])?trim((string)$_SERVER['DOCUMENT_ROOT']):'';
+    $document=$configured!==''?realpath($configured):false;
     return $document && st_business_inside($here,$document)?$document:$here;
 }
 function st_business_private_directory(?string $configured=null, ?string $publicRoot=null): string {
