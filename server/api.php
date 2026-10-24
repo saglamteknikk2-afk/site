@@ -351,7 +351,7 @@ function st_db(): PDO {
         CREATE TABLE IF NOT EXISTS rate(k TEXT NOT NULL,action TEXT NOT NULL,window INTEGER NOT NULL,n INTEGER NOT NULL,PRIMARY KEY(k,action,window));
         CREATE TABLE IF NOT EXISTS daily_stats(day TEXT NOT NULL,metric TEXT NOT NULL,val INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(day,metric));
         CREATE TABLE IF NOT EXISTS session_state(sid TEXT PRIMARY KEY,searched INTEGER NOT NULL DEFAULT 0,last_query TEXT NOT NULL DEFAULT '',ticket_sent INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL DEFAULT 0);");
-    $db->exec('BEGIN IMMEDIATE');
+    st_transaction_begin($db);
     try{
         $columns=array_column($db->query('PRAGMA table_info(outbox)')->fetchAll(),'name');
         foreach(['last_error'=>"TEXT NOT NULL DEFAULT ''",'telegram_message_id'=>'INTEGER','delivered'=>'INTEGER'] as $name=>$declaration)if(!in_array($name,$columns,true))$db->exec('ALTER TABLE outbox ADD COLUMN '.$name.' '.$declaration);
@@ -359,8 +359,8 @@ function st_db(): PDO {
             $columns=array_column($db->query('PRAGMA table_info('.$table.')')->fetchAll(),'name');
             foreach(['notification_sent'=>'INTEGER NOT NULL DEFAULT 0','telegram_message_id'=>'INTEGER'] as $name=>$declaration)if(!in_array($name,$columns,true))$db->exec('ALTER TABLE '.$table.' ADD COLUMN '.$name.' '.$declaration);
         }
-        st_backfill_receipts($db);st_analytics_schema($db);st_activity_schema($db);$db->exec('COMMIT');
-    }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
+        st_backfill_receipts($db);st_analytics_schema($db);st_activity_schema($db);$db->commit();
+    }catch(Throwable $e){$db->rollBack();throw $e;}
     $q=$db->prepare('INSERT OR IGNORE INTO meta(k,v) VALUES(?,?)'); $q->execute(['secret',bin2hex(random_bytes(32))]);
     return $db;
 }
@@ -531,7 +531,7 @@ function st_delivery_receipt(PDO $db,string $event,int $message_id): void {
 }
 function st_cleanup(): void {
     $db=st_db();$cfg=st_config();
-    $db->exec('BEGIN IMMEDIATE');
+    st_transaction_begin($db);
     try{
         st_backfill_receipts($db);
         $review_cutoff=time()-max(1,(int)$cfg['pending_retention_days'])*86400;
@@ -550,8 +550,8 @@ function st_cleanup(): void {
         // Gunluk ziyaret sayim anahtarlari en fazla 32 gun saklanir.
         $db->prepare("DELETE FROM meta WHERE k LIKE 'visitor:%' AND substr(k,9,10) < ?")
             ->execute([date('Y-m-d',time()-86400*32)]);
-        $db->exec('COMMIT');
-    }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
+        $db->commit();
+    }catch(Throwable $e){$db->rollBack();throw $e;}
 }
 function st_worker(int $limit=20,?string $event_id=null,bool $on_request=false): array {
     if(!$on_request){st_cleanup();st_check_daily_report(false);}
@@ -815,15 +815,15 @@ function st_dispatch(): void {
     }
     $gps=st_gps_description($a);
     $payload['text'].="\n\n🔍 Siteden Arama: ".$search_line."\n📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')."\n🗺 Konum: ".($gps?:st_location());
-    $db->exec('BEGIN IMMEDIATE');
+    st_transaction_begin($db);
     try {
         $q=$db->prepare('SELECT hash,response FROM idempotency WHERE k=?');$q->execute([$key]);$old=$q->fetch();
-        if($old){$db->exec('COMMIT');if(!hash_equals($old['hash'],$hash))st_fail('Başvuru anahtarı çakıştı.',409);st_finish_record(json_decode($old['response'],true),$action);}
+        if($old){$db->commit();if(!hash_equals($old['hash'],$hash))st_fail('Başvuru anahtarı çakıştı.',409);st_finish_record(json_decode($old['response'],true),$action);}
         $db->prepare($sql)->execute($data);st_enqueue($db,$action.':'.$id,$payload);
         st_stat_inc($action==='review'?'reviews':'tickets');
         if($action==='ticket')st_session_track($session,'ticket');
-        $db->prepare('INSERT INTO idempotency(k,hash,response,created) VALUES(?,?,?,?)')->execute([$key,$hash,json_encode($response,JSON_UNESCAPED_UNICODE),$stamp]);$db->exec('COMMIT');
-    }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
+        $db->prepare('INSERT INTO idempotency(k,hash,response,created) VALUES(?,?,?,?)')->execute([$key,$hash,json_encode($response,JSON_UNESCAPED_UNICODE),$stamp]);$db->commit();
+    }catch(Throwable $e){$db->rollBack();throw $e;}
     st_finish_record($response,$action,201);
 }
 if(!defined('ST_LIBRARY_MODE')) {

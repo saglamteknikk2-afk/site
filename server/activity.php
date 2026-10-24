@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/transaction.php';
 /* Completed UI answers are acknowledged separately from generation, so the
  * notification contains the text actually displayed, not an earlier fallback. */
 function st_activity_schema(PDO $db): void {
@@ -67,17 +68,17 @@ function st_activity_record(string $session,array $input,bool $legacy=false): ar
     $modelId=$row?$row['model_id']:st_activity_optional($input,'model_id');$page=st_activity_optional($input,'page',200);
     if($page!==''&&(!preg_match('~^/[A-Za-z0-9_./-]*$~D',$page)||strpos($page,'..')!==false))st_fail('Sayfa bilgisi geçersiz.');
     $hash=hash('sha256',json_encode([$device,$issue,$answer,$source,$brand,$model,$modelId,$page]));
-    $db->exec('BEGIN IMMEDIATE');
+    st_transaction_begin($db);
     try{
         $replay=$db->prepare('SELECT hash FROM activity_replays WHERE k=?');$replay->execute([$id]);$old=$replay->fetchColumn();
-        if($old!==false){$db->exec('COMMIT');if(!hash_equals($old,$hash))st_fail('Etkinlik anahtarı farklı içerikle kullanılamaz.',409);st_delivery_attempt($id);return ['ok'=>true,'recorded'=>true,'duplicate'=>true,'activity_id'=>$id];}
+        if($old!==false){$db->commit();if(!hash_equals($old,$hash))st_fail('Etkinlik anahtarı farklı içerikle kullanılamaz.',409);st_delivery_attempt($id);return ['ok'=>true,'recorded'=>true,'duplicate'=>true,'activity_id'=>$id];}
         if($serverId!=='')$db->prepare('UPDATE ai_events SET answer=?,page=?,displayed=1 WHERE id=? AND sid=?')->execute([$answer,$page,$id,$sid]);
         else $db->prepare('INSERT INTO ai_events(id,sid,device,brand,model,model_id,issue,answer,source,page,created,displayed) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)')->execute([$id,$sid,$device,$brand,$model,$modelId,$issue,$answer,$source,$page,time()]);
         $eventRow=['id'=>$id,'device'=>$device,'brand'=>$brand,'model'=>$model,'issue'=>$issue,'answer'=>$answer,'source'=>$source,'page'=>$page];
         st_activity_finish($db,$eventRow,$input);
         $db->prepare('INSERT INTO activity_replays(k,hash,event_id,created) VALUES(?,?,?,?)')->execute([$id,$hash,$id,time()]);
-        $db->exec('COMMIT');
-    }catch(Throwable $error){if($db->inTransaction())$db->exec('ROLLBACK');throw $error;}
+        $db->commit();
+    }catch(Throwable $error){if($db->inTransaction())$db->rollBack();throw $error;}
     st_delivery_attempt($id);
     return ['ok'=>true,'recorded'=>true,'duplicate'=>false,'activity_id'=>$id];
 }

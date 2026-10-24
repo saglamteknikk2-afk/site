@@ -49,9 +49,9 @@ try{
     $check($r['bot']&&!$r['recorded']&&$value($db,'2026-10-25','visit_events')===1,'Known bot does not change visit counters');
     foreach(['bingbot/2.0','YandexBot/3.0','HeadlessChrome/130','Lighthouse','UptimeRobot/2.0','AhrefsBot'] as $ua)$check(st_analytics_is_bot($ua),'Recognized crawler or automated monitor');
     $check(!st_analytics_is_bot('Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) Safari/604.1'),'Human mobile browser is not excluded');
-    $db->exec('BEGIN IMMEDIATE');st_analytics_increment($db,'tickets',1,$after);$db->exec('ROLLBACK');
+    st_transaction_begin($db);st_analytics_increment($db,'tickets',1,$after);$db->rollBack();
     $check($value($db,'2026-10-25','tickets')===0,'Counter increment respects caller transaction rollback');
-    $db->exec('BEGIN IMMEDIATE');st_analytics_record_visit($db,$sid,'navigation-event-004','Mozilla/5.0',$after);$db->exec('ROLLBACK');
+    st_transaction_begin($db);st_analytics_record_visit($db,$sid,'navigation-event-004','Mozilla/5.0',$after);$db->rollBack();
     $check($value($db,'2026-10-25','visit_events')===1,'Nested visit operation does not commit caller transaction');
     foreach([['bad','navigation-event-005'],[$sid,'short']] as [$badSid,$badEvent]){
         $thrown=false;try{st_analytics_record_visit($db,$badSid,$badEvent,'Mozilla/5.0',$after);}catch(InvalidArgumentException $e){$thrown=true;}$check($thrown,'Invalid event/session IDs rejected');

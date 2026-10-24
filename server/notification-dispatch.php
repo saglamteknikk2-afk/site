@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/transaction.php';
 /* Event delivery never configures webhooks, generates reports, or opens a DB
  * transaction belonging to a customer record. Telegram offers no idempotency
  * key: an acknowledgement lost after remote acceptance cannot be made exactly
@@ -35,15 +36,15 @@ function st_deliver_outbox(PDO $db,array $cfg,int $limit=20,?string $event_id=nu
     $deadline=microtime(true)+max(100,min(30000,$budget_ms))/1000;$limit=max(1,min(50,$limit));
     for($i=0;$i<$limit;$i++){
         $remaining=(int)floor(($deadline-microtime(true))*1000);if($remaining<100)break;
-        $db->exec('BEGIN IMMEDIATE');
+        st_transaction_begin($db);
         try{
             $q=$db->prepare('SELECT * FROM outbox WHERE sent=0 AND due<=? AND lease<?'.$filter.' ORDER BY due,created,id LIMIT 1');
             $q->execute(array_merge([time(),time()],$filter_params));$row=$q->fetch(PDO::FETCH_ASSOC);
-            if(!$row){$db->exec('COMMIT');break;}
+            if(!$row){$db->commit();break;}
             $lease=time()+max(30,(int)ceil($remaining/1000)+5);
             $q=$db->prepare('UPDATE outbox SET lease=? WHERE id=? AND sent=0 AND lease<?');$q->execute([$lease,$row['id'],time()]);
-            $db->exec('COMMIT');
-        }catch(Throwable $error){if($db->inTransaction())$db->exec('ROLLBACK');throw $error;}
+            $db->commit();
+        }catch(Throwable $error){if($db->inTransaction())$db->rollBack();throw $error;}
         try{
             $payload=json_decode($row['payload'],true);if(!is_array($payload))throw new RuntimeException('Invalid stored notification');
             $method=$payload['_method']??'sendMessage';unset($payload['_method']);
@@ -54,14 +55,14 @@ function st_deliver_outbox(PDO $db,array $cfg,int $limit=20,?string $event_id=nu
             $receipt=$transport($method,$payload,max(100,(int)floor(($deadline-microtime(true))*1000)));
             $message_id=$receipt['result']['message_id']??null;
             if(empty($receipt['ok'])||(in_array($method,['sendMessage','sendPhoto'],true)&&(!is_int($message_id)||$message_id<=0)))throw new STTelegramError('Telegram teslim onayı alınamadı; bildirim kuyrukta.');
-            $db->exec('BEGIN IMMEDIATE');
+            st_transaction_begin($db);
             try{
                 $q=$db->prepare("UPDATE outbox SET sent=1,lease=0,last_error='',telegram_message_id=?,delivered=? WHERE id=? AND lease=? AND sent=0");
                 $q->execute([in_array($method,['sendMessage','sendPhoto'],true)?$message_id:null,time(),$row['id'],$lease]);
                 $confirmed=$q->rowCount()>0;
                 if($confirmed&&in_array($method,['sendMessage','sendPhoto'],true))st_delivery_receipt($db,$row['id'],$message_id);
-                $db->exec('COMMIT');
-            }catch(Throwable $error){if($db->inTransaction())$db->exec('ROLLBACK');throw $error;}
+                $db->commit();
+            }catch(Throwable $error){if($db->inTransaction())$db->rollBack();throw $error;}
             if(!$confirmed)throw new RuntimeException('Notification lease changed before receipt persistence');
             $result['sent']++;
         }catch(Throwable $error){

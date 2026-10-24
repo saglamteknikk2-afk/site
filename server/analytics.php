@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/transaction.php';
 /* Local counters and calendar reports. No IP, credentials or network transport
  * is stored here; notification delivery is handled by the durable outbox. */
 function st_analytics_time(?int $now=null): DateTimeImmutable {
@@ -12,9 +13,9 @@ function st_analytics_date(string $day): DateTimeImmutable {
 }
 function st_analytics_transaction(PDO $db,callable $operation) {
     $owner=!$db->inTransaction();
-    if($owner)$db->exec('BEGIN IMMEDIATE');
-    try{$result=$operation();if($owner)$db->exec('COMMIT');return $result;}
-    catch(Throwable $e){if($owner&&$db->inTransaction())$db->exec('ROLLBACK');throw $e;}
+    if($owner)st_transaction_begin($db);
+    try{$result=$operation();if($owner)$db->commit();return $result;}
+    catch(Throwable $e){if($owner&&$db->inTransaction())$db->rollBack();throw $e;}
 }
 function st_analytics_schema(PDO $db,?int $now=null): void {
     $db->exec("CREATE TABLE IF NOT EXISTS meta(k TEXT PRIMARY KEY,v TEXT NOT NULL);

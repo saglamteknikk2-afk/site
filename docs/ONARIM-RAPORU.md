@@ -2,7 +2,7 @@
 
 24 Ekim 2026. İncelenen son uzak kaynak `eb27d901ac2c0aeb95a2f9275a9917d0a2b8b4be`; önceki teslim `95e73d7` ile arasındaki 21 değişiklik korundu ve yeni akışa birleştirildi. Eski ZIP'te gerçek `site.sqlite` bulunmuyor. Bu nedenle canlı müşteri verileri kurtarıldı veya canlı Telegram teslimi doğrulandı denmiyor.
 
-Doğrulanan üretim dosyalarının `content_sha256` değeri: `d6d45037c6a7a4bb9f96c2cad7de9e4a5a622ee854036d29260ec533fec367de`. Paket kendi `build-info.json` dosyasını içerir; güncel indirmenin bu değerini kontrol edin. Dosya bazında gerçek SHA-256 değerleri sunucuda yalnız CLI ile `kurulum-kontrol.php` tarafından okunur. Ana siteye otomatik aktarım yapılmadı.
+Doğrulanan üretim dosyalarının `content_sha256` değeri: `0e9e682b110ff4a32ba909b3bc921f2a78b2063915a9becf427b0d84a9a8c7fd`. Paket kendi `build-info.json` dosyasını içerir; güncel indirmenin bu değerini kontrol edin. Dosya bazında gerçek SHA-256 değerleri sunucuda yalnız CLI ile `kurulum-kontrol.php` tarafından okunur. Ana siteye otomatik aktarım yapılmadı.
 
 | Konu | Koddan doğrulanan durum ve değişiklik | Kanıt / sınır |
 | --- | --- | --- |
@@ -16,6 +16,8 @@ Doğrulanan üretim dosyalarının `content_sha256` değeri: `d6d45037c6a7a4bb9f
 | Ana sayfa alt dizini | Uzak sürümde başlamış kaldırma korundu; tam bağlantı dizini beş kategori merkezinde tutulur. Ana sayfaya gereksiz uzun liste yeniden eklenmez. | Üretimde 203 sayfa ve 190 sitemap adresi; tamamı en fazla iki HTML bağlantısıyla erişilebilir. 50 ilçe tablosu ve özgün yerel içerikler korunur. |
 | Canlıya yansımama | Plesk belge kökü, FPM/OPcache ve Cloudflare hesabına erişim yok; canlı neden teşhis edilmiş sayılmaz. `server/kurulum-kontrol.php` uygulama klasörü, gerçek dosya özetleri, sürüm parametreleri ve DB adaylarını salt okunur gösterir. | `tests/installation-diagnostics.php`: 18 kontrol; dosya/veritabanı yaratmaz, müşteri satırı veya anahtar göstermez. HTTP üzerinden 404 verir. Plesk adımları `PLESK-KURULUM.md` ve ZIP'teki `KURULUM-ONCESI.txt` içindedir. |
 
-Birleşik yerel sonuçlar: 108 Python birim testi; 106 gerçek yerel HTTP kontrolü; 48 gerçek tarayıcı→PHP kontrolü. PHP yerel motoru 8.4.24; GitHub iş akışı Plesk uyumu için PHP 8.2 ile aynı kaynakları sınar. Güncel Actions sonucu ve tam sayfa/düğme taraması ayrıca yayın iş akışındaki raporlardan okunmalıdır; önceki sürümün raporu yeni sürümün kanıtı sayılmaz.
+Birleşik yerel sonuçlar: 108 Python birim testi; 106 gerçek yerel HTTP kontrolü; 48 gerçek tarayıcı→PHP kontrolü. Yerelde PHP 8.4.24 ve ayrıca resmî Debian paketlerinden çıkarılan PHP 8.2.32 ile gerçek HTTP/tarayıcı ve veritabanı akışları sınandı; GitHub iş akışı da Plesk uyumu için PHP 8.2 kullanır. Güncel Actions sonucu ve tam sayfa/düğme taraması ayrıca yayın iş akışındaki raporlardan okunmalıdır; önceki sürümün raporu yeni sürümün kanıtı sayılmaz.
 
 Tam 00:00 teslimi için İstanbul saat dilimiyle zamanlanmış görev gerekir; görev yoksa ilk trafik sonrası yedek çalışır. Canlı teslimin kanıtı Telegram'ın pozitif `message_id` makbuzudur. Formun kaydedilmiş olması veya kuyrukta durması teslim kanıtı değildir. Hiçbir test gerçek müşteri verisini veya canlı bot/Gemini anahtarını kullanmadı.
+
+PHP 8.2 doğrulamasında ham `BEGIN IMMEDIATE` ile açılan işlemlerin PDO tarafından izlenmemesi saptandı. `server/transaction.php` standart PDO başlangıcı ve veri değiştirmeyen yazma rezervasyonu kullanır; bildirim, rapor, kayıt ve test işlemleri aynı yönteme geçirildi. İç içe işlem ve erken Telegram gönderimi bu şekilde önlenir.

@@ -8,9 +8,9 @@ define('ST_LIBRARY_MODE',true);require dirname(__DIR__).'/server/api.php';
 $checks=0;$assert=static function(bool $condition,string $name)use(&$checks):void{$checks++;if(!$condition)throw new RuntimeException($name);};
 try{
     $cfg=st_config();$assert(count($cfg['configuration_errors'])===2,'Configuration diagnostics identify both invalid Telegram fields');
-    $db=st_db();$id=str_repeat('a',24);$db->exec('BEGIN IMMEDIATE');
+    $db=st_db();$id=str_repeat('a',24);st_transaction_begin($db);
     $db->prepare('INSERT INTO tickets(id,name,phone,district,device,issue,created) VALUES(?,?,?,?,?,?,?)')->execute([$id,'Sentetik QA','05340000000','Küçükçekmece','Kombi','Sentetik arıza gözlemi',time()]);
-    st_enqueue($db,'ticket:'.$id,['text'=>'Sentetik müşteri talebi']);$db->exec('COMMIT');
+    st_enqueue($db,'ticket:'.$id,['text'=>'Sentetik müşteri talebi']);$db->commit();
     $result=st_delivery_attempt('ticket:'.$id);
     $assert($result['failed']===1&&$result['sent']===0,'Invalid token fails locally before any provider request');
     $row=$db->query('SELECT * FROM outbox')->fetch();

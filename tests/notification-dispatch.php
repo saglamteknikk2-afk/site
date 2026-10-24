@@ -5,6 +5,7 @@ declare(strict_types=1);
 $root=dirname(__DIR__);$temporary=sys_get_temp_dir().'/st-notification-qa-'.bin2hex(random_bytes(6));
 mkdir($temporary,0700);mkdir($temporary.'/assets',0700);mkdir($temporary.'/assets/notifications',0700);
 copy($root.'/server/notification-dispatch.php',$temporary.'/notification-dispatch.php');
+copy($root.'/server/transaction.php',$temporary.'/transaction.php');
 class STTelegramError extends RuntimeException {public $retry_after;public function __construct(string $message,int $retry_after=0){parent::__construct($message);$this->retry_after=$retry_after;}}
 $receipt_calls=[];
 function st_delivery_receipt(PDO $db,string $event,int $message_id): void {global $receipt_calls;$receipt_calls[]=[$event,$message_id];}
@@ -52,8 +53,8 @@ try{
  $parallel='ai:parallel';$enqueue($parallel,['text'=>'Synthetic parallel event']);$other=new PDO('sqlite:'.$temporary.'/test.sqlite',null,null,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);$second=null;
  $r=st_deliver_outbox($db,$cfg,6,$parallel,static function($method,$payload,$timeout)use($other,$cfg,$parallel,$success,&$second):array{$second=st_deliver_outbox($other,$cfg,6,$parallel,$success);return $success($method,$payload,$timeout);});
  $assert($r['sent']===1&&$second['sent']===0&&(int)$row($parallel)['sent']===1,'Two actual SQLite connections cannot claim the same notification concurrently');
- $transaction='ai:transaction';$enqueue($transaction,['text'=>'Transaction test']);$db->exec('BEGIN IMMEDIATE');$r=st_deliver_outbox($db,$cfg,6,$transaction,$success);
- $assert(($r['deferred']??'')==='transaction'&&$db->inTransaction()&&(int)$row($transaction)['sent']===0,'A caller transaction is neither committed nor dispatched');$db->exec('ROLLBACK');
+ $transaction='ai:transaction';$enqueue($transaction,['text'=>'Transaction test']);st_transaction_begin($db);$r=st_deliver_outbox($db,$cfg,6,$transaction,$success);
+ $assert(($r['deferred']??'')==='transaction'&&$db->inTransaction()&&(int)$row($transaction)['sent']===0,'A caller transaction is neither committed nor dispatched');$db->rollBack();
  $bad='ai:bad';$enqueue($bad,['text'=>'Invalid stored payload']);$db->prepare('UPDATE outbox SET payload=? WHERE id=?')->execute(['{broken',$bad]);$before=count($calls);$r=st_deliver_outbox($db,$cfg,6,$bad,$success);
  $assert($r['failed']===1&&count($calls)===$before&&$row($bad)['last_error']==='Telegram’a ulaşılamadı; bildirim kuyrukta.','Malformed stored JSON stays pending without exposing implementation details');
  $unack='ai:unack';$enqueue($unack,['text'=>'Unacknowledged reply']);$r=st_deliver_outbox($db,$cfg,6,$unack,static function():array{return ['ok'=>true,'result'=>true];});
