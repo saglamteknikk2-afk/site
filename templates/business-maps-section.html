@@ -1,23 +1,23 @@
 <!-- Optional section: include business-maps.css and deferred business-maps.js once. -->
-<section class="st-business-maps" data-business-maps data-api="/api.php?action=business-maps" aria-labelledby="businessMapsTitle">
+<section class="st-business-maps" data-business-maps data-api="api.php?action=business-maps" aria-labelledby="businessMapsTitle">
   <div class="st-map-intro">
-    <h2 id="businessMapsTitle">Konum bağlantılarımız</h2>
-    <p>İşletmenin paylaşılan harita bağlantıları üzerinden yol tarifi alabilirsiniz.</p>
+    <h2 id="businessMapsTitle">Bölgenizi seçin, bize ulaşın</h2>
+    <p>Hizmet bölgenizi inceleyebilir, servis talebiniz için doğrudan iletişime geçebilirsiniz.</p>
   </div>
   <div class="st-map-grid">
     <article class="st-map-card" data-map-provider="google">
       <span class="st-map-provider">GOOGLE MAPS</span>
-      <h3>Google Haritalar</h3>
-      <p data-map-status role="status">Konum bağlantısı yakında</p>
-      <a class="st-map-action" data-map-link aria-disabled="true" tabindex="-1">Konum bağlantısı yakında</a>
+      <h3 data-map-title>Hizmet bölgenizi bulun</h3>
+      <p data-map-status role="status">İlçe ve mahallenizi seçerek servis bilgilerine ulaşın.</p>
+      <a class="st-map-action" data-map-link href="bolgeler.html">Hizmet bölgelerini incele →</a>
       <button type="button" class="st-map-embed-button" data-map-embed hidden>Haritayı burada aç</button>
       <div class="st-map-canvas" data-map-canvas hidden></div>
     </article>
     <article class="st-map-card" data-map-provider="yandex">
       <span class="st-map-provider">YANDEX MAPS</span>
-      <h3>Yandex Haritalar</h3>
-      <p data-map-status role="status">Konum bağlantısı yakında</p>
-      <a class="st-map-action" data-map-link aria-disabled="true" tabindex="-1">Konum bağlantısı yakında</a>
+      <h3 data-map-title>Ekibimizle iletişime geçin</h3>
+      <p data-map-status role="status">Servis talebinizin ayrıntılarını ekibimizle görüşün.</p>
+      <a class="st-map-action" data-map-link href="iletisim.html">Servis için iletişime geç →</a>
       <button type="button" class="st-map-embed-button" data-map-embed hidden>Haritayı burada aç</button>
       <div class="st-map-canvas" data-map-canvas hidden></div>
     </article>

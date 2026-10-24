@@ -3,6 +3,7 @@
 import importlib.util
 import hashlib
 import json
+import re
 import shutil
 import tempfile
 import unittest
@@ -16,12 +17,15 @@ spec_zip=importlib.util.spec_from_file_location('packager',ROOT/'scripts/package
 packager=importlib.util.module_from_spec(spec_zip);spec_zip.loader.exec_module(packager)
 
 class BuildTests(unittest.TestCase):
+    def markup(self,path):
+        text=path.read_text()
+        return re.sub(r'<script data-st-404-resource>document.write\((.*?)\);</script>',lambda m:json.loads(m[1]),text)
     @classmethod
     def setUpClass(cls):
         cls.temp=tempfile.TemporaryDirectory();cls.root=Path(cls.temp.name)/'source';cls.root.mkdir()
         shutil.copytree(ROOT/'preview-parts',cls.root/'preview-parts')
         (cls.root/'scripts').mkdir()
-        for name in ['production-seo.json','preview-guard.js']:shutil.copy2(ROOT/'scripts'/name,cls.root/'scripts'/name)
+        for name in ['production-seo.json','preview-guard.js','portable_paths.py']:shutil.copy2(ROOT/'scripts'/name,cls.root/'scripts'/name)
         (cls.root/'server').mkdir();(cls.root/'server/api.php').write_text('<?php echo "server";')
         (cls.root/'server/custom.txt').write_text('server')
         (cls.root/'overrides/assets').mkdir(parents=True)
@@ -55,8 +59,8 @@ class BuildTests(unittest.TestCase):
     def test_legacy_logo_and_favicon_use_supplied_artwork(self):
         brand=json.loads((self.root/'components/brand.json').read_text())
         for page in self.preview.glob('*.html'):
-            text=page.read_text()
-            self.assertIn('href="/site'+brand['favicon']+'" type="image/png"',text)
+            text=self.markup(page)
+            self.assertIn('href="'+brand['favicon'].lstrip('/')+'" type="image/png"',text)
             self.assertNotRegex(text,r'''["'](?:/site/|/|\./)?logo\.(?:svg|png)["']''')
     def test_brand_rewrites_legacy_jsonld_and_relative_references(self):
         brand=json.loads((self.root/'components/brand.json').read_text())
@@ -66,7 +70,7 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(actual.count(brand['logo']),4)
     def test_old_mode_marker_is_replaced_once(self):
         text=(self.preview/'bolgeler.html').read_text()
-        self.assertEqual(text.count('data-st-mode='),1)
+        self.assertEqual(text.count('data-st-mode='),2)
         self.assertIn('data-st-mode="preview"',text)
     def test_changed_assets_get_fresh_urls(self):
         source='<script src="/site/assets/a.js?v=old"></script><a href="/guide.html">Guide</a>'
@@ -85,7 +89,15 @@ class BuildTests(unittest.TestCase):
     def test_robots_crawl_allowed(self):self.assertEqual((self.preview/'robots.txt').read_text(),'User-agent: *\nAllow: /\n')
     def test_global_enhancement(self):
         for page in self.preview.glob('*.html'):
-            self.assertIn('/site/assets/premium.css',page.read_text());self.assertIn('/site/assets/premium.js',page.read_text())
+            self.assertIn('href="assets/premium.css',self.markup(page));self.assertIn('src="assets/premium.js',self.markup(page))
+    def test_404_preloader_cannot_resolve_assets_before_dynamic_base(self):
+        source='<head><link rel="canonical" href="https://saglamkombiklima.com.tr/404.html"><link rel="stylesheet" href="assets/a.css"></head><h1>Bulunamadı</h1><img src="assets/brand/logo-ribbon.webp"><script src="assets/a.js" defer></script>'
+        actual=builder.error_page_resources(source)
+        self.assertNotIn('<img src=',actual);self.assertNotIn('<script src=',actual)
+        self.assertNotIn('<link rel="stylesheet"',actual)
+        self.assertIn('<h1>Bulunamadı</h1>',actual)
+        self.assertIn('<link rel="canonical" href="https://saglamkombiklima.com.tr/404.html">',actual)
+        self.assertEqual(re.sub(r'<script data-st-404-resource>document.write\((.*?)\);</script>',lambda m:json.loads(m[1]),actual),source)
     def test_production_has_restored_canonical(self):self.assertIn('https://saglamkombiklima.com.tr/',(self.production/'index.html').read_text());self.assertIn('rel="canonical"',(self.production/'index.html').read_text())
     def test_preview_guard_absent_production(self):self.assertNotIn('preview-guard',(self.production/'index.html').read_text())
     def test_local_search_forms_work_without_unlocking_writes(self):
@@ -97,7 +109,7 @@ class BuildTests(unittest.TestCase):
         self.assertIn('<form id="musteriYorumFormu">',actual)
         self.assertEqual(actual,builder.allow_local_preview_forms(actual))
         self.assertIn('<form id="svcSearchForm" data-preview-local="true">',(self.preview/'servis-sec.html').read_text())
-        self.assertNotIn('<form id="svcSearchForm" data-preview-local="true">',(self.production/'servis-sec.html').read_text())
+        self.assertIn('<form id="svcSearchForm" data-preview-local="true">',(self.production/'servis-sec.html').read_text())
     def test_path_conversion(self):
         source='<a href="/site/kombi.html"><img src="/assets/a.svg">';self.assertEqual(builder.normalize_paths(source,'/site'),'<a href="/site/kombi.html"><img src="/site/assets/a.svg">')
         self.assertEqual(builder.normalize_paths(source,''),'<a href="/kombi.html"><img src="/assets/a.svg">')

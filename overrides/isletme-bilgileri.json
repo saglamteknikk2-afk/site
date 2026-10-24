@@ -3,7 +3,7 @@
   "name": "Sağlam Teknik",
   "url": "https://saglamkombiklima.com.tr/",
   "telephone": "+905346225515",
-  "business_type": "Markalardan bağımsız kombi, klima ve petek teknik servisi",
+  "business_type": "Markalardan Bağımsız Özel Teknik Servis",
   "service_area": "İstanbul Avrupa Yakası",
   "districts": [
     "Arnavutköy",
@@ -48,6 +48,19 @@
   ],
   "source": "https://saglamkombiklima.com.tr/isletme-bilgileri.html",
   "editorial_policy": "https://saglamkombiklima.com.tr/kaynak-ve-yayin-ilkeleri.html",
-  "updated": "2026-10-22",
-  "limitations": "Adres, çalışma saatleri, fiyatlar, değerlendirme puanları ve sertifika bilgileri doğrulanmadığı için bu veri setinde belirtilmez. Randevu uygunluğu görüşmede netleştirilir."
+  "updated": "2026-10-24",
+  "limitations": "MYK belge numarası ve parça/işçilik garantisi işletme sahibinin beyanıdır. Adres, çalışma saatleri ve harita konumu ayrıca yapılandırılır; randevu ve varış uygunluğu görüşmede netleştirilir. Mesleki yeterlilik belgesi üretici yetkili servisi olunduğu anlamına gelmez.",
+  "business_claims": {
+    "qualification": {
+      "status": "business-declared",
+      "credential_number": "YB0200/11UY0032-4/02/502",
+      "declared_on": "2026-10-24"
+    },
+    "warranty": {
+      "status": "business-declared",
+      "duration": "1 yıl",
+      "scope": "Sağlam Teknik tarafından yapılan işçilik ve temin edilip takılan parçalar; yapılan işlem, değişen parça ve garanti başlangıcı servis belgesinde belirtilir.",
+      "declared_on": "2026-10-24"
+    }
+  }
 }

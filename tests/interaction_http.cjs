@@ -13,4 +13,4 @@ async function startServer(directory,base){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));return {origin:'http://127.0.0.1:'+server.address().port,errors,get requests(){return requests;},close:()=>new Promise(resolve=>server.close(resolve))};
 }
 const publicNames=directory=>fs.readdirSync(directory).filter(n=>n.endsWith('.html')&&n!=='owner-admin.html'&&!/^(?:google|yandex_)/.test(n)).sort();
-module.exports={startServer,resolveFile,publicNames};
+module.exports={startServer,resolveFile,publicNames,mime};

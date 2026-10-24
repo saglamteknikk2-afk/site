@@ -1,7 +1,10 @@
 
 'use strict';
+const stRuntimeRoot = document.currentScript?.src ? new URL('../', document.currentScript.src) : new URL('./', location.href);
+function stSiteURL(value){return window.STEnvironment?.href(value)||new URL(String(value).replace(/^\/+/,''),stRuntimeRoot).href}
 let stCsrf='',stBootstrap=null,stTokenTime=0;
 async function stFetchJson(path,options={},timeoutMs=20000){
+ if(window.ST_PREVIEW===true||window.STEnvironment?.preview)throw Object.assign(Error(window.ST_PREVIEW_MESSAGE||'Bu test ön izlemesinde gönderim kapalıdır. Bilgileriniz kaydedilmedi ve ileti gönderilmedi.'),{code:'PREVIEW_DISABLED'});
  if(location.protocol==='file:')throw Error('Bu dosya önizlemesinde form gönderilemez. PC denemesini başlatma dosyasıyla açın.');
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
  try{
@@ -13,7 +16,7 @@ async function stFetchJson(path,options={},timeoutMs=20000){
 }
 async function stToken(){
  if(stTokenTime&&Date.now()-stTokenTime>1800000)stBootstrap=null;
- if(!stBootstrap)stBootstrap=stFetchJson('/api.php?action=bootstrap',{},6000).then(a=>{
+ if(!stBootstrap)stBootstrap=stFetchJson(stSiteURL('api.php?action=bootstrap'),{},6000).then(a=>{
   if(typeof a.csrf!=='string'||!/^\d+\.[a-f0-9]{64}$/.test(a.csrf))throw Error('Form bağlantısı doğrulanamadı. Sayfayı yenileyip tekrar deneyin.');
   stCsrf=a.csrf;stTokenTime=Date.now();return stCsrf;
  }).catch(e=>{stBootstrap=null;throw e});return stBootstrap;
@@ -23,7 +26,7 @@ async function stApi(action,data,key){
  if(window.stAttachLocation&&(action==='review'||action==='ticket'))stAttachLocation(data);
  for(let attempt=0;attempt<2;attempt++){
   const token=await stToken();
-  try{return await stFetchJson('/api.php?action='+encodeURIComponent(action),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':token,...(key?{'Idempotency-Key':key}:{})},body:JSON.stringify(data)},action==='ai'?18000:20000);}
+  try{return await stFetchJson(stSiteURL('api.php?action='+encodeURIComponent(action)),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':token,...(key?{'Idempotency-Key':key}:{})},body:JSON.stringify(data)},action==='ai'?18000:20000);}
   catch(error){if(attempt===0&&error.status===403&&error.message==='Sayfayı yenileyip tekrar deneyin.'){stBootstrap=null;stTokenTime=0;continue;}throw error;}
  }
 }
@@ -31,11 +34,11 @@ function stEscape(value){return String(value??'').replace(/[&<>"']/g,x=>({'&':'&
 function stError(id,message){const e=document.getElementById(id);if(e){e.textContent=message;e.classList.toggle('hidden',!message)}}
 function stAiContact(phone){const box=document.getElementById('aiResultBox');const link=box?.querySelector('a[href^="tel:"]');const button=box?.querySelector('button');if(link){link.href='tel:'+(phone||'05346225515');link.innerHTML='<i class="fa-solid fa-phone"></i> '+(phone?phone+' Acil Hattını Ara':'Ustayı Hemen Ara')}if(button)button.classList.toggle('hidden',!!phone)}
 function stRequestKey(form,data){if(window.stAttachLocation)stAttachLocation(data);const encoded=JSON.stringify(data);if(form.dataset.requestBody!==encoded){form.dataset.requestBody=encoded;form.dataset.requestKey=stId()}return form.dataset.requestKey}
-function requestRegion(button){const d=button.dataset.district;const device=button.dataset.device||(location.pathname.includes('-klima-')?'klima':'kombi');window.location.href='/servis-sec.html#'+new URLSearchParams({cihaz:device,ilce:d,mahalle:button.dataset.neighborhood||''}).toString()}
+function requestRegion(button){const d=button.dataset.district;const device=button.dataset.device||(location.pathname.includes('-klima-')?'klima':'kombi');window.location.href=stSiteURL('servis-sec.html')+'#'+new URLSearchParams({cihaz:device,ilce:d,mahalle:button.dataset.neighborhood||''}).toString()}
 function stNormalize(value){return value.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i')}
 function filterRegions(){const q=stNormalize(document.getElementById('regionSearch')?.value||'').replace(/[^a-z0-9]/g,'');let count=0,semts=0;document.querySelectorAll('[data-region-group]').forEach(group=>{let shown=0;group.querySelectorAll('[data-neighborhood]').forEach(button=>{const match=stNormalize(button.dataset.district+' '+button.dataset.neighborhood).replace(/[^a-z0-9]/g,'').includes(q);button.hidden=!match;if(match)shown++});group.hidden=shown===0;group.open=!!q&&shown>0;count+=shown});document.querySelectorAll('[data-semt-card]').forEach(card=>{card.hidden=!stNormalize(card.dataset.semt+' '+card.dataset.aliases+' '+card.dataset.district).replace(/[^a-z0-9]/g,'').includes(q);if(!card.hidden)semts++});const status=document.getElementById('regionStatus');if(status)status.textContent=(semts?semts+' semt · ':'')+count+' mahalle gösteriliyor';const empty=document.getElementById('regionEmpty');if(empty)empty.hidden=!!(count||semts)}
 function filterBrands(){const q=stNormalize(document.getElementById('brandSearch')?.value||'');document.querySelectorAll('[data-brand]').forEach(e=>e.hidden=!stNormalize(e.dataset.brand).includes(q))}
-function requestSearchedRegion(){const q=document.getElementById('regionSearch')?.value.trim();if(q)window.location.href='/servis-sec.html#'+new URLSearchParams({arama:q}).toString()}
+function requestSearchedRegion(){const q=document.getElementById('regionSearch')?.value.trim();if(q)window.location.href=stSiteURL('servis-sec.html')+'#'+new URLSearchParams({arama:q}).toString()}
 window.addEventListener('DOMContentLoaded',()=>{
  const nav=document.getElementById('stMainNav'),header=nav?.closest('header');
  if(header){
@@ -51,11 +54,11 @@ window.addEventListener('DOMContentLoaded',()=>{
  const logoTargets=document.querySelectorAll('[data-site-logo]');
  if(logoTargets.length){
   const sharedLogo=document.querySelector('.at-brand img, .premium-footer-brand img');
-  const canonicalLogo=sharedLogo?.getAttribute('src')||'/assets/brand/logo-ribbon.png';
+  const canonicalLogo=sharedLogo?.getAttribute('src')||stSiteURL('assets/brand/logo-ribbon.webp');
   const logo=new Image();
   logo.onload=()=>logoTargets.forEach(img=>{img.removeAttribute('srcset');img.src=canonicalLogo});
   logo.src=canonicalLogo;
  }
  const badge=document.getElementById('svgFallbackBadge');
- if(badge){const stamp=new Image();stamp.alt='Sağlam Teknik müşteri değerlendirme rozeti';stamp.className='w-full h-full object-cover';stamp.onload=()=>{badge.style.display='none';badge.parentElement.prepend(stamp)};stamp.src='/oneri.png'}
+ if(badge){const stamp=new Image();stamp.alt='Sağlam Teknik müşteri değerlendirme rozeti';stamp.className='w-full h-full object-cover';stamp.onload=()=>{badge.style.display='none';badge.parentElement.prepend(stamp)};stamp.src=stSiteURL('assets/brand/armut-tavsiye.webp')}
 });

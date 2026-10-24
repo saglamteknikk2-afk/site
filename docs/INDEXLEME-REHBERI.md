@@ -9,6 +9,7 @@ Yerel paket 203 ziyaretçi sayfası içerir; 201'i dizine uygun, 404 ve seçim e
 - Ana sayfa, bir ilçe/hizmet sayfası ve kaynaklı bir model rehberi doğru HTTPS adresinde **200** dönmeli; giriş ekranı, doğrulama engeli veya hata sayfası göstermemeli.
 - Dizine alınması istenen sayfanın HTML'inde ve HTTP `X-Robots-Tag` başlığında yanlışlıkla `noindex` bulunmamalı. Üretime test dosyalarının taşınmadığını gerçek yanıt üzerinden kontrol edin.
 - Her önemli sayfada tek, doğru canonical bulunmalı. HTTP/www/eski adresler amaçlanan HTTPS adrese yönlenmeli; yönlendirme döngüsü olmamalı.
+- Önizleme de üretim canonical/OG/şema adreslerini kullanır; `noindex` önizlemede ayrıca kalır. Canlıya yüklemeden önce önizleme adresinden görülen üretim canonical'ını yanlışlıkla GitHub adresine çevirmeyin.
 - robots.txt önemli içeriğin taranmasını engellememeli. Gizli API/yönetim yollarının engelleri korunur. `noindex` için tarayıcının sayfaya erişebilmesi gerektiğini unutmayın.
 
 Yerel dosya testleri bu sunucu kontrollerinin yerine geçmez. Sorun varsa önce onu düzeltin; yeniden gönderim teknik engeli kaldırmaz.
@@ -24,6 +25,8 @@ Kayıtlı dizin sonucundaki son tarama, sayfa getirme, kullanıcı canonical'ı 
 Üretim sitemap adresi: `https://saglamkombiklima.com.tr/sitemap.xml`.
 
 Dosya yalnız gerçek, canonical, dizine uygun sayfaları içermeli. `noindex`, yönetim/API, filtre kopyaları veya teorik kombinasyon URL'leri eklenmemeli. Yeni içerik güncellemesinden sonra `lastmod` gerçekten değişen içeriği yansıtmalı. Sitemap'in başarıyla okunması, içindeki bütün URL'lerin tarandığı veya dizine alındığı anlamına gelmez.
+
+Son metadata adımı sitemap'i gerçek dosya kümesinden üretir; güvenilir güncelleme zamanı yoksa isteğe bağlı `lastmod` alanını eklemez. `llms.txt` sitemap veya Search Console başvurusu değildir; 25 ilçe ve gerçekten yayımlanmış rehberlerin okunabilir özetidir.
 
 ## 4. Gerekirse önemli sayfa için indeksleme isteyin
 
@@ -48,4 +51,8 @@ Haftalık kontrolde önemli canonical sayfaların durumunu ve organik gösterim/
 
 Taranabilirlik gerekli bir teknik koşuldur; sıralama, her sorguda görünme, AI önerisi veya müşteri sayısı garantisi sağlamaz. Bu rehber hesap bağlamaz ve otomatik indeksleme başvurusu yapmaz.
 
+Şema incelemesinde bir hizmet, bir ilçe ve bir model sayfasını örnekleyin: tek `@graph`, doğru üretim URL'leri ve görünür içerikle aynı bilgi bulunmalı. Kaynaklı model rehberi `TechArticle`, gerçek hizmet `Service` olarak ayrılır; SSS yalnız görünür sorulara aittir. Google FAQ zengin sonucunu Mayıs 2026'da kaldırdığı için SSS'nin arama sonucunda açılmasını beklemeyin. Armut 4.8 rozeti, işletmenin kendi sitesinde Google yıldız sonucu sağlayacak `AggregateRating` olarak sunulmaz. Google Rich Results Test yalnız desteklediği özellikleri sınar; bütün Schema.org türlerini göstermemesi tek başına bozuk JSON-LD demek değildir.
+
 Resmî kaynaklar: [URL Denetimi](https://support.google.com/webmasters/answer/9012289), [Sayfa indeksleme raporu](https://support.google.com/webmasters/answer/7440203), [Yeniden tarama isteme](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl), [Sitemap rehberi](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview), [Google noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing), [Canonical](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
+
+Şema kaynakları (24 Ekim 2026'da kontrol edildi): [Genel şema kuralları](https://developers.google.com/search/docs/appearance/structured-data/sd-policies), [Self-serving işletme değerlendirmeleri](https://developers.google.com/search/docs/appearance/structured-data/review-snippet#self-serving-reviews), [Güncel FAQ/llms.txt değişiklik kaydı](https://developers.google.com/search/updates).

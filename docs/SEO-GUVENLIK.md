@@ -1,6 +1,6 @@
 # SEO, güvenlik ve ortam sınırları
 
-23 Ekim 2026 — kaynak ve mevcut yerel çıktı incelemesi. Bu belge canlı üretim yayını, güvenlik sertifikası veya sıralama garantisi değildir. Son commit, son test sayıları ve GitHub Actions yayın sonucu teslim sırasında güncel kayıtlarla doğrulanmalıdır.
+24 Ekim 2026 — kaynak ve mevcut yerel çıktı incelemesi. Bu belge canlı üretim yayını, güvenlik sertifikası veya sıralama garantisi değildir. Son commit, son test sayıları ve GitHub Actions yayın sonucu teslim sırasında güncel kayıtlarla doğrulanmalıdır.
 
 ## Önizleme ve üretim
 
@@ -10,7 +10,13 @@
 
 Önizlemede bütün ziyaretçi HTML sayfalarına `noindex,nofollow,noarchive`, görünür test bildirimi ve ilk sırada `preview-guard.js` eklenir. robots.txt taramaya izin verir; sitemap önizlemeye alınmaz. Böylece tarayıcı `noindex` etiketini okuyabilir. `noindex` parola koruması değildir ve tarayıcı engelleyicisi güvenlik sınırı sayılmaz; önizlemeye zaten gizli veri konmaz. PHP, özel ayarlar ve yönetim dosyaları önizleme derlemesinden çıkarılır. Form, AI/API, konum ve ileti gönderimleri kapalıdır; gerçek başarı mesajı gösterilmemelidir.
 
-Üretimde önizleme kilidi ve `/site/` öneki kaldırılır, özgün canonical/SEO etiketleri geri yüklenir. Üretimde seçici/404/yönetim gibi dizine alınmaması gereken sayfaların `noindex` kalması hata sayılmaz. Yerel dosya kontrolü; canlı yönlendirme, TLS, WAF, HTTP başlıkları, gerçek tarama veya Core Web Vitals ölçümü yerine geçmez.
+Canonical, `og:url` ve sayfanın JSON-LD kimlikleri her iki ortamda da `https://saglamkombiklima.com.tr/` alan adını kullanır. Önizleme `noindex` durumunu korur; üretimde önizleme kilidi kaldırılır. Üretimde seçici/404/yönetim gibi dizine alınmaması gereken sayfaların `noindex` kalması hata sayılmaz. Yerel dosya kontrolü; canlı yönlendirme, TLS, WAF, HTTP başlıkları, gerçek tarama veya Core Web Vitals ölçümü yerine geçmez.
+
+`scripts/semantic_seo.py::enhance_files(files)` son HTML kümesindeki eski şema bloklarını tek `@graph` içinde uzlaştırır. Ziyaretçi sayfalarında `HVACBusiness`, `WebSite`, `WebPage` ve `BreadcrumbList`; gerçek hizmet sayfalarında `Service`; model ve teknik rehberlerde `TechArticle` bulunur. `FAQPage` yalnız MAIN içindeki gerçek soru/cevaplardan üretilir; açılabilir `details/summary` ve görünür `#yerel-sorular .local-faq-item` başlık/paragraf düzenleri desteklenir; menü, form ve gizli metinler SSS yapılmaz. Kod tabloları ve anlamları değiştirilmez. Modelin görünür resmî belge bağlantısı, belge başlığı ve bölüm/sayfa konumu makaleye kaynak olarak eklenir; üretici kaynaklarının dış alan adları korunur.
+
+Geçerli Schema.org işaretlemesi ile Google'ın desteklediği zengin sonuç türü aynı şey değildir. Google'ın güncel değişiklik kaydına göre FAQ zengin sonucu 7 Mayıs 2026'dan beri gösterilmez; SSS şeması Google'da açılır sonuç veya sıralama vaadi olarak sunulmaz. Yerel JSON sözdizimi ve görünür metin eşleşmesi denetimleri, Google Rich Results Test veya canlı URL Denetimi yerine geçmez.
+
+Üretim `sitemap.xml` dosyası yalnız mevcut, canonical, dizine uygun ziyaretçi sayfalarından yeniden üretilir; yönetim, 404 ve seçim ekranı eklenmez. Güvenilir değişiklik zamanı bulunmadan her derlemeye yeni `lastmod` yazılmaz. Üretim `robots.txt`, API/PHP ve yönetim yollarını engeller; `owner-admin.html` dosyaları ayrıca `noindex,nofollow` taşır. robots.txt erişim denetimi değildir; taraması engellenen bir adresin `noindex` etiketinin görülmesi de garanti değildir. Yönetim yetkilendirmesi sunucuda korunmalıdır.
 
 ## İçerik ve arama görünürlüğü
 
@@ -38,7 +44,7 @@ Gemini anahtarları yalnız web kökü dışındaki `private/saglam-teknik/site_
 
 Dört anahtar yuvası korunmuştur; aynı projedeki anahtarlar ayrı kota kabul edilmez. Modelin hesapta kullanılabilir olduğu veya ücretsiz sınırın yeterli olduğu kodun varlığından çıkarılamaz. Kaynakta toplam AI ağ bütçesi sınırlandırılmıştır; kota/fatura/yetki hatasında diğer anahtarlarla devam edilmez. Önce kaynaklı yerel rehber gösterilir. Gerçek sağlayıcı bağlantısı ve performansı ayrıca doğrulanmadıkça “AI çalışıyor” denmez.
 
-`haritalar.json` dosyası yalnız gerçek Google/Yandex paylaşım bağlantılarını ve isteğe bağlı iframe **src URL** değerlerini taşır. Boş örnek, doğrulanmış işletme konumu değildir. Üretim `business-maps` yanıtı yalnız izin verilen kamuya açık URL alanlarını döndürür; API anahtarı veya özel ayar içeriğini açmaz. Iframe/HTML kodu kabul edilmez, harita ziyaretçi seçerse yüklenir. Önizlemede harita API isteği yapılmaz. Kullanıcı gerçek bağlantıları henüz sağlamadıysa kartlar pasif kalır.
+`haritalar.json` dosyası yalnız gerçek Google/Yandex paylaşım bağlantılarını ve isteğe bağlı iframe **src URL** değerlerini taşır. Boş örnek, doğrulanmış işletme konumu değildir. Üretim `business-maps` yanıtı yalnız izin verilen kamuya açık URL alanlarını döndürür; API anahtarı veya özel ayar içeriğini açmaz. Iframe/HTML kodu kabul edilmez, harita ziyaretçi seçerse yüklenir. Önizlemede harita API isteği yapılmaz. Gerçek harita bağlantısı bulunmadığında işletme konumu uydurulmaz; bölge ve iletişim yönlendirmesi gerçek mevcut sayfalara gider.
 
 Sunucu tarafında parametreli SQL, CSRF/yetki kontrolleri, sınırlama, güvenli çıktı ve hata işleme korunmalıdır. Apache `.htaccess` kurallarının varlığı, Plesk/Nginx katmanında özel dosyaların gerçekten engellendiğini kanıtlamaz; canlı kurulumda ayrıca kontrol gerekir. TLS doğrulaması kapatılmaz. PHP 8.2 uyumluluğu hedeflenir; gerçek sürümün güvenlik yaması ve eklentileri hosting sağlayıcısıyla doğrulanır.
 
@@ -46,7 +52,9 @@ Sunucu tarafında parametreli SQL, CSRF/yetki kontrolleri, sınırlama, güvenli
 
 Önizleme mevcut yayımlı değerlendirmeleri gösterebilir; canlı onaylı yorum API'sini çağırmaz, yeni yorum kaydetmez. Üretimde `api.php?action=reviews` yalnız onaylı site yorumlarını yükler; yeni kayıtlar yayın onayıyla yönetici incelemesine gider. Özel üretim veritabanı test ortamına kopyalanmaz. Mevcut API tek yanıtta en fazla 500 onaylı kayıt döndürür; daha büyük yorum arşivleri için ayrıca sayfalama gerekir. Canlıdaki bütün kayıtların korunduğu, ancak gerçek API/veritabanı kapsamı ayrıca doğrulanınca söylenebilir; bu tasarım özel kayıtların taşındığı anlamına gelmez.
 
-`oneri.png`, kullanıcı tarafından sağlanan Armut rozetidir. Görsel yeniden üretilmez veya puanı değiştirilmez. Bu dosyanın gösterilmesi resmî Armut API entegrasyonu, güncel platform puanının bağımsız doğrulanması veya platform garantisi değildir. Site yorumlarıyla platform puanı karıştırılmaz; sahte `aggregateRating` eklenmez. Yeni profil bağlantısı veya rozet kullanım açıklaması, gerçek kaynak doğrulanmadan uydurulmaz.
+`oneri.png`, kullanıcı tarafından sağlanan Armut rozetidir. Görsel yeniden üretilmez veya puanı değiştirilmez. Bu dosyanın gösterilmesi resmî Armut API entegrasyonu, güncel platform puanının bağımsız doğrulanması veya platform garantisi değildir. Site yorumlarıyla platform puanı karıştırılmaz. İşletmenin kendi sitesindeki kendi işletme puanı, üçüncü taraf rozetinden gelse de Google'ın self-serving yerel işletme değerlendirmesi sınırına girer; bu nedenle `AggregateRating`, sahte değerlendirme sayısı veya yıldız sonucu vaadi eklenmez. Yeni profil bağlantısı veya rozet kullanım açıklaması, gerçek kaynak doğrulanmadan uydurulmaz.
+
+`llms.txt`, katalogdaki 25 ilçeyi, telefon ve bağımsız servis ilkesini, mevcut önemli hizmet/işletme sayfalarını ve gerçekten yayımlanan model URL'lerini listeler. Teorik seçimler veya dosyası olmayan model adresleri eklenmez. MYK numarası ve garanti kapsamı `isletme-bilgileri.json` içindeki işletme beyanından alınır; haricî doğrulama, belge sorgu bağlantısı veya üretici yetkisi uydurulmaz. Bu dosyanın varlığı Google görünürlüğünü olumlu ya da olumsuz etkileyen özel bir koşul değildir.
 
 ## Bildirim, ölçüm ve reklam
 
@@ -67,6 +75,7 @@ python -m unittest discover -s tests -p 'test_*.py' -v
 python scripts/build_site.py --mode production --output build/production
 python scripts/check_site.py build/production --mode production --report build/production-check.json
 python scripts/audit_content.py build/production --report build/content-audit.json --strict
+python -m unittest discover -s tests -p 'test_semantic_seo.py' -v
 php tests/business-runtime.php
 ```
 
@@ -76,6 +85,8 @@ Kaynaklar ve mevcut çıktılar üzerinde yapılan sınırlı Google/Telegram an
 
 Resmî dayanaklar: [GitHub Pages statik sınırları](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site), [Google noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing), [Google AI görünürlüğü](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), [Google canonical](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [Google reklam ve organik arama ayrımı](https://developers.google.com/search/docs/fundamentals/do-i-need-seo).
 
+24 Ekim 2026'da ayrıca okunan resmî şema kaynakları: [Görünür içerik ve yapılandırılmış veri kuralları](https://developers.google.com/search/docs/appearance/structured-data/sd-policies), [İşletmenin kendisi hakkındaki değerlendirme sınırı](https://developers.google.com/search/docs/appearance/structured-data/review-snippet#self-serving-reviews), [FAQ özelliğinin kaldırılması ve llms.txt açıklaması](https://developers.google.com/search/updates).
+
 Aynı son denetleyiciyle `d1af1ff289b0eb6db1d0f7f123a0f474b65f37a9` kaynaklarının üretim derlemesi yeniden karşılaştırıldı: en az 20 kelimelik esas içerik paragraflarında editoryal inceleme gerektiren bire bir tekrar grubu 21’den 0’a indi. Ziyaretçi sayfa sayısı 203 kaldı. 50 ilçe, 5 semt, 16 marka ve 6 hizmet sayfasındaki düzenlemeler değerli kaynak ve adresleri korur. Son raporda gerekli ortak kaynak/güvenlik/gezinti modüllerinden 40 tekrar grubu vardır. Bu sınırlı sözcüksel denetim anlamsal benzersizlik, taranma veya sıralama garantisi değildir.
 
-Varış/garanti/MYK beyanları `components/service-assurances.json` içinde teyit beklemektedir. İşletmenin bölgesel süre koşulları, yazılı garanti kapsamı ve geçerli belgesi doğrulanmadan “40 dk”, “1 yıl” veya belge doğrulaması kesin vaat olarak ilk ekrana taşınmaz. Arayüz süreyi görüşmeye, yazılı koşulları istemeye ve belge kapsamını sormaya yönlendirir.
+24 Ekim 2026'da işletme sahibi MYK numarasını `YB0200/11UY0032-4/02/502`, garanti beyanını da servis fişinde belirtilen kendi taktığı parça ve uyguladığı işçilik için 1 yıl olarak bildirdi. `components/service-assurances.json` bu iki kaydı `business-declared` olarak taşır; bu, belgenin haricî geçerlilik denetimi yapıldığı anlamına gelmez. Kapsam ve koşullar hizmet öncesinde yazılı görüşülür. Sabit “40 dk” varış vaadi doğrulanmış değildir; süre konum ve ekip uygunluğuyla görüşülür.

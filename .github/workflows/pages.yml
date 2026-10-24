@@ -103,6 +103,8 @@ jobs:
           node tests/browser_smoke.cjs
           node tests/business-maps.cjs
           node tests/preview-guard.cjs
+          node tests/environment.cjs
+          node tests/portable_deploy.cjs
           python tests/run_model_checks.py
           node tests/editorial_links.cjs
           node tests/interactions.cjs

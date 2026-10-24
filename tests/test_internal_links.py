@@ -28,6 +28,20 @@ registry = module('crawl_registry', ROOT / 'scripts/brand_registry.py')
 landings = module('crawl_landings', ROOT / 'scripts/landing_actions.py')
 
 
+def strip_directories(text):
+    pattern = r'<details\b[^>]*id="(?:st-hub-directory|st-district-navigation|st-brand-models)"[^>]*>'
+    while match := re.search(pattern, text):
+        depth = 0
+        for token in re.finditer(r'</?details\b[^>]*>', text[match.start():]):
+            depth += -1 if token[0].startswith('</') else 1
+            if depth == 0:
+                text = text[:match.start()] + text[match.start() + token.end():]
+                break
+        else:
+            raise AssertionError('Unclosed generated directory')
+    return text
+
+
 class InternalLinkTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -65,8 +79,8 @@ class InternalLinkTests(unittest.TestCase):
         for name in self.stats['touched_pages']:
             text = self.built[name].decode()
             self.assertIn('assets/internal-links.css', text)
-            self.assertIn('class="st-reading-links"', text)
-        self.assertNotIn('assets/internal-links.css', self.built['index.html'].decode())
+            self.assertRegex(text, r'class="st-reading-links(?:\s|\")')
+        self.assertIn('assets/internal-links.css', self.built['index.html'].decode())
 
     def test_no_new_route_canonical_schema_model_or_sitemap(self):
         self.assertEqual(set(self.files), set(self.original))
@@ -74,8 +88,9 @@ class InternalLinkTests(unittest.TestCase):
             before, after = self.original[name].decode(), self.files[name].decode()
             for pattern in [r'<h1\b[\s\S]*?</h1>', r'<link\b[^>]*rel="canonical"[^>]*>', r'<script\b[^>]*type="application/ld\+json"[^>]*>[\s\S]*?</script>']:
                 self.assertEqual(re.findall(pattern, before), re.findall(pattern, after), name)
-            clean = re.sub(r'<nav\b[^>]*data-st-reading-links="1"[^>]*>[\s\S]*?</nav>', '', after)
-            clean = clean.replace('<link rel="stylesheet" href="/assets/internal-links.css">', '')
+            clean = strip_directories(after)
+            clean = re.sub(r'<nav\b[^>]*data-st-reading-links="1"[^>]*>[\s\S]*?</nav>', '', clean)
+            clean = clean.replace('<link rel="stylesheet" href="assets/internal-links.css">', '')
             self.assertEqual(before, clean, name)
         for name in ['sitemap.xml', 'assets/verified-faults.json', 'assets/organic-catalog.json']:
             self.assertEqual(self.original[name], self.files[name])
@@ -91,8 +106,8 @@ class InternalLinkTests(unittest.TestCase):
                 self.assertLessEqual(len(hrefs), 6, name)
                 self.assertEqual(len(hrefs), len(set(hrefs)), name)
                 for href in hrefs:
-                    self.assertIn(urlsplit(href).path.lstrip('/'), self.files, name)
-                    self.assertNotIn(href, existing, (name, href))
+                    self.assertIn(urlsplit(linking.canonical_href(href, name)).path.lstrip('/'), self.files, name)
+                    self.assertNotIn(linking.canonical_href(href, name), existing, (name, href))
 
     def test_regions_have_all25_combi_and25_climate_links_without_a_duplicate_list(self):
         catalog = json.loads(self.files['assets/servis-katalog.json'])
@@ -100,7 +115,7 @@ class InternalLinkTests(unittest.TestCase):
         for district in catalog['districts']:
             for device in ('kombi', 'klima'):
                 self.assertIn('/' + linking.slug(district) + '-' + device + '-servisi.html', links)
-        self.assertEqual(self.stats['hub_links_added'], 0)
+        self.assertGreater(self.stats['hub_links_added'], 0)
         self.assertNotIn('id="st-district-links"', self.files['bolgeler.html'].decode())
 
     def test_missing_region_destination_is_repaired_without_new_urls(self):
@@ -110,8 +125,8 @@ class InternalLinkTests(unittest.TestCase):
         self.assertEqual(removed, 1)
         files['bolgeler.html'] = text.encode()
         result = linking.enhance_files(files)
-        self.assertEqual(result['hub_links_added'], 1)
-        self.assertIn('href="/kucukcekmece-klima-servisi.html"', files['bolgeler.html'].decode())
+        self.assertGreater(result['hub_links_added'], 0)
+        self.assertIn('href="kucukcekmece-klima-servisi.html"', files['bolgeler.html'].decode())
         self.assertEqual(set(files), set(self.original))
 
     def test_all_verified_model_pages_link_to_their_own_device_and_brand_filter(self):
@@ -121,20 +136,26 @@ class InternalLinkTests(unittest.TestCase):
             text = self.files[name].decode()
             self.assertIn('data-st-reading-links="1"', text)
             links = linking.parse(text).main_links
-            self.assertIn('/' + model['device'] + '-servisi.html', links)
-            self.assertTrue(any(href.startswith('/model-ariza-kodlari.html?') and 'brand=' in href for href in links), name)
+            self.assertIn(model['device'] + '-servisi.html', links)
+            self.assertTrue(any(href.startswith('model-ariza-kodlari.html?') and 'brand=' in href for href in links), name)
         depths = {row['path'].lstrip('/'): row['depth'] for row in self.graph['routes']}
         self.assertTrue(all(depths[Path(model['path']).name] <= 3 for model in faults['models']))
 
-    def test_owned_brand_and_semt_sources_are_not_rewritten(self):
+    def test_brand_sources_keep_prose_and_receive_only_verified_exact_models(self):
         catalog = json.loads(self.files['assets/servis-katalog.json'])
         districts = {linking.slug(name) for name in catalog['districts']}
         for name, before in self.original.items():
             match = re.fullmatch(r'(.+)-(?:kombi|klima)-servisi\.html', name)
-            if match and match[1] not in districts or name in {linking.slug(n) + '-servisi.html' for n in catalog['semts']}:
+            if name in {linking.slug(n) + '-servisi.html' for n in catalog['semts']}:
                 self.assertEqual(before, self.files[name], name)
+            if match and match[1] not in districts:
+                after = self.files[name].decode()
+                self.assertIn('id="st-brand-models"', after)
+                clean = strip_directories(after).replace('<link rel="stylesheet" href="assets/internal-links.css">', '')
+                self.assertEqual(before.decode(), clean, name)
+                self.assertNotIn('scope_confirmed=', after)
 
-    def test_idempotent_and_no_unsupported_neighbor_districts(self):
+    def test_idempotent_and_every_district_has_the_requested_navigation(self):
         before = copy.copy(self.files)
         result = linking.enhance_files(self.files)
         self.assertEqual(before, self.files)
@@ -143,8 +164,42 @@ class InternalLinkTests(unittest.TestCase):
         for district in catalog['districts']:
             for device in ('kombi', 'klima'):
                 name = linking.slug(district) + '-' + device + '-servisi.html'
-                if district not in linking.LOCAL_CONTEXT:
-                    self.assertEqual(self.original[name], self.files[name], name)
+                text = self.files[name].decode()
+                self.assertIn('id="st-district-navigation"', text)
+                self.assertIn('Yakın hizmet bölgeleri', text)
+                self.assertIn('İlgili 5 belirti rehberi', text)
+                self.assertNotIn('en sık görülen', text.lower())
+                links = {linking.canonical_href(href, name) for href in linking.parse(text).main_links}
+                self.assertIn('/' + device + '-servisi.html', links)
+                for target in linking.DISTRICT_SYMPTOMS[device]: self.assertIn('/' + target, links)
+                for nearby in linking.NEARBY_DISTRICTS[district]:
+                    self.assertIn('/' + linking.slug(nearby) + '-' + device + '-servisi.html', links)
+
+    def test_all_six_hubs_have_direct_static_links_to_every_published_category(self):
+        catalog = json.loads(self.files['assets/servis-katalog.json'])
+        index = json.loads(self.files['assets/page-index.json'])
+        required = {row['path'] for row in index if row['kind'] in ('district', 'brand')}
+        required.update('/' + linking.slug(name) + '-servisi.html' for name in catalog['semts'])
+        required.update(row['path'] for config in catalog['devices'].values() for row in config['symptoms'])
+        for name in linking.HUBS:
+            text = self.files[name].decode()
+            self.assertIn('data-st-link-directory="hub"', text)
+            links = {urlsplit(linking.canonical_href(href, name)).path for href in linking.parse(text).main_links}
+            self.assertTrue(required <= links, (name, sorted(required - links)))
+        self.assertEqual(self.stats['directory_pages']['hub'], 6)
+        self.assertEqual(self.stats['directory_pages']['district'], 50)
+        self.assertEqual(self.stats['directory_pages']['brand-models'], 16)
+
+    def test_emitted_links_and_styles_are_document_relative(self):
+        for name in self.stats['touched_pages']:
+            text = self.files[name].decode()
+            before = self.original[name].decode()
+            self.assertIn('href="assets/internal-links.css"', text)
+            old_links = set(linking.parse(before).main_links)
+            for href in set(linking.parse(text).main_links) - old_links:
+                self.assertFalse(href.startswith(('/', 'https:', 'http:')), (name, href))
+        self.assertEqual(linking.relative_href('/assets/internal-links.css', 'docs/help.html'), '../assets/internal-links.css')
+        self.assertEqual(linking.relative_href('/kombi-servisi.html#bilgi', 'docs/help.html'), '../kombi-servisi.html#bilgi')
 
     def test_graph_does_not_count_javascript_or_nofollow_as_crawl_paths(self):
         files = {'index.html': b'<a class="at-brand" href="/"></a><script>const href="/hidden.html"</script><a href="/hidden.html" rel="nofollow">Hidden</a>', 'hidden.html': b'<main><h1>Hidden</h1></main>', '404.html': b'<meta name="robots" content="noindex">'}

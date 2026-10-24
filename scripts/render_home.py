@@ -8,10 +8,21 @@ def render_assurances(data: dict) -> tuple[str, str]:
     cards, notes = [], []
     for item in data['items']:
         # Pending business claims never become published guarantees by implication.
-        title = item['declared_title'] if item['status'] == 'verified' else item['title']
+        title = item['declared_title'] if item['status'] in {'verified', 'business-declared'} else item['title']
         cards.append('<a href="#servis-kosullari"><strong>' + html.escape(title) + '</strong><span>' + html.escape(item['detail']) + '</span></a>')
         notes.append('<details><summary>' + html.escape(title) + '</summary><p>' + html.escape(item['conditions']) + '</p></details>')
     return ''.join(cards), ''.join(notes)
+
+def render_reviews(reviews: list[dict]) -> str:
+    cards = []
+    esc = lambda value: html.escape(str(value))
+    for index, review in enumerate(reviews[:6]):
+        author = review.get('author') or 'Müşteri'
+        rating = max(1, min(5, int(review.get('rating', 5))))
+        initial = author.replace('*', '').strip()[:1].upper() or 'S'
+        meta = ' · '.join(str(review[k]) for k in ('date', 'service') if review.get(k))
+        cards.append(f'<article class="pr-review" data-review-id="existing-{index}"><div class="pr-review-head"><span class="pr-review-avatar" aria-hidden="true">{esc(initial)}</span><div class="pr-review-identity"><h3>{esc(author)}</h3><p class="pr-review-meta">{esc(meta)}</p></div></div><span class="pr-review-rating" role="img" aria-label="5 üzerinden {rating} puan">' + '★' * rating + '☆' * (5-rating) + '</span><blockquote>' + esc(review.get('comment') or 'Bu değerlendirmeye yazılı not eklenmemiş.') + '</blockquote><p class="pr-review-origin">Mevcut sitedeki değerlendirme</p></article>')
+    return ''.join(cards)
 
 def render_home(files: dict[str, bytes], root: Path) -> None:
     template = root / 'components/home.html'
@@ -34,6 +45,13 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
         if not full.is_file():
             raise ValueError(f'Home component is missing: {path}')
         body = body.replace('{{'+token+'}}',full.read_text())
+    reviews = json.loads((root / 'components/reviews.json').read_text())
+    body = body.replace('<div id="reviewsContainer" class="pr-review-list" aria-label="Müşteri değerlendirmeleri"></div>', '<div id="reviewsContainer" class="pr-review-list" aria-label="Müşteri değerlendirmeleri">' + render_reviews(reviews) + '</div>')
+    body = body.replace('Diğer değerlendirmeleri göster', 'Daha Fazla Yorum Göster')
+    body = body.replace('Değerlendirmeleri okumak ve yorum formunu kullanmak için JavaScript’i etkinleştirin.', 'İlk altı değerlendirme yukarıda okunabilir. Diğer yorumlar ve yorum formu için JavaScript’i etkinleştirin.')
+    body = body.replace('Mevcut sitedeki değerlendirmeler yükleniyor.', 'Mevcut siteden aktarılan değerlendirmeler.')
+    seed_json = json.dumps(reviews, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
+    body += '<script id="st-review-seeds" type="application/json">' + seed_json + '</script>'
     if re.search(r'\{\{[A-Z_]+\}\}', body):
         raise ValueError('Unresolved home component')
     scripts = ['site.js','location.js','verified-faults.js','fault-lookup.js','fault-advisories.js','diagnostic-guide.js',

@@ -1,5 +1,5 @@
 {
-  "logo": "/assets/brand/logo-ribbon.png",
+  "logo": "/assets/brand/logo-ribbon.webp",
   "favicon": "/assets/brand/favicon.png",
   "source": "User-supplied original clean blue S ribbon. Existing cropped/resized assets retained; artwork and colors unchanged.",
   "source_sha256": "704f0afb26ed152f0af6fc5a2b8f88f1cd4cde71cf6aea0ca5be5abc1a90131f",
@@ -14,6 +14,7 @@
   "alt": "Sağlam Teknik mavi S kurdele simgesi",
   "logo_aliases": [
     "/assets/brand/logo-flame-ice.png",
-    "/assets/logo.svg"
+    "/assets/logo.svg",
+    "/assets/brand/logo-ribbon.png"
   ]
 }

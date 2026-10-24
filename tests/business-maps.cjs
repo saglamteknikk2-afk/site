@@ -14,24 +14,24 @@ const assert=require('assert/strict');
   let checks=0;
   const equal=(actual,expected,message)=>{checks++;assert.deepEqual(actual,expected,message);};
   try {
-    async function scenario({windowPreview=false,bodyPreview=false,maps}) {
+    async function scenario({windowPreview=false,bodyPreview=false,maps,mount='/'}) {
       const page=await browser.newPage();const api=[];const external=[];const errors=[];
       page.on('pageerror',error=>errors.push(error.message));
       await page.route('**/*',async route=>{
         const u=new URL(route.request().url());
-        if(u.origin==='https://maps-test.invalid'&&u.pathname==='/')return route.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><html><head><meta charset="utf-8"><script>window.ST_PREVIEW='+windowPreview+'</script></head><body'+(bodyPreview?' data-st-mode="preview"':'')+'>'+markup+'<script>'+script+'</script></body></html>'});
-        if(u.origin==='https://maps-test.invalid'&&u.pathname==='/api.php'){
+        if(u.origin==='https://maps-test.invalid'&&u.pathname===mount)return route.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><html><head><meta charset="utf-8"><script>window.ST_PREVIEW='+windowPreview+'</script></head><body'+(bodyPreview?' data-st-mode="preview"':'')+'>'+markup+'<script>'+script+'</script></body></html>'});
+        if(u.origin==='https://maps-test.invalid'&&u.pathname===mount+'api.php'){
           api.push(u.href);return route.fulfill({contentType:'application/json',body:JSON.stringify({ok:true,maps:maps||{}})});
         }
         external.push(u.href);return route.abort();
       });
-      await page.goto('https://maps-test.invalid/');
+      await page.goto('https://maps-test.invalid'+mount);
       if(windowPreview||bodyPreview){
         equal(api.length,0,'Preview must not contact even the sanitized API');
-        equal(await page.locator('[data-map-link][href]').count(),0,'Preview links remain truthfully disabled');
-        equal(await page.locator('[data-map-link][aria-disabled="true"]').count(),2,'Both preview cards disabled');
+        equal(await page.locator('[data-map-link][href]').count(),2,'Preview keeps useful local navigation');
+        equal(await page.locator('[data-map-link][aria-disabled="true"]').count(),0,'Local navigation is enabled without pretending maps are configured');
       }else{
-        await page.waitForFunction(()=>document.querySelector('.st-map-card.is-configured')||document.querySelector('[data-map-status]').textContent.includes('alınamıyor')||window.__mapsTestWait);
+        await page.waitForFunction(()=>document.querySelector('[data-business-maps]').getAttribute('aria-busy')==='false');
         equal(api.length,1,'Production fetches the single sanitized endpoint');
       }
       equal(external.length,0,'No external map request before explicit embed click');
@@ -54,9 +54,19 @@ const assert=require('assert/strict');
     // Invalid Google host remains disabled while a valid Yandex link makes the
     // asynchronous completion observable without relying on an arbitrary sleep.
     const invalid=await scenario({maps:{google:{url:'https://www.google.com.evil.invalid/maps/place/Test',embed_url:'https://www.google.com/maps/embed?pb=test'},yandex:maps.yandex}});
-    equal(await invalid.page.locator('[data-map-provider="google"] [data-map-link]').getAttribute('href'),null,'Lookalike host rejected in the browser');
+    equal(await invalid.page.locator('[data-map-provider="google"] [data-map-link]').getAttribute('href'),'https://maps-test.invalid/bolgeler.html','Lookalike host falls back to real local area navigation');
     equal(await invalid.page.locator('[data-map-provider="google"] [data-map-embed]').isHidden(),true,'Rejected share URL cannot enable an embed');
     await invalid.page.close();
+    const empty=await scenario({maps:{}});
+    equal(await empty.page.locator('[data-map-provider="google"] [data-map-link]').getAttribute('href'),'https://maps-test.invalid/bolgeler.html','Unconfigured Google card opens regions');
+    equal(await empty.page.locator('[data-map-provider="yandex"] [data-map-link]').getAttribute('href'),'https://maps-test.invalid/iletisim.html','Unconfigured Yandex card opens contact');
+    equal(await empty.page.locator('iframe').count(),0,'Unconfigured maps cannot create embeds');
+    equal(await empty.page.getByText('Konum bağlantısı yakında').count(),0,'Passive placeholder removed');
+    await empty.page.close();
+    const mounted=await scenario({maps,mount:'/site/'});
+    equal(mounted.api[0],'https://maps-test.invalid/site/api.php?action=business-maps','API remains inside deployment mount');
+    equal(await mounted.page.locator('.st-map-card.is-configured').count(),2,'Configured maps work in a deployment subdirectory');
+    await mounted.page.close();
     process.stdout.write(JSON.stringify({checks,errors:0,real_network_requests:0})+'\n');
   } finally {await browser.close();}
 })().catch(error=>{process.stderr.write(error.stack+'\n');process.exitCode=1;});

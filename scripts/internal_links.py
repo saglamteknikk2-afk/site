@@ -5,6 +5,7 @@ from collections import Counter, deque
 import html
 from html.parser import HTMLParser
 import json
+import posixpath
 from pathlib import Path, PurePosixPath
 import re
 from urllib.parse import unquote, urlencode, urljoin, urlsplit
@@ -68,6 +69,41 @@ def slug(value: str) -> str:
     return re.sub(r'[^a-z0-9]+', '-', value.translate(str.maketrans('çğıöşüÇĞİÖŞÜ', 'cgiosuCGIOSU')).lower()).strip('-')
 
 
+def relative_href(href: str, source: str) -> str:
+    """Emit document-relative links; canonical paths remain comparison keys only."""
+    canonical = canonical_href(href, source)
+    if not canonical: return ''
+    url = urlsplit(canonical)
+    target = posixpath.relpath(url.path.lstrip('/'), posixpath.dirname(source) or '.')
+    return target + (('?' + url.query) if url.query else '') + (('#' + url.fragment) if url.fragment else '')
+
+
+HUBS = ('index.html', 'bolgeler.html', 'hizmetler.html', 'markalar.html', 'ariza-rehberi.html', 'model-ariza-kodlari.html')
+
+# Curated nearby navigation, not a claim of a shared administrative boundary,
+# closest-route calculation, local branches, arrival times or technical patterns.
+NEARBY_DISTRICTS = {
+    'Arnavutköy': ('Başakşehir', 'Çatalca'), 'Avcılar': ('Küçükçekmece', 'Beylikdüzü', 'Esenyurt'),
+    'Bahçelievler': ('Bakırköy', 'Güngören', 'Bağcılar'), 'Bakırköy': ('Bahçelievler', 'Küçükçekmece', 'Zeytinburnu'),
+    'Bayrampaşa': ('Gaziosmanpaşa', 'Esenler'), 'Bağcılar': ('Bahçelievler', 'Esenler', 'Küçükçekmece'),
+    'Başakşehir': ('Arnavutköy', 'Küçükçekmece'), 'Beylikdüzü': ('Avcılar', 'Esenyurt', 'Büyükçekmece'),
+    'Beyoğlu': ('Şişli', 'Beşiktaş'), 'Beşiktaş': ('Şişli', 'Sarıyer'),
+    'Büyükçekmece': ('Beylikdüzü', 'Esenyurt', 'Silivri'), 'Esenler': ('Bağcılar', 'Bayrampaşa'),
+    'Esenyurt': ('Avcılar', 'Beylikdüzü', 'Büyükçekmece'), 'Eyüpsultan': ('Kağıthane', 'Gaziosmanpaşa'),
+    'Fatih': ('Zeytinburnu', 'Eyüpsultan'), 'Gaziosmanpaşa': ('Bayrampaşa', 'Sultangazi'),
+    'Güngören': ('Bahçelievler', 'Zeytinburnu'), 'Kağıthane': ('Şişli', 'Sarıyer', 'Eyüpsultan'),
+    'Küçükçekmece': ('Avcılar', 'Bahçelievler', 'Başakşehir'), 'Sarıyer': ('Beşiktaş', 'Kağıthane'),
+    'Silivri': ('Çatalca', 'Büyükçekmece'), 'Sultangazi': ('Gaziosmanpaşa', 'Eyüpsultan'),
+    'Zeytinburnu': ('Bakırköy', 'Fatih', 'Güngören'), 'Çatalca': ('Silivri', 'Arnavutköy'),
+    'Şişli': ('Beşiktaş', 'Kağıthane', 'Beyoğlu'),
+}
+
+DISTRICT_SYMPTOMS = {
+    'kombi': ('kombi-basinci.html', 'kombi-su-akitiyor.html', 'kombi-sicak-su.html', 'kombi-petek-isitmiyor.html', 'kombi-atesleme.html'),
+    'klima': ('klima-sogutmuyor.html', 'klima-isitmiyor.html', 'klima-su-akitiyor.html', 'klima-sesli-calisiyor.html', 'klima-buzlaniyor.html'),
+}
+
+
 # Existing sources relate these semt descriptions to the named district guides.
 # Ambiguous semt names remain descriptions; these links never choose an address.
 LOCAL_CONTEXT = {
@@ -102,6 +138,8 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     pages = {name: parse(content.decode('utf-8')) for name, content in files.items() if visitor(name)}
     catalog = json.loads(files.get('assets/servis-katalog.json', b'{}'))
     faults = json.loads(files.get('assets/verified-faults.json', b'{}'))
+    brands = json.loads(files.get('assets/brand-registry.json', b'{}'))
+    page_index = json.loads(files.get('assets/page-index.json', b'[]'))
     model_pages = {}
     for model in faults.get('models', []):
         model_pages.setdefault(PurePosixPath(model['path']).name, []).append(model)
@@ -109,9 +147,100 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     changed = []
     added = 0
     hub_added = 0
+    directory_counts = Counter()
 
     def label(target):
         return ' '.join(pages[target].h1).strip() or target.removesuffix('.html').replace('-', ' ')
+
+    def write_fragment(name, fragment, identifier, kind):
+        nonlocal added
+        if name not in pages: return
+        text = files[name].decode('utf-8')
+        if f'id="{identifier}"' in text or '</main>' not in text: return
+        text = text.replace('</main>', fragment + '</main>', 1)
+        if 'assets/internal-links.css' in files and 'assets/internal-links.css' not in text:
+            css = relative_href('/assets/internal-links.css', name)
+            text = text.replace('</head>', '<link rel="stylesheet" href="' + css + '"></head>', 1)
+        files[name] = text.encode('utf-8')
+        pages[name] = parse(text)
+        changed.append(name)
+        added += len(parse(fragment).links)
+        directory_counts[kind] += 1
+
+    def link_list(name, entries):
+        output = []
+        seen = set()
+        for href, title_text in entries:
+            canonical = canonical_href(href, name)
+            target = urlsplit(canonical).path.lstrip('/')
+            if target not in pages or target == name or canonical in seen: continue
+            seen.add(canonical)
+            output.append('<li><a href="' + html.escape(relative_href(canonical, name), quote=True) + '">' + html.escape(title_text or label(target)) + '</a></li>')
+        return '<ul>' + ''.join(output) + '</ul>'
+
+    # Every requested hub contains complete static groups, even with JavaScript off.
+    # Only existing visitor pages are linked; a brand identity never creates a URL.
+    groups = []
+    for device in ('kombi', 'klima'):
+        groups.append((device.capitalize() + ' ilçe rehberleri', [('/' + key + '-' + device + '-servisi.html', district + ' ' + device + ' servisi') for key, district in districts.items()]))
+    groups.append(('Semt rehberleri', [('/' + slug(name) + '-servisi.html', name + ' kombi ve klima rehberi') for name in catalog.get('semts', [])]))
+    brand_routes = {}
+    for row in brands.get('brands', []):
+        for device in row.get('devices', []):
+            target = row['id'] + '-' + device + '-servisi.html'
+            if target in pages and row['id'] not in districts:
+                brand_routes[target] = (row['name'], device)
+    for item in page_index:
+        target = PurePosixPath(item.get('path', '')).name
+        if item.get('kind') == 'brand' and target in pages and target not in brand_routes:
+            for device, config in catalog.get('devices', {}).items():
+                for brand in config.get('brands', []):
+                    if target == slug(brand) + '-' + device + '-servisi.html': brand_routes[target] = (brand, device)
+    symptoms = set()
+    services = set()
+    for device, config in catalog.get('devices', {}).items():
+        groups.append((device.capitalize() + ' marka sayfaları', [('/' + target, brand + ' ' + device + ' rehberi') for target, (brand, kind) in sorted(brand_routes.items()) if kind == device]))
+        paths = sorted({PurePosixPath(urlsplit(row['path']).path).name for row in config.get('symptoms', [])})
+        symptoms.update(paths)
+        groups.append((device.capitalize() + ' belirti rehberleri', [('/' + target, '') for target in paths]))
+        services.update(PurePosixPath(urlsplit(row['path']).path).name for row in config.get('services', []))
+    services.add('petek-temizligi.html')
+    groups.append(('Hizmet ve işlem kapsamları', [('/' + target, '') for target in sorted(services)]))
+    readings = {PurePosixPath(item.get('path', '')).name for item in page_index if item.get('kind') == 'article'} - services - symptoms - {slug(name) + '-servisi.html' for name in catalog.get('semts', [])} - set(HUBS)
+    groups.append(('Model, kod ve güvenli kullanım bilgileri', [('/' + target, '') for target in sorted(readings)]))
+    for name in HUBS:
+        identifier = 'st-hub-directory'
+        content = ''.join('<details class="st-directory-group"><summary>' + html.escape(title) + '</summary><nav aria-label="' + html.escape(title, quote=True) + '">' + link_list(name, entries) + '</nav></details>' for title, entries in groups)
+        fragment = '<details id="' + identifier + '" class="st-reading-links st-link-directory" data-st-link-directory="hub"><summary>Tüm bölge, marka ve rehber bağlantıları</summary><p>Yayımlanmış sayfalar cihaz türüne ve konuya göre ayrılır. Bir marka veya semt adı, tek başına model ya da servis uygunluğu doğrulamaz.</p>' + content + '</details>'
+        old_count = added
+        write_fragment(name, fragment, identifier, 'hub')
+        hub_added += added - old_count
+
+    for district_slug, district in districts.items():
+        for device in ('kombi', 'klima'):
+            name = district_slug + '-' + device + '-servisi.html'
+            identifier = 'st-district-navigation'
+            if name not in pages: continue
+            neighbors = [('/' + slug(other) + '-' + device + '-servisi.html', other + ' ' + device + ' rehberi') for other in NEARBY_DISTRICTS.get(district, ()) if slug(other) in districts]
+            service_links = [('/' + device + '-servisi.html', device.capitalize() + ' hizmet kapsamı')]
+            symptom_links = [('/' + target, '') for target in DISTRICT_SYMPTOMS[device]]
+            fragment = '<details id="' + identifier + '" class="st-reading-links st-link-directory" data-st-link-directory="district"><summary>' + html.escape(district + ' için ilgili hizmet ve rehberler') + '</summary><nav aria-label="Ana hizmet rehberi">' + link_list(name, service_links) + '</nav><details class="st-directory-group"><summary>Yakın hizmet bölgeleri</summary><nav aria-label="Yakın ilçe rehberleri">' + link_list(name, neighbors) + '</nav></details><details class="st-directory-group"><summary>İlgili 5 belirti rehberi</summary><p>Bu seçki, ilçede hangi arızanın daha sık görüldüğüne ilişkin bir istatistik veya sıralama değildir.</p><nav aria-label="İlgili belirti rehberleri">' + link_list(name, symptom_links) + '</nav></details></details>'
+            write_fragment(name, fragment, identifier, 'district')
+
+    # Exact names retain their document/model IDs; foreign/controller scope is not bypassed.
+    for name, (brand, device) in sorted(brand_routes.items()):
+        rows = [model for model in faults.get('models', []) if model['brand'] == brand and model['device'] == device and PurePosixPath(model['path']).name in pages]
+        if not rows: continue
+        families = []
+        for model in rows:
+            target = PurePosixPath(model['path']).name
+            names = model.get('model_names') or [model['label']]
+            generic = model.get('matchable') is False or all(re.fullmatch(r'\d+(?:[.,]\d+)?\s*(?:kW|BTU|BTU/H)?', exact, re.I) for exact in names)
+            entries = [(target + '#kodlar', model['label'])] if generic else [(target + '?' + urlencode({'model': exact, 'model_id': model['id']}) + '#kodlar', exact if exact.lower().startswith(brand.lower()) else brand + ' ' + exact) for exact in names]
+            scope = ' Ülke, ürün son eki veya belge kapsamı ayrıca eşleşmelidir.' if model.get('requires_scope_confirmation') or model.get('requires_document_match') or model.get('matchable') is False else ''
+            families.append('<details class="st-directory-group"><summary>' + html.escape(model['label']) + '</summary><p>Üretici belgesinde kapsanan adları kontrol edin.' + scope + '</p><nav aria-label="' + html.escape(model['label'], quote=True) + '">' + link_list(name, entries) + '</nav></details>')
+        fragment = '<details id="st-brand-models" class="st-reading-links st-link-directory" data-st-link-directory="brand-models"><summary>' + html.escape(brand + ' ' + device + ' model ve belge listesi') + '</summary><p>Aynı markanın farklı modelleri ayrı belge kapsamlarına sahip olabilir. Bağlantılar kapsam onayını veya model kontrolünü atlamaz.</p>' + ''.join(families) + '</details>'
+        write_fragment(name, fragment, 'st-brand-models', 'brand-models')
 
     def add_module(name, title, intro, candidates, identifier='st-reading-links'):
         nonlocal added
@@ -130,36 +259,17 @@ def enhance_files(files: dict[str, bytes]) -> dict:
             used.add(href)
             if len(links) == 6: break
         if len(links) < 3: return 0
-        items = ''.join('<li><a href="' + html.escape(href, quote=True) + '">' + html.escape(text) + '<span aria-hidden="true">↗</span></a></li>' for href, text in links)
+        items = ''.join('<li><a href="' + html.escape(relative_href(href, name), quote=True) + '">' + html.escape(text) + '<span aria-hidden="true">↗</span></a></li>' for href, text in links)
         section = '<nav id="' + identifier + '" class="st-reading-links" ' + MARKER + ' aria-labelledby="' + identifier + '-title"><h2 id="' + identifier + '-title">' + html.escape(title) + '</h2><p>' + html.escape(intro) + '</p><ul>' + items + '</ul></nav>'
         if '</main>' not in text: return 0
         text = text.replace('</main>', section + '</main>', 1)
         if 'assets/internal-links.css' in files and 'assets/internal-links.css' not in text:
-            text = text.replace('</head>', '<link rel="stylesheet" href="/assets/internal-links.css"></head>', 1)
+            text = text.replace('</head>', '<link rel="stylesheet" href="' + relative_href('/assets/internal-links.css', name) + '"></head>', 1)
         files[name] = text.encode('utf-8')
         pages[name] = parse(text)
         changed.append(name)
         added += len(links)
         return len(links)
-
-    # The current region directory already has all50 anchors. Repair only omissions.
-    if 'bolgeler.html' in pages:
-        existing = {urlsplit(canonical_href(href, 'bolgeler.html')).path for href in pages['bolgeler.html'].main_links}
-        missing = []
-        for district_slug, district in districts.items():
-            for device in ('kombi', 'klima'):
-                target = district_slug + '-' + device + '-servisi.html'
-                if target in pages and '/' + target not in existing:
-                    missing.append(('/' + target, district + ' ' + device + ' servis bilgileri'))
-        if missing:
-            text = files['bolgeler.html'].decode('utf-8')
-            links = ''.join('<li><a href="' + href + '">' + html.escape(title) + '</a></li>' for href, title in missing)
-            text = text.replace('</main>', '<nav class="st-reading-links" id="st-district-links" aria-labelledby="st-district-links-title"><h2 id="st-district-links-title">İlçe ve cihaz rehberleri</h2><ul>' + links + '</ul></nav></main>', 1)
-            if 'assets/internal-links.css' in files and 'assets/internal-links.css' not in text:
-                text = text.replace('</head>', '<link rel="stylesheet" href="/assets/internal-links.css"></head>', 1)
-            files['bolgeler.html'] = text.encode('utf-8')
-            pages['bolgeler.html'] = parse(text)
-            changed.append('bolgeler.html');added += len(missing);hub_added += len(missing)
 
     for name, group in model_pages.items():
         if name not in pages: continue
@@ -192,7 +302,7 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     }
     for name, (title, intro, targets) in policy.items():
         add_module(name, title, intro, [('/' + target, '') for target in targets])
-    return {'pages_enhanced': len(set(changed)), 'links_added': added, 'hub_links_added': hub_added, 'touched_pages': sorted(set(changed))}
+    return {'pages_enhanced': len(set(changed)), 'links_added': added, 'hub_links_added': hub_added, 'directory_pages': dict(directory_counts), 'touched_pages': sorted(set(changed))}
 
 
 def analyze_graph(files: dict[str, bytes]) -> dict:

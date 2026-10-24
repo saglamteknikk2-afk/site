@@ -13,7 +13,7 @@ const selected=[['index.html',1440,1000,true],['index.html',390,844,true],['inde
 const expectedLogo=brand.logo;
 const expectedFavicon=brand.favicon;
 const layoutOnly=process.env.SAGLAM_LAYOUT_ONLY==='1';
-function assetMatches(url,expected){try{return new URL(url).pathname===base+expected;}catch(_){return false;}}
+function assetMatches(url,expected){try{return new URL(url).pathname===new URL(expected.replace(/^\/+/,''),origin+base+'/').pathname;}catch(_){return false;}}
 function routeAudit(){
  const publicNames=directory=>fs.readdirSync(directory).filter(name=>name.endsWith('.html')&&name!=='owner-admin.html'&&!/^(?:google|yandex_)/.test(name)).sort();
  const expected=Object.keys(JSON.parse(fs.readFileSync(path.join(repository,'scripts/production-seo.json'),'utf8'))).sort();
@@ -29,7 +29,9 @@ function routeAudit(){
  const landings=JSON.parse(fs.readFileSync(path.join(root,'assets/ad-landing-map.json'),'utf8')).routes;
  if(landings.length!==82)throw Error('Expected the existing 82 service landing routes');
  for(const landing of landings){const localPath=landing.path.startsWith(base+'/')?landing.path.slice(base.length):landing.path;const text=fs.readFileSync(path.join(root,localPath.replace(/^\//,'')),'utf8'),block=text.match(/<div\b[^>]*data-service-contact[^>]*>([\s\S]*?)<\/div>/)?.[1],links=[...(block||'').matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>/g)].map(m=>m[1]),wa=links.find(href=>href.startsWith('https://wa.me/')),message=wa&&new URL(wa.replace(/&amp;/g,'&')).searchParams.get('text');if(links.length!==2||!links.includes('tel:05346225515')||!message?.includes(landing.title)||!message?.includes(landing.url))throw Error('Service landing must preserve contextual phone/WhatsApp actions: '+landing.path);}
- return {passed:true,visitor_routes:203,preview_noindex:203,production_indexable:201,sitemap_urls:sitemap.length,contextual_service_landings:landings.length};
+ const homeHTML=fs.readFileSync(path.join(root,'index.html'),'utf8'),staticReviews=[...homeHTML.matchAll(/\bclass=["']([^"']+)["']/g)].filter(match=>match[1].split(/\s+/).includes('pr-review')).length;
+ if(staticReviews!==6)throw Error('Exactly the first six existing reviews must be present in static HTML');
+ return {passed:true,visitor_routes:203,preview_noindex:203,production_indexable:201,sitemap_urls:sitemap.length,contextual_service_landings:landings.length,static_review_cards:staticReviews};
 }
 async function reachableControl(locator){
  await locator.evaluate(el=>el.scrollIntoView({block:'center',inline:'nearest'}));

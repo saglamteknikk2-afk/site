@@ -7,4 +7,12 @@
 .st-reading-links a:hover{border-color:var(--p-green,#214f40);background:var(--p-paper,#f6f3eb)}
 .st-reading-links a:focus-visible{outline:3px solid var(--p-green,#214f40);outline-offset:3px}
 .st-reading-links a span{flex:0 0 auto;font-size:20px}
+.st-link-directory>summary{min-height:48px;cursor:pointer;font-size:clamp(18px,2.2vw,24px);font-weight:650;line-height:1.4;color:var(--p-ink,#123f35)}
+.st-link-directory[open]>summary{margin-bottom:18px}
+.st-link-directory .st-directory-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--p-line,#dcded2)}
+.st-link-directory .st-directory-group>summary{min-height:48px;padding:10px 0;cursor:pointer;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
+.st-link-directory .st-directory-group[open]>summary{margin-bottom:10px}
+.st-link-directory nav+p,.st-link-directory nav+details{margin-top:18px}
+.p-home>.st-link-directory{width:min(1240px,calc(100% - 80px));margin-inline:auto}
+@media(max-width:760px){.p-home>.st-link-directory{width:calc(100% - 32px)}}
 @media(max-width:480px){.st-reading-links{margin:26px 0}.st-reading-links ul{grid-template-columns:1fr}}

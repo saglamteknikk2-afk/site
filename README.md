@@ -37,7 +37,7 @@ Bu komutlar **yayın yapmaz**. Üretim paketi `/site/` önekini kaldırır, PHP 
 
 GitHub Actions; `overrides/`, `components/`, `server/`, testler, scriptler ve belgeler değiştiğinde derleme ve kontrolleri çalıştırır. Pull request'ler yayın yapmaz. `main` dalı yalnızca GitHub Pages ön izlemesini günceller. Actions → **Run workflow → production_package** seçeneği indirilebilir üretim taslak ZIP'i oluşturur; canlı siteye yüklemez.
 
-Derleme sırası: SHA-256 doğrulanan arşiv → üretimde `server/` → `overrides/` → ortak parçalar ve moda göre URL/SEO/gönderim ayarları. Aynı kaynaklardan aynı içerik özeti üretilir; tarih veya ortam yolu çıktı içeriğine eklenmez.
+Derleme sırası: SHA-256 doğrulanan arşiv → üretimde `server/` → `overrides/` → ortak parçalar ve moda göre URL/SEO/gönderim ayarları. Aynı kaynaklardan aynı içerik özeti üretilir. Ziyaretçi bağlantıları ve CSS kaynakları belgeye göre görecelidir; 404 kurtarma ekranı yayın bağlamını ayrıca bilir.
 
 Özgün arşiv SHA-256: `1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b`.
 
@@ -45,7 +45,7 @@ Derleme sırası: SHA-256 doğrulanan arşiv → üretimde `server/` → `overri
 
 Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Marka ve tam model önerileri aynı arama alanından ilerler; belge kapsamı kullanıcı onayı olmadan doğrulanmış sayılmaz.
 
-`components/service-assurances.json` varış, garanti ve mesleki belge beyanlarının durumunu yönetir. `pending` bir beyan kesin bir süre veya garanti olarak yayımlanmaz. Bölgesel süre koşulları, garanti kapsamı ve geçerli mesleki belge işletmeden teyit edilmeden `verified` yapılmamalıdır.
+`components/service-assurances.json` varış, garanti ve mesleki belge beyanlarının durumunu yönetir. `pending` bir beyan kesin bir süre veya garanti olarak yayımlanmaz. İşletme sahibi MYK belge numarasını ve 1 yıl parça/işçilik garantisini 24 Ekim 2026 tarihinde bildirdi; bunlar `business-declared` durumundadır. Bu durum dış kurum doğrulaması anlamına gelmez. 40 dk varış bilgisi koşulları teyit beklediğinden `pending` kalır.
 
 `python scripts/audit_content.py build/production --strict --report build/content-audit.json` yalnız ziyaretçi HTML ana içeriğini tarar. Kopya sinyalleri editoryal inceleme içindir; Google/AI sıralama puanı değildir. Kaynak, güvenlik ve ortak gezinme metni gerekli yerlerde korunur. Strict mod kaynak/FAQ/JSON-LD/ana içerik bütünlüğünü ve tam gövde klonlarını denetler. Pages iş akışı hem önizlemeyi hem üretim dosyalarını doğrular; yalnız test sitesi yayımlanır.
 
@@ -60,3 +60,5 @@ Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Ma
 Yayın ve Search Console adımları `docs/INDEXLEME-REHBERI.md` içindedir.
 
 `node tests/backend_browser.cjs build/production` gerçek arayüzü geçici PHP sunucusu ve SQLite ile birlikte çalıştırır. API yanıtları taklit edilmez; üretim anahtarları kullanılmaz. PHP çalıştırıcısı gerekirse `SAGLAM_PHP_BIN` ile seçilir.
+
+Portable yayın: `scripts/portable_paths.py` kök mükerrerlerini ve kullanılmayan eski görselleri çıktıdan kaldırır; HTML/JS/JSON ve CSS yollarını kendi çözüm bağlamında relative yapar. `scripts/semantic_seo.py` son HTML’den tek @graph, canonical, llms ve sitemap üretir. İlk altı gerçek site değerlendirmesi `components/reviews.json` kaynağından statik yazılır; devamı düğmeyle açılır. `node tests/portable_deploy.cjs` aynı dosyaları üç dizinde ve hostname güvenlik durumlarında sınar.

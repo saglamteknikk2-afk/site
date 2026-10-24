@@ -26,7 +26,7 @@ class SEOTests(unittest.TestCase):
     def page(self,name,canonicals,*,noindex=False,preview=False):
         head=''.join('<link rel="canonical" href="'+escape(url,quote=True)+'">' for url in canonicals)
         if noindex: head+='<meta name="robots" content="noindex,follow">'
-        if preview: head+='<script src="/site/assets/preview-guard.js"></script>'
+        if preview: head+='<script src="assets/preview-guard.js"></script>'
         banner='<div id="st-preview-banner">Static preview</div>' if preview else ''
         mode='preview' if preview else 'production'
         (self.root/name).write_text(f'<!doctype html><html><head>{head}</head><body data-st-mode="{mode}">{banner}<h1>Servis bilgisi</h1></body></html>')
@@ -79,15 +79,15 @@ class SEOTests(unittest.TestCase):
                 (self.root/'sitemap.xml').write_text(xml)
                 self.assertTrue(any(error.startswith('sitemap.xml:') for error in self.errors()))
 
-    def test_preview_needs_no_production_canonical_or_sitemap(self):
+    def test_preview_has_official_canonical_and_noindex_without_sitemap(self):
         for name in ['index.html','kombi.html','servis-sec.html']:
-            self.page(name,[],noindex=True,preview=True)
+            self.page(name,[ORIGIN+('/' if name=='index.html' else '/'+name)],noindex=True,preview=True)
         (self.root/'owner-admin.html').unlink()
         (self.root/'sitemap.xml').unlink()
         (self.root/'assets').mkdir();(self.root/'assets/preview-guard.js').write_text('window.ST_PREVIEW=true;')
         (self.root/'robots.txt').write_text('User-agent: *\nAllow: /\n')
         self.assertEqual(self.errors('preview'),[])
-        self.page('kombi.html',[],preview=True)
+        self.page('kombi.html',[ORIGIN+'/kombi.html'],preview=True)
         self.assertIn('kombi.html: noindex missing',self.errors('preview'))
 
 

@@ -78,6 +78,8 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
         if mode=='production' and not is_noindex:
             expected=BUSINESS_ORIGIN+('/' if rel=='index.html' else '/'+rel)
             indexable.add(expected)
+        if mode=='preview' or mode=='production' and not is_noindex:
+            expected=BUSINESS_ORIGIN+('/' if rel=='index.html' else '/'+rel)
             if len(page.canonicals)!=1:
                 errors.append(f'{rel}: expected exactly one canonical, got {len(page.canonicals)}')
             elif page.canonicals[0]!=expected:
@@ -86,7 +88,10 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
         if mode=='preview':
             if not any('noindex' in r.lower() for r in page.robots): errors.append(f'{rel}: noindex missing')
             if 'id="st-preview-banner"' not in text: errors.append(f'{rel}: preview banner missing')
-            if not page.scripts or not urlsplit(page.scripts[0]).path.endswith('/assets/preview-guard.js'): errors.append(f'{rel}: preview guard is not first script')
+            if rel=='404.html' and 'data-st-404-resource' in text:
+                if 'data-st-error-base' not in text or 'assets/preview-guard.js' not in text or ('assets/environment.js' in text and text.index('assets/preview-guard.js')>text.index('assets/environment.js')):
+                    errors.append(f'{rel}: error resource guard ordering is invalid')
+            elif not page.scripts or not urlsplit(page.scripts[0]).path.lstrip('./').endswith('assets/preview-guard.js'): errors.append(f'{rel}: preview guard is not first script')
         elif 'st-preview-banner' in text or 'preview-guard.js' in text or 'static-preview' in text:
             errors.append(f'{rel}: preview controls leaked into production')
         for tag,attr,value in page.refs:
@@ -95,6 +100,9 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
             raw=unquote(parsed.path)
             if not raw:
                 if parsed.fragment and unquote(parsed.fragment) not in page.ids:errors.append(f'{rel}: missing page anchor {value}')
+                continue
+            if raw.startswith('/'):
+                errors.append(f'{rel}: root-dependent URL {value}')
                 continue
             if mode=='preview' and raw.startswith('/'):
                 if not (raw==base_path or raw.startswith(base_path+'/')):
@@ -117,7 +125,16 @@ def check(root: Path, mode: str, base_path: str='/site') -> dict:
         if re.search(r'Disallow:\s*/\s*$', robots,re.M): errors.append('robots.txt blocks noindex crawling')
     elif mode=='production':
         check_sitemap(root,indexable,errors)
-    report={'passed':not errors,'mode':mode,'visitor_pages':pages,'noindex_pages':noindex,'jsonld_blocks':schemas,'references_checked':refs,'errors':errors,'warnings':warnings}
+    css_refs=0
+    for css in root.rglob('*.css'):
+        for match in re.finditer(r'''url\(\s*["']?([^\s)'"<>]+)''',css.read_text()):
+            value=match[1];parsed=urlsplit(value)
+            if parsed.scheme or parsed.netloc or not parsed.path:continue
+            if parsed.path.startswith('/'):
+                errors.append(f'{css.relative_to(root)}: root-dependent CSS URL {value}');continue
+            target=(css.parent/unquote(parsed.path)).resolve();css_refs+=1
+            if not target.is_file():errors.append(f'{css.relative_to(root)}: missing CSS resource {value}')
+    report={'passed':not errors,'mode':mode,'visitor_pages':pages,'noindex_pages':noindex,'jsonld_blocks':schemas,'references_checked':refs,'css_resources_checked':css_refs,'root_dependent_urls':sum('root-dependent' in e for e in errors),'errors':errors,'warnings':warnings}
     return report
 
 def main():

@@ -18,7 +18,7 @@ try{
  $address=stream_socket_get_name($socket,false);fclose($socket);$origin='http://'.$address;
  $admin=bin2hex(random_bytes(24));$webhook=bin2hex(random_bytes(24));
  file_put_contents($private.'/site_apileri,.txt',implode("\n",['SITE_URL='.$origin,'ADMIN_ACCESS_KEY='.$admin,'TELEGRAM_WEBHOOK_SECRET='.$webhook,'TELEGRAM_ADMIN_IDS=10000001','TELEGRAM_CHAT_ID=10000002','TELEGRAM_BOT_TOKEN=','GEMINI_API_KEY=','IP_LOCATION_LOOKUP=0','VISIT_NOTIFICATIONS=0','DAILY_REPORT=0'])."\n");
- $process=proc_open([PHP_BINARY,'-d','display_errors=0','-d','log_errors=1','-S',$address,'-t',$doc],[0=>['pipe','r'],1=>['file',$base.'/server.stdout','a'],2=>['file',$base.'/server.stderr','a']],$pipes,$doc,['PATH'=>getenv('PATH')?:'','SAGLAM_PRIVATE_DIR'=>$private]);
+ $process=proc_open([getenv('SAGLAM_PHP_BIN')?:PHP_BINARY,'-d','display_errors=0','-d','log_errors=1','-S',$address,'-t',$doc],[0=>['pipe','r'],1=>['file',$base.'/server.stdout','a'],2=>['file',$base.'/server.stderr','a']],$pipes,$doc,['PATH'=>getenv('PATH')?:'','SAGLAM_PRIVATE_DIR'=>$private]);
  if(!is_resource($process))throw new RuntimeException('PHP loopback server did not start.');fclose($pipes[0]);
  $ready=false;for($i=0;$i<60;$i++){$probe=@stream_socket_client('tcp://'.$address,$errno,$error,0.1);if($probe){fclose($probe);$ready=true;break;}usleep(25000);}if(!$ready)throw new RuntimeException('PHP loopback server startup timed out.');
  $request=static function(string $method,string $path,?array $payload=null,array $extra=[],?string $raw=null)use($origin,&$cookie,&$csrf,&$requests):array{

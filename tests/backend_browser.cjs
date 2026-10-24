@@ -17,7 +17,7 @@ function snapshot(directory){const hash=crypto.createHash('sha256');let count=0;
 async function freePort(){return new Promise((resolve,reject)=>{const socket=net.createServer();socket.once('error',reject);socket.listen(0,'127.0.0.1',()=>{const port=socket.address().port;socket.close(()=>resolve(port));});});}
 async function waitForServer(port){for(let i=0;i<100;i++){if(server.exitCode!==null)throw Error('PHP server exited: '+stderr);const ready=await new Promise(resolve=>{const socket=net.connect(port,'127.0.0.1');socket.once('connect',()=>{socket.destroy();resolve(true);});socket.once('error',()=>resolve(false));});if(ready)return;await new Promise(resolve=>setTimeout(resolve,30));}throw Error('PHP loopback startup timed out');}
 function inspect(){return JSON.parse(runPHP(['-r',String.raw`$db=new PDO('sqlite:'.$argv[1]);$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);echo json_encode(['tickets'=>$db->query('SELECT id,name,phone,district,device,issue,notification_sent FROM tickets ORDER BY created,rowid')->fetchAll(),'reviews'=>$db->query('SELECT id,author,comment,status FROM reviews ORDER BY created,rowid')->fetchAll(),'outbox_count'=>(int)$db->query('SELECT count(*) FROM outbox')->fetchColumn(),'notification_attempts'=>(int)$db->query('SELECT count(*) FROM outbox WHERE sent<>0 OR attempts<>0 OR lease<>0')->fetchColumn()]);`,path.join(fixture,'private/site.sqlite')]));}
-function apiResponse(page,action){return page.waitForResponse(response=>new URL(response.url()).pathname==='/api.php'&&new URL(response.url()).searchParams.get('action')===action&&response.request().method()==='POST');}
+function apiResponse(page,action,method='POST'){return page.waitForResponse(response=>new URL(response.url()).pathname==='/api.php'&&new URL(response.url()).searchParams.get('action')===action&&response.request().method()===method);}
 async function savedResponse(promise,name){const response=await promise,data=await response.json();check(response.status()===201&&data.ok===true&&/^[a-f0-9]{24}$/.test(data.id||'')&&data.delivery==='queued',name+' really saves through PHP with queued notification');return data;}
 async function visibleText(page,selector,pattern){await page.waitForFunction(({selector,source})=>{const el=document.querySelector(selector);return el&&!el.hidden&&!el.classList.contains('hidden')&&new RegExp(source,'i').test(el.textContent);},{selector,source:pattern.source});}
 (async()=>{
@@ -93,9 +93,17 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   const approved=await context.request.post(origin+'/yonetim-api.php?action=decide',{headers:{Origin:origin,'X-CSRF-Token':ownerCsrf,'X-Admin-Key':admin},data:{id:review.id,status:'approved'}});
   requests.push({path:'/yonetim-api.php',action:'decide',method:'POST',status:approved.status(),csrf_valid_shape:/^\d+\.[a-f0-9]{64}$/.test(ownerCsrf),transport:'playwright-shared-cookie-api-context'});
   check(approved.status()===200&&inspect().reviews.find(row=>row.id===review.id)?.status==='approved','Actual authenticated owner endpoint approves synthetic pending review');
+  const publicReviewRequests=requests.filter(row=>row.action==='reviews').length;
   await page.reload({waitUntil:'networkidle'});
+  check(await page.locator('#reviewsContainer > .pr-review').count()===6,'Reload keeps exactly six build-time review cards');
+  check(requests.filter(row=>row.action==='reviews').length===publicReviewRequests,'Initial page load does not fetch or render every review');
+  const requestedReviews=apiResponse(page,'reviews','GET');
+  await page.locator('#premiumReviewsMore').click();
+  check((await requestedReviews).status()===200,'More explicitly requests real approved reviews');
+  await page.waitForFunction(()=>document.querySelector('#premiumReviewStatus')?.textContent.includes('yayımlanması onaylanan'));
+  await page.locator('#reviewSearchInput').fill(comment);
   await page.waitForFunction(comment=>document.querySelector('#reviewsContainer')?.textContent.includes(comment),comment);
-  check(await page.locator('.pr-review').filter({hasText:comment}).count()===1,'Reloaded real frontend renders approved review exactly once');
+  check(await page.locator('.pr-review').filter({hasText:comment}).count()===1,'Explicitly loaded real frontend renders approved review exactly once');
   // Explicit AI opt-in against real PHP with every provider key empty.
   await page.locator('.p-device-shortcuts [data-usta-device="Klima"]').click();
   await page.locator('#ustaStep [data-choice="cool"]').click();await page.locator('#ustaStep [data-brand=""]').click();

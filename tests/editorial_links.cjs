@@ -22,7 +22,7 @@ const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=u
   for(const record of inventory.links){
    await page.goto(origin+'/site/'+record.source,{waitUntil:'domcontentloaded'});
    const href='/site'+record.href;
-   const index=await page.locator('main a[href]').evaluateAll((links,expected)=>links.findIndex(a=>a.getAttribute('href')===expected),href);
+   const index=await page.locator('main a[href]').evaluateAll((links,expected)=>links.findIndex(a=>a.href===new URL(expected,location.origin).href),href);
    assert.ok(index>=0,record.source+' contains '+href);
    const link=page.locator('main a[href]').nth(index),details=link.locator('xpath=ancestor::details');
    for(const item of await details.all())if(await item.evaluate(el=>!el.open))await item.locator(':scope > summary').click();

@@ -50,7 +50,7 @@ function build(item){
    ];
    for(const [label,locator,expected]of entries){
     const response=await page.goto(inner,{waitUntil:'networkidle'});check(label+' starts on existing inner page',response.status()===200);
-    const anchor=locator();check(label+' retains built href',await anchor.getAttribute('href')===new URL(expected).pathname+new URL(expected).hash);
+    const anchor=locator();check(label+' resolves built href',await anchor.evaluate(a=>a.href)===expected);
     await anchor.click();await page.waitForURL(expected,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.STUstaWizard);
     check(label+' click reaches home assistant',page.url()===expected&&await page.locator('#aiUstaWizard').count()===1);
    }

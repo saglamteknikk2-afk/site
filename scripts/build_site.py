@@ -7,11 +7,13 @@ import hashlib
 import io
 import importlib.util
 import json
+import posixpath
 import re
 import shutil
 import stat
 import zipfile
 from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_SHA256 = '1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b'
@@ -160,18 +162,48 @@ def apply_brand(text: str, brand: dict) -> str:
         text = text.replace(alias, brand['logo'])
     return text
 
-def version_assets(text: str, files: dict[str, bytes], prefix: str = '/site') -> str:
+def version_assets(text: str, files: dict[str, bytes], prefix: str = '/site', name: str = 'index.html') -> str:
     """Version HTML assets from final served bytes, including custom mounts."""
     def rewrite(match):
         path = match['path']
+        if urlsplit(path).scheme or path.startswith('//'):
+            return match[0]
         key = path[len(prefix):] if prefix and path.startswith(prefix + '/') else path
-        key = key.lstrip('/')
+        key = key.lstrip('/') if key.startswith('/') else posixpath.normpath(posixpath.join(posixpath.dirname(name), key))
         if not key.startswith('assets/') or key not in files:
             return match[0]
         version = hashlib.sha256(files[key]).hexdigest()[:10]
         return match['start'] + match['quote'] + path + '?v=' + version + match['quote']
-    return re.sub(r'(?P<start>\b(?:src|href)=)(?P<quote>["\'])(?P<path>/(?!/)[^"\'?]+\.(?:css|js))(?:\?[^"\']*)?(?P=quote)',
+    return re.sub(r'(?P<start>\b(?:src|href)=)(?P<quote>["\'])(?P<path>[^"\'?]+\.(?:css|js))(?:\?[^"\']*)?(?P=quote)',
                   rewrite, text)
+
+def error_page_base(text: str, mode: str, prefix: str) -> str:
+    """A 404 can be served at an arbitrary missing path; resolve its assets first.
+
+    Github project pages expose their project segment. The local regression
+    server uses the build's declared mount; official hosting uses its root.
+    Normal visitor pages require neither a base tag nor a configured mount.
+    """
+    mount = prefix.strip('/') if mode == 'preview' else ''
+    code = '''<script data-st-error-base>(function(){var h=location.hostname.toLowerCase(),p=location.pathname.split('/').filter(Boolean),m=DOCUMENT_MOUNT;if(h==='github.io'||h.endsWith('.github.io'))m=p[0]||'';else if(h==='saglamkombiklima.com.tr'||h==='www.saglamkombiklima.com.tr')m='';var b=document.createElement('base');b.href=new URL(m?m+'/':'./',location.origin+'/').href;document.head.prepend(b);})();</script>'''.replace('DOCUMENT_MOUNT', json.dumps(mount))
+    return insert_head(text, code)
+
+def error_page_resources(text: str) -> str:
+    """Prevent speculative 404 asset requests before the computed base exists.
+
+    Only the error document needs this: a server may return it for any missing
+    nested path. Parser-written resource tags retain normal defer ordering, while
+    the preload scanner cannot mistake their URLs for missing-path resources.
+    Canonical, noindex, navigation and readable error text remain ordinary HTML.
+    """
+    def write(match):
+        tag = match[0]
+        if tag.lower().startswith('<link') and re.search(r'\brel=["\']canonical["\']', tag, re.I):
+            return tag
+        payload = json.dumps(tag, ensure_ascii=False).replace('<', '\\u003c')
+        return '<script data-st-404-resource>document.write(' + payload + ');</script>'
+    pattern = r'<script\b(?=[^>]*\bsrc=)[^>]*>\s*</script\s*>|<link\b(?=[^>]*\bhref=)[^>]*>|<(?:img|source|image)\b[^>]*>'
+    return re.sub(pattern, write, text, flags=re.I)
 
 def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     output = output.resolve()
@@ -241,11 +273,14 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                         text = re.sub(pattern, lambda _: component.read_text(), text, count=1, flags=re.I)
             if visitor(Path(name)):
                 text = clean_preview_html(text)
+                text = re.sub(r'(<html\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + re.sub(r'\s+data-st-mode=["\'][^"\']*["\']', '', m[2], flags=re.I), text, count=1, flags=re.I)
                 text = re.sub(r'(<body\b)([^>]*>)', lambda m: m[1] + f' data-st-mode="{mode}"' + re.sub(r'\s+data-st-mode=["\'][^"\']*["\']', '', m[2], flags=re.I), text, count=1, flags=re.I)
+                text = allow_local_preview_forms(text)
+                if 'assets/environment.js' in files:
+                    text = insert_head(text, '<script src="/assets/environment.js"></script>')
                 if 'assets/brand-registry.js' in files and 'assets/brand-registry.js' not in text:
                     text = insert_head(text, f'<script src="{prefix}/assets/brand-registry.js" defer></script>')
                 if mode == 'preview':
-                    text = allow_local_preview_forms(text)
                     text = insert_head(text, '<meta name="robots" content="noindex,nofollow,noarchive">' + PREVIEW_MARKER
                         + '<meta http-equiv="Content-Security-Policy" content="form-action &#39;none&#39;; frame-src &#39;none&#39;; object-src &#39;none&#39;; worker-src &#39;none&#39;; base-uri &#39;self&#39;">'
                         + f'<script src="{prefix}/assets/preview-guard.js"></script>')
@@ -271,7 +306,13 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                 if not re.search(r'<link\b[^>]*rel=["\'](?:shortcut )?icon["\']', text, re.I):
                     text = insert_head(text, f'<link rel="icon" href="{brand["favicon"]}" type="image/png">')
                 text = insert_head(text, '<meta charset="UTF-8">')
+                if name == '404.html':
+                    text = error_page_base(text, mode, prefix)
                 html_count += 1
+            elif path.name == 'owner-admin.html' and mode == 'production':
+                text = re.sub(r'(<html\b)([^>]*>)', lambda m: m[1] + ' data-st-mode="production"' + re.sub(r'\s+data-st-mode=["\'][^"\']*["\']', '', m[2], flags=re.I), text, count=1, flags=re.I)
+                if 'assets/environment.js' in files:
+                    text = insert_head(text, '<script src="/assets/environment.js"></script>')
             text = apply_brand(text, brand)
             if path.suffix in {'.js', '.json'}:
                 text = normalize_javascript(text, prefix, files)
@@ -285,11 +326,23 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         built['robots.txt'] = b'User-agent: *\nAllow: /\n'
         built.pop('sitemap.xml', None)
     built['.nojekyll'] = b''
+    for module_name in ('semantic_seo', 'portable_paths'):
+        module_path = root / 'scripts' / (module_name + '.py')
+        if module_path.exists():
+            spec = importlib.util.spec_from_file_location('saglam_' + module_name, module_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            if module_name == 'portable_paths':
+                module.enhance_files(built, prefix)
+            else:
+                module.enhance_files(built)
     # All runtime assets are transformed now. Hash the bytes actually served,
     # rather than source bytes which may have different deployment paths.
     for name in built:
         if visitor(Path(name)):
-            built[name] = version_assets(built[name].decode('utf-8'), built, prefix).encode('utf-8')
+            built[name] = version_assets(built[name].decode('utf-8'), built, prefix, name).encode('utf-8')
+            if name == '404.html':
+                built[name] = error_page_resources(built[name].decode('utf-8')).encode('utf-8')
     digest = hashlib.sha256()
     for name, content in sorted(built.items()):
         digest.update(name.encode() + b'\0' + hashlib.sha256(content).digest())

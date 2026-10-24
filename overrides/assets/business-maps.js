@@ -1,7 +1,9 @@
 (function () {
   'use strict';
+  const scriptRoot = document.currentScript?.src ? new URL('../', document.currentScript.src) : new URL('./', location.href);
+  const siteURL = value => window.STEnvironment?.href(value) || new URL(String(value).replace(/^\/+/, ''), scriptRoot).href;
   function preview() {
-    return window.ST_PREVIEW === true || document.body?.dataset.stMode === 'preview' ||
+    return /(^|\.)github\.io$/i.test(location.hostname) || window.STEnvironment?.preview === true || window.ST_PREVIEW === true || document.body?.dataset.stMode === 'preview' ||
       document.documentElement.dataset.stMode === 'preview' || !/^https?:$/.test(location.protocol);
   }
   function mapURL(value, provider, embed) {
@@ -23,18 +25,26 @@
     } catch (_) {}
     return '';
   }
-  function reset(card, message) {
-    const link = card.querySelector('[data-map-link]'), status = card.querySelector('[data-map-status]');
+  function reset(card) {
+    const provider = card.dataset.mapProvider, link = card.querySelector('[data-map-link]'), status = card.querySelector('[data-map-status]');
+    const area = provider === 'google';
     card.classList.remove('is-configured');
-    if (link) { link.removeAttribute('href'); link.setAttribute('aria-disabled', 'true'); link.tabIndex = -1; link.textContent = 'Konum bağlantısı yakında'; }
-    if (status) status.textContent = message || 'Konum bağlantısı yakında';
+    card.dataset.mapState = 'local-navigation';
+    if (link) {
+      link.href = siteURL(area ? 'bolgeler.html' : 'iletisim.html');
+      link.removeAttribute('aria-disabled'); link.removeAttribute('tabindex'); link.removeAttribute('target'); link.removeAttribute('rel');
+      link.textContent = area ? 'Hizmet bölgelerini incele →' : 'Servis için iletişime geç →';
+    }
+    if (status) status.textContent = area ? 'İlçe ve mahallenizi seçerek servis bilgilerine ulaşın.' : 'Servis talebinizin ayrıntılarını ekibimizle görüşün.';
+    const title = card.querySelector('[data-map-title]'); if (title) title.textContent = area ? 'Hizmet bölgenizi bulun' : 'Ekibimizle iletişime geçin';
     const button = card.querySelector('[data-map-embed]'); if (button) button.hidden = true;
   }
   function configure(card, data) {
     const provider = card.dataset.mapProvider, url = mapURL(data?.url, provider, false);
     if (!url) return;
     const link = card.querySelector('[data-map-link]'), status = card.querySelector('[data-map-status]');
-    card.classList.add('is-configured');
+    card.classList.add('is-configured'); card.dataset.mapState = 'configured';
+    const title = card.querySelector('[data-map-title]'); if (title) title.textContent = provider === 'google' ? 'Google Haritalar' : 'Yandex Haritalar';
     if (link) { link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.removeAttribute('aria-disabled'); link.removeAttribute('tabindex'); link.textContent = provider === 'google' ? 'Google Haritalar’da aç ↗' : 'Yandex Haritalar’da aç ↗'; }
     if (status) status.textContent = 'İşletmenin paylaşılan konum bağlantısı';
     const embed = mapURL(data?.embed_url, provider, true), button = card.querySelector('[data-map-embed]'), canvas = card.querySelector('[data-map-canvas]');
@@ -52,14 +62,17 @@
   async function start() {
     const sections = [...document.querySelectorAll('[data-business-maps]')];
     if (!sections.length) return;
+    sections.forEach(section => section.setAttribute('aria-busy', 'true'));
+    const ready = () => sections.forEach(section => section.setAttribute('aria-busy', 'false'));
     const cards = sections.flatMap(section => [...section.querySelectorAll('.st-map-card[data-map-provider]')]);
     cards.forEach(card => reset(card));
-    if (preview()) return;
+    if (preview()) { ready(); return; }
     let endpoint;
     try {
-      endpoint = new URL(sections[0].dataset.api || '/api.php?action=business-maps', location.href);
-      if (endpoint.origin !== location.origin || !/^\/(?:server\/)?api\.php$/.test(endpoint.pathname) || endpoint.searchParams.get('action') !== 'business-maps') return;
-    } catch (_) { return; }
+      endpoint = new URL(sections[0].dataset.api || siteURL('api.php?action=business-maps'), location.href);
+      const allowedPaths = [new URL(siteURL('api.php')).pathname, new URL(siteURL('server/api.php')).pathname];
+      if (endpoint.origin !== location.origin || !allowedPaths.includes(endpoint.pathname) || endpoint.searchParams.get('action') !== 'business-maps') { ready(); return; }
+    } catch (_) { ready(); return; }
     const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 3500);
     try {
       const response = await fetch(endpoint.href, { credentials: 'same-origin', headers: { Accept: 'application/json' }, signal: controller.signal });
@@ -67,8 +80,8 @@
       const data = await response.json();
       if (data.ok !== true || !data.maps || typeof data.maps !== 'object') throw new Error('unavailable');
       cards.forEach(card => configure(card, data.maps[card.dataset.mapProvider]));
-    } catch (_) { cards.forEach(card => reset(card, 'Konum bağlantısı şu anda alınamıyor')); }
-    finally { clearTimeout(timer); }
+    } catch (_) { cards.forEach(card => reset(card)); }
+    finally { clearTimeout(timer); ready(); }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();

@@ -14,7 +14,7 @@
     const form = byId('musteriYorumFormu');
     if (!container || !form) return;
     const preview = window.ST_PREVIEW === true || document.body.dataset.stMode === 'preview' || location.protocol === 'file:' || /(^|\.)github\.io$/i.test(location.hostname);
-    const seeds = Array.isArray(window.STPublishedReviewSeeds) ? window.STPublishedReviewSeeds.map(review => ({...review, source: 'existing'})) : [];
+    const seeds = Array.isArray(window.STPublishedReviewSeeds) ? window.STPublishedReviewSeeds.map((review, index) => ({...review, id: `existing-${index}`, source: 'existing'})) : [];
     let reviews = [...seeds];
     let category = 'all';
     let limit = 6;
@@ -22,6 +22,8 @@
     let requestKey = '';
     let requestBody = '';
     let csrf = '';
+    let liveLoad = null;
+    let liveLoaded = preview;
     const filters = [...root.querySelectorAll('[data-review-category]')];
     const status = byId('premiumReviewStatus');
     const count = byId('premiumReviewCount');
@@ -41,14 +43,20 @@
       node.hidden = !message;
       node.classList.toggle('hidden', !message);
     }
-    function render() {
+    function render({append = false, preserveStatic = false} = {}) {
       const query = normalize(byId('reviewSearchInput')?.value.trim());
       const filtered = reviews.filter(review => (category === 'all' || review.cat === category) && (!query || normalize([review.author, review.comment, review.service, review.district].join(' ')).includes(query)));
       const visible = filtered.slice(0, limit);
       const fragment = document.createDocumentFragment();
-      visible.forEach(review => {
+      const current = [...container.querySelectorAll(':scope > .pr-review')];
+      const samePrefix = current.length <= visible.length && current.every((card, index) => card.dataset.reviewId === String(visible[index].id));
+      // The first six cards are rendered into HTML at build time. Keep those
+      // nodes intact; More appends the next batch instead of recreating them.
+      const retain = (append || preserveStatic) && samePrefix && current.length > 0;
+      (retain ? visible.slice(current.length) : visible).forEach(review => {
         const rating = Math.max(1, Math.min(5, Number.parseInt(review.rating, 10) || 5));
         const card = element('article', 'pr-review');
+        card.dataset.reviewId = String(review.id);
         const head = element('div', 'pr-review-head');
         const identity = element('div', 'pr-review-identity');
         const author = String(review.author || 'Müşteri');
@@ -69,10 +77,11 @@
         empty.append(element('h3', '', 'Bu aramada yorum bulunamadı.'), element('p', '', 'Başka bir sözcük deneyin veya tüm hizmetleri seçin.'));
         fragment.append(empty);
       }
-      container.replaceChildren(fragment);
+      if (retain && visible.length) container.append(fragment);
+      else container.replaceChildren(fragment);
       const text = `${filtered.length} değerlendirme${filtered.length ? ` · ${visible.length} gösteriliyor` : ''}`;
       if (count) count.textContent = text;
-      if (more) more.hidden = filtered.length <= visible.length;
+      if (more) more.hidden = filtered.length <= visible.length && liveLoaded;
       filters.forEach(button => {
         const active = button.dataset.reviewCategory === category;
         button.classList.toggle('is-active', active);
@@ -84,9 +93,10 @@
     more?.addEventListener('click', () => {
       const previous = container.querySelectorAll('.pr-review').length;
       limit += 6;
-      render();
+      render({append: true});
       const next = container.querySelectorAll('.pr-review')[previous];
       if (next) { next.tabIndex = -1; next.focus({preventScroll: true}); }
+      loadApprovedOnDemand();
     });
     root.querySelector('[data-review-privacy]')?.setAttribute('href', new URL('aydinlatma.html', siteBase).href);
     root.querySelector('[data-review-live-site]')?.setAttribute('href', 'https://saglamkombiklima.com.tr/#yorumFormKutusu');
@@ -108,6 +118,25 @@
         }
         return data;
       } finally { clearTimeout(timeout); }
+    }
+    function loadApprovedOnDemand() {
+      if (preview || liveLoad) return;
+      liveLoad = request('reviews').then(data => {
+        if (!Array.isArray(data.reviews)) throw new Error('Yorum listesi doğrulanamadı.');
+        const seen = new Set();
+        const approved = data.reviews.filter(review => {
+          if (!review || typeof review !== 'object' || !review.id || seen.has(String(review.id))) return false;
+          seen.add(String(review.id));
+          return true;
+        }).map(review => ({...review, id: `site-${review.id}`, source: 'site'}));
+        reviews = [...seeds, ...approved];
+        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler ve yayımlanması onaylanan site yorumları.';
+      }).catch(() => {
+        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Yeni yorumlar şu anda yüklenemedi.';
+      }).finally(() => {
+        liveLoaded = true;
+        render({append: true});
+      });
     }
     async function postReview(payload, key) {
       for (let attempt = 0; attempt < 2; attempt++) {
@@ -161,28 +190,15 @@
         form.removeAttribute('aria-busy');
       }
     });
-    render();
+    render({preserveStatic: true});
     if (preview) {
       root.classList.add('is-preview');
       submit.disabled = true;
       submit.textContent = 'Ön izlemede gönderim kapalı';
       root.querySelectorAll('[data-review-preview-note]').forEach(note => { note.hidden = false; });
-      if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Canlı yorumlar bu ön izlemede yüklenmez.';
+      if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Diğerlerini düğmeyle açabilirsiniz; ön izlemede yeni yorum gönderilemez.';
     } else {
-      request('reviews').then(data => {
-        if (!Array.isArray(data.reviews)) throw new Error('Yorum listesi doğrulanamadı.');
-        const seen = new Set();
-        const approved = data.reviews.filter(review => {
-          if (!review || typeof review !== 'object' || !review.id || seen.has(String(review.id))) return false;
-          seen.add(String(review.id));
-          return true;
-        }).map(review => ({...review, source: 'site'}));
-        reviews = [...approved, ...seeds];
-        render();
-        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler ve yayımlanması onaylanan site yorumları.';
-      }).catch(() => {
-        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Yeni yorumlar şu anda yüklenemedi.';
-      });
+      if (status) status.textContent = 'Mevcut sitede yayımlanan değerlendirmeler. Diğer yorumları aşağıdaki düğmeyle açabilirsiniz.';
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once: true});

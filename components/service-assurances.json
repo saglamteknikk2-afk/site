@@ -1,9 +1,31 @@
 {
   "checked_on": "2026-10-24",
-  "source_note": "Mevcut işletme sitesinde süre, garanti ve MYK beyanları var. Bölgesel süre koşulları, garanti kapsamı ve geçerli belge henüz sunulmadığından kesin vaatler doğrulama bekliyor.",
+  "source_note": "MYK belge numarası ve 1 yıl parça/işçilik garantisi 24 Ekim 2026 tarihinde işletme sahibi tarafından bildirildi. Varış süresi konum ve ekip uygunluğuna bağlıdır.",
   "items": [
-    {"id":"arrival","status":"pending","declared_title":"40 dk varış hedefi","title":"Varış planı","detail":"Bölgeniz ve ekip uygunluğuna göre süreyi görüşelim.","conditions":"Varış zamanı; konum, ekip uygunluğu ve trafik durumuna göre değişir. Telefon görüşmesinde yaklaşık süreyi netleştirin. Randevu görüşülmeden her adres için sabit varış süresi taahhüt edilmez."},
-    {"id":"warranty","status":"pending","declared_title":"1 yıl işçilik garantisi","title":"İşçilik garantisi","detail":"Kapsam ve koşulları işlem öncesinde yazılı isteyin.","conditions":"İşçilik garantisinin süresi, kapsadığı işlem ve koşulları hizmet öncesinde yazılı olarak görüşülür. Parça ve işçilik kapsamları ayrı açıklanmalıdır. Servis teklifinde yer almayan bir kapsamı varsaymayın."},
-    {"id":"qualification","status":"pending","declared_title":"MYK mesleki yeterlilik","title":"MYK ve eğitim bilgisi","detail":"Belge ve işlem kapsamını görüşmede sorabilirsiniz.","conditions":"Mesleki yeterlilik ve eğitim belgeleri hakkında bilgi talep edebilirsiniz. Belgenin kapsadığı meslek ve işlem, ihtiyaç duyulan hizmetle birlikte değerlendirilmelidir. Mesleki belge, üreticinin yetkili servisi olunduğu anlamına gelmez."}
+    {
+      "id": "arrival",
+      "status": "pending",
+      "declared_title": "40 dk varış hedefi",
+      "title": "Varış planı",
+      "detail": "Bölgeniz ve ekip uygunluğuna göre süreyi görüşelim.",
+      "conditions": "Varış zamanı; konum, ekip uygunluğu ve trafik durumuna göre değişir. Telefon görüşmesinde yaklaşık süreyi netleştirin. Randevu görüşülmeden her adres için sabit varış süresi taahhüt edilmez."
+    },
+    {
+      "id": "warranty",
+      "status": "business-declared",
+      "declared_title": "1 yıl parça ve işçilik garantisi",
+      "title": "1 yıl parça ve işçilik garantisi",
+      "detail": "Yapılan işlem ve değişen parçalar servis fişinde belirtilir.",
+      "conditions": "Sağlam Teknik tarafından yapılan işçilik ve temin edilip takılan parçalar için işletmenin verdiği 1 yıllık garanti uygulanır. Yapılan işlem, değişen parçalar ve garanti başlangıcı servis belgesinde belirtilir. Bu işletme garantisi, üreticinin garanti koşullarından ayrı değerlendirilir."
+    },
+    {
+      "id": "qualification",
+      "status": "business-declared",
+      "declared_title": "MYK belgeli teknik uzman",
+      "title": "MYK belgeli teknik uzman",
+      "detail": "Belge no: YB0200/11UY0032-4/02/502",
+      "conditions": "İşletme sahibinin bildirdiği MYK belge numarası: YB0200/11UY0032-4/02/502. Belgenin işlem kapsamını servis öncesinde görüşebilirsiniz. Mesleki yeterlilik belgesi, bir üreticinin yetkili servisi olunduğu anlamına gelmez.",
+      "credential_number": "YB0200/11UY0032-4/02/502"
+    }
   ]
 }
