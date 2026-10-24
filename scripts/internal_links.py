@@ -209,6 +209,10 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     readings = {PurePosixPath(item.get('path', '')).name for item in page_index if item.get('kind') == 'article'} - services - symptoms - {slug(name) + '-servisi.html' for name in catalog.get('semts', [])} - set(HUBS)
     groups.append(('Model, kod ve güvenli kullanım bilgileri', [('/' + target, '') for target in sorted(readings)]))
     for name in HUBS:
+        if name == 'index.html':
+            # Home should be a focused lead-generation page, not a 100+ link directory.
+            # Full directory remains on the other category hubs.
+            continue
         identifier = 'st-hub-directory'
         content = ''.join('<details class="st-directory-group"><summary>' + html.escape(title) + '</summary><nav aria-label="' + html.escape(title, quote=True) + '">' + link_list(name, entries) + '</nav></details>' for title, entries in groups)
         fragment = '<details id="' + identifier + '" class="st-reading-links st-link-directory" data-st-link-directory="hub"><summary>Tüm bölge, marka ve rehber bağlantıları</summary><p>Yayımlanmış sayfalar cihaz türüne ve konuya göre ayrılır. Bir marka veya semt adı, tek başına model ya da servis uygunluğu doğrulamaz.</p>' + content + '</details>'
