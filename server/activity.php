@@ -16,15 +16,27 @@ function st_activity_source_label(string $source,bool $client): string {
     $labels=['ai'=>'Gemini AI','manual'=>'Üretici belgesi','guide'=>'Yerel belirti rehberi','emergency'=>'Acil güvenlik yönlendirmesi','advisory'=>'Üretici duyurusu'];
     return ($labels[$source]??'Yerel rehber').($client?' (tarayıcıda gösterilen kaynak)':'');
 }
+function st_activity_location(PDO $db,array $input): string {
+    $gps=st_gps_description($input);if($gps!=='')return $gps;
+    $district=st_activity_optional($input,'district',120);$neighborhood=st_activity_optional($input,'neighborhood',120);
+    $selected=trim(implode(' / ',array_filter([$district,$neighborhood])));
+    if($selected!=='')return 'Müşterinin seçimi / beyanı: '.$selected.' (GPS ile doğrulanmadı).';
+    if(st_config()['ip_location_lookup']){
+        $key='geo:'.hash_hmac('sha256',st_ip().'.'.date('Y-m-d'),st_secret());
+        $query=$db->prepare('SELECT v FROM meta WHERE k=?');$query->execute([$key]);$cached=json_decode($query->fetchColumn()?:'null',true);$query->closeCursor();
+        if(is_array($cached)&&($cached['until']??0)>time()&&is_string($cached['text']??null)&&strlen($cached['text'])<=400)return 'Yaklaşık IP bölgesi: '.$cached['text'];
+    }
+    return 'İzinli GPS veya doğrulanmış bölge bilgisi yok; ilçe/mahalle varsayılmadı.';
+}
 function st_activity_finish(PDO $db,array $row,array $input): void {
-    $source=$row['source'];$gps=st_gps_description($input);
+    $source=$row['source'];$location=st_activity_location($db,$input);
     $text="🤖 AI USTA — SORU VE CEVAP\n🕒 Tarih/saat: ".date('d.m.Y H:i:s')." (İstanbul)\n🔧 Cihaz: ".$row['device']
         ."\n🏷️ Marka / model: ".(trim($row['brand'].' '.$row['model'])?:'Belirtilmedi')
         ."\n🧠 Yanıt kaynağı: ".st_activity_source_label($source,empty($input['server_activity_id']))
         ."\n\n❓ Kullanıcının sorusu / belirtisi:\n".$row['issue']
         ."\n\n💡 Ekranda gösterilen cevap:\n".$row['answer']
         ."\n\n📄 Sayfa: ".$row['page']."\n📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')
-        ."\n📍 Konum: ".($gps?:'Konum paylaşılmadı; ilçe/mahalle varsayılmadı.');
+        ."\n📍 Konum: ".$location;
     st_enqueue($db,$row['id'],['text'=>$text]);
     st_analytics_increment($db,'ai_questions');
     st_analytics_increment($db,'ai_source_'.($source==='ai'?'gemini':($source==='advisory'?'manual':$source)));

@@ -42,6 +42,11 @@ function runtime(options={}){
  const acknowledged=main.requests.filter(r=>r.action==='activity').at(-1).body;
  check('A final server answer retains its signed generation receipt',acknowledged.server_activity_id==='ai:synthetic-receipt'&&acknowledged.server_activity_token==='synthetic-signed-token');
  check('The display acknowledgement retains the entire rendered text',acknowledged.answer==='Son ekranda gösterilen sunucu cevabı ve sonraki adım.');
+ const located=runtime();located.context.stAttachLocation=data=>{data.location={consent:true,latitude:41,longitude:28.9,accuracy:12};return data;};
+ await located.context.stRecordAIResult({...result,district:'Bakırköy',neighborhood:'Ataköy'});
+ const locationPayload=located.requests.find(r=>r.action==='activity').body;
+ check('Only an existing consented location attachment is forwarded to activity',locationPayload.location?.consent===true&&locationPayload.location.latitude===41);
+ check('Explicit wizard district and neighborhood remain customer statements',locationPayload.district==='Bakırköy'&&locationPayload.neighborhood==='Ataköy');
  const retry=runtime({failOnce:'activity'});await retry.context.stRecordAIResult(result);
  const attempts=retry.requests.filter(r=>r.action==='activity');
  check('A temporary connection error gets one bounded retry',attempts.length===2);

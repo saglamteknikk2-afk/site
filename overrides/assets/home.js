@@ -72,7 +72,7 @@
       const reference=document.getElementById('aiManualReference');
       if(reference){reference.replaceChildren();reference.hidden=!data.source_url;if(data.source_url&&/^https:\/\//.test(data.source_url)){const link=document.createElement('a');link.href=data.source_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Üretici kaynağını aç ↗';reference.append(link,document.createElement('br'),document.createTextNode(data.source_locator||''));}}
       if(options.record!==false&&typeof stRecordAIResult==='function'){
-        stRecordAIResult({...data,device,brand:context.brand||'',model:context.model||'',model_id:context.model_id||'',code:context.code||'',issue:document.getElementById('issueInput').value.trim(),answer:response.innerText.trim()});
+        stRecordAIResult({...data,device,brand:context.brand||'',model:context.model||'',model_id:context.model_id||'',district:context.district||'',neighborhood:context.neighborhood||'',code:context.code||'',issue:document.getElementById('issueInput').value.trim(),answer:response.innerText.trim()});
       }
     }
 

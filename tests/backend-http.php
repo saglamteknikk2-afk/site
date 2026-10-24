@@ -129,6 +129,19 @@ try{
  $assert($r['status']===200&&$count('ai_events')===$beforeAI+1&&$count('outbox')===$activityQueue,'Local-result replay cannot duplicate activity or notification');
  $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-forged-gemini-00001','source'=>'ai']),['Idempotency-Key'=>'qa-forged-gemini-00001']);
  $assert($r['status']===400,'Client activity cannot claim an unobserved Gemini response');
+ // Consent, stated district and cached IP estimates remain distinct; no GeoIP network call.
+ $notice=static function(string $id)use($db):string{$q=$db->prepare('SELECT payload FROM outbox WHERE id=?');$q->execute([$id]);$value=json_decode($q->fetchColumn(),true);$q->closeCursor();return $value['text']??$value['caption']??'';};
+ $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-location-stated-00001','district'=>'Bakırköy','neighborhood'=>'Ataköy']));
+ $assert($r['status']===200&&strpos($notice($r['data']['activity_id']),'Müşterinin seçimi / beyanı: Bakırköy / Ataköy')!==false,'Selected neighborhood is clearly a customer statement, not inferred GPS');
+ $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-location-consent-0001','location'=>['consent'=>true,'latitude'=>41.0,'longitude'=>28.9,'accuracy'=>12]]));
+ $assert($r['status']===200&&strpos($notice($r['data']['activity_id']),'41.000000')!==false,'Explicitly consented GPS reaches the completed-answer notification');
+ $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-location-denied-00001','location'=>['consent'=>false,'latitude'=>41.0,'longitude'=>28.9,'accuracy'=>12]]));
+ $assert($r['status']===200&&strpos($notice($r['data']['activity_id']),'41.000000')===false,'Coordinates without consent are never reported');
+ $configBefore=file_get_contents($private.'/site_apileri,.txt');file_put_contents($private.'/site_apileri,.txt',str_replace('IP_LOCATION_LOOKUP=0','IP_LOCATION_LOOKUP=1',$configBefore));
+ $geoKey='geo:'.hash_hmac('sha256','127.0.0.1.'.date('Y-m-d'),$fixtureSecret);$db->prepare('INSERT OR REPLACE INTO meta(k,v) VALUES(?,?)')->execute([$geoKey,json_encode(['until'=>time()+300,'text'=>'İstanbul (IP tahmini; kesin ilçe/mahalle bilinmiyor)'])]);
+ $r=$request('POST','/api.php?action=activity',array_replace($activity,['event_id'=>'qa-location-cached-00001']));
+ $assert($r['status']===200&&strpos($notice($r['data']['activity_id']),'Yaklaşık IP bölgesi: İstanbul')!==false,'Available cached IP estimate is labeled approximate without a new provider lookup');
+ file_put_contents($private.'/site_apileri,.txt',$configBefore);
  $r=$request('POST','/api.php?action=ai',['device'=>'Kombi','issue'=>'Bosch Condens 2300i W hata kodu 227','model_id'=>'bosch-kombi-condens-2300i-w','code'=>'227']);
  $assert($r['status']===200&&$r['data']['source']==='manual'&&$r['data']['code_definition_verified']===true,'Known scoped model/code uses the verified manual without Gemini');
  $receipt=$r['data'];$shown=['type'=>'ai_result','event_id'=>'qa-rendered-server-00001','device'=>'Kombi','issue'=>'Bosch Condens 2300i W hata kodu 227','answer'=>'Tam ekranda gösterilen sentetik açıklama ve güvenli gözlem.','source'=>'ai','page'=>'/','server_activity_id'=>$receipt['activity_id'],'server_activity_token'=>str_repeat('0',64)];

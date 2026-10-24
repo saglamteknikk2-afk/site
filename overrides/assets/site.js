@@ -23,7 +23,7 @@ async function stToken(){
 }
 function stId(){if(globalThis.crypto?.randomUUID)return crypto.randomUUID();const bytes=new Uint8Array(24);crypto.getRandomValues(bytes);return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('')}
 async function stApi(action,data,key){
- if(window.stAttachLocation&&(action==='review'||action==='ticket'))stAttachLocation(data);
+ if(window.stAttachLocation&&(action==='review'||action==='ticket'||action==='activity'))stAttachLocation(data);
  for(let attempt=0;attempt<2;attempt++){
   const token=await stToken();
   try{return await stFetchJson(stSiteURL('api.php?action='+encodeURIComponent(action)),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':token,...(key?{'Idempotency-Key':key}:{})},body:JSON.stringify(data)},action==='ai'?18000:['visit','activity'].includes(action)?6000:20000);}
@@ -46,7 +46,7 @@ function stRecordAIResult(value){
  if(!stRecordingAllowed()||value?.activity_recorded===true)return Promise.resolve(null);
  const source=String(value?.source||'guide');
  if(!['manual','guide','emergency','advisory','ai'].includes(source))return Promise.resolve(null);
- const payload={type:'ai_result',device:String(value?.device||'Kombi'),brand:String(value?.brand||''),model:String(value?.model||''),model_id:String(value?.model_id||''),issue:String(value?.issue||''),answer:String(value?.answer||'').trim(),source,page:location.pathname,code:String(value?.code||''),server_activity_id:String(value?.activity_id||''),server_activity_token:String(value?.activity_token||'')};
+ const payload={type:'ai_result',device:String(value?.device||'Kombi'),brand:String(value?.brand||''),model:String(value?.model||''),model_id:String(value?.model_id||''),issue:String(value?.issue||''),answer:String(value?.answer||'').trim(),source,page:location.pathname,code:String(value?.code||''),server_activity_id:String(value?.activity_id||''),server_activity_token:String(value?.activity_token||''),district:String(value?.district||''),neighborhood:String(value?.neighborhood||'')};
  if(!payload.answer||!payload.issue)return Promise.resolve(null);
  const signature=JSON.stringify(payload);
  if(stCompletedAnswers.has(signature))return stCompletedAnswers.get(signature);
