@@ -777,8 +777,19 @@ function st_dispatch(): void {
         st_json(['ok'=>true]);
     }
     if($action==='bootstrap' && $method==='GET'){
-        // Daily reports are queued locally. Webhook setup and delivery belong to cron.
-        st_check_daily_report(false);
+        // Re-enable the previous no-cron fallback: first request after midnight
+        // sends the completed daily summary if a cron job was unavailable.
+        if(st_check_daily_report(false))st_deliver_now('daily:'.date('Y-m-d',strtotime('-1 day')));
+        $period_file=__DIR__.'/report-support.php';
+        if(is_file($period_file)){
+            require_once $period_file;
+            foreach(['weekly','monthly'] as $period){
+                try{if(st_enqueue_period_report($period)){
+                    $window=st_report_window($period);
+                    st_deliver_now($window['id']);
+                }}catch(Throwable $e){@error_log('SaglamTeknik: donem raporu kuyruga alinamadi ('.get_class($e).').');}
+            }
+        }
         st_json(['ok'=>true,'csrf'=>st_csrf(st_session())]);
     }
     if($action==='reviews' && $method==='GET') {
