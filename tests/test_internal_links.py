@@ -80,7 +80,7 @@ class InternalLinkTests(unittest.TestCase):
             text = self.built[name].decode()
             self.assertIn('assets/internal-links.css', text)
             self.assertRegex(text, r'class="st-reading-links(?:\s|\")')
-        self.assertIn('assets/internal-links.css', self.built['index.html'].decode())
+        self.assertNotIn('id="st-hub-directory"', self.built['index.html'].decode())
 
     def test_no_new_route_canonical_schema_model_or_sitemap(self):
         self.assertEqual(set(self.files), set(self.original))
@@ -175,18 +175,19 @@ class InternalLinkTests(unittest.TestCase):
                 for nearby in linking.NEARBY_DISTRICTS[district]:
                     self.assertIn('/' + linking.slug(nearby) + '-' + device + '-servisi.html', links)
 
-    def test_all_six_hubs_have_direct_static_links_to_every_published_category(self):
+    def test_five_library_hubs_keep_static_links_without_cluttering_home(self):
         catalog = json.loads(self.files['assets/servis-katalog.json'])
         index = json.loads(self.files['assets/page-index.json'])
         required = {row['path'] for row in index if row['kind'] in ('district', 'brand')}
         required.update('/' + linking.slug(name) + '-servisi.html' for name in catalog['semts'])
         required.update(row['path'] for config in catalog['devices'].values() for row in config['symptoms'])
         for name in linking.HUBS:
+            if name == 'index.html': continue
             text = self.files[name].decode()
             self.assertIn('data-st-link-directory="hub"', text)
             links = {urlsplit(linking.canonical_href(href, name)).path for href in linking.parse(text).main_links}
             self.assertTrue(required <= links, (name, sorted(required - links)))
-        self.assertEqual(self.stats['directory_pages']['hub'], 6)
+        self.assertEqual(self.stats['directory_pages']['hub'], 5)
         self.assertEqual(self.stats['directory_pages']['district'], 50)
         self.assertEqual(self.stats['directory_pages']['brand-models'], 16)
 
