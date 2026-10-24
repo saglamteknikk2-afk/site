@@ -588,14 +588,18 @@ function st_cleanup(): void {
         $db->exec('COMMIT');
     }catch(Throwable $e){$db->exec('ROLLBACK');throw $e;}
 }
-function st_worker(int $limit=20,?string $event_id=null): array {
-    $db=st_db();$cfg=st_config();st_cleanup();if(!$cfg['telegram_token'] || !$cfg['telegram_chat_id']) return ['sent'=>0,'configured'=>false];
-    st_ensure_webhook(false);
-    st_check_daily_report(false);
+function st_worker(int $limit=20,?string $event_id=null,bool $on_request=false): array {
+    $db=st_db();$cfg=st_config();
+    if(!$on_request)st_cleanup();
+    if(!$cfg['telegram_token'] || !$cfg['telegram_chat_id']) return ['sent'=>0,'configured'=>false];
+    // Visitor requests must not install webhooks or run global cleanup.
+    if(!$on_request){st_ensure_webhook(false);st_check_daily_report(false);}
     $sent=0;$failed=0;
     for($i=0;$i<$limit;$i++) {
         $db->exec('BEGIN IMMEDIATE');
-        $q=$db->prepare('SELECT * FROM outbox WHERE sent=0 AND due<=? AND lease<?'.($event_id?' AND id=?':'').' ORDER BY due LIMIT 1');$q->execute(array_merge([time(),time()],$event_id?[$event_id]:[]));$row=$q->fetch();
+        $filter=$event_id!==null?' AND (id=? OR id LIKE ?)':'';
+        $q=$db->prepare('SELECT * FROM outbox WHERE sent=0 AND due<=? AND lease<?'.$filter.' ORDER BY due,id LIMIT 1');
+        $q->execute(array_merge([time(),time()],$event_id!==null?[$event_id,$event_id.':%']:[]));$row=$q->fetch();
         if(!$row){$db->exec('COMMIT');break;}
         $q=$db->prepare('UPDATE outbox SET lease=? WHERE id=?');$q->execute([time()+30,$row['id']]);$db->exec('COMMIT');
         try {
@@ -625,9 +629,16 @@ function st_worker(int $limit=20,?string $event_id=null): array {
     }
     return ['sent'=>$sent,'failed'=>$failed,'configured'=>true];
 }
+function st_deliver_now(string $event_id): void {
+    // One event and its companion photo/AI chunks. Duplicates are claimed by outbox leases.
+    // Network errors must never cause a saved customer request to fail.
+    try{if(!st_db()->inTransaction())st_worker(12,$event_id,true);}catch(Throwable $e){
+        @error_log('SaglamTeknik: anlik Telegram iletimi siraya alindi ('.get_class($e).').');
+    }
+}
 function st_finish_record(array $response,string $action,int $code=200): void {
     $event_id=$action.':'.$response['id'];
-    // Delivery is performed by worker.php cron; the saved request stays durable.
+    st_deliver_now($event_id);
     $q=st_db()->prepare('SELECT sent FROM outbox WHERE id=?');$q->execute([$event_id]);
     $delivered=$q->fetchColumn();
     if($delivered===false){$table=$action==='review'?'reviews':'tickets';$q=st_db()->prepare('SELECT notification_sent FROM '.$table.' WHERE id=?');$q->execute([$response['id']]);$delivered=$q->fetchColumn();}
@@ -807,6 +818,7 @@ function st_dispatch(): void {
                 . "📱 Kullanılan Cihaz: " . st_device($_SERVER['HTTP_USER_AGENT'] ?? '') . "\n"
                 . "📍 Konum: " . ($gps ?: st_location());
             st_enqueue(st_db(), $search_id, ['text' => $search_text]);
+            st_deliver_now($search_id);
         } catch (Throwable $e) {}
         st_json($res);
     }
@@ -837,7 +849,7 @@ function st_dispatch(): void {
             . "📍 Konum: ".($gps?:st_location())."\n"
             . "🔍 Siteden Arama: ".$search_line."\n"
             . "🛠 Talep Durumu: ".$ticket_line;
-        st_enqueue(st_db(),$id,['text'=>$text]);st_json(['ok'=>true,'enabled'=>true]);
+        st_enqueue(st_db(),$id,['text'=>$text]);st_deliver_now($id);st_json(['ok'=>true,'enabled'=>true]);
     }
     if($action==='ai'){
         st_rate('ai',12);
@@ -862,6 +874,7 @@ function st_dispatch(): void {
                 . "📱 Ziyaretçi cihazı: " . st_device($_SERVER['HTTP_USER_AGENT'] ?? '') . "\n"
                 . "📍 Konum: " . ($gps ?: 'Konum paylaşılmadı (AI yanıtı için IP konum servisi çağrılmaz).');
             st_enqueue(st_db(), $ai_id, ['text' => $ai_text]);
+            st_deliver_now($ai_id);
         } catch (Throwable $e) {}
         st_json($res);
     }
