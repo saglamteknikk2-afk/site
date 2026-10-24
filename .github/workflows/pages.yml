@@ -76,6 +76,7 @@ jobs:
           python scripts/audit_content.py build/production --strict --report build/content-audit.json
           python scripts/internal_links.py build/production --report build/crawl-check.json --check
           php tests/business-runtime.php
+          php tests/notification-reports.php build/production
           php tests/fault-catalog.php
           php tests/brand_registry.php build/production
           php tests/backend-http.php build/production
