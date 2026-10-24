@@ -862,6 +862,30 @@ function st_dispatch(): void {
             . "🛠 Talep Durumu: ".$ticket_line;
         st_enqueue(st_db(),$id,['text'=>$text]);st_deliver_now($id);st_json(['ok'=>true,'enabled'=>true]);
     }
+    if($action==='ai-local'){
+        // A completed on-device guide is an AI Usta interaction too.
+        // Record only a deliberate completed result; no Gemini request or IP/GPS lookup.
+        st_rate('ai-local',24);
+        $device=st_text($a,'device',2,40);
+        if(!in_array($device,['Kombi','Klima','Petek'],true))st_fail('Cihaz türü geçersiz.');
+        $issue=st_text($a,'issue',3,1200);
+        $answer=st_text($a,'answer',3,2400);
+        $id='ai:local:'.hash_hmac('sha256',$session.'|'.$device.'|'.$issue,st_secret()).':'.intdiv(time(),600);
+        $db=st_db();
+        $exists=$db->prepare('SELECT 1 FROM outbox WHERE id=?');$exists->execute([$id]);
+        if(!$exists->fetchColumn()){
+            $text="🤖 AI USTA · YEREL REHBER\n"
+                ."🕒 Tarih/saat: ".date('d.m.Y H:i:s')." (İstanbul)\n"
+                ."🔧 Cihaz: ".$device."\n\n"
+                ."❓ Sorulan soru / belirti:\n".$issue."\n\n"
+                ."💡 Gösterilen ilk rehber:\n".$answer."\n\n"
+                ."📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'');
+            st_enqueue($db,$id,['text'=>$text]);
+            st_stat_inc('ai_questions');
+            st_deliver_now($id);
+        }
+        st_json(['ok'=>true,'recorded'=>true]);
+    }
     if($action==='ai'){
         st_rate('ai',12);
         st_stat_inc('ai_questions');
