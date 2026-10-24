@@ -94,6 +94,13 @@ try{
  $r=$request('GET','/api.php?action=business-maps');$assert($r['status']===200&&!$r['data']['configured'],'Missing map configuration has an honest empty response');
  file_put_contents($private.'/haritalar.json',json_encode(['google_url'=>'https://maps.app.goo.gl/SyntheticQAMap','google_embed_url'=>'https://www.google.com/maps/embed?pb=synthetic','telegram_token'=>'SYNTHETIC_MAP_SECRET_NEVER_PUBLIC']));
  $r=$request('GET','/api.php?action=business-maps');$assert($r['status']===200&&$r['data']['configured']&&strpos($r['raw'],'SYNTHETIC_MAP_SECRET_NEVER_PUBLIC')===false,'Maps endpoint exposes only allowlisted public map fields');
+ $local=['device'=>'Kombi','issue'=>'Kombi su akıtıyor; ilk rehberi tamamladım','answer'=>'İlk rehber: Cihaza müdahale etmeden gözlemi not edin.'];
+ $beforeLocal=(int)$db->query("SELECT COUNT(*) FROM outbox WHERE id LIKE 'ai:local:%'")->fetchColumn();
+ $r=$request('POST','/api.php?action=ai-local',$local);
+ $assert($r['status']===200&&($r['data']['recorded']??false)===true,'Completed local AI Usta guide notifies without Gemini');
+ $r=$request('POST','/api.php?action=ai-local',$local);
+ $afterLocal=(int)$db->query("SELECT COUNT(*) FROM outbox WHERE id LIKE 'ai:local:%'")->fetchColumn();
+ $assert($r['status']===200&&$afterLocal===$beforeLocal+1,'Repeated guide within ten minutes never duplicates Telegram notice');
  $r=$request('POST','/api.php?action=ai',['device'=>'Kombi','issue'=>'Bosch Condens 2300i W hata kodu 227','model_id'=>'bosch-kombi-condens-2300i-w','code'=>'227']);
  $assert($r['status']===200&&$r['data']['source']==='manual'&&$r['data']['code_definition_verified']===true,'Known scoped model/code uses the verified manual without Gemini');
  foreach(['E1','E01'] as $code){$r=$request('POST','/api.php?action=ai',['device'=>'Kombi','issue'=>'Modelini bilmiyorum; hata kodu '.$code,'code'=>$code]);$assert($r['status']===200&&$r['data']['source']==='guide'&&empty($r['data']['code_definition_verified']),'Unknown model '.$code.' never gets an invented meaning');}
