@@ -129,7 +129,7 @@
           seen.add(String(review.id));
           return true;
         }).map(review => ({...review, id: `site-${review.id}`, source: 'site'}));
-        reviews = [...seeds, ...approved];
+        reviews = [...approved, ...seeds];
         if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler ve yayımlanması onaylanan site yorumları.';
       }).catch(() => {
         if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Yeni yorumlar şu anda yüklenemedi.';
@@ -199,6 +199,7 @@
       if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Diğerlerini düğmeyle açabilirsiniz; ön izlemede yeni yorum gönderilemez.';
     } else {
       if (status) status.textContent = 'Mevcut sitede yayımlanan değerlendirmeler. Diğer yorumları aşağıdaki düğmeyle açabilirsiniz.';
+      loadApprovedOnDemand();
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once: true});
