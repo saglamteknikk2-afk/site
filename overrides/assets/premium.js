@@ -12,10 +12,30 @@
    if(!window.STUstaWizard||!document.getElementById('aiUstaWizard'))return;
    event.preventDefault();window.STUstaWizard.open(link.dataset.ustaDevice||undefined);
   }));
-  document.querySelectorAll('[data-ticket-open]').forEach(button=>button.addEventListener('click',()=>{
-   if(typeof window.toggleServiceTicketModal==='function')window.toggleServiceTicketModal(true);
-   else {const target=homeURL();target.hash='servis-talebi';location.href=target.href;}
-  }));
+  // A single delegated listener works on older inline HTML and current components.
+  // The modal can still open if home.js did not initialize.
+  const modal=document.getElementById('serviceTicketModal');
+  const setModal=show=>{
+   if(typeof window.toggleServiceTicketModal==='function'){window.toggleServiceTicketModal(show);return;}
+   if(!modal){const target=homeURL();target.hash='servis-talebi';location.href=target.href;return;}
+   modal.classList.toggle('hidden',!show);
+   document.body.classList.toggle('ah-dialog-open',show);
+   if(show)modal.querySelector('#ticketName')?.focus({preventScroll:true});
+  };
+  document.querySelectorAll('[data-ticket-open],.usta-ticket').forEach(button=>{
+   button.removeAttribute('onclick');
+   button.addEventListener('click',event=>{event.preventDefault();setModal(true);});
+  });
+  modal?.querySelectorAll('.ah-modal-close').forEach(button=>{
+   button.removeAttribute('onclick');
+   button.addEventListener('click',()=>setModal(false));
+  });
+  // Keyboard close also works in the fallback case; the main handler owns it otherwise.
+  document.addEventListener('keydown',event=>{
+   if(event.key==='Escape'&&modal&&!modal.classList.contains('hidden')&&typeof window.toggleServiceTicketModal!=='function'){
+    event.preventDefault();setModal(false);
+   }
+  });
   document.querySelectorAll('a[href]').forEach(link=>{
    const url=new URL(link.href,document.baseURI);
    if(url.origin===location.origin&&url.pathname===location.pathname&&!url.hash)link.setAttribute('aria-current','page');
