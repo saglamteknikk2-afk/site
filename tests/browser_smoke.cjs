@@ -7,6 +7,7 @@ const output=path.resolve(process.env.SAGLAM_QA||path.join(__dirname,'../build/q
 const repository=path.resolve(__dirname,'..');
 const production=path.resolve(process.env.SAGLAM_PRODUCTION_BUILD||path.join(repository,'build/production'));
 const brand=JSON.parse(fs.readFileSync(path.join(repository,'components/brand.json'),'utf8'));
+const masterRequest=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/master-request.json'),'utf8'));
 const base='/site';const origin='https://premium-preview.test';
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.woff2':'font/woff2','.ttf':'font/ttf'};
 const selected=[['index.html',1440,1000,true],['index.html',390,844,true],['index.html',320,844,false],['index.html',768,1000,false],['model-ariza-kodlari.html',390,844,true],['bolgeler.html',390,844,true],['iletisim.html',390,844,true],['kombi-servisi.html',390,844,true],['kucukcekmece-klima-servisi.html',390,844,true]];
@@ -22,16 +23,17 @@ function routeAudit(){
  const isNoindex=text=>/<meta\b(?=[^>]*name=["']robots["'])(?=[^>]*content=["'][^"']*noindex)[^>]*>/i.test(text);
  if(previewNames.some(name=>!isNoindex(fs.readFileSync(path.join(root,name),'utf8'))))throw Error('Every preview visitor page must be noindex');
  if(/Disallow:\s*\/\s*$/m.test(fs.readFileSync(path.join(root,'robots.txt'),'utf8')))throw Error('Preview robots must allow reading noindex');
- const canonical=[];
- for(const name of productionNames){const text=fs.readFileSync(path.join(production,name),'utf8');if(isNoindex(text))continue;const link=text.match(/<link\b(?=[^>]*rel=["']canonical["'])[^>]*>/i)?.[0],url=link?.match(/href=["']([^"']+)["']/i)?.[1],expectedURL='https://saglamkombiklima.com.tr/'+(name==='index.html'?'':name);if(url!==expectedURL)throw Error('Production canonical changed: '+name);canonical.push(url);}
+ const canonical=[],excluded=new Set([...masterRequest.established_nonindex_routes,...masterRequest.foreign_slugs]);
+ if(masterRequest.foreign_slugs.length!==11||excluded.size!==13)throw Error('Expected exactly eleven requested foreign guides plus the two established noindex routes');
+ for(const name of productionNames){const text=fs.readFileSync(path.join(production,name),'utf8'),noindex=isNoindex(text);if(noindex!==excluded.has(name))throw Error('Production indexing policy differs from the requested exact route set: '+name);const link=text.match(/<link\b(?=[^>]*rel=["']canonical["'])[^>]*>/i)?.[0],url=link?.match(/href=["']([^"']+)["']/i)?.[1],expectedURL='https://saglamkombiklima.com.tr/'+(name==='index.html'?'':name);if(name!=='404.html'&&url!==expectedURL)throw Error('Production canonical changed: '+name);if(masterRequest.foreign_slugs.includes(name)){const robots=text.match(/<meta\b(?=[^>]*name=["']robots["'])[^>]*>/i)?.[0]?.match(/content=["']([^"']+)["']/i)?.[1]?.toLowerCase().split(/[\s,]+/)||[];if(!robots.includes('noindex')||!robots.includes('follow')||robots.includes('nofollow'))throw Error('Foreign guide must remain available with noindex,follow: '+name);}if(!noindex)canonical.push(url);}
  const sitemap=[...fs.readFileSync(path.join(production,'sitemap.xml'),'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]).sort();
- if(canonical.length!==201||JSON.stringify(canonical.sort())!==JSON.stringify(sitemap))throw Error('The 201 production canonical/sitemap URLs must remain unchanged');
+ if(canonical.length!==190||JSON.stringify(canonical.sort())!==JSON.stringify(sitemap))throw Error('The 190 indexable production canonical URLs must equal the sitemap, excluding only the requested eleven additional guides');
  const landings=JSON.parse(fs.readFileSync(path.join(root,'assets/ad-landing-map.json'),'utf8')).routes;
  if(landings.length!==82)throw Error('Expected the existing 82 service landing routes');
  for(const landing of landings){const localPath=landing.path.startsWith(base+'/')?landing.path.slice(base.length):landing.path;const text=fs.readFileSync(path.join(root,localPath.replace(/^\//,'')),'utf8'),block=text.match(/<div\b[^>]*data-service-contact[^>]*>([\s\S]*?)<\/div>/)?.[1],links=[...(block||'').matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>/g)].map(m=>m[1]),wa=links.find(href=>href.startsWith('https://wa.me/')),message=wa&&new URL(wa.replace(/&amp;/g,'&')).searchParams.get('text');if(links.length!==2||!links.includes('tel:05346225515')||!message?.includes(landing.title)||!message?.includes(landing.url))throw Error('Service landing must preserve contextual phone/WhatsApp actions: '+landing.path);}
  const homeHTML=fs.readFileSync(path.join(root,'index.html'),'utf8'),staticReviews=[...homeHTML.matchAll(/\bclass=["']([^"']+)["']/g)].filter(match=>match[1].split(/\s+/).includes('pr-review')).length;
  if(staticReviews!==6)throw Error('Exactly the first six existing reviews must be present in static HTML');
- return {passed:true,visitor_routes:203,preview_noindex:203,production_indexable:201,sitemap_urls:sitemap.length,contextual_service_landings:landings.length,static_review_cards:staticReviews};
+ return {passed:true,visitor_routes:203,preview_noindex:203,production_indexable:190,sitemap_urls:sitemap.length,foreign_guides_available_noindex_follow:masterRequest.foreign_slugs.length,excluded_foreign_routes:masterRequest.foreign_slugs,contextual_service_landings:landings.length,static_review_cards:staticReviews};
 }
 async function reachableControl(locator){
  await locator.evaluate(el=>el.scrollIntoView({block:'center',inline:'nearest'}));

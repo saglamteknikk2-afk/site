@@ -6,8 +6,12 @@
   const params=new URLSearchParams(location.search),selected=models.find(m=>m.id===params.get('model_id'))||models[0];
   const wanted=params.get('model')||'',exact=(selected.model_names||[]).find(n=>n===wanted);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let family=selected.label.split('—')[0].trim().replace(/\s+\d+(?:\s*\/\s*\d+){2,}(?:\s*kw)?/ig,'').trim();if(family.length>85)family=(selected.model_names?.[0]||family.slice(0,72))+' ailesi';
-  const heading=document.querySelector('.at-page-hero h1');if(heading)heading.textContent=selected.brand+' '+family+' · '+(selected.device==='klima'?'Klima':'Kombi')+' hata kodları';
+  let family=selected.label.split('—')[0].trim();
+  if(!(selected.brand==='Baxi'&&family.includes('Assure 500')))family=family.replace(/\s+\d+(?:\s*\/\s*\d+){2,}(?:\s*kw)?/ig,'').trim();
+  family=family.replace(' (ülke/ürün kodu teyidi gerekir)','').replace(', Vitotronic kontrol (nesil teyidi gerekir)',' (Vitotronic)');
+  if(family.length>85)family=(selected.model_names?.[0]||family.slice(0,72))+' ailesi';
+  const identity=family.toLowerCase().startsWith(selected.brand.toLowerCase())?family:selected.brand+' '+family;
+  const heading=document.querySelector('.at-page-hero h1');if(heading)heading.textContent=identity+' · '+(selected.device==='klima'?'Klima':'Kombi')+' hata kodları';
   if(heading)document.title=heading.textContent+' | Sağlam Teknik';
   table.id='kodlar';table.hidden=false;
   const lead=document.querySelector('.at-page-hero .at-lead');if(lead)lead.textContent='Modelinizin üretici belgesinde doğrulanan gösterimler aşağıda. Kodun yazımını aynen koruyun; bu açıklamalar kesin parça teşhisi değildir.';
@@ -18,7 +22,7 @@
   const existingNote=document.getElementById('modelScopeNote');
   if(existingNote){if(exact){const selectedLine=document.createElement('strong');selectedLine.textContent='Seçilen model: '+exact;existingNote.prepend(selectedLine);}}else table.before(note);
   if(scope&&!scope.closest('details')){const details=document.createElement('details');details.className='mb-scope-notes';const summary=document.createElement('summary');summary.textContent='Kapsamdaki modeller ve üretici kaynağı';scope.replaceWith(details);details.append(summary,scope);}
-  const nav=document.createElement('div');nav.className='mb-table-links';nav.innerHTML='<a href="/model-ariza-kodlari.html">← Başka model ara</a><a href="/index.html#aiUstaWizard">Kod yok, belirtimle devam et →</a>';if(!document.querySelector('.mb-table-links'))table.before(nav);
+  const nav=document.createElement('div');nav.className='mb-table-links';nav.innerHTML='<a href="model-ariza-kodlari.html">← Başka model ara</a><a href="index.html#aiUstaWizard">Kod yok, belirtimle devam et →</a>';if(!document.querySelector('.mb-table-links'))table.before(nav);
   // No invented model selector: exact model names and scope come from the dataset.
   // Existing row ids, filtering and per-code references remain untouched.
   if(location.hash==='#kodlar')requestAnimationFrame(()=>table.scrollIntoView({block:'start'}));

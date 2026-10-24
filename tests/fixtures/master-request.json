@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "source": "User supplied Yapıştırılan metin.txt (2026-10-24); parsed PHP text only, never executed.",
+  "source_sha256": "b9d18615da5e2edf9a55505a223e287001add42bfc612dd19d99866d70fc6e00",
+  "foreign_slugs": [
+    "baxi-kombi-combi-2-uk-ariza-kodlari.html",
+    "baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html",
+    "de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html",
+    "gree-klima-vireo-r32-ariza-kodlari.html",
+    "midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html",
+    "mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html",
+    "saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html",
+    "viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html",
+    "york-klima-r-series-dhr18-48-us-ariza-kodlari.html",
+    "ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html",
+    "ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html"
+  ],
+  "established_nonindex_routes": [
+    "404.html",
+    "servis-sec.html"
+  ],
+  "district_routes": [
+    "arnavutkoy-klima-servisi.html",
+    "arnavutkoy-kombi-servisi.html",
+    "avcilar-klima-servisi.html",
+    "avcilar-kombi-servisi.html",
+    "bagcilar-klima-servisi.html",
+    "bagcilar-kombi-servisi.html",
+    "bahcelievler-klima-servisi.html",
+    "bahcelievler-kombi-servisi.html",
+    "bakirkoy-klima-servisi.html",
+    "bakirkoy-kombi-servisi.html",
+    "basaksehir-klima-servisi.html",
+    "basaksehir-kombi-servisi.html",
+    "bayrampasa-klima-servisi.html",
+    "bayrampasa-kombi-servisi.html",
+    "besiktas-klima-servisi.html",
+    "besiktas-kombi-servisi.html",
+    "beylikduzu-klima-servisi.html",
+    "beylikduzu-kombi-servisi.html",
+    "beyoglu-klima-servisi.html",
+    "beyoglu-kombi-servisi.html",
+    "buyukcekmece-klima-servisi.html",
+    "buyukcekmece-kombi-servisi.html",
+    "catalca-klima-servisi.html",
+    "catalca-kombi-servisi.html",
+    "esenler-klima-servisi.html",
+    "esenler-kombi-servisi.html",
+    "esenyurt-klima-servisi.html",
+    "esenyurt-kombi-servisi.html",
+    "eyupsultan-klima-servisi.html",
+    "eyupsultan-kombi-servisi.html",
+    "fatih-klima-servisi.html",
+    "fatih-kombi-servisi.html",
+    "gaziosmanpasa-klima-servisi.html",
+    "gaziosmanpasa-kombi-servisi.html",
+    "gungoren-klima-servisi.html",
+    "gungoren-kombi-servisi.html",
+    "kagithane-klima-servisi.html",
+    "kagithane-kombi-servisi.html",
+    "kucukcekmece-klima-servisi.html",
+    "kucukcekmece-kombi-servisi.html",
+    "sariyer-klima-servisi.html",
+    "sariyer-kombi-servisi.html",
+    "silivri-klima-servisi.html",
+    "silivri-kombi-servisi.html",
+    "sisli-klima-servisi.html",
+    "sisli-kombi-servisi.html",
+    "sultangazi-klima-servisi.html",
+    "sultangazi-kombi-servisi.html",
+    "zeytinburnu-klima-servisi.html",
+    "zeytinburnu-kombi-servisi.html"
+  ],
+  "matrices": {
+    "kombi": {
+      "headers": [
+        "Kombi Markası",
+        "{$ilce} Bölgesinde Sık Bakılan Modeller",
+        "Sık Arıza / Hata Kodları",
+        "Arıza Belirtisi ve İlk Kontrol"
+      ],
+      "rows": [
+        [
+          "Baymak",
+          "Duotec Compact, Lambert LPY, Lunatec, Luna Avant, Dolcevita, Eco 4",
+          "E01 (E1), E03 (E3), E05, E06, E10, E25, E35",
+          "E01/E1 ateşleme ve gaz yokluğu; E10 düşük su basıncı (1.5 bar olmalı); E03 hava akış/fan; E06 sıcak su sensörü."
+        ],
+        [
+          "DemirDöküm",
+          "Nitromix, Atromix, Atron, Aden, Nepto, Kalisto, Isofast",
+          "F4 (F04), F5 (F05), F10 (F1), F22, F28",
+          "F4/F04 ve F28 ateşleme/gaz kesintisi; F5 prosestat/hava akışı; F10 ve F22 tesisat su basıncı düşüklüğü."
+        ],
+        [
+          "E.C.A.",
+          "Proteus Premix, Citius Premix, Confeo Plus, Calora, Eurostar",
+          "E01 (E1), E02, F37, F47, T1, T3, L4",
+          "E01/E1 alev oluşmama uyarısı; F37 düşük su basıncı; T1/T3 aşırı ısınma ve NTC sensör kontrolü."
+        ],
+        [
+          "Vaillant",
+          "ecoTEC Pro, ecoTEC Plus, ecoTEC Intro, turboTEC Pro/Plus",
+          "F.28 (F28), F.29, F.22 (F22), F.75, F.62",
+          "F28/F29 ateşleme ve gaz valfi; F22 susuz çalışma/düşük basınç; F75 pompa ve basınç sensörü algılama."
+        ],
+        [
+          "Buderus",
+          "Logamax Plus GB062, GB122i, GB072, GB012, GB172i, U072, U052",
+          "6A (227), 6C, 4C, 2E, H07, 3L, 3A",
+          "6A/227 ve 6C alev algılamama/iyonizasyon; 2E ve H07 düşük su basıncı; 4C aşırı ısınma/dolaşım."
+        ],
+        [
+          "Bosch",
+          "Condens 2200iW, 2300iW, 2500W, 7000iW, Classic, Comfort, Exclusive",
+          "EA, E9, CE (H07), C6, ER, F0",
+          "EA alev/ateşleme hatası; CE/H07 tesisat su basıncı uyarısı; C6 fan/prosestat; E9 limit termostat."
+        ],
+        [
+          "Viessmann",
+          "Vitodens 050-W, Vitodens 100-W, Vitodens 200-W, Vitopend 100-W",
+          "F4 (F04), EE, F2 (F02), F30, F51, E1",
+          "F4/EE alev oluşmama; F2 emniyet termostatı; F30/F51 sensör arızası; E1 yanma/iyonizasyon kontrolü."
+        ],
+        [
+          "Ariston",
+          "Clas One, Genus One, Cares Premium, Alteas One, Egis Plus",
+          "501 (5P3), 108, 101, 104, 601",
+          "501/5P3 ateşleme kesintisi; 108 düşük su basıncı; 101/104 aşırı ısınma ve sirkülasyon kontrolü."
+        ]
+      ],
+      "links": [
+        "baymak-kombi-servisi.html",
+        "demirdokum-kombi-servisi.html",
+        "eca-kombi-servisi.html",
+        "vaillant-kombi-servisi.html",
+        "buderus-kombi-servisi.html",
+        "bosch-kombi-servisi.html",
+        "viessmann-kombi-servisi.html",
+        "ariston-kombi-servisi.html"
+      ]
+    },
+    "klima": {
+      "headers": [
+        "Klima Markası",
+        "{$ilce} Bölgesinde Sık Bakılan Seriler",
+        "Sık Hata / Uyarı Kodları",
+        "Belirti ve Teknik Kontrol Kapsamı"
+      ],
+      "rows": [
+        [
+          "Daikin",
+          "Shira Eco, Sensira FTX, Emura, Zeta, VRV / Inverter Serileri",
+          "U0, U4, A5, A6, H6, E7, L5",
+          "U0 soğutucu gaz eksikliği; U4 iç-dış ünite iletişim; A6/E7 fan motoru; L5 inverter kompresör kontrolü."
+        ],
+        [
+          "Mitsubishi",
+          "Mitsubishi Electric (MSZ/Kirigamine/Hare) & Heavy (SRK-ZS)",
+          "E1, E6, P1, P2, P5, P8, U4",
+          "P8 dış ünite/boru sıcaklığı ve soğutmama; P5 drenaj/su taşma; E6 iç-dış ünite haberleşme kontrolü."
+        ],
+        [
+          "Arçelik & Beko",
+          "Ekolojik Inverter, Prosmart, Mirror, Mobil/Portatif Seriler",
+          "CH01, CH02, CH05, CH10, CH38, E1, FL",
+          "CH05 haberleşme hatası; CH38 soğutucu gaz azalması; CH10 iç fan motoru; FL yoğuşma suyu haznesi dolu."
+        ],
+        [
+          "LG & Samsung",
+          "LG DualCool (S09ET/Sirius), Samsung WindFree & AR35 Inverter",
+          "CH05, CH21, CH38 / E101, E121, E464, CF",
+          "CH05/E101 iletişim uyarısı; CH38 gaz kaçağı/eksikliği; E121 iç ortam sensörü; CF filtre temizlik uyarısı."
+        ],
+        [
+          "Baymak & Diğerleri",
+          "Baymak Elegant Plus/Air, Airfel, Vestel Flora/Vega, Bosch, Gree, Midea",
+          "E1, E3, E4, E6, F0, F1, H3, P0, EC",
+          "F0/EC gaz eksikliği ve kaçak koruması; E1/E6 iletişim hatası; H3 kompresör aşırı yük koruması."
+        ]
+      ],
+      "links": [
+        "daikin-klima-servisi.html",
+        "mitsubishi-electric-klima-servisi.html",
+        "arcelik-klima-servisi.html",
+        "beko-klima-servisi.html",
+        "lg-klima-servisi.html",
+        "samsung-klima-servisi.html",
+        "baymak-klima-servisi.html"
+      ]
+    }
+  },
+  "district_metadata": {
+    "kombi": {
+      "title": "{$ilce} Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": "{$ilce} ({$mahalleMetni}) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15.",
+      "lead": "{$ilce} ve tüm mahallelerinde ({$mahalleMetni}) MYK belgeli mobil ekibimizle kombi arıza tespiti, garantili tamir, anakart/pompa onarımı, yıllık kombi bakımı ve makineli petek temizliği sunuyoruz. İşlem ve ücret onayınız olmadan müdahale yapılmaz."
+    },
+    "klima": {
+      "title": "{$ilce} Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": "{$ilce} ({$mahalleMetni}) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15.",
+      "lead": "{$ilce} ve tüm mahallelerinde ({$mahalleMetni}) split ve inverter klimalar için antibakteriyel klima bakımı, R32 / R410A gaz kontrolü, vakumlu montaj, su akıtma ve soğutmama arızalarında 1 yıl garantili teknik servis sunuyoruz."
+    }
+  }
+}

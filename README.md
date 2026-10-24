@@ -39,11 +39,15 @@ GitHub Actions; `overrides/`, `components/`, `server/`, testler, scriptler ve be
 
 Derleme sırası: SHA-256 doğrulanan arşiv → üretimde `server/` → `overrides/` → ortak parçalar ve moda göre URL/SEO/gönderim ayarları. Aynı kaynaklardan aynı içerik özeti üretilir. Ziyaretçi bağlantıları ve CSS kaynakları belgeye göre görecelidir; 404 kurtarma ekranı yayın bağlamını ayrıca bilir.
 
-Özgün arşiv SHA-256: `1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b`.
+Özgün arşiv SHA-256: `1e1af83e7bc6233f8af88f89a5873440288caed73cb4173483106f050ec5eb7b`. Bu özet yalnız `preview-parts/` içindeki başlangıç arşivini doğrular; güncel derlemenin veya üretim ZIP paketinin özeti değildir. Güncel çıktı özeti derlemenin `build-info.json` dosyasında, dağıtılacak ZIP özeti ise ilgili paket doğrulamasında okunur.
+
+Paylaşılan `google-gemini-kurulum.php` dönüşümü kalıcı olarak `scripts/master_content.py` ve `components/master-content.json` içine işlendi; kurulum PHP dosyası depoda ve çıktıda bulunmaz. Her derleme 50 ilçenin başlık, açıklama, giriş ve marka/model/kod tablolarını tekrar üretir; özgün yerel gövdeler, SSS ve 1.198 mahalle bağlantısı korunur. Tablolar ortak başvuru örnekleridir; ilçe bazında ölçülmüş arıza sıklığı veya tüm modeller için geçerli teşhis sayılmaz. 11 yabancı pazar rehberi üretimde `noindex,follow` taşır ve sitemap'e girmez; 190 dizine uygun adres kalır.
+
+`python scripts/package_production.py build/production --output build/saglam-teknik-guncel.zip` önce dosya baytlarını `content_sha256` ile karşılaştırır, ardından kökünde site dosyaları bulunan ZIP'i ve gerçek ZIP baytlarının `.sha256` / `.json` yan dosyalarını üretir. `archive_sha256` her derlemede özgün arşivden yeniden hesaplanır. `production_deployed:false` yalnızca dosya üretiminin canlı sunucuya yükleme anlamına gelmediğini belirtir.
 
 ## Premium tasarım ve organik içerik denetimi
 
-Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Marka ve tam model önerileri aynı arama alanından ilerler; belge kapsamı kullanıcı onayı olmadan doğrulanmış sayılmaz.
+Ana sayfa servis türü, telefon/WhatsApp ve tek AI Usta akışıyla başlar. Marka ve tam model önerileri aynı arama alanından ilerler. Kod araması önce seçili modeldeki tam yazımı, ardından yalnız tek ve çelişkisiz kayda bağlanan baştaki sıfır varyantını kullanır (`E1/E01`, `F4/F04` gibi). Başka modelden kod anlamı taşınmaz. Ülke, sürüm ve kontrolcü kapsamı sonuçta açıklanır; rehber ayrıca kapsam onay kutusuyla engellenmez ve yabancı belgenin yerel cihaza uyduğu varsayılmaz.
 
 `components/service-assurances.json` varış, garanti ve mesleki belge beyanlarının durumunu yönetir. `pending` bir beyan kesin bir süre veya garanti olarak yayımlanmaz. İşletme sahibi MYK belge numarasını ve 1 yıl parça/işçilik garantisini 24 Ekim 2026 tarihinde bildirdi; bunlar `business-declared` durumundadır. Bu durum dış kurum doğrulaması anlamına gelmez. 40 dk varış bilgisi koşulları teyit beklediğinden `pending` kalır.
 

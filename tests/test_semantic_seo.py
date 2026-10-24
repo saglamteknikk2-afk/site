@@ -155,20 +155,75 @@ class SemanticSeoTests(unittest.TestCase):
 
     def test_llms_distinguishes_supplied_business_declarations_from_external_verification(self):
         files = self.files()
-        files['isletme-bilgileri.json'] = json.dumps({'business_claims': {'qualification': {'status': 'business-declared', 'credential_number': 'YB0200/11UY0032-4/02/502'}, 'warranty': {'status': 'business-declared', 'duration': '1 yıl', 'scope': 'Servis fişinde belirtilen takılan parça ve uygulanan işçilik'}}}).encode()
+        files['isletme-bilgileri.json'] = json.dumps({'business_claims': {'experience': {'status': 'business-declared', 'years': 20}, 'armut': {'status': 'user-supplied-badge', 'rating': 4.8, 'scale': 5}, 'qualification': {'status': 'business-declared', 'credential_number': 'YB0200/11UY0032-4/02/502', 'profession': 'Gaz Yakıcı Cihazlar Servis Personeli'}, 'warranty': {'status': 'business-declared', 'duration': '1 yıl', 'scope': 'Servis fişinde belirtilen takılan parça ve uygulanan işçilik'}}}).encode()
         seo.enhance_files(files); llms = files['llms.txt'].decode()
         self.assertIn('İşletme sahibinin beyanına göre MYK belge numarası: YB0200/11UY0032-4/02/502', llms)
         self.assertIn('bağımsız doğrulanmış değildir', llms)
         self.assertIn('1 yıl parça ve işçilik', llms)
         self.assertIn('Servis fişinde belirtilen takılan parça ve uygulanan işçilik', llms)
+        self.assertIn('beyanına göre 20 yıllık saha tecrübesi', llms)
+        self.assertIn('4.8/5 Tavsiye Edilen Hizmet Veren', llms)
+        self.assertIn('Gaz Yakıcı Cihazlar Servis Personeli', llms)
         self.assertNotIn('MYK belge numarası', json.dumps(rows(files['index.html'])))
+
+    def test_exact_foreign_list_keeps_203_pages_but_190_indexable_and_preserves_sources(self):
+        files = self.files()
+        files['assets/verified-faults.json'] = json.dumps({'models': [{'path': '/' + name, 'manual': {'official': True, 'url': 'https://manufacturer.example/manual.pdf', 'title': 'Yabancı pazar özgün belgesi', 'locator': 'Sayfa 12'}} for name in seo.FOREIGN_MODEL_PAGES]}).encode()
+        body = '<p>Özgün ülke kapsamı: E1, E01, F4 ve F04.</p><a href="https://manufacturer.example/manual.pdf">Resmî belge</a>'
+        for name in seo.FOREIGN_MODEL_PAGES:
+            files[name] = document('Yabancı model', body, '<meta name="robots" content="index,follow"><meta name="robots" content="all">')
+        while sum(seo.visitor(name) for name in files) < 203:
+            number = sum(seo.visitor(name) for name in files)
+            files['guide-' + str(number) + '.html'] = document('Rehber ' + str(number))
+        stats = seo.enhance_files(files)
+        self.assertEqual(len(seo.FOREIGN_MODEL_PAGES), 11)
+        self.assertEqual((stats['visitor_pages'], stats['noindex_pages'], stats['sitemap_urls']), (203, 13, 190))
+        for name in seo.FOREIGN_MODEL_PAGES:
+            text = files[name].decode()
+            self.assertIn(body, text)
+            self.assertEqual(re.findall(r'<meta name="robots" content="([^"]*)">', text), ['noindex,follow'])
+            self.assertIn('href="' + seo.page_url(name) + '"', text)
+            self.assertNotIn(seo.page_url(name), files['sitemap.xml'].decode())
+            self.assertNotIn(seo.page_url(name), files['llms.txt'].decode())
+            article = next(row for row in rows(files[name]) if row['@type'] == 'TechArticle')
+            self.assertEqual(article['citation'][0]['url'], 'https://manufacturer.example/manual.pdf')
+        self.assertIn(seo.ORIGIN + '/kombi-servisi.html', files['sitemap.xml'].decode())
+
+    def test_foreign_preview_keeps_noindex_nofollow_and_no_tr_authority_listing(self):
+        files = self.files(preview=True)
+        for name in seo.FOREIGN_MODEL_PAGES: files[name] = document('Yabancı model', preview=True)
+        stats = seo.enhance_files(files)
+        self.assertEqual(stats['foreign_noindex_pages'], 11)
+        for name in seo.FOREIGN_MODEL_PAGES:
+            self.assertEqual(re.findall(r'<meta name="robots" content="([^"]*)">', files[name].decode()), ['noindex,nofollow,noarchive'])
+            self.assertNotIn(seo.page_url(name), files['llms.txt'].decode())
+        self.assertNotIn('sitemap.xml', files)
+
+    def test_llms_brand_code_meanings_keep_their_published_model_and_manual_context(self):
+        files = self.files()
+        records = [
+            {'path': '/baymak-ornek-ariza-kodlari.html', 'brand': 'Baymak', 'device': 'kombi', 'model_names': ['Duotec belge modeli'], 'codes': [{'code': 'E01', 'meaning': 'Yalnız Duotec belgesindeki örnek açıklama'}], 'manual': {'official': True, 'url': 'https://manufacturer.example/duotec.pdf', 'locator': 'Sayfa 8'}},
+            {'path': '/bosch-ornek-ariza-kodlari.html', 'brand': 'Bosch', 'device': 'kombi', 'model_names': ['Condens belge modeli'], 'codes': [{'code': 'EA', 'meaning': 'Yalnız Condens belgesindeki diğer açıklama'}], 'manual': {'official': True, 'url': 'https://manufacturer.example/condens.pdf', 'locator': 'Sayfa 12'}},
+        ]
+        for record in records: files[record['path'].lstrip('/')] = document(record['model_names'][0])
+        files['assets/verified-faults.json'] = json.dumps({'models': records}).encode()
+        seo.enhance_files(files)
+        llms = files['llms.txt'].decode()
+        baymak = next(line for line in llms.splitlines() if line.startswith('- Baymak —'))
+        self.assertIn('Duotec belge modeli', baymak)
+        self.assertIn('E01: Yalnız Duotec belgesindeki örnek açıklama', baymak)
+        self.assertIn('https://manufacturer.example/duotec.pdf — Sayfa 8', baymak)
+        self.assertNotIn('Condens', baymak)
+        self.assertIn('Önce seçili modelde tam kod yazımı', llms)
 
     def test_idempotent_and_preserves_unrelated_code_bytes(self):
         files = self.files(); files['assets/app.js'] = b'const code="E01";'
+        files['build-info.json'] = b'{"production_deployed":false,"content_sha256":"builder-owned"}'
         first = seo.enhance_files(files); snapshot = dict(files)
         self.assertEqual(seo.enhance_files(files), first)
         self.assertEqual(files, snapshot)
         self.assertEqual(files['assets/app.js'], b'const code="E01";')
+        self.assertEqual(files['build-info.json'], b'{"production_deployed":false,"content_sha256":"builder-owned"}')
 
 
 if __name__ == '__main__': unittest.main()

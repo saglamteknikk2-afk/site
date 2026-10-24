@@ -9,11 +9,14 @@ from urllib.parse import urlencode
 
 def family_title(model: dict) -> str:
     family = model['label'].split('—')[0].strip()
-    family = re.sub(r'\s+\d+(?:\s*/\s*\d+){2,}(?:\s*kW)?', '', family, flags=re.I).strip()
+    if not (model.get('brand') == 'Baxi' and 'Assure 500' in family):
+        family = re.sub(r'\s+\d+(?:\s*/\s*\d+){2,}(?:\s*kW)?', '', family, flags=re.I).strip()
+    family = family.replace(' (ülke/ürün kodu teyidi gerekir)', '').replace(', Vitotronic kontrol (nesil teyidi gerekir)', ' (Vitotronic)')
     if len(family) > 85:
         family = (model.get('model_names') or [family[:72]])[0] + ' ailesi'
     device = 'Klima' if model['device'] == 'klima' else 'Kombi'
-    return f"{model['brand']} {family} · {device} hata kodları"
+    identity = family if family.lower().startswith(model["brand"].lower()) else model["brand"] + " " + family
+    return f"{identity} · {device} hata kodları"
 
 
 def enhance_html(text: str, models: list[dict]) -> str:

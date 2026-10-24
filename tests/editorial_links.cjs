@@ -33,12 +33,15 @@ const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=u
     await page.waitForFunction(()=>document.querySelector('#modelScopeNote')?.textContent.includes('Seçilen model:'));
     assert.ok((await page.locator('#modelScopeNote').innerText()).includes(record.model_name),'Exact selected model '+record.model_name);
     assert.ok(await page.locator('#kodlar').isVisible(),'Code table anchor visible');
-    assert.equal(new URL(page.url()).searchParams.has('scope_confirmed'),false,'Selection never confirms scope');
+    assert.equal(new URL(page.url()).searchParams.has('scope_confirmed'),false,'Selection does not inject a confirmation state');
+    assert.equal(await page.locator('#ustaScopeConfirmed').count(),0,'Country/document context must not become a checkbox blocker');
     if(record.requires_scope_confirmation||record.matchable===false){
      const note=await page.locator('#modelScopeNote').innerText();
-     assert.match(note,/ülke|belge numarası|son eki/,'Country/document warning stays visible');
+     assert.match(note,/ülke|belge numarası|son eki|pazar|bölge/,'Country/document context stays visible as a descriptive source note');
      const model=await page.evaluate(id=>window.ST_VERIFIED_FAULTS.models.find(m=>m.id===id),record.model_id);
-     assert.ok(model.requires_scope_confirmation||model.matchable===false,'Source scope restriction retained');
+     assert.ok(model.requires_scope_confirmation||model.matchable===false,'Source scope metadata remains available');
+     const result=await page.evaluate(id=>{const model=ST_VERIFIED_FAULTS.models.find(m=>m.id===id),code=model.codes.find(c=>c.matchable!==false&&!c.source_conflict);return code?STFaults.lookup({device:model.device,brand:model.brand,model_id:model.id,code:code.code}):null;},record.model_id);
+     if(result){assert.notEqual(result.status,'scope-required','Country note does not block an explicit model');assert.notEqual(result.status,'document-match-required','Document note does not block an explicit model');}
     }
    }else if(record.kind==='model_hub'){
     await page.waitForFunction(()=>window.STModelBrowser);

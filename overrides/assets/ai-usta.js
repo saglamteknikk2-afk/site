@@ -16,7 +16,7 @@
   const selectedModel = () => models().find(m => m.id === state.model_id);
   const symptomText = () => state.symptom === 'other' ? 'Kendi anlatımım' : symptoms[state.device]?.find(s => s[0] === state.symptom)?.[1] || '';
   const hasCode = () => state.symptom === 'error' || !!state.code;
-  // The single text field suggests known names; it never confirms a document scope.
+  // The single field suggests known names; selecting a model does not validate its market.
   let inputSuggestion = {brand:'',model_id:'',model:'',code:''};
   const normalize = value => window.STBrands?.normalize(value) || String(value||'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i').replace(/[^a-z0-9]+/g,' ').trim();
   const contains = (text,term) => !!term && (' '+text+' ').includes(' '+term+' ');
@@ -88,8 +88,8 @@
   function scopeFields() {
     const model = selectedModel();
     if (!model) return '';
-    const required = model.matchable !== false && (model.requires_scope_confirmation || model.requires_document_match);
-    return `<div id="ustaModelScope">${model.market?`<p class="usta-note"><strong>Belgenin pazarı / bölgesi:</strong> ${esc(model.market)}</p>`:''}${model.scope_note?`<p class="usta-note">${esc(model.scope_note)}</p>`:''}${model.matchable===false?'<p class="usta-note">Bu belge kapasiteye veya benzer ada bakılarak otomatik eşleştirilemez. Cihazın belge ve ürün numarası ayrıca kontrol edilmelidir.</p>':''}${model.requires_document_match?`<p class="usta-note"><strong>Eşleşmesi gereken belge:</strong> ${esc(model.manual?.title||model.label)}</p>`:''}${required?`<label class="usta-scope-check"><input id="ustaScopeConfirmed" type="checkbox"${state.scope_confirmed?' checked':''}> Etiketteki ülke/ürün kodu ve gerekiyorsa belge numarası bu üretici belgesiyle eşleşiyor.</label>`:''}<details class="usta-free"><summary>Model kapsamı ve üretici kaynağı</summary><p class="usta-note">${esc((model.model_names||[]).join(' · '))}</p>${model.manual?.url?`<a href="${esc(model.manual.url)}" target="_blank" rel="noopener noreferrer">Üretici belgesini aç ↗</a>`:''}</details></div>`;
+    const warning = window.STFaults?.lookup({device:state.device.toLowerCase(),brand:state.brand,model_id:model.id}).scope_warning || '';
+    return `<div id="ustaModelScope">${model.market?`<p class="usta-note"><strong>Belgenin pazarı / bölgesi:</strong> ${esc(model.market)}</p>`:''}${model.scope_note?`<p class="usta-note">${esc(model.scope_note)}</p>`:''}${model.matchable===false?'<p class="usta-note">Bu belge kapasiteye veya benzer ada bakılarak otomatik eşleştirilemez. Cihazın belge ve ürün numarası ayrıca kontrol edilmelidir.</p>':''}${model.requires_document_match?`<p class="usta-note"><strong>Seçilen üretici belgesi:</strong> ${esc(model.manual?.title||model.label)}</p>`:''}${warning?`<p class="usta-note" data-model-source-notice>${esc(warning)}</p>`:''}<details class="usta-free"><summary>Model kapsamı ve üretici kaynağı</summary><p class="usta-note">${esc((model.model_names||[]).join(' · '))}</p>${model.manual?.url?`<a href="${esc(model.manual.url)}" target="_blank" rel="noopener noreferrer">Üretici belgesini aç ↗</a>`:''}</details></div>`;
   }
   function modelFields() {
     if (!state.brand) return '<p class="usta-note">Marka ve tam model bilinmeden kodun anlamını tahmin etmiyoruz. Ekrandaki kodu not edebilir veya doğrudan güvenli yönlendirmeye geçebilirsiniz.</p>';
@@ -106,7 +106,7 @@
   }
   function codeFields() {
     const codes = (selectedModel()?.codes || []).filter(code => code.matchable!==false && !code.source_conflict);
-    return `${hasCode()&&codes.length?`<p class="usta-note">Bu modelin belgesindeki kodlardan birini seçin:</p><div class="usta-code-grid">${codes.slice(0,8).map(c=>`<button type="button" class="usta-code" data-fault-code="${esc(c.code)}">${esc(c.code)}</button>`).join('')}</div><label class="usta-field-label">Diğer kodlar<select id="ustaCodeSelect" class="usta-field"><option value="">Kod seçin / aşağıya yazın</option>${codes.map(c=>`<option${state.code===c.code?' selected':''}>${esc(c.code)}</option>`).join('')}</select></label>`:''}<label class="usta-field-label">${hasCode()?'Ekrandaki kod':'Varsa ekrandaki kod'} <span>(isteğe bağlı)</span><input id="ustaCode" class="usta-field" maxlength="40" value="${esc(state.code)}" placeholder="E1, E01, F.28… aynen yazın" autocomplete="off"></label><p class="usta-note">E1 ve E01 ayrı kodlardır. Modeli bilmeden bir kod anlamı seçmeyiz.</p>`;
+    return `${hasCode()&&codes.length?`<p class="usta-note">Bu modelin belgesindeki kodlardan birini seçin:</p><div class="usta-code-grid">${codes.slice(0,8).map(c=>`<button type="button" class="usta-code" data-fault-code="${esc(c.code)}">${esc(c.code)}</button>`).join('')}</div><label class="usta-field-label">Diğer kodlar<select id="ustaCodeSelect" class="usta-field"><option value="">Kod seçin / aşağıya yazın</option>${codes.map(c=>`<option${state.code===c.code?' selected':''}>${esc(c.code)}</option>`).join('')}</select></label>`:''}<label class="usta-field-label">${hasCode()?'Ekrandaki kod':'Varsa ekrandaki kod'} <span>(isteğe bağlı)</span><input id="ustaCode" class="usta-field" maxlength="40" value="${esc(state.code)}" placeholder="E1, E01, F.28… aynen yazın" autocomplete="off"></label><p class="usta-note">Seçilen modelde E1/E01 ve F4/F04 gibi sıfır eklenmiş yazımlar eşleştirilir. Modeli bilmeden bir kod anlamı seçmeyiz.</p>`;
   }
   function fields() {
     if (state.step===0) return `<div class="usta-grid usta-grid--devices">${['Kombi','Klima','Petek'].map(d=>choice(d,deviceIcon(d)+d,d==='Kombi'?'Isıtma / sıcak su':d==='Klima'?'Isıtma / soğutma':'Radyatör / tesisat')).join('')}</div>`;
@@ -166,7 +166,6 @@
     el('ustaModel')?.addEventListener('input',event=>{state.model=event.target.value.trim();state.model_id='';state.scope_confirmed=false;state.code='';el('ustaModelScope')?.remove();if(el('ustaVerifiedModel'))el('ustaVerifiedModel').value='';compose();clearResult();});
     const bind=(id,key)=>el(id)?.addEventListener('input',event=>{state[key]=event.target.value.trim();compose();clearResult();safetyCheck();});
     bind('ustaCode','code');bind('ustaNeighborhood','neighborhood');
-    el('ustaScopeConfirmed')?.addEventListener('change',event=>{state.scope_confirmed=event.target.checked;compose();clearResult();});
     el('ustaDistrict')?.addEventListener('change',event=>{state.district=event.target.value;state.neighborhood='';compose();if(el('ustaNeighborhood'))el('ustaNeighborhood').value='';});
     el('ustaCodeSelect')?.addEventListener('change',event=>{state.code=event.target.value;if(el('ustaCode'))el('ustaCode').value=state.code;compose();});
     view.querySelectorAll('[data-fault-code]').forEach(button=>button.addEventListener('click',()=>{state.code=button.dataset.faultCode;compose();result(3);}));

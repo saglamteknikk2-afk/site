@@ -31,14 +31,17 @@ def blocked_preview(path: PurePosixPath) -> bool:
             or any(x.lower() in {'private', '_private', 'server', 'private-examples', 'node_modules', '.git'} for x in path.parts)
             or bool(re.match(r'(google|yandex_).*\.html$', path.name)))
 
-def archive_files(root: Path) -> dict[str, bytes]:
+def archive_files(root: Path, integrity: dict | None = None) -> dict[str, bytes]:
     parts = sorted((root / 'preview-parts').glob('part-*.txt'))
     if [p.name for p in parts] != [f'part-{i:03d}.txt' for i in range(43)]:
         raise ValueError('Expected exactly part-000.txt through part-042.txt')
     encoded = ''.join(p.read_text(encoding='ascii') for p in parts)
     archive = base64.b64decode(re.sub(r'\s+', '', encoded), validate=True)
-    if hashlib.sha256(archive).hexdigest() != ARCHIVE_SHA256:
+    archive_sha256 = hashlib.sha256(archive).hexdigest()
+    if archive_sha256 != ARCHIVE_SHA256:
         raise ValueError('Original preview archive SHA-256 mismatch')
+    if integrity is not None:
+        integrity.update(archive_sha256=archive_sha256, archive_bytes=len(archive))
     result = {}
     with zipfile.ZipFile(io.BytesIO(archive)) as z:
         for item in z.infolist():
@@ -210,7 +213,8 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     protected = [root / name for name in ('overrides', 'server', 'scripts', 'tests', 'docs', 'components', 'preview-parts', '.git')]
     if output == root or output in root.parents or any(output == p or p in output.parents or output in p.parents for p in protected):
         raise ValueError('Output must be a separate generated directory')
-    files = archive_files(root)
+    archive_integrity = {}
+    files = archive_files(root, archive_integrity)
     if mode == 'production':
         overlay(files, root / 'server')
     overlay(files, root / 'overrides')
@@ -249,6 +253,13 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
         linking = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(linking)
         linking.enhance_files(files)
+    master_stats = {}
+    master_path = root / 'scripts/master_content.py'
+    if master_path.exists():
+        spec = importlib.util.spec_from_file_location('saglam_master_content', master_path)
+        master = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(master)
+        master_stats = master.enhance_files(files)
     files.pop('TEST-KAPSAMI.txt', None)
     files.pop('CNAME', None)
     files.pop('reviews-section.html', None)  # source fragment, not a public route
@@ -346,9 +357,10 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
     digest = hashlib.sha256()
     for name, content in sorted(built.items()):
         digest.update(name.encode() + b'\0' + hashlib.sha256(content).digest())
-    report = {'schema_version': 1, 'mode': mode, 'base_path': prefix or '/', 'archive_sha256': ARCHIVE_SHA256,
+    report = {'schema_version': 1, 'mode': mode, 'base_path': prefix or '/', 'archive_sha256': archive_integrity['archive_sha256'],
+              'archive_sha256_kind': 'immutable-source-archive', 'archive_bytes': archive_integrity['archive_bytes'],
               'visitor_pages': html_count, 'model_pages_enhanced': enhancement_count, 'files': len(built), 'content_sha256': digest.hexdigest(),
-              'production_deployed': False}
+              'static_master': master_stats, 'production_deployed': False}
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)

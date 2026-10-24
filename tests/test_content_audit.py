@@ -37,6 +37,16 @@ class ContentAuditTests(unittest.TestCase):
         self.assertEqual(report['summary']['editorial_duplicate_groups'],0)
         self.assertEqual(report['summary']['missing_manual_link_pages'],0)
         self.assertTrue(all(p['kind']=='model_guide' for p in report['pages']))
+    def test_supplied_reference_matrix_is_shared_without_hiding_editorial_body(self):
+        matrix='<div class="at-summary" data-st-master-matrix="kombi"><p>'+PROSE+'</p><table><tr><td>E1 / E01</td></tr></table></div>'
+        for name in ['a.html','b.html']:self.page(name,matrix+'<p>Burada sayfanın ayrı bir kısa metni var.</p>')
+        report=auditor.audit(self.root)
+        self.assertEqual(report['summary']['editorial_duplicate_groups'],0)
+        self.assertEqual(report['exact_duplicate_groups'][0]['classification'],'shared_module')
+        self.assertEqual(report['exact_duplicate_groups'][0]['occurrences'][0]['category'],'shared_reference_matrix')
+        for name in ['a.html','b.html']:self.page(name,matrix+'<p>'+PROSE+'</p>')
+        report=auditor.audit(self.root)
+        self.assertEqual(report['summary']['editorial_duplicate_groups'],1)
     def test_entity_swapped_body_is_a_near_repeat_signal(self):
         assets=self.root/'assets';assets.mkdir()
         (assets/'servis-katalog.json').write_text(json.dumps({'districts':[{'name':'Avcılar'},{'name':'Bakırköy'}]}))

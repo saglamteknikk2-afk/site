@@ -15,6 +15,11 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  const check=(name,value)=>{checks.push({name,pass:!!value});if(!value)throw Error(name);};
  const goto=async name=>{await page.goto(origin+name);};
  const noOverflow=()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);
+ await goto('/baxi-kombi-combi-2-uk-ariza-kodlari.html');
+ check('Baxi family heading retains 200 400 600 800 and Assure 500',await page.locator('h1').evaluate(element=>['200','400','600','800','Assure 500'].every(term=>element.textContent.includes(term))&&!element.textContent.includes('/ /')));
+ await goto('/viessmann-kombi-vitodens-vitotronic-200-300-ariza-kodlari.html');
+ check('Vitotronic heading has no obsolete confirmation suffix',!(await page.locator('h1').innerText()).includes('teyidi gerekir'));
+
  await goto('/model-ariza-kodlari.html');await page.waitForFunction(()=>window.STModelBrowser);
  check('library cards visible initially',await page.locator('[data-model-card]').count()>0);
  check('375px library has no overflow',await noOverflow());
@@ -53,7 +58,7 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  await page.click('#ustaBack');await page.click('#ustaBack');await page.selectOption('#ustaBrand','Baymak');
  const reset=await page.evaluate(()=>STUstaWizard.getContext());
  check('brand change clears prior model scope and code',!reset.model_id&&!reset.scope_confirmed&&!reset.code);
- check('E1 and E01 remain distinct',await page.evaluate(()=>STFaults.codeKey('E1')!==STFaults.codeKey('E01')));
+ check('selected model resolves E1 and E01 to the same documented row',await page.evaluate(()=>{const m=ST_VERIFIED_FAULTS.models.find(model=>model.brand==='Baymak'&&model.codes.some(row=>row.code==='E01'&&!row.source_conflict));if(!m)return false;const a=STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:'E1'}),b=STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:'E01'});return a.verified&&b.verified&&a.definition.code===b.definition.code&&a.code_match==='flexible';}));
  await page.click('#ustaRestart');await page.locator('[data-choice=Kombi]').click();await page.fill('#ustaExtraIssue','Sıcak su bazen soğuyor');await page.click('#ustaFreeNext');
  check('typed symptom enters same brand step',await page.locator('#ustaBrand').isVisible());await page.locator('[data-brand=""]').click();
  check('unknown brand safely skips model',await page.locator('#aiResultBox').isVisible()&&await page.evaluate(()=>STUstaWizard.getContext().step===4&&!STUstaWizard.getContext().model_id));
@@ -76,8 +81,9 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  check('family nickname never guesses exact model',await page.locator('#ustaUseSuggestedModel').count()===0&&await page.evaluate(()=>!STUstaWizard.getContext().model_id));
  check('natural search preserves E1 without zero padding',await page.inputValue('#ustaCode')==='E1');
  await page.click('#ustaRestart');await page.evaluate(()=>STUstaWizard.open('Klima'));await page.fill('#ustaExtraIssue','Midea 42AGVCI09M5 E1');await page.press('#ustaExtraIssue','Enter');await page.locator('[data-brand=Midea]').last().click();await page.click('#ustaUseSuggestedModel');
- check('foreign exact model still needs scope confirmation',await page.locator('#ustaScopeConfirmed').isVisible()&&!await page.locator('#ustaScopeConfirmed').isChecked());
- await page.click('#ustaNext');check('unconfirmed foreign model never returns manual answer',await page.locator('#aiSource').innerText()!=='Seçilen modelin üretici belgesi');
+ check('foreign model has a nonblocking source notice instead of a checkbox',await page.locator('#ustaScopeConfirmed').count()===0&&await page.locator('#ustaModelScope [data-model-source-notice]').isVisible()&&(await page.locator('#ustaModelScope').innerText()).includes('BR'));
+ const foreignCode=await page.evaluate(()=>{const id=STUstaWizard.getContext().model_id;return ST_VERIFIED_FAULTS.models.find(m=>m.id===id).codes.find(row=>row.matchable!==false&&!row.source_conflict).code;});
+ await page.fill('#ustaCode',foreignCode);await page.click('#ustaNext');check('selected foreign document answers immediately with country notice',await page.locator('#aiSource').innerText()==='Seçilen modelin üretici belgesi'&&(await page.locator('#aiResponseText').innerText()).includes('Türkiye varyantı doğrulaması değildir')); 
  await page.click('#ustaRestart');await page.locator('[data-choice=Petek]').click();await page.locator('[data-choice=heat]').click();
  check('radiator skips brand and model',await page.locator('#aiResultBox').isVisible()&&await page.locator('#ustaBrand,#ustaVerifiedModel').count()===0);
  await page.click('#ustaRestart');await page.locator('[data-choice=Kombi]').click();await page.fill('#ustaExtraIssue','Gaz kokusu var');
@@ -86,8 +92,8 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  check('emergency dismissal clears description',await page.inputValue('#ustaExtraIssue')==='');
  await page.evaluate(()=>STUstaWizard.open('Klima'));const changed=await page.evaluate(()=>STUstaWizard.getContext());
  check('device change clears model and code',changed.device==='Klima'&&!changed.model_id&&!changed.code&&!changed.scope_confirmed);
- check('foreign scope cannot autoanswer',await page.evaluate(()=>{const m=ST_VERIFIED_FAULTS.models.find(x=>x.matchable!==false&&x.requires_scope_confirmation&&x.codes.length);return !!m&&STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:m.codes[0].code}).status==='scope-required';}));
- check('document-only model cannot autoanswer',await page.evaluate(()=>{const m=ST_VERIFIED_FAULTS.models.find(x=>x.matchable===false&&x.codes.length);return !!m&&STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:m.codes[0].code,scope_confirmed:true}).status==='document-match-required';}));
+ check('selected foreign document does not require a scope checkbox',await page.evaluate(()=>{const m=ST_VERIFIED_FAULTS.models.find(x=>x.matchable!==false&&x.requires_scope_confirmation&&x.codes.some(row=>row.matchable!==false&&!row.source_conflict));if(!m)return false;const row=m.codes.find(row=>row.matchable!==false&&!row.source_conflict),match=STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:row.code,scope_confirmed:false});return match.verified&&!!match.scope_warning;}));
+ check('explicit document selection answers while generic inference remains disabled',await page.evaluate(()=>{const m=ST_VERIFIED_FAULTS.models.find(x=>x.matchable===false&&x.codes.some(row=>row.matchable!==false&&!row.source_conflict));if(!m)return false;const row=m.codes.find(row=>row.matchable!==false&&!row.source_conflict);return STFaults.lookup({device:m.device,brand:m.brand,model_id:m.id,code:row.code}).verified&&!STFaults.infer(m.label,m.device,m.brand);}));
  for(const width of [768,1440]){await page.setViewportSize({width,height:900});check(width+'px assistant no overflow',await noOverflow());}
  await goto('/index.html?cihaz=kombi&marka=Is%C4%B1san&usta=1#ai-usta');await page.waitForFunction(()=>window.STUstaWizard);
  check('brand deep link retains symptom step',await page.evaluate(()=>STUstaWizard.getContext().step===1&&STUstaWizard.getContext().brand==='Isısan'&&!STUstaWizard.getContext().model_id));

@@ -342,7 +342,7 @@ def main():
     parser.add_argument('directory', type=Path)
     parser.add_argument('--report', type=Path)
     parser.add_argument('--check', action='store_true')
-    parser.add_argument('--expected-indexable', type=int, default=201)
+    parser.add_argument('--expected-indexable', type=int, default=190)
     parser.add_argument('--max-depth', type=int, default=3)
     args = parser.parse_args()
     files = {p.relative_to(args.directory).as_posix(): p.read_bytes() for p in args.directory.rglob('*.html')}

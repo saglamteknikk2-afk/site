@@ -54,13 +54,24 @@
     "qualification": {
       "status": "business-declared",
       "credential_number": "YB0200/11UY0032-4/02/502",
-      "declared_on": "2026-10-24"
+      "declared_on": "2026-10-24",
+      "profession": "Gaz Yakıcı Cihazlar Servis Personeli"
     },
     "warranty": {
       "status": "business-declared",
       "duration": "1 yıl",
       "scope": "Sağlam Teknik tarafından yapılan işçilik ve temin edilip takılan parçalar; yapılan işlem, değişen parça ve garanti başlangıcı servis belgesinde belirtilir.",
       "declared_on": "2026-10-24"
+    },
+    "experience": {
+      "status": "business-declared",
+      "years": 20,
+      "declared_on": "2026-10-24"
+    },
+    "armut": {
+      "status": "user-supplied-badge",
+      "rating": 4.8,
+      "scale": 5
     }
   }
 }

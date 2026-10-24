@@ -5,14 +5,15 @@
   const data=window.ST_VERIFIED_FAULTS||{models:[],coverage:[]},organic=window.ST_ORGANIC_CATALOG||{models:[]},registry=window.STBrands;
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const state={device:'',brand:'',query:'',limit:30};
-  const modelTitle=(m,n)=>norm(n).startsWith(norm(m.brand))?n:m.brand+' '+n;
+  const displayLabel=value=>String(value).replace(' (ülke/ürün kodu teyidi gerekir)','').replace(', Vitotronic kontrol (nesil teyidi gerekir)',' (Vitotronic)');
+  const modelTitle=(m,n)=>displayLabel(norm(n).startsWith(norm(m.brand))?n:m.brand+' '+n);
   const records=[];
   for(const m of data.models){
     const names=m.model_names?.length?m.model_names:[m.label];
     for(const n of names){
       // Generic capacities are a document scope, never an invented commercial model.
       const generic=/^\d+(?:[.,]\d+)?\s*(?:kw|btu|btu\/h)?$/i.test(n.trim())||m.matchable===false&&m.requires_document_match;
-      records.push({name:generic?m.brand+' · '+m.label:modelTitle(m,n),exact:n,device:m.device,brand:m.brand,verified:true,documentOnly:generic,id:m.id,path:m.path,market:m.market||'',scope:m.scope_note||'',count:m.codes?.length||0,terms:[m.brand,n,m.label.replace(/\d+/g,''),...(m.aliases||[]).filter(a=>! /\d/.test(a))].join(' ')});
+      records.push({name:generic?displayLabel(m.brand+' · '+m.label):modelTitle(m,n),exact:n,device:m.device,brand:m.brand,verified:true,documentOnly:generic,id:m.id,path:m.path,market:m.market||'',scope:m.scope_note||'',count:m.codes?.length||0,terms:[m.brand,n,m.label.replace(/\d+/g,''),...(m.aliases||[]).filter(a=>! /\d/.test(a))].join(' ')});
     }
   }
   const seen=new Set(records.map(r=>[r.device,norm(r.brand),norm(r.exact)].join('|')));
@@ -22,7 +23,7 @@
   function route(r){if(!r.verified)return '/index.html?'+new URLSearchParams({cihaz:r.device,marka:r.brand,model:r.exact,usta:'1'})+'#ai-usta';const url=new URL(r.path,document.baseURI);url.searchParams.set('model',r.exact);url.searchParams.set('model_id',r.id);url.hash='kodlar';return url.pathname+url.search+url.hash;}
   function render(){
     const q=norm(state.query),parts=q.split(' ').filter(Boolean);const list=unique.filter(r=>(!state.device||r.device===state.device)&&(!state.brand||norm(r.brand)===norm(state.brand))&&parts.every(p=>norm(r.terms).includes(p))).sort((a,b)=>Number(b.verified)-Number(a.verified)||a.name.localeCompare(b.name,'tr'));
-    const shown=list.slice(0,state.limit);el('modelResults').innerHTML=shown.map(r=>`<a class="mb-card${r.verified?'':' mb-card--pending'}" href="${esc(route(r))}" data-model-card data-verified="${r.verified}"><span class="mb-card-meta">${r.device==='klima'?'Klima':'Kombi'} · ${r.verified?r.documentOnly?'Belge numarası eşleşmeli':'Üretici belgesi var':'Model ailesi · kod tablosu bekliyor'}</span><h2>${esc(r.name)}</h2><p>${r.verified?esc(r.market?('Belge pazarı: '+r.market+'. '):'')+(r.documentOnly?'Kapasite tek başına model eşleştirmez. Belge kapsamını kontrol edin.':esc('Üretici kaynağına göre hazırlanmıştır. Cihaz etiketindeki tam adı ve varsa ürün son ekini kontrol edin.')):'Bu adın modele özel kodları henüz doğrulanmadı. Belirtinizle devam edebilirsiniz.'}</p><span class="mb-card-link">${r.verified?'Kodları aç':'Belirtimle devam et'} <span aria-hidden="true">↗</span></span></a>`).join('');
+    const shown=list.slice(0,state.limit);el('modelResults').innerHTML=shown.map(r=>`<a class="mb-card${r.verified?'':' mb-card--pending'}" href="${esc(route(r))}" data-model-card data-verified="${r.verified}"><span class="mb-card-meta">${r.device==='klima'?'Klima':'Kombi'} · ${r.verified?r.documentOnly?'Belge / kontrol serisi':'Üretici belgesi var':'Model ailesi · kod tablosu bekliyor'}</span><h2>${esc(r.name)}</h2><p>${r.verified?esc(r.market?('Belge pazarı: '+r.market+'. '):'')+(r.documentOnly?'Kapasite tek başına model eşleştirmez. Belge kapsamını kontrol edin.':esc('Üretici kaynağına göre hazırlanmıştır. Cihaz etiketindeki tam adı ve varsa ürün son ekini kontrol edin.')):'Bu adın modele özel kodları henüz doğrulanmadı. Belirtinizle devam edebilirsiniz.'}</p><span class="mb-card-link">${r.verified?'Kodları aç':'Belirtimle devam et'} <span aria-hidden="true">↗</span></span></a>`).join('');
     el('modelStatus').textContent=list.length+' model / belge kaydı'+(list.length>shown.length?' · ilk '+shown.length+' gösteriliyor':'')+'.';
     el('modelMore').hidden=list.length<=state.limit;
     el('modelEmpty').hidden=list.length!==0;

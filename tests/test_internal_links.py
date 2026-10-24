@@ -65,10 +65,10 @@ class InternalLinkTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temp.cleanup()
 
-    def test_all201_indexable_pages_reachable_within_three_html_links(self):
+    def test_all190_indexable_pages_reachable_within_three_html_links(self):
         self.assertEqual(self.graph['visitor_routes'], 203)
-        self.assertEqual(self.graph['indexable_routes'], 201)
-        self.assertEqual(self.graph['reachable_indexable_routes'], 201)
+        self.assertEqual(self.graph['indexable_routes'], 190)
+        self.assertEqual(self.graph['reachable_indexable_routes'], 190)
         self.assertLessEqual(self.graph['max_indexable_depth'], 3)
         self.assertEqual(self.graph['unreachable_indexable'], [])
         self.assertEqual(self.graph['unlinked_indexable'], [])
@@ -210,7 +210,7 @@ class InternalLinkTests(unittest.TestCase):
         report = Path(self.temp.name) / 'crawl-report.json'
         result = subprocess.run([sys.executable, str(ROOT / 'scripts/internal_links.py'), str(self.output), '--check', '--report', str(report)], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertEqual(json.loads(report.read_text())['reachable_indexable_routes'], 201)
+        self.assertEqual(json.loads(report.read_text())['reachable_indexable_routes'], 190)
 
 
 if __name__ == '__main__':

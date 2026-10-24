@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Behavior tests for release separation; no browser, PHP, or network needed."""
 import importlib.util
+import base64
 import hashlib
 import json
 import re
@@ -47,6 +48,17 @@ class BuildTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):cls.temp.cleanup()
     def test_archive_integrity(self):self.assertEqual(len(builder.archive_files(self.root)),486)
+    def test_build_info_hashes_are_recomputed_from_real_source_and_output_bytes(self):
+        archive=base64.b64decode(''.join(p.read_text() for p in sorted((self.root/'preview-parts').glob('part-*.txt'))))
+        for directory,report in [(self.preview,self.p),(self.production,self.r)]:
+            self.assertEqual(report['archive_sha256'],hashlib.sha256(archive).hexdigest())
+            self.assertEqual(report['archive_bytes'],len(archive))
+            self.assertEqual(report['archive_sha256_kind'],'immutable-source-archive')
+            digest=hashlib.sha256()
+            for name,path in sorted((p.relative_to(directory).as_posix(),p) for p in directory.rglob('*') if p.is_file() and p.name!='build-info.json'):
+                digest.update(name.encode()+b'\0'+hashlib.sha256(path.read_bytes()).digest())
+            self.assertEqual(report['content_sha256'],digest.hexdigest())
+            self.assertFalse(report['production_deployed'])
     def test_modes_have_same_visitor_count(self):self.assertEqual((self.p['visitor_pages'],self.r['visitor_pages']),(203,203))
     def test_backend_only_in_production(self):self.assertFalse((self.preview/'api.php').exists());self.assertTrue((self.production/'api.php').exists())
     def test_overrides_win(self):self.assertEqual((self.production/'custom.txt').read_text(),'override wins')
@@ -84,6 +96,18 @@ class BuildTests(unittest.TestCase):
         self.assertIn('index.html',names);self.assertIn('api.php',names)
         self.assertFalse(any(name.startswith(('production/','private/','templates/')) or name.endswith(('.db','.sqlite','.env')) for name in names))
         with zipfile.ZipFile(archive) as z:self.assertIsNone(z.testzip())
+        self.assertEqual(archive.with_name(archive.name+'.sha256').read_text().split()[0],hashlib.sha256(archive.read_bytes()).hexdigest())
+        metadata=json.loads(archive.with_name(archive.name+'.json').read_text())
+        self.assertEqual(metadata['content_sha256'],self.r['content_sha256'])
+        self.assertEqual(metadata['source_archive_sha256'],self.r['archive_sha256'])
+    def test_package_rejects_direct_output_edits_and_nested_archives(self):
+        source=Path(self.temp.name)/'tampered';shutil.copytree(self.production,source)
+        (source/'index.html').write_text((source/'index.html').read_text()+'<!-- direct edit -->')
+        with self.assertRaisesRegex(ValueError,'do not match'):packager.package(source,Path(self.temp.name)/'bad.zip')
+        with self.assertRaisesRegex(ValueError,'outside'):packager.package(self.production,self.production/'self.zip')
+    def test_temporary_php_installer_is_never_a_published_resource(self):
+        for directory in [self.preview,self.production]:
+            self.assertEqual(list(directory.rglob('google-gemini-kurulum.php')),[])
     def test_preview_all_noindex(self):
         for page in self.preview.glob('*.html'):self.assertIn('noindex',page.read_text())
     def test_robots_crawl_allowed(self):self.assertEqual((self.preview/'robots.txt').read_text(),'User-agent: *\nAllow: /\n')

@@ -2,7 +2,7 @@
 
 24 Ekim 2026. Bu adımlar, üretim paketi gerçekten ana alan adına yayımlandıktan sonra uygulanır. Mevcut çalışma ana siteye kurulmuş sayılmaz. GitHub Pages test önizlemesinin `noindex` olması amaçlıdır; bu adres için indeksleme talep etmeyin.
 
-Yerel paket 203 ziyaretçi sayfası içerir; 201'i dizine uygun, 404 ve seçim ekranı `noindex` durumundadır. Bu sayılar **Google'ın dizine aldığı sayfa sayısı değildir**. Gerçek durum Search Console'dan okunur. Katalogdaki seçim, model veya rehber kayıtlarının her biri ayrı yayımlanmış URL sayılmaz.
+Yeni politika 203 ziyaretçi sayfasını korur; 190'ı sitemap kapsamında, 404/seçim ekranı ve kullanıcı tarafından belirlenen 11 yabancı pazar model rehberi olmak üzere 13'ü `noindex` durumundadır. Yabancı pazar sayfalarında üretim etiketi `noindex,follow`; içerik ve kaynakları erişilebilir kalır. Bu sayılar **Google'ın dizine aldığı sayfa sayısı değildir**. Gerçek durum Search Console'dan okunur. Katalogdaki seçim, model veya rehber kayıtlarının her biri ayrı yayımlanmış URL sayılmaz.
 
 ## 1. Önce gerçek sunucu yanıtını kontrol edin
 
@@ -26,7 +26,7 @@ Kayıtlı dizin sonucundaki son tarama, sayfa getirme, kullanıcı canonical'ı 
 
 Dosya yalnız gerçek, canonical, dizine uygun sayfaları içermeli. `noindex`, yönetim/API, filtre kopyaları veya teorik kombinasyon URL'leri eklenmemeli. Yeni içerik güncellemesinden sonra `lastmod` gerçekten değişen içeriği yansıtmalı. Sitemap'in başarıyla okunması, içindeki bütün URL'lerin tarandığı veya dizine alındığı anlamına gelmez.
 
-Son metadata adımı sitemap'i gerçek dosya kümesinden üretir; güvenilir güncelleme zamanı yoksa isteğe bağlı `lastmod` alanını eklemez. `llms.txt` sitemap veya Search Console başvurusu değildir; 25 ilçe ve gerçekten yayımlanmış rehberlerin okunabilir özetidir.
+Son metadata adımı sitemap'i gerçek dosya kümesinden üretir; güvenilir güncelleme zamanı yoksa isteğe bağlı `lastmod` alanını eklemez. `llms.txt` sitemap veya Search Console başvurusu değildir; 25 ilçe ve ana dizindeki gerçek rehberlerin okunabilir özetidir. Korunan 86 model HTML sayfasından 11 yabancı pazar rehberi ana listeden çıkarılmış, 75 model adresi listelenmiştir. Bu karar, önceki “Keşfedildi” durumunun tek bir nedene bağlandığı anlamına gelmez.
 
 ## 4. Gerekirse önemli sayfa için indeksleme isteyin
 
@@ -41,7 +41,7 @@ Son metadata adımı sitemap'i gerçek dosya kümesinden üretir; güvenilir gü
 | Keşfedildi — şu anda dizine eklenmiş değil | Google URL'yi biliyor, henüz taramış olmayabilir. Erişim, sitemap ve dahili keşfi inceleyin. Bu etiket tek başına düşük kalite, URL deseni veya tarama bütçesi sorunu kanıtı değildir. |
 | Tarandı — şu anda dizine eklenmiş değil | İçerik gerçekten alındı mı, kullanıcı ihtiyacı karşılanıyor mu, başka sayfayla aynı amaç/kapsam mı, canonical doğru mu inceleyin. Tek başına ceza göstergesi değildir. |
 | Doğru canonical'a sahip alternatif sayfa | Beklenen kopya/parametre adresiyse normal olabilir. Asıl amaçlanan canonical doğruysa bunu zorla ayrı indeksletmeyin. |
-| `noindex` nedeniyle hariç | Önizleme/404/seçim ekranında beklenebilir. Asıl hizmet sayfasındaysa HTML ve sunucu başlığını düzeltin; robots.txt ile taramayı kapatarak çözmeye çalışmayın. |
+| `noindex` nedeniyle hariç | Önizleme/404/seçim ekranı ve belirlenmiş 11 yabancı pazar rehberinde amaçlıdır. Asıl hizmet sayfasında beklenmiyorsa HTML ve sunucu başlığını düzeltin; robots.txt ile taramayı kapatarak çözmeye çalışmayın. |
 
 Önceki ekrandaki “keşfedildi” sayısı, bugünkü durumun veya tek bir nedenin teşhisi değildir. Manuel işlem olup olmadığını ilgili Search Console raporundan ayrıca okuyun; dizine alınmama ile manuel işlem aynı şey değildir.
 

@@ -55,7 +55,7 @@
         response.innerHTML='<section class="usta-result-alert" aria-label="Öncelikli bilgi"><p>'+safe(data.text)+'</p>'+(phone?'<a class="usta-emergency-call" href="tel:'+phone+'">'+phone+' acil hattını ara →</a>':'')+'</section>';
       }else{
         const text=match?.verified?match.definition.code+' · '+match.definition.meaning:(data.text||'Marka/model ve arıza belirtisini biraz daha tarif eder misiniz?');
-        const observation=match?.verified?match.definition.safe_observation:'Ekrandaki tam kodu ve belirtinin hangi kullanım sırasında çıktığını, kapağı açmadan not edin.';
+        const observation=match?.verified?[match.definition.safe_observation,match.scope_warning].filter(Boolean).join(' '):'Ekrandaki tam kodu ve belirtinin hangi kullanım sırasında çıktığını, kapağı açmadan not edin.';
         const heading=match?.verified?'Üretici belgesindeki açıklama':data.source==='ai'?'AI ön değerlendirmesi':'İlk yönlendirme';
         response.innerHTML='<div class="usta-result-grid"><section class="usta-result-main" aria-label="'+safe(heading)+'"><p>'+safe(text)+'</p></section><section><h4>Güvenli gözlem</h4><p>'+safe(observation)+'</p></section><section><h4>Sonraki adım</h4><p>Belirti devam ediyorsa model ve gözlemlerinizi paylaşarak kontrolü planlayalım. Gaz, elektrik ve soğutucu devreye müdahale etmeyin.</p></section></div>';
       }
@@ -87,7 +87,7 @@
       lastDiagnosedIssue=`${device}: ${issue}`;
       const initial=showFallbackDiagnostic(device,issue);
       // Güvenlik yönlendirmesi ve belirti rehberi bağlantıyı beklemeden görünür.
-      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual')return;
+      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review)return;
       button.disabled=true;document.getElementById('aiLoading').classList.remove('hidden');
       const source=document.getElementById('aiSource');if(source)source.textContent='Belirti rehberi · AI değerlendirmesi bekleniyor…';
       try {

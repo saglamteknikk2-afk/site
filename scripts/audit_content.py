@@ -23,6 +23,7 @@ def words(text: str) -> list[str]:
 
 def module_kind(frames: list[dict]) -> str:
     attrs=' '.join(f['attrs'] for f in frames).lower()
+    if 'st-master-matrix' in attrs: return 'shared_reference_matrix'
     if any(token in attrs for token in ['fault-scope','scope-note','scope-notes','source-note','editorial-source','brand-note','coverage']): return 'source_scope'
     if any(token in attrs for token in ['review','yorum']): return 'review'
     if any(token in attrs for token in ['safety','emergency','advisory']): return 'safety'
@@ -42,7 +43,7 @@ class MainContent(HTMLParser):
         if tag=='link' and 'canonical' in (a.get('rel') or '').lower().split(): self.metadata['canonical'].append(a.get('href',''))
         if tag=='script' and a.get('type')=='application/ld+json': self.ld=True; self.buffer=[]
         parent=self.stack[-1] if self.stack else {'main':False,'hidden':False}
-        frame={'tag':tag,'main':parent['main'] or tag=='main','hidden':parent['hidden'] or tag in HIDDEN,'attrs':' '.join(str(a.get(k) or '') for k in ['class','id','role'])}
+        frame={'tag':tag,'main':parent['main'] or tag=='main','hidden':parent['hidden'] or tag in HIDDEN,'attrs':' '.join(str(a.get(k) or '') for k in ['class','id','role']) + (' st-master-matrix' if 'data-st-master-matrix' in a else '')}
         if tag not in VOID: self.stack.append(frame)
         if frame['main'] and not frame['hidden']:
             if tag in BLOCK: self.main_text.append(' ')

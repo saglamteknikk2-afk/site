@@ -23,6 +23,20 @@ SERVICE_PAGES = {
 }
 DIRECTORIES = {'bolgeler.html', 'markalar.html', 'hizmetler.html', 'ariza-rehberi.html', 'model-ariza-kodlari.html'}
 SYSTEM_PAGES = {'404.html', 'servis-sec.html'}
+# Exact list requested for the Turkey-facing index; documents remain accessible.
+FOREIGN_MODEL_PAGES = {
+    'baxi-kombi-combi-2-uk-ariza-kodlari.html',
+    'baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html',
+    'de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html',
+    'gree-klima-vireo-r32-ariza-kodlari.html',
+    'midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html',
+    'mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html',
+    'saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html',
+    'viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html',
+    'york-klima-r-series-dhr18-48-us-ariza-kodlari.html',
+    'ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html',
+    'ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html',
+}
 LD_SCRIPT = re.compile(r'<script\b(?=[^>]*\btype\s*=\s*["\']application/ld\+json["\'])[^>]*>[\s\S]*?</script\s*>', re.I)
 
 
@@ -170,6 +184,11 @@ def metadata(text: str, name: str, graph: list[dict]) -> str:
     return re.sub(r'</head\s*>', lambda _: addition + '</head>', text, count=1, flags=re.I)
 
 
+def robots_meta(text: str, value: str) -> str:
+    text = re.sub(r'<meta\b[^>]*>', lambda m: '' if tag_attrs(m[0]).get('name', '').lower() == 'robots' else m[0], text, flags=re.I)
+    return re.sub(r'</head\s*>', lambda _: '<meta name="robots" content="' + value + '"></head>', text, count=1, flags=re.I)
+
+
 def build_graph(name: str, page: Page, files: dict[str, bytes], districts: list[str], model_rows: list[dict]) -> list[dict]:
     url = page_url(name); heading = normalized(''.join(page.h1)) or normalized(''.join(page.title)).split(' | ')[0]
     business = {'@type': 'HVACBusiness', '@id': BUSINESS_ID, 'name': 'Sağlam Teknik', 'url': ORIGIN + '/', 'telephone': '+905346225515', 'description': 'İstanbul Avrupa Yakası için markalardan bağımsız özel kombi, klima ve petek teknik servisi.', 'areaServed': [{'@type': 'AdministrativeArea', 'name': district + ', İstanbul'} for district in districts]}
@@ -221,12 +240,25 @@ def llms(pages: dict[str, Page], districts: list[str], models: dict[str, list[di
     claims = business.get('business_claims', {})
     qualification = claims.get('qualification', {})
     warranty = claims.get('warranty', {})
+    experience = claims.get('experience', {})
+    armut = claims.get('armut', {})
     declaration = 'MYK ve eğitim belgesi bilgisi doğrulama bekliyor; geçerli belge, kapsadığı meslek ve işlem hizmet görüşmesinde sorulmalıdır.'
     if qualification.get('status') == 'business-declared' and qualification.get('credential_number'):
         declaration = 'İşletme sahibinin beyanına göre MYK belge numarası: ' + str(qualification['credential_number']) + '. Belgenin geçerliliği ve işlem kapsamı bu dizin tarafından bağımsız doğrulanmış değildir; mesleki belge üreticinin yetkili servisi olunduğu anlamına gelmez.'
     if warranty.get('status') == 'business-declared' and warranty.get('duration') and warranty.get('scope'):
         declaration += ' İşletme sahibinin garanti beyanı: ' + str(warranty['duration']) + ' parça ve işçilik; kapsam: ' + str(warranty['scope']) + '. Yazılı servis fişi koşulları esas alınır.'
-    lines = ['# Sağlam Teknik', '', '> İstanbul Avrupa Yakası için markalardan bağımsız özel kombi, klima ve petek teknik servisi.', '', 'Telefon: 0534 622 55 15 (+90 534 622 55 15). Marka üreticilerinin yetkili servisi olduğu iddia edilmez.', '', declaration, '', 'Kod anlamı yalnız belgelenmiş tam model, ülke, ürün ve kontrolcü kapsamına aittir. E1/E01 ve noktalı kodlar otomatik eşitlenmez. Kaynak/kapsam uyarısı kullanıcı onayı gerektiriyorsa atlanmaz. Listelenmeyen modeller veya tarihî ürünler için eksiksiz kapsam iddia edilmez.', '', 'Bu dosya isteğe bağlı okunabilir bağlantı özetidir; AI sistemleri tarafından kullanılma, önerilme, sıralama veya müşteri garantisi vermez.', '', '## Hizmet bölgeleri', '']
+    supplied = []
+    if experience.get('status') == 'business-declared' and experience.get('years'):
+        supplied.append('İşletme sahibinin beyanına göre ' + str(experience['years']) + ' yıllık saha tecrübesi vardır.')
+    if qualification.get('profession'):
+        supplied.append('MYK belgesi için bildirilen meslek: ' + str(qualification['profession']) + '.')
+    supplied.append(declaration)
+    if armut.get('status') == 'user-supplied-badge' and armut.get('rating') is not None and armut.get('scale'):
+        supplied.append('Kullanıcı tarafından sağlanan Armut rozetinde ' + str(armut['rating']) + '/' + str(armut['scale']) + ' Tavsiye Edilen Hizmet Veren bilgisi bulunur. Bu bilgi güncel platform puanının bağımsız teyidi, Armut API bağlantısı veya bütün site yorumlarının ortalaması olarak sunulmaz.')
+    lines = ['# Sağlam Teknik — İstanbul Avrupa Yakası Kombi, Klima ve Petek Servisi', '', '> İstanbul Avrupa Yakası için markalardan bağımsız özel kombi, klima ve makineli petek temizliği teknik servisi.', '', '- Resmî site: ' + ORIGIN + '/', '- Servis hattı: 0534 622 55 15 (+90 534 622 55 15).', '- WhatsApp: https://wa.me/905346225515', '- Hizmet niteliği: Üretici yetkili servisi olmayan bağımsız özel teknik servis; işlem kapsamı ve ücret işe başlamadan önce müşteri onayına sunulur.', '', '## İşletme tarafından sağlanan bilgiler', '', '\n\n'.join(supplied), '', '## Kod ve belge kapsamı', '', 'Kod açıklaması, belirtilen tam modelin üretici belgesine aittir. Aramada E1/E01 ve F4/F04 gibi baştaki sıfır, nokta veya boşluk yazımları esnek eşleştirilebilir; bu arama kolaylığı bütün marka ve modellerde aynı anlam olduğu iddiası değildir. Önce seçili modelde tam kod yazımı, gerekirse esnek yazım eşleşmesi aranır; farklı modellerin anlamları birleştirilmez. Ülke, ürün ve kontrolcü kapsamı engelleyici onay kutusu yerine okunabilir not olarak gösterilir. Marka tabloları genel servis/sorgu özetidir; tek başına kesin parça teşhisi, gaz dolumu kararı veya bütün modeller için ortak basınç değeri vermez.', '', 'Listelenmeyen veya tarihî modeller için eksiksiz belge kapsamı iddia edilmez. Türkiye odaklı bu ana dizinde 11 yabancı pazar rehberi listelenmez; sayfalar ve resmî kaynakları yerinde korunur.', '', 'Bu dosya isteğe bağlı okunabilir bağlantı özetidir; AI sistemleri tarafından kullanılma, önerilme, sıralama veya müşteri garantisi vermez.', '', '## Öncelikli hizmet bölgeleri', '']
+    for name in ['kucukcekmece-kombi-servisi.html', 'sefakoy-servisi.html', 'basaksehir-kombi-servisi.html', 'bahcesehir-servisi.html', 'avcilar-kombi-servisi.html', 'bahcelievler-kombi-servisi.html', 'bagcilar-kombi-servisi.html', 'bakirkoy-kombi-servisi.html']:
+        if name in published: lines.append('- [' + normalized(''.join(pages[name].h1)) + '](' + page_url(name) + ')')
+    lines += ['', '## Tüm hizmet bölgeleri — ' + str(len(districts)) + ' ilçe', '']
     district_routes = set()
     for district in districts:
         slug = district.translate(str.maketrans('çğıöşüÇĞİÖŞÜ', 'cgiosuCGIOSU')).lower()
@@ -234,6 +266,29 @@ def llms(pages: dict[str, Page], districts: list[str], models: dict[str, list[di
         district_routes.update(name for _, name in links)
         available = ['[' + label + '](' + page_url(name) + ')' for label, name in links if name in published]
         lines.append('- ' + district + (': ' + ' · '.join(available) if available else ''))
+    lines += ['', '## Marka ve modelle birlikte okunacak kod örnekleri', '', 'Aşağıdaki anlamlar yalnız adı ve belgesi verilen model örneğine aittir; aynı markanın diğer serilerine aktarılmaz. Kaynak bölüm/sayfa bilgisi model rehberinde korunur.', '']
+    brand_requests = [
+        ('Baymak', 'baymak-kombi-servisi.html', ['E01', 'E03', 'E10', 'E25', 'E35']),
+        ('Demirdöküm', 'demirdokum-kombi-servisi.html', ['F.28', 'F.22', 'F.20']),
+        ('ECA', 'eca-kombi-servisi.html', ['E01', 'F37', 'E10']),
+        ('Vaillant', 'vaillant-kombi-servisi.html', ['F.28', 'F.22', 'F.75']),
+        ('Buderus', 'buderus-kombi-servisi.html', ['6A', '6C', '4C', 'H07', '227']),
+        ('Bosch', 'bosch-kombi-servisi.html', ['EA', 'CE', 'E9', 'C6']),
+        ('Viessmann', 'viessmann-kombi-servisi.html', ['F4', 'F2', 'F30', 'F51', 'E1']),
+        ('Ariston', 'ariston-kombi-servisi.html', ['501', '108', '101', '104']),
+    ]
+    for brand, landing, requested in brand_requests:
+        candidates = [(name, model) for name, group in models.items() if name in published for model in group if model.get('brand') == brand and model.get('device') == 'kombi' and model.get('manual', {}).get('official')]
+        if not candidates: continue
+        name, model = max(candidates, key=lambda item: sum(row.get('code') in requested for row in item[1].get('codes', [])))
+        examples = [row for row in model.get('codes', []) if row.get('code') in requested][:3]
+        if not examples: continue
+        service = '[' + brand + ' kombi servisi](' + page_url(landing) + ')' if landing in published else brand
+        meanings = '; '.join(str(row['code']) + ': ' + str(row.get('meaning', '')) for row in examples)
+        manual = model['manual']; label = ' / '.join(model.get('model_names', [])) or model.get('label', '')
+        lines.append('- ' + service + ' — [' + label + '](' + page_url(name) + '): ' + meanings + '. Belge: ' + manual['url'] + (' — ' + manual['locator'] if manual.get('locator') else ''))
+    if 'klima-servisi.html' in published:
+        lines.append('- [Klima servisi](' + page_url('klima-servisi.html') + '): Daikin, Mitsubishi Electric, Mitsubishi Heavy Industries, Arçelik, Beko, LG, Samsung, Baymak ve katalogdaki diğer markalarda model bilgisiyle bakım, montaj, su akıtma ve soğutmama talebi görüşülür. Gaz/soğutucu devre işlemi yalnız belirtiye bakılarak kesinleştirilmez.')
     for title, names in [('İşletme, hizmet ve kaynak bilgileri', sorted(published - set(models) - district_routes)), ('Yayımlanmış model ve belge rehberleri', sorted(name for name in models if name in published))]:
         lines += ['', '## ' + title, '']
         for name in names:
@@ -255,13 +310,16 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     counts = Counter()
     for name, page in pages.items():
         graph = build_graph(name, page, files, districts, models.get(name, []))
-        files[name] = metadata(files[name].decode('utf-8'), name, graph).encode('utf-8')
+        text = metadata(files[name].decode('utf-8'), name, graph)
+        if name in FOREIGN_MODEL_PAGES:
+            text = robots_meta(text, 'noindex,nofollow,noarchive' if preview else 'noindex,follow')
+            page.noindex = True
+        files[name] = text.encode('utf-8')
         counts.update(row['@type'] for row in graph)
     for name in list(files):
         if PurePosixPath(name).name != 'owner-admin.html': continue
-        text = re.sub(r'<meta\b[^>]*>', lambda m: '' if tag_attrs(m[0]).get('name', '').lower() == 'robots' else m[0], files[name].decode('utf-8'), flags=re.I)
-        files[name] = re.sub(r'</head\s*>', '<meta name="robots" content="noindex,nofollow"></head>', text, count=1, flags=re.I).encode('utf-8')
-    published = {name for name, page in pages.items() if name not in SYSTEM_PAGES and (preview or not page.noindex)}
+        files[name] = robots_meta(files[name].decode('utf-8'), 'noindex,nofollow').encode('utf-8')
+    published = {name for name, page in pages.items() if name not in SYSTEM_PAGES | FOREIGN_MODEL_PAGES and (preview or not page.noindex)}
     business = json.loads(files.get('isletme-bilgileri.json', b'{}'))
     files['llms.txt'] = llms(pages, districts, models, published, business).encode('utf-8')
     if preview:
@@ -277,4 +335,4 @@ def enhance_files(files: dict[str, bytes]) -> dict:
             row = ET.SubElement(sitemap, '{' + namespace + '}url')
             ET.SubElement(row, '{' + namespace + '}loc').text = page_url(name)
         files['sitemap.xml'] = ET.tostring(sitemap, encoding='utf-8', xml_declaration=True) + b'\n'
-    return {'visitor_pages': len(pages), 'mode': 'preview' if preview else 'production', 'schema_types': dict(sorted(counts.items())), 'districts': len(districts), 'published_model_urls': len(set(models) & published), 'sitemap_urls': 0 if preview else len(published)}
+    return {'visitor_pages': len(pages), 'mode': 'preview' if preview else 'production', 'schema_types': dict(sorted(counts.items())), 'districts': len(districts), 'model_html_urls': len(models), 'published_model_urls': len(set(models) & published), 'foreign_noindex_pages': len(set(pages) & FOREIGN_MODEL_PAGES), 'noindex_pages': sum(page.noindex for page in pages.values()), 'sitemap_urls': 0 if preview else len(published)}
