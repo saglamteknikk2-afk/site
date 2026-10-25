@@ -115,7 +115,7 @@
     const labels=new Map();for(const item of choices){const key=normalize(item.label);labels.set(key,(labels.get(key)||0)+1);}
     const options=choices.sort((a,b)=>a.label.localeCompare(b.label,'tr',{numeric:true})).map(item=>`<option value="${esc(item.value)}"${item.selected?' selected':''}>${esc(item.label+(labels.get(normalize(item.label))>1&&item.family?' — '+item.family:''))}</option>`).join('');
     const prompt=modelPrompt?`<p id="ustaModelPrompt" class="usta-note" role="status">${esc(state.code?state.code+' kodu için':'Hata kodunu yorumlamak için')} ${esc(state.brand)} cihazınızın tam modelini seçin. Bilmiyorsanız “Modeli bilmiyorum” ile ön bilgiye geçebilirsiniz.</p>`:'';
-    const control=manualModel?`<label class="usta-field-label" for="ustaModel">Modeliniz <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model)}" placeholder="Etiketteki model adını yazın" autocomplete="off"></label><button id="ustaChooseModel" class="usta-inline-action" type="button">← Model listesini aç</button>`:`${choices.length?`<label class="usta-field-label" for="ustaVerifiedModel">${esc(state.brand)} modeli <span>(isteğe bağlı)</span><select id="ustaVerifiedModel" class="usta-field"><option value="">Modeli seçin</option>${options}</select></label>`:'<p class="usta-note">Bu markanın model listesi hazırlanıyor. Modelinizi yazabilir veya devam edebilirsiniz.</p>'}<button id="ustaWriteModel" class="usta-inline-action" type="button">Modelim listede yok, yazayım</button>`;
+    const control=manualModel?`<label class="usta-field-label" for="ustaModel">Modeliniz <span>(isteğe bağlı)</span><input id="ustaModel" class="usta-field" maxlength="120" value="${esc(state.model)}" placeholder="Etiketteki model adını yazın" autocomplete="off"></label><button id="ustaChooseModel" class="usta-inline-action" type="button">← Model listesini aç</button>`:`${choices.length?`<label class="usta-field-label" for="ustaVerifiedModel">${esc(state.brand)} modeli <span>(isteğe bağlı)</span><select id="ustaVerifiedModel" class="usta-field"><option value="">Modelimi bilmiyorum / Listede yok</option>${options}</select></label>`:'<p class="usta-note">Bu markanın model listesi hazırlanıyor. Modelinizi yazabilir veya devam edebilirsiniz.</p>'}<button id="ustaWriteModel" class="usta-inline-action" type="button">Modelim listede yok, yazayım</button>`;
     return `${prompt}${manualModel?'':modelSuggestion()}${control}${scopeFields()}`;
   }
   function codeFields() {
@@ -130,7 +130,7 @@
       return `<label class="usta-field-label" for="ustaBrand">Cihazın markası<select id="ustaBrand" class="usta-field"><option value="">Marka seçin</option>${names.map(name=>`<option${state.brand===name?' selected':''}>${esc(name)}</option>`).join('')}</select></label>${state.brand?`<button type="button" class="usta-next" data-brand="${esc(state.brand)}">${esc(state.brand)} ile devam et →</button>`:''}<button type="button" class="usta-back" data-brand="">Markayı bilmiyorum, devam et →</button>`;
     }
     if (state.step===3) return modelFields()+codeFields()+`<button type="button" class="usta-back" data-unknown-code>${state.code&&!selectedModel()?'Modeli bilmiyorum, ön bilgiye geç':'Modeli / kodu bilmiyorum, devam et'} →</button>`;
-    return `<details class="usta-context-details"><summary>Seçimlerinizi görüntüleyin</summary><dl class="usta-summary"><dt>Cihaz / belirti</dt><dd>${esc(state.device+' · '+symptomText())}</dd>${state.brand||state.model?`<dt>Marka / model</dt><dd>${esc([state.brand,state.model].filter(Boolean).join(' · '))}</dd>`:''}${state.code?`<dt>Ekrandaki kod</dt><dd>${esc(state.code)}</dd>`:''}${state.detail?`<dt>Anlatımınız</dt><dd>${esc(state.detail)}</dd>`:''}</dl></details><details id="ustaLocationContext" class="usta-free"><summary>Servis için bölge ekleyin <span>(isteğe bağlı)</span></summary><div class="usta-fields"><label>İlçe<select id="ustaDistrict" class="usta-field"><option value="">Daha sonra paylaşırım</option>${(catalog().districts||[]).map(d=>`<option${state.district===d?' selected':''}>${esc(d)}</option>`).join('')}</select></label><label>Mahalle / semt<input id="ustaNeighborhood" class="usta-field" maxlength="80" value="${esc(state.neighborhood)}" placeholder="Örn. Atakent"></label></div></details>`;
+    return `<label class="usta-field-label" for="ustaFinalDescription">Arızanı tarif et <span>(isteğe bağlı)</span><textarea id="ustaFinalDescription" class="usta-field" rows="3" maxlength="900" placeholder="Örn. İlk ateşlemede sert patlama sesi duyuyorum.">${esc(state.detail)}</textarea></label><details class="usta-context-details"><summary>Seçimlerinizi görüntüleyin</summary><dl class="usta-summary"><dt>Cihaz / belirti</dt><dd>${esc(state.device+' · '+symptomText())}</dd>${state.brand||state.model?`<dt>Marka / model</dt><dd>${esc([state.brand,state.model].filter(Boolean).join(' · '))}</dd>`:''}${state.code?`<dt>Ekrandaki kod</dt><dd>${esc(state.code)}</dd>`:''}${state.detail?`<dt>Anlatımınız</dt><dd>${esc(state.detail)}</dd>`:''}</dl></details><details id="ustaLocationContext" class="usta-free"><summary>Servis için bölge ekleyin <span>(isteğe bağlı)</span></summary><div class="usta-fields"><label>İlçe<select id="ustaDistrict" class="usta-field"><option value="">Daha sonra paylaşırım</option>${(catalog().districts||[]).map(d=>`<option${state.district===d?' selected':''}>${esc(d)}</option>`).join('')}</select></label><label>Mahalle / semt<input id="ustaNeighborhood" class="usta-field" maxlength="80" value="${esc(state.neighborhood)}" placeholder="Örn. Atakent"></label></div></details>`;
   }
   function showLocal() {
     compose();
@@ -141,7 +141,7 @@
     state.model_unknown=false;state.skip_model=false;modelPrompt=true;clearResult();go(3);
   }
   function result(from) {
-    if(hasCode()&&state.brand&&!selectedModel()&&!state.model_unknown){requestModel();return;}
+    if(!selectedModel())state.model_unknown=true;
     state.last_detail_step=from;go(4);
   }
   function afterSymptom() {
@@ -187,7 +187,7 @@
     el('ustaChooseModel')?.addEventListener('click',()=>{manualModel=false;const code=state.code;resetModel(true);state.code=code;clearResult();render(false);el('ustaVerifiedModel')?.focus({preventScroll:true});});
     el('ustaModel')?.addEventListener('input',event=>{state.model=event.target.value.trim();manualModelDraft=state.model;state.model_id='';state.model_unknown=!!state.model;state.scope_confirmed=false;compose();clearResult();});
     const bind=(id,key)=>el(id)?.addEventListener('input',event=>{state[key]=event.target.value.trim();if(key==='code')state.model_unknown=!state.model_id&&!!state.model;compose();clearResult();safetyCheck();});
-    bind('ustaCode','code');bind('ustaNeighborhood','neighborhood');
+    bind('ustaCode','code');bind('ustaNeighborhood','neighborhood');bind('ustaFinalDescription','detail');
     el('ustaDistrict')?.addEventListener('change',event=>{state.district=event.target.value;state.neighborhood='';compose();if(el('ustaNeighborhood'))el('ustaNeighborhood').value='';});
     view.querySelector('[data-unknown-code]')?.addEventListener('click',()=>{state.model_unknown=!selectedModel();result(3);});
     el('ustaBack').hidden=state.step===0;el('ustaNext').hidden=state.step!==3;el('ustaNext').textContent='Arızamı bul →';
@@ -226,7 +226,7 @@
   el('ustaExtraIssue').addEventListener('input',event=>{state.detail=event.target.value.trim();updateInputHint();compose();clearResult();safetyCheck();});
   el('ustaFreeNext').addEventListener('click',()=>{
     if(!state.device){go(0);return;}
-    if(state.detail.length<3){el('ustaExtraIssue').setCustomValidity('Lütfen belirtinizi birkaç kelimeyle yazın.');el('ustaExtraIssue').reportValidity();el('ustaExtraIssue').addEventListener('input',()=>el('ustaExtraIssue').setCustomValidity(''),{once:true});return;}
+    // Hazır belirtiyle yazı yazmadan devam etmek mümkündür.
     state.symptom='other';state.answer='';applyInput();afterSymptom();
   });
   el('ustaExtraIssue').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();el('ustaFreeNext').click();}});
@@ -260,9 +260,9 @@
     submit(){
       compose();if(safetyCheck())return;
       if(state.step!==4){if(state.device&&state.symptom)result(state.step);else go(state.device?1:0);return;}
-      if(hasCode()&&!selectedModel()){showLocal();return;}
+      // Model olmadan da güvenli AI değerlendirmesine geçilir.
       if(window.ST_PREVIEW){showLocal();const source=el('aiSource');if(source)source.textContent+=' · Test sürümünde AI bağlantısı kapalı';return;}
-      if(typeof window.diagnoseIssue==='function')window.diagnoseIssue();
+      if(typeof window.diagnoseIssue==='function')window.diagnoseIssue();else showLocal();
     }
   };
   const query=new URLSearchParams(location.search),legacy=new URLSearchParams(location.hash.slice(1));
