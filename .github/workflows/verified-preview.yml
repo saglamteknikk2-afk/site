@@ -49,7 +49,7 @@ jobs:
         run: |
           gh api repos/${{ github.repository }}/actions/runs/40187060394 > build/reused-run.json
           gh api repos/${{ github.repository }}/actions/jobs/121149998473 > build/reused-job.json
-          gh api repos/${{ github.repository }}/actions/jobs/121149998473/logs > build/reused-baseline-job.log
+          gh api --allow-escape-sequences repos/${{ github.repository }}/actions/jobs/121149998473/logs > build/reused-baseline-job.log
       - name: Gerçek tarayıcıyı hazırla
         run: |
           set -euo pipefail
