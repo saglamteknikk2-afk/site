@@ -579,6 +579,7 @@ function st_guide(string $device,string $issue): array {
     $q=st_normalize($issue);$kind=strpos(st_normalize($device),'klima')!==false?'klima':'kombi';
     if(preg_match('/gaz\s*kok|dogal\s*gaz\s*(kok|kac)/',$q) || ($kind==='kombi' && preg_match('/gaz[i]?\s*kac/',$q)))return ['ok'=>true,'source'=>'emergency','emergency_phone'=>'187','text'=>'Gaz kokusu veya gaz kaçağı bildiriyorsanız elektrik düğmelerine dokunmayın. Ortamdan ayrılıp dışarıdan 187 Doğal Gaz Acil hattını arayın.'];
     if(preg_match('/yangin|alev\s*al|duman\s*cik|yaralan/',$q))return ['ok'=>true,'source'=>'emergency','emergency_phone'=>'112','text'=>'Yangın, duman veya yaralanma bildiriyorsanız ortamdan güvenli biçimde uzaklaşın ve 112 Acil Çağrı Merkezi’ni arayın. Cihaza müdahale etmeyin.'];
+    if($kind==='kombi' && preg_match('/patlam|gecikmeli\s*atesleme|pof\s*diye|gum\s*diye/',$q))return ['ok'=>true,'source'=>'safety','text'=>'Ateşleme sırasında patlama veya sert vuruntu gecikmeli ateşleme gibi yanma sorunlarından kaynaklanabilir. Kesin teşhis için yerinde kontrol gerekir. Cihazı tekrar tekrar çalıştırmayın, resetlemeyin ve kapağını açmayın. Gaz kokusu varsa elektrik düğmelerine dokunmadan güvenli yere geçip dışarıdan 187 Doğal Gaz Acil hattını arayın. Yetkin servis kontrolü isteyin.','guide_path'=>'/kombi-atesleme.html'];
     $file=__DIR__.'/assets/diagnostic-data.json';$rows=is_file($file)?json_decode(file_get_contents($file),true):[];
     $best=null;$score=0;
     foreach($rows??[] as $row)if($row['device']===$kind)foreach($row['terms'] as $term)if(strpos($q,$term)!==false && strlen($term)>$score){$best=$row;$score=strlen($term);}
@@ -645,7 +646,7 @@ function st_gemini_transport(string $key,string $model,array $payload,int $timeo
 }
 function st_ai(array $a): array {
     $device=st_text($a,'device',2,40);$issue=st_text($a,'issue',3,1200);
-    $fallback=st_guide($device,$issue);if($fallback['source']==='emergency')return $fallback;
+    $fallback=st_guide($device,$issue);if(in_array($fallback['source'],['emergency','safety'],true))return $fallback;
     $notice=st_fault_advisory($issue);if($notice)return $notice;
     $manual=st_fault_response(['device'=>stripos($device,'klima')!==false?'klima':'kombi','query'=>$issue,'model_id'=>is_string($a['model_id']??null)?$a['model_id']:'','code'=>is_string($a['code']??null)?substr($a['code'],0,64):'','model_unknown'=>($a['model_unknown']??false)===true,'scope_confirmed'=>($a['scope_confirmed']??false)===true]);
     if($manual)return $manual;
@@ -653,7 +654,7 @@ function st_ai(array $a): array {
     if(preg_match('/(?<![a-z0-9])((?:CH|EA|EC|E|F|A|C|H|J|L|P|U)[ .-]?[0-9]{1,3}|EA|EC)(?![a-z0-9])/i',$issue,$code)
         || preg_match('/\b(?:hata|ariza|kod|kodu)\s+([0-9]{2,3})\b/',st_normalize($issue),$code)) {
         $shown=strtoupper(preg_replace('/[ .-]/','',$code[1]));
-        return ['ok'=>true,'source'=>'guide','text'=>$shown.' kodunu not ettik. Bu kodun anlamını belirlemek için cihaz etiketindeki tam model ve üretici belgesi gerekli. Modeli bilmiyorsanız etiketin fotoğrafını WhatsApp ile paylaşabilirsiniz. Kapağı açmayın ve reseti sürekli tekrarlamayın.','requires_model'=>empty($a['model_unknown']),'guide_path'=>stripos($device,'klima')!==false?'/klima-hata-kodu.html':'/kombi-hata-kodu.html'];
+        return ['ok'=>true,'source'=>'guide','text'=>$shown.' kodunu not ettik. Bu kodun anlamını belirlemek için cihaz etiketindeki tam model ve üretici belgesi gerekli. Modeli bilmiyorsanız etiketin fotoğrafını WhatsApp ile paylaşabilirsiniz. Kapağı açmayın ve reseti sürekli tekrarlamayın.','requires_model'=>false,'guide_path'=>stripos($device,'klima')!==false?'/klima-hata-kodu.html':'/kombi-hata-kodu.html'];
     }
     
     // Up to four owner-configured slots, used only for transient availability failover.
