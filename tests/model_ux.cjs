@@ -35,8 +35,10 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  check('short heading has no capacity list',!(await page.locator('h1').innerText()).includes('14/20/24'));
  await goto('/');await page.waitForFunction(()=>window.STUstaWizard);
  check('redundant homepage model search removed',await page.locator('#homeModelSearch,#homeModelQuery,.p-model-section').count()===0);
- check('hero device shortcuts use one assistant',await page.locator('.p-device-shortcuts [data-usta-open][data-usta-device]').count()===3);
- await page.locator('.p-device-shortcuts [data-usta-device=Kombi]').click();
+ check('homepage has three device entries and direct AI',await page.locator('.p-service-entry [data-service-device],.p-service-entry [data-service-ai]').count()===4);
+ await page.locator('.p-service-entry [data-service-device=Kombi]').click();
+ check('device entry opens a choice of service actions',await page.locator('#serviceEntryActions').isVisible()&&await page.locator('#serviceEntryActions [data-entry-diagnose]').isVisible());
+ await page.locator('#serviceEntryActions [data-entry-diagnose]').click();
  check('hero device skips repeat device question',await page.evaluate(()=>STUstaWizard.getContext().step===1&&STUstaWizard.getContext().device==='Kombi'));
  check('one symptom search field visible',await page.locator('#aiUstaWizard input[type=search]:visible').count()===1&&await page.locator('#ustaExtraIssue').isVisible());
  await page.locator('#ustaStep [data-choice=water]').click();
@@ -98,7 +100,7 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4175').replace(/\/$/
  await goto('/index.html?cihaz=kombi&marka=Is%C4%B1san&usta=1#ai-usta');await page.waitForFunction(()=>window.STUstaWizard);
  check('brand deep link retains symptom step',await page.evaluate(()=>STUstaWizard.getContext().step===1&&STUstaWizard.getContext().brand==='Isısan'&&!STUstaWizard.getContext().model_id));
  await page.locator('[data-choice=error]').click();check('prefilled brand continues in unified flow',await page.locator('#ustaBrand').inputValue()==='Isısan');
- await page.locator('[data-brand="Isısan"]').click();check('legacy identity never borrows other brand models',await page.locator('#ustaVerifiedModel').count()===0);
+ await page.locator('[data-brand="Isısan"]').click();check('legacy identity never borrows another brand documented model',await page.locator('#ustaVerifiedModel option').evaluateAll(options=>options.filter(o=>o.value&&!o.value.startsWith('directory|')).length)===0);
  await goto('/model-ariza-kodlari.html');await page.waitForFunction(()=>window.STModelBrowser);
  check('all catalog brands retained',await page.locator('#modelBrand option').count()>=33);
  check('no JavaScript page errors',errors.length===0);

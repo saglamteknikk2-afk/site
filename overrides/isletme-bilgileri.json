@@ -48,14 +48,17 @@
   ],
   "source": "https://saglamkombiklima.com.tr/isletme-bilgileri.html",
   "editorial_policy": "https://saglamkombiklima.com.tr/kaynak-ve-yayin-ilkeleri.html",
-  "updated": "2026-10-24",
-  "limitations": "MYK belge numarası ve parça/işçilik garantisi işletme sahibinin beyanıdır. Adres, çalışma saatleri ve harita konumu ayrıca yapılandırılır; randevu ve varış uygunluğu görüşmede netleştirilir. Mesleki yeterlilik belgesi üretici yetkili servisi olunduğu anlamına gelmez.",
+  "updated": "2026-10-25",
+  "limitations": "Mesleki belge örnekleri işletme sahibi tarafından sağlanmıştır; kişisel bilgiler ve belge numaraları kamuya açık kopyalarda gizlenir. Belgelerin çevrimiçi güncel geçerlilik doğrulaması yapılmış değildir. Parça/işçilik garantisi işletme sahibinin beyanıdır. Adres, çalışma saatleri ve harita konumu ayrıca yapılandırılır; randevu ve varış uygunluğu görüşmede netleştirilir. Mesleki yeterlilik belgesi üretici yetkili servisi olunduğu anlamına gelmez.",
   "business_claims": {
     "qualification": {
       "status": "business-declared",
-      "credential_number": "YB0200/11UY0032-4/02/502",
+      "credential_number": "****",
       "declared_on": "2026-10-24",
-      "profession": "Gaz Yakıcı Cihazlar Servis Personeli"
+      "profession": "Isıtma ve Gaz Yakıcı Cihaz Servis Personeli (Seviye 4)",
+      "public_identifier_masked": true,
+      "document_provided_on": "2026-10-25",
+      "verification_scope": "İşletme sahibinin sağladığı belge örneği; çevrimiçi belge geçerlilik doğrulaması yapılmış değildir."
     },
     "warranty": {
       "status": "business-declared",

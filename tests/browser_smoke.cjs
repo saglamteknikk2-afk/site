@@ -106,8 +106,8 @@ async function exerciseWizard(page,width){
  if(await page.locator('#aiUstaWizard').count()!==1)throw Error('All device entries must use the single AI assistant');
  await stage('device',0);
  const quickDevices=[];
- for(const device of ['Kombi','Klima','Petek']){const button=page.locator(`.p-hero [data-usta-device="${device}"]`);if(await button.count()!==1)throw Error('Missing hero device shortcut: '+device);await button.click();const context=await page.evaluate(()=>STUstaWizard.getContext());if(context.device!==device||context.step!==1)throw Error('Device shortcut must skip device selection: '+device);quickDevices.push({device,step:context.step});await page.locator('#ustaRestart').click();}
- await page.locator('.p-hero [data-usta-device="Kombi"]').click();await stage('symptom',1);
+ for(const device of ['Kombi','Klima','Petek']){const button=page.locator(`.p-service-entry [data-service-device="${device}"]`);if(await button.count()!==1)throw Error('Missing device entry: '+device);await button.click();await page.locator('#serviceEntryActions [data-entry-diagnose]').click();const context=await page.evaluate(()=>STUstaWizard.getContext());if(context.device!==device||context.step!==1)throw Error('Device shortcut must skip device selection: '+device);quickDevices.push({device,step:context.step});await page.locator('#ustaRestart').click();}
+ await page.locator('.p-service-entry [data-service-device="Kombi"]').click();await page.locator('#serviceEntryActions [data-entry-diagnose]').click();await stage('symptom',1);
  if(!await page.locator('#ustaExtraIssue').isVisible())throw Error('Free text must be visible at symptom step');
  if(!await page.locator('#ustaExtraIssue').evaluate(el=>el.tagName==='INPUT'&&['text','search'].includes(el.type)))throw Error('Symptom front door must use one short text input');
  if(await page.locator('#aiUstaWizard input:visible').count()!==1)throw Error('Symptom front door must expose exactly one input');

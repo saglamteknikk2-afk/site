@@ -58,7 +58,9 @@ jobs:
           extensions: curl, pdo_sqlite, mbstring
           coverage: none
       - name: Derleme ayrımı ve arşiv bütünlüğünü test et
-        run: python -m unittest discover -s tests -p 'test_*.py' -v
+        run: |
+          python scripts/model_directory.py --check
+          python -m unittest discover -s tests -p 'test_*.py' -v
       - name: JavaScript ve PHP sözdizimini doğrula
         shell: bash
         run: |
@@ -76,6 +78,10 @@ jobs:
           python scripts/audit_content.py build/production --strict --report build/content-audit.json
           python scripts/internal_links.py build/production --report build/crawl-check.json --check
           php tests/business-runtime.php
+          php tests/priority-service.php
+          php tests/review-moderation.php
+          php tests/moderation-http.php build/production
+          php tests/service-operations.php
           php tests/notification-reports.php build/production
           php tests/notification-dispatch.php
           php tests/config-notification-failure.php
@@ -125,6 +131,12 @@ jobs:
           INTERACTION_EXTRAS_ONLY=1 INTERACTION_OUTPUT=build/qa-interactions-extras node tests/interactions.cjs
           node tests/backend_browser.cjs build/production
           node tests/owner_browser.cjs build/production
+          node tests/priority_service.cjs
+          node tests/priority_http.cjs build/production
+          node tests/priority_preview.cjs _site /site
+          node tests/model_directory.cjs
+          node tests/home_entry_reviews.cjs build/production
+          node tests/service_operations_browser.cjs build/production
       - name: Derleme kontrol raporları
         uses: actions/upload-artifact@v4
         with:
@@ -148,6 +160,15 @@ jobs:
             build/fault-lookup-report.json
             build/catalog-acceptance.json
             build/backend-qa/owner-browser.json
+            build/backend-qa/priority-http.json
+            build/priority-service-browser.json
+            build/priority-preview-browser.json
+            build/service-operations-test.json
+            build/review-moderation-report.json
+            build/backend-qa/moderation-http.json
+            build/home-entry-reviews.json
+            build/backend-qa/service-operations-browser.json
+            build/priority-service-quote-*.png
             build/frontend-events-report.json
             build/qa-ticket-modal/*.json
             build/qa-ticket-modal/*.png

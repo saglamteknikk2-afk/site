@@ -1,6 +1,6 @@
 {
-  "checked_on": "2026-10-24",
-  "source_note": "MYK belge numarası ve 1 yıl parça/işçilik garantisi 24 Ekim 2026 tarihinde işletme sahibi tarafından bildirildi. Varış süresi konum ve ekip uygunluğuna bağlıdır.",
+  "checked_on": "2026-10-25",
+  "source_note": "Mesleki belge örnekleri işletme sahibi tarafından sağlandı. Kamuya açık kopyalarda kişisel bilgiler ve belge numaraları gizlenir. Varış süresi konum ve ekip uygunluğuna bağlıdır.",
   "items": [
     {
       "id": "arrival",
@@ -23,9 +23,10 @@
       "status": "business-declared",
       "declared_title": "MYK belgeli teknik uzman",
       "title": "MYK belgeli teknik uzman",
-      "detail": "Belge no: YB0200/11UY0032-4/02/502",
-      "conditions": "İşletme sahibinin bildirdiği MYK belge numarası: YB0200/11UY0032-4/02/502. Belgenin işlem kapsamını servis öncesinde görüşebilirsiniz. Mesleki yeterlilik belgesi, bir üreticinin yetkili servisi olunduğu anlamına gelmez.",
-      "credential_number": "YB0200/11UY0032-4/02/502"
+      "detail": "Isıtma ve gaz yakıcı cihazlar alanında mesleki yeterlilik.",
+      "conditions": "Mesleki belge örneğinde kişisel bilgiler ve belge numarası gizlenmiştir. Belgenin işlem kapsamını servis öncesinde görüşebilirsiniz. Mesleki yeterlilik belgesi, bir üreticinin yetkili servisi olunduğu anlamına gelmez.",
+      "credential_number": "****",
+      "public_identifier_masked": true
     }
   ]
 }

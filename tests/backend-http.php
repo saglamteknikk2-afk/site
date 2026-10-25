@@ -12,7 +12,7 @@ $remove=function(string $path)use(&$remove):void{if(is_link($path)||!is_dir($pat
 $process=null;$checks=[];$requests=0;$cookie='';$csrf='';
 $assert=static function(bool $ok,string $name)use(&$checks):void{$checks[]=['name'=>$name,'passed'=>$ok];if(!$ok)throw new RuntimeException($name);};
 try{
- foreach(['api.php','business-config.php','ai-koruma.php','fault-catalog.php','fault-advisories.php','notification-support.php','notification-dispatch.php','analytics.php','storage.php','transaction.php','activity.php','kurulum-kontrol.php','yonetim-api.php'] as $file){if(!is_file($public.'/'.$file)||!copy($public.'/'.$file,$doc.'/'.$file))throw new RuntimeException('Missing public PHP fixture file: '.$file);}
+ foreach(['api.php','business-config.php','ai-koruma.php','fault-catalog.php','fault-advisories.php','notification-support.php','notification-dispatch.php','analytics.php','storage.php','transaction.php','activity.php','priority-service.php','review-moderation.php','service-operations.php','kurulum-kontrol.php','yonetim-api.php'] as $file){if(!is_file($public.'/'.$file)||!copy($public.'/'.$file,$doc.'/'.$file))throw new RuntimeException('Missing public PHP fixture file: '.$file);}
  foreach(['servis-katalog.json','organic-catalog.json','verified-faults.json','brand-registry.json','trusted-proxies.json'] as $file){if(is_file($public.'/assets/'.$file))copy($public.'/assets/'.$file,$doc.'/assets/'.$file);}
  $socket=stream_socket_server('tcp://127.0.0.1:0',$errno,$error);if(!$socket)throw new RuntimeException('Loopback socket unavailable.');
  $address=stream_socket_get_name($socket,false);fclose($socket);$origin='http://'.$address;

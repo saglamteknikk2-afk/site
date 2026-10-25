@@ -4,6 +4,9 @@ require_once __DIR__ . '/business-config.php';
 require_once __DIR__ . '/ai-koruma.php';
 require_once __DIR__ . '/fault-catalog.php';
 require_once __DIR__ . '/fault-advisories.php';
+require_once __DIR__ . '/priority-service.php';
+require_once __DIR__ . '/review-moderation.php';
+require_once __DIR__ . '/service-operations.php';
 /* Sağlam Teknik API. PHP 7.2+ ve PHP 8+ tam uyumlu, PDO SQLite ve cURL gerektirir.
  * Veritabanı/anahtarlar varsayılan olarak httpdocs'un dışındaki private klasöründedir. */
 date_default_timezone_set('Europe/Istanbul');
@@ -189,7 +192,7 @@ function st_ensure_webhook(bool $force=false): array {
         }
         $db = st_db();
         $webhook_url = rtrim($cfg['site_url'], '/') . '/api.php?action=webhook';
-        $sig = hash('sha256', $cfg['telegram_token'] . '|' . $webhook_url . '|' . $cfg['telegram_webhook_secret']);
+        $sig = hash('sha256', $cfg['telegram_token'] . '|' . $webhook_url . '|' . $cfg['telegram_webhook_secret'].'|message,callback_query:v2');
         if (!$force) {
             $q = $db->prepare("SELECT v FROM meta WHERE k='webhook_sig'");
             $q->execute();
@@ -198,7 +201,7 @@ function st_ensure_webhook(bool $force=false): array {
         st_telegram('setWebhook', [
             'url' => $webhook_url,
             'secret_token' => $cfg['telegram_webhook_secret'],
-            'allowed_updates' => ['callback_query']
+            'allowed_updates' => ['message','callback_query']
         ]);
         $db->prepare("INSERT INTO meta(k,v) VALUES('webhook_sig',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v")->execute([$sig]);
         return ['ok'=>true, 'cached'=>false];
@@ -359,7 +362,7 @@ function st_db(): PDO {
             $columns=array_column($db->query('PRAGMA table_info('.$table.')')->fetchAll(),'name');
             foreach(['notification_sent'=>'INTEGER NOT NULL DEFAULT 0','telegram_message_id'=>'INTEGER'] as $name=>$declaration)if(!in_array($name,$columns,true))$db->exec('ALTER TABLE '.$table.' ADD COLUMN '.$name.' '.$declaration);
         }
-        st_backfill_receipts($db);st_analytics_schema($db);st_activity_schema($db);$db->commit();
+        st_backfill_receipts($db);st_analytics_schema($db);st_activity_schema($db);st_priority_schema($db);st_review_moderation_schema($db);st_operations_schema($db);$db->commit();
     }catch(Throwable $e){$db->rollBack();throw $e;}
     $q=$db->prepare('INSERT OR IGNORE INTO meta(k,v) VALUES(?,?)'); $q->execute(['secret',bin2hex(random_bytes(32))]);
     return $db;
@@ -495,7 +498,9 @@ function st_enqueue(PDO $db,string $id,array $payload): void {
 }
 class STTelegramError extends RuntimeException {
     public $retry_after;
-    public function __construct(string $message,int $retry_after=0){parent::__construct($message);$this->retry_after=$retry_after;}
+    public $telegram_code;
+    public $telegram_reason;
+    public function __construct(string $message,int $retry_after=0,int $telegram_code=0,string $telegram_reason=''){parent::__construct($message);$this->retry_after=$retry_after;$this->telegram_code=$telegram_code;$this->telegram_reason=$telegram_reason;}
 }
 function st_telegram_error(int $code,string $description='',array $parameters=[]): STTelegramError {
     $message='Telegram’a ulaşılamadı; bildirim kuyrukta tutuluyor.';$d=strtolower($description);
@@ -504,7 +509,8 @@ function st_telegram_error(int $code,string $description='',array $parameters=[]
     elseif($code===400 && strpos($d,'chat not found')!==false)$message='Telegram chat ID bulunamadı. Botu başlatıp doğru sohbet ID bilgisini kaydedin.';
     elseif($code===409)$message='Telegram onay alıcısı çakışıyor; webhook veya başka bir getUpdates alıcısı bulunuyor.';
     elseif($code===429)$message='Telegram gönderim sınırına ulaşıldı; belirtilen sürenin sonunda yeniden denenecek.';
-    return new STTelegramError($message,min(86400,max(0,(int)($parameters['retry_after']??0))));
+    $reason=$code===400&&preg_match('/^(?:bad request:\s*)?message is not modified(?:[:.]|$)/D',$d)?'message_not_modified':'';
+    return new STTelegramError($message,min(86400,max(0,(int)($parameters['retry_after']??0))),$code,$reason);
 }
 function st_telegram(string $method,array $payload,int $timeoutMs=8000): array {
     $cfg=st_config();$token=$cfg['telegram_token']; if(!$token)throw new STTelegramError('Telegram bot anahtarı ayarlanmadı.');
@@ -684,28 +690,33 @@ function st_dispatch(): void {
         $secret=st_config()['telegram_webhook_secret'];
         $provided=$_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? '';
         if(!preg_match('/^[A-Za-z0-9_-]{32,256}$/D',$secret) || !is_string($provided) || !hash_equals($secret,$provided))st_fail('Bildirim doğrulanamadı.',403);
-        $raw=file_get_contents('php://input');
+        $raw=file_get_contents('php://input',false,null,0,65537);
+        if(is_string($raw)&&strlen($raw)>65536)st_fail('Bildirim boyutu geçersiz.',413);
         $a=is_string($raw)?json_decode($raw,true):null;
         if(!is_array($a))st_json(['ok'=>true]);
+        if(is_array($a['message']??null)){
+            try{st_review_bot_message(st_db(),$a['message'],st_config());}
+            catch(DomainException $e){st_fail('Yönetim yetkisi doğrulanamadı.',403);}
+            st_request_maintenance();
+            st_json(['ok'=>true]);
+        }
         $query=$a['callback_query']??null;if(!is_array($query))st_json(['ok'=>true]);
-        try{$message=st_decide($query);}catch(DomainException $e){st_fail('Onay yetkisi veya kayıt doğrulanamadı.',403);}
+        try{
+            $operation=st_operations_callback(st_db(),$query,st_config());
+            $message=$operation!==null?$operation['message']:st_review_bot_callback(st_db(),$query,st_config());
+            if($message===null)$message=st_decide($query);
+        }catch(DomainException $e){st_fail('Yönetim yetkisi, süre veya kayıt doğrulanamadı.',403);}
         if(!empty($query['id'])) {
             $p=['_method'=>'answerCallbackQuery','callback_query_id'=>(string)$query['id'],'text'=>$message,'show_alert'=>true];
-            st_enqueue(st_db(),'ack:'.hash('sha256',(string)$query['id']),$p);
-            try{
-                $send=$p;unset($send['_method']);
-                st_telegram('answerCallbackQuery',$send);
-                $q=st_db()->prepare('UPDATE outbox SET sent=1 WHERE id=?');
-                $q->execute(['ack:'.hash('sha256',(string)$query['id'])]);
-                if(!empty($query['message']['chat']['id']) && !empty($query['message']['message_id'])) {
-                    st_telegram('editMessageReplyMarkup', [
-                        'chat_id' => $query['message']['chat']['id'],
-                        'message_id' => (int)$query['message']['message_id'],
-                        'reply_markup' => ['inline_keyboard' => []]
-                    ]);
-                }
-            }catch(Throwable $e){}
+            $ack='ack:'.hash('sha256',(string)$query['id']);st_enqueue(st_db(),$ack,$p);
+            if(!empty($query['message']['chat']['id']) && !empty($query['message']['message_id']))st_enqueue(st_db(),$ack.':markup',[
+                '_method'=>'editMessageReplyMarkup','chat_id'=>$query['message']['chat']['id'],
+                'message_id'=>(int)$query['message']['message_id'],
+                'reply_markup'=>$operation!==null?$operation['reply_markup']:['inline_keyboard'=>[]]
+            ]);
+            st_delivery_attempt($ack);
         }
+        if($operation!==null)st_delivery_attempt('ticket-state:'.$operation['ticket_id'].':'.$operation['status']);
         st_json(['ok'=>true]);
     }
     if($action==='bootstrap' && $method==='GET'){
@@ -713,12 +724,16 @@ function st_dispatch(): void {
         st_json(['ok'=>true,'csrf'=>st_csrf(st_session())]);
     }
     if($action==='reviews' && $method==='GET') {
-        $rows=st_db()->query("SELECT id,author,district,service,cat,rating,comment,created FROM reviews WHERE status='approved' ORDER BY created DESC,id DESC LIMIT 500")->fetchAll();
+        $db=st_db();$rows=st_review_filter_deleted($db,$db->query("SELECT id,author,district,service,cat,rating,comment,created FROM reviews WHERE status='approved' ORDER BY created DESC,id DESC LIMIT 500")->fetchAll());
         foreach($rows as &$r){$r['rating']=(int)$r['rating'];$r['date']=date('d.m.Y',(int)$r['created']);if($r['district']!=='')$r['service'].=' ('.$r['district'].')';$r['source']='site';$r['created']=(int)$r['created'];unset($r['district']);}
-        st_json(['ok'=>true,'reviews'=>$rows]);
+        st_json(['ok'=>true,'reviews'=>$rows,'deleted_ids'=>st_review_deleted_ids($db)]);
     }
     if($method!=='POST')st_fail('İşlem bulunamadı.',404);
     $session=st_require_csrf();$a=st_body();
+    if($action==='priority-quote'){
+        st_rate('priority-quote',20);
+        st_json(st_priority_quote($a,$session,st_secret()));
+    }
     st_request_maintenance();
     if($action==='activity'){
         st_rate('activity',60);st_json(st_activity_record($session,$a));
@@ -729,28 +744,6 @@ function st_dispatch(): void {
         $q_txt = $res['query'] ?? ($a['query'] ?? '');
         st_session_track($session, 'search', (string)$q_txt);
         st_stat_inc(!empty($res['found']) ? 'search_found' : 'search_not_found');
-        try {
-            $gps = st_gps_description($a);
-            $found_icon = !empty($res['found']) ? '✅ Eşleşme Bulundu' : '❌ Eşleşme Bulunamadı';
-            $target_info = array_filter([
-                $res['device_label'] ?? '',
-                $res['brand'] ?? '',
-                $res['district'] ?? '',
-                $res['neighborhood'] ?? '',
-                $res['locality'] ?? ''
-            ]);
-            $search_id = 'search:' . hash_hmac('sha256', $session . ':' . $q_txt, st_secret()) . ':' . intdiv(time(), 60);
-            $search_text = "🔍 SİTEDEN ARAMA YAPILDI\n"
-                . "🕒 Tarih/Saat: " . date('d.m.Y H:i:s') . " (İstanbul)\n"
-                . "⌨️ Aranan İfade: " . $q_txt . "\n"
-                . "📊 Sonuç Durumu: " . $found_icon . "\n"
-                . (!empty($target_info) ? "🎯 Tespit Edilen: " . implode(' / ', $target_info) . "\n" : "")
-                . (!empty($res['path']) ? "📄 Yönlendirilen Sayfa: " . $res['path'] . "\n" : "")
-                . "📱 Kullanılan Cihaz: " . st_device($_SERVER['HTTP_USER_AGENT'] ?? '') . "\n"
-                . "📍 Konum: " . ($gps ?: st_location());
-            st_enqueue(st_db(), $search_id, ['text' => $search_text]);
-            st_deliver_now($search_id);
-        } catch (Throwable $e) {}
         st_json($res);
     }
     if($action==='visit') {
@@ -769,7 +762,7 @@ function st_dispatch(): void {
         $id=($locationOnly?'visit-location:':'visit:').$record['day'].':'.hash('sha256',$sid.'|'.$event);
         $text="🌐 YENİ ZİYARETÇİ\n📅 Tarih: ".date('d.m.Y')."\n🕒 Saat: ".date('H:i:s')." (İstanbul)\n📍 Yaklaşık bölge: ".($gps?:st_location())
             ."\n📱 Cihaz / işletim sistemi / tarayıcı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')
-            ."\n📄 Giriş sayfası: ".$page."\n🔍 Sitede yapılan arama: ".($query!==''?$query:'Henüz yok')
+            ."\n📄 Giriş sayfası: ".$page
             ."\n🔁 Oturum durumu: ".($record['unique_session']?'Günün ilk oturumu':($locationOnly?'İzinli konum güncellemesi':'Günlük tekrar ziyaret'));
         st_enqueue(st_db(),$id,['text'=>$text]);st_delivery_attempt($id);st_json(array_merge(['ok'=>true,'enabled'=>true],$record));
     }
@@ -791,9 +784,13 @@ function st_dispatch(): void {
     $key=hash_hmac('sha256',$action.'.'.$idempotency,st_secret());$hash=hash('sha256',json_encode($a));$db=st_db();
     $q=$db->prepare('SELECT hash,response FROM idempotency WHERE k=?');$q->execute([$key]);$old=$q->fetch();
     if($old){if(!hash_equals($old['hash'],$hash))st_fail('Aynı başvuru anahtarı farklı içerikle kullanılamaz.',409);st_finish_record(json_decode($old['response'],true),$action);}
+    $priority=null;
+    if($action==='ticket'){
+        $serviceLevel=$a['service_level']??'standard';
+        if(!is_string($serviceLevel)||!in_array($serviceLevel,['standard','priority'],true))st_fail('Servis seçimini kontrol edin.');
+        if($serviceLevel==='priority')$priority=st_priority_accept($a,$session,st_secret());
+    }
     st_rate($action,$action==='review'?5:8);$id=bin2hex(random_bytes(12));$stamp=time();
-    $s_info = st_session_info($session);
-    $search_line = $s_info['searched'] ? "✅ Yapıldı (" . $s_info['last_query'] . ")" : "❌ Yapılmadı";
     if($action==='review') {
         $author=st_text($a,'author',2,80);$district=st_text($a,'district',2,80);$comment=st_text($a,'comment',10,2000);$service=st_text($a,'service',2,80);
         if(!in_array($service,['Kombi Bakımı / Onarımı','Klima Bakımı / Montajı','Makineli Petek Temizliği','Acil Servis Hizmeti'],true))st_fail('Hizmet türü geçersiz.');
@@ -812,14 +809,21 @@ function st_dispatch(): void {
         $sql='INSERT INTO tickets(id,name,phone,district,device,issue,created) VALUES(?,?,?,?,?,?,?)';$data=[$id,$name,$phone,$district,$device,$issue,$stamp];
         $payload=['text'=>"🛠 Servis talebi\n🆔 Kayıt: $id\n🕒 Tarih: ".date('d.m.Y H:i:s',$stamp)." (İstanbul)\n👤 Ad: $name\n📞 Telefon: $phone\n📍 Konum (müşterinin beyanı): $district\n🔧 Cihaz: $device\n\n📝 $issue"];
         $response=['ok'=>true,'id'=>$id,'message'=>'Talebiniz kaydedildi. Hızlı dönüş için arayabilir veya WhatsApp ile iletebilirsiniz.'];
+        if($priority){
+            $payload['text'].="\n\n⭐ Öncelikli servis\nKabul edilen hizmet bedeli: ".number_format($priority['fee_try'],0,',','.')." TL\nKoşul sürümü: ".$priority['terms_version']."\nUygunluk ve varış ekiple görüşülerek netleştirilir.";
+            $response['priority']=['fee_try'=>$priority['fee_try'],'currency'=>'TRY','terms_version'=>$priority['terms_version']];
+        }
     }
     $gps=st_gps_description($a);
-    $payload['text'].="\n\n🔍 Siteden Arama: ".$search_line."\n📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')."\n🗺 Konum: ".($gps?:st_location());
+    $payload['text'].="\n\n📱 Ziyaretçi cihazı: ".st_device($_SERVER['HTTP_USER_AGENT']??'')."\n🗺 Konum: ".($gps?:st_location());
     st_transaction_begin($db);
     try {
         $q=$db->prepare('SELECT hash,response FROM idempotency WHERE k=?');$q->execute([$key]);$old=$q->fetch();
         if($old){$db->commit();if(!hash_equals($old['hash'],$hash))st_fail('Başvuru anahtarı çakıştı.',409);st_finish_record(json_decode($old['response'],true),$action);}
-        $db->prepare($sql)->execute($data);st_enqueue($db,$action.':'.$id,$payload);
+        $db->prepare($sql)->execute($data);
+        if($priority)st_priority_record($db,$priority,$id);
+        if($action==='ticket'){$response['queue']=st_operations_ticket_created($db,$id,$a,$priority);$payload['reply_markup']=st_operations_keyboard($db,$id);}
+        st_enqueue($db,$action.':'.$id,$payload);
         st_stat_inc($action==='review'?'reviews':'tickets');
         if($action==='ticket')st_session_track($session,'ticket');
         $db->prepare('INSERT INTO idempotency(k,hash,response,created) VALUES(?,?,?,?)')->execute([$key,$hash,json_encode($response,JSON_UNESCAPED_UNICODE),$stamp]);$db->commit();
@@ -828,6 +832,7 @@ function st_dispatch(): void {
 }
 if(!defined('ST_LIBRARY_MODE')) {
     try{st_dispatch();}catch(Throwable $e){
+        if($e instanceof STPriorityException)st_json(['ok'=>false,'error'=>$e->getMessage(),'reason'=>$e->reason()],$e->getCode());
         $safe=date('c').' | '.get_class($e).' | '.basename($e->getFile()).':'.$e->getLine().' | '.(int)$e->getCode()."\n";
         try { @file_put_contents(st_private().'/api-hata-guvenli.log',$safe,FILE_APPEND|LOCK_EX); } catch (Throwable $ignored) {}
         @error_log('SaglamTeknik API: '.trim($safe));

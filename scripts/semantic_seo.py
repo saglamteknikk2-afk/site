@@ -323,6 +323,13 @@ def enhance_files(files: dict[str, bytes]) -> dict:
     published = {name for name, page in pages.items() if name not in SYSTEM_PAGES | FOREIGN_MODEL_PAGES | unavailable_pages and (preview or not page.noindex)}
     business = json.loads(files.get('isletme-bilgileri.json', b'{}'))
     files['llms.txt'] = llms(pages, districts, models, published, business).encode('utf-8')
+    if 'assets/model-directory.json' in files:
+        directory = json.loads(files['assets/model-directory.json'])
+        coverage = directory.get('coverage', {})
+        files['llms.txt'] += ('\n## Model ve seri tanıma dizini\n\n'
+            + '- [Kaynak bağlantılı model ve seri isimleri](' + ORIGIN + '/assets/model-directory.json): '
+            + str(coverage.get('entries', 0)) + ' isim kaydı. Bu kısmi tanıma dizini bütün piyasanın veya arıza kodlarının eksiksiz olduğu anlamına gelmez. '
+            + 'Model adı, doğrulanmış hata kodu tablosundan ayrıdır; yalnız tam ve tekil kılavuz eşleşmesi kod tanımına bağlanır.\n').encode('utf-8')
     if preview:
         files['robots.txt'] = b'User-agent: *\nAllow: /\n'
         files.pop('sitemap.xml', None)

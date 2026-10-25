@@ -16,7 +16,8 @@ function runtime(options={}){
   sessionStorage:{getItem(){throw Error('A forever session-storage flag must not suppress visits');}},
   fetch:async(url,request={})=>{
    const action=new URL(url).searchParams.get('action');requests.push({action,headers:request.headers,body:request.body?JSON.parse(request.body):null});
-   if(options.failOnce===action&&!failures[action]){failures[action]=true;throw Error('Synthetic connection failure');}
+   failures[action]=(failures[action]||0)+1;
+   if(options.failOnce===action&&failures[action]===1||options.failTwice===action&&failures[action]<=2)throw Error('Synthetic connection failure');
    return {ok:true,json:async()=>action==='bootstrap'?{ok:true,csrf:'1700000000.'+'a'.repeat(64)}:{ok:true,recorded:true}};
   }
  };
@@ -51,6 +52,12 @@ function runtime(options={}){
  const attempts=retry.requests.filter(r=>r.action==='activity');
  check('A temporary connection error gets one bounded retry',attempts.length===2);
  check('Retries reuse both the event ID and the exact answer payload',JSON.stringify(attempts[0])===JSON.stringify(attempts[1]));
+ const recovered=runtime({failTwice:'activity'});await recovered.context.stRecordAIResult(result);
+ check('A failed answer batch stays pending instead of being permanently marked complete',recovered.context.STAIActivityStatus==='pending');
+ await recovered.context.stRecordAIResult(result);
+ const recoveredAttempts=recovered.requests.filter(r=>r.action==='activity');
+ check('A later retry of the same answer can recover after both first attempts failed',recoveredAttempts.length===3&&recovered.context.STAIActivityStatus==='recorded');
+ check('Recovered activity still uses the original event ID and payload',JSON.stringify(recoveredAttempts[0])===JSON.stringify(recoveredAttempts[2]));
  const visits=runtime();await visits.context.stRecordVisit();await visits.context.stRecordVisit();
  let rows=visits.requests.filter(r=>r.action==='visit');
  check('One document sends one page-view event even if initialization runs again',rows.length===1);

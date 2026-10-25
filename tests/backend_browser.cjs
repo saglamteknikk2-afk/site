@@ -24,7 +24,7 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
 (async()=>{
  let report;
  try{
-  check(fs.existsSync(path.join(publicRoot,'api.php'))&&fs.existsSync(path.join(publicRoot,'index.html')),'Production HTML/assets/PHP build exists');
+  check(['api.php','index.html','review-moderation.php','service-operations.php'].every(name=>fs.existsSync(path.join(publicRoot,name))),'Production HTML/assets/PHP and new backend modules exist');
   const original=snapshot(publicRoot);beforeHash=original.sha256;
   const version=runPHP(['-r','echo PHP_VERSION;']);
   check(JSON.parse(runPHP(['-r','echo json_encode(PDO::getAvailableDrivers());'])).includes('sqlite'),'Selected PHP engine supports SQLite');
@@ -127,16 +127,20 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   check(await page.locator('.pr-review').filter({hasText:comment}).count()===1,'Approved review remains unique after pagination and filtering');
   // Explicit AI opt-in against real PHP with every provider key empty.
   const aiEventsBefore=inspect().ai_events.length;
-  await page.locator('.p-device-shortcuts [data-usta-device="Klima"]').click();
-  await page.locator('#ustaStep [data-choice="cool"]').click();await page.locator('#ustaStep [data-brand=""]').click();
+  await page.locator('.p-service-entry [data-service-device="Klima"]').click();
+  await page.locator('#serviceEntryActions [data-entry-diagnose]').click();
+  await page.locator('#ustaStep [data-choice="cool"]').click();
+  const localActivityResponse=apiResponse(page,'activity');
+  await page.locator('#ustaStep [data-brand=""]').click();
   await page.waitForFunction(()=>STUstaWizard.getContext().step===4);
   check(await page.locator('#aiResponseText').innerText().then(text=>text.trim().length>40),'Local symptom guide is useful before any AI submission');
   const localAnswer=(await page.locator('#aiResponseText').innerText()).trim(),localRecords=await waitForActivity(localAnswer);
   check(localRecords.length===1&&localRecords[0].source==='guide'&&localRecords[0].device==='Klima','Locally completed guide logs the actual visible answer once with truthful source');
+  check((await localActivityResponse).status()===200,'The completed local answer receives its actual activity HTTP acknowledgement');
   await Promise.all(responseTasks);
   check(!requests.some(row=>row.action==='ai'),'Guided local answer performs no automatic AI request');
   const activitiesBeforeExplicit=requests.filter(row=>row.action==='activity').length;
-  const aiResponse=apiResponse(page,'ai');await page.locator('#askBtn').click();const ai=await aiResponse,aiData=await ai.json();
+  const aiResponse=apiResponse(page,'ai'),serverActivityResponse=apiResponse(page,'activity');await page.locator('#askBtn').click();const ai=await aiResponse,aiData=await ai.json();
   check(ai.status()===200&&aiData.source==='guide'&&String(aiData.text||'').length>40,'Explicit AI request reaches actual PHP and returns safe no-key fallback');
   await page.waitForFunction(()=>document.querySelector('#aiLoading').classList.contains('hidden')&&!document.querySelector('#askBtn').disabled);
   check((await page.locator('#aiSource').innerText()).includes('Belirti rehberi')&&(await page.locator('#aiResponseText').innerText()).trim().length>40,'No-key backend fallback is rendered through the actual UI result contract');
@@ -144,7 +148,7 @@ async function visibleText(page,selector,pattern){await page.waitForFunction(({s
   check(inspect().ai_events.length===aiEventsBefore+2,'One completed local guide and one explicit server answer create exactly two activity records');
   await Promise.all(responseTasks);
   const displayedServer=(await page.locator('#aiResponseText').innerText()).trim();
-  await waitForActivity(displayedServer);await Promise.all(responseTasks);
+  await waitForActivity(displayedServer);check((await serverActivityResponse).status()===200,'The displayed server answer receives its actual activity HTTP acknowledgement');await Promise.all(responseTasks);
   check(requests.filter(row=>row.action==='activity').length===activitiesBeforeExplicit+1,'Displayed server answer acknowledges its signed generated record once');
   check(inspect().ai_events.filter(row=>row.answer===displayedServer).length>=1,'Stored server activity includes the exact final rendered observation and next-step text');
   await Promise.all(responseTasks);

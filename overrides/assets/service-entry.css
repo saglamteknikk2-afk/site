@@ -1,0 +1,23 @@
+/* Device entry and exact section navigation; premium brand styles stay shared. */
+.p-service-entry{margin:22px 0 17px;max-width:610px}
+.p-service-entry [hidden]{display:none!important}
+.p-entry-label{font-size:12px;font-weight:650;letter-spacing:.025em;margin:0 0 10px;color:#426153}
+.p-entry-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.p-entry-buttons button{display:flex;flex-direction:column;gap:10px;justify-content:center;align-items:flex-start;min-width:0;min-height:99px;padding:14px 12px;border:1px solid #cbd8c2;border-radius:7px;background:#fffdf7;color:#173e33;font:inherit;font-size:13px;font-weight:650;line-height:1.35;text-align:left;cursor:pointer}
+.p-entry-buttons button svg{height:27px;width:27px;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.p-entry-buttons button:hover,.p-entry-buttons button[aria-pressed=true]{border-color:#173e33;background:#e6edda}
+.p-entry-buttons button[data-service-ai]{background:#173e33;color:#fffdf7;border-color:#173e33}
+.p-entry-actions{padding:15px 0 0}
+.p-entry-actions>p{font-size:12px;color:#48604d;margin:0 0 9px}
+.p-entry-actions>div{display:flex;gap:7px;flex-wrap:wrap}
+.p-entry-actions :is(a,button){display:flex;align-items:center;justify-content:space-between;gap:10px;flex:1 1 135px;min-height:44px;padding:10px 12px;border:1px solid #c4d1b9;border-radius:5px;background:#edf1e3;color:#173e33;font:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none}
+.p-entry-actions :is(a,button):hover{border-color:#173e33;background:#e3e9d7}
+.p-technician-card{display:flex;align-items:flex-start;gap:11px;border-block:1px solid #d7dece;padding:14px 0;margin:0 0 20px;color:#244537}
+.p-technician-mark{display:grid;place-items:center;width:32px;height:37px;flex:0 0 32px;background:#e2ebd7;border:1px solid #bfcfb2;border-radius:14px 14px 17px 17px;font-size:19px;font-weight:700}
+.p-technician-card strong{display:block;font-size:13px;line-height:1.5}
+.p-technician-card p{font-size:11px;line-height:1.65;color:#64725e;margin:3px 0 5px;max-width:440px}
+.p-technician-card a{font-size:11px;text-decoration:underline;text-underline-offset:3px}
+.p-service-entry :is(button,a):focus-visible,.p-technician-card a:focus-visible{outline:2px solid #b56940;outline-offset:3px}
+.premium-reviews .pr-intro,.premium-reviews .pr-form-card,#aiUstaWizard{scroll-margin-top:var(--st-nav-offset,115px)}
+@media(max-width:767px){.p-service-entry{margin:18px 0 16px}.p-entry-buttons{gap:6px}.p-entry-buttons button{padding:12px 9px;min-height:95px;font-size:12px}.p-entry-buttons button svg{height:25px;width:25px}.p-technician-card{margin-bottom:18px;padding-block:13px}.p-technician-card p{font-size:11px}.p-entry-actions :is(a,button){font-size:12px;flex:1 1 130px}}
+@media(max-width:380px){.p-entry-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.p-entry-buttons button{min-height:76px;flex-direction:row;align-items:center;justify-content:flex-start;padding:12px;gap:10px}.p-entry-buttons button svg{flex:0 0 25px}.p-entry-actions :is(a,button){flex-basis:100%}}

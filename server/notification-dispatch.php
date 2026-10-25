@@ -48,17 +48,29 @@ function st_deliver_outbox(PDO $db,array $cfg,int $limit=20,?string $event_id=nu
         try{
             $payload=json_decode($row['payload'],true);if(!is_array($payload))throw new RuntimeException('Invalid stored notification');
             $method=$payload['_method']??'sendMessage';unset($payload['_method']);
-            if(!in_array($method,['sendMessage','sendPhoto','answerCallbackQuery'],true))throw new RuntimeException('Unsupported stored notification method');
+            if(!in_array($method,['sendMessage','sendPhoto','answerCallbackQuery','editMessageReplyMarkup'],true))throw new RuntimeException('Unsupported stored notification method');
             if($method==='answerCallbackQuery'&&(int)$row['created']<time()-30){$q=$db->prepare('UPDATE outbox SET sent=1,lease=0,last_error=? WHERE id=? AND lease=?');$q->execute(['Onay bildirimi zaman aşımına uğradı; karar kaydı korunuyor.',$row['id'],$lease]);continue;}
             if(in_array($method,['sendMessage','sendPhoto'],true))$payload['chat_id']=$cfg['telegram_chat_id'];
+            if($method==='editMessageReplyMarkup'){
+                if((string)($payload['chat_id']??'')!==(string)$cfg['telegram_chat_id']||!is_int($payload['message_id']??null)||$payload['message_id']<=0||!is_array($payload['reply_markup']['inline_keyboard']??null))throw new RuntimeException('Invalid markup edit target');
+            }
             if($method==='sendPhoto')[$method,$payload]=st_delivery_photo_payload($payload);
-            $receipt=$transport($method,$payload,max(100,(int)floor(($deadline-microtime(true))*1000)));
+            try{$receipt=$transport($method,$payload,max(100,(int)floor(($deadline-microtime(true))*1000)));}
+            catch(STTelegramError $error){
+                if($method==='editMessageReplyMarkup'&&($error->telegram_code??0)===400&&($error->telegram_reason??'')==='message_not_modified')$receipt=['ok'=>true,'result'=>true];
+                else throw $error;
+            }
             $message_id=$receipt['result']['message_id']??null;
             if(empty($receipt['ok'])||(in_array($method,['sendMessage','sendPhoto'],true)&&(!is_int($message_id)||$message_id<=0)))throw new STTelegramError('Telegram teslim onayı alınamadı; bildirim kuyrukta.');
+            if($method==='editMessageReplyMarkup'){
+                $edited=$receipt['result']??null;
+                if($edited!==true&&(!is_array($edited)||($edited['message_id']??null)!==$payload['message_id']||(string)($edited['chat']['id']??'')!==(string)$cfg['telegram_chat_id']))throw new STTelegramError('Telegram düğme güncelleme onayı alınamadı; bildirim kuyrukta.');
+                $message_id=$payload['message_id'];
+            }
             st_transaction_begin($db);
             try{
                 $q=$db->prepare("UPDATE outbox SET sent=1,lease=0,last_error='',telegram_message_id=?,delivered=? WHERE id=? AND lease=? AND sent=0");
-                $q->execute([in_array($method,['sendMessage','sendPhoto'],true)?$message_id:null,time(),$row['id'],$lease]);
+                $q->execute([in_array($method,['sendMessage','sendPhoto','editMessageReplyMarkup'],true)?$message_id:null,time(),$row['id'],$lease]);
                 $confirmed=$q->rowCount()>0;
                 if($confirmed&&in_array($method,['sendMessage','sendPhoto'],true))st_delivery_receipt($db,$row['id'],$message_id);
                 $db->commit();

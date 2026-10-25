@@ -3,6 +3,29 @@ from pathlib import Path
 import html
 import json
 import re
+from datetime import datetime, timezone
+
+def review_time(review: dict) -> float:
+    """Sort real source dates without changing the seed's persistent identity."""
+    created = review.get('created')
+    if isinstance(created, (int, float)) and created > 0:
+        return float(created)
+    text = str(review.get('date') or '').strip()
+    try:
+        parsed = datetime.fromisoformat(text.replace('Z', '+00:00'))
+        return (parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)).timestamp()
+    except ValueError:
+        pass
+    months = {'oca':1,'şub':2,'sub':2,'mar':3,'nis':4,'may':5,'haz':6,'tem':7,'ağu':8,'agu':8,'eyl':9,'eki':10,'kas':11,'ara':12}
+    match = re.fullmatch(r'(\d{1,2})\s+([^\s]+)\s+(\d{4})', text)
+    if match:
+        month = months.get(match[2].casefold()[:3])
+        if month:
+            try:
+                return datetime(int(match[3]), month, int(match[1]), tzinfo=timezone.utc).timestamp()
+            except ValueError:
+                pass
+    return 0
 
 def render_assurances(data: dict) -> tuple[str, str]:
     cards, notes = [], []
@@ -16,12 +39,13 @@ def render_assurances(data: dict) -> tuple[str, str]:
 def render_reviews(reviews: list[dict]) -> str:
     cards = []
     esc = lambda value: html.escape(str(value))
-    for index, review in enumerate(reviews[:6]):
+    indexed = sorted(enumerate(reviews), key=lambda item: review_time(item[1]), reverse=True)
+    for index, review in indexed[:6]:
         author = review.get('author') or 'Müşteri'
         rating = max(1, min(5, int(review.get('rating', 5))))
         initial = author.replace('*', '').strip()[:1].upper() or 'S'
         meta = ' · '.join(str(review[k]) for k in ('date', 'service') if review.get(k))
-        cards.append(f'<article class="pr-review" data-review-id="existing-{index}"><div class="pr-review-head"><span class="pr-review-avatar" aria-hidden="true">{esc(initial)}</span><div class="pr-review-identity"><h3>{esc(author)}</h3><p class="pr-review-meta">{esc(meta)}</p></div></div><span class="pr-review-rating" role="img" aria-label="5 üzerinden {rating} puan">' + '★' * rating + '☆' * (5-rating) + '</span><blockquote>' + esc(review.get('comment') or 'Bu değerlendirmeye yazılı not eklenmemiş.') + '</blockquote><p class="pr-review-origin">Mevcut sitedeki değerlendirme</p></article>')
+        cards.append(f'<article class="pr-review" data-review-id="existing-{index}"><div class="pr-review-head"><span class="pr-review-avatar" aria-hidden="true">{esc(initial)}</span><div class="pr-review-identity"><h3>{esc(author)}</h3><p class="pr-review-meta">{esc(meta)}</p></div></div><span class="pr-review-rating" role="img" aria-label="5 üzerinden {rating} puan">' + '★' * rating + '☆' * (5-rating) + '</span><blockquote>' + esc(review.get('comment') or 'Bu değerlendirmeye yazılı not eklenmemiş.') + '</blockquote><p class="pr-review-origin">Müşteri yorumu</p></article>')
     return ''.join(cards)
 
 def render_home(files: dict[str, bytes], root: Path) -> None:
@@ -33,7 +57,7 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
     head = re.sub(r'<link\b[^>]*rel=["\']stylesheet["\'][^>]*>', '', head, flags=re.I)
     head = re.sub(r'<meta\b[^>]*property=["\']og:image["\'][^>]*>', '', head, flags=re.I)
     head += '<meta property="og:image" content="https://saglamkombiklima.com.tr/assets/comfort-pets.webp">'
-    styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'ai-usta.css', 'premium.css', 'ticket-modal.css', 'premium-reviews.css', 'business-maps.css']
+    styles = ['tailwind.css', 'fonts.css', 'icons.css', 'atelier.css', 'premium.css', 'ai-usta.css', 'ticket-modal.css', 'premium-reviews.css', 'business-maps.css', 'service-entry.css']
     head += ''.join(f'<link rel="stylesheet" href="/assets/{name}?v=20261024-hybrid">' for name in styles)
     body = template.read_text()
     assurances, notes = render_assurances(json.loads((root / 'components/service-assurances.json').read_text()))
@@ -49,12 +73,12 @@ def render_home(files: dict[str, bytes], root: Path) -> None:
     body = body.replace('<div id="reviewsContainer" class="pr-review-list" aria-label="Müşteri değerlendirmeleri"></div>', '<div id="reviewsContainer" class="pr-review-list" aria-label="Müşteri değerlendirmeleri">' + render_reviews(reviews) + '</div>')
     body = body.replace('Diğer değerlendirmeleri göster', 'Daha Fazla Yorum Göster')
     body = body.replace('Değerlendirmeleri okumak ve yorum formunu kullanmak için JavaScript’i etkinleştirin.', 'İlk altı değerlendirme yukarıda okunabilir. Diğer yorumlar ve yorum formu için JavaScript’i etkinleştirin.')
-    body = body.replace('Mevcut sitedeki değerlendirmeler yükleniyor.', 'Mevcut siteden aktarılan değerlendirmeler.')
+    body = body.replace('Mevcut sitedeki değerlendirmeler yükleniyor.', 'Müşteri yorumları yükleniyor.')
     seed_json = json.dumps(reviews, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
     body += '<script id="st-review-seeds" type="application/json">' + seed_json + '</script>'
     if re.search(r'\{\{[A-Z_]+\}\}', body):
         raise ValueError('Unresolved home component')
     scripts = ['site.js','location.js','verified-faults.js','fault-lookup.js','fault-advisories.js','diagnostic-guide.js',
-               'home.js','servis-verileri.js','organic-catalog.js','servis-search.js','ai-usta.js','atelier.js','premium-reviews.js','business-maps.js','premium.js']
+               'priority-service-policy.js','priority-service.js','home.js','servis-verileri.js','organic-catalog.js','model-directory.js','servis-search.js','ai-usta.js','atelier.js','premium-reviews.js','business-maps.js','service-entry.js','premium.js']
     body += ''.join(f'<script src="/assets/{name}?v=20261024-hybrid" defer></script>' for name in scripts)
     files['index.html'] = ('<!doctype html><html lang="tr"><head>'+head+'</head><body class="at-site" data-page-kind="home">'+body+'</body></html>').encode('utf-8')

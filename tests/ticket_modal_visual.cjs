@@ -9,6 +9,7 @@ const builds=process.env.MODAL_CASES?JSON.parse(process.env.MODAL_CASES):[
  {label:'production',directory:path.join(root,'build/production'),base:''}
 ];
 const sizes=[{width:320,height:780},{width:390,height:844},{width:768,height:960},{width:1440,height:1000},{width:1920,height:1080}];
+const openers=['.usta-ticket','.p-service-cta [data-ticket-open]:not([data-ticket-level="priority"])','.p-service-cta [data-ticket-open][data-ticket-level="priority"]'];
 const transparent=value=>value==='transparent'||value==='rgba(0, 0, 0, 0)';
 async function run(browser,entry){
  const directory=path.resolve(entry.directory),base=entry.base.replace(/\/$/,''),start=JSON.parse(fs.readFileSync(path.join(directory,'build-info.json'),'utf8'));
@@ -30,7 +31,7 @@ async function run(browser,entry){
     await page.goto(server.origin+base+'/',{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);
     const modal=page.locator('#serviceTicketModal'),card=modal.locator('.ah-modal-card');
     assert(await modal.isHidden(),'Closed modal must not appear in document flow');
-    for(const selector of ['.usta-ticket','.p-service-cta [data-ticket-open]']){
+    for(const selector of openers){
      const opener=page.locator(selector);await opener.scrollIntoViewIfNeeded();
      const before=await page.evaluate(()=>({height:document.documentElement.scrollHeight,y:scrollY}));
      await opener.click();assert(await modal.isVisible(),'Actual service button opens the dialog');
@@ -81,7 +82,7 @@ async function run(browser,entry){
   }
  }finally{await server.close();}
  const end=JSON.parse(fs.readFileSync(path.join(directory,'build-info.json'),'utf8'));
- return {label:entry.label,passed:records.length===10&&!errors.length&&!pageErrors.length&&!httpErrors.length&&start.content_sha256===end.content_sha256,build_start:start,build_end:end,actual_button_cases:records.length,errors,page_errors:pageErrors,http_errors:httpErrors,synthetic_api_requests:apiRequests,records};
+ return {label:entry.label,passed:records.length===sizes.length*openers.length&&!errors.length&&!pageErrors.length&&!httpErrors.length&&start.content_sha256===end.content_sha256,build_start:start,build_end:end,actual_button_cases:records.length,errors,page_errors:pageErrors,http_errors:httpErrors,synthetic_api_requests:apiRequests,records};
 }
 (async()=>{
  fs.mkdirSync(output,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_BIN||'/usr/bin/chromium',args:['--no-sandbox']}),reports=[];

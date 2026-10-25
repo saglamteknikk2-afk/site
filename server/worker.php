@@ -36,6 +36,9 @@ try {
         if($command==='retry')st_db()->exec('UPDATE outbox SET due=0 WHERE sent=0 AND lease<'.time());
         // A webhook setup failure must never prevent ordinary event delivery.
         try{st_auto_webhook();}catch(Throwable $ignored){@error_log('Sağlam Teknik webhook kurulamadı; bildirim kuyruğu işlenmeye devam ediyor.');}
+        st_db()->exec('DELETE FROM telegram_review_dialogs WHERE expires<'.time());
+        st_db()->exec('DELETE FROM telegram_review_confirmations WHERE expires<'.(time()-86400));
+        st_db()->exec('DELETE FROM telegram_moderation_updates WHERE created<'.(time()-30*86400));
         st_check_daily_report(false);
         $result=st_worker();
         st_db()->prepare("INSERT INTO meta(k,v) VALUES('last_worker_run',?) ON CONFLICT(k) DO UPDATE SET v=excluded.v")->execute([date('Y-m-d H:i:s')]);

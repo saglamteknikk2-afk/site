@@ -15,7 +15,8 @@
     if (!container || !form) return;
     const preview = window.ST_PREVIEW === true || document.body.dataset.stMode === 'preview' || location.protocol === 'file:' || /(^|\.)github\.io$/i.test(location.hostname);
     const seeds = Array.isArray(window.STPublishedReviewSeeds) ? window.STPublishedReviewSeeds.map((review, index) => ({...review, id: `existing-${index}`, source: 'existing'})) : [];
-    let reviews = [...seeds];
+    const deletedIds = new Set();
+    let reviews = [...seeds].sort((a,b)=>reviewTime(b)-reviewTime(a));
     let category = 'all';
     let limit = 6;
     let submitting = false;
@@ -66,7 +67,8 @@
       const merged = [...approved].sort((a, b) => reviewTime(b) - reviewTime(a)).concat(seeds).filter(review => {
         const id = String(review.id);
         const identity = contentKey(review);
-        if (identifiers.has(id) || (identity && content.has(identity))) return false;
+        const rawId=id.startsWith('site-')?id.slice(5):id;
+        if (deletedIds.has(id)||deletedIds.has(rawId)||identifiers.has(id) || (identity && content.has(identity))) return false;
         identifiers.add(id);
         if (identity) content.add(identity);
         return true;
@@ -99,7 +101,14 @@
         stars.setAttribute('aria-label', `5 üzerinden ${rating} puan`);
         card.append(head, stars);
         const quote = element('blockquote', '', review.comment ? String(review.comment) : 'Bu değerlendirmeye yazılı not eklenmemiş.');
-        card.append(quote, element('p', 'pr-review-origin', review.source === 'site' ? 'Sitede yönetici onayıyla yayımlandı' : 'Mevcut sitedeki değerlendirme'));
+        const origin=element('p','pr-review-origin','Müşteri yorumu');
+        if(review.source==='site'){
+          const verified=review.service_verified===true;
+          const badge=element('span','pr-review-badge'+(verified?' is-service-verified':''),verified?'✓ Hizmet doğrulandı':'✓ Yayın onaylı');
+          badge.title=verified?'Hizmet kaydıyla eşleşen değerlendirme':'Yorumun yayımlanması yönetici tarafından onaylandı.';
+          origin.append(badge);
+        }
+        card.append(quote,origin);
         fragment.append(card);
       });
       if (!visible.length) {
@@ -149,10 +158,11 @@
         return data;
       } finally { clearTimeout(timeout); }
     }
-    function loadApprovedReviews() {
-      if (preview || liveLoad || liveLoaded) return;
+    function loadApprovedReviews(force=false) {
+      if (preview || liveLoad || (liveLoaded&&!force)) return;
       liveLoad = request('reviews').then(data => {
         if (!Array.isArray(data.reviews)) throw new Error('Yorum listesi doğrulanamadı.');
+        for(const id of [...(Array.isArray(data.deleted_ids)?data.deleted_ids:[]),...(Array.isArray(data.deleted_seed_ids)?data.deleted_seed_ids:[])])deletedIds.add(String(id));
         const seen = new Set();
         const approved = data.reviews.filter(review => {
           if (!review || typeof review !== 'object' || !review.id || typeof review.author !== 'string' || typeof review.comment !== 'string' || (review.status && review.status !== 'approved') || seen.has(String(review.id))) return false;
@@ -161,9 +171,9 @@
         }).map(review => ({...review, id: `site-${review.id}`, source: 'site'}));
         reviews = mergeApproved(approved);
         liveLoaded = true;
-        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler ve yayımlanması onaylanan site yorumları.';
+        if (status) status.textContent = 'Müşteri yorumları · En yeniden eskiye.';
       }).catch(() => {
-        if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Yeni yorumlar şu anda yüklenemedi.';
+        if (status) status.textContent = 'Yeni yorumlar şu anda yüklenemedi. Görünen yorumlarda arama yapabilirsiniz.';
       }).finally(() => {
         liveLoad = null;
         render({append: true});
@@ -227,10 +237,13 @@
       submit.disabled = true;
       submit.textContent = 'Ön izlemede gönderim kapalı';
       root.querySelectorAll('[data-review-preview-note]').forEach(note => { note.hidden = false; });
-      if (status) status.textContent = 'Mevcut sitedeki değerlendirmeler gösteriliyor. Diğerlerini düğmeyle açabilirsiniz; ön izlemede yeni yorum gönderilemez.';
+      if (status) status.textContent = 'Müşteri yorumları · En yeniden eskiye. Ön izlemede yeni yorum gönderilemez.';
     } else {
-      if (status) status.textContent = 'Son onaylanan yorumlar yükleniyor. Mevcut değerlendirmeler gösteriliyor.';
+      if (status) status.textContent = 'Müşteri yorumları yükleniyor…';
       loadApprovedReviews();
+      window.addEventListener('focus',()=>loadApprovedReviews(true));
+      document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadApprovedReviews(true);});
+      setInterval(()=>{if(!document.hidden)loadApprovedReviews(true);},60000);
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once: true});

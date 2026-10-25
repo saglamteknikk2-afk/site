@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-define('ST_LIBRARY_MODE',true);require __DIR__.'/api.php';
+define('ST_LIBRARY_MODE',true);require __DIR__.'/api.php';require_once __DIR__.'/service-operations.php';
 
 function st_owner_verify(): void {
     $key=(string)(st_config()['admin_access_key']??'');
@@ -8,14 +8,14 @@ function st_owner_verify(): void {
     $provided=$_SERVER['HTTP_X_ADMIN_KEY']??'';
     if(strlen($key)<32 || strlen($key)>256 || !is_string($provided) || !hash_equals($key,$provided)) {
         if(in_array('sqlite',PDO::getAvailableDrivers(),true))st_rate('owner-auth',30);
-        st_fail('Yönetim erişim anahtarı doğrulanamadı. Paketteki YONETIMI_AC.txt bağlantısını kullanın.',403);
+        st_fail('Yönetim erişim anahtarı doğrulanamadı. Özel ayar dosyanızdaki yönetim anahtarını kullanın.',403);
     }
 }
 
 function st_owner_state(): array {
-    $c=st_config();$sqlite=in_array('sqlite',PDO::getAvailableDrivers(),true);$writable=is_writable(st_private());$reviews=[];$tickets=[];$queue=[];$pending=0;$ai_error='';
-    if($sqlite && $writable){$db=st_db();$reviews=$db->query("SELECT r.id,r.author,r.district,r.service,r.rating,r.comment,r.status,MAX(r.notification_sent,COALESCE(o.sent,0)) AS notification_sent,o.last_error AS notification_error,COALESCE(r.telegram_message_id,o.telegram_message_id) AS telegram_message_id FROM reviews r LEFT JOIN outbox o ON o.id='review:'||r.id ORDER BY r.created DESC LIMIT 100")->fetchAll();$tickets=$db->query("SELECT t.id,t.name,t.phone,t.district,t.device,t.issue,t.created,MAX(t.notification_sent,COALESCE(o.sent,0)) AS notification_sent,o.last_error AS notification_error,COALESCE(t.telegram_message_id,o.telegram_message_id) AS telegram_message_id FROM tickets t LEFT JOIN outbox o ON o.id='ticket:'||t.id ORDER BY t.created DESC LIMIT 100")->fetchAll();$queue=$db->query('SELECT id,sent,attempts,last_error,telegram_message_id,due FROM outbox ORDER BY created DESC LIMIT 30')->fetchAll();$pending=(int)$db->query('SELECT count(*) FROM outbox WHERE sent=0')->fetchColumn();$ai_error=$db->query("SELECT v FROM meta WHERE k='ai_error'")->fetchColumn()?:'';}
-    return ['ok'=>true,'site_url'=>$c['site_url'],'configuration_errors'=>$c['configuration_errors']??[],'telegram_set'=>(bool)$c['telegram_token'],'gemini_set'=>(bool)$c['gemini_key'],'gemini_model'=>$c['gemini_model'],'telegram_chat_id'=>$c['telegram_chat_id'],'telegram_admin_ids'=>implode(',',$c['telegram_admin_ids']),'visit_notifications'=>$c['visit_notifications'],'telegram_polling'=>$c['telegram_polling'],'webhook_secret_valid'=>(bool)preg_match('/^[A-Za-z0-9_-]{32,256}$/D',$c['telegram_webhook_secret']),'sqlite_available'=>$sqlite,'curl_available'=>function_exists('curl_init'),'private_writable'=>$writable,'api_file'=>'private/saglam-teknik/site_apileri,.txt','reviews'=>$reviews,'tickets'=>$tickets,'notifications'=>$queue,'pending_notifications'=>$pending,'ai_error'=>$ai_error,'webhook_error'=>isset($db)?($db->query("SELECT v FROM meta WHERE k='webhook_error'")->fetchColumn()?:''):''];
+    $c=st_config();$sqlite=in_array('sqlite',PDO::getAvailableDrivers(),true);$writable=is_writable(st_private());$reviews=[];$tickets=[];$queue=[];$pending=0;$ai_error='';$operations=['active'=>0,'counts'=>[],'districts'=>[]];
+    if($sqlite && $writable){$db=st_db();st_operations_schema($db);$operations=st_operations_owner_snapshot($db);$reviews=$db->query("SELECT r.id,r.author,r.district,r.service,r.rating,r.comment,r.status,MAX(r.notification_sent,COALESCE(o.sent,0)) AS notification_sent,o.last_error AS notification_error,COALESCE(r.telegram_message_id,o.telegram_message_id) AS telegram_message_id FROM reviews r LEFT JOIN outbox o ON o.id='review:'||r.id ORDER BY r.created DESC LIMIT 100")->fetchAll();$tickets=$db->query("SELECT t.id,t.name,t.phone,t.district,t.device,t.issue,t.created,MAX(t.notification_sent,COALESCE(o.sent,0)) AS notification_sent,o.last_error AS notification_error,COALESCE(t.telegram_message_id,o.telegram_message_id) AS telegram_message_id FROM tickets t LEFT JOIN outbox o ON o.id='ticket:'||t.id ORDER BY t.created DESC LIMIT 100")->fetchAll();$queue=$db->query('SELECT id,sent,attempts,last_error,telegram_message_id,due FROM outbox ORDER BY created DESC LIMIT 30')->fetchAll();$tickets=st_operations_enrich_tickets($db,$tickets);$pending=(int)$db->query('SELECT count(*) FROM outbox WHERE sent=0')->fetchColumn();$ai_error=$db->query("SELECT v FROM meta WHERE k='ai_error'")->fetchColumn()?:'';}
+    return ['ok'=>true,'site_url'=>$c['site_url'],'configuration_errors'=>$c['configuration_errors']??[],'telegram_set'=>(bool)$c['telegram_token'],'gemini_set'=>(bool)$c['gemini_key'],'gemini_model'=>$c['gemini_model'],'telegram_chat_id'=>$c['telegram_chat_id'],'telegram_admin_ids'=>implode(',',$c['telegram_admin_ids']),'visit_notifications'=>$c['visit_notifications'],'telegram_polling'=>$c['telegram_polling'],'webhook_secret_valid'=>(bool)preg_match('/^[A-Za-z0-9_-]{32,256}$/D',$c['telegram_webhook_secret']),'sqlite_available'=>$sqlite,'curl_available'=>function_exists('curl_init'),'private_writable'=>$writable,'api_file'=>'private/saglam-teknik/site_apileri,.txt','reviews'=>$reviews,'tickets'=>$tickets,'operations'=>$operations,'notifications'=>$queue,'pending_notifications'=>$pending,'ai_error'=>$ai_error,'webhook_error'=>isset($db)?($db->query("SELECT v FROM meta WHERE k='webhook_error'")->fetchColumn()?:''):''];
 }
 
 function st_owner_settings(array $a): array {
@@ -38,6 +38,10 @@ function st_owner_dispatch(): void {
     if($method!=='POST')st_fail('İşlem bulunamadı.',404);
     st_require_csrf();$a=st_body();st_rate('owner-action',120);
     if($action==='settings')st_json(st_owner_settings($a));
+    if($action==='ticket-status'){
+        $id=st_text($a,'id',24,24);$status=$a['status']??null;if(!is_string($status))st_fail('Servis durumunu kontrol edin.');
+        $db=st_db();st_operations_schema($db);$result=st_operations_set_status($db,$id,$status,'owner');st_json($result);
+    }
     if($action==='decide'){
         $id=st_text($a,'id',24,24);$status=$a['status']??'';if(!preg_match('/^[a-f0-9]{24}$/D',$id) || !in_array($status,['approved','rejected'],true))st_fail('Yorum kararı geçersiz.');
         $changed=st_review_apply_decision(st_db(),$id,$status);
@@ -54,7 +58,7 @@ function st_owner_dispatch(): void {
     }
     if($action==='setup-webhook'){
         $c=st_prepare_webhook_config(true);
-        $r=st_telegram('setWebhook',['url'=>rtrim($c['site_url'],'/').'/api.php?action=webhook','secret_token'=>$c['telegram_webhook_secret'],'allowed_updates'=>['callback_query']]);
+        $r=st_telegram('setWebhook',['url'=>rtrim($c['site_url'],'/').'/api.php?action=webhook','secret_token'=>$c['telegram_webhook_secret'],'allowed_updates'=>['message','callback_query']]);
         if(($r['result']??false)!==true)st_fail('Telegram onay bağlantısı doğrulanamadı.',502);
         st_json(['ok'=>true,'message'=>'Telegram onay bağlantısı kuruldu. Ana sayfadan bir test yorumu gönderip Telegram’da Onayla/Reddet deneyin.']);
     }

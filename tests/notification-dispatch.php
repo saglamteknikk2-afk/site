@@ -6,7 +6,7 @@ $root=dirname(__DIR__);$temporary=sys_get_temp_dir().'/st-notification-qa-'.bin2
 mkdir($temporary,0700);mkdir($temporary.'/assets',0700);mkdir($temporary.'/assets/notifications',0700);
 copy($root.'/server/notification-dispatch.php',$temporary.'/notification-dispatch.php');
 copy($root.'/server/transaction.php',$temporary.'/transaction.php');
-class STTelegramError extends RuntimeException {public $retry_after;public function __construct(string $message,int $retry_after=0){parent::__construct($message);$this->retry_after=$retry_after;}}
+class STTelegramError extends RuntimeException {public $retry_after;public $telegram_code;public $telegram_reason;public function __construct(string $message,int $retry_after=0,int $telegram_code=0,string $telegram_reason=''){parent::__construct($message);$this->retry_after=$retry_after;$this->telegram_code=$telegram_code;$this->telegram_reason=$telegram_reason;}}
 $receipt_calls=[];
 function st_delivery_receipt(PDO $db,string $event,int $message_id): void {global $receipt_calls;$receipt_calls[]=[$event,$message_id];}
 require $root.'/server/notification-support.php';require $temporary.'/notification-dispatch.php';
@@ -61,6 +61,31 @@ try{
  $assert($r['failed']===1&&(int)$row($unack)['sent']===0&&(int)$row($unack)['telegram_message_id']===0,'A response without message_id is not reported delivered');
  $unsupported='ai:unsupported';$enqueue($unsupported,['_method'=>'deleteWebhook','text'=>'Must not run']);$before=count($calls);$r=st_deliver_outbox($db,$cfg,6,$unsupported,$success);
  $assert($r['failed']===1&&count($calls)===$before,'Stored queue payload cannot invoke unrelated Telegram methods');
+ $markup=['_method'=>'editMessageReplyMarkup','chat_id'=>'10000002','message_id'=>222,'reply_markup'=>['inline_keyboard'=>[[['text'=>'Yoldayım','callback_data'=>'t:y:synthetic']]]]];
+ $edit='ack:edit-message:markup';$enqueue($edit,$markup);$editCalls=[];
+ $editMessage=static function(string $method,array $payload,int $timeout)use(&$editCalls):array{$editCalls[]=[$method,$payload,$timeout];return ['ok'=>true,'result'=>['message_id'=>$payload['message_id'],'chat'=>['id'=>$payload['chat_id']]]];};
+ $r=st_deliver_outbox($db,$cfg,6,$edit,$editMessage);
+ $assert($r['sent']===1&&$r['failed']===0&&$editCalls[0][0]==='editMessageReplyMarkup','A queued ticket status updates its actual Telegram message keyboard');
+ $assert($editCalls[0][1]['reply_markup']===$markup['reply_markup']&&(int)$row($edit)['telegram_message_id']===222&&(int)$row($edit)['delivered']>0,'Edited Message acknowledgement preserves the new buttons and target receipt');
+ $r=st_deliver_outbox($db,$cfg,6,$edit,$editMessage);$assert($r['sent']===0&&count($editCalls)===1,'A confirmed keyboard edit is never retried');
+ $editTrue='ack:edit-true:markup';$enqueue($editTrue,$markup);$r=st_deliver_outbox($db,$cfg,6,$editTrue,static function():array{return ['ok'=>true,'result'=>true];});
+ $assert($r['sent']===1&&(int)$row($editTrue)['sent']===1,'A boolean true Telegram edit acknowledgement is accepted for a validated target');
+ $notModified='ack:edit-unchanged:markup';$enqueue($notModified,$markup);$r=st_deliver_outbox($db,$cfg,6,$notModified,static function():array{throw new STTelegramError('Already in requested state',0,400,'message_not_modified');});
+ $assert($r['sent']===1&&(int)$row($notModified)['sent']===1&&(int)$row($notModified)['attempts']===0,'Legitimate not-modified response completes an idempotent validated keyboard edit');
+ $otherError='ack:edit-other400:markup';$enqueue($otherError,$markup);$r=st_deliver_outbox($db,$cfg,6,$otherError,static function():array{throw new STTelegramError('Message cannot be edited',0,400,'');});
+ $assert($r['failed']===1&&(int)$row($otherError)['sent']===0&&(int)$row($otherError)['attempts']===1,'Other Telegram 400 errors remain durably queued rather than claiming success');
+ $editNetwork='ack:edit-network:markup';$enqueue($editNetwork,$markup);$r=st_deliver_outbox($db,$cfg,6,$editNetwork,static function():array{throw new STTelegramError('Synthetic network failure');});
+ $assert($r['failed']===1&&(int)$row($editNetwork)['sent']===0&&(int)$row($editNetwork)['lease']===0,'A failed keyboard edit retains its queue entry and releases the lease');
+ $wrongReceipt='ack:edit-wrong-receipt:markup';$enqueue($wrongReceipt,$markup);$r=st_deliver_outbox($db,$cfg,6,$wrongReceipt,static function():array{return ['ok'=>true,'result'=>['message_id'=>333,'chat'=>['id'=>'10000002']]];});
+ $assert($r['failed']===1&&(int)$row($wrongReceipt)['sent']===0,'A Message receipt for another target cannot acknowledge the keyboard edit');
+ $missingReceipt='ack:edit-missing-receipt:markup';$enqueue($missingReceipt,$markup);$r=st_deliver_outbox($db,$cfg,6,$missingReceipt,static function():array{return ['ok'=>true,'result'=>null];});
+ $assert($r['failed']===1&&(int)$row($missingReceipt)['sent']===0,'An edit without Message or true receipt is never reported delivered');
+ $foreign='ack:edit-foreign:markup';$enqueue($foreign,array_replace($markup,['chat_id'=>'99999999']));$before=count($editCalls);$r=st_deliver_outbox($db,$cfg,6,$foreign,$editMessage);
+ $assert($r['failed']===1&&count($editCalls)===$before,'A stored keyboard edit cannot target an unconfigured chat');
+ $badTarget='ack:edit-invalid-target:markup';$enqueue($badTarget,array_replace($markup,['message_id'=>0]));$r=st_deliver_outbox($db,$cfg,6,$badTarget,$editMessage);
+ $assert($r['failed']===1&&count($editCalls)===$before,'A missing or zero Telegram message target cannot invoke the edit method');
+ $notEdit='ai:wrong-not-modified';$enqueue($notEdit,['text'=>'A new message still needs a real receipt']);$r=st_deliver_outbox($db,$cfg,6,$notEdit,static function():array{throw new STTelegramError('Not a legitimate edit',0,400,'message_not_modified');});
+ $assert($r['failed']===1&&(int)$row($notEdit)['sent']===0,'Not-modified metadata cannot falsely acknowledge sendMessage');
  $ack='ack:expired';$enqueue($ack,['_method'=>'answerCallbackQuery','callback_query_id'=>'synthetic','text'=>'Decision persisted'],time()-60);$before=count($calls);$r=st_deliver_outbox($db,$cfg,6,$ack,$success);
  $assert($r['sent']===0&&count($calls)===$before&&(int)$row($ack)['sent']===1&&strpos($row($ack)['last_error'],'zaman aşımı')!==false,'Expired Telegram UI acknowledgements cannot loop forever');
  $long='ai:long';$text=str_repeat('Üretici belgesindeki açıklama ve sorulan soru. ',240);$enqueue($long,['text'=>$text]);$parts=(int)$db->query("SELECT count(*) FROM outbox WHERE id='ai:long' OR id LIKE 'ai:long:part:%'")->fetchColumn();$before=count($calls);$r=st_deliver_outbox($db,$cfg,20,$long,$success);

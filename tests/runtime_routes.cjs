@@ -55,13 +55,24 @@ function build(item){
     check(label+' click reaches home assistant',page.url()===expected&&await page.locator('#aiUstaWizard').count()===1);
    }
    for(const device of ['Kombi','Klima','Petek']){
-    await page.locator(`.p-hero [data-usta-device="${device}"]`).click();
+    await page.locator(`.p-service-entry [data-service-device="${device}"]`).click();await page.locator('#serviceEntryActions [data-entry-diagnose]').click();
     check(device+' shortcut prefills the same widget',await page.evaluate(device=>{const current=STUstaWizard.getContext();return current.device===device&&current.step===1;},device));
    }
-   await page.goto(home,{waitUntil:'networkidle'});
-   // Exercise the existing fallback without opening a modal or submitting a form.
+   await page.goto(inner,{waitUntil:'networkidle'});
+   // Inner pages have no home modal: the shared enhancement must navigate to
+   // its real home anchor instead of attempting to submit or opening a dialog.
+   check('ticket fallback starts where no home modal exists',await page.locator('#serviceTicketModal').count()===0);
    await page.evaluate(()=>{window.toggleServiceTicketModal=undefined;});
-   await page.locator('[data-ticket-open]').first().click();await page.waitForURL(home+'#servis-talebi');
+   const fallback=page.locator('[data-ticket-open]:visible');
+   if(!await fallback.count()){
+    // A synthetic legacy control is installed before the actual shared script
+    // initializes; the application handler and URL builder remain unchanged.
+    await page.reload({waitUntil:'networkidle'});
+    await page.evaluate(()=>{const button=document.createElement('button');button.dataset.ticketOpen='';button.id='qaLegacyTicket';button.textContent='Sentetik eski servis düğmesi';document.body.append(button);});
+    const source=await page.locator('script[src]').evaluateAll(scripts=>scripts.map(s=>s.src).find(src=>new URL(src).pathname.endsWith('/assets/premium.js')));
+    await page.addScriptTag({url:source});await page.evaluate(()=>document.dispatchEvent(new Event('DOMContentLoaded')));
+   }
+   await page.locator('[data-ticket-open]:visible').first().click();await page.waitForURL(home+'#servis-talebi');
    check('ticket fallback uses built home anchor',page.url()===home+'#servis-talebi');
    check('no generated route was missing '+JSON.stringify(missing),missing.length===0);
    check('no JavaScript error',errors.length===0);

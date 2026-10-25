@@ -19,7 +19,7 @@ function inspect(){return JSON.parse(runPHP(String.raw`$db=new PDO('sqlite:'.$ar
 (async()=>{
  const initial=snapshot(publicRoot);
  try{
-  check(fs.existsSync(path.join(publicRoot,'owner-admin.html'))&&fs.existsSync(path.join(publicRoot,'yonetim-api.php')),'Frozen production build includes actual owner HTML/JS and PHP');
+  check(['owner-admin.html','yonetim-api.php','review-moderation.php','service-operations.php'].every(name=>fs.existsSync(path.join(publicRoot,name))),'Frozen production build includes owner HTML/JS and all required PHP modules');
   const version=runPHP('echo PHP_VERSION;');check(JSON.parse(runPHP('echo json_encode(PDO::getAvailableDrivers());')).includes('sqlite'),'Selected PHP supports SQLite');
   fixture=fs.mkdtempSync(path.join(os.tmpdir(),'st-owner-browser-'));fs.chmodSync(fixture,0o700);webroot=path.join(fixture,'httpdocs');privateRoot=path.join(fixture,'private');fs.cpSync(publicRoot,webroot,{recursive:true});fs.mkdirSync(privateRoot,{mode:0o700});
   const number=await port();origin='http://127.0.0.1:'+number;

@@ -2,6 +2,7 @@
 
     // 1. GEMINI AI USTA MOTORU
     let lastDiagnosedIssue = "";
+    let aiRequestSerial = 0;
 
     document.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('homeGuideSearch')?.addEventListener('submit',event=>{
@@ -48,7 +49,8 @@
       const box=document.getElementById('aiResultBox'),response=document.getElementById('aiResponseText');
       stAiContact(data.emergency_phone);
       const actions=document.querySelector('#aiResultBox .usta-result-actions');if(actions)actions.hidden=data.source==='advisory'||data.source==='emergency';
-      const context=window.STUstaWizard?.getContext()||{},device=document.getElementById('deviceSelect').value;
+      const context=options.context||window.STUstaWizard?.getContext()||{},device=options.device||document.getElementById('deviceSelect').value;
+      const issue=options.issue??document.getElementById('issueInput').value.trim();
       const match=data.source==='manual'?window.STFaults?.lookup({device:device.toLowerCase(),brand:context.brand||'',model_id:context.model_id||'',code:context.code||'',scope_confirmed:context.scope_confirmed===true}):null;
       const safe=value=>stEscape(value||'').replace(/\n/g,'<br>');
       if(data.source==='advisory'||data.source==='emergency'){
@@ -65,7 +67,7 @@
       box.classList.remove('hidden');
       const guide=document.getElementById('aiGuideLink');
       if(guide){
-        const local=window.STDiagnosticGuide?.(document.getElementById('deviceSelect').value,document.getElementById('issueInput').value);
+        const local=window.STDiagnosticGuide?.(device,issue,context);
         const path=data.guide_path||local?.guide_path||'';
         guide.href=stDiagnosticGuideURL(path);
         guide.hidden=data.source==='emergency'||data.source==='advisory';
@@ -73,12 +75,12 @@
       const reference=document.getElementById('aiManualReference');
       if(reference){reference.replaceChildren();reference.hidden=!data.source_url;if(data.source_url&&/^https:\/\//.test(data.source_url)){const link=document.createElement('a');link.href=data.source_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Üretici kaynağını aç ↗';reference.append(link,document.createElement('br'),document.createTextNode(data.source_locator||''));}}
       if(options.record!==false&&typeof stRecordAIResult==='function'){
-        stRecordAIResult({...data,device,brand:context.brand||'',model:context.model||'',model_id:context.model_id||'',district:context.district||'',neighborhood:context.neighborhood||'',code:context.code||'',issue:document.getElementById('issueInput').value.trim(),answer:response.innerText.trim()});
+        stRecordAIResult({...data,device,brand:context.brand||'',model:context.model||'',model_id:context.model_id||'',district:context.district||'',neighborhood:context.neighborhood||'',code:context.code||'',issue,answer:response.innerText.trim()});
       }
     }
 
     function showFallbackDiagnostic(device, issue, options={}) {
-      const data=window.STDiagnosticGuide?window.STDiagnosticGuide(device,issue,window.STUstaWizard?.getContext()||{}):{source:'guide',text:'Marka/modeli, hata kodunu ve sorunun ne zaman oluştuğunu paylaşın. İç parçalara müdahale etmeden Sağlam Teknik ile servis kontrolü planlayabilirsiniz: 0534 622 5515.'};
+      const data=window.STDiagnosticGuide?window.STDiagnosticGuide(device,issue,options.context||window.STUstaWizard?.getContext()||{}):{source:'guide',text:'Marka/modeli, hata kodunu ve sorunun ne zaman oluştuğunu paylaşın. İç parçalara müdahale etmeden Sağlam Teknik ile servis kontrolü planlayabilirsiniz: 0534 622 5515.'};
       renderDiagnostic(data,options);return data;
     }
 
@@ -87,7 +89,11 @@
       if(issue.length<3){alert('Lütfen arıza belirtisini veya hata kodunu en az 3 karakterle yazın.');return;}
       if(issue.length>1200){alert('Arıza açıklamasını biraz kısaltın; en fazla 1200 karakter kullanabilirsiniz.');return;}
       const button=document.getElementById('askBtn');if(button.disabled)return;
-      const requestKey=stId();
+      const requestKey=stId(),serial=++aiRequestSerial;
+      const context={...(window.STUstaWizard?.getContext()||{})};
+      const snapshot=JSON.stringify({device,issue,context});
+      const isCurrent=()=>serial===aiRequestSerial&&snapshot===JSON.stringify({device:document.getElementById('deviceSelect').value,issue:document.getElementById('issueInput').value.trim(),context:window.STUstaWizard?.getContext()||{}});
+      const renderOptions={context,device,issue};
       lastDiagnosedIssue=`${device}: ${issue}`;
       const initial=showFallbackDiagnostic(device,issue,{record:false});
       // Güvenlik yönlendirmesi ve belirti rehberi bağlantıyı beklemeden görünür.
@@ -96,11 +102,11 @@
       button.disabled=true;document.getElementById('aiLoading').classList.remove('hidden');
       const source=document.getElementById('aiSource');if(source)source.textContent='Belirti rehberi · AI değerlendirmesi bekleniyor…';
       try {
-        const context=window.STUstaWizard?.getContext()||{};
         const data=await stApi('ai',{device,issue,model_id:context.model_id||'',code:context.code||'',model_unknown:context.model_unknown===true,scope_confirmed:context.scope_confirmed===true},requestKey);
-        if(data.text)renderDiagnostic(data);else showFallbackDiagnostic(device,issue);
-      }catch(error){showFallbackDiagnostic(device,issue);if(source)source.textContent='Belirti rehberi · AI bağlantısı kurulamadı';}
-      finally{button.disabled=false;button.classList.remove('hidden');document.getElementById('aiLoading').classList.add('hidden');}
+        if(!isCurrent())return;
+        if(data.text)renderDiagnostic(data,renderOptions);else showFallbackDiagnostic(device,issue,renderOptions);
+      }catch(error){if(isCurrent()){showFallbackDiagnostic(device,issue,renderOptions);if(source)source.textContent='Belirti rehberi · AI bağlantısı kurulamadı';}}
+      finally{if(serial===aiRequestSerial){button.disabled=false;button.classList.remove('hidden');document.getElementById('aiLoading').classList.add('hidden');}}
     }
 
     function sendToWhatsappFromAI() {
@@ -128,6 +134,7 @@
         document.getElementById('ticketSubmitBtn').classList.remove('hidden');
         document.getElementById('ticketSuccessMsg').classList.add('hidden');
         stError('ticketError','');
+        document.getElementById('ticketQueueSummary')?.remove();
         const currentIssue = document.getElementById('issueInput')?.value.trim()||'';
         const currentDevice = document.getElementById('deviceSelect')?.value||'';
         if (currentIssue) {
@@ -136,6 +143,7 @@
         if (currentDevice) {
           document.getElementById('ticketDevice').value = currentDevice;
         }
+        window.STPriorityTicket?.setLevel(document.getElementById('serviceTicketForm'),'standard');
         modal.classList.remove('hidden');
         modal.setAttribute('aria-hidden','false');
         document.body.classList.add('ah-dialog-open');
@@ -151,10 +159,21 @@
     }
     // Capture at the document so old inline HTML and premium.js do not open it twice.
     document.addEventListener('click',event=>{
+      const prioritySubmit=event.target.closest?.('#ticketSubmitBtn');
+      if(prioritySubmit&&window.ST_PREVIEW===true&&document.getElementById('ticketServiceLevel')?.value==='priority'&&window.STPriorityTicket){
+        event.preventDefault();event.stopImmediatePropagation();
+        if(document.getElementById('serviceTicketForm').reportValidity())submitServiceTicket();
+        return;
+      }
       const control=event.target.closest?.('[data-ticket-open],.usta-ticket,[data-ticket-close],#serviceTicketModal .ah-modal-close');
       if(!control||!document.getElementById('serviceTicketModal'))return;
       event.preventDefault();event.stopImmediatePropagation();
       toggleServiceTicketModal(!control.matches('[data-ticket-close],.ah-modal-close'));
+      if(control.dataset.ticketDevice){
+        document.getElementById('ticketDevice').value=control.dataset.ticketDevice;
+        if(window.STUstaWizard?.getContext()?.device!==control.dataset.ticketDevice)document.getElementById('ticketIssue').value='';
+      }
+      if(control.dataset.ticketLevel)window.STPriorityTicket?.setLevel(document.getElementById('serviceTicketForm'),control.dataset.ticketLevel);
     },true);
     document.addEventListener('submit',event=>{
       if(event.target.id!=='serviceTicketForm')return;
@@ -189,18 +208,30 @@
       }
 
       const form = document.getElementById('serviceTicketForm');
-      const payload = {name,phone,district,device,issue,website:document.getElementById('ticketWebsite').value};
+      let payload = {name,phone,district,device,issue,website:document.getElementById('ticketWebsite').value};
       stError('ticketError','');document.getElementById('ticketSuccessMsg').classList.add('hidden');
       try {
+        if(document.getElementById('ticketServiceLevel')?.value==='priority'&&!window.STPriorityTicket)throw Error('Öncelikli servis ücret onayı yüklenemedi. Sayfayı yenileyin veya uygunluğu telefonla görüşün.');
+        if(window.STPriorityTicket){
+          const confirmation=await STPriorityTicket.beforeSubmit(form,payload);
+          if(!confirmation.ready)return false;
+          payload=confirmation.payload;
+        }
         const saved=await stApi('ticket',payload,stRequestKey(form,payload));
         const note=document.querySelector('#ticketSuccessMsg p');
         if(note)note.textContent=saved.delivery==='sent'?'Talebiniz kaydedildi ve ekibimize bildirildi. Randevu uygunluğunu birlikte netleştireceğiz.':'Talebiniz kaydedildi. Ekibimize bildirim bekliyor; acil destek için bizi arayabilir veya WhatsApp’tan ulaşabilirsiniz.';
+        if(saved.queue&&typeof saved.queue.message==='string'){
+          let summary=document.getElementById('ticketQueueSummary');
+          if(!summary){summary=document.createElement('p');summary.id='ticketQueueSummary';summary.className='ticket-queue-summary';document.getElementById('ticketSuccessMsg').append(summary);}
+          summary.textContent=saved.queue.message;
+        }
         document.getElementById('ticketSuccessMsg').classList.remove('hidden');
         submitBtn.classList.add('hidden');
         delete form.dataset.requestKey; delete form.dataset.requestBody;
       } catch (err) {
+        window.STPriorityTicket?.handleError(form,err);
         stError('ticketError',err.name==='AbortError'?'Bağlantı zaman aşımına uğradı. Aynı talebi tekrar gönderebilirsiniz.':err.message);
-      } finally { submitBtn.disabled=false; submitBtn.innerHTML='Servis talebini gönder <span aria-hidden="true">↗</span>'; }
+      } finally { submitBtn.disabled=false; submitBtn.textContent=window.STPriorityTicket?.submitLabel(form)||'Servis talebini gönder'; }
       return false;
     }
 

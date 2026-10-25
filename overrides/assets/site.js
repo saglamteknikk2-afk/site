@@ -41,7 +41,34 @@ async function stBackgroundEvent(action,payload,key){
   try{return await stApi(action,payload,key)}catch(_){return null}
  }
 }
-const stCompletedAnswers=new Map();
+const stCompletedAnswers=new Map(),stPendingAnswers=new Map();
+function stAIRecordStatus(status){
+ window.STAIActivityStatus=status;
+ if(typeof window.dispatchEvent==='function'&&typeof CustomEvent==='function')window.dispatchEvent(new CustomEvent('st:ai-record-status',{detail:{status}}));
+}
+function stSendAIResult(signature,entry){
+ if(stCompletedAnswers.has(signature))return stCompletedAnswers.get(signature);
+ clearTimeout(entry.timer);entry.attempts++;
+ const send=async()=>{
+  try{return await stApi('activity',entry.payload,entry.payload.event_id);}
+  catch(error){
+   if(error.code==='PREVIEW_DISABLED'||error.status&&error.status<500)throw error;
+   await new Promise(resolve=>setTimeout(resolve,1000));
+   return stApi('activity',entry.payload,entry.payload.event_id);
+  }
+ };
+ const pending=send().then(result=>{
+  if(result?.recorded!==true)throw Error('Yanıt bildirim kaydı doğrulanamadı.');
+  stPendingAnswers.delete(signature);stAIRecordStatus('recorded');return result;
+ }).catch(error=>{
+  stCompletedAnswers.delete(signature);
+  if(error.code==='PREVIEW_DISABLED'||error.status&&error.status<500){stPendingAnswers.delete(signature);stAIRecordStatus('rejected');return null;}
+  stAIRecordStatus('pending');
+  if(entry.attempts<4&&stRecordingAllowed())entry.timer=setTimeout(()=>stSendAIResult(signature,entry),[0,1000,5000,15000][entry.attempts]);
+  return null;
+ });
+ stCompletedAnswers.set(signature,pending);return pending;
+}
 function stRecordAIResult(value){
  if(!stRecordingAllowed()||value?.activity_recorded===true)return Promise.resolve(null);
  const source=String(value?.source||'guide');
@@ -50,11 +77,11 @@ function stRecordAIResult(value){
  if(!payload.answer||!payload.issue)return Promise.resolve(null);
  const signature=JSON.stringify(payload);
  if(stCompletedAnswers.has(signature))return stCompletedAnswers.get(signature);
- const event_id=stId();payload.event_id=event_id;
- const pending=stBackgroundEvent('activity',payload,event_id);
- stCompletedAnswers.set(signature,pending);
- return pending;
+ let entry=stPendingAnswers.get(signature);
+ if(!entry){payload.event_id=stId();entry={payload,attempts:0,timer:null};stPendingAnswers.set(signature,entry);}
+ return stSendAIResult(signature,entry);
 }
+window.addEventListener('online',()=>{for(const [signature,entry] of stPendingAnswers){entry.attempts=0;stSendAIResult(signature,entry);}});
 let stPageVisit=null;
 function stVisitSource(){
  try{const referrer=document.referrer;if(!referrer)return 'direct';const host=new URL(referrer).hostname.toLowerCase();if(host===location.hostname)return 'direct';if(/(^|\.)google\./.test(host))return 'google';if(/(^|\.)yandex\./.test(host))return 'yandex';return 'other'}catch(_){return 'direct'}

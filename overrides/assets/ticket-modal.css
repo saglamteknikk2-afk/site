@@ -4,6 +4,13 @@ body.ah-dialog-open {
   overscroll-behavior: none;
 }
 
+#serviceTicketModal .ah-priority-review { padding: 20px; border: 1px solid #bccbb5; border-radius: 10px; background: #edf1e6; margin-block: 16px; }
+#serviceTicketModal .ah-priority-review h3 { margin: 0 0 10px; font-size: 21px; }
+#serviceTicketModal .ah-priority-fee { margin: 12px 0; color: #123f35; font-size: 32px; font-weight: 750; }
+#serviceTicketModal .ah-priority-consent { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.6; }
+#serviceTicketModal .ah-priority-consent input[type="checkbox"] { width: 22px; min-width: 22px; height: 22px; min-height: 22px; padding: 0; margin: 2px 0 0; accent-color: #123f35; }
+#serviceTicketModal .ah-priority-edit { padding: 11px 14px; margin-top: 15px; border: 1px solid #a9bba3; border-radius: 6px; background: #fffdf8; color: #123f35; font: inherit; cursor: pointer; }
+
 #serviceTicketModal,
 #serviceTicketModal * {
   box-sizing: border-box;

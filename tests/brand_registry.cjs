@@ -21,8 +21,8 @@ const origin=(process.env.ST_TEST_ORIGIN||'http://127.0.0.1:4187').replace(/\/$/
     const service=await page.evaluate(device=>ST_SERVICE_DATA.devices[device].brands.slice().sort(),device);
     check(device+' search service and library brands match',JSON.stringify(service)===JSON.stringify(expected));
     await page.selectOption('#ustaBrand','Isısan');
-    check(device+' Isısan has honest missing-table notice',(await page.locator('#ustaStep').innerText()).includes('doğrulanmış bir kod tablosu henüz yok'));
-    check(device+' Isısan cannot select another manufacturer model',await page.locator('#ustaVerifiedModel').count()===0);
+    check(device+' Isısan has honest optional model entry',await page.locator('#ustaWriteModel').isVisible()&&await page.evaluate(()=>!STUstaWizard.getContext().model_id));
+    check(device+' Isısan cannot select another manufacturer documented model',await page.locator('#ustaVerifiedModel option').evaluateAll(options=>options.filter(o=>o.value&&!o.value.startsWith('directory|')).length)===0);
     check(device+' legacy identity cannot verify Bosch/Buderus code',await page.evaluate(device=>STFaults.models(device,'Isısan').length===0&&!STFaults.lookup({device,brand:'Isısan',code:'E01'}).verified,device));
   }
   await page.goto(origin+'/markalar.html');await page.waitForFunction(()=>window.STBrands);

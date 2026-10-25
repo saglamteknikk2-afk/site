@@ -408,6 +408,12 @@ def build(root: Path, output: Path, mode: str, prefix: str) -> dict:
                 module.enhance_files(built, prefix)
             else:
                 module.enhance_files(built)
+    privacy_path = root / 'scripts/public_credentials.py'
+    if privacy_path.exists():
+        spec = importlib.util.spec_from_file_location('saglam_public_credentials', privacy_path)
+        privacy = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(privacy)
+        privacy.mask_public_credentials(built)
     # All runtime assets are transformed now. Hash the bytes actually served,
     # rather than source bytes which may have different deployment paths.
     for name in built:
