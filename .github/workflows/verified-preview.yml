@@ -78,7 +78,7 @@ jobs:
           for folder,expected in [('_site','72fa628e9812b70056d0e788e646bb03b4d8d88ea967ca5050460aa18336d2fc'),('build/production','3cdfcbc1a1370782a17055f0a17edd9de581c30fc025f10d8ee0e484b1bdfc7e')]:
            assert json.loads((Path(folder)/'build-info.json').read_text())['content_sha256']==expected,(folder,'Application bytes changed')
            digest=hashlib.sha256()
-           for path in sorted(p for p in Path(folder).rglob('*') if p.is_file() and p.relative_to(folder).as_posix()!='build-info.json'):
+           for path in sorted((p for p in Path(folder).rglob('*') if p.is_file() and p.relative_to(folder).as_posix()!='build-info.json'),key=lambda p:p.relative_to(folder).as_posix()):
             digest.update(path.relative_to(folder).as_posix().encode()+b'\0'+hashlib.sha256(path.read_bytes()).digest())
            assert digest.hexdigest()==expected,(folder,'Actual application tree differs')
           spec=importlib.util.spec_from_file_location('acceptance','scripts/run_browser_acceptance.py');suite=importlib.util.module_from_spec(spec);spec.loader.exec_module(suite)
