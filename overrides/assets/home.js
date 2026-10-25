@@ -1,4 +1,45 @@
 
+    // Sadece müşteri adresi: mevcut API alanlarının adları korunur.
+    async function stUpgradeAddress() {
+      const old=document.getElementById('ticketDistrict');if(!old)return;
+      const districts=['Arnavutköy','Avcılar','Bağcılar','Bahçelievler','Bakırköy','Başakşehir','Bayrampaşa','Beşiktaş','Beylikdüzü','Beyoğlu','Büyükçekmece','Çatalca','Esenler','Esenyurt','Eyüpsultan','Fatih','Gaziosmanpaşa','Güngören','Kağıthane','Küçükçekmece','Sarıyer','Silivri','Şişli','Sultangazi','Zeytinburnu'];
+      const unknown='Bilmiyorum / Listede yok';
+      const select=(id,placeholder)=>{const el=document.createElement('select');el.id=id;el.innerHTML='';el.add(new Option(placeholder,''));el.add(new Option(unknown,unknown));return el;};
+      let district=old;
+      if(old.tagName!=='SELECT'){
+        district=select('ticketDistrict','İlçe seçin');
+        for(const name of districts)district.add(new Option(name,name));
+        district.required=true;old.replaceWith(district);
+      }
+      let hood=document.getElementById('ticketNeighborhood');
+      if(!hood){const label=document.createElement('label');label.htmlFor='ticketNeighborhood';label.textContent='Mahalle (isteğe bağlı)';hood=select('ticketNeighborhood','Önce ilçe seçin');label.append(hood);district.closest('label')?.after(label);}
+      let street=document.getElementById('ticketStreet');
+      if(!street){const label=document.createElement('label');label.htmlFor='ticketStreet';label.textContent='Sokak / cadde (isteğe bağlı)';street=document.createElement('input');street.id='ticketStreet';street.maxLength=120;street.placeholder='Sokak/cadde adı veya bilmiyorum';label.append(street);hood.closest('label')?.after(label);}
+      let catalog=null;
+      try{
+        const url=new URL('assets/servis-katalog.json',document.baseURI);
+        const response=await fetch(url,{credentials:'same-origin'});
+        if(response.ok)catalog=await response.json();
+      }catch(_){}
+      const list=Array.isArray(catalog?.neighborhoods)?catalog.neighborhoods:[];
+      const render=()=>{
+        if(hood.tagName!=='SELECT')return;
+        const former=hood.value;hood.replaceChildren(new Option(district.value?'Mahalle seçin':'Önce ilçe seçin',''),new Option(unknown,unknown));
+        for(const name of [...new Set(list.filter(x=>x.district===district.value).map(x=>x.name))].sort((a,b)=>a.localeCompare(b,'tr')))hood.add(new Option(name,name));
+        if([...hood.options].some(x=>x.value===former))hood.value=former;
+      };
+      district.addEventListener('change',render);render();
+      const ticket=document.getElementById('serviceTicketForm');
+      ticket?.addEventListener('submit',()=>{
+        const issue=document.getElementById('ticketIssue');if(!issue)return;
+        const value=issue.value.replace(/\s*\|\s*Mahalle:.*$/,'');
+        const extra=[hood.value&&'Mahalle: '+hood.value,street.value.trim()&&'Sokak: '+street.value.trim()].filter(Boolean).join(' | ');
+        issue.value=(value+(extra?' | '+extra:'')).slice(0,2000);
+      },true);
+    }
+    document.addEventListener('DOMContentLoaded',stUpgradeAddress);
+
+
 
     // 1. GEMINI AI USTA MOTORU
     let lastDiagnosedIssue = "";
@@ -45,7 +86,7 @@
     }
 
     function renderDiagnostic(data, options={}) {
-      if(data.requires_model&&typeof window.STUstaWizard?.requestModel==='function'){window.STUstaWizard.requestModel();return;}
+      if(data.requires_model){data={...data,requires_model:false,text:'Model bilinmiyorsa hata koduna kesin anlam veremeyiz. Arızayı tarif edin; yetkin usta kontrolü gerekir.'};}
       const box=document.getElementById('aiResultBox'),response=document.getElementById('aiResponseText');
       stAiContact(data.emergency_phone);
       const actions=document.querySelector('#aiResultBox .usta-result-actions');if(actions)actions.hidden=data.source==='advisory'||data.source==='emergency';
@@ -53,7 +94,7 @@
       const issue=options.issue??document.getElementById('issueInput').value.trim();
       const match=data.source==='manual'?window.STFaults?.lookup({device:device.toLowerCase(),brand:context.brand||'',model_id:context.model_id||'',code:context.code||'',scope_confirmed:context.scope_confirmed===true}):null;
       const safe=value=>stEscape(value||'').replace(/\n/g,'<br>');
-      if(data.source==='advisory'||data.source==='emergency'){
+      if(data.source==='advisory'||data.source==='emergency'||data.source==='safety'){
         const phone=['187','112'].includes(data.emergency_phone)?data.emergency_phone:'';
         response.innerHTML='<section class="usta-result-alert" aria-label="Öncelikli bilgi"><p>'+safe(data.text)+'</p>'+(phone?'<a class="usta-emergency-call" href="tel:'+phone+'">'+phone+' acil hattını ara →</a>':'')+'</section>';
       }else{
@@ -63,7 +104,8 @@
         response.innerHTML='<div class="usta-result-grid"><section class="usta-result-main" aria-label="'+safe(heading)+'"><p>'+safe(text)+'</p></section><section><h4>Güvenli gözlem</h4><p>'+safe(observation)+'</p></section><section><h4>Sonraki adım</h4><p>Belirti devam ediyorsa model ve gözlemlerinizi paylaşarak kontrolü planlayalım. Gaz, elektrik ve soğutucu devreye müdahale etmeyin.</p></section></div>';
       }
       const source=document.getElementById('aiSource');
-      if(source)source.textContent=data.source==='advisory'?'Üreticinin modele özel duyurusu':data.source==='manual'?'Seçilen modelin üretici belgesi':data.source==='ai'?'AI teknik ön değerlendirme':data.source==='emergency'?'Öncelikli güvenlik bilgisi':'Belirti rehberi';
+      if(source)source.textContent=data.source==='advisory'?'Üreticinin modele özel duyurusu':data.source==='manual'?'Seçilen modelin üretici belgesi':data.source==='ai'?'AI teknik ön değerlendirme':data.source==='emergency'||data.source==='safety'?'Öncelikli güvenlik bilgisi':'Belirti rehberi';
+      if(!response.querySelector('.st-call-technician')){const link=document.createElement('a');link.className='st-call-technician';link.href='tel:05346225515';link.textContent='Ustamızı ara';link.style.cssText='display:inline-block;margin-top:12px;padding:12px 18px;background:#164b3b;color:white;border-radius:8px';response.append(link);}
       box.classList.remove('hidden');
       const guide=document.getElementById('aiGuideLink');
       if(guide){
@@ -97,8 +139,8 @@
       lastDiagnosedIssue=`${device}: ${issue}`;
       const initial=showFallbackDiagnostic(device,issue,{record:false});
       // Güvenlik yönlendirmesi ve belirti rehberi bağlantıyı beklemeden görünür.
-      if(initial.requires_model)return;
-      if(initial.source==='emergency'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review||initial.code_unverified){renderDiagnostic(initial);return;}
+      if(initial.requires_model&&!context.model_unknown){}
+      if(initial.source==='emergency'||initial.source==='safety'||initial.source==='advisory'||initial.source==='manual'||initial.requires_document_review||initial.code_unverified){renderDiagnostic(initial);return;}
       button.disabled=true;document.getElementById('aiLoading').classList.remove('hidden');
       const source=document.getElementById('aiSource');if(source)source.textContent='Belirti rehberi · AI değerlendirmesi bekleniyor…';
       try {
@@ -109,12 +151,14 @@
       finally{if(serial===aiRequestSerial){button.disabled=false;button.classList.remove('hidden');document.getElementById('aiLoading').classList.add('hidden');}}
     }
 
+    window.diagnoseIssue = diagnoseIssue;
     function sendToWhatsappFromAI() {
       const issue = document.getElementById('issueInput')?.value.trim() || lastDiagnosedIssue || 'Kombi / Klima arızası';
       const message = `Merhaba Sağlam Teknik, AI Usta üzerinden ön bilgi hazırladım.\n\nCihaz: ${document.getElementById('deviceSelect')?.value || ''}\n${issue}\n\nServis uygunluğunu görüşmek istiyorum.`;
       window.open('https://wa.me/905346225515?text='+encodeURIComponent(message), '_blank','noopener,noreferrer');
     }
 
+    window.sendToWhatsappFromAI = sendToWhatsappFromAI;
     function selectDeviceAndFocus(device) {
       if(window.STUstaWizard){window.STUstaWizard.open(device);return;}
       const select = document.getElementById('deviceSelect');
