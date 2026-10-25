@@ -6,12 +6,21 @@ const root=path.resolve(__dirname,'..'),directory=path.resolve(process.argv[2]||
 (async()=>{
  const server=await startServer(directory,''),browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_BIN||'/usr/bin/chromium',args:['--no-sandbox']}),checks=[],errors=[],external=[];
  const check=(ok,name)=>{checks.push({name,passed:!!ok});assert(ok,name);};
- const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});let report;
+ const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});let report,reviewRefresh=false;
+ const liveReviews=()=>[
+  {id:'qa-linked',author:'QA Hizmet Kaydı',comment:'Sentetik hizmet kaydıyla eşleşen yorum.',rating:5,date:'24 Eki 2026',created:1792843200,status:'approved',cat:'klima',service:'Klima bakımı',service_verified:true,decided:1892843200},
+  {id:'qa-old-ms',author:'QA Milisaniye',comment:'Sentetik milisaniye tarihli değerlendirme.',rating:5,date:'21 Eki 2026',created:1792584000000,status:'approved',cat:'kombi',service:'Kombi bakımı'},
+  {id:'qa-invalid-date',author:'QA Tarihsiz',comment:'Sentetik geçersiz tarihli değerlendirme.',rating:5,date:'31.02.2026',status:'approved',cat:'kombi',service:'Kombi bakımı'},
+  {id:'qa-numeric-date',author:'QA Sayısal Tarih',comment:'Sentetik sayısal tarihli değerlendirme.',rating:5,date:'22.10.2026',status:'approved',cat:'kombi',service:'Kombi bakımı'},
+  {id:'qa-newest',author:'QA Yeni Yorum',comment:'Sentetik yeni değerlendirme örneği.',rating:5,date:'25 Eki 2026',created:1792929600,status:'approved',cat:'kombi',service:'Kombi bakımı',service_verified:false},
+  {id:'qa-date-only',author:'QA Yazılı Tarih',comment:'Sentetik yalnız gün tarihli değerlendirme.',rating:5,date:'23 Ekim 2026',status:'approved',cat:'klima',service:'Klima bakımı'},
+  ...(reviewRefresh?[{id:'qa-refresh',author:'QA Son Onaylanan',comment:'Odak yenilemesiyle gelen sentetik değerlendirme.',rating:5,date:'26.10.2026',status:'approved',cat:'kombi',service:'Kombi bakımı'}]:[])
+ ];
  try{
   await page.route('**/*',route=>{
    const url=new URL(route.request().url());
    if(url.origin!==server.origin){external.push(url.href);return route.abort();}
-   if(/\.php$/.test(url.pathname))return route.fulfill({contentType:'application/json',body:JSON.stringify(url.searchParams.get('action')==='reviews'?{ok:true,deleted_ids:['existing-0','existing-2'],reviews:[{id:'qa-newest',author:'QA Yeni Yorum',comment:'Sentetik yeni değerlendirme örneği.',rating:5,date:'25 Eki 2026',created:1792929600,status:'approved',service:'Kombi bakımı',service_verified:false},{id:'qa-linked',author:'QA Hizmet Kaydı',comment:'Sentetik hizmet kaydıyla eşleşen yorum.',rating:5,date:'24 Eki 2026',created:1792843200,status:'approved',service:'Klima bakımı',service_verified:true}]}:url.searchParams.get('action')==='bootstrap'?{ok:true,csrf:'1700000000.'+'a'.repeat(64)}:{ok:true,recorded:true})});
+   if(/\.php$/.test(url.pathname))return route.fulfill({contentType:'application/json',body:JSON.stringify(url.searchParams.get('action')==='reviews'?{ok:true,deleted_ids:['existing-0','existing-2'],reviews:liveReviews()}:url.searchParams.get('action')==='bootstrap'?{ok:true,csrf:'1700000000.'+'a'.repeat(64)}:{ok:true,recorded:true})});
    return route.continue();
   });
   page.on('pageerror',error=>errors.push(error.message));await page.goto(server.origin+'/',{waitUntil:'networkidle'});
@@ -28,6 +37,17 @@ const root=path.resolve(__dirname,'..'),directory=path.resolve(process.argv[2]||
    }
   }
   check(await page.locator('.pr-review').first().getAttribute('data-review-id')==='site-qa-newest','Newest approved live review is first');
+  check(JSON.stringify(await page.locator('.pr-review').evaluateAll(cards=>cards.map(card=>card.dataset.reviewId)))===JSON.stringify(['site-qa-newest','site-qa-linked','site-qa-date-only','site-qa-numeric-date','site-qa-old-ms','existing-1']),'Shuffled Turkish, numeric and millisecond dates sort newest first, ignoring approval time');
+  check(await page.locator('.pr-order').innerText()==='Sıralama: En yeni yorumlar önce','Newest-first order is stated beside the displayed reviews');
+  await page.locator('#btnCatKlima').click();
+  check(JSON.stringify((await page.locator('.pr-review').evaluateAll(cards=>cards.map(card=>card.dataset.reviewId))).slice(0,2))===JSON.stringify(['site-qa-linked','site-qa-date-only']),'Service filters preserve newest-first order');
+  await page.locator('#btnCatAll').click();
+  while(await page.locator('#premiumReviewsMore').isVisible())await page.locator('#premiumReviewsMore').click();
+  check(await page.locator('.pr-review').last().getAttribute('data-review-id')==='site-qa-invalid-date','Impossible dates stay at the end instead of silently changing to another calendar day');
+  await page.locator('#btnCatAll').click();
+  reviewRefresh=true;await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await page.waitForFunction(()=>document.querySelector('.pr-review')?.dataset.reviewId==='site-qa-refresh');
+  check(await page.locator('.pr-review').first().getAttribute('data-review-id')==='site-qa-refresh','Newly approved reviews move to the top on refresh rather than append at the bottom');
+
   check(await page.locator('[data-review-id="existing-0"],[data-review-id="existing-2"]').count()===0,'Deleted original seed IDs do not reappear');
   check((await page.locator('[data-review-id="site-qa-newest"] .pr-review-origin').innerText()).includes('Müşteri yorumu')&&!await page.locator('[data-review-id="site-qa-newest"] .is-service-verified').count(),'Publication approval does not claim a verified service');
   check(await page.locator('[data-review-id="site-qa-linked"] .is-service-verified').count()===1,'Only a service-linked review gets the service verification badge');

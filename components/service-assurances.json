@@ -1,6 +1,6 @@
 {
   "checked_on": "2026-10-25",
-  "source_note": "Mesleki belge örnekleri işletme sahibi tarafından sağlandı. Kamuya açık kopyalarda kişisel bilgiler ve belge numaraları gizlenir. Varış süresi konum ve ekip uygunluğuna bağlıdır.",
+  "source_note": "Mesleki belge örnekleri işletme sahibi tarafından sağlandı. Kamuya açık paylaşım kopyalarında hassas kişisel alanlar ve doğrulama kodları kaldırılır; belge numaralarının yalnız son dört rakamı gösterilir. Bu kopyalar güncel resmî geçerlilik teyidi değildir. Varış süresi konum ve ekip uygunluğuna bağlıdır.",
   "items": [
     {
       "id": "arrival",
@@ -20,12 +20,12 @@
     },
     {
       "id": "qualification",
-      "status": "business-declared",
-      "declared_title": "MYK belgeli teknik uzman",
-      "title": "MYK belgeli teknik uzman",
-      "detail": "Isıtma ve gaz yakıcı cihazlar alanında mesleki yeterlilik.",
-      "conditions": "Mesleki belge örneğinde kişisel bilgiler ve belge numarası gizlenmiştir. Belgenin işlem kapsamını servis öncesinde görüşebilirsiniz. Mesleki yeterlilik belgesi, bir üreticinin yetkili servisi olunduğu anlamına gelmez.",
-      "credential_number": "****",
+      "status": "provided-document-copy",
+      "declared_title": "Mesleki eğitim ve belge örnekleri",
+      "title": "Mesleki eğitim ve belge örnekleri",
+      "detail": "Sunulan belgeleri ve meslek kapsamını inceleyin.",
+      "conditions": "Mesleki belgeler paylaşım kopyasıdır. Hassas kişisel alanlar, doğrulama kodları ve MYK geçerlilik bilgileri gizlenmiştir; belge numaralarının yalnız son dört rakamı gösterilir. Güncel resmî geçerlilik bu kopyadan doğrulanamaz. İşlem kapsamını servis öncesinde görüşebilirsiniz. Mesleki belge üreticinin yetkili servisi olunduğu anlamına gelmez.",
+      "credential_number": "****2502",
       "public_identifier_masked": true
     }
   ]

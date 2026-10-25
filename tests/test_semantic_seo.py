@@ -167,9 +167,11 @@ class SemanticSeoTests(unittest.TestCase):
 
     def test_llms_distinguishes_supplied_business_declarations_from_external_verification(self):
         files = self.files()
-        files['isletme-bilgileri.json'] = json.dumps({'business_claims': {'experience': {'status': 'business-declared', 'years': 20}, 'armut': {'status': 'user-supplied-badge', 'rating': 4.8, 'scale': 5}, 'qualification': {'status': 'business-declared', 'credential_number': 'YB0200/11UY0032-4/02/502', 'profession': 'Gaz Yakıcı Cihazlar Servis Personeli'}, 'warranty': {'status': 'business-declared', 'duration': '1 yıl', 'scope': 'Servis fişinde belirtilen takılan parça ve uygulanan işçilik'}}}).encode()
+        files['isletme-bilgileri.json'] = json.dumps({'business_claims': {'experience': {'status': 'business-declared', 'years': 20}, 'armut': {'status': 'user-supplied-badge', 'rating': 4.8, 'scale': 5}, 'qualification': {'status': 'business-declared', 'credential_number': 'YB9999/99UY9999-9/99/123456', 'profession': 'Gaz Yakıcı Cihazlar Servis Personeli'}, 'warranty': {'status': 'business-declared', 'duration': '1 yıl', 'scope': 'Servis fişinde belirtilen takılan parça ve uygulanan işçilik'}}}).encode()
         seo.enhance_files(files); llms = files['llms.txt'].decode()
-        self.assertIn('İşletme sahibinin beyanına göre MYK belge numarası: YB0200/11UY0032-4/02/502', llms)
+        self.assertIn('İşletmenin sunduğu MYK belge örneği; belge numarası: YB9999/99UY9999-9/99/123456', llms)
+        self.assertIn('Güncel resmî geçerlilik bu kopyadan doğrulanamaz', llms)
+        self.assertNotIn('MYK belgeli teknik uzman', llms)
         self.assertIn('bağımsız doğrulanmış değildir', llms)
         self.assertIn('1 yıl parça ve işçilik', llms)
         self.assertIn('Servis fişinde belirtilen takılan parça ve uygulanan işçilik', llms)

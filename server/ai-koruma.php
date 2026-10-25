@@ -67,7 +67,7 @@ function st_ip_spam_engelle() {
         }
         
         $cevap_metni = "Ücretsiz yapay zekâ ön kontrol hakkınızı tamamladınız.\n\n" .
-                       "⚠️ Kombi ve klimalarınızda elektrik, doğalgaz ve yüksek su basıncı hatları bulunduğu için bu aşamadan sonra cihaz kapağını açmadan MYK belgeli teknik ekibimizin müdahale etmesi can ve cihaz güvenliğiniz için gereklidir.\n\n" .
+                       "⚠️ Kombi ve klimalarınızda elektrik, doğalgaz ve yüksek su basıncı hatları bulunduğu için bu aşamadan sonra cihaz kapağını açmadan teknik ekibimizin müdahale etmesi can ve cihaz güvenliğiniz için gereklidir.\n\n" .
                        "📍 <b>Varış Planı:</b> Bölge, ekip uygunluğu ve trafik durumuna göre görüşmede netleştirilir.\n\n" .
                        "📞 <b>Ustayı Hemen Arayın:</b> <a href='tel:05346225515'><b>0534 622 5515</b></a>\n" .
                        "💬 <b>WhatsApp ile Arıza Fotoğrafı Gönderin:</b> <a href='https://wa.me/905346225515'><b>Hemen Mesaj Atın</b></a>\n" .

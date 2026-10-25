@@ -8,14 +8,26 @@ from datetime import datetime, timezone
 def review_time(review: dict) -> float:
     """Sort real source dates without changing the seed's persistent identity."""
     created = review.get('created')
-    if isinstance(created, (int, float)) and created > 0:
-        return float(created)
+    if isinstance(created, (int, float)) and not isinstance(created, bool) and created > 0:
+        # Historic integrations may store milliseconds; the public API uses seconds.
+        stamp = float(created) / 1000 if created >= 1_000_000_000_000 else float(created)
+        try:
+            datetime.fromtimestamp(stamp, timezone.utc)
+            return stamp
+        except (ValueError, OverflowError, OSError):
+            pass
     text = str(review.get('date') or '').strip()
     try:
         parsed = datetime.fromisoformat(text.replace('Z', '+00:00'))
         return (parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)).timestamp()
     except ValueError:
         pass
+    numeric = re.fullmatch(r'(\d{1,2})[./-](\d{1,2})[./-](\d{4})', text)
+    if numeric:
+        try:
+            return datetime(int(numeric[3]), int(numeric[2]), int(numeric[1]), tzinfo=timezone.utc).timestamp()
+        except ValueError:
+            return 0
     months = {'oca':1,'şub':2,'sub':2,'mar':3,'nis':4,'may':5,'haz':6,'tem':7,'ağu':8,'agu':8,'eyl':9,'eki':10,'kas':11,'ara':12}
     match = re.fullmatch(r'(\d{1,2})\s+([^\s]+)\s+(\d{4})', text)
     if match:

@@ -45,15 +45,31 @@
       node.classList.toggle('hidden', !message);
     }
     function reviewTime(review) {
-      if (Number.isFinite(Number(review.created)) && Number(review.created) > 0) return Number(review.created) * 1000;
+      const created = Number(review.created);
+      if (Number.isFinite(created) && created > 0) {
+        const timestamp = created >= 1e12 ? created : created * 1000;
+        if (Number.isFinite(new Date(timestamp).getTime())) return timestamp;
+      }
+      const calendarTime = (year, month, day) => {
+        const timestamp = Date.UTC(year, month, day);
+        const result = new Date(timestamp);
+        // Date.UTC otherwise silently changes 31 February into a March date.
+        return result.getUTCFullYear() === year && result.getUTCMonth() === month && result.getUTCDate() === day ? timestamp : 0;
+      };
       const date = normalize(review.date).trim();
       const numeric = date.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
-      if (numeric) return Date.UTC(Number(numeric[3]), Number(numeric[2]) - 1, Number(numeric[1]));
+      if (numeric) return calendarTime(Number(numeric[3]), Number(numeric[2]) - 1, Number(numeric[1]));
       const months = {oca: 0, sub: 1, mar: 2, nis: 3, may: 4, haz: 5, tem: 6, agu: 7, eyl: 8, eki: 9, kas: 10, ara: 11};
       const turkish = date.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
-      if (turkish && months[turkish[2].slice(0, 3)] !== undefined) return Date.UTC(Number(turkish[3]), months[turkish[2].slice(0, 3)], Number(turkish[1]));
-      const timestamp = Date.parse(date);
-      return Number.isFinite(timestamp) ? timestamp : 0;
+      if (turkish && months[turkish[2].slice(0, 3)] !== undefined) return calendarTime(Number(turkish[3]), months[turkish[2].slice(0, 3)], Number(turkish[1]));
+      const iso = date.match(/^(\d{4})-(\d{2})-(\d{2})(?:t.*)?$/);
+      if (iso) {
+        const calendar = calendarTime(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+        if (!calendar) return 0;
+        const timestamp = Date.parse(date);
+        return Number.isFinite(timestamp) ? timestamp : 0;
+      }
+      return 0;
     }
     function mergeApproved(approved) {
       const contentKey = review => {

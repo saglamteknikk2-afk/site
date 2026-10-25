@@ -7,6 +7,7 @@ remain untouched. No identifier value is returned in the diagnostics.
 from __future__ import annotations
 
 import json
+import html
 from pathlib import PurePosixPath
 import re
 
@@ -21,8 +22,15 @@ _CREDENTIAL = re.compile(
 
 
 def mask_text(text: str) -> tuple[str, int]:
-    """Mask MYK-shaped personal certificate IDs, including escaped slashes."""
-    return _CREDENTIAL.subn(MASK, text)
+    """Expose only the last four numeric digits of a certificate identifier.
+
+    Normalize entity/escaped delimiters first: digits in ``&#47;`` describe a
+    slash and must never be mistaken for part of the document number.
+    """
+    def partial(match: re.Match) -> str:
+        identifier = html.unescape(match.group(0)).replace('\\/', '/')
+        return MASK + ''.join(re.findall(r'[0-9]', identifier))[-4:]
+    return _CREDENTIAL.subn(partial, text)
 
 
 def _mask_json(value):

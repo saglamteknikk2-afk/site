@@ -16,18 +16,25 @@ class PublicCredentialTests(unittest.TestCase):
         files = {name: ('Belge no: ' + SYNTHETIC_ID).encode() for name in ['index.html', 'llms.txt', 'assets/profile.js', 'assets/labels.svg', 'assets/profile.css', 'profile.php']}
         report = privacy.mask_public_credentials(files)
         self.assertEqual(report['identifiers_masked'], 6)
-        self.assertTrue(all(SYNTHETIC_ID.encode() not in value and b'****' in value for value in files.values()))
+        self.assertTrue(all(SYNTHETIC_ID.encode() not in value and b'****3456' in value for value in files.values()))
         self.assertNotIn(SYNTHETIC_ID, json.dumps(report))
 
     def test_decoded_json_cannot_reveal_an_escaped_number(self):
         escaped = '\\u0059' + SYNTHETIC_ID[1:].replace('/', '\\u002f')
         files = {'assets/profile.json': ('{"claims":[{"credential_number":"' + escaped + '"}]}').encode()}
         privacy.mask_public_credentials(files)
-        self.assertEqual(json.loads(files['assets/profile.json'])['claims'][0]['credential_number'], '****')
+        self.assertEqual(json.loads(files['assets/profile.json'])['claims'][0]['credential_number'], '****3456')
 
     def test_escaped_slashes_and_html_entities_are_masked(self):
         for value in [SYNTHETIC_ID.replace('/', '\\/'), SYNTHETIC_ID.replace('/', '&#47;'), SYNTHETIC_ID.lower()]:
-            self.assertEqual(privacy.mask_text(value), ('****', 1))
+            self.assertEqual(privacy.mask_text(value), ('****3456', 1))
+
+    def test_four_digits_are_taken_from_the_whole_identifier(self):
+        # Some documents end with a three-digit serial segment. Do not invent a
+        # leading zero or reveal characters besides the four numeric digits.
+        number = 'YB9999/99UY9999-9/12/345'
+        for value in [number, number.replace('/', '&#47;'), number.replace('/', '\\/')]:
+            self.assertEqual(privacy.mask_text(value), ('****2345', 1))
 
     def test_manufacturer_identifiers_and_trade_names_are_preserved(self):
         source = 'MYK belgeli Isıtma ve Gaz Yakıcı Cihaz Servis Personeli (Seviye 4). Manual 0020228723_05; TD-20230100; 300032122 Rev.04; VUW TR 236/5-3; E01/F04.'

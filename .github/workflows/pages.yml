@@ -108,6 +108,36 @@ jobs:
           fi
       - name: Sayfalardan AI Usta ve model bağlantılarını gerçekten tıkla
         run: python scripts/run_browser_acceptance.py
+      # Package only the checked production tree, then hash the complete Pages
+      # tree including this download and its integrity files before publication.
+      - name: Kontrol edilen tam site ZIP dosyasını doğrudan indirilebilir yap
+        if: github.event_name != 'pull_request'
+        run: |
+          python scripts/package_production.py build/production --output _site/indir/saglam-teknik-guncel.zip
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          site = Path('_site')
+          metadata = site / 'build-info.json'
+          info = json.loads(metadata.read_text())
+          distribution = json.loads((site / 'indir/saglam-teknik-guncel.zip.json').read_text())
+          files = sorted((p.relative_to(site).as_posix(), p) for p in site.rglob('*') if p.is_file() and p != metadata)
+          digest = hashlib.sha256()
+          for name, path in files:
+              digest.update(name.encode('utf-8') + b'\0' + hashlib.sha256(path.read_bytes()).digest())
+          info['content_sha256'] = digest.hexdigest()
+          info['files'] = len(files)
+          info['distribution_artifacts'] = [{
+              'path': 'indir/saglam-teknik-guncel.zip',
+              'sha256': distribution['zip_sha256'],
+              'production_content_sha256': distribution['content_sha256'],
+              'files': distribution['files'],
+              'bytes': distribution['bytes'],
+          }]
+          metadata.write_text(json.dumps(info, ensure_ascii=False, indent=2) + '\n')
+          print(json.dumps({'pages_content_sha256': info['content_sha256'], 'download': info['distribution_artifacts'][0]}))
+          PY
       - name: Derleme kontrol raporları
         uses: actions/upload-artifact@v4
         with:
@@ -150,6 +180,8 @@ jobs:
             build/qa-model-guidance/evidence/*.json
             build/qa-model-guidance/evidence/*.png
             _site/build-info.json
+            _site/indir/*.json
+            _site/indir/*.sha256
       - name: GitHub Pages dosyalarını hazırla
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3

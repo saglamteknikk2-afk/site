@@ -20,6 +20,7 @@
 .premium-reviews .pr-search>span{display:block;margin-bottom:7px}
 .premium-reviews .pr-search input{width:100%;min-height:48px;background:#faf8f1;border:1px solid var(--pr-line);border-radius:5px;color:var(--pr-ink);padding:12px 15px;font:inherit;font-size:15px;outline-offset:3px}
 .premium-reviews .pr-count{font-size:11px;letter-spacing:.035em;color:var(--pr-muted);margin:14px 0 10px;min-height:18px}
+.premium-reviews .pr-order{font-size:12px;line-height:1.6;color:var(--pr-muted);margin:16px 0 0}.premium-reviews .pr-order strong{color:var(--pr-forest);font-weight:600}
 .premium-reviews .pr-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .premium-reviews .pr-review{display:flex;flex-direction:column;min-width:0;padding:22px 20px;background:#fbfaf5;border:1px solid var(--pr-line);border-radius:7px;color:var(--pr-ink)}
 .premium-reviews .pr-review-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}

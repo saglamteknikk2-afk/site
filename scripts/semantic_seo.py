@@ -242,9 +242,9 @@ def llms(pages: dict[str, Page], districts: list[str], models: dict[str, list[di
     warranty = claims.get('warranty', {})
     experience = claims.get('experience', {})
     armut = claims.get('armut', {})
-    declaration = 'MYK ve eğitim belgesi bilgisi doğrulama bekliyor; geçerli belge, kapsadığı meslek ve işlem hizmet görüşmesinde sorulmalıdır.'
-    if qualification.get('status') == 'business-declared' and qualification.get('credential_number'):
-        declaration = 'İşletme sahibinin beyanına göre MYK belge numarası: ' + str(qualification['credential_number']) + '. Belgenin geçerliliği ve işlem kapsamı bu dizin tarafından bağımsız doğrulanmış değildir; mesleki belge üreticinin yetkili servisi olunduğu anlamına gelmez.'
+    declaration = 'Sunulan mesleki eğitim ve belge örnekleri paylaşım kopyalarıdır; güncel resmî geçerlilik bu kopyalardan doğrulanamaz. Belgenin kapsadığı meslek ve işlem hizmet görüşmesinde sorulmalıdır.'
+    if qualification.get('status') in {'business-declared', 'provided-document-copy'} and qualification.get('credential_number'):
+        declaration = 'İşletmenin sunduğu MYK belge örneği; belge numarası: ' + str(qualification['credential_number']) + '. Paylaşım kopyasında hassas kişisel alanlar, doğrulama kodları ve geçerlilik bilgileri gizlenmiştir. Güncel resmî geçerlilik bu kopyadan doğrulanamaz; belgenin geçerliliği ve işlem kapsamı bu dizin tarafından bağımsız doğrulanmış değildir. Mesleki belge üreticinin yetkili servisi olunduğu anlamına gelmez.'
     if warranty.get('status') == 'business-declared' and warranty.get('duration') and warranty.get('scope'):
         declaration += ' İşletme sahibinin garanti beyanı: ' + str(warranty['duration']) + ' parça ve işçilik; kapsam: ' + str(warranty['scope']) + '. Yazılı servis fişi koşulları esas alınır.'
     supplied = []
