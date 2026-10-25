@@ -1,0 +1,178 @@
+name: Sağlam Teknik — Aynı derlemenin tamamlanan kontrolü
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verified-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: saglam-verified-preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: curl, pdo_sqlite, mbstring
+          coverage: none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Aynı uygulama kaynaklarını derle ve statik kontrolleri doğrula
+        run: |
+          python -m unittest discover -s tests -p "test_*.py"
+          python scripts/build_site.py --mode preview --output _site --base-path /site
+          python scripts/check_site.py _site --mode preview --report build/preview-check.json
+          python scripts/build_site.py --mode production --output build/production
+          python scripts/check_site.py build/production --mode production --report build/production-check.json
+          python scripts/audit_content.py build/production --strict --report build/content-audit.json
+          python scripts/internal_links.py build/production --report build/crawl-check.json --check
+      - name: Önceki sabitlenmiş çalışmanın gerçek kontrol kanıtını al
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/${{ github.repository }}/actions/runs/40187060394 > build/reused-run.json
+          gh api repos/${{ github.repository }}/actions/jobs/121149998473 > build/reused-job.json
+          gh api repos/${{ github.repository }}/actions/jobs/121149998473/logs > build/reused-baseline-job.log
+      - name: Gerçek tarayıcıyı hazırla
+        run: |
+          set -euo pipefail
+          npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.62.1
+          SAGLAM_CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          if [ -n "$SAGLAM_CHROME_BIN" ]; then
+            printf "CHROMIUM_BIN=%s\n" "$SAGLAM_CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+            node -e 'process.stdout.write("CHROMIUM_BIN="+require("playwright").chromium.executablePath()+"\n")' >> "$GITHUB_ENV"
+          fi
+      - name: Aynı dosyalar için 23 başarılı kontrolü doğrula ve kalan 5 kontrolü çalıştır
+        run: |
+          python - <<'PY'
+          import hashlib,importlib.util,json,os,re,subprocess,time
+          from pathlib import Path
+          BASELINE='08f270a65ee0a2ccb973b51ba71f11dd0e8b31b4'
+          allowed={'tests/fixtures/master-request.json','.github/workflows/verified-preview.yml'}
+          changed=set(subprocess.check_output(['git','diff','--name-only',BASELINE,'HEAD'],text=True).splitlines())
+          assert changed and changed<=allowed,('Unreviewed application/source changes',sorted(changed))
+          run=json.loads(Path('build/reused-run.json').read_text());job=json.loads(Path('build/reused-job.json').read_text())
+          assert run['head_sha']==BASELINE and run['id']==40187060394 and run['status']=='completed' and run['conclusion']=='failure'
+          assert job['id']==121149998473 and job['run_id']==40187060394 and job['head_sha']==BASELINE and job['status']=='completed' and job['conclusion']=='failure'
+          browser_step=next(s for s in job['steps'] if s['name']=='Sayfalardan AI Usta ve model bağlantılarını gerçekten tıkla')
+          assert all(s['conclusion']=='success' for s in job['steps'] if s['number']<browser_step['number']), 'Baseline prerequisite checks did not all pass'
+          for folder,expected in [('_site','72fa628e9812b70056d0e788e646bb03b4d8d88ea967ca5050460aa18336d2fc'),('build/production','3cdfcbc1a1370782a17055f0a17edd9de581c30fc025f10d8ee0e484b1bdfc7e')]:
+           assert json.loads((Path(folder)/'build-info.json').read_text())['content_sha256']==expected,(folder,'Application bytes changed')
+           digest=hashlib.sha256()
+           for path in sorted(p for p in Path(folder).rglob('*') if p.is_file() and p.relative_to(folder).as_posix()!='build-info.json'):
+            digest.update(path.relative_to(folder).as_posix().encode()+b'\0'+hashlib.sha256(path.read_bytes()).digest())
+           assert digest.hexdigest()==expected,(folder,'Actual application tree differs')
+          spec=importlib.util.spec_from_file_location('acceptance','scripts/run_browser_acceptance.py');suite=importlib.util.module_from_spec(spec);spec.loader.exec_module(suite)
+          groups=suite.groups();expected={(group,tuple(command['argv'])):command for group,commands in groups.items() for command in commands}
+          assert len(expected)==28
+          rows=[]
+          for line in Path('build/reused-baseline-job.log').read_text(errors='replace').splitlines():
+           match=re.search(r'(\{"group":.*\})',line)
+           if match:
+            try:row=json.loads(match[1])
+            except json.JSONDecodeError:continue
+            if set(row)>={'group','argv','passed','seconds'}:rows.append(row)
+          seen={}
+          for row in rows:
+           key=(row['group'],tuple(row['argv']))
+           assert key in expected and key not in seen,('Unexpected/duplicate baseline command',key)
+           seen[key]=row
+          passed={key for key,row in seen.items() if row['passed'] is True}
+          failed={key for key,row in seen.items() if row['passed'] is False}
+          assert len(passed)==23 and failed=={('layout-and-models',('node','tests/district_matrix.cjs'))},('Baseline evidence does not match expected results',len(passed),failed)
+          missing=[(key,command) for key,command in expected.items() if key not in passed]
+          assert len(missing)==5 and all(key[0]=='layout-and-models' for key,_ in missing)
+          reports=[]
+          for key,command in missing:
+           started=time.monotonic();result=subprocess.run(command['argv'],env=dict(os.environ,**command['env']))
+           row={'group':key[0],'argv':command['argv'],'exit_code':result.returncode,'passed':result.returncode==0,'seconds':round(time.monotonic()-started,2)};reports.append(row)
+           print(json.dumps(row),flush=True)
+           assert result.returncode==0,('Outstanding command failed',command['argv'])
+          report={'passed':True,'baseline_commit':BASELINE,'baseline_run':40187060394,'baseline_job':121149998473,'unchanged_application_sha256_verified':True,'allowed_changed_files':sorted(changed),'baseline_passed_commands':[seen[k] for k in sorted(passed)],'rerun_commands':reports,'total_verified_commands':len(passed)+len(reports)}
+          Path('build/incremental-acceptance.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({'passed':True,'reused_commands':len(passed),'fresh_commands':len(reports),'total_verified_commands':report['total_verified_commands']}),flush=True)
+          PY
+      - name: Kontrol edilen tam site ZIP dosyasını doğrudan indirilebilir yap
+        run: |
+          python scripts/package_production.py build/production --output _site/indir/saglam-teknik-guncel.zip
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          site = Path('_site')
+          metadata = site / 'build-info.json'
+          info = json.loads(metadata.read_text())
+          distribution = json.loads((site / 'indir/saglam-teknik-guncel.zip.json').read_text())
+          files = sorted((p.relative_to(site).as_posix(), p) for p in site.rglob('*') if p.is_file() and p != metadata)
+          digest = hashlib.sha256()
+          for name, path in files:
+              digest.update(name.encode('utf-8') + b'\0' + hashlib.sha256(path.read_bytes()).digest())
+          info['content_sha256'] = digest.hexdigest()
+          info['files'] = len(files)
+          info['distribution_artifacts'] = [{
+              'path': 'indir/saglam-teknik-guncel.zip',
+              'sha256': distribution['zip_sha256'],
+              'production_content_sha256': distribution['content_sha256'],
+              'files': distribution['files'],
+              'bytes': distribution['bytes'],
+          }]
+          metadata.write_text(json.dumps(info, ensure_ascii=False, indent=2) + '\n')
+          print(json.dumps({'pages_content_sha256': info['content_sha256'], 'download': info['distribution_artifacts'][0]}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-preview-complete-evidence
+          path: |
+            build/incremental-acceptance.json
+            build/reused-baseline-job.log
+            build/reused-run.json
+            build/reused-job.json
+            build/preview-check.json
+            build/production-check.json
+            build/content-audit.json
+            build/crawl-check.json
+            build/home-entry-reviews.json
+            build/editorial-links-browser.json
+            build/qa-master-matrix/*.json
+            build/qa-model/*.json
+            build/model-directory-report.json
+            _site/build-info.json
+            _site/indir/*.json
+            _site/indir/*.sha256
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy-preview:
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - id: deployment
+        uses: actions/deploy-pages@v4
