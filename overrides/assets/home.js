@@ -231,8 +231,10 @@
       const name = document.getElementById('ticketName')?.value?.trim() || '';
       const phone = document.getElementById('ticketPhone')?.value?.trim() || '';
       const district = document.getElementById('ticketDistrict')?.value?.trim() || '';
+      const neighborhood = document.getElementById('ticketNeighborhood')?.value?.trim() || '';
+      const street = document.getElementById('ticketStreet')?.value?.trim() || '';
       const device = document.getElementById('ticketDevice')?.value || 'Kombi';
-      const issue = document.getElementById('ticketIssue')?.value?.trim() || '';
+      const issue = [document.getElementById('ticketIssue')?.value?.trim() || '',neighborhood?'Mahalle: '+neighborhood:'',street?'Sokak: '+street:''].filter(Boolean).join(' | ').slice(0,2000);
 
       if (!name || !phone || !district || !issue) {
         alert("Lütfen tüm alanları doldurunuz.");
