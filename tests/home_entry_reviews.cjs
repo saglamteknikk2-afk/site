@@ -33,8 +33,11 @@ const root=path.resolve(__dirname,'..'),directory=path.resolve(process.argv[2]||
   check(await page.locator('[data-review-id="site-qa-linked"] .is-service-verified').count()===1,'Only a service-linked review gets the service verification badge');
   check(!await page.locator('#yorumlar').innerText().then(text=>/Mevcut sitedeki değerlendirme/.test(text)),'Obsolete imported-review wording is absent');
   await page.evaluate(()=>window.scrollTo(0,0));await page.locator('#atMenuToggle').click();await page.locator('header a[href$="#yorumlar"]').first().click();
-  const alignment=await page.evaluate(()=>({heading:document.querySelector('#yorumlar .pr-intro').getBoundingClientRect().top,header:document.querySelector('.at-header').getBoundingClientRect().height}));
-  check(Math.abs(alignment.heading-alignment.header-18)<3,'Reviews navigation aligns the actual review heading below the fixed header');
+  const alignment=await page.evaluate(()=>{const header=document.querySelector('.at-header'),rect=header.getBoundingClientRect();return {heading:document.querySelector('#yorumlar .pr-intro').getBoundingClientRect().top,header:{top:rect.top,bottom:rect.bottom,position:getComputedStyle(header).position},menu_expanded:document.getElementById('atMenuToggle').getAttribute('aria-expanded')};});
+  const visibleOverlay=['fixed','sticky'].includes(alignment.header.position)&&alignment.header.top<=12&&alignment.header.bottom>12;
+  const expectedTop=12+(visibleOverlay?alignment.header.bottom:0);
+  check(Math.abs(alignment.heading-expectedTop)<2,'Reviews heading aligns at12px below the viewport or an actually visible fixed header');
+  check(alignment.menu_expanded==='false','Reviews navigation closes the mobile menu before positioning the heading');
   check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile home has no horizontal overflow');
   // A delayed result must not be attached to changed wizard inputs or Telegram context.
   await page.evaluate(async()=>{
@@ -46,7 +49,7 @@ const root=path.resolve(__dirname,'..'),directory=path.resolve(process.argv[2]||
   });
   check(!await page.locator('#aiResponseText').innerText().then(text=>text.includes('ESKİ YANIT'))&&(await page.evaluate(()=>window.__qaRecords.length))===0,'Changed input suppresses a stale AI result and its notification');
   check(errors.length===0&&server.errors.length===0,'Home entry/reviews journey has no browser or local static HTTP errors');
-  report={passed:true,checks:checks.length,cases:checks,mocked_api:true,provider_requests:0,external_requests:external,page_errors:errors,build:JSON.parse(fs.readFileSync(path.join(directory,'build-info.json'),'utf8'))};
+  report={passed:true,checks:checks.length,cases:checks,review_alignment:alignment,mocked_api:true,provider_requests:0,external_requests:external,page_errors:errors,build:JSON.parse(fs.readFileSync(path.join(directory,'build-info.json'),'utf8'))};
  }catch(error){report={passed:false,checks:checks.length,cases:checks,error:error.stack,page_errors:errors,server_errors:server.errors};process.exitCode=1;}
  finally{await browser.close();await server.close();}
  fs.mkdirSync(path.join(root,'build'),{recursive:true});fs.writeFileSync(path.join(root,'build/home-entry-reviews.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({passed:report.passed,checks:report.checks,error:report.error}));

@@ -107,41 +107,14 @@ jobs:
             node -e 'process.stdout.write("CHROMIUM_BIN="+require("playwright").chromium.executablePath()+"\n")' >> "$GITHUB_ENV"
           fi
       - name: Sayfalardan AI Usta ve model bağlantılarını gerçekten tıkla
-        run: |
-          python scripts/build_site.py --mode preview --output build/qa-navigation/custom --base-path /qa-preview
-          python scripts/check_site.py build/qa-navigation/custom --mode preview --base-path /qa-preview --report build/custom-check.json
-          node tests/runtime_paths.cjs _site /site
-          node tests/runtime_paths.cjs build/production /
-          node tests/runtime_paths.cjs build/qa-navigation/custom /qa-preview
-          node tests/navigation.cjs
-          node tests/browser_smoke.cjs
-          node tests/business-maps.cjs
-          node tests/preview-guard.cjs
-          node tests/environment.cjs
-          node tests/portable_deploy.cjs
-          node tests/fault_lookup.cjs
-          node tests/frontend_events.cjs
-          node tests/ticket_modal_visual.cjs
-          node tests/page_visual_acceptance.cjs
-          node tests/model_guidance.cjs _site /site
-          node tests/district_matrix.cjs
-          python tests/run_model_checks.py
-          node tests/editorial_links.cjs
-          node tests/interactions.cjs
-          INTERACTION_EXTRAS_ONLY=1 INTERACTION_OUTPUT=build/qa-interactions-extras node tests/interactions.cjs
-          node tests/backend_browser.cjs build/production
-          node tests/owner_browser.cjs build/production
-          node tests/priority_service.cjs
-          node tests/priority_http.cjs build/production
-          node tests/priority_preview.cjs _site /site
-          node tests/model_directory.cjs
-          node tests/home_entry_reviews.cjs build/production
-          node tests/service_operations_browser.cjs build/production
+        run: python scripts/run_browser_acceptance.py
       - name: Derleme kontrol raporları
         uses: actions/upload-artifact@v4
         with:
           name: preview-build-report
           path: |
+            build/browser-acceptance-run.json
+            build/browser-acceptance/*.log
             build/preview-check.json
             build/production-check.json
             build/content-audit.json
