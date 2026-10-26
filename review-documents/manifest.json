@@ -1,0 +1,20 @@
+{
+  "gzip_sha256": "e1fff585c4de281d04f5b92c510d5700f4141518fb08d51f60363cd45edefeb1",
+  "gzip_bytes": 18714605,
+  "parts": [
+    {
+      "name": "inceleme-html.gz.part-00",
+      "bytes": 9437184,
+      "sha256": "d4e7643e0339439c201a920a3f5a0e401b2169fba16aeca9e619f57cca5d1977"
+    },
+    {
+      "name": "inceleme-html.gz.part-01",
+      "bytes": 9277421,
+      "sha256": "a63a725ef0c91cfe094e5673b27f1faa7cfe8e7076a038517cd433722dda35a2"
+    }
+  ],
+  "html_sha256": "8d57f0075ac40ca950a56aba90edd8cec14c4478c8e78895f940dc38961a0641",
+  "html_bytes": 27858496,
+  "pdf_sha256": "df83969512bdc9c2465586b65a735d633f131ac792aa134ff376db7c3cb5bf2b",
+  "pdf_bytes": 5895218
+}

@@ -1,0 +1,107 @@
+name: İnceleme belgelerini mevcut test yayınına ekle
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'review-documents/**'
+      - '.github/workflows/review-documents.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saglam-review-documents-pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      # Restore only the already published application. No pending repair source
+      # is built or shipped by this document-delivery workflow.
+      - uses: actions/checkout@v4
+        with:
+          ref: 8e43f08e68e1c75a53b42f713ae17ac6ae1ae400
+          path: published-source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Yayındaki uygulamanın aynı dosyalarını hazırla
+        run: |
+          python published-source/scripts/build_site.py --mode preview --output _site --base-path /site
+          python published-source/scripts/build_site.py --mode production --output build/review-baseline-production
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected = {
+              '_site/build-info.json': '72fa628e9812b70056d0e788e646bb03b4d8d88ea967ca5050460aa18336d2fc',
+              'build/review-baseline-production/build-info.json': '3cdfcbc1a1370782a17055f0a17edd9de581c30fc025f10d8ee0e484b1bdfc7e',
+          }
+          for name, digest in expected.items():
+              assert json.loads(Path(name).read_text())['content_sha256'] == digest, name
+          print('Previously published application bytes are unchanged.')
+          PY
+          python published-source/scripts/package_production.py build/review-baseline-production --output _site/indir/saglam-teknik-guncel.zip
+      - name: Salt okunur inceleme belgelerini ekle
+        run: |
+          python - <<'PY'
+          import gzip, hashlib, json, shutil
+          from pathlib import Path
+          source = Path('review-documents')
+          manifest = json.loads((source / 'manifest.json').read_text())
+          zipped = b''
+          for part in manifest['parts']:
+              data = (source / part['name']).read_bytes()
+              assert len(data) == part['bytes']
+              assert hashlib.sha256(data).hexdigest() == part['sha256']
+              zipped += data
+          assert hashlib.sha256(zipped).hexdigest() == manifest['gzip_sha256']
+          html = gzip.decompress(zipped)
+          assert len(html) == manifest['html_bytes']
+          assert hashlib.sha256(html).hexdigest() == manifest['html_sha256']
+          pdf = (source / 'saglam-teknik-inceleme.pdf').read_bytes()
+          assert len(pdf) == manifest['pdf_bytes']
+          assert hashlib.sha256(pdf).hexdigest() == manifest['pdf_sha256']
+          assert pdf.startswith(b'%PDF-')
+          review = Path('_site/inceleme')
+          review.mkdir(parents=True, exist_ok=True)
+          (review / 'index.html').write_bytes(html)
+          (review / 'saglam-teknik-inceleme.pdf').write_bytes(pdf)
+          (review / 'dosya-bilgileri.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
+          site = Path('_site')
+          metadata = site / 'build-info.json'
+          info = json.loads(metadata.read_text())
+          info['application_source_commit'] = '8e43f08e68e1c75a53b42f713ae17ac6ae1ae400'
+          info['review_documents'] = {'source': 'a1.zip', 'pages': 204, 'kind': 'read-only review; not a repaired application'}
+          files = sorted((p.relative_to(site).as_posix(), p) for p in site.rglob('*') if p.is_file() and p != metadata)
+          digest = hashlib.sha256()
+          for name, path in files:
+              digest.update(name.encode() + b'\0' + hashlib.sha256(path.read_bytes()).digest())
+          info['content_sha256'] = digest.hexdigest()
+          info['files'] = len(files)
+          metadata.write_text(json.dumps(info, ensure_ascii=False, indent=2) + '\n')
+          print('204-page read-only HTML review and PDF added; business application source unchanged.')
+          PY
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          name: review-documents-pages
+          path: _site
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          artifact_name: review-documents-pages
