@@ -1,6 +1,6 @@
 # Sağlam Teknik — Hibrit Matris Sistemi Teknik Raporu
 
-**Kontrol tarihi:** 28 Ekim 2026  
+**Kontrol tarihi:** 29 Ekim 2026  
 **Kapsam:** Kaynak kod, üretim paketi ve güvenli GitHub önizlemesi. Canlı `saglamkombiklima.com.tr` sunucusuna bu çalışmayla yükleme yapılmaz.
 
 ## 1. Uygulanan mimari
@@ -13,23 +13,31 @@
 
 576 kaynak dosyanın baytları doğrulanarak okunur; eski bir derleme çıktısının sessizce yeniden yayımlanması önlenir. İçerik, eşleştirme, bağlantılar, yapılandırılmış veri ve yükleme optimizasyonları aynı derleme hattında üretilir. `build-info.json` yayımlanan dosyaların gerçek içerik özetini taşır. Üretim ZIP’i deterministik biçimde oluşturulur; ZIP bütünlüğü ve dosya manifesti kontrol edilir.
 
-Ana tasarım, mevcut adresler ve teknik arıza tabloları korunur. **25 ilçe için 50 kombi/klima sayfası, 5 semt sayfası ve mevcut 599 mahalle kaydı** aynı sistem içinde çalışır. Kombinasyon sayısını artırmak için binlerce yeni, birbirinin benzeri URL oluşturulmaz.
+Ana tasarım, mevcut adresler ve model rehberlerindeki teknik arıza tabloları korunur. **25 ilçe için 50 kombi/klima sayfası, 5 semt sayfası ve mevcut 599 mahalle kaydı** aynı sistem içinde çalışır. Kombinasyon sayısını artırmak için binlerce yeni, birbirinin benzeri URL oluşturulmaz.
 
-## 2. Bölge içeriği ve mahalle matrisi
+## 2. Bölge sayfalarının ana gövdeleri yeniden yazıldı
 
-`hybrid/data/regions.json` ilçelerin mahallelerini, komşuluk verisini, giriş paragraflarını, adres notlarını ve ilgili belirti rehberlerini tek kaynaktan yönetir. `hybrid/regions.py` bu verileri **derleme sırasında okunabilir HTML’ye** dönüştürür. Tarayıcıdaki JavaScript seçimleri kolaylaştırır; arama motorunun okuyacağı ana içerik JavaScript’in çalışmasına bağlı değildir. JavaScript geliştirmesi başarısız olduğunda bölge metni ve bağlantılar kalır.
+Önceki sürümde girişler farklı olsa da 25 kombi sayfasındaki uzun özet ve tablo, yer adları çıkarıldığında aynıydı; 25 klima sayfasında da aynı sorun vardı. Yeni bölgesel notlar ise her cihaz grubu için beş metinden dönüşümlü üretilmişti. Bu düzen yalnızca girişlerin farklılaşmasını sağlıyor, ana gövdeyi bağımsız hâle getirmiyordu.
 
-50 ilçe servis sayfası ve 5 semt sayfası için 55 ayrı giriş paragrafı hazırlandı. İlçe/mahalle isimlerini değiştirerek aynı girişin çoğaltılması yerine adres ayrımı, sıcak su/ısıtma davranışı, kullanım modu ve güvenli gözlem gibi farklı servis kararları anlatılır. Apartman, site veya iş yeriyle ilgili bilgiler koşullu sorular olarak kullanılır; doğrulanmamış bina yoğunluğu, yerel arıza sıklığı, tamamlanmış iş veya kesin varış süresi iddiası üretilmez.
+Bu sürümde 50 ilçe ve 5 semt sayfasının **eski ana içerik bölümü bütünüyle değiştirildi**. Ortak tanıtım, yer adları değiştirilmiş uzun tablolar ve dönen not havuzu kaldırıldı. Her sayfa için ayrı giriş, üç ana bölüm, sayfaya özel sorular ve cevaplar, kısa çıkarımlar ve servis çağrısı yazıldı. Toplam 55 ayrı gövde, 210 ana bölüm paragrafı ve 110 özel soru-cevap gerçek HTML içinde doğrulandı. Teknik arıza kodu tabloları kendi model rehberlerinde korundu.
 
-Mahalle seçimi artık yalnızca boş bir talep formuna göndermez. Bölgeler ekranındaki **1.797 mahalle bağlantısı**, ilgili cihazın ilçe içeriğine ve mahalle işaretine gider. İlçe sayfalarında **1.198 mahalle işareti** bulunur: 599 kaydın kombi ve klima karşılıklarıdır; 1.198 bağımsız mahalle sayfası değildir. Kullanıcı buradan belirti rehberine, marka/model bilgisine ve isterse servis talebine ilerler.
+Metinler `hybrid/data/editorial/batch-*.json` dosyalarında, gerçek mahalle ve komşuluk verisi `hybrid/data/regions.json` içinde yönetilir. `hybrid/editorial_regions.py` her sayfanın ana içeriğini derleme sırasında HTML'ye yazar. İçerik JavaScript çalışmasa da okunabilir; filtreler bu anlatımı tamamlar.
 
-599 kayıt eski sitenin korunan hizmet envanteridir; güncel belediye kayıtlarının tamamının yeniden doğrulandığı iddiası değildir. Sokak listesi veya adres bilgisi uydurulmadı. Beşiktaş’taki Arnavutköy ile Arnavutköy ilçesi, Zeytinburnu’ndaki Maltepe ile Maltepe ilçesi gibi karışabilecek konumlar ayrı değerlendirilir. 500 Evler ve Merter gibi kullanımlarda açık ilçe bilgisi istenir.
+Örneğin Avcılar kombi gövdesi sıcak suyun hangi kullanımda kesildiğini; Küçükçekmece kombi gövdesi Sefaköy/mahalle adresiyle cihaz bilgisinin aynı kayıtta tutulmasını; Fatih kombi gövdesi yanma ve havalandırma belirtilerinde güvenli sınırları anlatır. Bu konular o ilçede yalnızca bu arızaların olduğu veya başka markalara hizmet verilmediği anlamına gelmez. Seçim akışı bütün mevcut marka ve belirti seçeneklerini korur.
 
-Komşuluk listesi OpenStreetMap kaynaklı ilçe geometrilerinde ortak kara sınırı çizgilerinin karşılaştırılmasıyla türetilmiştir. Kaynak özeti, yöntem ve ODbL 1.0 lisans bilgisi veri dosyasına; atıf metni bölge alanına eklendi. Bu liste hukuki sınır tespiti, sürüş rotası, servis sırası veya varış süresi değildir.
+Her gövde farklı bir okuyucu tarafından da incelendi. Birbirine fazla yakın bulunan Sarıyer ve Esenyurt klima anlatımları yeniden ayrıştırıldı; birkaç dil sorunu düzeltildi. Kilyos bağlantısındaki yanlış mahalle başlığı, kaynak kaydın gerçek `Kumköy (Kilyos)` adına göre düzeltildi.
+
+Editöryal denetim, yer ve marka isimlerini kaldırarak uzun paragraf/cümle tekrarlarını ve yakın kopyaları arar. Yazılmış paragrafların gerçekten yayımlanacak HTML gövdesine işlendiğini, eski ortak blokların kaldırıldığını da kontrol eder. **Bu kontroller Google'ın bir özgünlük puanı değildir.** Ortak menü, iletişim, doğru teknik bilgiler ve model tabloları bu editöryal karşılaştırmanın dışında tutulur; bunları farklı göstermek için gerçekler değiştirilmez.
+
+`icerik-inceleme.html` sayfasında 55 rotanın tamamı için kaldırılan eski özet ve yeni ana anlatım yan yana okunabilir. İnceleme arama dizinine kapalıdır. Böylece yalnızca test sayısı yerine yapılan metin değişikliğinin kendisi incelenebilir.
+
+599 mahalle kaydı, kombi ve klima karşılıklarıyla 1.198 ilçe içi başlığa bağlanır. Bölgeler ekranındaki mahalle bağlantıları ortak forma değil ilgili içeriğe ulaşır. Aynı sayfada mahalleye tıklanınca filtredeki mahalle seçimi de güncellenir. Bunlar 1.198 bağımsız mahalle URL'si değildir. Kayıtlar eski sitenin hizmet envanteridir; güncel resmî belediye toplamı iddiası yoktur. Sokak veya bina verisi uydurulmadı.
+
+Komşuluk verisi OpenStreetMap ilçe geometrilerindeki ortak kara sınırlarından türetilmiştir. ODbL kaynak/lisans atfı korunur. Bu veri rota, sıra veya varış süresi göstermez; yapılaşma yoğunluğu, arıza sıklığı veya yapılmamış iş örnekleri metne eklenmedi.
 
 ## 3. Çapraz bağlantılar ve arama eşleştirmesi
 
-`hybrid/hubs.py`, bölge → marka/model → belirti rehberi → bölge/hizmet akışlarını HTML bağlantılarıyla kurar. Mevcut kontrol çıktısında 175 sayfada 1.449 bağlamsal bağlantı üretilmiştir. Dizine uygun 187 içerik sayfasının tamamına site içinden ulaşılır; bu envanterde yetim sayfa yoktur. Yönetim, doğrulama, 404 ve kişiye özel takip adresleri içerik sayfası sayılmaz.
+`hybrid/hubs.py`, bölge → marka/model → belirti rehberi → bölge/hizmet akışlarını HTML bağlantılarıyla kurar. Mevcut kontrol çıktısında 175 sayfada 1.452 bağlamsal bağlantı üretilmiştir. Dizine uygun 187 içerik sayfasının tamamına site içinden ulaşılır; bu envanterde yetim sayfa yoktur. Yönetim, doğrulama, 404 ve kişiye özel takip adresleri içerik sayfası sayılmaz.
 
 İlçe sayfalarında 55 seçim bileşeni bulunur. Cihaz, marka, model, mahalle ve belirti aynı bağlamda ilerler. Model veya özel açıklama zorunlu değildir. Cihaz değiştirilince önceki cihazdan kalan model/kod temizlenir. Bilinmeyen model yazılabilir; kodun anlamı doğrulanamadığında farklı modelden açıklama taşınmaz.
 
@@ -60,7 +68,7 @@ Kaynakta bulunan **86 model arıza tablosu ve 1.443 kod başlığı** korunmuşt
 
 İşletme kimliği tek `https://saglamkombiklima.com.tr/#business` adresinde tutarlıdır. Kullanıcının verdiği **İnönü Mahallesi, Küçükçekmece, İstanbul, TR** adresi `LocalBusiness/HVACBusiness` verisine işlendi. Sokak/bina numarası veya koordinat eklenmedi; adres kapsamı verilenden daha ayrıntılı gösterilmedi. Fiyat aralığı ve değerlendirme puanı uydurulmadı.
 
-Kontrol edilen üretim çıktısında 201 sayfada işletme verisi, uygun 179 sayfada `Service`, 179 sayfada görünür içerikten türetilen 241 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
+Kontrol edilen üretim çıktısında 201 sayfada işletme verisi, uygun 179 sayfada `Service`, 179 sayfada görünür içerikten türetilen 296 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
 
 Sitemap, `llms.txt` ve `assets/hybrid-inventory.json` aynı gerçek canonical envanterinden üretilir. **Bu sürümde sayı 187’dir; 192’ye tamamlamak için hayali sayfa eklenmemiştir.** Önceden noindex olan yabancı pazar rehberlerinin korunan kapsamı sitemap dışında kalır. Ayrıntılı `llms-full.txt` saklanır. Üretim robots kuralları içerik erişimine izin verir; özel dosya ve API engellerini korur.
 
@@ -93,10 +101,10 @@ Bu yerel deneyde aktarılan veri %67,71 azalmış, performans puanı 87’den 93
 
 ## 7. Kontrol kanıtları ve teslim sınırı
 
-- Statik üretim kabulü: 187 içerik/sitemap adresi, 21.195 iç dosya/işaret referansı; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
-- 42 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
+- Statik üretim kabulü: 187 içerik/sitemap adresi, iç dosya/işaret referansları; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
+- 51 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
 - Yerel Chromium’da 204 ziyaretçi sayfası 360 ve 768 pikselde açıldı. Bu taramada JavaScript hatası, kaynak HTTP hatası, bozuk görsel veya yatay taşma görülmedi. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
-- Yeni matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
+- Yeni metinlerin tamamı, 55 gövde ekran görüntüsü, eski/yeni inceleme ekranı, matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
 
 **Bu kontroller canlı Telegram teslimi, Gemini cevabı, sunucudaki form kaydı veya Search Console sonucu değildir.** GitHub önizlemesi bilerek noindex durumundadır; form, konum ve sağlayıcı gönderimleri kapalıdır. Üretim ZIP’i canlı sunucu için ayrı derlenir ve bu önizleme kısıtlarını taşımaz. Canlı sunucuya otomatik geçiş yapılmaz.
 
@@ -111,3 +119,5 @@ python -m unittest discover -s hybrid/tests -p 'test_*.py'
 ```
 
 Raporun sayısal dayanakları: `build-production-log.json`, `acceptance-production.json`, `matching-final.json`, `matrix-browser.json`, `browser-audit.json`, `diagnostics-loader-browser.json`, `home-final-check.json` ve `lighthouse-comparison.json`. Bunlar farklı kapsamları ölçer; ekran sayısı, test sayısı ve işlevsel sağlayıcı teslimi aynı başarı ölçüsü olarak birleştirilmemiştir.
+
+Editöryal kaynak kanıtları: `editorial-before-after.json`, `editorial-content-audit.json`, `editorial-rendered-audit.json`, `manual-editorial-review.json`. Derleme, kaynak metin ile gerçek HTML gövdesi uyuşmazsa durur.

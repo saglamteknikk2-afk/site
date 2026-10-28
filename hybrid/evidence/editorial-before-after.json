@@ -1,0 +1,59 @@
+{
+  "scope": "Actual old published files versus new rendered bodies; no Google ranking or indexing score",
+  "old_repeated_masked_summary_groups": {
+    "kombi": [
+      25
+    ],
+    "klima": [
+      25
+    ]
+  },
+  "old_shared_masked_table_groups": {
+    "kombi": [
+      25
+    ],
+    "klima": [
+      25
+    ]
+  },
+  "new_old_summary_blocks": 0,
+  "new_rotating_note_blocks": 0,
+  "new_authored_bodies_rendered": 55,
+  "new_authored_paragraphs_verified": 210,
+  "new_authored_faqs_verified": 110,
+  "new_repeated_long_paragraph_groups": 0,
+  "new_repeated_long_sentence_groups": 0,
+  "new_near_duplicate_paragraphs": 0,
+  "preserved_neighborhood_pairs": 599,
+  "preserved_district_neighborhood_anchors": 1198,
+  "source_model_tables_checked": 86,
+  "source_model_table_changes": [],
+  "most_similar_authored_pairs": [
+    {
+      "a": "fatih-kombi-servisi.html",
+      "b": "gungoren-kombi-servisi.html",
+      "five_word_jaccard": 0.0058
+    },
+    {
+      "a": "esenler-klima-servisi.html",
+      "b": "esenyurt-klima-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "eyupsultan-klima-servisi.html",
+      "b": "fatih-klima-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "eyupsultan-kombi-servisi.html",
+      "b": "fatih-kombi-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "arnavutkoy-klima-servisi.html",
+      "b": "basaksehir-klima-servisi.html",
+      "five_word_jaccard": 0.0039
+    }
+  ],
+  "data_and_render_errors": []
+}

@@ -40,6 +40,12 @@
         fields.code.value='';result.replaceChildren();result.hidden=true;
         root.querySelectorAll('details').forEach(el=>el.open=false);
       }
+      function selectHashNeighborhood(){
+        let selected='';
+        try{selected=decodeURIComponent(location.hash).replace(/^#mahalle-/,'');}catch(_){return;}
+        const match=[...fields.neighborhood.options].find(item=>item.value&&slug(item.value)===selected);
+        if(match){fields.neighborhood.value=match.value;result.hidden=true;}
+      }
       function localLink(path,label){
         const target=path.split(/[?#]/)[0];if(!routes.has(target))return null;
         const link=document.createElement('a');link.href=path;link.textContent=label;return link;
@@ -75,6 +81,7 @@
       root.querySelector('[data-matrix-show]').addEventListener('click',show);
       root.querySelector('[data-matrix-reset]').addEventListener('click',()=>{initialize();fields.brand.focus({preventScroll:true});});
       initialize();controls.hidden=false;
+      window.addEventListener('hashchange',selectHashNeighborhood);
     });
   }).catch(()=>{/* Static region, brand and symptom links remain usable. */});
 })();

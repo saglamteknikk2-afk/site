@@ -1,0 +1,563 @@
+{
+  "scope": "Authored page bodies only; no Google originality, ranking, indexing or factual-certification score",
+  "methods": {
+    "entity_mask": "All source district, neighborhood, locality, business and brand names normalized before comparisons",
+    "paragraph_guard": "Exact reuse >=18 words across pages; near reuse >=40 words and >=0.65 five-word containment",
+    "sentence_guard": "Exact reuse >=14 words across pages",
+    "heading_guard": "Exact normalized substantive section headings or FAQ questions >=5 words",
+    "page_guard": "Five-word Jaccard >=0.4 is an internal regression flag, not a search-engine threshold"
+  },
+  "expected_pages": 55,
+  "pages": 55,
+  "per_page": {
+    "arnavutkoy-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 267,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Adres ve cihaz türünü ilk görüşmede netleştirme"
+    },
+    "arnavutkoy-klima-servisi.html": {
+      "device": "klima",
+      "words": 253,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "İç/dış ünite etiketini doğru cihazla eşleştirme"
+    },
+    "avcilar-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 279,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Sıcak su kesintisinin kullanım anını ayırma"
+    },
+    "avcilar-klima-servisi.html": {
+      "device": "klima",
+      "words": 276,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Hava üfleme ile gerçek soğutma kaybını ayırma"
+    },
+    "bahcelievler-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 266,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Bakım öncesinde cihaza güvenli erişim hazırlığı"
+    },
+    "bahcelievler-klima-servisi.html": {
+      "device": "klima",
+      "words": 267,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "İç üniteden su damlamasında güvenli öncelik"
+    },
+    "bakirkoy-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 277,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Birden fazla muslukta debi ve sıcaklık gözlemi"
+    },
+    "bakirkoy-klima-servisi.html": {
+      "device": "klima",
+      "words": 280,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kokunun oluştuğu çalışma anı ve bakım ihtiyacı"
+    },
+    "bayrampasa-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 270,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Sık devreye giren cihazda kumanda ve çalışma döngüsü"
+    },
+    "bayrampasa-klima-servisi.html": {
+      "device": "klima",
+      "words": 271,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "İşyerinde çalışma saatleri ve hava dolaşımı ihtiyacı"
+    },
+    "sefakoy-servisi.html": {
+      "device": "mixed",
+      "words": 273,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Sefaköy semt adı ile gerçek mahalle eşleşmesi"
+    },
+    "bagcilar-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 269,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Tekrarlayan basınç kaybı için gözlem kaydı"
+    },
+    "bagcilar-klima-servisi.html": {
+      "device": "klima",
+      "words": 262,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Sigorta attıran klimada tekrarlanan denemeyi önleme"
+    },
+    "basaksehir-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 265,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Radyatör, yerden ısıtma ve merkezi sistem ayrımı"
+    },
+    "basaksehir-klima-servisi.html": {
+      "device": "klima",
+      "words": 264,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Çok odalı veya çok üniteli sistemde etkilenen cihaz"
+    },
+    "beylikduzu-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 261,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Uzun süre kapalı cihazla yeniden ısınma talebi"
+    },
+    "beylikduzu-klima-servisi.html": {
+      "device": "klima",
+      "words": 268,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kumanda modu, zamanlayıcı ve ayar karışıklığı"
+    },
+    "beyoglu-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 273,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kiracı ve mülk sahibi arasında servis geçmişi aktarımı"
+    },
+    "beyoglu-klima-servisi.html": {
+      "device": "klima",
+      "words": 264,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kiralanmış mekânda güvenli erişim ve cihaz geçmişi"
+    },
+    "besiktas-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 264,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kullanım alanlarına göre ısıtma ve sıcak su ihtiyacını ayırma"
+    },
+    "besiktas-klima-servisi.html": {
+      "device": "klima",
+      "words": 276,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "İç fan sesi ile dış ünite titreşimini tarif etme"
+    },
+    "500-evler-servisi.html": {
+      "device": "mixed",
+      "words": 255,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "500 Evler adında ilçe belirsizliği"
+    },
+    "buyukcekmece-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 249,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Musluğa sıcak suyun geç gelmesini doğru tarif etme"
+    },
+    "buyukcekmece-klima-servisi.html": {
+      "device": "klima",
+      "words": 238,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Uzun bekleme sonrası bakım ile onarım ayrımı"
+    },
+    "esenler-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 242,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Ekranı kapalı veya hiç başlamayan cihaz için kayıt"
+    },
+    "esenler-klima-servisi.html": {
+      "device": "klima",
+      "words": 235,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Kumandaya tepki vermeyen cihazda gözlenebilir bilgiler"
+    },
+    "esenyurt-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 256,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Soğuk ve sıcak sistem basıncını birlikte değerlendirme"
+    },
+    "esenyurt-klima-servisi.html": {
+      "device": "klima",
+      "words": 250,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Isıtmada bekleme ve defrost sürecini tarif etme"
+    },
+    "eyupsultan-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 246,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Yoğuşma gideri çevresindeki su izini güvenle tarif etme"
+    },
+    "eyupsultan-klima-servisi.html": {
+      "device": "klima",
+      "words": 248,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "İç/dış ünitede buzlanmanın yeri ve zamanını ayırma"
+    },
+    "fatih-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 248,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Baca, havalandırma ve yanma belirtisinde güvenli sınır"
+    },
+    "fatih-klima-servisi.html": {
+      "device": "klima",
+      "words": 243,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Filtre ve hava geçişi çevresinde güvenli kullanıcı sınırı"
+    },
+    "merter-servisi.html": {
+      "device": "mixed",
+      "words": 258,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 8,
+      "focus": "Merter işyeri/konut adresinde gerçek ilçe seçimi"
+    },
+    "gaziosmanpasa-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 283,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 12,
+      "focus": "Yalnız bazı petekler soğukken cihaz/tesisat ayrımı"
+    },
+    "gaziosmanpasa-klima-servisi.html": {
+      "device": "klima",
+      "words": 276,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Klima bakımının kapsamı ile soğutucu işlemini ayırma"
+    },
+    "gungoren-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 283,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Uğultu ile ateşlemede patlama sesini ayırma"
+    },
+    "gungoren-klima-servisi.html": {
+      "device": "klima",
+      "words": 271,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "İç ünite üflüyor dış ünite davranışı bilinmiyor"
+    },
+    "kagithane-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 274,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Ekran kodunu tam modelle eşleme ve belirsiz kod yönetimi"
+    },
+    "kagithane-klima-servisi.html": {
+      "device": "klima",
+      "words": 274,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Yanıp sönen ışık ve kodun doğru modelle kaydı"
+    },
+    "kucukcekmece-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 271,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Sefaköy adresi, mahalle ve markayı aynı talepte birleştirme"
+    },
+    "kucukcekmece-klima-servisi.html": {
+      "device": "klima",
+      "words": 275,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Evden çalışma ve işyeri talebinde aynı adresi koruma"
+    },
+    "sariyer-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 288,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Mevsimsel kullanımda donma/elektrik riskini fark etme"
+    },
+    "sariyer-klima-servisi.html": {
+      "device": "klima",
+      "words": 327,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 10,
+      "focus": "Mevsim geçişinde ısıtma talebinin doğru kaydı"
+    },
+    "bahcesehir-servisi.html": {
+      "device": "mixed",
+      "words": 294,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 9,
+      "focus": "Bahçeşehir 1 ve 2. Kısım ile ilçe sınırı"
+    },
+    "silivri-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 299,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Ev sahibi uzaktayken yerinde kontrol organizasyonu"
+    },
+    "silivri-klima-servisi.html": {
+      "device": "klima",
+      "words": 289,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Sezonluk kullanılan adreste uzaktan iletişim hazırlığı"
+    },
+    "sultangazi-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 300,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Periyodik bakım ile tekrar eden arıza kaydını ayırma"
+    },
+    "sultangazi-klima-servisi.html": {
+      "device": "klima",
+      "words": 307,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Isıtmada dış üniteden su ile iç kaçak ayrımı"
+    },
+    "zeytinburnu-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 284,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Görünen su kaçağında yeri ve zamanı not etme"
+    },
+    "zeytinburnu-klima-servisi.html": {
+      "device": "klima",
+      "words": 301,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Bir odada dengesiz serinlik ve hava yönü gözlemi"
+    },
+    "catalca-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 295,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Seyrek kullanılan adreste servis hazırlığı ve iletişim"
+    },
+    "catalca-klima-servisi.html": {
+      "device": "klima",
+      "words": 300,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Uzak adreste cihaz bilgilerini önceden hazırlama"
+    },
+    "sisli-kombi-servisi.html": {
+      "device": "kombi",
+      "words": 302,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Ev/ofiste kumanda değişiklikleri ve gün içi kullanım"
+    },
+    "sisli-klima-servisi.html": {
+      "device": "klima",
+      "words": 311,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Ortak ofiste kullanıcı ayarları ve kontrol geçmişi"
+    },
+    "kilyos-servisi.html": {
+      "device": "mixed",
+      "words": 305,
+      "sections": 3,
+      "faq": 2,
+      "authored_paragraphs": 11,
+      "focus": "Kilyos adı ile Kumköy adresini birlikte kullanma"
+    }
+  },
+  "repeated_long_paragraph_groups": 0,
+  "repeated_long_sentence_groups": 0,
+  "near_duplicate_paragraphs": 0,
+  "most_similar_pairs": [
+    {
+      "a": "fatih-kombi-servisi.html",
+      "b": "gungoren-kombi-servisi.html",
+      "five_word_jaccard": 0.0058
+    },
+    {
+      "a": "esenler-klima-servisi.html",
+      "b": "esenyurt-klima-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "eyupsultan-klima-servisi.html",
+      "b": "fatih-klima-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "eyupsultan-kombi-servisi.html",
+      "b": "fatih-kombi-servisi.html",
+      "five_word_jaccard": 0.0042
+    },
+    {
+      "a": "arnavutkoy-klima-servisi.html",
+      "b": "basaksehir-klima-servisi.html",
+      "five_word_jaccard": 0.0039
+    },
+    {
+      "a": "basaksehir-kombi-servisi.html",
+      "b": "besiktas-kombi-servisi.html",
+      "five_word_jaccard": 0.0039
+    },
+    {
+      "a": "esenyurt-kombi-servisi.html",
+      "b": "kucukcekmece-kombi-servisi.html",
+      "five_word_jaccard": 0.0039
+    },
+    {
+      "a": "bagcilar-kombi-servisi.html",
+      "b": "kucukcekmece-kombi-servisi.html",
+      "five_word_jaccard": 0.0038
+    },
+    {
+      "a": "bahcelievler-kombi-servisi.html",
+      "b": "zeytinburnu-kombi-servisi.html",
+      "five_word_jaccard": 0.0037
+    },
+    {
+      "a": "beylikduzu-kombi-servisi.html",
+      "b": "sariyer-kombi-servisi.html",
+      "five_word_jaccard": 0.0037
+    },
+    {
+      "a": "kucukcekmece-kombi-servisi.html",
+      "b": "silivri-kombi-servisi.html",
+      "five_word_jaccard": 0.0036
+    },
+    {
+      "a": "esenler-klima-servisi.html",
+      "b": "fatih-klima-servisi.html",
+      "five_word_jaccard": 0.0022
+    },
+    {
+      "a": "esenler-klima-servisi.html",
+      "b": "eyupsultan-klima-servisi.html",
+      "five_word_jaccard": 0.0021
+    },
+    {
+      "a": "esenyurt-klima-servisi.html",
+      "b": "fatih-klima-servisi.html",
+      "five_word_jaccard": 0.0021
+    },
+    {
+      "a": "bagcilar-kombi-servisi.html",
+      "b": "buyukcekmece-kombi-servisi.html",
+      "five_word_jaccard": 0.002
+    }
+  ],
+  "pair_median_five_word_jaccard": 0.0,
+  "explicit_claim_disclaimers": [
+    {
+      "page": "bahcelievler-klima-servisi.html",
+      "kind": "explicit_limit_on_remote_diagnosis"
+    },
+    {
+      "page": "bayrampasa-kombi-servisi.html",
+      "kind": "explicit_limit_on_remote_diagnosis"
+    },
+    {
+      "page": "beylikduzu-kombi-servisi.html",
+      "kind": "explicit_limit_on_remote_diagnosis"
+    },
+    {
+      "page": "fatih-klima-servisi.html",
+      "kind": "explicit_limit_on_remote_diagnosis"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "status": "passed",
+  "rendered": {
+    "pages_checked": 55,
+    "rendered_bodies": 55,
+    "authored_section_paragraphs_checked": 210,
+    "authored_faq_answers_checked": 110,
+    "errors": []
+  }
+}

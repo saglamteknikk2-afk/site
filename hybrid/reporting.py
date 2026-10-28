@@ -50,6 +50,8 @@ def markdown(text):
     return '\n'.join(out)
 
 def add_report(files,repo,metrics,provenance):
+    from content_review import add_content_review
+    add_content_review(files,repo,metrics)
     source=repo/'hybrid/TECHNICAL-REPORT.md'
     if not source.exists():raise ValueError('Technical report is required before publishing.')
     body=markdown(source.read_text())

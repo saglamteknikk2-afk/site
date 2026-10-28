@@ -1,0 +1,693 @@
+{
+  "pages": [
+    {
+      "route": "bagcilar-kombi-servisi.html",
+      "focus": "Tekrarlayan basınç kaybı için gözlem kaydı",
+      "lead": "Bağcılar’da kombinin basıncı yeniden düşüyorsa servis görüşmesine son su ekleme tarihinden başlayabilirsiniz. Kirazlı, Güneşli veya Mahmutbey adresinizde göstergenin ne zaman değiştiğini bilmek, cihazdaki uyarıyla tesisatta görülen su izini birbirine karıştırmadan değerlendirmemize yardımcı olur. Marka ve model henüz bilinmese de talebinizi anlatabilirsiniz.",
+      "headline": "Basınç kaybını tekrar eden bir olay olarak anlatın",
+      "description": "Bağcılar kombi servisinde basınç kaybı, bakım ve onarım talepleri. Kirazlı, Güneşli ve diğer mahallelerden cihazınıza uygun rehberle ilerleyin.",
+      "sections": [
+        {
+          "id": "basinc-zamani",
+          "heading": "Göstergenin değiştiği zamanı yakalayın",
+          "paragraphs": [
+            "Basınç, cihaz dinlenirken mi azalıyor; kalorifer çalıştıktan sonra mı farklı görünüyor? Daha önce fark ettiğiniz değerleri hatırlıyorsanız yaklaşık zamanıyla paylaşın. Yeni bir deneme yapmak veya cihazın kapağını açmak gerekmez. Sürekli su ekleyerek kullanımı sürdürmek, tekrarlayan şikâyetin değerlendirilmesini geciktirebilir."
+          ],
+          "links": [
+            {
+              "path": "kombi-basinci.html",
+              "label": "Basınç değişiminde hangi gözlemler işe yarar?"
+            }
+          ]
+        },
+        {
+          "id": "su-izleri",
+          "heading": "Islak noktayla ekrandaki uyarıyı ayrı kaydedin",
+          "paragraphs": [
+            "Kombinin altında, görünen boru bağlantısında veya peteğin çevresinde su izi varsa yerini belirtin. Bir odada nem görülmesi, kaynağın mutlaka kombi olduğu anlamına gelmez. Su elektrikli bölümlere yaklaşıyorsa uzanıp silmeye çalışmayın; güvenli mesafede kalıp servisle iletişim kurun. Çınar’daki daire veya Bağlar’daki iş yeri için adres tarifine kapı ve kat bilgisi de eklenebilir."
+          ],
+          "links": [
+            {
+              "path": "kombi-su-akitiyor.html",
+              "label": "Görünen su kaçağını tarif etme rehberi"
+            }
+          ]
+        },
+        {
+          "id": "kayit-kapsami",
+          "heading": "Tekrar sıklığı, parça isminden daha yararlı olabilir",
+          "paragraphs": [
+            "“Genleşme tankı bozuk” demeniz beklenmez. Dün çalıştığı, bugün uyarı verdiği veya her hafta aynı durumun yaşandığı bilgisi başlangıç için daha kullanışlıdır. Sağlam Teknik’e bakım, ısınmama, sıcak su veya başka bir kombi şikâyeti için de ulaşabilirsiniz. İşlem kapsamı yerinde kontrol ve sizin onayınızla belirlenir."
+          ],
+          "bullets": [
+            "Ekrandaki kodu varsa aynen not edin.",
+            "Son bakım ya da onarımdan bildiğiniz bilgiyi ekleyin.",
+            "Mahalle seçimiyle birlikte ulaşılabilir telefon bırakın."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Basınç düştüğünde her seferinde su eklemeli miyim?",
+          "answer": "Tekrarlayan düşüşte sürekli su ekleyerek devam etmek yerine cihazın kullanım kılavuzunu esas alın ve servis kontrolü isteyin. Sebep, göstergeye bakılarak tek başına belirlenemez."
+        },
+        {
+          "question": "Kirazlı’daki adresim için model etiketini bulamadım; kayıt açabilir miyim?",
+          "answer": "Evet. Model alanını boş bırakıp basınç değişimini ve varsa uyarıyı anlatabilirsiniz. Belirli bir hata kodunun açıklanması gerektiğinde tam model bilgisi ayrıca netleştirilir."
+        }
+      ],
+      "takeaways": [
+        "Düşüşün zamanını söyleyin.",
+        "Su izinin yerini ayırın.",
+        "Parça tahmini yapmanız gerekmiyor."
+      ],
+      "neighborhood_intro": "Bağcılar’daki adresinizin bağlı olduğu mahalleyi seçin; aynı kayıtta cihaz belirtisini de koruyalım.",
+      "cta": {
+        "heading": "Basınç tekrar düşüyorsa birlikte değerlendirelim",
+        "text": "Mahallenizi ve gözlemlerinizi paylaşın; bakım veya arıza kontrolü için servis uygunluğunu görüşelim."
+      }
+    },
+    {
+      "route": "bagcilar-klima-servisi.html",
+      "focus": "Sigorta attıran klimada tekrarlanan denemeyi önleme",
+      "lead": "Bağcılar’daki klimanız çalıştırıldığında sigorta atıyorsa aynı işlemi tekrar tekrar denemeyin. Hürriyet’te bir evde veya Güneşli’de bir iş yerinde yaşanan durum için önce güvenliğinizi koruyun; ardından hangi cihaz çalışırken elektriğin kesildiğini, belirtiyi zorlamadan hatırladığınız kadarıyla bize iletin. Bakım ve diğer klima arızaları için de kayıt alınır.",
+      "headline": "Elektrik kesilmesine eşlik eden klima belirtisini güvenle kaydedin",
+      "description": "Bağcılar klima bakım ve arıza servisi. Sigorta atması, soğutmama veya su akıtma belirtisinde güvenli gözlem ve mahalleye göre servis talebi.",
+      "sections": [
+        {
+          "id": "yeniden-denemeyin",
+          "heading": "Kesintiyi yeniden oluşturmaya çalışmayın",
+          "paragraphs": [
+            "Klimayı peş peşe açmak, sigortayı tekrar tekrar kaldırmak ya da başka bir uzatma kablosu denemek güvenli bir arıza tespiti değildir. Yanık kokusu, duman veya kıvılcım varsa elektrikli kısımlara yaklaşmayın; acil tehlikede güvenli alandan 112’yi arayın. Kullanıcıdan kapak açması, bağlantı kontrol etmesi veya ölçüm yapması istenmez."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Çalışmayan klimada güvenli sınırlar"
+            }
+          ]
+        },
+        {
+          "id": "olay-bilgisi",
+          "heading": "Hatırladığınız kullanım sırasını anlatın",
+          "paragraphs": [
+            "Kesinti kumandadan komut verildiğinde mi oldu, cihaz bir süre çalıştıktan sonra mı? O sırada başka cihazların kullanılıp kullanılmadığını biliyorsanız söyleyin; bilmiyorsanız araştırmak için deneme yapmayın. Bu bilgiler bir parçanın bozuk olduğunu kanıtlamaz. Elektrik tesisatıyla cihaz tarafının değerlendirilmesi gerektiği, uygun kontrol sonrasında ayrılır."
+          ],
+          "bullets": [
+            "Görünen ekran veya ışık durumunu belirtin.",
+            "İlk kez mi, daha önce de mi yaşandığını söyleyin.",
+            "Cihazın marka adını bildiğiniz kadarıyla ekleyin."
+          ]
+        },
+        {
+          "id": "bagcilar-talep",
+          "heading": "Güvenli görüşmeden bakım kaydına geçiş",
+          "paragraphs": [
+            "Mahmutbey, İnönü veya listedeki başka bir mahalleden servis isteğinde cihazın bulunduğu katı ve iletişim kişisini netleştirebiliriz. Sorununuz elektrik kesintisi değilse soğutma, ısıtma, koku ve su akıtma gibi diğer belirtilerden de ilerleyebilirsiniz. Arıza nedeni kesinleşmeden kart, kompresör veya gaz işlemi önerilmez; yapılacak işlem ve ücret açıklanarak onayınız alınır."
+          ],
+          "links": [
+            {
+              "path": "klima-tamiri.html",
+              "label": "Klima onarımının değerlendirme adımları"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Sigortanın klima yüzünden attığını kesin söyleyebilir miyiz?",
+          "answer": "Hayır. Birlikte gerçekleşmeleri tek başına nedeni kanıtlamaz. Cihaz ve elektrik tesisatı güvenli biçimde değerlendirilmeden parça teşhisi yapılmaz."
+        },
+        {
+          "question": "Servis gelene kadar yeniden çalıştırıp video çekmem gerekir mi?",
+          "answer": "Hayır. Sorunu yeniden oluşturmanız beklenmez. Daha önce güvenli şekilde alınmış bir görüntü varsa paylaşabilirsiniz; yeni bir deneme yapmak gerekmez."
+        }
+      ],
+      "takeaways": [
+        "Kesintiyi tekrar denemeyin.",
+        "Elektrik bağlantılarına müdahale etmeyin.",
+        "Olayın sırasını hatırladığınız kadar aktarın."
+      ],
+      "neighborhood_intro": "Cihazın bulunduğu Bağcılar mahallesini işaretleyerek güvenli ilk görüşme için iletişim bırakabilirsiniz.",
+      "cta": {
+        "heading": "Önce durumu konuşalım",
+        "text": "Tekrarlanan elektrik kesintisini belirtin; uygun servis yönlendirmesini cihazı zorlamadan birlikte netleştirelim."
+      }
+    },
+    {
+      "route": "basaksehir-kombi-servisi.html",
+      "focus": "Radyatör, yerden ısıtma ve merkezi sistem ayrımı",
+      "lead": "Başakşehir’de ısınma talebi oluştururken evdeki ısıtmanın bireysel kombiden mi, binanın ortak sisteminden mi beslendiğini ayırmak önemlidir. Kayabaşı, Altınşehir veya Bahçeşehir 1. Kısım adresiniz için cihaz türünü biliyorsanız seçin; bilmiyorsanız duvarda görünen cihazı ve hangi alanın ısınmadığını tarif ederek başlayın.",
+      "headline": "Isıyı sağlayan cihazla dağıtan sistemi ayıralım",
+      "description": "Başakşehir kombi servisi: bireysel cihaz, radyatör ve yerden ısıtma belirtilerini ayırarak bakım veya onarım talebinizi doğru kapsamla iletin.",
+      "sections": [
+        {
+          "id": "isi-kaynagi",
+          "heading": "Dairenizde hangi cihaz bulunuyor?",
+          "paragraphs": [
+            "Sıcak suyu ve kaloriferi yöneten bir kombi mi var, yalnızca oda kumandası mı görüyorsunuz? Bina yönetiminden bilinen bir ortak ısıtma bilgisi varsa bunu ekleyin. Merkezi sistemde tüm bina etkileniyorsa yönetimle görüşmek gerekebilir. Bu ayrım, kombi kaydıyla ortak tesisat talebini yanlışlıkla aynı işlem gibi değerlendirmemizi önler."
+          ]
+        },
+        {
+          "id": "dagitim-belirtisi",
+          "heading": "Petek ile zemindeki ısıyı aynı sürede yorumlamayın",
+          "paragraphs": [
+            "Radyatörlerin durumu, yerden ısıtılan alanın hissi ve musluktaki sıcak su ayrı gözlemlerdir. Hangi bölümün çalıştığını anlatın; bilinmeyen vana veya kolektör ayarlarını değiştirmeyin. Yerden ısıtma için hissedilen sıcaklığa bakarak kombinin arızalı olduğunu söylemek doğru olmaz. Kontrolün cihazda mı, kumandada mı, dağıtım tarafında mı yoğunlaşacağı görüşmede belirlenir."
+          ],
+          "links": [
+            {
+              "path": "kombi-petek-isitmiyor.html",
+              "label": "Cihaz ve ısıtma devresini ayıran gözlemler"
+            }
+          ]
+        },
+        {
+          "id": "basaksehir-erisim",
+          "heading": "Yönetim bilgisiyle kişisel talebinizi birlikte hazırlayın",
+          "paragraphs": [
+            "Başak, Ziya Gökalp veya diğer mahallelerden başvururken varsa blok ve daire bilgisi, girişte aranacak kişi ve cihazın tam modelini paylaşabilirsiniz. Yönetimin ayrıca izin vermesi gereken bir alana erişim gerekiyorsa bunu önceden konuşalım. Sağlam Teknik bireysel kombi bakımı, sıcak su sorunu ve farklı arızalar için de talep alır; kapsam, incelenecek sisteme göre açıklanır."
+          ],
+          "bullets": [
+            "Etkilenen alanı oda veya kat olarak belirtin.",
+            "Sıcak suyun durumunu ayrıca söyleyin.",
+            "Ortak sistem bilgisini biliyorsanız ekleyin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Evde kombi görmüyorsam yine de kombi servisi kaydı mı seçmeliyim?",
+          "answer": "Cihaz türünü bilmiyorsanız bunu açıkça belirtin. Ortak ısıtma veya farklı bir ünite söz konusu olabilir; talep türünü görüşmede netleştirebiliriz."
+        },
+        {
+          "question": "Tek odanın ısınmaması petek temizliği gerektiğini gösterir mi?",
+          "answer": "Tek başına göstermez. Oda kumandası, kullanım koşulları ve tesisatın davranışı birlikte değerlendirilir; kontrol yapılmadan temizlik veya parça değişimi kesinleştirilmez."
+        }
+      ],
+      "takeaways": [
+        "Isı kaynağını tanımlayın.",
+        "Dağıtım tarafını ayrıca anlatın.",
+        "Ortak alan erişimini önceden konuşun."
+      ],
+      "neighborhood_intro": "Başakşehir mahalleleri arasından gerçek adresinizi bulun; semt adı yerine bağlı olduğunuz mahalleyi de kayda ekleyebilirsiniz.",
+      "cta": {
+        "heading": "Isınmayan alanı birlikte ayıralım",
+        "text": "Cihaz türü bilinmese de talebinizi bırakın; hangi sistem için kontrol gerektiğini konuşarak belirleyelim."
+      }
+    },
+    {
+      "route": "basaksehir-klima-servisi.html",
+      "focus": "Çok odalı veya çok üniteli sistemde etkilenen cihaz",
+      "lead": "Başakşehir’de birden fazla klimanız varsa bütün cihazların mı, yalnız bir iç ünitenin mi etkilendiğini söylemek servis hazırlığını kolaylaştırır. Şahintepesi’ndeki eviniz veya Başakşehir mahallesindeki iş yeriniz için oda adını, görünen marka bilgisini ve sorunun hangi cihazda başladığını belirterek bakım ya da arıza talebi bırakabilirsiniz.",
+      "headline": "Bir iç ünitenin şikâyetini diğer cihazlardan ayırın",
+      "description": "Başakşehir klima servisinde tek veya çok üniteli cihazlar için bakım ve arıza kaydı. Etkilenen oda, model ve belirtiyi birlikte netleştirin.",
+      "sections": [
+        {
+          "id": "etkilenen-oda",
+          "heading": "Oda adları cihazları karıştırmayı önler",
+          "paragraphs": [
+            "“Salondaki cihaz üflüyor ama soğutmuyor; diğer odadaki çalışıyor” gibi bir anlatım başlangıçta yeterlidir. Her üniteye aynı kumanda komutunu vermek veya arızayı diğer odalarda da oluşturmaya çalışmak gerekmez. Birden fazla kumanda varsa hangisinin hangi cihaz için kullanıldığını bilmeniz, ayar karışıklığı ihtimalini değerlendirmeye yardımcı olur."
+          ],
+          "links": [
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Üfleme ve soğutma belirtisini karşılaştırın"
+            }
+          ]
+        },
+        {
+          "id": "sistem-kapsami",
+          "heading": "Dış ünite sayısını bilmemeniz kayıt açmaya engel değil",
+          "paragraphs": [
+            "Tek dış üniteye bağlı birden fazla iç ünite bulunabilir; fakat bunu yalnız oda sayısından çıkarmayız. Elinizdeki kılavuz veya güvenli şekilde okunabilen etiket bilgisi varsa paylaşın. Dış üniteye ulaşmak için pencereye uzanmayın veya merdivene çıkmayın. Sistem türü netleşmeden bir cihazdaki kodun diğer bütün ünitelere aynı anlamla uygulanması doğru değildir."
+          ]
+        },
+        {
+          "id": "kontrol-hazirligi",
+          "heading": "Çalışma alanını ve erişilecek cihazı önceden belirleyin",
+          "paragraphs": [
+            "Güvercintepe, Şamlar ve listedeki diğer mahallelerden gelen taleplerde hangi odanın inceleneceğini, ünite önünde eşya bulunup bulunmadığını ve erişimden sorumlu kişiyi konuşabiliriz. Bakım istiyorsanız kaç iç ünite için değerlendirme istediğinizi belirtin. Onarımda ise işlem kapsamı, etkilenen cihaz ve sistem bağlantıları incelendikten sonra açıklanır; bütün cihazlar için peşinen aynı işlem kararlaştırılmaz."
+          ],
+          "bullets": [
+            "Her cihazın belirtisini ayrı cümleyle yazın.",
+            "Görünen hata kodunu ilgili odayla eşleştirin.",
+            "Ünite sayısını bilmiyorsanız tahmin etmeyin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Aynı dış üniteye bağlı olduklarını bilmiyorsam talep oluşturabilir miyim?",
+          "answer": "Evet. Etkilenen odaları ve gözlediğiniz durumu paylaşmanız yeterli. Sistemin bağlantı düzeni servis değerlendirmesinde netleştirilebilir."
+        },
+        {
+          "question": "Bir odadaki hata kodunu çalışan klimanın modelinden açıklayabilir miyiz?",
+          "answer": "Hayır. Hata, onu gösteren cihazın ve bağlı olduğu sistemin doğru model belgesiyle ele alınmalıdır; benzer görünüşlü başka bir ünitenin tablosu esas alınmaz."
+        }
+      ],
+      "takeaways": [
+        "Etkilenen odayı adlandırın.",
+        "Kodla cihazı eşleştirin.",
+        "Ünite sayısından sistem tahmini yapmayın."
+      ],
+      "neighborhood_intro": "Başakşehir içindeki servis adresini seçerken birden fazla cihazın aynı adreste bulunduğunu ayrıca belirtebilirsiniz.",
+      "cta": {
+        "heading": "Hangi üniteyle başlayacağımızı söyleyin",
+        "text": "Oda ve belirti bilgilerinizi paylaşın; bakım kapsamını veya arıza kontrolünü buna göre görüşelim."
+      }
+    },
+    {
+      "route": "beylikduzu-kombi-servisi.html",
+      "focus": "Uzun süre kapalı cihazla yeniden ısınma talebi",
+      "lead": "Beylikdüzü’nde bir süredir kullanılmayan evin kombisiyle yeniden ısınmak istediğinizde, ilk ihtiyaç bakım mı yoksa mevcut bir arızanın kontrolü mü birlikte ayıralım. Adnan Kahveci, Kavaklı veya Yakuplu adresinizde cihazın en son ne zaman çalıştığını biliyorsanız paylaşın; bilinmeyen ayarları değiştirerek deneme yapmanız gerekmez.",
+      "headline": "Uzun aradan sonra kombi için doğru talebi belirleyin",
+      "description": "Beylikdüzü kombi bakımı ve arıza servisi. Uzun süredir kullanılmayan cihaz, sıcak su ve ısınma ihtiyacınız için mahalleye göre talep bırakın.",
+      "sections": [
+        {
+          "id": "son-kullanim",
+          "heading": "Son çalışan hâli hatırlamak yardımcıdır",
+          "paragraphs": [
+            "Cihazı en son siz mi kullandınız; o tarihte sıcak su veya ısınma sorunu var mıydı? Ev yeni teslim alındıysa önceki kullanıcıdan bilinen arıza ya da bakım bilgisi alınabilir. Bilgi yoksa bunu açıkça söyleyin. Uzun süre kapalı kalmış olması tek başına parça bozulduğu anlamına gelmez; geçmişi bilinmeyen cihaza kesin teşhis konulamaz."
+          ]
+        },
+        {
+          "id": "ilk-belirti",
+          "heading": "Bakım isteğiyle başlamayan cihazı ayrı kaydedin",
+          "paragraphs": [
+            "Henüz bir sorun gözlemlemeden periyodik kontrol istiyorsanız bakım talebi seçebilirsiniz. Ekranda uyarı bulunması, su akıtması veya cihazın çalışmaması durumunda belirtiyi ayrıca aktarın. Bakım randevusu, arızalı parçanın mutlaka aynı işlem içinde giderileceği taahhüdü değildir. Gerekli kontrol ve önerilen kapsam, işlem başlamadan önce açıklanmalıdır."
+          ],
+          "links": [
+            {
+              "path": "kombi-bakimi-ne-zaman-yapilir.html",
+              "label": "Bakım talebiyle arıza kontrolünü ayırın"
+            }
+          ]
+        },
+        {
+          "id": "ev-hazirligi",
+          "heading": "Geliş öncesinde erişim ve iletişimi düzenleyin",
+          "paragraphs": [
+            "Sahil veya Dereağzı adresine henüz taşınmadıysanız cihazın yanında bulunacak kişiyi ve ulaşılabilir telefonu belirleyebilirsiniz. Anahtar teslimi ya da bina girişi için gereken bilgi görüşmede netleştirilir. Donma, görünür su hasarı veya yanık kokusu şüphesinde cihazı yeniden çalıştırarak sınamayın. Marka seçimi mümkünse eklenir; model alanı boş olsa da servis ihtiyacını konuşabiliriz."
+          ],
+          "bullets": [
+            "Son kullanım zamanı biliniyorsa belirtin.",
+            "Bakım isteğiyle görülen arızayı ayırın.",
+            "Eve erişim sağlayacak kişiyi netleştirin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Uzun süredir kapalı kalan her kombinin parçası değişir mi?",
+          "answer": "Hayır. Kullanılmama süresi tek başına parça değişimi gerekçesi değildir. Cihazın durumu kontrol edilir; önerilen işlem gerekçesiyle birlikte size açıklanır."
+        },
+        {
+          "question": "Eve henüz taşınmadım; bakım için ön görüşme yapabilir miyim?",
+          "answer": "Evet. Beylikdüzü’ndeki mahalleyi ve eve erişim durumunu paylaşabilirsiniz. Randevu uygunluğu, cihazın yanında bulunacak kişiyle birlikte görüşülür."
+        }
+      ],
+      "takeaways": [
+        "Önceki kullanım bilgisini toplayın.",
+        "Mevcut arızayı bakım isteğinden ayırın.",
+        "Güvensiz yeniden çalıştırma denemesi yapmayın."
+      ],
+      "neighborhood_intro": "Servis gerektiren Beylikdüzü adresinin mahallesini seçin; ikamet ettiğiniz başka adresi değil cihazın bulunduğu yeri esas alalım.",
+      "cta": {
+        "heading": "Evin yeniden kullanımını birlikte planlayalım",
+        "text": "Cihazın bilinen geçmişini ve bugünkü ihtiyacınızı iletin; kontrol kapsamını görüşerek belirleyelim."
+      }
+    },
+    {
+      "route": "beylikduzu-klima-servisi.html",
+      "focus": "Kumanda modu, zamanlayıcı ve ayar karışıklığı",
+      "lead": "Beylikdüzü’nde klima beklediğiniz saatte başlamıyor veya seçtiğiniz sıcaklıkta farklı davranıyorsa kumanda ekranındaki mod ve zamanlayıcı bilgisi iyi bir başlangıçtır. Barış, Cumhuriyet ya da Gürpınar adresinizde görünen simgeleri bildiğiniz kadarıyla aktarın; anlamını bilmediğiniz tuş birleşimlerini deneyerek ayarları değiştirmek zorunda değilsiniz.",
+      "headline": "Kumanda ayarı ile klimanın verdiği tepkiyi karşılaştırın",
+      "description": "Beylikdüzü klima bakım ve arıza talebi: kumanda modu, zamanlayıcı, ısıtma ve soğutma belirtilerini cihaz bilgisiyle birlikte değerlendirin.",
+      "sections": [
+        {
+          "id": "ekrandaki-ayar",
+          "heading": "Çalışma modunu sıcaklık rakamından ayırın",
+          "paragraphs": [
+            "Kumandada düşük bir sıcaklık yazması, cihazın mutlaka soğutma modunda olduğu anlamına gelmez. Bildiğiniz bir kar tanesi, güneş veya fan simgesi varsa bunu söyleyin; emin değilseniz kumanda ekranının mevcut görüntüsü kullanılabilir. Her marka için aynı tuş dizisini önermek yerine o modele ait kullanım bilgisi esas alınır."
+          ],
+          "links": [
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Soğutma talebinin değerlendirilmesi"
+            }
+          ]
+        },
+        {
+          "id": "zamanli-calisma",
+          "heading": "Kendi kendine başlamanın bir saati var mı?",
+          "paragraphs": [
+            "Açılma ya da kapanma her gün benzer bir saatte oluyorsa zamanlayıcı göstergesini not edin. Cihazın başkaları tarafından da kumanda edilip edilmediğini bilmek önemlidir. Birden fazla kullanıcı olduğunda en son görülen ayarla arıza anındaki ayar farklı olabilir. Bu gözlemler yardımcı olur; kendiliğinden durma şikâyetinin kesin olarak ayardan kaynaklandığını kanıtlamaz."
+          ]
+        },
+        {
+          "id": "ayar-sonrasi",
+          "heading": "Beklenmeyen davranış sürüyorsa belirtiyi daraltın",
+          "paragraphs": [
+            "Kumandaya cevap geliyor mu, iç ünitenin ışığı yanıyor mu, fan hava üflüyor mu? Bunları ayrı ayrı anlatmak, uzaktan rastgele ayar önerileri vermekten daha faydalıdır. Büyükşehir ve Marmara dâhil Beylikdüzü mahallelerinden bakım, koku, su akıtma veya başka arızalar için de ulaşabilirsiniz. Servis talebinde model bilgisini biliyorsanız ekleyin; bilmiyorsanız boş bırakın."
+          ],
+          "bullets": [
+            "Görünen mod veya simgeyi kaydedin.",
+            "Başlama ve durma saatini yaklaşık belirtin.",
+            "Diğer kullanıcıların yaptığı değişiklikleri biliyorsanız ekleyin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Kumandadaki simgeyi tanımıyorum; yanlış seçim yapmış olur muyum?",
+          "answer": "Bir mod tahmin etmek zorunda değilsiniz. Görünen simgeyi tarif edebilir veya mevcut ekran görüntüsünü paylaşabilirsiniz; açıklama cihazın kendi kullanım bilgisine göre yapılır."
+        },
+        {
+          "question": "Klima her akşam aynı saatte kapanıyorsa kesin zamanlayıcı mı vardır?",
+          "answer": "Kesin denemez. Saat düzeni görüşmede yararlı bir ayrıntıdır; kumanda ayarı, cihaz uyarısı ve çalışma koşulları birlikte ele alınır."
+        }
+      ],
+      "takeaways": [
+        "Mod ile sıcaklık rakamını ayırın.",
+        "Tekrarlanan saati not edin.",
+        "Bilinmeyen tuş birleşimlerini denemeyin."
+      ],
+      "neighborhood_intro": "Beylikdüzü mahallenizi seçtikten sonra kumanda ve çalışma belirtisini aynı servis talebinde tutabilirsiniz.",
+      "cta": {
+        "heading": "Klimanın ne yapmasını bekliyorsunuz?",
+        "text": "Görünen ayarı ve gerçekleşen davranışı söyleyin; kullanıcı ayarı mı yoksa servis kontrolü mü gerektiğini konuşalım."
+      }
+    },
+    {
+      "route": "beyoglu-kombi-servisi.html",
+      "focus": "Kiracı ve mülk sahibi arasında servis geçmişi aktarımı",
+      "lead": "Beyoğlu’nda kiraladığınız veya yeni devraldığınız adresteki kombinin geçmişini bilmemeniz servis talebine engel değildir. Cihangir, Fetihtepe veya listedeki başka bir mahallede cihazın gerçek konumunu, bugün yaşanan belirtiyi ve önceki kullanıcıdan öğrenilebilen bilgiyi birbirinden ayırarak ilerleyebiliriz. Marka seçimi yapılmadan da görüşme başlayabilir.",
+      "headline": "Yeni kullanıcı için eski cihaz bilgisini toparlayalım",
+      "description": "Beyoğlu kombi bakım ve onarım servisi. Kiracı veya mülk sahibi olarak cihaz geçmişi, erişim ve güncel belirtiyle servis talebi oluşturun.",
+      "sections": [
+        {
+          "id": "bilinen-gecmis",
+          "heading": "Belgesi olan işlemi, duyulan bilgiden ayırın",
+          "paragraphs": [
+            "Önceki bakım fişi, değişen parçaya ait servis kaydı veya kullanım kılavuzu varsa bunlar görüşmeye yardımcı olur. “Daha önce kartı yapılmış olabilir” gibi kesin olmayan bir bilgiyi de tahmin olduğunu söyleyerek aktarabilirsiniz. Geçmişte yapılan işlem, bugünkü sorunun aynı parçadan kaynaklandığı anlamına gelmez. Sırf önceki kullanıcı söyledi diye onarım kararı verilmez."
+          ]
+        },
+        {
+          "id": "bugunku-durum",
+          "heading": "Devraldığınız koşulu yeniden denemeden anlatın",
+          "paragraphs": [
+            "Eve geldiğinizde ekran uyarılı mıydı, sıcak su alınabiliyor muydu, bir odanın peteği mi soğuktu? Hangi bilgiyi kendi gözleminizle, hangisini ev sahibinden öğrendiğinizi belirtin. Cihazı açmak, kapalı bağlantıları değiştirmek veya eski hatayı yeniden oluşturmak gerekmez. Görünen model etiketi güvenle okunabiliyorsa eklenebilir; kod açıklamasında tam model ayrıca aranır."
+          ],
+          "links": [
+            {
+              "path": "kombi-modeli-nasil-ogrenilir.html",
+              "label": "Cihaz modelini kapağı açmadan tanıma"
+            }
+          ]
+        },
+        {
+          "id": "gorusulecek-kisi",
+          "heading": "İşlemi onaylayacak kişiyle erişim kişisini netleştirin",
+          "paragraphs": [
+            "Sütlüce’deki bir konut veya Asmalı Mescid’deki bir iş yeri için cihazın yanında bulunacak kişiyle işlemi değerlendirecek kişi farklı olabilir. Bu durumu önceden söylemek iletişim kopukluğunu önler. Kiracı ve mülk sahibi arasındaki ücret paylaşımına servis görüşmesiyle otomatik karar verilmez. Kontrolden sonra önerilen kapsam ve ücret açıklanır; işlem onayı ayrıca alınır."
+          ],
+          "bullets": [
+            "Varsa eski servis kaydını hazır tutun.",
+            "Bugünkü şikâyeti geçmişten ayrı anlatın.",
+            "İletişim ve onay kişilerini belirtin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Önceki servis fişi olmadan kombiyi kontrol edebilir misiniz?",
+          "answer": "Talep bırakabilirsiniz. Geçmiş belgenin bulunmaması mevcut belirtinin değerlendirilmesine engel değildir; ancak eski bir işlem veya garanti kapsamı belgesiz doğrulanmış sayılmaz."
+        },
+        {
+          "question": "Kombinin masrafını kiracı mı ev sahibi mi öder?",
+          "answer": "Bu konu tarafların sözleşmesine ve ilgili koşullara bağlıdır; yalnız arıza kaydı açılmasıyla belirlenmez. Teknik kontrolün kapsamı ve işlem bedeli size açıklanır."
+        }
+      ],
+      "takeaways": [
+        "Belgeyle tahmini ayrı tutun.",
+        "Mevcut belirtiyi kendi gözleminizle anlatın.",
+        "Onay verecek kişiyi önceden belirleyin."
+      ],
+      "neighborhood_intro": "Semt adıyla tarif edilen Beyoğlu adresini mahalle seçimiyle netleştirin; listede bulamazsanız tam adresi görüşmede paylaşabilirsiniz.",
+      "cta": {
+        "heading": "Cihazın geçmişi eksik olsa da başlayabiliriz",
+        "text": "Bugünkü ihtiyacı ve erişim durumunu aktarın; bakım ya da arıza kontrolünü birlikte değerlendirelim."
+      }
+    },
+    {
+      "route": "beyoglu-klima-servisi.html",
+      "focus": "Kiralanmış mekânda güvenli erişim ve cihaz geçmişi",
+      "lead": "Beyoğlu’nda devraldığınız mekândaki klima için ilk adım, hangi ünitenin size ait kullanım alanını etkilediğini ve ona nasıl erişileceğini netleştirmektir. Gümüşsuyu, Şahkulu veya Sütlüce adresinizde bakım geçmişi bilinmiyorsa bunu belirtin; görünen belirti, cihaz bilgisi ve erişim koşullarıyla servis görüşmesine başlayabilirsiniz.",
+      "headline": "Mekânı devralırken klima bilgisini de devralın",
+      "description": "Beyoğlu klima bakım ve arıza servisinde kiralanmış mekânlar için cihaz geçmişi, ünite bilgisi ve güvenli erişimi birlikte netleştirin.",
+      "sections": [
+        {
+          "id": "hangi-unite",
+          "heading": "Görünen her ünite aynı alanı beslemeyebilir",
+          "paragraphs": [
+            "Birden fazla iç ünite bulunan adreste hangi odanın ya da bölümün etkilendiğini söyleyin. Ortak kumanda kullanılıp kullanılmadığını biliyorsanız ekleyin. Yalnız dışarıdan görünen üniteye bakarak bağlantı düzenini çıkarmayız. Kiralama sırasında verilen kılavuz veya cihaz listesi varsa ilgili modelin bulunmasını kolaylaştırabilir; yokluğu ise belirtiyi anlatmanıza engel olmaz."
+          ]
+        },
+        {
+          "id": "guvenli-erisim",
+          "heading": "Dış üniteyi göstermek için risk almayın",
+          "paragraphs": [
+            "Cihazın bulunduğu yerin erişim durumunu güvenli konumdan tarif etmek yeterlidir. Pencereye uzanmak, çatıya çıkmak veya merdivenle fotoğraf çekmek istenmez. Bina yönetiminden izin gerektiren bir bölüm söz konusuysa görüşmede belirtin. Erişimin uygunluğu, yapılabilecek kontrolün kapsamını etkileyebilir; bu durum görülmeden kesin işlem ve varış sözü verilmez."
+          ],
+          "links": [
+            {
+              "path": "servis-oncesi-guvenli-kontrol.html",
+              "label": "Servis öncesi güvenli hazırlık"
+            }
+          ]
+        },
+        {
+          "id": "bakim-kaydi",
+          "heading": "Geçmişi bilinmeyen cihazda bugünkü ihtiyaca odaklanın",
+          "paragraphs": [
+            "Firuzağa’daki bir iş yerinde koku şikâyeti veya Piri Paşa’daki bir evde soğutma azalması farklı gözlemlerle ele alınır. Kullanıcının “önceki kiracı bakım yaptırmıştı” demesi tek başına işlemin kapsamını göstermez. Talebinizi bakım isteği, görülen arıza veya her ikisi olarak açıklayın. Önerilen uygulama cihaz değerlendirilince, ücret ve kapsamıyla birlikte onayınıza sunulur."
+          ],
+          "bullets": [
+            "Etkilenen iç üniteyi oda adıyla belirtin.",
+            "Bilinen bakım belgesini varsa paylaşın.",
+            "Giriş ve ortak alan izinlerini konuşun."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Dış ünitenin nerede olduğunu bilmiyorum; servis görüşmesi yapabilir miyim?",
+          "answer": "Evet. İç ünitenin bulunduğu alanı ve belirtisini anlatarak başlayabilirsiniz. Dış üniteye ulaşmak için kendinizi riske atmanız gerekmez; erişim değerlendirmesi ayrıca yapılır."
+        },
+        {
+          "question": "Önceki kiracı bakım yapıldığını söyledi; yine bakım gerekir mi?",
+          "answer": "Sözel bilgi tek başına bakımın tarihini veya kapsamını doğrulamaz. Bilinen belge ve cihazın bugünkü durumu birlikte değerlendirilerek ihtiyaç açıklanır."
+        }
+      ],
+      "takeaways": [
+        "Odayla cihazı eşleştirin.",
+        "Ulaşılması zor alana kendiniz çıkmayın.",
+        "Geçmiş beyanla güncel ihtiyacı ayırın."
+      ],
+      "neighborhood_intro": "Beyoğlu mahallesini seçerken iş yerinin bilinen adından çok cihazın bulunduğu gerçek adresi esas alın.",
+      "cta": {
+        "heading": "Mekânın koşullarını önceden paylaşın",
+        "text": "Ünite ve erişim bilgisini iletin; bakım veya arıza kontrolünün nasıl yürütülebileceğini konuşalım."
+      }
+    },
+    {
+      "route": "besiktas-kombi-servisi.html",
+      "focus": "Kullanım alanlarına göre ısıtma ve sıcak su ihtiyacını ayırma",
+      "lead": "Beşiktaş’taki kombi şikâyetiniz yalnız bir kullanım sırasında ortaya çıkabilir: muslukta sıcak su kesilirken odalar ısınıyor ya da petekler soğukken sıcak su alınabiliyor olabilir. Etiler, Ortaköy veya Dikilitaş adresiniz için bu farkı anlatmanız, ihtiyaç duyduğunuz kontrolü daha açık bir servis talebine dönüştürür.",
+      "headline": "Sıcak su çalışıyor mu, odalar ısınıyor mu?",
+      "description": "Beşiktaş kombi servisinde sıcak su ve kalorifer şikâyetlerini ayrı değerlendirin. Mahalleniz, cihazınız ve kullanım belirtinizle talep bırakın.",
+      "sections": [
+        {
+          "id": "iki-kullanim",
+          "heading": "İki işlevin durumunu ayrı cümlelerle söyleyin",
+          "paragraphs": [
+            "Kombinin bütünüyle çalışmadığını söylemeden önce normal kullanımda hangi işlevin sürdüğünü hatırlayın. “Sıcak su var, salon peteği soğuk” ile “hiçbir muslukta sıcak su yok” aynı kaydı oluşturmaz. Bunu anlamak için yeni deneme yapmanız şart değildir; daha önce gözlediğiniz durumu aktarmanız yeterlidir. Parça adı bilmek veya teknik terim kullanmak beklenmez."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicak-su.html",
+              "label": "Sıcak su şikâyetinde gözlenen farklar"
+            }
+          ]
+        },
+        {
+          "id": "kullanim-alani",
+          "heading": "Konutta ve iş yerinde şikâyetin zamanı değişebilir",
+          "paragraphs": [
+            "Evde duş sırasında fark edilen sıcaklık değişimiyle iş yerinin açılışında hissedilen ısınma eksikliği farklı kullanım bilgileri gerektirir. Kaç kişinin kullandığına ilişkin ayrıntı vermek zorunda değilsiniz; sorunun hangi işlevde ve hangi sırada yaşandığını belirtin. Odalardan yalnız birinin etkilenmesi, doğrudan kombi arızası veya petek temizliği gerektiğini kanıtlamaz."
+          ],
+          "links": [
+            {
+              "path": "kombi-petek-isitmiyor.html",
+              "label": "Petek ve cihaz tarafını ayırma rehberi"
+            }
+          ]
+        },
+        {
+          "id": "besiktas-kayit",
+          "heading": "Adres, kumanda ve cihaz bilgisini aynı kayıtta toplayın",
+          "paragraphs": [
+            "Beşiktaş’ın Arnavutköy mahallesindeki bir adres, Arnavutköy ilçesiyle karışmamalıdır; mahalle ve ilçeyi birlikte seçin. Levent veya Türkali’den başvururken varsa oda kumandası bilgisini ve ekrandaki tam uyarıyı ekleyebilirsiniz. Bakım veya farklı bir arıza için de talep alınır. Kontrolün sonunda yapılması önerilen işlem açıklanır; sadece şikâyet adına bakılarak onarım kararı verilmez."
+          ],
+          "bullets": [
+            "Sıcak suyun durumunu belirtin.",
+            "Isınmayan alanı tarif edin.",
+            "İlçeyle aynı adı taşıyan mahallede adresi teyit edin."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Sıcak su varken petekler soğuksa kombi sağlam sayılır mı?",
+          "answer": "Bu gözlem cihazın bütün işlevlerinin sağlıklı olduğunu kanıtlamaz. Kumanda, çalışma koşulları ve ısıtma devresi birlikte değerlendirilmelidir."
+        },
+        {
+          "question": "Arnavutköy mahallesindeyim; hangi ilçeyi seçmeliyim?",
+          "answer": "Beşiktaş’taki Arnavutköy mahallesini kastediyorsanız ilçe olarak Beşiktaş’ı seçin. Tam adresin görüşmede doğrulanması, aynı isimli ilçe kaydıyla karışmayı önler."
+        }
+      ],
+      "takeaways": [
+        "İki kullanım işlevini ayırın.",
+        "Tek oda belirtisinden teşhis çıkarmayın.",
+        "Arnavutköy adında ilçeyi ayrıca belirtin."
+      ],
+      "neighborhood_intro": "Beşiktaş mahalleleri içinden cihaz adresinizi işaretleyin; semt veya işletme adıyla verilen tarifi gerektiğinde tamamlayalım.",
+      "cta": {
+        "heading": "Hangi işlevin aksadığını söyleyin",
+        "text": "Sıcak su ve ısınma durumunu birlikte aktarın; uygun kontrol kapsamını görüşelim."
+      }
+    },
+    {
+      "route": "besiktas-klima-servisi.html",
+      "focus": "İç fan sesi ile dış ünite titreşimini tarif etme",
+      "lead": "Beşiktaş’taki klimanızda yeni bir ses duyduğunuzda, sesin iç üniteden mi yoksa güvenli konumdan duyulan dış ünite tarafından mı geldiğini belirtin. Akat, Bebek veya Gayrettepe adresinizde uğultu, sürtme ve aralıklı titreşimi kendi kelimelerinizle anlatabilirsiniz; kaynağı bulmak için cihazı açmanız istenmez.",
+      "headline": "Duyulan sesi yer, süre ve çalışma anıyla tarif edin",
+      "description": "Beşiktaş klima servisinde fan sesi, titreşim, bakım ve onarım talepleri. İç ve dış ünite belirtisini güvenli gözlemlerle ayırarak ilerleyin.",
+      "sections": [
+        {
+          "id": "sesin-yeri",
+          "heading": "Sesin nereden duyulduğunu emin olduğunuz kadar söyleyin",
+          "paragraphs": [
+            "İç ünite önünde duyulan hava sesiyle uzaktan fark edilen mekanik uğultu aynı biçimde tarif edilmeyebilir. Kaynağından emin değilseniz tahmininizi kesin bilgi gibi sunmayın. Cihazın hangi modda çalıştığı, sesin sürekli mi aralıklı mı olduğu ve ne zaman başladığı görüşmeye yardımcı olur. Kaydı güçlendirmek için parçaya dokunmak veya koruyucu kapağı açmak gerekmez."
+          ]
+        },
+        {
+          "id": "calisma-ani",
+          "heading": "Normalden farklı davranışı yeniden oluşturmaya çalışmayın",
+          "paragraphs": [
+            "Ses yalnız ilk çalışmada mı duyuluyor, cihaz kapanırken mi geliyor, fan açıkken mi sürüyor? Hatırladığınız bu ayrıntıları paylaşabilirsiniz. Belirgin artış, yanık kokusu, duman veya elektrik kesintisi eşlik ediyorsa cihazı denemeyi bırakın; acil tehlikede güvenli alana geçin. Dış üniteyi dinlemek için pencereye uzanmak veya yüksek bir yere çıkmak uygun değildir."
+          ],
+          "links": [
+            {
+              "path": "klima-sesli-calisiyor.html",
+              "label": "Klimanın sesli çalışmasını değerlendirme"
+            }
+          ]
+        },
+        {
+          "id": "talep-kapsami",
+          "heading": "Bakım isteği ile ses şikâyetini birlikte açıklayın",
+          "paragraphs": [
+            "Balmumcu’da bakım isteyen bir kullanıcı da Ortaköy’de titreşim fark eden biri de cihazın modelini biliyorsa ekleyebilir. Sadece sese bakarak fan motoru, bağlantı elemanı veya kompresör değişimi önerilmez. Onarım gerekip gerekmediği ve işlemin kapsamı kontrol sonrası konuşulur. Soğutma, ısıtma, koku veya su akıtma gibi diğer klima ihtiyaçları da servis talebine eklenebilir."
+          ],
+          "bullets": [
+            "Sesin duyulduğu alanı belirtin.",
+            "Eşlik eden uyarıları ayrıca aktarın.",
+            "Görüntü almak için güvenli sınırı aşmayın."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Gönderdiğim ses kaydından değişecek parça belli olur mu?",
+          "answer": "Ses kaydı yardımcı bir gözlem olabilir; tek başına kesin parça teşhisi değildir. Cihazın modeli ve çalışma koşullarıyla birlikte yerinde kontrol gerekebilir."
+        },
+        {
+          "question": "Sesi kaydetmek için klimayı yeniden açmalı mıyım?",
+          "answer": "Belirtiyi yeniden oluşturmanız beklenmez. Özellikle ses belirgin arttıysa veya koku, duman, elektrik sorunu eşlik ediyorsa yeni deneme yapmayın; mevcut gözlemi aktarın."
+        }
+      ],
+      "takeaways": [
+        "Yerini bilmiyorsanız tahmin olduğunu söyleyin.",
+        "Sesin başladığı anı not edin.",
+        "Kayıt için cihazı zorlamayın."
+      ],
+      "neighborhood_intro": "Beşiktaş servis adresini seçerken cihazın bulunduğu katı ve güvenli erişim koşulunu görüşmede tamamlayabilirsiniz.",
+      "cta": {
+        "heading": "Duyduğunuz farkı tarif edin",
+        "text": "Sesin nerede ve ne zaman oluştuğunu paylaşın; bakım ya da arıza kontrolünü uygun kapsamla değerlendirelim."
+      }
+    },
+    {
+      "route": "500-evler-servisi.html",
+      "focus": "500 Evler adında ilçe belirsizliği",
+      "lead": "500 Evler diye tarif edilen servis adresinde ilk netleştireceğimiz bilgi ilçedir. Bu ad tek başına resmî mahalle veya ilçe sınırı kabul edilmez. Bayrampaşa, Gaziosmanpaşa ya da Sultangazi seçeneklerinden gerçek adresinize uyan bilgiyi belirterek kombi, klima veya petek ihtiyacını doğru konumla birlikte iletebilirsiniz.",
+      "headline": "500 Evler tarifini açık servis adresine dönüştürelim",
+      "description": "500 Evler kombi, klima ve petek servis talepleri. Semt tarifini gerçek ilçe ve mahalleyle netleştirip cihazınıza uygun rehbere ulaşın.",
+      "sections": [
+        {
+          "id": "semt-ilce",
+          "heading": "Bilinen semt adıyla idari adres aynı şey değildir",
+          "paragraphs": [
+            "Adresinizi günlük kullanımda 500 Evler olarak söylüyor olabilirsiniz. Servis kaydında ise ilçe, mahalle, sokak ve bina bilgileri birlikte değerlendirilir. Buradaki ilçe seçenekleri olası adresi netleştirmek içindir; belirtilen adın bu ilçelerin bütününde resmî bir mahalle olduğu iddia edilmez. Hangi ilçede olduğunuzdan emin değilseniz seçeneklerden rastgele seçim yapmak yerine görüşmede açıklayın."
+          ]
+        },
+        {
+          "id": "cihaz-ihtiyaci",
+          "heading": "Konum netleşirken cihaz şikâyetini kaybetmeyelim",
+          "paragraphs": [
+            "Kombi sıcak su vermiyorsa, klima soğutmuyorsa veya peteklerin durumu için kontrol istiyorsanız bunu adres tarifinden ayrı cümleyle belirtin. Marka biliniyorsa eklenebilir; model bilinmiyorsa talep durmaz. Kodlu uyarılarda aynı kodun başka cihazlarda farklı anlam taşıyabileceği unutulmamalıdır. Kesin açıklama, ilgili cihazın doğru model belgesine göre yapılır."
+          ],
+          "links": [
+            {
+              "path": "ariza-rehberi.html",
+              "label": "Cihaz belirtisine göre rehber seçin"
+            }
+          ]
+        },
+        {
+          "id": "adres-teyidi",
+          "heading": "Görüşmede tamamlanabilecek bilgileri ayırın",
+          "paragraphs": [
+            "Sokağı veya bina numarasını henüz bilmiyorsanız elinizdeki adres bilgisini söyleyin; bulunduğunuz konumu paylaşmak isteğe bağlıdır. Yakındaki bir işletmenin adını tarif olarak kullanmanız, onun servis adresi olarak kaydedileceği anlamına gelmez. Randevu uygunluğu gerçek adres teyit edilerek görüşülür; semt adından otomatik sıra, rota veya varış süresi üretilmez."
+          ],
+          "bullets": [
+            "İlçeyi biliyorsanız onu esas alın.",
+            "Mahalle bilgisini adres belgenizden kontrol edebilirsiniz.",
+            "İletişim kişisiyle cihazın bulunduğu adresi ayırın."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "500 Evler’i yazınca neden ilçe bilgisi de isteniyor?",
+          "answer": "Semt tarifi tek başına kesin idari adres sağlamayabilir. İlçe ve mahalle bilgisi yanlış bir yere yönlenmeyi önlemek için birlikte netleştirilir."
+        },
+        {
+          "question": "İlçemi bilmiyorsam konum izni vermek zorunda mıyım?",
+          "answer": "Hayır. Konum paylaşımı isteğe bağlıdır. Bildiğiniz adresi aktarabilir, eksik ilçe ve mahalle bilgisini telefon görüşmesinde tamamlayabilirsiniz."
+        }
+      ],
+      "takeaways": [
+        "500 Evler adı adres teyidi gerektirir.",
+        "Cihaz belirtisini ayrı kaydedin.",
+        "Konum paylaşımı zorunlu değildir."
+      ],
+      "neighborhood_intro": "Önce gerçek ilçeyi belirleyin; ardından o ilçenin mahalle rehberinden adresinizi tamamlayabilirsiniz.",
+      "cta": {
+        "heading": "500 Evler tarifinizle başlayın",
+        "text": "Bildiğiniz adresi ve cihaz ihtiyacını paylaşın; eksik konum bilgisini görüşerek tamamlayalım."
+      }
+    }
+  ]
+}

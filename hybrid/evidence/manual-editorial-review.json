@@ -1,0 +1,46 @@
+{
+  "scope": "Independent second-reader review of all55 authored regional bodies; no independent certification of current municipal completeness or future search-engine behavior.",
+  "coverage": {
+    "batches": 5,
+    "pages": 55,
+    "each_batch_read_by_different_author": true
+  },
+  "findings_and_actions": [
+    {
+      "batch": 1,
+      "issue": "Ownership wording could imply customer must owndevice; stopwatch phrase awkward.",
+      "action": "Changed to daireye ait and ordinary duration-observation wording.",
+      "status": "fixed"
+    },
+    {
+      "batch": 2,
+      "issue": "Remote-controller headline sounded unnatural.",
+      "action": "Changed Beylikdüzü klima headline to settings versus observed response.",
+      "status": "fixed"
+    },
+    {
+      "batch": 3,
+      "issue": "Accusatory Merter address wording, awkward clock phrase, excessive health-marketing comparison.",
+      "action": "Three literal copy fixes applied by own author.",
+      "status": "fixed"
+    },
+    {
+      "batch": 4,
+      "issue": "Sarıyer and Esenyurt climate bodies initially shared defrost/waiting explanatory focus despite differentphrasing.",
+      "action": "Sarıyer body rewritten around newseason usepurpose,controllerhistory androomconditions; defrost only shortFAQ. GOPaddressphrasesclarified.",
+      "status": "fixed"
+    },
+    {
+      "batch": 5,
+      "issue": "Kilyos link used incomplete anchor; three statements could imply duplicate requests, unclear neighborhoodlabel or undervalued comfort.",
+      "action": "Rootcorrected anchor to kumkoy-kilyos; authorcorrected request/tone/addressphrases.",
+      "status": "fixed"
+    }
+  ],
+  "meaning_assessment": "The new bodies use different service-intake and observation tasks, rather than a rotating pool of five notes or pure locality-name replacement. Shared technical and safety facts remain compatible. No unsafe repair instructions or fabricated districtfailure-frequency/building-stock/completed-job claims were found by the second readers.",
+  "limits": [
+    "A textual similarity audit cannot certify all factual claims or Google indexing.",
+    "The55pages share a company design and legitimate navigation; that is outside editorial-copy detection.",
+    "Originalmodel code tables remain sourcefacts and must not be rewritten solely for uniqueness."
+  ]
+}

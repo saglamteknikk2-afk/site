@@ -19,7 +19,7 @@ BUSINESS_ADDRESS = {
     'addressLocality': 'Küçükçekmece', 'addressRegion': 'İstanbul',
     'addressCountry': 'TR',
 }
-NON_CONTENT = {'404.html', 'owner-admin.html', 'servis-takip.html', 'servis-sec.html'}
+NON_CONTENT = {'404.html', 'owner-admin.html', 'servis-takip.html', 'servis-sec.html', 'icerik-inceleme.html'}
 POLICY_PAGES = {
     'aydinlatma.html', 'hakkimizda.html', 'isletme-bilgileri.html',
     'kaynak-ve-yayin-ilkeleri.html', 'iletisim.html',

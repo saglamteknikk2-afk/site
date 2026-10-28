@@ -26,7 +26,7 @@ ORIGIN = 'https://saglamkombiklima.com.tr/'
 HOSTS = {'saglamkombiklima.com.tr', 'www.saglamkombiklima.com.tr'}
 CONTACT_HOSTS = {'wa.me', 'api.whatsapp.com', 'web.whatsapp.com'}
 EXCLUDE = {'404.html', 'owner-admin.html', 'servis-takip.html', 'servis-sec.html',
-           'teknik-rapor.html', 'technical-report.html', 'rapor.html'}
+           'teknik-rapor.html', 'technical-report.html', 'rapor.html', 'icerik-inceleme.html'}
 TEXT_SUFFIXES = {'.js','.php','.json','.txt','.html','.yml','.yaml','.env'}
 SECRET_PATTERNS = {
     'google_api_key': r'AIza[0-9A-Za-z_-]{35}',

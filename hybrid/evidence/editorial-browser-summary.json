@@ -1,0 +1,101 @@
+{
+  "scope": "Actual local Chromium layout/runtime checks; external providers blocked and form delivery not exercised. Gallery captures show all55 editorial bodies.",
+  "pages": 204,
+  "views": 408,
+  "changedBodyCaptures": 55,
+  "captureBytes": 4722708,
+  "overflow": [],
+  "boundsOverflow": [],
+  "runtimeErrors": [],
+  "httpErrors": [],
+  "brokenImages": [],
+  "duplicateIds": [],
+  "navigation": [
+    {
+      "kind": "sidebar",
+      "href": "#semt-mahalle",
+      "top": 240.578125,
+      "bottom": 472.34375,
+      "visible": true
+    },
+    {
+      "kind": "sidebar",
+      "href": "#belirti-tercihi",
+      "top": 241.34375,
+      "bottom": 433.140625,
+      "visible": true
+    },
+    {
+      "kind": "sidebar",
+      "href": "#model-ve-islem",
+      "top": 241.140625,
+      "bottom": 432.9375,
+      "visible": true
+    },
+    {
+      "kind": "direct neighborhood hash",
+      "selected": "Atakent",
+      "passed": true
+    },
+    {
+      "kind": "same-page neighborhood change",
+      "hash": "#mahalle-cennet",
+      "selected": "Cennet",
+      "passed": true
+    },
+    {
+      "kind": "header",
+      "label": "AI Usta",
+      "width": 360,
+      "top": 12.40625,
+      "bottom": 692.890625,
+      "visible": true
+    },
+    {
+      "kind": "header",
+      "label": "Yorumlar",
+      "width": 360,
+      "top": -45.59375,
+      "bottom": 3411.84375,
+      "visible": true
+    },
+    {
+      "kind": "header",
+      "label": "AI Usta",
+      "width": 1440,
+      "top": 103.34375,
+      "bottom": 787.421875,
+      "visible": true
+    },
+    {
+      "kind": "header",
+      "label": "Yorumlar",
+      "width": 1440,
+      "top": -8.921875,
+      "bottom": 1646.28125,
+      "visible": true
+    }
+  ],
+  "navigationErrors": [],
+  "reviewUI": {
+    "scope": "Real local Chromium of 55-page comparison UI, not provider or indexing results",
+    "rows": 55,
+    "search_kucukcekmece_results": 2,
+    "open_close_visible_rows": true,
+    "width": 360,
+    "doc": 360,
+    "body": 360,
+    "robots": "noindex,nofollow",
+    "errors": []
+  },
+  "qa_note": "Initial hidden desktop-link selector on mobile corrected by opening actualmobile menu; all navigation outcomes below are from rerun.",
+  "sourceContentShaAtReport": "1787badcb5d51e2a9a9e1bda7d3e8bec95f27a0c07faa8f16dbc95719493f259",
+  "sourceVersionNote": "Application body/style data frozen for this run; technical report text may update independently. This records manifest at report write, not a claim that output metadata stayed byte-identical during the run.",
+  "commentsHeading": {
+    "sectionTop": -45.59375,
+    "headingTop": 45.90625,
+    "headingBottom": 132.125,
+    "headerBottom": -6472,
+    "headingText": "İyi işin ardından,söz sizde."
+  }
+}

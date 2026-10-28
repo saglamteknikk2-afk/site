@@ -1,0 +1,723 @@
+{
+  "pages": [
+    {
+      "route": "silivri-kombi-servisi.html",
+      "focus": "Ev sahibi uzaktayken yerinde kontrol organizasyonu",
+      "lead": "Silivri’deki evinizde kombi sorunu varken başka bir adreste olabilirsiniz. Servis kaydını, cihazı görebilen kişiyle iletişim kurabileceğimiz şekilde hazırlayalım. Selimpaşa, Gümüşyaka veya Alibey adresini; evde bulunacak kişinin erişim bilgisi ve kombide gözlenen belirtiyle birlikte iletmeniz, görüşmenin daha doğru ilerlemesini sağlar.",
+      "headline": "Siz uzaktayken Silivri’deki kombi için kontrol nasıl hazırlanır?",
+      "description": "Silivri kombi servis talebinde adres, cihaz bilgisi ve evde bulunacak kişi birlikte netleştirilir. Bakım ve arıza kontrolü için hazırlık rehberini inceleyin.",
+      "sections": [
+        {
+          "id": "evdeki-kisi",
+          "heading": "Cihazı gören kişiyle aynı bilgiyi konuşalım",
+          "paragraphs": [
+            "Telefonda aktarılan bir şikâyet birkaç kişiden geçince değişebilir. Evdeki kişiden kombinin ekranını, marka etiketini ve sorunun ne zaman ortaya çıktığını tarif etmesini isteyin. Cihazı denemek veya bir işlem yapmak yerine mevcut durumu anlatması yeterlidir.",
+            "Kaloriferin çalışmaması, musluk suyunun ısınmaması ve ekranda uyarı görülmesi aynı talepte ayrı gözlemler olarak belirtilebilir. Hangisinin yaşandığı bilinmiyorsa bunu açıkça yazın. Eksik bilgiyi görüşmede tamamlamak, tahmini bir parça adı üzerinden talep açmaktan daha yararlıdır."
+          ],
+          "links": [
+            {
+              "path": "kombi-calismiyor.html",
+              "label": "Çalışmama belirtisini ayırın"
+            }
+          ]
+        },
+        {
+          "id": "giris-onayi",
+          "heading": "Adrese erişim ve işlem onayı birbirinden ayrıdır",
+          "paragraphs": [
+            "Binaya veya eve kimin giriş sağlayacağını önceden belirleyin. Kapıyı açacak kişiyle masrafı değerlendirecek kişi farklıysa, işlem önerisinin kime aktarılacağını da söyleyin. Ziyaret sırasında onaya ihtiyaç duyulabileceği için ulaşılabilir bir iletişim numarası önemlidir.",
+            "Kavaklı ya da Semizkumlar gibi mahalle adlarının yanına bina ve kapı tarifini ekleyebilirsiniz. Randevunun uygunluğu görüşmede belirlenir; adresi bırakmış olmak belirli bir saat veya varış süresi taahhüdü oluşturmaz."
+          ]
+        },
+        {
+          "id": "ziyaret-notu",
+          "heading": "Kontrolden sonra paylaşılmasını istediğiniz bilgiyi belirtin",
+          "paragraphs": [
+            "Uzaktaysanız değerlendirme sonunda arızanın nasıl açıklandığını, hangi işlemin önerildiğini ve kapsamın ne olduğunu öğrenmek isteyebilirsiniz. Bu beklentiyi talebinize ekleyin. Bakım isteğiyle arıza incelemesini bir arada yazabilirsiniz; her biri cihazın durumuna göre ayrıca değerlendirilir.",
+            "Baymak, Vaillant veya başka bir marka seçimi yapmadan da kayıt hazırlanabilir. Bir hata kodu varsa tam yazımı saklanır; anlamı, etiket bilgisiyle eşleşen model belgesinden kontrol edilir."
+          ],
+          "links": [
+            {
+              "path": "kombi-modeli-nasil-ogrenilir.html",
+              "label": "Etiketten model bilgisini bulma"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Silivri’deki evime benim yerime yakınım eşlik edebilir mi?",
+          "answer": "Adrese giriş sağlayacak kişi ve işlem kararının kime aktarılacağı görüşmede belirlenebilir. Yakınınızın cihazı sökmesi ya da arızayı önceden teşhis etmesi gerekmez."
+        },
+        {
+          "question": "Evdeki kişi hata kodunu okuyamıyorsa talep eksik mi kalır?",
+          "answer": "Hayır. Ekranın okunamadığını ve yaşanan kullanım sorununu belirtin. Model veya kod bilinmediği için tahmini bir anlam yazılmaz; gerekli bilgiler kontrol sırasında tamamlanabilir."
+        }
+      ],
+      "takeaways": [
+        "Adrese giriş sağlayacak kişiyi belirleyin.",
+        "İşlem onayının kimden alınacağını söyleyin.",
+        "Duyulan teşhis yerine gözlenen sorunu aktarın."
+      ],
+      "neighborhood_intro": "Silivri adresinin mahalle karşılığını seçin; evde sizi karşılayacak kişinin tarifini ayrıca not edebilirsiniz.",
+      "cta": {
+        "heading": "Silivri’deki adres için birlikte hazırlanalım",
+        "text": "Cihazın bulunduğu mahalleyi ve evde iletişim kurulacak kişiyi paylaşın; bakım veya arıza talebinin uygunluğunu görüşelim."
+      }
+    },
+    {
+      "route": "silivri-klima-servisi.html",
+      "focus": "Sezonluk kullanılan adreste uzaktan iletişim hazırlığı",
+      "lead": "Silivri’de bir süre kullanılmayan adresteki klimanın durumunu, eve gitmeden kesinleştirmek mümkün olmayabilir. Gümüşyaka, Selimpaşa veya Çanta Balaban için talep bırakırken son kullanım zamanını ve cihazı kontrol edebilecek kişinin olup olmadığını belirtin. Bakım ihtiyacıyla gözlenmiş arızayı ayrı bilgiler olarak kaydedelim.",
+      "headline": "Silivri’de yeniden kullanılacak klimaya dair bildiklerinizi toparlayın",
+      "description": "Silivri klima servisi için sezonluk kullanım, son çalışma bilgisi ve adrese erişimi paylaşın. Bakım ihtiyacıyla gözlenen arızayı ayıran hazırlık rehberi.",
+      "sections": [
+        {
+          "id": "son-kullanim",
+          "heading": "Son çalışmayı hatırlamak, bugünkü durumu tahmin etmek değildir",
+          "paragraphs": [
+            "Klima kapatıldığında çalışıyorduysa bunu geçmiş kullanım bilgisi olarak aktarın. Uzun süre beklemiş olması tek başına gaz eksikliği, kart arızası veya bakım zorunluluğunu kanıtlamaz. Şimdi soğutup soğutmadığı görülmediyse, kaydı arıza doğrulanmış gibi oluşturmayın.",
+            "Elinizde önceki bakım tarihi veya eski işlem notu varsa paylaşabilirsiniz. Bunlar yeni kontrolün kapsamını konuşmaya yardımcı olur; önceki parça değişiminin tekrar gerekeceği anlamına gelmez."
+          ],
+          "links": [
+            {
+              "path": "klima-bakimi.html",
+              "label": "Klima bakımında değerlendirilen başlıklar"
+            }
+          ]
+        },
+        {
+          "id": "uzaktan-bilgi",
+          "heading": "Cihaza ulaşamıyorsanız yanlış bir model seçmeyin",
+          "paragraphs": [
+            "Kumanda fotoğrafı, klimanın tam modelini her zaman göstermez. İç ünite etiketini görebilen biri varsa cihazı açmadan okunabilen bilgiyi iletsin. Dış ünite etiketi yüksekteyse ona ulaşmak için tırmanılmasını istemeyiz; erişilemediğini belirtmek yeterlidir.",
+            "Yeni Mahallesi’ndeki adreste veya site içindeki farklı bloklarda girişler karışabilir. Kayıt ekranındaki mahalle seçiminin yanına giriş ve kapı bilgisini ekleyin. Konum paylaşımı zorunlu değildir."
+          ]
+        },
+        {
+          "id": "ilk-gozlem",
+          "heading": "Yerine gidildiğinde ortaya çıkan şikâyeti ayrıca aktarın",
+          "paragraphs": [
+            "Eve ulaştığınızda koku, su damlaması veya olağan dışı ses fark ederseniz eski talebi bu yeni gözlemle tamamlayın. Hangi modun seçildiği ve üflemenin başlayıp başlamadığı değerlidir. Cihaz elektriksel sorun gösteriyorsa tekrar tekrar çalıştırmayı denemeyin.",
+            "Arçelik, Daikin, Mitsubishi ve diğer markalar için bakım ya da onarım ihtiyacı konuşulabilir. Kesin işlem, ücret ve ziyaret uygunluğu mevcut cihaz bilgisi üzerinden değerlendirilir; sezon başlangıcı için otomatik parça veya soğutucu işlemi önerilmez."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Tepki vermeyen klimayı tarif etme"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Eve henüz gitmedim; yalnız bakım düşünüyorsam kayıt açabilir miyim?",
+          "answer": "İsteğinizi bakım değerlendirmesi olarak bırakabilirsiniz. Son kullanım ve erişim bilgisi görüşülür; cihaz görülmeden arıza varmış gibi bir işlem kapsamı belirlenmez."
+        },
+        {
+          "question": "Eski bakım fişim yoksa klima bilgisi nasıl tamamlanır?",
+          "answer": "Görünen marka etiketi ve kullanım sırasında fark edilen davranış başlangıç için yeterlidir. Önceki işlemler bilinmiyorsa bunu kayda ekleriz; belge yokluğu model tahminini gerektirmez."
+        }
+      ],
+      "takeaways": [
+        "Eski çalışmayı güncel teşhis saymayın.",
+        "Yüksekteki etikete ulaşmaya çalışmayın.",
+        "Sonradan görülen şikâyeti talebe ekleyin."
+      ],
+      "neighborhood_intro": "Sezonluk kullanılan Silivri adresinizin mahallesini işaretleyin; blok veya kapı tarifini görüşmede tamamlayabilirsiniz.",
+      "cta": {
+        "heading": "Kullanıma dönmeden önce ihtiyacı görüşelim",
+        "text": "Klimanın son kullanımını ve adrese ne zaman erişilebileceğini anlatın; uygun bakım veya kontrol talebini birlikte oluşturalım."
+      }
+    },
+    {
+      "route": "sultangazi-kombi-servisi.html",
+      "focus": "Periyodik bakım ile tekrar eden arıza kaydını ayırma",
+      "lead": "Sultangazi’de kombiniz için yıllık bakım düşünmenizle aynı uyarının yeniden çıkması farklı ihtiyaçlardır. Cebeci, Gazi veya Sultançiftliği adresindeki talebinizde, sizi aramaya yönelten asıl nedeni söyleyin. Düzenli bakım beklentisini, ısıtma veya sıcak su sorunuyla karıştırmadan bir kayıt içinde değerlendirebiliriz.",
+      "headline": "Sultangazi’de bakım talebi mi, tekrarlayan arıza mı?",
+      "description": "Sultangazi kombi bakım ve arıza talebinde tekrar eden belirtiyi ayrı kaydedin. Önceki işlem, model ve kullanım bilgisiyle servis hazırlığını netleştirin.",
+      "sections": [
+        {
+          "id": "asil-gerekce",
+          "heading": "Bakım sözcüğünün arkasındaki şikâyeti kaybetmeyelim",
+          "paragraphs": [
+            "Kullanıcı bazen sıcak su düzensizliğini de bakım gerekiyor diye tarif eder. Gerçekte bir sorun yaşıyorsanız hangi kullanımda ortaya çıktığını ekleyin. Böylece kayıt yalnız temizlik isteği olarak okunmaz ve gözlenmesi gereken arıza belirtisi görüşmenin dışında kalmaz.",
+            "Cihaz normal çalışıyor ve periyodik kontrol istiyorsanız bunu da açıkça söyleyin. Yapılacak işin kapsamı, cihazın mevcut durumuyla birlikte açıklanır; bakım talebi her parçanın değişeceği veya tüm arızaların kendiliğinden giderileceği sözü değildir."
+          ],
+          "links": [
+            {
+              "path": "kombi-bakimi.html",
+              "label": "Kombi bakımının kapsamını inceleyin"
+            }
+          ]
+        },
+        {
+          "id": "tekrar-bilgisi",
+          "heading": "Aynı sorunun dönüş zamanını tarif edin",
+          "paragraphs": [
+            "Uyarı her gün mü görülüyor, yalnız sıcak su açıldığında mı çıkıyor, yoksa bir süredir kaybolmuş muydu? Tarihi tam hatırlamıyorsanız yaklaşık süreyi belirtebilirsiniz. Daha önce yapılan işlemi ve görülen kodu ayrı satırlarda yazmak olayın sırasını korur.",
+            "Tekrarlayan belirti için sürekli reset uygulamayın. Cihazın verdiği uyarının fotoğrafı veya eksiksiz yazımı, tam model bulunduğunda üretici açıklamasıyla karşılaştırılabilir. Bir önceki ustanın kullandığı parça adı yeni teşhisin yerine geçmez."
+          ]
+        },
+        {
+          "id": "islem-karari",
+          "heading": "Önerilen işlemle bakım isteğini ayrı onaylayın",
+          "paragraphs": [
+            "Kontrol sırasında bakım dışında bir onarım önerilirse nedenini ve hangi belirtiyi gidermeyi hedeflediğini sorun. İşlem kapsamı ve ücret değerlendirilmeden, talebinize yazdığınız genel bakım ifadesi ek işler için otomatik kabul sayılmaz.",
+            "50. Yıl ya da Eski Habipler adresinizi seçerken cihaz markasını bilmiyorsanız boş bırakabilirsiniz. Marka bilindiğinde model rehberleri açılır; Baymak veya Bosch seçimi başka markaların servis talebini sınırlandırmaz."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Tam modele bağlı kod rehberleri"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Yakın zamanda bakım yapıldı ama uyarı yeniden çıktı; nasıl belirtmeliyim?",
+          "answer": "Bakım tarihini, o işlemden önceki şikâyeti ve şimdi görülen uyarıyı birbirinden ayırarak paylaşın. Bu kayıt, önceki çalışmanın kusurlu olduğu veya aynı parçanın bozulduğu hükmünü içermez."
+        },
+        {
+          "question": "Bakım isteğime sıcak su arızasını da ekleyebilir miyim?",
+          "answer": "Evet. İki ihtiyacı aynı talebe yazabilirsiniz; ancak bakım ve arıza kontrolünün kapsamları ayrı açıklanır. Sıcak suyun ne zaman değiştiğini belirtmeniz değerlendirmeyi kolaylaştırır."
+        }
+      ],
+      "takeaways": [
+        "Önce asıl başvuru nedenini söyleyin.",
+        "Geçmiş işlemle yeni belirtiyi ayırın.",
+        "Ek onarım önerisinin kapsamını öğrenin."
+      ],
+      "neighborhood_intro": "Sultangazi mahallenizi seçerek konumu belirleyin; bakım ve arıza notları aynı adrese bağlansın.",
+      "cta": {
+        "heading": "Bakım ve arıza ihtiyacını doğru kaydedelim",
+        "text": "Sizi aramaya yönelten belirtiyi ve varsa önceki işlem tarihini iletin; Sultangazi için servis uygunluğunu değerlendirelim."
+      }
+    },
+    {
+      "route": "sultangazi-klima-servisi.html",
+      "focus": "Isıtmada dış üniteden su ile iç kaçak ayrımı",
+      "lead": "Sultangazi’de klima için su akıtıyor demeden önce suyun nerede görüldüğünü ayıralım. Isıtma sırasında dış ünitenin altında fark edilen suyla odanın içindeki damlama aynı bulgu değildir. Uğur Mumcu, Esentepe veya Cebeci adresinizde gözlenen yeri ve çalışma modunu kayda ekleyebilirsiniz.",
+      "headline": "Klimanın hangi tarafında su görüyorsunuz?",
+      "description": "Sultangazi klima servisinde iç ünite damlaması ile dışarıdaki suyu ayırın. Çalışma modu, damlama yeri ve güvenli gözlemlerle kontrol talebini hazırlayın.",
+      "sections": [
+        {
+          "id": "suyun-yeri",
+          "heading": "Odadaki damlama ayrıca değerlendirilmelidir",
+          "paragraphs": [
+            "İç ünitenin altından duvara veya zemine gelen suyu, dışarıdaki suyla aynı açıklamaya bağlamayın. Damlama elektrikli eşyalara yaklaşıyorsa cihazı kullanmayı sürdürmeden güvenliğe öncelik verin. Kapağı sökmek ya da suyun yolunu bir malzemeyle zorlamak kullanıcı kontrolü değildir.",
+            "Su yalnız soğutmada mı, ısıtmada mı, yoksa cihaz durduktan sonra mı görülüyor? Bir kez mi oldu, devam mı ediyor? Bu ayrıntılar kayıt için yeterlidir; borunun veya tavanın içini görmek için müdahale etmeniz gerekmez."
+          ],
+          "links": [
+            {
+              "path": "klima-su-akitiyor.html",
+              "label": "İç ünitede su belirtisini inceleyin"
+            }
+          ]
+        },
+        {
+          "id": "dis-unitenin-davranisi",
+          "heading": "Dışarıdaki suyu çalışma süreciyle birlikte anlatın",
+          "paragraphs": [
+            "Isıtma kullanan bir klima, dış ünitenin çalışma ve buz çözme süreçlerinde su oluşturabilir. Fakat yalnız su gördüğünüz için cihazın kesin normal veya kesin arızalı olduğu söylenmez. Isıtma durumu, ekrandaki uyarı ve tekrarlama biçimi de bilinmelidir.",
+            "Dış üniteye pencereden uzanmayın veya yüksek bir yere çıkmayın. Güvenli bir noktadan görülebilen durumu tarif edin. Kaynağı seçilemiyorsa suyun dış ünite çevresinde görüldüğünü söylemeniz yeterlidir."
+          ]
+        },
+        {
+          "id": "goruntuyu-tamamlama",
+          "heading": "Modele göre açıklanacak bilgileri saklayın",
+          "paragraphs": [
+            "Kumandadaki mod işaretini ve iç ünitede görünen kodu not edin. Aynı harf ve rakam başka bir cihazda farklı anlama gelebilir; üretici belgesi tam modele bağlanmadan parça ismi üzerinden yönlendirme yapılmaz.",
+            "Bakım isteğiniz de varsa damlama şikâyetinden ayrı belirtin. Temizlik talebi, drenaj veya farklı bir su kaynağının bulunduğu varsayımı değildir. Gazi ve Habibler dâhil mahalle seçimi adresi belirler; işlemin uygunluğu cihaz kontrolüne bağlı kalır."
+          ],
+          "links": [
+            {
+              "path": "klima-isitmiyor.html",
+              "label": "Isıtma davranışıyla birlikte değerlendirin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Isıtma açıkken dış ünitenin altı ıslandı; fotoğraf tek başına yeterli mi?",
+          "answer": "Fotoğraf suyun yerini göstermeye yardımcı olur; çalışma modu, ısıtmanın sürüp sürmediği ve varsa uyarı da gerekir. Görüntü üzerinden kesin normal çalışma veya parça arızası hükmü verilmez."
+        },
+        {
+          "question": "İç üniteden gelen damlamayı bakım yapılınca geçer diye beklemeli miyim?",
+          "answer": "Damlama ayrı bir şikâyet olarak kaydedilmelidir. Suyun kaynağı görülmeden yalnız bakımın yeterli olacağı söylenemez; elektrikli bölgelere yaklaşan su için kullanımı sürdürmeyin."
+        }
+      ],
+      "takeaways": [
+        "Suyun içte mi dışta mı olduğunu ayırın.",
+        "Modu ve eşlik eden uyarıyı not edin.",
+        "Yüksekteki üniteye ulaşmaya çalışmayın."
+      ],
+      "neighborhood_intro": "Sultangazi içindeki konumunuzu mahalleyle belirtin; suyun görüldüğü yer cihaz notunda ayrı kalsın.",
+      "cta": {
+        "heading": "Damlama yerini tarif ederek başlayın",
+        "text": "İç veya dış ünite çevresindeki gözleminizi aktarın. Klimanızın marka ve modeli biliniyorsa aynı kayda ekleyelim."
+      }
+    },
+    {
+      "route": "zeytinburnu-kombi-servisi.html",
+      "focus": "Görünen su kaçağında yeri ve zamanı not etme",
+      "lead": "Zeytinburnu’nda kombi çevresinde su gördüğünüzde, geldiğini düşündüğünüz parçadan önce görünen noktayı tarif edin. Kazlıçeşme, Sümer veya Beştelsiz adresinde su cihazın altına mı birikiyor, bağlantı çevresinde mi iz bırakıyor? Ne zaman fark edildiğini eklemek, kaçağın kaydını daha anlaşılır hâle getirir.",
+      "headline": "Kombi çevresindeki suyu tahmin etmeden tarif edin",
+      "description": "Zeytinburnu kombi su kaçağı talebinde görünen yeri, zamanı ve basınç değişimini kaydedin. Parça tahmini yapmadan güvenli servis hazırlığını inceleyin.",
+      "sections": [
+        {
+          "id": "gordugunuz-nokta",
+          "heading": "Su birikintisi kaynağı her zaman göstermez",
+          "paragraphs": [
+            "Su, çıktığı noktadan başka bir yere akabilir. Zemindeki ıslaklık yalnız başına kombinin hangi parçasının sorunlu olduğunu anlatmaz. Kapağı açmadan görünen iz, damlanın sıklığı ve çevredeki borularda belirgin ıslaklık olup olmadığı kayda geçirilebilir.",
+            "Suyu göstermek için cihazı yeniden çalıştırmanız istenmez. Elektrik bölümüne yaklaşan su veya başka bir tehlike varsa kullanımda ısrar etmeyin. Kontrol sırasında kaynağın cihazdan mı, tesisattan mı geldiği ayrıca değerlendirilir."
+          ],
+          "links": [
+            {
+              "path": "kombi-su-akitiyor.html",
+              "label": "Görünür su kaçağı için güvenli bilgiler"
+            }
+          ]
+        },
+        {
+          "id": "ne-zaman-fark-edildi",
+          "heading": "İlk fark ettiğiniz an ile tekrarlama koşulunu ayırın",
+          "paragraphs": [
+            "Sabah zeminde su görmek, yalnız gece kaçırdığını kanıtlamaz. İlk fark ettiğiniz saati ve sonrasında gözlediğiniz durumu ayrı anlatın. Isıtma, sıcak su kullanımı veya cihazın kapalı olmasıyla bir ilişki gördüyseniz bunu da ekleyin.",
+            "Basınç göstergesi görünüyorsa okuduğunuz değeri not edebilirsiniz; su ekleyerek deneme yapmayın. Daha önce basıncın düştüğünü hatırlamanız faydalıdır, fakat iki belirtinin aynı parçadan kaynaklandığına önceden karar verilmez."
+          ],
+          "links": [
+            {
+              "path": "kombi-basinci.html",
+              "label": "Basınç gözlemini kaçağa ekleyin"
+            }
+          ]
+        },
+        {
+          "id": "kaydin-adresi",
+          "heading": "Maltepe adını ilçe bilgisiyle tamamlayın",
+          "paragraphs": [
+            "Zeytinburnu’nun Maltepe mahallesini kastediyorsanız ilçe seçimini Zeytinburnu olarak bırakın. Yalnız Maltepe yazılması farklı bir adresi çağrıştırabilir. Merkezefendi veya Veliefendi için de sokak ve bina bilgisi görüşmede tamamlanır.",
+            "Marka bilinmiyorsa gözlenen suyu anlatmanız yeterlidir. ECA, Buderus veya başka bir kombinin tam modeli belirlendiğinde ilgili rehber kullanılabilir. Yerinde önerilen işlem ve ücret, uygulanmadan önce kapsamıyla konuşulur."
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Yerde su var ama kombinin altı kuru görünüyor; yine de kombi kaydı açılır mı?",
+          "answer": "Su görüldüğünü, cihaz altında belirgin damla seçemediğinizi söyleyebilirsiniz. Kaynak kontrol edilmeden kombi veya tesisat hakkında kesin bir hüküm kurulmaz."
+        },
+        {
+          "question": "Kaçak arada bir kesiliyorsa kontrol için yeniden akmasını beklemeli miyim?",
+          "answer": "Aralıklı olduğunu belirtin ve varsa önceki gözleminizi saklayın. Sırf kaçağı göstermek amacıyla cihazı çalıştırmak veya parçaları zorlamak gerekmez; uygun kontrol yöntemi yerinde belirlenir."
+        }
+      ],
+      "takeaways": [
+        "Parça adı yerine görünen noktayı söyleyin.",
+        "Fark etme saatiyle çalışma koşulunu ayırın.",
+        "Maltepe için Zeytinburnu ilçesini belirtin."
+      ],
+      "neighborhood_intro": "Zeytinburnu mahallenizi seçin; benzer isimli başka ilçelerle karışmaması için ilçe bilgisini koruyun.",
+      "cta": {
+        "heading": "Su izini doğru bilgilerle aktarın",
+        "text": "Mahalle, görünür ıslaklık ve fark ettiğiniz zamanı paylaşın; kombi veya tesisat kontrolü için ihtiyacı görüşelim."
+      }
+    },
+    {
+      "route": "zeytinburnu-klima-servisi.html",
+      "focus": "Bir odada dengesiz serinlik ve hava yönü gözlemi",
+      "lead": "Zeytinburnu’ndaki odanın bir kısmı serinlerken diğer kısmı sıcak kalıyorsa şikâyeti yalnız klima soğutmuyor diye bırakmayın. Telsiz, Çırpıcı veya Gökalp adresinizde hava üflemesini nerede hissettiğinizi ve kullanım alanını anlatın. Böylece hava dağılımı gözlemi, cihazın gerçekten soğutma üretip üretmediğinden ayrı ele alınır.",
+      "headline": "Üfleme var, fakat serinlik odanın her yerine ulaşmıyor mu?",
+      "description": "Zeytinburnu klima talebinde dengesiz serinlik, üfleme ve oda kullanımını ayrı tarif edin. Soğutma kaybıyla hava dağılımını ayıran kontrol rehberi.",
+      "sections": [
+        {
+          "id": "hissedilen-serinlik",
+          "heading": "Odanın tek noktasındaki hisle cihaz kararı vermeyin",
+          "paragraphs": [
+            "Ünitenin karşısında serinlik hissedip uzak köşede aynı etkiyi alamamak, hiç soğuk hava üretilmemesinden farklıdır. Yakın ve uzak noktada ne yaşandığını anlatın. Bir odanın konforunu başka odadaki cihazla karşılaştırırken kullanım alanının da farklı olabileceğini düşünün.",
+            "Şikâyetiniz bir çalışma modunda mı, farklı ayarlarda da mı sürüyor? Kumandada seçilen mod ve fan kademesi kayıt için yararlıdır. Görülen sonucu açıklamak için sıcaklık ölçümü veya teknik bir test yapmanız şart değildir."
+          ],
+          "links": [
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Soğutma belirtisinin ayrıntıları"
+            }
+          ]
+        },
+        {
+          "id": "hava-yolunu-anlatma",
+          "heading": "Üflemenin önündeki görünen koşulları ekleyin",
+          "paragraphs": [
+            "Ünitenin önünde perde, mobilya veya kapalı bir bölme bulunuyorsa bunu söyleyin. Bunlar değerlendirmeye yardımcı gözlemlerdir; yalnız bir eşya gördüğünüz için bütün sorunu ona bağlamayın. Fanın sesini duymak da hava miktarını tek başına doğrulamaz.",
+            "Kanatları zorlayarak çevirmeyin ve cihazın içine uzanmayın. Kullanıcıya açık kumanda seçeneklerini değiştirdiyseniz önceki ayarı hatırlamaya çalışın. Ayarların sık değiştiği durumlarda hangi kullanımın şikâyeti oluşturduğunu kaydetmek daha değerlidir."
+          ]
+        },
+        {
+          "id": "kontrol-kapsami",
+          "heading": "Bakım ihtiyacı ile kapasite yorumunu ayrı tutun",
+          "paragraphs": [
+            "Dengesiz serinlikten hareketle cihazın küçük geldiğini veya mutlaka gaz gerektiğini söylemek doğru olmaz. Hava akışı, çalışma koşulları ve cihazın teknik durumu birlikte değerlendirilir. Kontrol yapılmadan soğutucu işlemi veya parça değişimi kararı sunulmaz.",
+            "Yeşiltepe ya da Seyitnizam adresini seçip markayı ekleyebilirsiniz; listede model bulunmuyorsa boş geçin. Arıza incelemesiyle birlikte bakım isteğiniz varsa bunu ayrı yazın, böylece iki talebin kapsamı görüşmede açıklanabilir."
+          ],
+          "links": [
+            {
+              "path": "klima-bakimi.html",
+              "label": "Bakım isteğini ayrıca değerlendirin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Klimanın karşısı serin ama odanın diğer yanı sıcak; bunu arıza diye yazabilir miyim?",
+          "answer": "Bu durumu aynen tarif edin. Üflemenin ulaştığı ve ulaşmadığı alanların belirtilmesi, hiç soğutmama şikâyetinden ayrılmasını sağlar; neden kontrol edilmeden belirlenmez."
+        },
+        {
+          "question": "Hava yönünü değiştirdim ama düzelmedi; daha fazla ayar denemeli miyim?",
+          "answer": "Yaptığınız değişikliği ve sonucunu not etmeniz yeterlidir. Kanatları elle zorlamayın. Özellikle ses, su veya elektriksel sorun da görülüyorsa denemeleri sürdürmek yerine kontrol isteyin."
+        }
+      ],
+      "takeaways": [
+        "Yakın ve uzak noktadaki farkı anlatın.",
+        "Kumanda ayarındaki değişikliği kaydedin.",
+        "Gaz veya kapasite konusunda tahminle karar vermeyin."
+      ],
+      "neighborhood_intro": "Oda kullanımına ilişkin notunuzla aynı Zeytinburnu adresini eşleştirmek için mahallenizi işaretleyin.",
+      "cta": {
+        "heading": "Hangi alanda serinlik eksik, birlikte anlayalım",
+        "text": "Klimanın üflemesini ve etkilenen alanı açıklayın; Zeytinburnu’ndaki bakım ya da arıza talebinizi buna göre hazırlayalım."
+      }
+    },
+    {
+      "route": "catalca-kombi-servisi.html",
+      "focus": "Seyrek kullanılan adreste servis hazırlığı ve iletişim",
+      "lead": "Çatalca’daki adresiniz her gün kullanılmıyorsa kombiye ilişkin son bilginiz de eski olabilir. Kaleiçi, Karacaköy Merkez veya Çiftlikköy için servis görüşürken cihazın bugün görülen durumuyla son kullanımını ayrı aktarın. Adreste bulunacak kişi ve erişim koşulları da talebin hazırlanmasına yardımcı olur.",
+      "headline": "Çatalca’daki az kullanılan ev için kombi bilgilerini güncelleyin",
+      "description": "Çatalca kombi servisi öncesinde son kullanım, mevcut belirti ve adrese erişimi netleştirin. Seyrek kullanılan ev için güvenli kayıt hazırlığını inceleyin.",
+      "sections": [
+        {
+          "id": "eski-ve-yeni-bilgi",
+          "heading": "Geçen kullanımın bilgisiyle bugünkü şikâyeti karıştırmayın",
+          "paragraphs": [
+            "En son kullanıldığında sıcak su sağlanmış olması bugünkü durumu göstermez. Cihazı bugün kimse görmediyse bunu belirtin. Bir arıza yaşandığı biliniyorsa, o olayın tarihiyle sonrasında yapılan işlemi hatırladığınız ölçüde ekleyebilirsiniz.",
+            "Talep açmak için cihazı denetimsiz çalıştırmak gerekmez. Özellikle olağan dışı yanma, gaz kokusu veya elektrik bölümüne ulaşan su varsa kontrol amacıyla tekrar denemeyin. Böyle bir durum, sıradan bakım isteğinin önüne geçen güvenlik bilgisidir."
+          ],
+          "links": [
+            {
+              "path": "servis-oncesi-guvenli-kontrol.html",
+              "label": "Servis öncesindeki güvenli sınırlar"
+            }
+          ]
+        },
+        {
+          "id": "adresi-tamamlama",
+          "heading": "Mahalle seçimiyle birlikte giriş tarifini hazırlayın",
+          "paragraphs": [
+            "Çatalca’nın Atatürk, Fatih veya Kalfa mahallesindeki adresinizi seçerken, farklı yerdeki aynı isimle karışmaması için ilçe bilgisini koruyun. Bina işareti veya kapı tarifi gerekiyorsa görüşmede paylaşın; yalnız konum bağlantısı göndermek zorunda değilsiniz.",
+            "Adreste bir yakınız bulunacaksa onun ne zaman erişim sağlayabileceğini önceden öğrenin. Bu bilgi bir ziyaret saatini kendiliğinden kesinleştirmez. Ekip uygunluğu, erişim ve talebin kapsamı konuşularak planlama yapılır."
+          ]
+        },
+        {
+          "id": "kombi-istegini-belirleme",
+          "heading": "Kontrol, bakım ve ısınma isteğini açıkça ayırın",
+          "paragraphs": [
+            "Ev tekrar kullanılmadan bakım mı istiyorsunuz, yoksa petekler ya da sıcak su çalışmadığı için mi başvuruyorsunuz? Birlikte yapılmasını istediğiniz işleri ayrı belirtin. Bakım kaydı, görülmemiş bir arızanın onarımını veya belirli bir parçanın gerekeceğini varsaymaz.",
+            "Marka/model bilginiz yoksa cihaz üzerindeki görünen etiketi daha sonra iletebilirsiniz. Baymak, Demirdöküm veya diğer marka talebi için aynı hazırlık geçerlidir; hata kodu bulunduğunda doğru belgeyi belirlemek üzere tam model bilgisi aranır."
+          ],
+          "links": [
+            {
+              "path": "kombi-bakimi-ne-zaman-yapilir.html",
+              "label": "Bakım zamanını kullanım ihtiyacıyla değerlendirin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Çatalca’daki eve gitmeden önce kontrol talebimi bırakabilir miyim?",
+          "answer": "Adrese erişimin nasıl sağlanacağını ve cihaz hakkında hangi bilginin güncel olduğunu açıklayabilirsiniz. Görüşme yapılması ziyaret saatini veya arızanın türünü peşinen kesinleştirmez."
+        },
+        {
+          "question": "Cihaz bir süredir kapalı; sırf kontrol etmek için çalıştırmalı mıyım?",
+          "answer": "Talep oluşturmak amacıyla deneme yapmanız gerekmez. Bilinen olağan dışı durumları aktarın; güvenlik belirtisi varsa yeniden çalıştırarak sonucu görmeye uğraşmayın."
+        }
+      ],
+      "takeaways": [
+        "Güncel gözlemle eski bilgiyi ayırın.",
+        "İlçe ve mahalleyi birlikte koruyun.",
+        "Adrese erişimi planlamadan önce konuşun."
+      ],
+      "neighborhood_intro": "Çatalca kaydında mahalle adını seçin; aynı isimli farklı yerleri önlemek için ilçe alanını değiştirmeyin.",
+      "cta": {
+        "heading": "Adresteki kullanım durumunu anlatarak başlayın",
+        "text": "Son kullanım bilgisini, bakım beklentinizi ve erişim sağlayacak kişiyi paylaşın; uygun servis hazırlığını konuşalım."
+      }
+    },
+    {
+      "route": "catalca-klima-servisi.html",
+      "focus": "Uzak adreste cihaz bilgilerini önceden hazırlama",
+      "lead": "Çatalca’daki klimanız için görüşmeye başlarken, okunabilir cihaz bilgisiyle kısa bir gözlem notu çoğu zaman uzun bir arıza tahmininden daha yararlıdır. İnceğiz, Kestanelik veya Muratbey Merkez adresinde bulunan ünitenin markasını ve ne yaptığını biliyorsanız iletin; henüz bilinmeyen alanları boş bırakabilirsiniz.",
+      "headline": "Çatalca klima talebinde doğru cihazı ve görünen sorunu eşleştirin",
+      "description": "Çatalca klima servis görüşmesi için etiket, çalışma modu ve gözlenen sorunu hazırlayın. Bilinmeyen modelde tahmin yapmadan bakım veya kontrol talebi bırakın.",
+      "sections": [
+        {
+          "id": "etiketi-eslestirme",
+          "heading": "Başka ünitenin veya kumandanın bilgisini karıştırmayın",
+          "paragraphs": [
+            "Adreste birden fazla klima varsa şikâyetin hangi odaya ait olduğunu belirtin. Kumanda üzerindeki ad, iç ünitenin tam modeline karşılık gelmeyebilir. Güvenle görülen cihaz etiketi tercih edilir; etiket okunmuyorsa rastgele bir benzer model seçilmez.",
+            "Evinizdeki kişi fotoğraf paylaşacaksa önce doğru üniteyi gösterdiğini kontrol edin. Kapak açmak, dış üniteye uzanmak veya yüksek noktaya çıkmak bu hazırlığın parçası değildir. Eksik bilgi ziyaret değerlendirmesi sırasında tamamlanabilir."
+          ],
+          "links": [
+            {
+              "path": "klima-modeli-nasil-ogrenilir.html",
+              "label": "Klima etiketinde model bilgisini arama"
+            }
+          ]
+        },
+        {
+          "id": "sikayetin-kaydi",
+          "heading": "Bir belirtiyi, koşuluyla birlikte yazın",
+          "paragraphs": [
+            "Soğutmuyor ifadesini; üflüyor fakat serinlik hissedilmiyor, hiç başlamıyor veya kısa sürede duruyor gibi gördüğünüz davranışla tamamlayabilirsiniz. Mod ve varsa uyarı kodu da yazılabilir. Teknik ölçüm yapmanız veya arızalı parçayı bilmeniz beklenmez.",
+            "Kayıt bir başkasının anlattığına dayanıyorsa bunu söyleyin. Emin olmadığınız ayrıntıyı doğruymuş gibi eklemeyin. İç ünite damlaması, elektriksel sorun ve olağan dışı koku gibi yeni belirtiler varsa ilk talebe sonradan da iletilebilir."
+          ]
+        },
+        {
+          "id": "talebin-hazirligi",
+          "heading": "Hizmet beklentisini erişim bilgisiyle tamamlayın",
+          "paragraphs": [
+            "Bakım ve arıza incelemesi aynı talepte yer alabilir; neyin istendiği ayrı yazılmalıdır. Üniteye güvenli erişim olup olmadığı, adreste kimin bulunacağı ve yapılacak işin kapsamı görüşülür. Yol veya varış süresi için otomatik bir söz verilmez.",
+            "Gökçeali ya da Çakıl mahallesini seçerken bina tarifini daha sonra tamamlayabilirsiniz. Marka seçimi hizmetin kesin uygunluğu anlamına gelmez; aynı markadaki farklı sistemler için model ve yerinde koşullar ayrıca değerlendirilir."
+          ],
+          "links": [
+            {
+              "path": "klima-tamiri.html",
+              "label": "Klima arıza incelemesinde izlenen yaklaşım"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Klimanın yalnız kumanda fotoğrafı var; model seçmeli miyim?",
+          "answer": "Kumanda görseli yardımcı olabilir, ancak tam cihaz modelini kanıtlamaz. Listeden tahmini bir model seçmeden, görünen marka ve şikâyetle ilerleyebilirsiniz."
+        },
+        {
+          "question": "Çatalca’daki birden fazla üniteyi tek kayıtta anlatabilir miyim?",
+          "answer": "Her ünitenin odasını ve şikâyetini ayrı belirterek aynı iletişimde aktarabilirsiniz. Birindeki hata kodu diğer cihazın açıklaması olarak kullanılmaz; kontrol kapsamı ayrı değerlendirilir."
+        }
+      ],
+      "takeaways": [
+        "Etiketi şikâyetli üniteyle eşleştirin.",
+        "Duyduğunuz bilgiyle kendi gözleminizi ayırın.",
+        "Bakım beklentisini ayrı bir not olarak yazın."
+      ],
+      "neighborhood_intro": "Çatalca içindeki hizmet adresini mahalleyle belirleyin; cihaz odası ve giriş açıklamasını ayrıca ekleyebilirsiniz.",
+      "cta": {
+        "heading": "Doğru üniteden gelen bilgiyle görüşelim",
+        "text": "Cihazın nerede olduğunu, ne yaptığını ve bakım mı kontrol mü istediğinizi aktarın; eksik ayrıntıları birlikte tamamlayalım."
+      }
+    },
+    {
+      "route": "sisli-kombi-servisi.html",
+      "focus": "Ev/ofiste kumanda değişiklikleri ve gün içi kullanım",
+      "lead": "Şişli’de kombiyle ısınan bir ev veya ofiste ayarlar gün içinde farklı kişilerce değiştirilebilir. Mecidiyeköy, Feriköy ya da Teşvikiye adresindeki şikâyeti aktarırken, sıcak suyun durumunu ve kumandada yapılan son değişiklikleri de belirtin. Böylece kullanım tercihiyle cihaz davranışını ayrı konuşabiliriz.",
+      "headline": "Şişli’de kombi şikâyetini gün içindeki kullanım sırasıyla anlatın",
+      "description": "Şişli kombi servis kaydında oda kumandası, kullanım saatleri ve sıcak su durumunu ayırın. Ayar değişikliğiyle arıza belirtisini birlikte değerlendirin.",
+      "sections": [
+        {
+          "id": "ayar-gecmisi",
+          "heading": "Ayarı kimin değiştirdiğini bilmek neden işe yarar?",
+          "paragraphs": [
+            "Çalışma saatleri, tatil programı veya hedef oda sıcaklığı değişmiş olabilir. Hangisinin yapıldığını biliyorsanız yazın; bilinmiyorsa kumandanın mevcut görüntüsünü tarif edin. Aynı gün birkaç farklı ayar denemek, şikâyetin hangi koşulda oluştuğunu anlamayı zorlaştırabilir.",
+            "Her ayar farkını kullanıcı hatası saymıyoruz. Bir tercihin değişmiş olması cihazda ayrıca sorun bulunmadığını kanıtlamaz. Kayıtta ayar geçmişiyle ısıtma şikâyeti birbirine karıştırılmadan tutulur; yerinde inceleme gerekiyorsa kapsamı açıklanır."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicaklik-ayari.html",
+              "label": "Sıcaklık ve çalışma ayarlarını anlamlandırın"
+            }
+          ]
+        },
+        {
+          "id": "kullanim-sirasi",
+          "heading": "Sıcak su ile oda ısınmasını iki ayrı gözlem olarak verin",
+          "paragraphs": [
+            "Ofis açıldığında odalar soğuk olabilirken muslukta sıcak su bulunabilir. Tersi bir durum da ayrıca anlatılmalıdır. Ne zaman başladığını, yalnız bazı alanların mı etkilendiğini ve sorunun gün boyu devam edip etmediğini söylemeniz faydalıdır.",
+            "Peteklerdeki farkı anlatırken odaların adını veya sayısını kullanabilirsiniz. Cihaz ayarlarını ve vana konumlarını sürekli değiştirerek test yapmanız istenmez. Isınma dağılımı ile kombinin verdiği ekran uyarısı ayrı değerlendirme başlıklarıdır."
+          ]
+        },
+        {
+          "id": "iletisim-kisisi",
+          "heading": "Ortak kullanım yerinde bir bilgi sorumlusu belirleyin",
+          "paragraphs": [
+            "Harbiye veya Esentepe’deki iş yerinde birden fazla kişi talebi takip ediyorsa, değerlendirmeyi kimin dinleyeceğini belirleyin. Önerilen işlemin kapsamı ve onayı farklı kişilere eksik aktarılmamalıdır. Cihaza erişim ve uygun ziyaret zamanı ayrıca görüşülür.",
+            "Marka ya da model bilinmese de hizmet isteği bırakılabilir. Ekrandaki kod mevcutsa yazımını aynen koruyun. Sadece kod üzerinden kesin parça teşhisi kurulmaz; gerektiğinde tam cihaz belgesi ve yerinde kontrol birlikte kullanılır."
+          ],
+          "links": [
+            {
+              "path": "kombi-hata-kodu.html",
+              "label": "Kodun tam modele bağlanması neden önemlidir?"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Oda kumandası değiştirildiğinden beri ısınma farklı; yalnız ayar sorunu olabilir mi?",
+          "answer": "Değişikliğin zamanı önemli bir bilgidir, fakat tek başına nedeni kanıtlamaz. Mevcut ayarı ve görülen davranışı kaydedin; cihazda ayrıca sorun olup olmadığı gerektiğinde kontrol edilir."
+        },
+        {
+          "question": "Ofiste herkes farklı belirti söylüyorsa hangisini yazmalıyız?",
+          "answer": "Kimin neyi, hangi saatte gözlediğini ayrı aktarın. Sıcak su, oda ısınması ve ekran uyarısını tek cümlede birleştirmek yerine olay sırasını korumak değerlendirmeyi kolaylaştırır."
+        }
+      ],
+      "takeaways": [
+        "Son program veya sıcaklık değişikliğini belirtin.",
+        "Isınma ve sıcak su gözlemini ayrı aktarın.",
+        "İşlem bilgisini takip edecek kişiyi belirleyin."
+      ],
+      "neighborhood_intro": "Şişli mahalleniz konumu belirlesin; ofis veya ev kullanımına ait notlar aynı servis kaydında korunsun.",
+      "cta": {
+        "heading": "Kullanım sırasını anlatarak kaydı hazırlayın",
+        "text": "Şikâyetin günün hangi bölümünde oluştuğunu ve bilinen ayar değişikliklerini paylaşın; uygun kombi kontrolünü görüşelim."
+      }
+    },
+    {
+      "route": "sisli-klima-servisi.html",
+      "focus": "Ortak ofiste kullanıcı ayarları ve kontrol geçmişi",
+      "lead": "Şişli’de ortak kullanılan bir ofiste klima şikâyeti, gün boyunca farklı ayarlar denenirken değişebilir. Fulya, Esentepe veya Mecidiyeköy adresindeki talebinizde, hangi ünitenin etkilendiğini ve son kumanda kullanımını anlatın. Çalışanların konfor beklentisiyle cihazın gözlenen davranışını birlikte kaydetmek, görüşmeyi daha anlaşılır kılar.",
+      "headline": "Ortak ofisteki klima talebini tek cihaz ve net gözlemle hazırlayın",
+      "description": "Şişli klima servis talebinde ofis ayarları, etkilenen ünite ve çalışma saatlerini netleştirin. Kullanıcı tercihiyle cihaz belirtisini ayıran rehberi açın.",
+      "sections": [
+        {
+          "id": "etkilenen-unite",
+          "heading": "Bütün sistemi tek bir odanın şikâyetiyle tarif etmeyin",
+          "paragraphs": [
+            "Toplantı odası, çalışma alanı veya girişte farklı üniteler bulunuyorsa sorunun hangisinde yaşandığını söyleyin. Diğerlerinin çalışıyor olması değerli bir bilgidir; ancak sistem tipini veya ortak dış ünite bağlantısını yalnız görünüşten çıkarmayın.",
+            "Birden fazla cihaz etkilenmişse her biri için üfleme, tepki ve ekrandaki uyarıyı ayrı aktarın. Aynı kumandanın kullanılması, bütün ünitelerin aynı model veya aynı arızada olduğunu göstermez. Güvenle okunabilen etiketler doğru cihazla eşleştirilir."
+          ],
+          "links": [
+            {
+              "path": "klima-modeli-nasil-ogrenilir.html",
+              "label": "Üniteleri tam model bilgisiyle ayırın"
+            }
+          ]
+        },
+        {
+          "id": "kumanda-kaydi",
+          "heading": "Değişen modları ve zamanlayıcıyı bir kez kaydedin",
+          "paragraphs": [
+            "Gün içinde soğutma, ısıtma veya fan seçiminin değiştirilip değiştirilmediğini öğrenin. Zamanlayıcı varsa mevcut durumu not edin. Sürekli yeni ayarlar denemek yerine görülen sonucu belirli bir kullanım anıyla ilişkilendirmek, şikâyetin dağılmasını önler.",
+            "Çalışanların konfor beklentisi farklı olabilir. Cihazın davranışı, oturma yeri ve üflemenin hissedildiği nokta ayrı anlatıldığında değerlendirme daha nettir. Bu gözlemler üzerinden kontrol yapılmadan gaz, kapasite veya elektronik kart kararı verilmez."
+          ]
+        },
+        {
+          "id": "isyerinde-hazirlik",
+          "heading": "Görüşmeyi ve erişimi takip edecek kişiyi seçin",
+          "paragraphs": [
+            "Şişli Merkez veya Halaskargazi’deki iş yerinin giriş kuralları varsa önceden bildirin. Ünite önündeki çalışma alanına güvenli erişim ve kimin eşlik edeceği konuşulur. Çalışma saati bilgisi, belirli bir varış ya da aynı gün işlem garantisi anlamına gelmez.",
+            "Bakım isteğiyle arıza şikâyetini aynı başvuruda paylaşabilirsiniz. Hangi işin talep edildiği ayrı açıklanır; önerilecek işlem ve ücret onayınıza sunulur. Talebi takip edecek kişinin gözlem notuna ulaşabilmesi, çalışanlar arasında bilgi kaybını azaltır."
+          ],
+          "links": [
+            {
+              "path": "klima-bakimi.html",
+              "label": "İş yeri bakım talebinin kapsamı"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Ofiste yalnız bir ünite sorunlu; tüm klimaları aynı arıza olarak mı yazalım?",
+          "answer": "Etkilenen ünitenin yerini belirtin; diğer cihazların durumunu ayrıca ekleyin. Bir ünitenin kodu veya belirtisi, model ve sistem bilgisi olmadan diğerlerine uygulanmaz."
+        },
+        {
+          "question": "Çalışanlar ayarları sık değiştiriyor; servisten önce hangi ayarda bırakmalıyız?",
+          "answer": "Teknik bir deneme ayarı önermek yerine mevcut modu ve yapılan değişiklikleri kaydederiz. Olağan dışı bir belirti varsa cihazı zorlamayın; kontrol ihtiyacını ve güvenli kullanım sınırını görüşelim."
+        }
+      ],
+      "takeaways": [
+        "Şikâyetli ünitenin yerini açıkça belirtin.",
+        "Ayar değişikliklerini olay sırasıyla aktarın.",
+        "Erişim ve işlem görüşmesini bir kişi takip etsin."
+      ],
+      "neighborhood_intro": "Ofisin Şişli içindeki mahallesini seçin; ünite ve oda adlarını adres açıklamasına karıştırmadan cihaz notuna ekleyin.",
+      "cta": {
+        "heading": "Ofisteki klima ihtiyacını tek kayıtta netleştirelim",
+        "text": "Hangi ünitenin ne yaptığını ve kullanılabilir görüşme zamanını paylaşın; bakım veya arıza değerlendirmesi için ilerleyelim."
+      }
+    },
+    {
+      "route": "kilyos-servisi.html",
+      "focus": "Kilyos adı ile Kumköy adresini birlikte kullanma",
+      "lead": "Kilyos diye tarif ettiğiniz adres için ilçe ve mahalle alanında Sarıyer ile Kumköy bilgisini birlikte kullanabilirsiniz. Kombi veya klima talebinizi bu adrese bağlayıp cihazın ihtiyacını ayrıca belirtelim. Semt adıyla kayıtlı mahalle adının farklı görünmesi, hizmet isteğinin başka bir yere yönlenmesine neden olmasın.",
+      "headline": "Kilyos tarifini Kumköy adresiyle birleştirin",
+      "description": "Kilyos kombi ve klima talebinde Sarıyer, Kumköy adresini seçin. Semt tarifi, cihaz türü ve gözlenen belirtiyle servis başvurusunu doğru hazırlayın.",
+      "sections": [
+        {
+          "id": "adresin-iki-adi",
+          "heading": "Semt tarifini koruyun, mahalle alanını net bırakın",
+          "paragraphs": [
+            "Adresinizi günlük konuşmada Kilyos olarak anlatmanız anlaşılırdır. Mahalle seçiminde Kumköy göründüğünde bu adı seçip Kilyos tarifinizi açıklamaya ekleyebilirsiniz. İlçe alanında Sarıyer bilgisinin bulunması, başvurunun konumunu daha açık hâle getirir.",
+            "Bina veya kapı kolay bulunmuyorsa okunabilir bir tarif bırakın. Yakındaki bir işaret yardımcı olabilir; ancak asıl adres bilgisinin yerini almamalıdır. Harita konumu paylaşmak istemiyorsanız mahalle ve giriş açıklamasını görüşmede tamamlayabiliriz."
+          ],
+          "links": [
+            {
+              "path": "sariyer-kombi-servisi.html#mahalle-kumkoy-kilyos",
+              "label": "Kumköy için Sarıyer kombi rehberi"
+            },
+            {
+              "path": "sariyer-klima-servisi.html#mahalle-kumkoy-kilyos",
+              "label": "Kumköy için Sarıyer klima bilgileri"
+            }
+          ]
+        },
+        {
+          "id": "cihaz-ihtiyaci",
+          "heading": "Aynı adresteki kombi ve klima sorununu ayırın",
+          "paragraphs": [
+            "Kombi için sıcak su veya petek sorunu; klima için üfleme, soğutma ya da ısıtma şikâyeti belirtilebilir. İki cihazda da ihtiyaç varsa ayrı notlar yazın. Birindeki kod diğer cihazın açıklaması olarak kullanılmaz; tam model bilgisi her cihaz için kendi kapsamında değerlendirilir.",
+            "Sadece bakım düşünüyorsanız arıza varmış gibi bir seçim yapmanız gerekmez. Cihaz markası bilinmiyorsa mevcut belirtiyle başlayabiliriz. Talebin kapsamı, uygunluğu ve ücretlendirmesi görüşülmeden otomatik işlem onayı oluşmaz."
+          ]
+        },
+        {
+          "id": "ziyaret-icin-hazirlik",
+          "heading": "Erişim durumunu konumdan ayrı konuşalım",
+          "paragraphs": [
+            "Adreste her zaman biri bulunmuyorsa görüşmede bunu söyleyin. Giriş sağlayacak kişi, iletişim kurulacak numara ve cihazın görülebilir durumu planlamaya yardımcı olur. Semt seçimi belirli bir ekip sırası, yol güzergâhı veya varış süresi göstermez.",
+            "Gaz kokusu, duman ya da elektrik bölgesine ulaşan su varsa sıradan servis hazırlığına devam etmeyin. Önce güvenli alana geçin ve duruma uygun acil yardımı kullanın. Olağan şikâyetlerde ise cihazı sökmeden elde edilen bilgilerle değerlendirmeye başlayabiliriz."
+          ],
+          "links": [
+            {
+              "path": "servis-oncesi-guvenli-kontrol.html",
+              "label": "Servis talebinden önce güvenlik bilgisi"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Adresim Kilyos diye biliniyor; seçimde neden Kumköy kullanıyorum?",
+          "answer": "Kilyos tarifi Kumköy mahalle adıyla birlikte kullanılabilir. Kaydınızda Sarıyer ve Kumköy seçimini koruyup Kilyos ifadesini ayrıca yazmanız adresin anlaşılmasını kolaylaştırır."
+        },
+        {
+          "question": "Kombiye bakım, klimaya arıza kontrolü istiyorsam iki farklı adres mi seçmeliyim?",
+          "answer": "Aynı yerdeyse adresi değiştirmeyin. Her cihazın ihtiyacını ayrı açıklayın; bakım ile arıza incelemesinin kapsamları ve cihaz bilgileri görüşmede birbirinden ayrılır."
+        }
+      ],
+      "takeaways": [
+        "İlçe Sarıyer, mahalle Kumköy olarak seçilebilir.",
+        "Kilyos tarifini adres açıklamasında koruyun.",
+        "Her cihazın ihtiyacını kendi notunda anlatın."
+      ],
+      "neighborhood_intro": "Kumköy mahalle bağlantısından ilgili cihaz rehberine geçebilir, Kilyos tarifini servis açıklamanıza ekleyebilirsiniz.",
+      "cta": {
+        "heading": "Kilyos adresini ve cihaz ihtiyacını birlikte netleştirelim",
+        "text": "Kumköy adresinizde bakım veya arıza için hangi cihazı değerlendireceğimizi söyleyin; uygun servis hazırlığını görüşelim."
+      }
+    }
+  ]
+}

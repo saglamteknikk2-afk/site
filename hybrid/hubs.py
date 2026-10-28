@@ -109,16 +109,20 @@ def apply_hubs(files):
         if n in regional:
             r,kind=regional[n];heading=r['name']+' için marka ve arıza rehberleri'
             available=[(brand,p) for (k,brand),p in brands.items() if k==kind]
-            # Rotate the examples for compactness; never claim popularity or local failure rates.
-            i=list(regional).index(n)%max(len(available),1);sample=(available[i:]+available[:i])[:3]
+            # Navigation examples are stable; location never changes a model's technical scope.
+            sample=sorted(available,key=lambda item:norm(item[0]))[:3]
             links += [(p,b+' '+kind+' servisi') for b,p in sample]
             scoped=[m for m in local_models if m['device']==kind and m['brand'] in {b for b,p in sample}]
             links += [(route(m['path'])+'#kodlar',m['brand']+' '+m['label']+' kod rehberi') for m in scoped[:2]]
-            links += [(x['path'],x['name']) for x in data['devices'][kind]['symptoms'] if x['path'] in eligible][:2]
+            from regions import load_editorial
+            authored=load_editorial()[n]
+            authored_links=[(x['path'],x['label']) for section in authored['sections'] for x in section.get('links',[])]
+            links += authored_links[:3]
             links += [('markalar.html','Diğer bütün markalar'),('ariza-rehberi.html','Diğer belirtiler'),('bolgeler.html','Bütün hizmet bölgeleri')]
             widget=_widget(r,kind,districts)
             marker='</section><!-- HYBRID-REGION:END -->'
-            if marker in text:text=text.replace(marker,marker+widget,1)
+            if '<div data-editorial-selector></div>' in text:text=text.replace('<div data-editorial-selector></div>',widget,1)
+            elif marker in text:text=text.replace(marker,marker+widget,1)
             else:text=text.replace('</main>',widget+'</main>',1)
             widgets+=1
         else:
@@ -142,7 +146,7 @@ def apply_hubs(files):
             links += [(slug(d)+'-'+kind+'-servisi.html',d+' '+kind+' servisi') for d in ['Küçükçekmece','Avcılar','Bağcılar']]
             links += [('bolgeler.html','Diğer bütün ilçeler'),('markalar.html','Marka seçimi'),('ariza-rehberi.html','Belirti rehberi')]
         links=[(p,l) for p,l in links if route(p) in eligible and route(p)!=n][:10]
-        rendered=block(heading,links,'Hata kodunu cihazın tam modeline göre okuyun; bölge seçimi teknik kodun anlamını değiştirmez.')
+        rendered=block(heading,links,'' if n in regional else 'Hata kodunu cihazın tam modeline göre okuyun; bölge seçimi teknik kodun anlamını değiştirmez.')
         if rendered:text=text.replace('</main>',rendered+'</main>',1);per_page[n]=len(links)
         if n in regional:
             assets='<link rel="stylesheet" href="assets/hybrid-matrix.css"><script src="assets/hybrid-matrix.js" defer></script>'

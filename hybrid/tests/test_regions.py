@@ -4,8 +4,10 @@ from pathlib import Path
 import re
 import unittest
 import zipfile
+import sys
 
 ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'hybrid'))
 spec=importlib.util.spec_from_file_location('regions',ROOT/'hybrid/regions.py')
 regions=importlib.util.module_from_spec(spec);spec.loader.exec_module(regions)
 
@@ -23,14 +25,18 @@ class RegionTests(unittest.TestCase):
     def test_render_is_static_and_preserves_codes(self):
         with zipfile.ZipFile(ROOT/'saglamkombiklima-seo.zip') as z:
             files={n:z.read(n) for n in z.namelist() if not n.endswith('/')}
-        tables={n:re.findall(r'<table\b.*?</table>',v.decode(),re.S) for n,v in files.items() if n.endswith('-kombi-servisi.html') or n.endswith('-klima-servisi.html')}
+        model_tables={n:re.findall(r'<table\b.*?</table>',v.decode(),re.S) for n,v in files.items() if n.endswith('-ariza-kodlari.html')}
         report=regions.apply_regions(files)
         self.assertEqual(report['unique_leads'],55)
         self.assertEqual(report['neighborhood_records'],599)
         for n in report['region_routes']:
             text=files[n].decode();self.assertIn('id="bolge-rehberi"',text)
-            self.assertLess(text.index('HYBRID-REGION:START'),text.find('data-st-master-matrix') if 'data-st-master-matrix' in text else len(text))
-            if n in tables:self.assertEqual(tables[n],re.findall(r'<table\b.*?</table>',text,re.S))
+            self.assertNotIn('data-st-master-matrix',text)
+            self.assertNotIn('class="at-summary"',text)
+            self.assertNotIn('class="hybrid-region-note"',text)
+            self.assertIn('class="editorial-body"',text)
+        for name,tables in model_tables.items():
+            self.assertEqual(tables,re.findall(r'<table\b.*?</table>',files[name].decode(),re.S))
         k=files['kucukcekmece-kombi-servisi.html'].decode()
         self.assertIn('id="mahalle-atakent"',k)
         self.assertIn('data-hybrid-neighborhood="Atakent"',k)

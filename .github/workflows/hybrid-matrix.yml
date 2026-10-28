@@ -52,6 +52,7 @@ jobs:
         run: |
           python -m http.server 8766 --bind 127.0.0.1 --directory _site > build/browser-server.txt 2>&1 &
           node hybrid/tests/matrix_browser.cjs http://127.0.0.1:8766/ build/matrix-browser.json
+          node hybrid/tests/editorial_browser.cjs http://127.0.0.1:8766/ build/editorial-browser.json
           node hybrid/tests/diagnostics_loader_browser.cjs _site build/diagnostics-browser.json
       - name: Üretim paketini önizleme indirme alanına ekle
         run: |

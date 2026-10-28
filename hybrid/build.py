@@ -32,6 +32,7 @@ def build(mode='production', source=None):
     from retired_copy import correct_retired_copy
     from reporting import add_report
     from cache_versions import version_assets
+    from editorial_audit import audit_editorial
     metrics={}
     metrics['service_scope']=retire_offers(files)
     metrics['retired_offer_copy']=correct_retired_copy(files)
@@ -41,6 +42,7 @@ def build(mode='production', source=None):
     metrics['hubs']=apply_hubs(files)
     metrics['publication_policy']=apply_publication_policy(files)
     metrics['semantics']=apply_semantics(files)
+    metrics['editorial']=audit_editorial(files=files)
     metrics['performance']=apply_performance(files)
     add_report(files,REPO,metrics,provenance)
     # Modules are responsible for indexable HTML, not runtime-only SEO text.
