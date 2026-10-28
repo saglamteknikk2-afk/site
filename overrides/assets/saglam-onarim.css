@@ -14,3 +14,23 @@
 .st-gallery-card figcaption{padding:13px;font-weight:600;color:#254b3b}
 .st-gallery-card figcaption small{display:block;font-weight:400;color:#617366}
 @media(max-width:700px){.st-gallery-grid{grid-template-columns:1fr}.st-field-photos{margin:22px 15px;padding:20px}}
+
+
+/* Selector: show the illustration beside the choices, never below a duplicate introduction. */
+.at-site[data-page-kind="selector"] .st-service-hero{display:block;padding:8px 0 15px;margin-bottom:12px;border-bottom:0}
+.at-site[data-page-kind="selector"] .st-service-hero .at-title{font-size:clamp(24px,2.4vw,34px);line-height:1.17}
+.at-site[data-page-kind="selector"] .st-service-hero .at-lead{font-size:14px;line-height:1.5}
+.at-site[data-page-kind="selector"] .st-service-hero .at-quickfacts{display:none}
+.at-site[data-page-kind="selector"] #servisSecimi.st-selector-optimized{margin-top:0!important;padding:clamp(17px,2.5vw,27px);scroll-margin-top:110px}
+.at-site[data-page-kind="selector"] .st-selector-top{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(250px,.88fr);gap:22px;align-items:center;margin:0 0 14px}
+.at-site[data-page-kind="selector"] .st-selector-top .svc-heading{flex-wrap:wrap;gap:12px;align-items:center}
+.at-site[data-page-kind="selector"] .st-selector-top p{margin:6px 0 0}
+.at-site[data-page-kind="selector"] .st-selector-visual{height:220px;min-width:0;overflow:hidden;background:#e7efe4;border-radius:10px;border:1px solid #d9dfd4}
+.at-site[data-page-kind="selector"] .st-selector-visual img{width:100%;height:100%;object-fit:contain;display:block}
+@media(max-width:760px){
+.at-site[data-page-kind="selector"] .st-service-hero{padding:3px 0 9px;margin-bottom:10px}
+.at-site[data-page-kind="selector"] .st-service-hero .at-title{font-size:25px}
+.at-site[data-page-kind="selector"] .st-selector-top{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.at-site[data-page-kind="selector"] .st-selector-visual{order:-1;height:165px}
+.at-site[data-page-kind="selector"] #servisSecimi.st-selector-optimized{padding:16px}
+}
