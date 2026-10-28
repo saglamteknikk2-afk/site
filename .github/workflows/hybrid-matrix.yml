@@ -1,0 +1,92 @@
+name: Sağlam Teknik — Hibrit Matris Yayını
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hybrid/**'
+      - '.github/workflows/hybrid-matrix.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: saglam-hybrid-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: curl, pdo_sqlite, mbstring
+          coverage: none
+      - name: Kaynak, içerik, schema ve veri sınırlarını test et
+        run: python -m unittest discover -s hybrid/tests -p 'test_*.py' -v
+      - name: Üretim ve güvenli önizlemeyi aynı kaynaktan oluştur
+        run: |
+          python hybrid/build.py --mode production --output build/production --zip build/saglam-teknik-hibrit.zip > build-production.json
+          python hybrid/build.py --mode preview --output _site > build-preview.json
+      - name: Gerçek dosyaları ve JS/PHP eşleştirmesini doğrula
+        run: |
+          python hybrid/source.py --output build/baseline
+          python hybrid/audit.py build/production --mode production --baseline build/baseline --report build/production-audit.json
+          python hybrid/audit.py _site --mode preview --baseline build/baseline --report build/preview-audit.json
+          node hybrid/tests/test_matching.cjs build/production build/matching-js.json
+          php hybrid/tests/test_matching.php build/production build/matching-js.json
+          find build/production -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          find build/production -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Tarayıcı kontrollerini hazırla
+        run: npm install --prefix "$RUNNER_TEMP/hybrid-browser" playwright@1.58.2
+      - name: Gerçek mobil filtre ve gecikmeli veri akışını dene
+        env:
+          NODE_PATH: ${{ runner.temp }}/hybrid-browser/node_modules
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: |
+          python -m http.server 8766 --bind 127.0.0.1 --directory _site > build/browser-server.txt 2>&1 &
+          node hybrid/tests/matrix_browser.cjs http://127.0.0.1:8766/ build/matrix-browser.json
+          node hybrid/tests/diagnostics_loader_browser.cjs _site build/diagnostics-browser.json
+      - name: Üretim paketini önizleme indirme alanına ekle
+        run: |
+          mkdir -p _site/indir
+          cp build/saglam-teknik-hibrit.zip _site/indir/
+          cp build/saglam-teknik-hibrit.zip.json _site/indir/
+          python hybrid/finalize_preview.py _site
+          python hybrid/audit.py _site --mode preview --baseline build/baseline --report build/final-preview-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hibrit-teknik-kanitlar
+          path: |
+            build/*audit.json
+            build/*browser.json
+            build/matching-js.json
+            build/saglam-teknik-hibrit.zip.json
+            build-production.json
+            build-preview.json
+          retention-days: 30
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          name: hybrid-matrix-pages
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          artifact_name: hybrid-matrix-pages

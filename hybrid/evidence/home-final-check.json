@@ -1,0 +1,159 @@
+{
+  "scope": "Focused final lazy-diagnostic initialization and header navigation in actual local Chromium; no provider submission",
+  "results": [
+    {
+      "width": 360,
+      "initial": {
+        "faultsHelper": true,
+        "verifiedData": false,
+        "organicData": false,
+        "modelDirectory": false,
+        "largeDataRequests": [],
+        "scrollY": 0,
+        "loader": true
+      },
+      "loaded": {
+        "faultsHelper": true,
+        "verifiedData": true,
+        "organicData": true,
+        "modelDirectory": true,
+        "loaderState": "ready",
+        "scrollY": 2044,
+        "section": -453.125,
+        "buttons": [
+          {
+            "text": "Baştan başla ↺"
+          },
+          {
+            "text": "Devam et →"
+          },
+          {
+            "text": "KombiIsıtma / sıcak su"
+          },
+          {
+            "text": "KlimaIsıtma / soğutma"
+          },
+          {
+            "text": "PetekRadyatör / tesisat"
+          },
+          {
+            "text": "Servisi ara ↗"
+          },
+          {
+            "text": "WhatsApp’a aktar ↗"
+          },
+          {
+            "text": "Kılavuz ve güvenlik bilgisini göster ↗"
+          },
+          {
+            "text": "AI Usta’ya sor ✳"
+          },
+          {
+            "text": "← Geri"
+          },
+          {
+            "text": "Arızamı bul →"
+          },
+          {
+            "text": "Doğrudan servis talebi bırak ↗"
+          }
+        ],
+        "requests": [
+          "http://127.0.0.1:8766/preview/assets/servis-verileri.js?v=f9d2edb725",
+          "http://127.0.0.1:8766/preview/assets/verified-faults.js?v=62ca11bf0c",
+          "http://127.0.0.1:8766/preview/assets/organic-catalog.js?v=541d8945d8",
+          "http://127.0.0.1:8766/preview/assets/model-directory.js?v=ade9792292"
+        ]
+      },
+      "deviceStep": "✳\nSağlam Teknik AI Usta\nBir belirtiyle başlayın.\nBirlikte netleştirelim.\n\nIsıtmıyor mu, su mu akıtıyor, ekranda bir kod mu var? Butonlarla seçin veya kendi cümlelerinizle anlatın.\n\nYazmadan ilerleyin\nGüvenli ilk bilgiyi görün\nİsterseniz ustaya aktarın\n\nKaynaklı rehber hemen kullanılabilir. İsteğe bağlı AI değerlendirmesi ön bilgidir; yerinde teknik incelemenin yerine geçmez.\n\n✳\n\nBİRLİKTE NETLEŞTİRELİM\n\nAI Usta\n\nButonlarla ilerleyin; isterseniz yazın.\n\n2 / 5 · Belirti\nBaştan başla\n↺\nSorunu yazın veya seçin\n\nMarka, tam model veya hata kodu da yazabilirsiniz.\n\nDevam et →\nSorun nedir?\n\nBir belirti seçin veya yukarıya yazın.\n\nPetekler ısınmıyor\nSıcak su yok / değişiyor\nBasınç değişiyor\nSu akıtıyor\nSesli çalışıyor\nHiç çalışmıyor\nHata kodu var\nServisi ara ↗\nWhatsApp’a aktar ↗\n← Geri\nDoğrudan servis talebi bırak\n↗\nGaz kokusu\n/\nDuman veya yangın",
+      "comments": {
+        "scrollY": 6605,
+        "sectionTop": -45.59375,
+        "heading": [
+          {
+            "text": "İyi işin ardından,söz sizde.",
+            "top": 45.90625
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "initial": {
+        "faultsHelper": true,
+        "verifiedData": false,
+        "organicData": false,
+        "modelDirectory": false,
+        "largeDataRequests": [],
+        "scrollY": 0,
+        "loader": true
+      },
+      "loaded": {
+        "faultsHelper": true,
+        "verifiedData": true,
+        "organicData": true,
+        "modelDirectory": true,
+        "loaderState": "ready",
+        "scrollY": 1071,
+        "section": 24.34375,
+        "buttons": [
+          {
+            "text": "Baştan başla ↺"
+          },
+          {
+            "text": "Devam et →"
+          },
+          {
+            "text": "KombiIsıtma / sıcak su"
+          },
+          {
+            "text": "KlimaIsıtma / soğutma"
+          },
+          {
+            "text": "PetekRadyatör / tesisat"
+          },
+          {
+            "text": "Servisi ara ↗"
+          },
+          {
+            "text": "WhatsApp’a aktar ↗"
+          },
+          {
+            "text": "Kılavuz ve güvenlik bilgisini göster ↗"
+          },
+          {
+            "text": "AI Usta’ya sor ✳"
+          },
+          {
+            "text": "← Geri"
+          },
+          {
+            "text": "Arızamı bul →"
+          },
+          {
+            "text": "Doğrudan servis talebi bırak ↗"
+          }
+        ],
+        "requests": [
+          "http://127.0.0.1:8766/preview/assets/servis-verileri.js?v=f9d2edb725",
+          "http://127.0.0.1:8766/preview/assets/verified-faults.js?v=62ca11bf0c",
+          "http://127.0.0.1:8766/preview/assets/organic-catalog.js?v=541d8945d8",
+          "http://127.0.0.1:8766/preview/assets/model-directory.js?v=ade9792292"
+        ]
+      },
+      "deviceStep": "✳\nSağlam Teknik AI Usta\nBir belirtiyle başlayın.\nBirlikte netleştirelim.\n\nIsıtmıyor mu, su mu akıtıyor, ekranda bir kod mu var? Butonlarla seçin veya kendi cümlelerinizle anlatın.\n\nYazmadan ilerleyin\nGüvenli ilk bilgiyi görün\nİsterseniz ustaya aktarın\n\nKaynaklı rehber hemen kullanılabilir. İsteğe bağlı AI değerlendirmesi ön bilgidir; yerinde teknik incelemenin yerine geçmez.\n\n✳\n\nBİRLİKTE NETLEŞTİRELİM\n\nAI Usta\n\nButonlarla ilerleyin; isterseniz yazın.\n\n2 / 5 · Belirti\nBaştan başla\n↺\nSorunu yazın veya seçin\n\nMarka, tam model veya hata kodu da yazabilirsiniz.\n\nDevam et →\nSorun nedir?\n\nBir belirti seçin veya yukarıya yazın.\n\nPetekler ısınmıyor\nSıcak su yok / değişiyor\nBasınç değişiyor\nSu akıtıyor\nSesli çalışıyor\nHiç çalışmıyor\nHata kodu var\nServisi ara ↗\nWhatsApp’a aktar ↗\n← Geri\nDoğrudan servis talebi bırak\n↗\nGaz kokusu\n/\nDuman veya yangın",
+      "comments": {
+        "scrollY": 4164,
+        "sectionTop": -8.921875,
+        "heading": [
+          {
+            "text": "İyi işin ardından,söz sizde.",
+            "top": 136.578125
+          }
+        ]
+      },
+      "errors": []
+    }
+  ]
+}

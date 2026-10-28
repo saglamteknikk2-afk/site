@@ -1,0 +1,16 @@
+{
+  "scope": "Local Chromium selectors and navigation only; no provider/form delivery",
+  "optional_fields": true,
+  "combi_brand_options": 35,
+  "district_options": 25,
+  "known_model_code_route": true,
+  "unknown_model_code_not_guessed": true,
+  "custom_model_optional": true,
+  "reset_and_keyboard": true,
+  "mobile_360_no_document_overflow": true,
+  "regionfinder_climate_content_anchor": true,
+  "cross_device_resets_model_and_code": true,
+  "climate_brand_options": 37,
+  "failed_enhancement_keeps_static_content": true,
+  "errors": []
+}

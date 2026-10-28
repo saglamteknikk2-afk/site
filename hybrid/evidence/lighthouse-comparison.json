@@ -1,0 +1,151 @@
+{
+  "scope": "Single local Lighthouse 13.6.0 mobile trials with simulated throttling. Not live PageSpeed, field CWV or Ads Quality Score. Preview SEO66 is caused by intentional noindex; production is validated separately. Preview LCP element is the test banner, so LCP values do not establish a production improvement.",
+  "trials": {
+    "baseline": {
+      "url": "http://127.0.0.1:8766/baseline/",
+      "lighthouse_version": "13.6.0",
+      "categories": {
+        "performance": 87,
+        "accessibility": 97,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "numeric": 3153.6529,
+          "display": "3.2 s"
+        },
+        "largest-contentful-paint": {
+          "numeric": 3153.6529,
+          "display": "3.2 s"
+        },
+        "total-blocking-time": {
+          "numeric": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "numeric": 0,
+          "display": "0"
+        },
+        "speed-index": {
+          "numeric": 3153.6529,
+          "display": "3.2 s"
+        },
+        "total-byte-weight": {
+          "numeric": 2420955,
+          "display": "Total size was 2,364 KiB"
+        }
+      },
+      "runWarnings": [],
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    },
+    "preview_before_css": {
+      "url": "http://127.0.0.1:8766/preview/",
+      "lighthouse_version": "13.6.0",
+      "categories": {
+        "performance": 87,
+        "accessibility": 97,
+        "best-practices": 100,
+        "seo": 66
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "numeric": 3193.7421999999997,
+          "display": "3.2 s"
+        },
+        "largest-contentful-paint": {
+          "numeric": 3193.7421999999997,
+          "display": "3.2 s"
+        },
+        "total-blocking-time": {
+          "numeric": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "numeric": 0.04871118762078695,
+          "display": "0.049"
+        },
+        "speed-index": {
+          "numeric": 3193.7421999999997,
+          "display": "3.2 s"
+        },
+        "total-byte-weight": {
+          "numeric": 867056,
+          "display": "Total size was 847 KiB"
+        }
+      },
+      "runWarnings": [],
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    },
+    "preview_final": {
+      "url": "http://127.0.0.1:8766/preview/",
+      "lighthouse_version": "13.6.0",
+      "categories": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 66
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "numeric": 2556.9249999999997,
+          "display": "2.6 s"
+        },
+        "largest-contentful-paint": {
+          "numeric": 2556.9249999999997,
+          "display": "2.6 s"
+        },
+        "total-blocking-time": {
+          "numeric": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "numeric": 0.04871118762078695,
+          "display": "0.049"
+        },
+        "speed-index": {
+          "numeric": 2556.9249999999997,
+          "display": "2.6 s"
+        },
+        "total-byte-weight": {
+          "numeric": 781753,
+          "display": "Total size was 763 KiB"
+        }
+      },
+      "runWarnings": [],
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      }
+    }
+  },
+  "transfer_delta_bytes": -1639202,
+  "transfer_reduction_percent": 67.71,
+  "production_seo_only": {
+    "url": "http://127.0.0.1:8766/production/",
+    "lighthouse_version": "13.6.0",
+    "seo_score": 100,
+    "scope": "Local static production HTML SEO audit only. PHP endpoints are not executed; not Google indexing or ranking verification."
+  }
+}

@@ -1,0 +1,1886 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-28",
+  "policy": {
+    "content": "Authored regional introductions; shared correct technical facts remain consistent. Neighborhoods are selection context, not cloned indexable URLs.",
+    "building_profile": "No statistical building-density, demand-frequency, local-fault or completed-job claims without evidence. Conditional dwelling/business/access questions only.",
+    "neighborhood_inventory": "Existing 599 neighborhood records preserved; not a claim that all present-day municipal changes were independently checked.",
+    "adjacency": "Conservative shared geometry segment calculation; not a driving route or complete administrative boundary legal reference."
+  },
+  "sources": [
+    {
+      "title": "Existing service catalogue, 25 districts and 599 neighborhoods",
+      "url": "assets/servis-verileri.js",
+      "scope": "neighborhood inventory; preserved from uploaded site"
+    },
+    {
+      "title": "İstanbul district polygon data — OpenStreetMap contributors, via sahircansurmeli/istanbul-geojson",
+      "url": "https://github.com/sahircansurmeli/istanbul-geojson/blob/master/ilce_geojson.json",
+      "license": "ODbL 1.0; derived adjacency data offered under ODbL 1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "source_sha256": "4553411a7020f795ad21c4918bd89fc0f77594fad3e53517182fee4ab5f2c1bb",
+      "method": "Two districts are linked only when their exported polygon rings share an exact non-zero line segment; sea crossings are not service routes.",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    {
+      "title": "Küçükçekmece Belediyesi — Konumu",
+      "url": "https://www.kucukcekmece.istanbul/icerikler/kucukcekmece/konumu/708",
+      "scope": "Five neighboring districts cross-check"
+    },
+    {
+      "title": "Başakşehir Belediyesi — Muhtarlıklar",
+      "url": "https://www.basaksehir.bel.tr/muhtarliklar",
+      "scope": "Bahçeşehir 1. Kısım and 2. Kısım"
+    },
+    {
+      "title": "İBB — Sarıyer Mahalle Muhtarları",
+      "url": "https://muhtarlikisleri.ibb.istanbul/sariyer-mahalle-muhtarlari/",
+      "scope": "Kumköy (Kilyos)"
+    },
+    {
+      "title": "İBB — Güngören Mahalle Muhtarları",
+      "url": "https://muhtarlikisleri.ibb.istanbul/gungoren-mahalle-muhtarlari/",
+      "scope": "Merter address usage; ambiguous locality requires explicit district"
+    }
+  ],
+  "districts": [
+    {
+      "name": "Arnavutköy",
+      "slug": "arnavutkoy",
+      "neighborhoods": [
+        "Adnan Menderes",
+        "Anadolu",
+        "Arnavutköy Merkez",
+        "Atatürk",
+        "Baklalı",
+        "Balaban",
+        "Bolluca",
+        "Boyalık",
+        "Boğazköy İstiklal",
+        "Deliklikaya",
+        "Dursunköy",
+        "Durusu",
+        "Fatih",
+        "Hacımaşlı",
+        "Hadımköy",
+        "Haraççı",
+        "Hastane",
+        "Hicret",
+        "Karaburun",
+        "Karlıbayır",
+        "Mareşal Fevzi Çakmak",
+        "Mavigöl",
+        "Mehmet Akif Ersoy",
+        "Mustafa Kemal Paşa",
+        "Nenehatun",
+        "Sazlıbosna",
+        "Tayakadın",
+        "Taşoluk",
+        "Terkos",
+        "Yassıören",
+        "Yavuz Selim",
+        "Yeniköy",
+        "Yeşilbayır",
+        "Yunus Emre",
+        "Çilingir",
+        "Ömerli",
+        "İmrahor",
+        "İslambey"
+      ],
+      "neighbors": [
+        "Esenyurt",
+        "Başakşehir",
+        "Eyüpsultan",
+        "Çatalca"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Arnavutköy Merkez, Baklalı veya Adnan Menderes adresindeki kombi için önce neyin çalışmadığını ayıralım: petekler mi, sıcak su mu, cihazın tamamı mı? Mahallenizi ve etiketteki model adını seçerek ilgili kontrol rehberine ulaşabilir, onarım veya bakım talebinizi buna göre bırakabilirsiniz.",
+        "klima": "Arnavutköy’de klima ihtiyacını tek bir “çalışmıyor” ifadesine sıkıştırmayın. Anadolu, Atatürk veya Balaban’daki cihazınızda fanın dönüp dönmediğini, seçili çalışma modunu ve ekrandaki uyarıyı belirlemek; bakım talebiyle soğutma arızasını birbirinden ayırmamıza yardımcı olur."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          },
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          },
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Avcılar",
+      "slug": "avcilar",
+      "neighborhoods": [
+        "Ambarlı",
+        "Cihangir",
+        "Denizköşkler",
+        "Firuzköy",
+        "Gümüşpala",
+        "Merkez",
+        "Mustafa Kemal Paşa",
+        "Tahtakale",
+        "Yeşilkent",
+        "Üniversite"
+      ],
+      "neighbors": [
+        "Küçükçekmece",
+        "Beylikdüzü",
+        "Esenyurt",
+        "Başakşehir"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Ambarlı’da sıcak su kesilmesiyle Firuzköy’de peteklerin ısınmaması aynı servis kaydı değildir. Avcılar kombi sayfasında mahallenizi seçtikten sonra belirtinin hangi kullanımda başladığını işaretleyin; marka ve tam model biliniyorsa o cihaza ait rehberle devam edelim.",
+        "klima": "Avcılar klima talebinde Ambarlı, Cihangir ve Denizköşkler adreslerini kendi mahalle adlarıyla kaydediyoruz. Cihaz üflüyor ama ortam serinlemiyorsa seçili mod, ayarlanan sıcaklık ve son filtre bakımını not edin; dış üniteye veya soğutucu devreye müdahale etmeyin."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          },
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          },
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Bahçelievler",
+      "slug": "bahcelievler",
+      "neighborhoods": [
+        "Bahçelievler",
+        "Cumhuriyet",
+        "Fevzi Çakmak",
+        "Hürriyet",
+        "Kocasinan",
+        "Siyavuşpaşa",
+        "Soğanlı",
+        "Yenibosna Merkez",
+        "Zafer",
+        "Çobançeşme",
+        "Şirinevler"
+      ],
+      "neighbors": [
+        "Küçükçekmece",
+        "Bakırköy",
+        "Bağcılar",
+        "Güngören"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Bahçelievler ilçesinin adı, Bahçelievler Mahallesi ile aynı olabilir; servis kaydında ikisini ayrı seçmek önemlidir. Kocasinan, Siyavuşpaşa ve diğer mahallelerde kombi bakımını mevcut arızadan ayırarak ilerleyin. Ekranda kod varsa model bilgisiyle, kod yoksa gördüğünüz belirtiyle yardımcı olalım.",
+        "klima": "Bahçelievler’de klima bakımını planlarken cihazın evde mi iş yerinde mi kullanıldığını ve çalışmadığı zamanları belirtin. Cumhuriyet veya Fevzi Çakmak adresinde birden çok iç ünite varsa hangisinin etkilendiğini seçmek, tüm sistem için gereksiz bir arıza varsayılmasını önler."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          },
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          },
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Bakırköy",
+      "slug": "bakirkoy",
+      "neighborhoods": [
+        "Ataköy 1. Kısım",
+        "Ataköy 2. 5. 6. Kısım",
+        "Ataköy 3-4-11. Kısım",
+        "Ataköy 7-8-9-10. Kısım",
+        "Basınköy",
+        "Cevizlik",
+        "Kartaltepe",
+        "Osmaniye",
+        "Sakızağacı",
+        "Yenimahalle",
+        "Yeşilköy",
+        "Yeşilyurt",
+        "Zeytinlik",
+        "Zuhuratbaba",
+        "Şenlikköy"
+      ],
+      "neighbors": [
+        "Küçükçekmece",
+        "Bahçelievler",
+        "Güngören",
+        "Zeytinburnu"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Ataköy’de kısım bilgisi, Cevizlik’te mahalle adı: Bakırköy kombi randevusunda adresi bu ayrıntılarla netleştiriyoruz. Basınç değişimi, ateşleme sorunu ve sıcak su şikâyeti için ayrı rehberler bulunur; yapılacak işlem ve ücret, inceleme sonrasında onayınıza sunulur.",
+        "klima": "Bakırköy klima servisinde Ataköy kısımlarını tek bir adres olarak birleştirmiyoruz. Basınköy veya Cevizlik dâhil doğru mahalleyi seçin; cihazın tipi, iç ünitenin yeri ve suyun nereden damladığı gibi gözlemlerle bakım ya da onarım talebinizi açıklayın."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          },
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          },
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Bayrampaşa",
+      "slug": "bayrampasa",
+      "neighborhoods": [
+        "Altıntepsi",
+        "Cevatpaşa",
+        "Kartaltepe",
+        "Kocatepe",
+        "Muratpaşa",
+        "Orta",
+        "Terazidere",
+        "Vatan",
+        "Yenidoğan",
+        "Yıldırım",
+        "İsmetpaşa"
+      ],
+      "neighbors": [
+        "Esenler",
+        "Eyüpsultan",
+        "Gaziosmanpaşa",
+        "Zeytinburnu"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Bayrampaşa’da “500 Evler” gibi semt tariflerinin yanında resmî mahalle adını da öğrenmek isteriz. Altıntepsi, Cevatpaşa veya Kocatepe’deki kombinizin sorunu yalnız musluk açıldığında mı ortaya çıkıyor? Bu ayrım, sıcak su rehberinden mi ısıtma kontrolünden mi başlanacağını belirler.",
+        "klima": "Bayrampaşa için klima kaydı açarken Kartaltepe, Muratpaşa ve Orta gibi mahalleleri listeden seçebilirsiniz. Cihazın yalnızca kumandaya tepki vermemesiyle çalışırken durması farklı gözlemlerdir; iç ünite ekranını ve olayın ne zaman gerçekleştiğini kaydetmeniz yeterlidir."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          },
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          },
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Bağcılar",
+      "slug": "bagcilar",
+      "neighborhoods": [
+        "100. Yıl",
+        "15 Temmuz",
+        "Barbaros",
+        "Bağlar",
+        "Demirkapı",
+        "Fatih",
+        "Fevzi Çakmak",
+        "Göztepe",
+        "Güneşli",
+        "Hürriyet",
+        "Kazım Karabekir",
+        "Kemalpaşa",
+        "Kirazlı",
+        "Mahmutbey",
+        "Merkez",
+        "Sancaktepe",
+        "Yavuz Selim",
+        "Yenigün",
+        "Yenimahalle",
+        "Yıldıztepe",
+        "Çınar",
+        "İnönü"
+      ],
+      "neighbors": [
+        "Küçükçekmece",
+        "Bahçelievler",
+        "Başakşehir",
+        "Esenler",
+        "Güngören"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Bağcılar’da Kirazlı veya Güneşli diye başlayan bir kombi talebini, cihazın gerçek belirtisiyle tamamlıyoruz. Basınç düşmesi, su kaçağı ve peteklerde yetersiz ısınma için ilgili adımı seçin. Marka adının yanında model de biliniyorsa kodu kendi belgesinde karşılaştıralım.",
+        "klima": "Bağcılar klima arızasında ilk sorumuz cihazın ses çıkarıp çıkarmadığı değil, hangi işlevin eksik olduğudur. 100. Yıl, 15 Temmuz ve Bağlar adreslerinde soğutmama, su damlatma veya koku belirtisini seçebilir; bulunduğunuz mekânın kullanımını ekleyerek bakım talebi oluşturabilirsiniz."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          },
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          },
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Başakşehir",
+      "slug": "basaksehir",
+      "neighborhoods": [
+        "Altınşehir",
+        "Bahçeşehir 1. Kısım",
+        "Bahçeşehir 2. Kısım",
+        "Başak",
+        "Başakşehir",
+        "Güvercintepe",
+        "Kayabaşı",
+        "Ziya Gökalp",
+        "Şahintepesi",
+        "Şamlar"
+      ],
+      "neighbors": [
+        "Küçükçekmece",
+        "Esenyurt",
+        "Avcılar",
+        "Sultangazi",
+        "Esenler",
+        "Eyüpsultan",
+        "Bağcılar",
+        "Arnavutköy"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Bahçeşehir 1. Kısım, Bahçeşehir 2. Kısım ve Başakşehir Mahallesi aynı adres değildir. Kombi kaydınızı bu ayrımı koruyarak açın; binanız merkezi sistemle ısınıyorsa bunu belirtin. Bireysel cihazdaki sıcak su veya ısıtma sorunu için modelinize uygun rehberi birlikte seçelim.",
+        "klima": "Başakşehir klima kaydında kısım, etap ve blok bilgisi varsa mahalle seçiminin ardından eklenir. Altınşehir’deki tek iç üniteyle birden fazla odanın bağlı olduğu sistemin değerlendirmesi aynı olmayabilir; etkilenen üniteyi ve kumandadaki modu tarif edin."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          },
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          },
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Beylikdüzü",
+      "slug": "beylikduzu",
+      "neighborhoods": [
+        "Adnan Kahveci",
+        "Barış",
+        "Büyükşehir",
+        "Cumhuriyet",
+        "Dereağzı",
+        "Gürpınar",
+        "Kavaklı",
+        "Marmara",
+        "Sahil",
+        "Yakuplu"
+      ],
+      "neighbors": [
+        "Esenyurt",
+        "Avcılar",
+        "Büyükçekmece"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Beylikdüzü’nde Adnan Kahveci, Barış ve Gürpınar adresleri için kombi talebinizi mahalle adıyla başlatabilirsiniz. Isıtma tüm odalarda mı eksik, yoksa yalnız bir petek mi soğuk? Cihaz sorunu ile tesisat şikâyetini ayırmak, servis öncesinde daha işe yarar bilgi toplamamızı sağlar.",
+        "klima": "Beylikdüzü klima servisinde bakım zamanı ile ani performans kaybını ayrı ele alıyoruz. Dereağzı veya Büyükşehir’de cihazınız eskisi gibi serinletmiyorsa kullanım modunu ve sorunun hangi saatlerde fark edildiğini yazın; inceleme olmadan gaz veya parça değişimi kararı verilmez."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          },
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          },
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Beyoğlu",
+      "slug": "beyoglu",
+      "neighborhoods": [
+        "Arap Cami",
+        "Asmalı Mescid",
+        "Bedrettin",
+        "Bereketzade",
+        "Bostan",
+        "Bülbül",
+        "Camiikebir",
+        "Cihangir",
+        "Emekyemez",
+        "Evliya Çelebi",
+        "Fetihtepe",
+        "Firuzağa",
+        "Gümüşsuyu",
+        "Hacıahmet",
+        "Hacımimi",
+        "Halıcıoğlu",
+        "Hüseyinağa",
+        "Kadımehmet",
+        "Kalyoncukulluk",
+        "Kamerhatun",
+        "Kaptanpaşa",
+        "Katip Mustafa Çelebi",
+        "Kemankeş Kara Mustafapaşa",
+        "Keçecipiri",
+        "Kocatepe",
+        "Kulaksız",
+        "Kuloğlu",
+        "Küçük Piyale",
+        "Kılıçali Paşa",
+        "Müeyyetzade",
+        "Piri Paşa",
+        "Piyalepaşa",
+        "Pürtelaş Hasan Efendi",
+        "Sururi",
+        "Sütlüce",
+        "Tomtom",
+        "Yahya Kahya",
+        "Yenişehir",
+        "Çatma Mescit",
+        "Çukur",
+        "Ömer Avni",
+        "Örnektepe",
+        "İstiklal",
+        "Şahkulu",
+        "Şehit Muhtar"
+      ],
+      "neighbors": [
+        "Beşiktaş",
+        "Eyüpsultan",
+        "Kağıthane",
+        "Şişli"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Beyoğlu kombi talebinde mahalle adından sonra daireye erişim ve cihazın bulunduğu yer önemli olabilir. Arap Cami, Asmalı Mescid veya Bülbül adresinizi seçin; sıcak suyun kesildiği anı ya da ekrandaki kodu not ederek güvenli ön bilgiye ulaşın.",
+        "klima": "Beyoğlu’nda klima kaydı bırakırken cihazın bir konutta, ofiste veya başka bir kullanım alanında bulunduğunu belirtin. Bedrettin, Bereketzade ve Bostan mahallelerinde aynı rehbere ulaşabilirsiniz; erişilmesi güç dış ünite için kendiniz müdahaleye çalışmadan servis uygunluğunu görüşün."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          },
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          },
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Beşiktaş",
+      "slug": "besiktas",
+      "neighborhoods": [
+        "Abbasağa",
+        "Akat",
+        "Arnavutköy",
+        "Balmumcu",
+        "Bebek",
+        "Cihannüma",
+        "Dikilitaş",
+        "Etiler",
+        "Gayrettepe",
+        "Konaklar",
+        "Kuruçeşme",
+        "Kültür",
+        "Levazım",
+        "Levent",
+        "Mecidiye",
+        "Muradiye",
+        "Nisbetiye",
+        "Ortaköy",
+        "Sinanpaşa",
+        "Türkali",
+        "Ulus",
+        "Vişnezade",
+        "Yıldız"
+      ],
+      "neighbors": [
+        "Beyoğlu",
+        "Sarıyer",
+        "Kağıthane",
+        "Şişli"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Beşiktaş’taki Arnavutköy Mahallesi ile Arnavutköy ilçesini karıştırmadan doğru servis bölgesini seçiyoruz. Abbasağa, Akat veya Bebek’te kombiniz hata veriyorsa kodun fotoğrafını ya da tam yazımını saklayın. Anlamını yalnız uygun model belgesiyle eşleştirelim.",
+        "klima": "Beşiktaş klima taleplerinde Balmumcu, Cihannüma ve diğer mahalleler aynı seçim alanındadır. Çalışırken duran cihaz için kumanda ayarı, ekrandaki işaret ve durmaya kadar geçen süreyi ayırarak anlatın; tekrarlayan uyarıyı denemek için cihazı sürekli yeniden başlatmayın."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          },
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          },
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Büyükçekmece",
+      "slug": "buyukcekmece",
+      "neighborhoods": [
+        "19 Mayıs",
+        "Ahmediye",
+        "Alkent 2000",
+        "Atatürk",
+        "Bahçelievler",
+        "Celaliye",
+        "Cumhuriyet",
+        "Dizdariye",
+        "Ekinoba",
+        "Fatih",
+        "Güzelce",
+        "Hürriyet",
+        "Kamiloba",
+        "Karaağaç",
+        "Kumburgaz",
+        "Mimaroba",
+        "Mimarsinan",
+        "Murat Çeşme",
+        "Pınartepe",
+        "Sinanoba",
+        "Türkoba",
+        "Ulus",
+        "Yenimahalle",
+        "Çakmaklı"
+      ],
+      "neighbors": [
+        "Beylikdüzü",
+        "Esenyurt",
+        "Çatalca"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Büyükçekmece’de Bahçelievler Mahallesi seçimi, Bahçelievler ilçesine yönlendirilmez. 19 Mayıs, Alkent 2000 veya Celaliye adresinde kombinin sıcak su ve kalorifer davranışını ayrı tarif edin; bakım mı arıza incelemesi mi gerektiğini belirtiler üzerinden netleştirelim.",
+        "klima": "Büyükçekmece klima hizmeti için Ahmediye, Atatürk veya Celaliye gibi mahallelerden seçim yapabilirsiniz. Cihaz uzun süre kullanılmadıysa bunu kayda ekleyin; ilk çalıştırmada görülen koku, su veya uyarı işaretlerini ayrı ayrı değerlendirerek ilgili rehbere geçin."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          },
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          },
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Esenler",
+      "slug": "esenler",
+      "neighborhoods": [
+        "15 Temmuz",
+        "Atışalanı",
+        "Birlik",
+        "Davutpaşa",
+        "Fatih",
+        "Fevzi Çakmak",
+        "Kazım Karabekir",
+        "Kemer",
+        "Menderes",
+        "Mimar Sinan",
+        "Namık Kemal",
+        "Nine Hatun",
+        "Oruçreis",
+        "Tuna",
+        "Turgut Reis",
+        "Yavuz Selim",
+        "Yeşil Vadi",
+        "Çifte Havuzlar",
+        "Şehitler"
+      ],
+      "neighbors": [
+        "Bayrampaşa",
+        "Sultangazi",
+        "Başakşehir",
+        "Bağcılar",
+        "Gaziosmanpaşa",
+        "Güngören",
+        "Zeytinburnu"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Esenler kombi kaydında Atışalanı semt tarifini resmî mahalle ve sokak bilgisiyle tamamlamak yararlıdır. Birlik, Davutpaşa ya da Fevzi Çakmak’taki cihazınız için belirtinin yeni mi tekrarlayan mı olduğunu seçin; önceki işlem varsa servis notunu ayrıca paylaşın.",
+        "klima": "Esenler’de klimanın açılmaması, soğutmaması ve su damlatması farklı başlangıç noktalarıdır. Fatih veya 15 Temmuz adresinizi seçtikten sonra gözleminizi işaretleyin. Cihazın filtresine erişim bile güvenli değilse merdiven veya dış cepheye çıkarak kontrol yapmayın."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          },
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          },
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Esenyurt",
+      "slug": "esenyurt",
+      "neighborhoods": [
+        "Akevler",
+        "Akçaburgaz",
+        "Akşemseddin",
+        "Ardıçlı",
+        "Atatürk",
+        "Aşık Veysel",
+        "Balıkyolu",
+        "Barbaros Hayrettin Paşa",
+        "Battalgazi",
+        "Cumhuriyet",
+        "Esenkent",
+        "Fatih",
+        "Gökevler",
+        "Güzelyurt",
+        "Hürriyet",
+        "Koza",
+        "Mehmet Akif Ersoy",
+        "Mehterçeşme",
+        "Merkez",
+        "Mevlana",
+        "Namık Kemal",
+        "Necip Fazıl Kısakürek",
+        "Orhan Gazi",
+        "Osmangazi",
+        "Piri Reis",
+        "Pınar",
+        "Saadetdere",
+        "Selahaddin Eyyubi",
+        "Sultaniye",
+        "Süleymaniye",
+        "Talatpaşa",
+        "Turgut Özal",
+        "Yenikent",
+        "Yeşilkent",
+        "Yunus Emre",
+        "Zafer",
+        "Çınar",
+        "Örnek",
+        "Üçevler",
+        "İncirtepe",
+        "İnönü",
+        "İstiklal",
+        "Şehitler"
+      ],
+      "neighbors": [
+        "Beylikdüzü",
+        "Avcılar",
+        "Başakşehir",
+        "Arnavutköy",
+        "Büyükçekmece"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Esenyurt’ta Atatürk adı geçen bir adresi, ilçesiyle birlikte kaydetmek gerekir. Akevler, Akçaburgaz veya Ardıçlı’daki kombi için basıncın ne zaman değiştiğini ve sıcak suyun nasıl etkilendiğini belirtin; marka/model bilginiz eksikse görünen belirtiyle ilerleyebilirsiniz.",
+        "klima": "Esenyurt klima servis talebinde cihazın kesintisiz mi aralıklı mı kullanıldığını öğrenmek isteriz. Akşemseddin veya Aşık Veysel adresinde birden çok cihaz varsa yalnız sorunlu olanı işaretleyin; bakım geçmişi bilinmiyorsa kesin tarih yazmanız gerekmez."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          },
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          },
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Eyüpsultan",
+      "slug": "eyupsultan",
+      "neighborhoods": [
+        "5. Levent",
+        "Akpınar",
+        "Akşemsettin",
+        "Alibeyköy",
+        "Ağaçlı",
+        "Defterdar",
+        "Düğmeciler",
+        "Emniyettepe",
+        "Esentepe",
+        "Eyüp Merkez",
+        "Göktürk Merkez",
+        "Güzeltepe",
+        "Işıklar",
+        "Karadolap",
+        "Mimar Sinan",
+        "Mithatpaşa",
+        "Nişanca",
+        "Odayeri",
+        "Pirinçci",
+        "Rami Cuma",
+        "Rami Yeni",
+        "Sakarya",
+        "Silahtarağa",
+        "Topçular",
+        "Yeşilpınar",
+        "Çiftalan",
+        "Çırçır",
+        "İhsaniye",
+        "İslambey"
+      ],
+      "neighbors": [
+        "Bayrampaşa",
+        "Sultangazi",
+        "Başakşehir",
+        "Arnavutköy",
+        "Gaziosmanpaşa",
+        "Zeytinburnu",
+        "Fatih",
+        "Beyoğlu",
+        "Sarıyer",
+        "Kağıthane"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Eyüpsultan kombi talebi, Alibeyköy veya 5. Levent gibi yer tariflerinin yanında mahalle seçimiyle netleşir. Akpınar, Ağaçlı ve Defterdar dâhil listeden adresinize ilerleyin; kullanım sırasında görülen değişikliği ve cihaz etiketini servis incelemesine temel olacak biçimde kaydedelim.",
+        "klima": "Eyüpsultan’da klima için başvuru yaparken dış ünitenin erişilebilir olup olmadığını ve etkilenen iç üniteyi belirtin. Alibeyköy’deki adresle Ağaçlı’daki adres ayrı kaydedilir; randevu uygunluğu teyit edilmeden varış saati veya sıra numarası vaat edilmez."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          },
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          },
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Fatih",
+      "slug": "fatih",
+      "neighborhoods": [
+        "Aksaray",
+        "Akşemsettin",
+        "Alemdar",
+        "Ali Kuşçu",
+        "Atikali",
+        "Ayvansaray",
+        "Balabanağa",
+        "Balat",
+        "Beyazıt",
+        "Binbirdirek",
+        "Cankurtaran",
+        "Cerrahpaşa",
+        "Cibali",
+        "Demirtaş",
+        "Derviş Ali",
+        "Emin Sinan",
+        "Hacı Kadın",
+        "Haseki Sultan",
+        "Hobyar",
+        "Hoca Gıyasettin",
+        "Hocapaşa",
+        "Hırka-İ Şerif",
+        "Kalenderhane",
+        "Karagümrük",
+        "Katip Kasım",
+        "Kemalpaşa",
+        "Koca Mustafapaşa",
+        "Küçük Ayasofya",
+        "Mercan",
+        "Mesihpaşa",
+        "Mevlanakapı",
+        "Mimar Hayrettin",
+        "Mimar Kemalettin",
+        "Molla Fenari",
+        "Molla Gürani",
+        "Molla Hüsrev",
+        "Muhsine Hatun",
+        "Nişanca",
+        "Rüstempaşa",
+        "Saraç İshak",
+        "Sarıdemir",
+        "Seyyid Ömer",
+        "Silivrikapı",
+        "Sultanahmet",
+        "Sururi",
+        "Süleymaniye",
+        "Sümbülefendi",
+        "Tahtakale",
+        "Taya Hatun",
+        "Topkapı",
+        "Yavuz Sinan",
+        "Yavuz Sultan Selim",
+        "Yedikule",
+        "Zeyrek",
+        "İskenderpaşa",
+        "Şehremini",
+        "Şehsuvarbey"
+      ],
+      "neighbors": [
+        "Eyüpsultan",
+        "Zeytinburnu"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Fatih kombi servisinde önce cihazın mı yoksa ısıtma tesisatının mı etkilendiğini anlamaya çalışıyoruz. Aksaray, Akşemsettin veya Ayvansaray adresinizde sıcak suyu ayrı, peteklerin durumunu ayrı tarif edin. Kapağı açmadan gözlenen bilgiler, ilk değerlendirme için yeterlidir.",
+        "klima": "Fatih’te Alemdar, Ali Kuşçu ve Atikali adresleri için klima bakım veya arıza talebi bırakabilirsiniz. Cihazın konumu ve çalışma sırasında karşılaşılan belirtiyi birlikte kaydedin; bir iş yerindeyse erişim saatlerini belirtmek, uygun servis planının görüşülmesini kolaylaştırır."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          },
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          },
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Gaziosmanpaşa",
+      "slug": "gaziosmanpasa",
+      "neighborhoods": [
+        "Barbaros Hayrettin Paşa",
+        "Bağlarbaşı",
+        "Fevzi Çakmak",
+        "Hürriyet",
+        "Karadeniz",
+        "Karayolları",
+        "Karlıtepe",
+        "Kazım Karabekir",
+        "Merkez",
+        "Mevlana",
+        "Pazariçi",
+        "Sarıgöl",
+        "Yeni Mahalle",
+        "Yenidoğan",
+        "Yıldıztabya",
+        "Şemsipaşa"
+      ],
+      "neighbors": [
+        "Bayrampaşa",
+        "Sultangazi",
+        "Esenler",
+        "Eyüpsultan"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Gaziosmanpaşa kombi kaydında “500 Evler” yerine mümkünse Karadeniz veya Karayolları gibi resmî mahalle adını da seçin. Cihaz kod veriyorsa marka ve modelle birlikte kontrol edilir; kod yokken kendi gözleminizden yola çıkarak uygun belirti rehberine geçebilirsiniz.",
+        "klima": "Gaziosmanpaşa’da klima soğutmuyorsa cihazın hiç başlamamasıyla fan çalışırken havanın ılık kalmasını ayırın. Bağlarbaşı, Hürriyet ve Fevzi Çakmak adresleri listede bulunur; modeli bilmiyorsanız bu aşamayı geçip gördüğünüz davranışı anlatabilirsiniz."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          },
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          },
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Güngören",
+      "slug": "gungoren",
+      "neighborhoods": [
+        "Abdurrahman Nafiz Gürman",
+        "Akıncılar",
+        "Gençosman",
+        "Güneştepe",
+        "Güven",
+        "Haznedar",
+        "Mareşal Çakmak",
+        "Mehmet Nesih Özmen",
+        "Merkez",
+        "Sanayi",
+        "Tozkoparan"
+      ],
+      "neighbors": [
+        "Bahçelievler",
+        "Bakırköy",
+        "Esenler",
+        "Bağcılar",
+        "Zeytinburnu"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Güngören kombi talebinde Merter tarifi tek başına mahalle seçiminin yerine geçmez. Abdurrahman Nafiz Gürman, Mehmet Nesih Özmen veya Haznedar adresinizi netleştirin; ısıtma, sıcak su ve basınç başlıklarından cihazın durumuna uyan rehberle başlayalım.",
+        "klima": "Güngören klima servisinde ev ve iş yeri kullanımını kayıt sırasında ayrı belirtebilirsiniz. Güneştepe, Güven veya Gençosman adresinde şikâyet yalnız belirli bir ünitedeyse bunu seçin; çalışma süresi ve son bakım bilgisiyle ihtiyacınızı daha anlaşılır hâle getirelim."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          },
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          },
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Kağıthane",
+      "slug": "kagithane",
+      "neighborhoods": [
+        "Emniyet Evleri",
+        "Gültepe",
+        "Gürsel",
+        "Hamidiye",
+        "Harmantepe",
+        "Hürriyet",
+        "Mehmet Akif Ersoy",
+        "Merkez",
+        "Nurtepe",
+        "Ortabayır",
+        "Seyrantepe",
+        "Sultan Selim",
+        "Talatpaşa",
+        "Telsizler",
+        "Yahya Kemal",
+        "Yeşilce",
+        "Çağlayan",
+        "Çeliktepe",
+        "Şirintepe"
+      ],
+      "neighbors": [
+        "Beşiktaş",
+        "Eyüpsultan",
+        "Beyoğlu",
+        "Sarıyer",
+        "Şişli"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Kağıthane’de kombi sorununun bütün petekleri mi tek bir odayı mı etkilediğini öğrenmek, kaydı doğru başlatır. Emniyet Evleri, Gültepe veya Hamidiye adresinizi seçin; ses, basınç ve sıcak su gözlemlerinizi birbirinden ayırarak aktarın.",
+        "klima": "Kağıthane klima taleplerinde Gürsel, Harmantepe ve Hürriyet gibi mahalle adlarıyla ilerlenir. Kumandadan verilen komutla cihazın verdiği tepkiyi ayrı yazın; aynı mekânda sorunsuz çalışan başka bir cihaz olması, tek başına ortak arıza olmadığını kanıtlamaz."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          },
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          },
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Küçükçekmece",
+      "slug": "kucukcekmece",
+      "neighborhoods": [
+        "Atakent",
+        "Atatürk",
+        "Beşyol",
+        "Cennet",
+        "Cumhuriyet",
+        "Fatih",
+        "Fevzi Çakmak",
+        "Gültepe",
+        "Halkalı Merkez",
+        "Kanarya",
+        "Kartaltepe",
+        "Kemalpaşa",
+        "Mehmet Akif",
+        "Sultan Murat",
+        "Söğütlü Çeşme",
+        "Tevfikbey",
+        "Yarımburgaz",
+        "Yeni Mahalle",
+        "Yeşilova",
+        "İnönü",
+        "İstasyon"
+      ],
+      "neighbors": [
+        "Bahçelievler",
+        "Bakırköy",
+        "Avcılar",
+        "Başakşehir",
+        "Bağcılar"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Atakent’te bir daire, Cennet’te bir iş yeri veya Sefaköy’de tarif edilen bir adres için önce doğru mahalleyi seçiyoruz. Küçükçekmece kombi sayfası sıcak su, petek ve basınç belirtilerini ayrı rehberlere bağlar; kodlu arızada marka ve model bilgisini koruyarak ilerler.",
+        "klima": "Küçükçekmece’de klima için Atakent, Beşyol ve Cennet adreslerini doğrudan seçebilirsiniz. Sefaköy bir semt tarifiyse resmî mahalleyi ayrıca belirleyin; cihazın tipi, kullanılan mod ve şikâyetin ne zaman başladığı üzerinden bakım veya onarım talebinizi düzenleyelim."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          },
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          },
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Sarıyer",
+      "slug": "sariyer",
+      "neighborhoods": [
+        "Ayazağa",
+        "Bahçeköy Kemer",
+        "Bahçeköy Merkez",
+        "Bahçeköy Yeni",
+        "Baltalimanı",
+        "Büyükdere",
+        "Cumhuriyet",
+        "Darüşşafaka",
+        "Demirciköy",
+        "Emirgan",
+        "Fatih Sultan Mehmet",
+        "Ferahevler",
+        "Garipçe",
+        "Gümüşdere",
+        "Huzur",
+        "Kazım Karabekir Paşa",
+        "Kireçburnu",
+        "Kocataş",
+        "Kumköy (Kilyos)",
+        "Kısırkaya",
+        "Maden",
+        "Maslak",
+        "PTT Evleri",
+        "Poligon",
+        "Pınar",
+        "Reşitpaşa",
+        "Rumelifeneri",
+        "Rumelihisarı",
+        "Rumelikavağı",
+        "Sarıyer Merkez",
+        "Tarabya",
+        "Uskumruköy",
+        "Yeniköy",
+        "Yeni",
+        "Zekeriyaköy",
+        "Çamlıtepe",
+        "Çayırbaşı",
+        "İstinye"
+      ],
+      "neighbors": [
+        "Beşiktaş",
+        "Eyüpsultan",
+        "Kağıthane"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Sarıyer kombi talebinde Ayazağa ile Kumköy/Kilyos adreslerinin aynı mahalle olmadığını koruyoruz. Bahçeköy’ün kısım bilgisini de seçerek ilerleyin; cihaz bir süre kullanılmadıysa bunu belirtin. İlk çalışma davranışıyla sürekli kullanımda oluşan belirtiyi ayrı ele alalım.",
+        "klima": "Sarıyer’de klima servis kaydı için Bahçeköy Merkez, Bahçeköy Kemer ve diğer mahalleler listelenir. Kumköy/Kilyos tarifinde resmî mahalle adını da koruyoruz. Erişim bilgisi, cihazın kullanım aralığı ve varsa ekrandaki uyarı randevu öncesinde değerlendirilebilir."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          },
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          },
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Silivri",
+      "slug": "silivri",
+      "neighborhoods": [
+        "Akören",
+        "Alibey",
+        "Alipaşa",
+        "Bekirli",
+        "Beyciler",
+        "Büyük Kılıçlı",
+        "Büyük Sinekli",
+        "Büyük Çavuşlu",
+        "Cumhuriyet",
+        "Danamandıra",
+        "Değirmenköy Fevzipaşa",
+        "Değirmenköy İsmetpaşa",
+        "Fatih",
+        "Fener",
+        "Gazitepe",
+        "Gümüşyaka",
+        "Kadıköy",
+        "Kavaklı",
+        "Kavaklı Hürriyet",
+        "Kurfallı",
+        "Küçük Kılıçlı",
+        "Küçük Sinekli",
+        "Mimar Sinan",
+        "Ortaköy",
+        "Piri Mehmet Paşa",
+        "Sayalar",
+        "Selimpaşa",
+        "Semizkumlar",
+        "Seymen",
+        "Yeni",
+        "Yolçatı",
+        "Çanta Balaban",
+        "Çanta Sancaktepe",
+        "Çayırdere",
+        "Çeltik"
+      ],
+      "neighbors": [
+        "Çatalca"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Silivri kombi servis kaydında Alibey, Alipaşa ve Akören adreslerini mahalle adıyla seçin. Cihaz dönemsel kullanılıyorsa kapalı kaldığı süreyi not edin; uzun aradan sonra ortaya çıkan bir kodu yalnız bulunduğu modele ait kılavuzla karşılaştırmak gerekir.",
+        "klima": "Silivri’de klima talebini sürekli kullanılan cihazla dönemsel açılan cihazı ayırt ederek kaydedebilirsiniz. Bekirli, Beyciler veya Büyük Kılıçlı adresinde ilk açılış sonrası gördüğünüz belirtiyi belirtin; uzun süre kullanılmaması tek başına herhangi bir parçanın bozuk olduğunu göstermez."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          },
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          },
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Sultangazi",
+      "slug": "sultangazi",
+      "neighborhoods": [
+        "50. Yıl",
+        "75. Yıl",
+        "Cebeci",
+        "Cumhuriyet",
+        "Esentepe",
+        "Eski Habipler",
+        "Gazi",
+        "Habibler",
+        "Malkoçoğlu",
+        "Sultançiftliği",
+        "Uğur Mumcu",
+        "Yayla",
+        "Yunus Emre",
+        "Zübeyde Hanım",
+        "İsmetpaşa"
+      ],
+      "neighbors": [
+        "Başakşehir",
+        "Esenler",
+        "Eyüpsultan",
+        "Gaziosmanpaşa"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Sultangazi’de Eski Habipler ve Habibler farklı mahalle kayıtlarıdır; adres seçimini buna göre yapıyoruz. Cebeci, 50. Yıl veya 75. Yıl’daki kombi için hata kodunun yanında sıcak su ve peteklerin durumunu da seçin; modeli bilmeden kesin kod anlamı çıkarmayalım.",
+        "klima": "Sultangazi klima kaydında Cebeci, Cumhuriyet ve Esentepe gibi mahalleleri kendi adlarıyla seçebilirsiniz. Cihaz başlıyor fakat kısa sürede duruyorsa geçen süreyi ve ekrandaki işareti not edin; bakım talebini ani duruş şikâyetinden ayrı tutalım."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          },
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          },
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Zeytinburnu",
+      "slug": "zeytinburnu",
+      "neighborhoods": [
+        "Beştelsiz",
+        "Gökalp",
+        "Kazlıçeşme",
+        "Maltepe",
+        "Merkezefendi",
+        "Nuripaşa",
+        "Seyitnizam",
+        "Sümer",
+        "Telsiz",
+        "Veliefendi",
+        "Yenidoğan",
+        "Yeşiltepe",
+        "Çırpıcı"
+      ],
+      "neighbors": [
+        "Bakırköy",
+        "Bayrampaşa",
+        "Esenler",
+        "Eyüpsultan",
+        "Güngören",
+        "Fatih"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Zeytinburnu’ndaki Maltepe Mahallesi, Anadolu Yakası’ndaki Maltepe ilçesiyle karıştırılmamalıdır. Beştelsiz, Gökalp veya Merkezefendi adresindeki kombiniz için arızanın başladığı kullanım adımını seçin; tamir gerekip gerekmediği yerinde incelemeyle netleşir.",
+        "klima": "Zeytinburnu klima kaydında Kazlıçeşme, Nuripaşa ve Maltepe mahallelerini ilçe bilgisiyle birlikte koruyoruz. Üfleme zayıflığı, sıcaklık değişimi veya su damlaması için ayrı rehberler vardır; fark ettiğiniz ilk belirtiyi seçerek işe yarar bir servis notu hazırlayın."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Ateşleme anını tarif edin",
+            "text": "Ses veya duruş ilk çalıştırmada oluyorsa ne zaman başladığını belirtin. Patlama benzeri ateşlemede cihazı yeniden denemeyin; gaz kokusunda güvenli alana geçip 187’ye ulaşın.",
+            "path": "kombi-atesleme.html"
+          },
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Koku ve bakım geçmişini birlikte kaydedin",
+            "text": "Kokunun yalnız ilk açılışta mı sürekli mi görüldüğünü ve son filtre bakımını belirtin. Yanık kokusu veya duman varsa cihazı kullanmayı bırakın; yeniden çalıştırarak kontrol etmeyin.",
+            "path": "klima-koku-yapiyor.html"
+          },
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Çatalca",
+      "slug": "catalca",
+      "neighborhoods": [
+        "Akalan",
+        "Atatürk",
+        "Aydınlar",
+        "Bahşayiş",
+        "Başak",
+        "Belgrat",
+        "Celepköy",
+        "Dağyenice",
+        "Elbasan",
+        "Fatih",
+        "Ferhatpaşa",
+        "Gökçeali",
+        "Gümüşpınar",
+        "Hallaçlı",
+        "Hisarbeyli",
+        "Kabakça",
+        "Kaleiçi",
+        "Kalfa",
+        "Karacaköy Merkez",
+        "Karamandere",
+        "Kestanelik",
+        "Kızılcaali",
+        "Muratbey Merkez",
+        "Nakkaş",
+        "Oklalı",
+        "Ormanlı",
+        "Ovayenice",
+        "Subaşı",
+        "Yalıköy",
+        "Yaylacık",
+        "Yazlık",
+        "Çakıl",
+        "Çanakça",
+        "Çiftlikköy",
+        "Örcünlü",
+        "Örencik",
+        "İhsaniye",
+        "İnceğiz",
+        "İzzettin"
+      ],
+      "neighbors": [
+        "Arnavutköy",
+        "Silivri",
+        "Büyükçekmece"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Çatalca’da Akalan, Aydınlar veya Belgrat adresi için kombinin bulunduğu mahalleyi seçerek başlayın. Binada hangi ısıtma sisteminin kullanıldığını ve cihazın yakıt türünü belirtmek önemlidir; elektrikli bir cihazın belirtisini gazlı kombi arızası gibi yorumlamayız.",
+        "klima": "Çatalca klima talebinde Atatürk, Bahşayiş ve Başak adresleri birbirinden ayrı kaydedilir. Cihazınız dönemsel çalışıyorsa son kullanım zamanını belirtin; iç ünitenin tepkisiyle dış ünitenin gözlenebilen durumunu ayırarak aktarın, dış kapağı açmayın."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Tesisat belirtisini cihaz kodundan ayırın",
+            "text": "Tek peteğin soğuk kalması ile bütün kaloriferlerin ısınmaması aynı gözlem değildir. Cihaz ekranını ve etkilenen odaları kaydetmek, servis öncesi ilk ayrımı kolaylaştırır.",
+            "path": "kombi-petek-isitmiyor.html"
+          },
+          {
+            "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+            "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+            "path": "kombi-sicak-su.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Kumanda tepkisi ile cihazın başlamasını ayırın",
+            "text": "Kumandaya basıldığında iç ünitenin ışık veya ses tepkisi verip vermediğini not edin. Enerji beslemesi ve elektronik arıza için kapağı açmadan teknik inceleme planlanmalıdır.",
+            "path": "klima-calismiyor.html"
+          },
+          {
+            "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+            "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+            "path": "klima-sogutmuyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    },
+    {
+      "name": "Şişli",
+      "slug": "sisli",
+      "neighborhoods": [
+        "19 Mayıs",
+        "Bozkurt",
+        "Cumhuriyet",
+        "Duatepe",
+        "Ergenekon",
+        "Esentepe",
+        "Eskişehir",
+        "Feriköy",
+        "Fulya",
+        "Gülbahar",
+        "Halaskargazi",
+        "Halide Edip Adıvar",
+        "Halil Rıfat Paşa",
+        "Harbiye",
+        "Kaptanpaşa",
+        "Kuştepe",
+        "Mahmut Şevket Paşa",
+        "Mecidiyeköy",
+        "Meşrutiyet",
+        "Paşa",
+        "Teşvikiye",
+        "Yayla",
+        "İnönü",
+        "İzzet Paşa",
+        "Şişli Merkez"
+      ],
+      "neighbors": [
+        "Beşiktaş",
+        "Beyoğlu",
+        "Kağıthane"
+      ],
+      "neighbor_basis": "shared-land-boundary-segments",
+      "leads": {
+        "kombi": "Şişli’de 19 Mayıs, Bozkurt veya Duatepe adresindeki kombinizin sorunu için önce ısıtma ile sıcak su davranışını ayırın. Aynı isimli mahalleler başka ilçelerde de bulunduğundan ilçe seçimini koruyoruz. Arıza kodu varsa yazımı ve modeli birlikte değerlendirilir.",
+        "klima": "Şişli klima servisinde Ergenekon, Esentepe veya Cumhuriyet adresinizi seçtikten sonra cihazın kullanım alanını belirtebilirsiniz. Birden fazla iç ünite varsa hangisinin etkilendiğini ayırın; yalnız ses veya koku tarifinden kesin parça değişimi kararı verilmez."
+      },
+      "notes": {
+        "kombi": [
+          {
+            "title": "Suyun görüldüğü noktayı kaydedin",
+            "text": "Islaklığın cihazın altından mı, bir bağlantıdan mı, başka bir tesisattan mı geldiğini kapağı açmadan gözlemleyin. Elektrik aksamına yakın su varsa cihaza dokunmadan güvenli servis desteği isteyin.",
+            "path": "kombi-su-akitiyor.html"
+          },
+          {
+            "title": "Basıncı tek ölçümle yorumlamayın",
+            "text": "Cihaz soğukken görülen basıncı ve ısıtma sonrasındaki değişimi not edin. Sürekli su eklemek ya da aynı uyarıyı tekrar tekrar sıfırlamak yerine gözlemi servis kaydına aktarın.",
+            "path": "kombi-basinci.html"
+          }
+        ],
+        "klima": [
+          {
+            "title": "Isıtma sırasında duraklamayı bağlamıyla anlatın",
+            "text": "Isıtma modunu, dış hava koşulunu ve duraklamanın süresini birlikte belirtin. Tek bir duraklamayı kesin arıza saymadan modelin kullanım bilgisine ve ekrandaki işaretlere bakılır.",
+            "path": "klima-isitmiyor.html"
+          },
+          {
+            "title": "Su damlamasının yerini ayırın",
+            "text": "Suyun iç üniteden mi yoksa dışarıdaki tahliye hattından mı geldiğini güvenli bir mesafeden gözlemleyin. Elektrikli bölümlere erişmeyin; damlayan suyun yerini servis kaydında belirtin.",
+            "path": "klima-su-akitiyor.html"
+          }
+        ]
+      },
+      "address_note": "Apartman veya site içindeki bir adres için blok, giriş ve kat bilgisi; iş yeri için erişim saatleri kayda eklenebilir. Bu bilgiler olmadan sıra, yolculuk süresi veya kesin varış saati üretilmez."
+    }
+  ],
+  "localities": [
+    {
+      "name": "Sefaköy",
+      "slug": "sefakoy",
+      "districts": [
+        "Küçükçekmece"
+      ],
+      "neighborhoods": [],
+      "lead": "Sefaköy diye tarif ettiğiniz adresi Küçükçekmece ilçesindeki resmî mahalleyle tamamlayalım. Kombide sıcak su ve ısıtma, klimada çalışma modu ve üfleme ayrı sorulur; bakım talebiyle mevcut arıza aynı kayıt altında birbirine karıştırılmaz.",
+      "scope_note": "Sefaköy semt adıyla gelen taleplerde mahalle seçimi ayrıca yapılır; semt için yeni bir resmî mahalle kaydı oluşturulmaz.",
+      "notes": [
+        {
+          "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+          "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+          "path": "kombi-sicak-su.html"
+        },
+        {
+          "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+          "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+          "path": "klima-sogutmuyor.html"
+        }
+      ]
+    },
+    {
+      "name": "500 Evler",
+      "slug": "500-evler",
+      "districts": [
+        "Bayrampaşa",
+        "Gaziosmanpaşa",
+        "Sultangazi"
+      ],
+      "neighborhoods": [],
+      "lead": "500 Evler bir semt tarifidir; bu adla yazılan talebi otomatik olarak tek ilçeye atamıyoruz. Resmî adresinizdeki ilçe ve mahalleyi seçin, ardından kombi veya klima belirtinizi ekleyin. Cihazın marka ve modeli bilinmiyorsa gözlemlerinizle devam edebilirsiniz.",
+      "scope_note": "İlçe seçenekleri adresi netleştirmek içindir. 500 Evler adı tek başına idari ilçe veya mahalle sınırı kabul edilmez; tam adres teyit edilir.",
+      "notes": [
+        {
+          "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+          "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+          "path": "kombi-sicak-su.html"
+        },
+        {
+          "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+          "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+          "path": "klima-sogutmuyor.html"
+        }
+      ]
+    },
+    {
+      "name": "Merter",
+      "slug": "merter",
+      "districts": [
+        "Güngören",
+        "Zeytinburnu"
+      ],
+      "neighborhoods": [],
+      "lead": "Merter’de kombi ya da klima talebi bırakırken yalnız semt adı yerine resmî ilçe ve mahalle seçimiyle ilerleyin. Ev, ofis veya iş yeri kullanımı ile erişim bilgilerini ayrı kaydederek cihazın belirtisine uygun rehbere ulaşabilirsiniz.",
+      "scope_note": "Merter tarifi idari adresin yerini tutmaz. Güngören veya Zeytinburnu seçimi tam adresinize göre yapılır; başka bir ilçe için ilgili ilçe sayfasına geçebilirsiniz.",
+      "notes": [
+        {
+          "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+          "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+          "path": "kombi-sicak-su.html"
+        },
+        {
+          "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+          "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+          "path": "klima-sogutmuyor.html"
+        }
+      ]
+    },
+    {
+      "name": "Bahçeşehir",
+      "slug": "bahcesehir",
+      "districts": [
+        "Başakşehir"
+      ],
+      "neighborhoods": [
+        {
+          "district": "Başakşehir",
+          "name": "Bahçeşehir 1. Kısım"
+        },
+        {
+          "district": "Başakşehir",
+          "name": "Bahçeşehir 2. Kısım"
+        }
+      ],
+      "lead": "Bahçeşehir 1. Kısım ve 2. Kısım adreslerini Başakşehir ilçesi altında ayrı seçiyoruz. Kombi için bireysel mi merkezi mi ısınma kullanıldığını; klima için hangi ünitenin etkilendiğini belirtin. Kısım ve blok bilgisi, talebin doğru adrese kaydedilmesini sağlar.",
+      "scope_note": "Bahçeşehir 1. Kısım ve Bahçeşehir 2. Kısım resmî mahalle kayıtları Başakşehir ilçesindedir. Yakın çevrede farklı resmî adresi bulunan kullanıcılar kendi ilçesini seçmelidir.",
+      "notes": [
+        {
+          "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+          "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+          "path": "kombi-sicak-su.html"
+        },
+        {
+          "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+          "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+          "path": "klima-sogutmuyor.html"
+        }
+      ]
+    },
+    {
+      "name": "Kilyos",
+      "slug": "kilyos",
+      "districts": [
+        "Sarıyer"
+      ],
+      "neighborhoods": [
+        {
+          "district": "Sarıyer",
+          "name": "Kumköy"
+        }
+      ],
+      "lead": "Kilyos adıyla bilinen Kumköy adresini Sarıyer ilçesi altında kaydediyoruz. Kombi ve klima uzun süre kapalı kaldıysa son kullanım bilgisini belirtin; dönemsel kullanım tek başına arıza nedeni sayılmaz. Görülen kod veya belirtiyle ilgili rehbere geçebilirsiniz.",
+      "scope_note": "İBB ve Sarıyer belediyesi kaynaklarında Kumköy (Kilyos) adı kullanılır. Adresiniz için Kumköy mahallesini seçebilir, Kilyos tarifini de servis notuna ekleyebilirsiniz.",
+      "notes": [
+        {
+          "title": "Sıcak su ile kaloriferi ayrı gözlemleyin",
+          "text": "Musluk açıldığında ve kalorifer çalışırken aynı sorunun görülüp görülmediğini not edin. İki kullanımın ayrılması, sıcak su şikâyeti ile ısıtma devresini karıştırmadan değerlendirmeye başlamayı sağlar.",
+          "path": "kombi-sicak-su.html"
+        },
+        {
+          "title": "Soğutmama belirtisinde çalışma modunu koruyun",
+          "text": "Seçili modu, hedef sıcaklığı ve iç ünitenin üfleyip üflemediğini not edin. Yalnız serinlik azalmasına bakarak gaz eksikliği veya kompresör arızası kararı verilmez.",
+          "path": "klima-sogutmuyor.html"
+        }
+      ]
+    }
+  ]
+}

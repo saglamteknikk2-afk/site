@@ -1,0 +1,18 @@
+{
+  "scope": "Real local Chromium; 1500 ms delayed first dataset; no provider submissions",
+  "data_requests": [
+    "verified-faults.js",
+    "organic-catalog.js",
+    "model-directory.js"
+  ],
+  "initial_large_data_requests": 0,
+  "ready": true,
+  "errors": [],
+  "vaillant_model_names": 39,
+  "device": "Kombi",
+  "failed_resource_fallback": {
+    "ready": false,
+    "device": "Kombi",
+    "errors": []
+  }
+}

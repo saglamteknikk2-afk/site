@@ -1,0 +1,110 @@
+{
+  "scope": "Manual second-pass natural Turkish and bounded geographic truth review of 50 district leads plus 5 locality leads; not independent current municipal inventory verification",
+  "reviewed_at": "2026-10-28",
+  "lead_count": 55,
+  "unique_full_leads": 55,
+  "word_counts": {
+    "Arnavutköy kombi": 38,
+    "Arnavutköy klima": 33,
+    "Avcılar kombi": 35,
+    "Avcılar klima": 34,
+    "Bahçelievler kombi": 36,
+    "Bahçelievler klima": 37,
+    "Bakırköy kombi": 35,
+    "Bakırköy klima": 34,
+    "Bayrampaşa kombi": 38,
+    "Bayrampaşa klima": 32,
+    "Bağcılar kombi": 36,
+    "Bağcılar klima": 35,
+    "Başakşehir kombi": 37,
+    "Başakşehir klima": 34,
+    "Beylikdüzü kombi": 39,
+    "Beylikdüzü klima": 37,
+    "Beyoğlu kombi": 36,
+    "Beyoğlu klima": 35,
+    "Beşiktaş kombi": 33,
+    "Beşiktaş klima": 34,
+    "Büyükçekmece kombi": 33,
+    "Büyükçekmece klima": 33,
+    "Esenler kombi": 36,
+    "Esenler klima": 33,
+    "Esenyurt kombi": 35,
+    "Esenyurt klima": 32,
+    "Eyüpsultan kombi": 35,
+    "Eyüpsultan klima": 35,
+    "Fatih kombi": 34,
+    "Fatih klima": 35,
+    "Gaziosmanpaşa kombi": 35,
+    "Gaziosmanpaşa klima": 29,
+    "Güngören kombi": 32,
+    "Güngören klima": 35,
+    "Kağıthane kombi": 32,
+    "Kağıthane klima": 33,
+    "Küçükçekmece kombi": 41,
+    "Küçükçekmece klima": 34,
+    "Sarıyer kombi": 35,
+    "Sarıyer klima": 34,
+    "Silivri kombi": 34,
+    "Silivri klima": 36,
+    "Sultangazi kombi": 39,
+    "Sultangazi klima": 32,
+    "Zeytinburnu kombi": 28,
+    "Zeytinburnu klima": 34,
+    "Çatalca kombi": 33,
+    "Çatalca klima": 30,
+    "Şişli kombi": 36,
+    "Şişli klima": 32,
+    "Sefaköy": 31,
+    "500 Evler": 34,
+    "Merter": 34,
+    "Bahçeşehir": 35,
+    "Kilyos": 34
+  },
+  "geo_checks": [
+    {
+      "item": "Beşiktaş Arnavutköy neighborhood vs Arnavutköy district",
+      "result": "Explicitly distinguished in lead"
+    },
+    {
+      "item": "Zeytinburnu Maltepe neighborhood vs Anatolian Maltepe district",
+      "result": "Explicitly distinguished in lead"
+    },
+    {
+      "item": "Büyükçekmece Bahçelievler neighborhood vs Bahçelievler district",
+      "result": "Explicitly distinguished in lead"
+    },
+    {
+      "item": "Sultangazi Eski Habipler and Habibler",
+      "result": "Both separate names exist in preserved catalogue"
+    },
+    {
+      "item": "Bahçeşehir 1. Kısım and 2. Kısım in Başakşehir",
+      "result": "Official municipal muhtarlık source checked"
+    },
+    {
+      "item": "Kilyos / Kumköy in Sarıyer",
+      "result": "IBB and municipal sources checked"
+    },
+    {
+      "item": "500 Evler and Merter",
+      "result": "Require explicit official address; candidate district choices are not asserted legal boundaries"
+    }
+  ],
+  "limits": [
+    "The 599 neighborhood records are the existing site inventory, not a verified up-to-date official total.",
+    "No building-density, actual local fault-frequency, historical jobs, driving-time, queue-position or model-code facts invented.",
+    "Adjacency is conservative shared polygon-segment detection, not complete legal boundary verification or driving route."
+  ],
+  "attribution": {
+    "source_sha256": "4553411a7020f795ad21c4918bd89fc0f77594fad3e53517182fee4ab5f2c1bb",
+    "license": "ODbL 1.0",
+    "visible_notice_present": "© OpenStreetMap katkıda bulunanlar, ODbL 1.0; derived adjacency same license",
+    "dataset_notice": "Source URL, geometry digest and derivation method stored in distributed regions.json."
+  },
+  "readability_corrections": [
+    "Removed SEO implementation explanations from customer-facing neighborhood helper text.",
+    "Changed unsupported-frequency disclaimer to practical symptom-observation guidance.",
+    "Replaced Kilyos archive-internal phrasing with customer-facing address instruction."
+  ],
+  "material_geographic_errors_found": []
+}

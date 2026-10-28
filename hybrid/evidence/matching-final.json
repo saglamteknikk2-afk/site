@@ -1,0 +1,170 @@
+{
+  "scope": "Actual shipped JS resolver and deterministic guides only; excludes Google/provider delivery",
+  "results": [
+    {
+      "query": "Küçükçekmece Baymak kombi servisi",
+      "path": "kucukcekmece-kombi-servisi.html",
+      "district": "Küçükçekmece",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "kombi servisi Baymak Küçükçekmece",
+      "path": "kucukcekmece-kombi-servisi.html",
+      "district": "Küçükçekmece",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Küçükçekmcece Baymak kombi servisi",
+      "path": "kucukcekmece-kombi-servisi.html",
+      "district": "Küçükçekmece",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Baymak kombi servisi",
+      "path": "baymak-kombi-servisi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Sefaköy kombi servisi",
+      "path": "sefakoy-servisi.html",
+      "district": "Küçükçekmece",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Avcılar Bosch kombi sıcak su vermiyor",
+      "path": "kombi-sicak-su.html",
+      "district": "Avcılar",
+      "neighborhood": "",
+      "brand": "Bosch",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Avcılar Bosch kombi vermiyor sıcak su",
+      "path": "kombi-sicak-su.html",
+      "district": "Avcılar",
+      "neighborhood": "",
+      "brand": "Bosch",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Baymak kombi altından su geliyor",
+      "path": "kombi-su-akitiyor.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Şişli Vaillant kombi ateşleme arızası",
+      "path": "kombi-atesleme.html",
+      "district": "Şişli",
+      "neighborhood": "",
+      "brand": "Vaillant",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Küçükçekmece petek temizliği",
+      "path": "petek-temizligi.html",
+      "district": "Küçükçekmece",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "petek yıkama",
+      "path": "petek-temizligi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": false,
+      "verified": false
+    },
+    {
+      "query": "Vaillant ecoTEC pro VUW TR 236/5-3 F22 hata kodu",
+      "path": "vaillant-kombi-ecotec-pro-236-286-5-3-ariza-kodlari.html#kod-f22",
+      "district": "",
+      "neighborhood": "",
+      "brand": "Vaillant",
+      "ambiguous_neighborhood": false,
+      "verified": true
+    },
+    {
+      "query": "Baymak Duotec 33 E1 hata kodu",
+      "path": "baymak-kombi-duotec-33-42-45-ariza-kodlari.html#kod-e01",
+      "district": "",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": true
+    },
+    {
+      "query": "Baymak Duotec 33 E01 hata kodu",
+      "path": "baymak-kombi-duotec-33-42-45-ariza-kodlari.html#kod-e01",
+      "district": "",
+      "neighborhood": "",
+      "brand": "Baymak",
+      "ambiguous_neighborhood": false,
+      "verified": true
+    },
+    {
+      "query": "Maltepe kombi servisi",
+      "path": "kombi-servisi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": true,
+      "verified": false
+    },
+    {
+      "query": "Kadıköy İstanbul kombi",
+      "path": "kombi-servisi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": true,
+      "verified": false
+    },
+    {
+      "query": "Cumhuriyet kombi servisi",
+      "path": "kombi-servisi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": true,
+      "verified": false
+    },
+    {
+      "query": "500 Evler kombi",
+      "path": "500-evler-servisi.html",
+      "district": "",
+      "neighborhood": "",
+      "brand": "",
+      "ambiguous_neighborhood": true,
+      "verified": false
+    }
+  ],
+  "district_brand_cases": 875,
+  "neighborhood_cases": 599,
+  "status": "passed"
+}
