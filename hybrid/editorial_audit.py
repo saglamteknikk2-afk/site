@@ -135,7 +135,7 @@ def verify_rendered(pages,files):
             'authored_faq_answers_checked':faq,'errors':errors}
 
 
-def audit_pages(pages, source, files=None, brands=(), strict=True):
+def audit_pages(pages, source, files=None, brands=(), strict=True, extra_routes=()):
     """Core entry point also accepts bounded fixtures for meaningful regression tests."""
     errors = []; warnings = []; claim_disclaimers = []; by_route = {}; blocks = []; headings = defaultdict(list)
     expected = {}
@@ -144,6 +144,8 @@ def audit_pages(pages, source, files=None, brands=(), strict=True):
             expected[row['slug']+'-'+device+'-servisi.html'] = (row, device)
     for row in source.get('localities', []):
         expected[row['slug']+'-servisi.html'] = (row, 'mixed')
+    for page in extra_routes:
+        expected[page['route']] = (page, page.get('device', 'mixed'))
     counts = Counter(page.get('route') for page in pages)
     for route, count in counts.items():
         if count != 1:errors.append({'kind':'duplicate_editorial_route', 'page':route, 'count':count})
@@ -208,7 +210,7 @@ def audit_pages(pages, source, files=None, brands=(), strict=True):
             for match in re.finditer(pattern,full_text):
                 # A clear refusal to promise a diagnosis is not a diagnosis promise.
                 tail=full_text[match.end():match.end()+75]
-                if kind=='unsubstantiated_promise' and re.search(r'(?i)(?:söylenmez|verilmez|verilmemelidir|konulamaz)',tail):
+                if kind=='unsubstantiated_promise' and re.search(r'(?i)(?:söylenmez|verilmez|verilmemelidir|konulamaz|oluşturmaz)',tail):
                     claim_disclaimers.append({'page':route,'kind':'explicit_limit_on_remote_diagnosis'})
                 else:warnings.append({'kind':kind,'page':route,'review_required':True})
     repeats = [values for values in exact_paragraphs.values() if len({v['page'] for v in values})>1]

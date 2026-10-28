@@ -1,0 +1,53 @@
+{
+  "reviewer": "symptom_editorial",
+  "scope": "Independent content cross-read of13symptom bodies against16brand bodies and55regional focus outlines; fullprose regression checks across84authored bodies. NotGooglecause certification.",
+  "symptom_pages": 13,
+  "cross_compared_brand_pages": 16,
+  "cross_compared_regional_pages": 55,
+  "findings": [
+    {
+      "check": "intent boundaries",
+      "result": "passed",
+      "detail": "No-powervsnoheatingvsnoscreencode, waterflowvstemperature, pressurerisevsfall, ignitionexplosionvsgenericnoise, maintenancevsrepair, petekcleaningvsallheating separated and contextually linked."
+    },
+    {
+      "check": "highrisk ignition",
+      "result": "passed",
+      "detail": "Patlamali/sertatesleme has firstsectionpriority in ignition andsound guides; no pumpguess, repeat-test or resetrequest. Gasodor andfire emergency routed separatelyfrompaidservice."
+    },
+    {
+      "check": "code identity",
+      "result": "passed",
+      "detail": "Fullcodepreserved. E1/E01 flexibility onlyunderselectedmodelscope; E10different. No claim bare01equalsE01, no unknownmodelcodesmappedbyguess."
+    },
+    {
+      "check": "navigation optional",
+      "result": "passed",
+      "detail": "Modelunknown explicitlypermitted in codeandignition guides. Symptomselection valid; no mandatorytext/modelrequirement introduced."
+    },
+    {
+      "check": "DIY",
+      "result": "passed",
+      "detail": "No gasadjustment, coveropening, electrodework, pressurefilling, drainpressure, electricalwork or forcedfaultreproduction instruction."
+    },
+    {
+      "check": "indexed neighbor differentiation",
+      "result": "passed",
+      "detail": "Symptomguides deepenoneobservedproblem; brandpagesidentifyproductscope; regionalpageslocateserviceandprovidefocusedlocalrecordpreparation. Sharedphysicalfacts allowed. Thisdoesnotmean84unrelatedtechnicalsubjects."
+    }
+  ],
+  "automated_cross_body": {
+    "pages": 84,
+    "status": "passed",
+    "errors": [],
+    "warnings": [
+      {
+        "kind": "unsubstantiated_promise",
+        "page": "demirdokum-kombi-servisi.html",
+        "review_required": true
+      }
+    ]
+  },
+  "app_changes": "none beyond assignedsymptomsJSON",
+  "blockers": []
+}

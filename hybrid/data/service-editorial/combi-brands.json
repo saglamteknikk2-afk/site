@@ -1,0 +1,522 @@
+{
+  "pages": [
+    {
+      "route": "ariston-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Ariston",
+      "lead": "Ariston kombiniz durduğunda önce ekranın açık olup olmadığını ve hangi kullanımın kesildiğini ayıralım. Sağlam Teknik, İstanbul Avrupa Yakası’nda markadan bağımsız bakım ve arıza değerlendirmesi sunar; işlem kapsamı cihaz incelendikten sonra açıklanır.",
+      "description": "Ariston kombi için ekran, sıcak su ve ısıtma şikâyetlerini ayırın. Ürün varyantına uygun belge kontrolü ve İstanbul Avrupa Yakası servis başvurusu.",
+      "headline": "Ariston’da ekran bilgisiyle çalışma şikâyetini birlikte okuyalım",
+      "sections": [
+        {
+          "id": "ekran-ve-calisma",
+          "heading": "Ekran kapalı mı, cihaz uyarıyla mı bekliyor?",
+          "paragraphs": [
+            "Ön panelin tamamen karanlık kalması, ekranda bir kod görünmesi ve cihazın çalışıp suyu ısıtamaması üç ayrı gözlemdir. Talebinizde hangisinin yaşandığını belirtin. Son normal kullanımın ne zaman olduğu, kesintinin kendiliğinden mi yoksa bir elektrik kesintisinin ardından mı başladığı da görüşmeye yön verir.",
+            "Karanlık ekranı kart arızası, görünen her uyarıyı ateşleme sorunu diye adlandırmayın. Kapağı sökerek veya kablolara dokunarak kontrol yapmak gerekmez. Daha önce çekilmiş güvenli bir ekran görüntüsü varsa kodun harf ve rakamları oradan aktarılabilir."
+          ],
+          "links": []
+        },
+        {
+          "id": "urun-varyanti",
+          "heading": "CLAS ONE adı tek başına kılavuz seçtirmez",
+          "paragraphs": [
+            "Sitedeki Ariston kod rehberi belirli CLAS ONE GB/IE ürünlerinin belgesidir. Türkiye’deki cihazın ön yüzünde benzer bir ad bulunması aynı ürün numarasına sahip olduğunu kanıtlamaz. Bu nedenle burada görülen yabancı pazar açıklaması Türkiye cihazına doğrudan uygulanmaz.",
+            "Etikette erişilebilir durumdaki model ve ürün numarasını olduğu gibi paylaşın; sırf belgeyi eşleştirmek için cihazı yerinden çıkarmayın. Doğru varyant doğrulanamıyorsa kod anlamı tahmin etmek yerine görünen belirti üzerinden servis hazırlığı yapabiliriz."
+          ],
+          "links": [
+            {
+              "path": "ariston-kombi-clas-one-gb-ie-3301043-ariza-kodlari.html",
+              "label": "CLAS ONE belgesinin ürün kapsamı"
+            }
+          ]
+        },
+        {
+          "id": "talep-ayrimi",
+          "heading": "Sıcak suyla ısıtma kaybını ayrı kaydedin",
+          "paragraphs": [
+            "Muslukta suyun ısınmaması ile peteklerin soğuk kalmasını tek cümlede birleştirmeyin. İkisi birlikte etkileniyorsa bunu ayrıca yazın. Sorunun aralıklı mı sürekli mi olduğu ve daha önce yapılan işlemin tarihi, yeni incelemenin geçmiş müdahaleden ayrılmasına yardımcı olur.",
+            "Bakım randevusu isterken mevcut kapanma veya sızıntıyı da bildirin. Düzenli bakım talebi, çalışmayı engelleyen arızanın giderildiği anlamına gelmez; gerekli onarım ve ücreti değerlendirmeden sonra görüşülür."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicak-su.html",
+              "label": "Sıcak su şikâyetini açıklayın"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Ariston modelimi listede bulamazsam talep bırakabilir miyim?",
+          "answer": "Evet. Model alanını boş bırakabilir veya etikette gördüğünüz adı yazabilirsiniz. Ekran durumu, etkilenen kullanım ve ilçe/mahalleyle başvuru yapılabilir; benzer adlı başka ürünün kod tablosu seçilmez."
+        },
+        {
+          "question": "Ariston ekranındaki 501 ile 5P3 aynı kayıt mı?",
+          "answer": "Gösterimler birbirinin yerine yazılmamalıdır. Kod aynen korunur; anlamı ancak tam ürün ve uygun üretici belgesi eşleştirildiğinde değerlendirilir. Bir gösterim tek başına değişecek parçayı belirlemez."
+        }
+      ],
+      "cta": {
+        "heading": "Ariston talebini doğru bilgiyle hazırlayın",
+        "text": "Ekrandaki durumu ve etkilenen kullanımı seçin; bulunduğunuz bölge için kontrol uygunluğunu birlikte görüşelim."
+      }
+    },
+    {
+      "route": "baymak-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Baymak",
+      "lead": "Baymak kombide basınç değişmesi, sıcak su kesilmesi veya tekrarlayan uyarı için cihazın davranışını birlikte değerlendirelim. Duotec, Lunatec ve Lambert gibi adlar farklı ürün kayıtlarını gösterir; model bilinmiyorsa belirtiyle başvuru yapılabilir.",
+      "description": "Baymak kombi bakım ve arıza desteği: basınç değişimi, tekrarlayan kapanma ve tam modelle kod kontrolü. İlçe ve mahalleye göre servis talebi.",
+      "headline": "Baymak arızasında değişimin ne zaman olduğunu ayırın",
+      "sections": [
+        {
+          "id": "basinc-zamani",
+          "heading": "Basınç yalnız çalışırken mi değişiyor?",
+          "paragraphs": [
+            "Cihaz soğukken gördüğünüz değer ile ısıtma çalışırken zaten gözlediğiniz değeri ayrı not edin. Sürekli su ekleme ihtiyacı, görünür damlama veya kendiliğinden kapanma varsa talepte bunlardan hangisinin önce başladığını belirtin. Tek bir gösterge değerinden genleşme tankı ya da pompa arızası sonucu çıkmaz.",
+            "Basıncı takip etmek için cihazı tekrar tekrar çalıştırmayın ve alışkanlıkla su eklemeyin. Özellikle su elektrikli bölüme yaklaşıyorsa kullanımı sürdürmeden teknik destek isteyin; dolum veya tahliye işlemi bu sayfanın önerdiği bir kullanıcı kontrolü değildir."
+          ],
+          "links": [
+            {
+              "path": "kombi-basinci.html",
+              "label": "Basınç değişimini değerlendirme rehberi"
+            }
+          ]
+        },
+        {
+          "id": "aile-kapasite",
+          "heading": "Aile adı kapasite rakamından önce gelir",
+          "paragraphs": [
+            "Duotec 33 ile Lambert LPY 33Fi benzer rakam taşısa da aynı model değildir. Lunatec, Luna Avant ve Lambert Attivo da ayrı ürün adlarıdır. Etiketteki aileyi, kapasiteyi ve harfli son eki birlikte korumak, arıza kaydının yanlış kılavuza yönlenmesini önler.",
+            "Buradaki mevcut belge kayıtları bütün eski ve güncel Baymak cihazlarını kapsamaz. Modeliniz listede yoksa en yakın görünen ismi seçmek zorunda değilsiniz. AI Usta’ya kendi modelinizi yazabilir veya model bilgisi olmadan gözlediğiniz şikâyeti aktarabilirsiniz."
+          ],
+          "links": [
+            {
+              "path": "baymak-kombi-lunatec-24-30-35-ariza-kodlari.html",
+              "label": "Lunatec model rehberi"
+            },
+            {
+              "path": "baymak-kombi-duotec-33-42-45-ariza-kodlari.html",
+              "label": "Duotec belge kapsamı"
+            }
+          ]
+        },
+        {
+          "id": "tekrar-kaydi",
+          "heading": "Uyarı silindiğinde olay kaydını kaybetmeyin",
+          "paragraphs": [
+            "Bir uyarının reset sonrasında kaybolması nedenin giderildiğini göstermez. Yeniden oluştuysa ilk ve son görülme zamanını, sıcak su ya da ısıtma kullanımını ve kodun aynen yazımını paylaşın. İnceleme için aynı durumu özellikle yeniden üretmeye çalışmayın.",
+            "E1 ve E01 gibi yazımlar yalnız eşleşen modelin kayıtlı tablosu izin veriyorsa birlikte değerlendirilebilir. Bu eşleştirme başka bir kodu veya farklı Baymak serisini kapsamaz. Kod yoksa ses, su ve çalışma davranışıyla talep hazırlamak mümkündür."
+          ],
+          "links": [
+            {
+              "path": "baymak-e1-hatasi.html",
+              "label": "Baymak E1/E01 için model kontrolü"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Baymak basıncı düştükçe su ekleyerek kullanmaya devam edeyim mi?",
+          "answer": "Tekrarlayan su ihtiyacının nedenini kontrol ettirmek gerekir. Görünen sızıntıyı ve ne sıklıkta tekrarlandığını bildirin; uzaktan genel bir dolum miktarı veya bütün modeller için ortak basınç hedefi verilmez."
+        },
+        {
+          "question": "Duotec tablosunda bulduğum kodu Lambert için kullanabilir miyim?",
+          "answer": "Hayır. İlgili ürün ve belge kapsamı ayrı doğrulanır. Aynı rakam veya benzer model adı ortak arıza anlamı oluşturmaz; uygun kayıt yoksa belirti üzerinden ilerlenir."
+        }
+      ],
+      "cta": {
+        "heading": "Baymak için belirtiyi kayda dönüştürün",
+        "text": "Modeli biliyorsanız seçin; bilmiyorsanız basınç, sıcak su veya kapanma gözlemini aktarın. Randevu ve işlem kapsamını görüşelim."
+      }
+    },
+    {
+      "route": "bosch-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Bosch",
+      "lead": "Bosch kombinizde sızıntı ya da sıcak su sorunu varsa bakım talebiyle mevcut arızayı ayrı ele alalım. İstanbul Avrupa Yakası’nda yerinde kontrol planlanabilir; Condens veya Class ailesinin tam adı, uygun teknik kaydı seçmeye yardımcı olur.",
+      "description": "Bosch kombi için bakım ile aktif arıza ayrımı, sıcak su dalgalanması ve Condens/Class model kontrolü. Yerinde değerlendirme için servis başvurusu.",
+      "headline": "Bosch bakımını aktif onarım ihtiyacından ayırın",
+      "sections": [
+        {
+          "id": "bakim-onarim",
+          "heading": "Yıllık bakım su kaçağını kendiliğinden çözmez",
+          "paragraphs": [
+            "Kombi çalışsa bile altından su geliyorsa talebi yalnız yıllık bakım olarak bırakmayın. Suyun görüldüğü yeri, damlamanın ne zaman fark edildiğini ve ekranda uyarı olup olmadığını bildirin. Görünür suyun kaynağı yalnız konumuna bakılarak kesinleştirilemez.",
+            "Periyodik kontrolün kapsamı ile mevcut kaçağın onarımı ayrı açıklanmalıdır. Her bakımda parça değiştirmek gerekmediği gibi, her sızıntı için aynı parça da önerilemez. Teknik değerlendirme sonrasında ek iş ve ücret için onay alınır."
+          ],
+          "links": [
+            {
+              "path": "kombi-su-akitiyor.html",
+              "label": "Kombide görünen suyu tarif edin"
+            }
+          ]
+        },
+        {
+          "id": "musluk-davranisi",
+          "heading": "Önceki işlem belgesi yeni işin kapsamını netleştirir",
+          "paragraphs": [
+            "Kaçak daha önce onarıldıysa işlem belgesinde hangi noktaya müdahale edildiğini ve suyun yeniden ne zaman görüldüğünü aktarın. Aynı yerde su fark etmek tek başına önceki parçanın tekrar arızalandığını göstermez. Belgedeki işlem adı, tarih ve bugün gözlenen yer birbirinden ayrılarak kontrolün geçmişi hazırlanır.",
+            "Belgeyi paylaşmanız gerekirse adres, telefon ve kişisel alanları gizleyin; herkese açık yoruma evrak koymayın. Yeni değerlendirmede önerilen işlem, bedel ve varsa garanti kapsamı açıklanarak onayınız alınır. Sızıntıya sıcak su kaybı da eşlik ediyorsa onu ayrıca belirtin; yalnız bakım isteğiniz olması ek onarımı otomatik onaylamaz."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicak-su.html",
+              "label": "Sızıntıya eşlik eden sıcak su şikâyeti"
+            }
+          ]
+        },
+        {
+          "id": "bosch-kayit",
+          "heading": "Condens ve Class kayıtlarını ürün adıyla seçin",
+          "paragraphs": [
+            "Sitede Condens 2300i W, Condens 2500 W, Condens 7000i W ve Class 6000 W gibi farklı Bosch rehberleri bulunur. Ön yüzdeki marka logosu bütün bu ürünler için aynı kod açıklamasını seçtirmez. Modeldeki i, W ve sayı grubunu kısaltmadan koruyun.",
+            "EA, CE veya başka bir gösterimi internetten en yakın tabloyla eşleştirmeyin. Görünen kod, gerçek ürün ve uygun belge birlikte kontrol edilir. Henüz belgelenmemiş bir sürüm için de model bilinmiyor seçeneğiyle servis görüşmesi yapılabilir."
+          ],
+          "links": [
+            {
+              "path": "bosch-kombi-condens-2300i-w-ariza-kodlari.html",
+              "label": "Condens 2300i W kaydı"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Bosch kombi çalışıyor ama su damlatıyorsa bakım mı seçmeliyim?",
+          "answer": "Talepte su sızıntısını açıkça seçin; bakım isteğiniz varsa ayrıca belirtin. Çalışmaya devam etmesi kaçağın önemsiz olduğunu göstermez. Elektrikli bölüme yaklaşan suda kullanımı sürdürmeden destek alın."
+        },
+        {
+          "question": "Bosch kodunu yazmadan sıcak su sorunu için başvurabilir miyim?",
+          "answer": "Evet. Kod yoksa sıcaklığın nasıl değiştiğini ve hangi kullanım noktalarında fark edildiğini anlatın. AI Usta ilk bilgi sunabilir; kesin neden ve onarım gereksinimi cihaz kontrolünde belirlenir."
+        }
+      ],
+      "cta": {
+        "heading": "Bosch kontrolünün kapsamını birlikte belirleyelim",
+        "text": "Aktif arızayı ve bakım isteğini ayrı kaydedin. İlçe ve mahalleyi seçerek uygun servis görüşmesine geçebilirsiniz."
+      }
+    },
+    {
+      "route": "buderus-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Buderus",
+      "lead": "Buderus kombinin sesi, durması veya ekrandaki gösterimi için olayların sırası önemlidir. Logamax U ve Logamax plus GB ürünlerini ayırarak, önce hangi kullanımda sorun çıktığını netleştirelim; yalnız sesten parça değişimi önerilmez.",
+      "description": "Buderus kombi ses ve kapanma şikâyetleri için olay kaydı, Logamax U/GB model ayrımı ve gösterge bilgileri. İstanbul Avrupa Yakası teknik servis talebi.",
+      "headline": "Buderus için bir olay kaydı oluşturun",
+      "sections": [
+        {
+          "id": "ses-zamanlamasi",
+          "heading": "Sesin başladığı an incelemenin parçasıdır",
+          "paragraphs": [
+            "Ses ilk çalışmada mı, sıcak su açılınca mı, yoksa ısıtma sürerken mi duyuluyor? Aynı sesin ardından cihaz duruyorsa bunu da sıraya ekleyin. Bu ayrım şikâyetin anlaşılmasına yarar; ses tarifinden fan, pompa veya başka bir parçanın değişeceği söylenemez.",
+            "Yeni başlayan patlama benzeri ateşleme, gaz kokusu veya duman varsa durumu sıradan çalışma sesi olarak değerlendirmeyin. Cihazı yeniden denemek yerine kullanmayı bırakıp uygun acil desteğe başvurun. Ses kaydı almak için tehlikeli çalışmayı tekrar ettirmeyin."
+          ],
+          "links": [
+            {
+              "path": "kombi-sesli-calisiyor.html",
+              "label": "Ses ve ateşleme belirtileri"
+            }
+          ]
+        },
+        {
+          "id": "gosterge-butunlugu",
+          "heading": "Kodla birlikte ekranda görünen diğer bilgiyi koruyun",
+          "paragraphs": [
+            "Buderus kaydına yalnız kısa bir kod yazıp ekranda sırayla görülen başka gösterimleri atlamayın. Varsa ek kodu ve cihazın çalışıp çalışmadığını da belirtin. 6A ile 227 gibi gösterimler bütün Logamax ailelerinde otomatik eşdeğer kabul edilmez.",
+            "Güncel bir ekran görüntüsünden bilgi aktarabilirsiniz; servis menüsüne girmeniz veya parametre değiştirmeniz istenmez. Hata görünmediği halde konfor sorunu varsa sıcak su ve ısıtma davranışı ayrıca kaydedilir. Uyarı ile kullanıcı şikâyeti birlikte değerlendirilir."
+          ],
+          "links": []
+        },
+        {
+          "id": "logamax-gecmisi",
+          "heading": "GB ve U ailelerini geçmiş işlemle birlikte eşleştirin",
+          "paragraphs": [
+            "Logamax plus GB012, GB072 ve Logamax U052 ayrı model aileleridir. Etiketteki plus ifadesini, GB veya U önekini ve rakamları birlikte iletin. Aynı markanın daha yeni ya da benzer numaralı rehberi kendi cihazınızın yerine seçilmez.",
+            "Son parça değişimi veya bakımın ardından aynı sorun geri geldiyse işlem tarihini ve şikâyetin nasıl değiştiğini yazın. Eski faturanın kişisel bilgilerini göndermeden yapılan işi tarif edebilirsiniz. Geçmiş işlem, yeni kontrolün hangi koşullarda yapılacağını açıklamaya yardımcı olur."
+          ],
+          "links": [
+            {
+              "path": "buderus-kombi-logamax-plus-gb072-ariza-kodlari.html",
+              "label": "Logamax plus GB072 rehberi"
+            },
+            {
+              "path": "buderus-kombi-logamax-u052-ariza-kodlari.html",
+              "label": "Logamax U052 rehberi"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Buderus’un yalnız sesini tarif ederek parça fiyatı öğrenebilir miyim?",
+          "answer": "Sesin ne zaman oluştuğu ön bilgi verir; hangi parçanın gerektiğini kanıtlamaz. Tam model, çalışma durumu ve varsa gösterge kaydıyla kontrol kapsamı görüşülür; ölçüm olmadan kesin parça listesi çıkarılmaz."
+        },
+        {
+          "question": "Logamax plus GB122i ile U072 aynı arıza tablosunu mu kullanır?",
+          "answer": "Aileler ayrı kayıtlardır. Kod açıklaması ilgili ürünün belge kapsamından seçilir. İsimdeki Logamax ortaklığı, kontrol sistemi ve kodların aynı olduğu anlamına gelmez."
+        }
+      ],
+      "cta": {
+        "heading": "Buderus şikâyetini olay sırasıyla iletin",
+        "text": "İlk fark ettiğiniz belirtiyi, ardından ne olduğunu ve bölgenizi paylaşın. Yerinde değerlendirme için uygunluğu görüşelim."
+      }
+    },
+    {
+      "route": "demirdokum-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "DemirDöküm",
+      "lead": "DemirDöküm kombi çalışırken ev yeterince ısınmıyorsa önce cihazdaki durumla odalardaki dağılımı ayıralım. Her ısıtma şikâyeti petek temizliği gerektirmez; model, kullanım ve görünen uyarıyla uygun kontrol planlanır.",
+      "description": "DemirDöküm kombi için ısıtma dağılımı, ekran uyarısı ve Nitromix belge kapsamını değerlendirin. Atromix/Atron gibi farklı serileri karıştırmadan servis talebi.",
+      "headline": "DemirDöküm’de cihaz ve ısı dağılımını ayrı anlatın",
+      "sections": [
+        {
+          "id": "isitma-alani",
+          "heading": "Bütün ev mi, yalnız bir bölüm mü etkileniyor?",
+          "paragraphs": [
+            "Tüm peteklerin soğuk kalmasıyla yalnız bir odanın ısınmaması aynı kayda dönüştürülmemelidir. Muslukta sıcak su olup olmadığını da belirtin. Bu iki gözlem, konfor kaybının hangi kullanımda yaşandığını gösterir; dolaşım, cihaz veya tesisat hakkında kesin teşhis oluşturmaz.",
+            "Isınmayan odayı ve sorunun ne zamandır sürdüğünü yazın. Talebi açıklamak için vana sökmek, petekten su boşaltmak veya kombinin ayarlarını gelişigüzel değiştirmek gerekmez. Yerinde incelemede gerekli kontrol ve önerilecek işlem ayrı açıklanır."
+          ],
+          "links": [
+            {
+              "path": "kombi-petek-isitmiyor.html",
+              "label": "Peteklerde ısı kaybını ayırın"
+            }
+          ]
+        },
+        {
+          "id": "uyari-kaydi",
+          "heading": "F ile başlayan gösterimi olduğu gibi kaydedin",
+          "paragraphs": [
+            "F4, F28 veya başka bir kodu kendi yorumunuzla parça adı haline getirmeyin. Harf, rakam ve ekrandaki diğer işaretler korunarak yazılır. Uyarının sıcak su talebinde mi yoksa ısıtma sırasında mı çıktığı, kodun kendisi kadar yararlı bir kayıt bilgisidir.",
+            "Arka arkaya resetlemek sorunun giderildiğini kanıtlamaz. Bir denemeden sonra aynı uyarı geri geldiyse tekrar sayısını belirtin; kapağı açarak ateşleme veya elektrik bileşenini kontrol etmeyin. Tehlikeli belirti varsa normal form akışı yerine güvenlik önceliklidir."
+          ],
+          "links": []
+        },
+        {
+          "id": "nitromix-siniri",
+          "heading": "Nitromix belgesini başka seriye taşımayın",
+          "paragraphs": [
+            "Sitedeki belgeli DemirDöküm kombi kaydı Nitromix P 24, P 28 ve P 35 NG (HEP) ailesine aittir. Bu kayıt markanın bütün eski ve güncel modellerinin aynı kod yapısına sahip olduğunu göstermez. Model son ekleri de karşılaştırmanın bir parçasıdır.",
+            "Atromix, Atron, Aden veya Nepto cihazınız varsa Nitromix tablosuna zorlanmadan başvuru yapabilirsiniz. Kendi modelinizi yazın ya da bilmiyorum seçeneğini kullanın. Belge eşleşmediğinde kod anlamı uydurulmaz; şikâyete ilişkin güvenli ön bilgiyle görüşme hazırlanır."
+          ],
+          "links": [
+            {
+              "path": "demirdokum-kombi-nitromix-p24-p28-p35-ng-hep-ariza-kodlari.html",
+              "label": "Nitromix NG (HEP) kapsamı"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "DemirDöküm kombide bir oda ısınmıyor; doğrudan petek temizliği mi gerekir?",
+          "answer": "Tek başına bu gözlem temizlik kararı verdirmez. Etkilenen odalar, sıcak su durumu ve sorunun başlangıcı değerlendirilir. Uygun işlem ancak kontrol sonrasında önerilir."
+        },
+        {
+          "question": "Atron cihazım için Nitromix kod açıklamasını kullanabilir miyim?",
+          "answer": "Hayır. Farklı ürün ailesinin belgesi doğrudan uygulanmaz. Atron adını ve görünen kodu kayda ekleyebilirsiniz; uygun kaynak doğrulanmadan kesin kod anlamı verilmez."
+        }
+      ],
+      "cta": {
+        "heading": "DemirDöküm ısıtma kaydını netleştirelim",
+        "text": "Etkilenen kullanım veya odaları belirtin. İlçe ve mahalleyle servis değerlendirmesi için başvurabilirsiniz."
+      }
+    },
+    {
+      "route": "eca-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "ECA",
+      "lead": "E.C.A. kombide suyun bir ısınıp bir soğumasını yalnız ekrandaki koda indirgemeyelim. Musluk davranışını, çalışma süresini ve tam modeli birlikte ele alarak servis hazırlığı yapabiliriz; model veya kod yazmak başvuru şartı değildir.",
+      "description": "E.C.A. kombi sıcak su dalgalanması ve kesintileri için kullanım gözlemleri, HM model ayrımı ve kaynaklı kod kontrolü. İlçe/mahalleyle servis başvurusu.",
+      "headline": "E.C.A. sıcak su şikâyetinde kullanımın ayrıntısı değerlidir",
+      "sections": [
+        {
+          "id": "sicak-su-davranisi",
+          "heading": "Sıcaklık dalgalanması ile tamamen soğuk suyu ayırın",
+          "paragraphs": [
+            "Su baştan beri soğuksa bunu, bir süre ısınıp sonra soğumasından ayrı anlatın. Sorunu yalnız duşta mı yoksa mutfakta da mı fark ettiğinizi ekleyin. Günlük kullanımda kendiliğinden görülen bu ayrıntılar ilk görüşmeyi somutlaştırır; tek başına eşanjör veya akış algılayıcısı kararı vermez.",
+            "Aynı anda peteklerin davranışında değişim olup olmadığını da kayda ekleyebilirsiniz. Belirtiyi göstermek için uzun süre su akıtmayın veya iç bağlantılara müdahale etmeyin. İnceleme sonrası gerekli işlem ve kapsam sizinle görüşülür."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicak-su.html",
+              "label": "Sıcak su dalgalanmasını açıklayın"
+            }
+          ]
+        },
+        {
+          "id": "hm-urun-adi",
+          "heading": "HM kapasitesi ürün ailesinin yerine geçmez",
+          "paragraphs": [
+            "Confeo Premix HM, Citius Premix HM ve Proteus Premix HM ayrı Türkiye kılavuzlarıyla kayıtlıdır. Yalnız 24 veya 28 gibi rakamlar, hangi ürünün kullanıldığını ayırt etmez. Örneğin Proteus Premix 24 HM adı etikette nasıl görünüyorsa o biçimde korunmalıdır.",
+            "Listede bulunmayan Confeo, Calora veya başka bir nesli benzer adlı HM kaydıyla eşleştirmeyin. Model seçmeden de ilerlenebilir. Kapağı açmadan görülebilen bilgi yeterli değilse uygun ürün belgesi servis değerlendirmesinde ayrıca doğrulanır."
+          ],
+          "links": [
+            {
+              "path": "eca-kombi-proteus-premix-hm-tr-ariza-kodlari.html",
+              "label": "Proteus Premix HM rehberi"
+            },
+            {
+              "path": "eca-kombi-citius-premix-hm-tr-ariza-kodlari.html",
+              "label": "Citius Premix HM rehberi"
+            }
+          ]
+        },
+        {
+          "id": "kod-ve-belirti",
+          "heading": "Ekran uyarısı ile gözlediğiniz etkiyi birlikte tutun",
+          "paragraphs": [
+            "E99 ya da başka bir kod gördüğünüzde yalnız markaya bakarak internetteki genel açıklamayı kesin arıza kabul etmeyin. Gerçek model ve kayıtlı belge eşleşirse anlamı değerlendirilebilir. Kodun ne zaman belirdiğini, cihazın tamamen durup durmadığını ve sıcak suyun etkilenmesini ayrı yazın.",
+            "Kullanım sırasında kod kaybolsa bile tekrar eden kesintiyi bildirin. Ekran geçmişi ile mevcut şikâyet birlikte incelenir; hiçbir kod uzaktan hangi parçanın mutlaka değişeceğini kanıtlamaz. AI Usta’nın ilk bilgisi de yerinde teknik ölçümün yerine geçmez."
+          ],
+          "links": []
+        }
+      ],
+      "faqs": [
+        {
+          "question": "E.C.A. modelini bilmiyorum; sıcak su sorusunu yine sorabilir miyim?",
+          "answer": "Evet. Belirti seçebilir veya kendi cümlenizle anlatabilirsiniz. Model bilinmediğinde özel kod anlamı kesinleştirilmez; gözlenen etkiye göre ön bilgi ve servis iletişimi sunulur."
+        },
+        {
+          "question": "ECA Proteus Premix 24 yazmam tam belgeyi seçmek için yeterli mi?",
+          "answer": "Etiketteki HM gibi son ekler ve kılavuzun ürün kapsamı da kontrol edilir. Kapasite ve aile bilgisi kısaltılırsa başka nesille karışabilir. Görebildiğiniz tam adı olduğu gibi iletin."
+        }
+      ],
+      "cta": {
+        "heading": "E.C.A. kullanım şikâyetini aktarın",
+        "text": "Suyun ne zaman değiştiğini ve hangi noktalarda fark edildiğini paylaşın. Modeli biliyorsanız ekleyerek kontrol uygunluğunu görüşelim."
+      }
+    },
+    {
+      "route": "vaillant-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Vaillant",
+      "lead": "Vaillant kombide ateşleme başlamaması, alevin kesilmesi ve patlama benzeri yanma aynı şikâyet değildir. Önce güvenli durumu ayıralım; ecoTEC, turboTEC veya başka ailede doğru kod bilgisi ancak ürün kapsamıyla birlikte değerlendirilebilir.",
+      "description": "Vaillant kombi için ateşleme şikâyetinin güvenli ayrımı, ecoTEC pro ürün kapsamı ve kod kaydı. Marka bağımsız İstanbul Avrupa Yakası servis desteği.",
+      "headline": "Vaillant ateşleme şikâyetinde ilk ayrım güvenliktir",
+      "sections": [
+        {
+          "id": "atesleme-guvenligi",
+          "heading": "Patlama benzeri yanmayı sıradan ses saymayın",
+          "paragraphs": [
+            "İlk ateşlemede sert patlama, gaz kokusu veya duman varsa cihazı tekrar denemeyin. Kullanımı bırakın; gaz kokusunda elektrik düğmelerini kullanmadan ortamdan uzaklaşıp güvenli yerden doğalgaz acil desteğini arayın. Yangın veya acil tehlikede acil yardım önceliklidir; servis formunu doldurmak için beklenmez.",
+            "Bu belirtiler yoksa ateşlemenin hiç başlamadığını mı, çalışmanın kısa süre sonra kesildiğini mi gözlediğinizi belirtin. Kaydı ayrıntılandırmak için yanmayı özellikle yeniden başlatmayın. Tek bir F kodundan gaz valfi veya kart değişimi sonucu çıkarılamaz."
+          ],
+          "links": [
+            {
+              "path": "kombi-atesleme.html",
+              "label": "Ateşleme belirtileri ve güvenlik"
+            }
+          ]
+        },
+        {
+          "id": "vuw-urun-kapsami",
+          "heading": "ecoTEC pro için VUW TR bilgisini de koruyun",
+          "paragraphs": [
+            "Mevcut Vaillant kombi rehberi ecoTEC pro VUW TR 236/5-3 ve VUW TR 286/5-3 belgesine dayanır. Ön yüzdeki ecoTEC adı tek başına bu kapsamı seçmez. Görülebilen etiketteki VUW, TR ve sayı grubu birlikte karşılaştırılır.",
+            "ecoTEC plus, pure, eski atmoTEC veya turboTEC cihazlar otomatik olarak pro tablosuyla değerlendirilmez. Modelinizin listede olmaması servis görüşmesini engellemez. Ürün adı bilinmiyorsa kodu aynen ve çalışma şikâyetini ayrıca iletebilirsiniz."
+          ],
+          "links": [
+            {
+              "path": "vaillant-kombi-ecotec-pro-236-286-5-3-ariza-kodlari.html",
+              "label": "ecoTEC pro VUW TR ürün kapsamı"
+            }
+          ]
+        },
+        {
+          "id": "kodun-etkisi",
+          "heading": "Gösterimin yanında cihazın davranışını da yazın",
+          "paragraphs": [
+            "F.22, F.28 veya F.75 gibi gösterimlerin nokta ve rakamlarını koruyun. Uyarının musluk açıldığında mı, petekler ısı isterken mi belirdiğini ekleyin. Kodun görünmesi ile evin ısınmaması aynı bilginin tekrarı değildir; ikisi beraber incelemeye hazırlanır.",
+            "Planlı bakım isteyen çalışan cihazla tekrarlayan duruş yaşayan cihaz ayrı kaydedilmelidir. Son müdahale ve uyarının tekrar zamanı görüşmede paylaşılır. İşlem öncesinde kontrol sonucu, önerilen iş ve bedel açıklanır; kullanıcıdan parça adı tahmin etmesi beklenmez."
+          ],
+          "links": []
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Vaillant ateşlerken sert patlama yapıyorsa yeniden resetleyeyim mi?",
+          "answer": "Hayır. Cihazı yeniden denemeyin ve kullanmayı bırakın. Gaz kokusu, duman veya yangın varsa uygun acil destek önceliklidir. Güvenli duruma geçildikten sonra teknik servis kontrolü planlanır."
+        },
+        {
+          "question": "ecoTEC plus için pro tablosu aynı sonucu verir mi?",
+          "answer": "Böyle bir eşdeğerlik varsayılmaz. Ürün ailesi, son ek ve uygun üretici belgesi kontrol edilir. Başka bir modelin tablosu, kod aynı görünse bile cihazınıza doğrudan uygulanmaz."
+        }
+      ],
+      "cta": {
+        "heading": "Vaillant için güvenli kontrol planlayın",
+        "text": "Acil tehlike yoksa model, gösterge ve çalışma davranışını paylaşın. Bölgenize göre teknik değerlendirme uygunluğunu görüşelim."
+      }
+    },
+    {
+      "route": "viessmann-kombi-servisi.html",
+      "type": "brand",
+      "device": "kombi",
+      "brand": "Viessmann",
+      "lead": "Viessmann sisteminde kombi modeliyle kontrol ünitesinin nesli birlikte önem taşıyabilir. Vitodens veya Vitopend adının yanında görünen kontrol bilgisini paylaşın; oda konforu, çalışma programı ve hata göstergesi ayrı ayrı değerlendirilir.",
+      "description": "Viessmann kombi ve kontrol ünitesi ayrımı, ısıtma programı gözlemleri ve Vitotronic belge kapsamı. İstanbul Avrupa Yakası için bakım ve arıza başvurusu.",
+      "headline": "Viessmann’da cihazla kontrol ünitesini ayırt edin",
+      "sections": [
+        {
+          "id": "kontrol-kimligi",
+          "heading": "Ekranın hangi bileşene ait olduğunu belirtin",
+          "paragraphs": [
+            "Uyarı kombinin ekranında mı, oda kontrolünde mi, başka bir kumandada mı görünüyor? Görünen cihaz ve kontrol adını ayrı yazmak yanlış belge seçimini önler. Yalnız Vitodens demek, kontrol neslinin veya ekrandaki gösterimin kapsamını her durumda tanımlamaz.",
+            "Sitedeki mevcut Viessmann rehberi Vitodens 200/300 ailesiyle ilgili Vitotronic kapsamını taşır. Bu kayıt Vitodens 050, 100 veya Vitopend ailesindeki bütün cihazlara genellenmez. Görülebilen etiketi aktarın; servis menüsüne girerek kimlik ya da parametre aramayın."
+          ],
+          "links": [
+            {
+              "path": "viessmann-kombi-vitodens-vitotronic-200-300-ariza-kodlari.html",
+              "label": "Vitotronic kaydının sınırları"
+            }
+          ]
+        },
+        {
+          "id": "program-ve-konfor",
+          "heading": "Program beklentisiyle arıza belirtisini karıştırmayın",
+          "paragraphs": [
+            "Isıtmanın yalnız belirli saatlerde eksik kalmasıyla gün boyu hiç başlamaması ayrı gözlemlerdir. Sorunun zamanını, o sırada sıcak su bulunup bulunmadığını ve ekranda uyarı görüp görmediğinizi belirtin. Bu bilgiler herhangi bir ayarın yanlış olduğunu kanıtlamadan mevcut durumu açıklar.",
+            "Teşhis amacıyla eğri, servis parametresi veya kontrol yapılandırması değiştirilmez. Var olan kullanıcı programını biliyorsanız adını paylaşabilirsiniz; emin değilseniz bilmiyorum demek yeterlidir. İnceleme gerçek kullanım koşullarıyla birlikte hazırlanır."
+          ],
+          "links": [
+            {
+              "path": "kombi-sicaklik-ayari.html",
+              "label": "Sıcaklık ve kullanım beklentisi"
+            }
+          ]
+        },
+        {
+          "id": "isitma-kontrolu",
+          "heading": "Kontrol ünitesi üzerindeki işlem geçmişini saklayın",
+          "paragraphs": [
+            "Kumanda değiştirildiyse veya kontrol ünitesi üzerinde bakım yapıldıysa işlem tarihini, belgedeki ürün adını ve teslimde verilen kullanım açıklamasını birlikte tutun. Eski ve yeni kontrol aynı görünse bile ayar veya uyumluluk hakkında tahmin yürütmeyin. İncelemeye önce hangi bileşenin değiştiği ve şikâyetin o işlemden önce de bulunup bulunmadığı bilgisiyle başlanır.",
+            "Servis görüşmesi için erişilebilir ekranda gördüğünüz kullanıcı programını ve hatırladığınız değişikliği aktarabilirsiniz; menülerden eski ayarı arayıp geri yüklemeye çalışmayın. Kontrol incelemesi, kombi bakımı ve önerilecek onarımın kapsamları ayrı açıklanır. İşlem kaydında yapılan kontrolün ve varsa değiştirilen bileşenin yazılı belirtilmesini isteyebilirsiniz."
+          ],
+          "links": []
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Viessmann uyarısı oda kontrolündeyse yalnız kombi modelini yazmam yeterli mi?",
+          "answer": "Kontrolün adı ve uyarının hangi ekranda görüldüğü de yararlıdır. Belirli kodlar kontrol nesline bağlı olabilir; benzer gösterim başka cihazın tablosuyla otomatik eşleştirilmez."
+        },
+        {
+          "question": "Isıtma saatleri değiştiğinde Viessmann servis menüsünü değiştireyim mi?",
+          "answer": "Servis parametrelerine müdahale etmeyin. Mevcut kullanıcı programını biliyorsanız ve sorunun hangi saatlerde görüldüğünü kaydedebiliyorsanız bunu paylaşın; uygun kontrol daha sonra cihaz başında yapılır."
+        }
+      ],
+      "cta": {
+        "heading": "Viessmann sistem bilgisini birlikte toparlayalım",
+        "text": "Cihaz ve kontrol adını biliyorsanız ekleyin; bilmiyorsanız etkilenen kullanım ve bölgeyle servis görüşmesini başlatabilirsiniz."
+      }
+    }
+  ]
+}

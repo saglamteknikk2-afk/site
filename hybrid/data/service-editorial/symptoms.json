@@ -1,0 +1,524 @@
+{
+  "pages": [
+    {
+      "route": "klima-calismiyor.html",
+      "type": "symptom",
+      "device": "klima",
+      "lead": "Klima hiç tepki vermiyor mu, iç ünite açıldığı hâlde hava mı üflemiyor, yoksa çalıştıktan sonra mı kapanıyor? Önce gördüğünüz durumu ayırın; parça tahmininden önce bu ayrım gerekir.",
+      "description": "Açılmayan, üflemeyen veya kendiliğinden kapanan klima için gözlemleri ayırın; doğru marka/model rehberine ve bölgenizde servis görüşmesine ulaşın.",
+      "headline": "Açılmayan klima ile yarıda duran klimayı ayırın",
+      "sections": [
+        {
+          "id": "tepki-ve-calisma",
+          "heading": "Kumanda komutu ile cihazın verdiği tepkiyi eşleştirin",
+          "paragraphs": [
+            "Servis görüşmesinde yalnız ‘çalışmıyor’ demek yerine komuttan sonra olanı anlatın: ekran veya ışık açılıyor mu, ses geliyor mu, hava çıkışı başlıyor mu? Kumandanın ekranının görünmesi, iç ve dış ünitenin çalıştığını tek başına göstermez. Daha önce gözlediğiniz tepkiyi aktarmanız yeterlidir; durumu yeniden oluşturmak için cihazı tekrar tekrar çalıştırmayın.",
+            "Evde birden fazla klima varsa hangi odadaki cihazdan söz ettiğinizi belirtin. Ortak kumanda kullanılması veya telefon uygulamasındaki bağlantı sorunu, ünite üzerindeki uyarıdan ayrı kaydedilmelidir. Uygulama çevrimdışı görünürken cihazın kendi göstergesinde ne olduğu değerlendirmeyi değiştirir."
+          ],
+          "links": [{"path": "klima-hata-kodu.html", "label": "Ekranda kod varsa gösterimi doğru kaydedin"}]
+        },
+        {
+          "id": "kapanma-kaydi",
+          "heading": "Kapanmanın öncesini ve sonrasını bir kez tarif edin",
+          "paragraphs": [
+            "İlk açılıştan sonra mı, uzun kullanımın ardından mı durduğunu ve kendiliğinden yeniden başlayıp başlamadığını yazın. Yalnız hava üflemesinin durmasıyla göstergeler dâhil tüm cihazın kapanmasını karıştırmayın. Klima çalışıyor fakat oda soğumuyorsa talebi ‘hiç açılmıyor’ olarak bırakmayın; performans şikâyetinin ayrı rehberi bulunur."
+          ],
+          "links": [{"path": "klima-sogutmuyor.html", "label": "Çalışan fakat soğutmayan klima bilgileri"}]
+        },
+        {
+          "id": "guvenli-servis-hazirligi",
+          "heading": "Elektrik korumasına müdahale etmeden destek alın",
+          "paragraphs": [
+            "Elektrik kutusunu açmak, kabloya ulaşmak veya korumayı devre dışı bırakmak bu kontrolün parçası değildir. Tekrarlayan kesilme, yanık kokusu veya suyun elektrikli bölüme ulaşması varsa kullanımı sürdürmeyin. Duman ya da yangında ortamdan güvenle uzaklaşıp 112’yi arayın; servis kaydı acil yardımın yerine geçmez."
+          ],
+          "links": [{"path": "klima-servisi.html", "label": "Klima arıza incelemesinin kapsamı"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Modeli okuyamıyorsam açılmayan klima için başvurabilir miyim?", "answer": "Evet. Modeli bilmediğinizi seçip odasını, gördüğünüz ışıkları ve cihazın verdiği tepkiyi anlatabilirsiniz. Etiketi okumak için dış üniteye tırmanmanız gerekmez."},
+        {"question": "İç ünite açıkken dış ünitenin durması kesin arıza mı?", "answer": "Tek gözlemle bu sonuca varılmaz. Kullanım modu, zamanlama ve cihazın kendi göstergeleri birlikte incelenir; durmuş olması tek başına değişecek parça belirlemez."}
+      ],
+      "cta": {"heading": "Klimanızın verdiği tepkiyi anlatarak başlayın", "text": "Hangi ünitenin durduğunu ve bulunduğunuz ilçeyi iletin. Model bilgisi yoksa da uygun kontrol için görüşebiliriz."}
+    },
+    {
+      "route": "klima-hata-kodu.html",
+      "type": "symptom",
+      "device": "klima",
+      "lead": "Klimadaki harf, rakam ve yanıp sönen göstergeyi kendi modelinin belgesiyle eşleştirin. İç ünite, kumanda ve uygulamada görülen uyarılar aynı kayıt değildir.",
+      "description": "Klima hata kodunu iç ünite, kumanda ve model bilgisiyle ayırın. Kodu genellemeden ilgili model tablosuna ve güvenli servis yönlendirmesine ulaşın.",
+      "headline": "Kodun hangi ekranda göründüğüyle başlayın",
+      "sections": [
+        {
+          "id": "gostergenin-kaynagi",
+          "heading": "Ünite ekranı, kumanda ve uygulama ayrı kaynaklardır",
+          "paragraphs": [
+            "Telefon uygulamasındaki bağlantı uyarısını, duvar ünitesinde görülen harfli kodla aynı kabul etmeyin. Kodun yerini ve gösterimin sabit mi dönüşümlü mü olduğunu not edin. Yalnız ışık yanıp sönüyorsa kendiniz bir hata numarası üretmeyin; hangi ışığın nasıl davrandığını anlatın. Kılavuzun kullanıcıya açıklamadığı servis menüsünü açmaya çalışmayın.",
+            "Kumanda modelinin adı, klimanın tam ürün modeli yerine geçmeyebilir. Belgede iç ve dış ünite için ayrı ürün adları varsa dışarıdan güvenle okuyabildiğiniz bilgileri koruyun. Etiket fotoğrafı çekmek için pencere dışına uzanmak veya kapak sökmek gerekmez."
+          ],
+          "links": [{"path": "model-ariza-kodlari.html", "label": "Klima modelinin kendi kod tablosunu seçin"}]
+        },
+        {
+          "id": "kodun-yazimi",
+          "heading": "Başındaki sıfırı ve ek gösterimi kaybetmeyin",
+          "paragraphs": [
+            "E1, E01 ya da başka bir gösterimi ekranda gördüğünüz biçimde iletin. Sitedeki eşleştirme, sıfırlı yazımları yalnız seçilen modelin belge kapsamı içinde değerlendirebilir; başka markanın benzer kodunu taşımaz. Farklı rakam veya ek harf, ayrı bir uyarı olabilir. Kod kaybolsa bile ilk gördüğünüz tam yazımı görüşmeye ekleyin."
+          ],
+          "links": [{"path": "markalar.html", "label": "Markadan ilgili cihaz ailesine geçin"}]
+        },
+        {
+          "id": "uyari-anindaki-kullanim",
+          "heading": "Kodla birlikte kullanım anını da saklayın",
+          "paragraphs": [
+            "Isıtma, soğutma veya bekleme sırasında çıktığını; üflemenin kesilip kesilmediğini ve yakın zamanda bir işlem yapılıp yapılmadığını belirtin. Uyarı tek başına gaz dolumu, sensör veya kart değişimi kararı değildir. Model bulunamazsa AI Usta’da belirtinizi tarif edebilirsiniz; kesin işlem kararı için cihaz başında inceleme gerekir."
+          ],
+          "links": [{"path": "klima-calismiyor.html", "label": "Kodla birlikte cihaz duruyorsa bu gözlemleri ayırın"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Kod tablosunda modelim görünmüyorsa ne yapacağım?", "answer": "Modeli bilmiyorum seçeneğiyle ilerleyin veya adını isteğe bağlı yazın. Kodun yanında yaşadığınız sorunu anlatın; başka modele ait anlam kesin açıklama olarak kullanılmaz."},
+        {"question": "Aynı hata yazan iki klima aynı parçayı mı gerektirir?", "answer": "Hayır. Cihaz ailesi, kontrol sistemi ve belgede tanımlanan kapsam farklı olabilir. Kod, model ve gözlenen çalışma birlikte değerlendirilir."}
+      ],
+      "cta": {"heading": "Göstergeyi birlikte doğru rehbere bağlayalım", "text": "Kodun tam yazımını ve hangi ekranda bulunduğunu paylaşın; ilçenize uygun servis görüşmesine bu kayıtla devam edin."}
+    },
+    {
+      "route": "klima-isitmiyor.html",
+      "type": "symptom",
+      "device": "klima",
+      "lead": "Isıtmaya hiç başlamayan, ara verip yeniden çalışan veya hava üflediği hâlde odayı ısıtamayan klima farklı belirtiler gösterir. Gözlemlerinizi bu üç durumdan başlayarak ayırabilirsiniz.",
+      "description": "Klima ısıtmıyorsa başlangıç, çalışma arası ve oda konforu şikâyetini ayırın. Modele uygun değerlendirme ve bölgenizde servis görüşmesi için hazırlanın.",
+      "headline": "Isıtma talebiyle gerçekleşen çalışmayı karşılaştırın",
+      "sections": [
+        {
+          "id": "isitma-talebi",
+          "heading": "Seçili modu ve kullanılan alanı kaydedin",
+          "paragraphs": [
+            "Kumandada görünen çalışma modu, ayar sıcaklığı ve etkilenen oda, görüşmenin başlangıç bilgisidir. Yalnız ‘sıcak üflemiyor’ yerine hava akışının olup olmadığını ve sorunun açılıştan beri mi sürdüğünü belirtin. Ayarı sürekli değiştirerek deneme yapmak yerine zaten kullandığınız ayarı aktarmanız daha anlaşılır bir kayıt oluşturur.",
+            "Kapıların sık açılması veya birden çok alanın tek cihazla kullanılması gibi koşulları gözlem olarak ekleyin. Bunlar tek başına klimanın kapasitesinin yetersiz olduğunu kanıtlamaz. Odanın konfor şikâyetiyle cihazın hiç devreye girmemesi aynı servis notunda ayrı cümlelerle tutulmalıdır."
+          ],
+          "links": [{"path": "klima-servisi.html", "label": "Isıtma performansı için klima servis kapsamı"}]
+        },
+        {
+          "id": "ara-ve-yeniden-baslama",
+          "heading": "Ara verdiğinde sonrasında ne olduğunu belirtin",
+          "paragraphs": [
+            "Başlangıçta bekleme veya çalışma içinde ara verme bazı modellerin işletim davranışı olabilir. Ancak her klimaya uygulanacak tek bir dakika sınırı yoktur. Aranın yaklaşık süresini, kendiliğinden yeniden başlayıp başlamadığını ve bir gösterge değişimi olup olmadığını yazın. Dış ünitedeki durumu görmek için tehlikeli bir alana çıkmayın."
+          ],
+          "links": [{"path": "klima-hata-kodu.html", "label": "Ara sırasında çıkan göstergeyi yorumlamadan kaydedin"}]
+        },
+        {
+          "id": "performans-kaydi",
+          "heading": "Eski performansla karşılaştırırken aynı koşulu arayın",
+          "paragraphs": [
+            "Daha önce aynı odada ısıtma sağlanırken yeni başlayan bir düşüş varsa başlangıç tarihini ve son bakım bilgisini iletin. Hava akışı azaldı mı, farklı ses veya koku eşlik ediyor mu gibi ayrıntılar kontrol planını daraltır. Gaz eksikliği ya da kompresör arızası yalnız bu anlatımdan belirlenmez; uygun inceleme ve işlem onayı gerekir."
+          ],
+          "links": [{"path": "klima-bakimi.html", "label": "Bakım ile mevcut arıza onarımının farkı"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Isıtmada beklerken hemen arıza kaydı mı açmalıyım?", "answer": "Kendi modelinizin kullanıcı açıklamalarını esas alın. Bekleme tekrar ediyor, cihaz başlamıyor veya konfor sorunu sürüyorsa mevcut gözlemlerinizle destek isteyebilirsiniz."},
+        {"question": "Yalnız bir oda ısınmıyorsa hangi bilgiyi eklemeliyim?", "answer": "Cihazın bulunduğu odayı, etkilenen alanı ve kapıların kullanımını belirtin. Üflemenin olup olmadığını da ekleyin; alan bilgisi tek başına kapasite veya parça kararı değildir."}
+      ],
+      "cta": {"heading": "Isıtma şikâyetinizi doğru başlıkla iletin", "text": "Başlamama, aralıklı durma veya yetersiz konfor seçeneklerinden size uyanı anlatın. Bölgenizde uygun kontrolü birlikte planlayalım."}
+    },
+    {
+      "route": "klima-koku-yapiyor.html",
+      "type": "symptom",
+      "device": "klima",
+      "lead": "Klimadan gelen nemli koku ile yanık kokusu aynı şekilde ele alınmaz. Kokunun ne zaman ortaya çıktığını ayırın; duman veya yangın varsa servis formundan önce güvenliğinizi sağlayın.",
+      "description": "Klimada nem, yabancı koku ve yanık kokusunu birbirinden ayırın. Bakım talebiyle acil durumu karıştırmadan uygun servis yönlendirmesine ulaşın.",
+      "headline": "Kokuyu maskelemek yerine ne zaman geldiğini kaydedin",
+      "sections": [
+        {
+          "id": "yanik-kokusu",
+          "heading": "Yanık kokusunda bakım randevusunu beklemeyin",
+          "paragraphs": [
+            "Yeni başlayan yanık kokusunda cihazı kullanmayı sürdürmeyin; kaynağı bulmak için elektrik kapağına veya kablolara yaklaşmayın. Duman ya da yangın varsa güvenli biçimde uzaklaşıp 112’den acil destek isteyin. Uzaktan koku tarifine bakarak bunun basit toz olduğu söylenemez; yeniden çalıştırarak doğrulamaya çalışmak uygun değildir."
+          ],
+          "links": [{"path": "klima-calismiyor.html", "label": "Kokuya kapanma eşlik ediyorsa görülen durumu ayırın"}]
+        },
+        {
+          "id": "kokunun-zamani",
+          "heading": "İlk açılış, sürekli çalışma ve bekleme dönemini ayırın",
+          "paragraphs": [
+            "Koku yalnız ilk açılışta mı, belirli bir modda mı veya cihaz kapalıyken de mi hissediliyor? Mekândaki başka bir kaynağın bulunup bulunmadığını kesin hüküm vermeden belirtin. ‘Kimyasal’, ‘nemli’ ya da ‘yanık’ gibi kendi tarifinizi kullanın; kokuya bakarak soğutucu kaçağı ilan etmeyin.",
+            "Son temizlikte hangi işlemin yapıldığını biliyorsanız bunu paylaşın. Koku giderici sprey kullanılması, hava yolu ve drenaj koşullarının kontrol edildiğini göstermez. Cihaz içine madde püskürtmek veya parçaları sökmek yerine uygulanan ürünün adını ve kokunun ondan önce başlayıp başlamadığını not edin."
+          ],
+          "links": [{"path": "klima-bakimi.html", "label": "Klima bakımında kapsamın açıklanması"}]
+        },
+        {
+          "id": "eslik-eden-belirtiler",
+          "heading": "Kokuyla birlikte su, ses veya hava akışı değişti mi?",
+          "paragraphs": [
+            "İçeri damlama, azalan hava akışı veya alışılmadık ses varsa her birini ayrı gözlem olarak ekleyin. Temizlik ihtiyacı ile gider veya elektrikle ilgili bir sorun aynı işlem değildir. Görüşmede ünitenin bulunduğu oda, erişim durumu ve yaklaşık başlangıç tarihi kontrolün hazırlığını sağlar. Yapılacak işlem, inceleme sonrasında açıklanıp onayınıza sunulur."
+          ],
+          "links": [{"path": "klima-su-akitiyor.html", "label": "Kokuya içeri damlama eşlik ediyorsa suyun yerini ayırın"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Kokuyu gidermek için parfüm veya sprey kullanayım mı?", "answer": "Ürünün kullanıcı talimatı dışında cihaz içine madde uygulamayın. Kokuyu bastırmak kaynağı belirlemez; kullandığınız bir ürün varsa adını servis görüşmesine ekleyin."},
+        {"question": "Bakım yeni yapıldığı hâlde koku sürüyorsa ne söylemeliyim?", "answer": "İşlemin tarihini, size açıklanan kapsamı ve kokunun öncesiyle sonrasını anlatın. Aynı işlemi tekrar istemeden önce devam eden belirtinin değerlendirilmesini isteyin."}
+      ],
+      "cta": {"heading": "Kokuya uygun kontrolü görüşelim", "text": "Kokunun tarifini, oluştuğu zamanı ve önceki işlem bilgisini iletin. Acil tehlike bulunuyorsa ticari servis talebi yerine ilgili acil desteği kullanın."}
+    },
+    {
+      "route": "kombi-atesleme.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombinin ateşleme yapmaması, alevin sönmesi ve patlama gibi sert sesle yanması aynı belirti değildir. Özellikle sert veya patlamalı ateşlemeyi sıradan çalışma sesi olarak değerlendirmeyin.",
+      "description": "Kombi ateşleme yapmıyor, alev sönüyor veya sert sesle yanıyorsa belirtileri ayırın. Patlamalı yanmada güvenli yönlendirme ve model odaklı servis bilgileri.",
+      "headline": "Ateşleme şikâyetinde önce tehlikeli durumu ayırın",
+      "sections": [
+        {
+          "id": "sert-atesleme",
+          "heading": "Patlama gibi yanmayı tekrar deneyerek göstermeyin",
+          "paragraphs": [
+            "‘Yanarken patlama yapıyor’, ‘geç yanıp sert vuruyor’ veya benzeri bir şikâyette kullanımı sürdürmeyin ve cihazı yeniden ateşleyerek kayıt almaya çalışmayın. Bunu pompa uğultusu gibi genel ses başlığı altında bırakmayın. Ateşleme ve yanma sisteminin teknik kontrolü gerekir; uzaktan tek bir parçanın arızalı olduğu söylenemez.",
+            "Gaz kokusu varsa elektrik düğmelerine dokunmadan ortamdan ayrılın; dışarıdan 187’yi arayın. Duman, yangın veya yaralanma tehlikesinde güvenli alana geçip 112’ye başvurun. Acil yardım ihtiyacını öncelikli ücretli servis seçeneğiyle karıştırmayın."
+          ],
+          "links": [{"path": "kombi-sesli-calisiyor.html", "label": "Ateşleme dışındaki çalışma seslerini ayrı değerlendirin"}]
+        },
+        {
+          "id": "alev-ve-kapanma",
+          "heading": "Başlayamama ile çalıştıktan sonra sönmeyi ayırın",
+          "paragraphs": [
+            "Cihaz hiç yanmadı mı, kısa süre çalışıp mı durdu, yalnız musluk açıldığında mı sorun yaşandı? Yeni deneme yapmadan daha önce gözlediğiniz sırayı anlatın. Ekrandaki gösterim, kullanım anı ve yaklaşık tekrar sayısı not edilebilir. Gaz ayarı, elektrot veya baca bağlantısına kullanıcı müdahalesi önerilmez."
+          ],
+          "links": [{"path": "kombi-calismiyor.html", "label": "Yanma dışındaki kapanma ve ekran sorunları"}]
+        },
+        {
+          "id": "atesleme-kodu",
+          "heading": "Aynı numarayı bütün kombilere taşımayın",
+          "paragraphs": [
+            "Ateşleme sırasında kod görülmesi, farklı marka ve modellerde aynı açıklamaya sahip değildir. Tam yazımı ve biliniyorsa ürün ailesini iletin. Peş peşe resetlemek arızanın nedenini çözmez. Güvenlik riski olmayan talepte de inceleme kapsamı ve gerekli olabilecek onarım, ücret onayınız alınarak belirlenmelidir."
+          ],
+          "links": [{"path": "kombi-hata-kodu.html", "label": "Kodu modelin kendi belgesiyle eşleştirin"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Patlamalı yanmayı ustaya göstermek için kombiyi açmalı mıyım?", "answer": "Hayır. Tehlikeli belirtiyi yeniden üretmeyin. Önceki gözleminizi anlatın; güvenli kullanım ve inceleme için teknik destek alın, gaz kokusunda dışarıdan 187’ye ulaşın."},
+        {"question": "Ateşleme arızasında model seçmeden konuşabilir miyim?", "answer": "Evet. Model bilinmiyorsa bu bilgi eksik bırakılabilir. Öncelikle sert yanma, koku ve kapanma gibi gördüğünüz durumu aktarın; kesin kod anlamı model doğrulanmadan verilmez."}
+      ],
+      "cta": {"heading": "Yanmanın nasıl gerçekleştiğini açıkça aktarın", "text": "Acil tehlike yoksa ateşleme anını ve varsa göstergeyi ustamızla görüşün. Patlamalı yanmayı genel ses şikâyeti olarak kaydetmeyin."}
+    },
+    {
+      "route": "kombi-bakimi.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombi bakımı talebinde son işlem tarihini ve mevcut şikâyeti birlikte belirtin. Düzenli bakım, devam eden arızanın onarımını veya her parçanın değiştirilmesini otomatik olarak kapsamaz.",
+      "description": "Kombi bakımının kapsamı, mevcut arızadan ayrılması ve işlem öncesi hazırlık. Parça değişimi ile ücret onayını açıkça görüşerek bakım talebi oluşturun.",
+      "headline": "Bakım randevusunun kapsamını işlemden önce netleştirin",
+      "sections": [
+        {
+          "id": "bakim-ve-onarim",
+          "heading": "Çalışan cihazın bakımı ile arızalı cihazın onarımını ayırın",
+          "paragraphs": [
+            "Sıcak su dalgalanması, basınç kaybı veya kapanma varsa yalnız ‘yıllık bakım’ notuyla başvurmayın. Bu belirtiler bakım planına eklenirken, arıza tespiti ve gerekebilecek onarımın ayrı değerlendirilmesini isteyin. Her bakımda aynı parçaların yenilenmesi veya tüm ilerideki arızaların önlenmesi beklenemez.",
+            "Cihazın kendi modeline ve çalışma durumuna göre kontrol kapsamı belirlenir. Sadece dış yüzeyin temizlenmesi, çalışma ve güvenlik kontrollerinin yapıldığını kanıtlamaz. Hangi işlemlerin önerildiğinin ve hangilerinin tamamlandığının açıklanması, sonraki servis görüşmelerinde daha doğru geçmiş bilgisi sağlar."
+          ],
+          "links": [{"path": "kombi-sicak-su.html", "label": "Bakıma ek olarak sıcak su şikâyetini tarif edin"}]
+        },
+        {
+          "id": "bakim-gecmisi",
+          "heading": "Eski işlem kaydını parça listesiyle birlikte saklayın",
+          "paragraphs": [
+            "Önceki bakımın tarihi, yapılan işlemler ve değiştiği belirtilen parçalar biliniyorsa bunları paylaşın. Belgeyi iletirken ilgisiz kimlik veya ödeme bilgilerini kapatabilirsiniz. Bakım aralığında üreticinin kullanıcı belgesi, kullanım koşulları ve teknik değerlendirme esas alınır; her cihaz için kaynaksız tek süre dayatılmaz."
+          ],
+          "links": [{"path": "model-ariza-kodlari.html", "label": "Cihaz ailesi ve model belgesi bilgileri"}]
+        },
+        {
+          "id": "islem-onayi",
+          "heading": "Ek iş çıktığında ayrı onay verin",
+          "paragraphs": [
+            "Bakım talebi, sonradan önerilecek bütün parça ve işlemler için açık çek değildir. İnceleme sonucunda ek onarım gerekirse nedeni, kapsamı ve bedeli açıklanmalıdır. İşlem sonunda size verilen kayıtta yapılan işi kontrol edin. Sonraki kullanımda farklı bir belirti ortaya çıkarsa bakım tarihini söyleyerek yeni durumu ayrıca bildirin."
+          ],
+          "links": [{"path": "kombi-servisi.html", "label": "Kombi servisinde değerlendirme ve işlem süreci"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Bakım talebinde kombinin yaşını bilmiyorsam sorun olur mu?", "answer": "Hayır. Bildiğiniz son işlem tarihini ve günlük kullanımdaki değişiklikleri paylaşın. Etiket veya ilk çalıştırma belgesi varsa model görüşmede netleştirilebilir."},
+        {"question": "Bakımla birlikte petek temizliği zorunlu mu?", "answer": "İki işlemin kapsamı ayrıdır. Tesisattaki şikâyet ayrıca incelenir; her kombi bakımına petek temizliği eklenmesi gerektiği varsayılmaz."}
+      ],
+      "cta": {"heading": "Bakım isteğinizi mevcut durumla birlikte iletin", "text": "Son bakım zamanını, fark ettiğiniz değişikliği ve ilçenizi paylaşın. Uygun randevu ve işlem kapsamını görüşelim."}
+    },
+    {
+      "route": "kombi-basinci.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombi basıncının zaman içinde azalmasıyla yalnız ısıtma sırasında yükselmesi aynı şikâyet değildir. Göstergede gördüğünüz değeri, cihazın o andaki çalışmasıyla birlikte kaydedin.",
+      "description": "Kombi basıncı düşüyor veya yükseliyorsa değişimin süresini ve çalışma koşulunu ayırın. Modelin kullanım aralığı ve sızıntı bilgisiyle servis görüşmesine hazırlanın.",
+      "headline": "Tek rakam yerine basıncın nasıl değiştiğini anlatın",
+      "sections": [
+        {
+          "id": "basincin-zamani",
+          "heading": "Soğuk ve sıcak durumdaki okumaları karıştırmayın",
+          "paragraphs": [
+            "Dışarıdan güvenle okuyabildiğiniz basıncı aktarırken cihazın beklemede mi, ısıtmada mı olduğunu da söyleyin. Dün görülen değerle bugünkü değerin hangi koşullarda okunduğu bilinmezse karşılaştırma eksik kalır. Bu bilgiyi elde etmek için cihazı özellikle çalıştırmanız gerekmez; mevcut gözlemlerle başlanabilir.",
+            "Her kombiye tek bir bar aralığı veya su doldurma işlemi önermek doğru değildir. Kendi modelinizin kullanıcı kılavuzu esas alınır. Göstergenin nasıl okunacağından emin değilseniz rakamı tahmin etmeyin; okunamadığını belirtin ve uygun yönlendirme isteyin."
+          ],
+          "links": [{"path": "model-ariza-kodlari.html", "label": "Basınç uyarısını kendi model belgesinde arayın"}]
+        },
+        {
+          "id": "surekli-kayip",
+          "heading": "Sürekli azalmada sızıntı gözlemini ayrı yazın",
+          "paragraphs": [
+            "Değerin kaç saat veya gün içinde değiştiğini ve evde görünen damlama bulunup bulunmadığını not edin. Su ekleme ihtiyacının sık tekrarlanması ayrıca incelenmelidir; bunu alışılmış bir kullanım gibi sürdürmek sorunun izlenmesini zorlaştırır. Sızıntı görülmemesi de tesisatın ve cihazın kontrol gerektirmediğini kanıtlamaz."
+          ],
+          "links": [{"path": "kombi-su-akitiyor.html", "label": "Görünen suyun konumunu ve zamanını ayırın"}]
+        },
+        {
+          "id": "yukselme-ve-durma",
+          "heading": "Yükselme, su tahliyesi ve kapanmayı birlikte bildirin",
+          "paragraphs": [
+            "Basınç yükselirken cihazın durması, uyarı vermesi veya su görülmesi gibi eşlik eden durumları ayrı sıralayın. Genleşme tankı ya da başka bir parça için yalnız rakama bakarak değişim kararı verilmez. Kapağı açmayın, iç ayar yapmayın; inceleme sonucunda önerilen işlemin nedenini ve bedelini öğrenerek onay verin."
+          ],
+          "links": [{"path": "kombi-calismiyor.html", "label": "Basınç değişimine kapanma eşlik ediyorsa"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Göstergede farklı değer görünmesi her zaman arıza mı?", "answer": "Çalışma sıcaklığı ve modelin özellikleri dikkate alınır. Değişimin büyüklüğü, süresi ve eşlik eden belirtiler bilinmeden tek rakamla karar verilmez."},
+        {"question": "Sürekli su eklediğimi servis kaydına yazmalı mıyım?", "answer": "Evet. Ne sıklıkta ihtiyaç duyduğunuzu ve bunu ne zamandır yaşadığınızı paylaşın. Doldurma musluğu veya iç parçalar için deneme yapmadan destek isteyin."}
+      ],
+      "cta": {"heading": "Basınç değişiminizin zamanını birlikte ayıralım", "text": "Okuyabildiğiniz değer, sıcak/soğuk durum ve değişim süresiyle başvurun. Görünen kaçak veya kapanma varsa ayrıca belirtin."}
+    },
+    {
+      "route": "kombi-calismiyor.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombi ekranının kapalı olması, ekranda uyarı görülmesi ve yalnız bir kullanımın çalışmaması farklı başlangıç noktalarıdır. Talebinizi gördüğünüz duruma göre ayırabilirsiniz.",
+      "description": "Kombi açılmıyor veya kendiliğinden kapanıyorsa ekran, hata göstergesi ve etkilenen kullanımını ayırın. Parça tahmini yapmadan servis değerlendirmesine ulaşın.",
+      "headline": "Çalışmayan kombide önce hangi işlevin durduğunu bulun",
+      "sections": [
+        {
+          "id": "ekran-durumu",
+          "heading": "Kapalı ekranı hata kodu gibi kaydetmeyin",
+          "paragraphs": [
+            "Ekran tamamen karanlıksa olmayan bir kodu seçmeniz gerekmez. Göstergenin hiç açılmadığını, ne zamandır böyle olduğunu ve öncesinde bir kesilme veya işlem yaşanıp yaşanmadığını belirtin. Ekran kapalı diye doğrudan anakart değişimi gerektiği sonucuna varılmaz; besleme ve cihazın durumu teknik kontrolle ayrılır.",
+            "Gösterge açık fakat cihaz çalışmayı durdurmuşsa görülen sayı, harf veya sembolü olduğu gibi aktarın. Bir sıcaklık değerini hata numarası sanmayın. Bilmediğiniz servis menüsüne girmeden ve kapağı açmadan zaten görebildiğiniz bilgilerle kayıt oluşturabilirsiniz."
+          ],
+          "links": [{"path": "kombi-hata-kodu.html", "label": "Gerçek bir uyarı görünüyorsa model rehberini kullanın"}]
+        },
+        {
+          "id": "etkilenen-kullanim",
+          "heading": "Sıcak su ve petek ısıtmasını ayrı anlatın",
+          "paragraphs": [
+            "Musluktaki sıcak su çalışırken yalnız peteklerin soğuk kalması, bütün cihazın kapalı olmasıyla aynı kayıt değildir. Tersi durumda da sıcak suya özel ayrıntılar gerekir. Hangi kullanımın etkilendiğini seçin; iki sorun birden varsa tekini gizlemeden ayrı belirtin. Böylece görüşme doğrudan ilgili inceleme başlığına geçer."
+          ],
+          "links": [{"path": "kombi-sicak-su.html", "label": "Yalnız sıcak su sorunu için ayrıntılar"}, {"path": "kombi-petek-isitmiyor.html", "label": "Yalnız petekler ısınmıyorsa ilgili rehber"}]
+        },
+        {
+          "id": "kendiliginden-kapanma",
+          "heading": "Kendiliğinden kapanmanın tekrarını not edin",
+          "paragraphs": [
+            "Kapanmanın başlangıçta mı, kullanım sürerken mi oluştuğunu ve kendiliğinden dönüp dönmediğini paylaşın. Sorunu göstermek için art arda yeniden başlatmayın; yapılan önceki denemeyi belirtmeniz yeterlidir. Elektrik, gaz ve iç parçalara müdahale etmeden model ve gözlem kaydıyla teknik destek isteyin."
+          ],
+          "links": [{"path": "kombi-servisi.html", "label": "Kombi arıza incelemesi ve işlem onayı"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Ekran açık ama kombi sessizse hangi seçeneği kullanmalıyım?", "answer": "Ekranın açık olduğunu ve hangi işlevi kullanmak istediğinizi anlatın. Sessizlik tek başına arıza türünü belirlemez; varsa sembol veya uyarı ek bilgi sağlar."},
+        {"question": "Bir kez düzelip yeniden kapanması çözülmüş sayılır mı?", "answer": "Tekrarlayan durma ayrıca değerlendirilmelidir. İlk ve son olayın yaklaşık zamanını, kullanımını ve uyarısını paylaşın; sürekli reset denemesiyle takip etmeyin."}
+      ],
+      "cta": {"heading": "Durumunuza uygun servis başlığını seçin", "text": "Kapalı ekran, hata göstergesi veya tek işlevin durması bilgisini iletin. Modelinizi bilmiyorsanız başvuruyu yine sürdürebilirsiniz."}
+    },
+    {
+      "route": "kombi-sesli-calisiyor.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Uğultu, titreşim ve ilk yanmada patlama gibi sesler aynı değildir. Sesin gerçekleştiği anı belirtin; sert veya patlamalı ateşleme varsa bunu normal çalışma gürültüsü saymayın.",
+      "description": "Kombide uğultu, titreşim veya yeni başlayan sesi kullanım anına göre ayırın. Patlamalı ateşlemeyi ayrı ve öncelikli değerlendirerek güvenli destek alın.",
+      "headline": "Sesin adından önce ne zaman başladığını belirleyin",
+      "sections": [
+        {
+          "id": "ateslemedeki-ses",
+          "heading": "Patlama ve sert yanmayı genel uğultudan ayırın",
+          "paragraphs": [
+            "Kombinin yanmaya başlarken patlaması veya sert vurması, sıradan titreşim anlatımıyla geçiştirilmemelidir. Kullanımı sürdürmeyin; sesi ustaya göstermek için yeni ateşleme denemesi yapmayın. Yanma kontrolü gerektiren bu durumda ses tarifinden pompa veya kart teşhisi verilmez. Gaz kokusunda ortamdan ayrılıp dışarıdan 187’ye ulaşın; yangın veya duman tehlikesinde 112’den yardım isteyin."
+          ],
+          "links": [{"path": "kombi-atesleme.html", "label": "Sert veya patlamalı ateşleme için ayrı yönlendirme"}]
+        },
+        {
+          "id": "sesin-kosulu",
+          "heading": "Musluk, ısıtma ve bekleme anlarını karşılaştırın",
+          "paragraphs": [
+            "Daha önce duyduğunuz ses musluk açılınca mı, petekler ısınırken mi, cihaz beklerken mi oluşuyordu? Sürekli uğultu ile kısa süreli vuruntuyu kendi kelimelerinizle ayırın. Sesin uzaktan mı cihazın yanından mı fark edildiğini de söyleyebilirsiniz. Duyma kaydı tek başına değiştirilecek parçayı belirlemez.",
+            "Yeni başlayan veya belirgin artan sesi eski çalışma alışkanlığından ayrı kaydedin. Yakın zamanda bakım ya da tesisat işlemi yapıldıysa tarihini ekleyin. Kapağı açıp ses aramak, borulara müdahale etmek veya cihazın yerleşimini değiştirmek kullanıcı gözlemi değildir."
+          ],
+          "links": [{"path": "kombi-bakimi.html", "label": "Önceki bakım ve işlem kaydını hazırlayın"}]
+        },
+        {
+          "id": "sesle-birlikte-belirti",
+          "heading": "Sese eşlik eden değişikliği kayda ekleyin",
+          "paragraphs": [
+            "Sıcak su dalgalanması, ısınma azalması, hata göstergesi veya sızıntı varsa bunları sesin yanında ayrıca belirtin. İnceleme, görülen belirtileri birlikte ele alır. Güvenli bir yerden daha önce alınmış kayıt yardımcı olabilir; kayıt almak için riskli duruma yaklaşmanız veya cihazı yeniden çalıştırmanız istenmez."
+          ],
+          "links": [{"path": "kombi-sicak-su.html", "label": "Sesle birlikte sıcak su değişiyorsa"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Kısa bir ses kaydı ustanın kesin teşhis koymasına yeter mi?", "answer": "Kayıt, hangi sesin kastedildiğini anlatabilir; kaynağı ve gereken işlemi kesinleştirmez. Oluştuğu kullanım ve eşlik eden belirtiler de gerekir."},
+        {"question": "Ses bazen geliyor diye talebi ertelemeli miyim?", "answer": "Yeni veya artan belirtiyi görüşebilirsiniz. Son duyduğunuz zamanı anlatın; özellikle sert ateşlemeyi tekrar ettirerek kontrol etmeyin."}
+      ],
+      "cta": {"heading": "Sesi doğru olayla eşleştirerek görüşelim", "text": "Uğultu, titreşim veya sert yanma ayrımını belirtin. Eşlik eden sıcaklık, kod veya kaçak bilgisini de paylaşın."}
+    },
+    {
+      "route": "kombi-sicak-su.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Sıcak su hiç gelmiyor, kullanım sırasında soğuyor veya yalnız bir muslukta sorun yaşanıyorsa farklı bilgiler gerekir. Önce etkilenen musluk ve suyun davranışını ayırın.",
+      "description": "Kombi sıcak su vermiyor, su bir sıcak bir soğuk oluyor veya az akıyorsa tek musluk ve tüm musluk ayrımını yapın. Uygun servis kaydına hazırlanın.",
+      "headline": "Sıcaklık şikâyetiyle akış şikâyetini ayrı kaydedin",
+      "sections": [
+        {
+          "id": "etkilenen-musluklar",
+          "heading": "Bir musluk mu, bütün sıcak su noktaları mı?",
+          "paragraphs": [
+            "Mutfakta sorun yokken yalnız banyoda sıcaklık değişmesi ile bütün musluklarda suyun soğuk kalması aynı durum değildir. Hangi noktalarda yaşandığını açıkça sıralayın. Ortak kullanımda birden fazla musluk açıkken mi fark edildiğini de ekleyin; özellikle yeniden deneme yapmanız gerekmez.",
+            "Su normal akıp ısınmıyor mu, yoksa sıcak taraftaki akış da mı azaldı? Bu iki gözlem farklıdır. Düşük akışı doğrudan kombinin bir parçasına bağlamayın; musluk, tesisat ve cihaz koşulları teknik incelemeyle ayrılmalıdır. Ayar değiştirerek sorunu örtmek yerine mevcut durumu kaydetmek görüşmeyi kolaylaştırır."
+          ],
+          "links": [{"path": "kombi-servisi.html", "label": "Sıcak su arızasının teknik inceleme süreci"}]
+        },
+        {
+          "id": "sicaklik-dalgalanmasi",
+          "heading": "İlk suyla kullanımın devamını karıştırmayın",
+          "paragraphs": [
+            "Suyun ilk açılışta mı soğuk kaldığını, bir süre sonra mı sıcaklığının değiştiğini veya aralıklı mı dalgalandığını belirtin. Yaklaşık süre ve daha önceki çalışmaya göre değişim yararlıdır. Cihazda o sırada bir kod göründüyse tam yazımı ekleyin; başka marka için bulunan açıklamayı kendi cihazınıza taşımayın."
+          ],
+          "links": [{"path": "kombi-hata-kodu.html", "label": "Musluk kullanımında görülen kodu doğru eşleştirin"}]
+        },
+        {
+          "id": "isitma-ve-gecmis",
+          "heading": "Peteklerin durumu ve işlem geçmişini birlikte iletin",
+          "paragraphs": [
+            "Aynı dönemde petek ısıtmasının çalışıp çalışmadığını ve son yapılan bakım veya onarımı söyleyin. Bu bilgiler sıcak su talebini daha açık tanımlar; tek başına eşanjör ya da vana değişimi anlamına gelmez. İç ayarlara ve parçalara müdahale etmeden, önerilen kontrol kapsamını ve işlem bedelini görüşerek ilerleyin."
+          ],
+          "links": [{"path": "kombi-petek-isitmiyor.html", "label": "Sıcak suya petek ısıtma sorunu da eşlik ediyorsa"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Yalnız duşta sıcaklık değişiyorsa kombi servisine söylemeli miyim?", "answer": "Evet; diğer muslukların normal olup olmadığını da belirtin. Tek noktadaki belirtiyi tüm cihaz arızası diye genellemeden inceleme planı oluşturulur."},
+        {"question": "Sıcak su sorunu için cihazı açıp video çekmem gerekir mi?", "answer": "Hayır. Kapağı açmadan yaşadığınız durumu anlatmanız yeterlidir. Daha önce gözlediğiniz süre, musluk ve gösterge bilgisiyle başlanabilir."}
+      ],
+      "cta": {"heading": "Sıcak su kaydını kullanım noktasına göre oluşturalım", "text": "Etkilenen muslukları, akış ve sıcaklık değişimini aktarın. İlçe bilginizle uygun servis görüşmesine devam edin."}
+    },
+    {
+      "route": "kombi-su-akitiyor.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombi altındaki damlama, görünür tesisat bağlantısındaki sızıntı ve gider çevresindeki suyu ayrı tarif edin. Su elektrikli bölümlere ulaşıyorsa kullanımı sürdürmeyin ve güvenli destek isteyin.",
+      "description": "Kombi su akıtıyorsa görünen sızıntının yerini, zamanını ve basınç değişimini ayırın. Elektrik yakınındaki su için güvenli yönlendirme ve servis bilgileri.",
+      "headline": "Gördüğünüz suyun yerini parça adı tahmin etmeden belirtin",
+      "sections": [
+        {
+          "id": "suyun-konumu",
+          "heading": "Cihaz altı, bağlantı ve gider çevresini karıştırmayın",
+          "paragraphs": [
+            "Yalnız dışarıdan görebildiğiniz noktayı anlatın: su cihazın altından mı, boru birleşiminden mi, gider çevresinden mi görünüyor? Zemindeki birikintinin yeriyle sızıntının çıktığı yer aynı olmayabilir. Kaynağı bulmak için kapağı sökmeyin veya boru bağlantısını gevşetmeyin.",
+            "Yoğuşma suyunun uygun giderden ilerlemesi ile çevreye kaçak oluşması aynı şikâyet değildir. Giderin normal çalıştığını varsayarak içeri damlamayı önemsiz saymayın. Güvenli mesafeden daha önce çekilmiş fotoğraf varsa konumu anlatmaya yardım eder; elektrikli bölüme yaklaşarak görüntü almayın."
+          ],
+          "links": [{"path": "kombi-servisi.html", "label": "Kaçak incelemesi ve işlem onayı hakkında bilgi"}]
+        },
+        {
+          "id": "sizin-zamanlamasi",
+          "heading": "Sürekli damlama ile kullanım sırasında kaçırmayı ayırın",
+          "paragraphs": [
+            "Su bekleme sırasında da görülüyor mu, sıcak su açıldığında mı beliriyor, yoksa petek ısıtmasında mı artıyor? Başlangıç tarihini ve damlama miktarındaki değişimi tarif edin. Ekranda dışarıdan okunan basınç değişiyorsa onu da ekleyin. Aynı belirti her evde aynı conta veya eşanjör arızası anlamına gelmez."
+          ],
+          "links": [{"path": "kombi-basinci.html", "label": "Sızıntıyla birlikte basınç değişimini kaydedin"}]
+        },
+        {
+          "id": "elektrik-yakinindaki-su",
+          "heading": "Suyun elektrikle temasını denemeyle kontrol etmeyin",
+          "paragraphs": [
+            "Elektrikli bölümlere ulaşan su, yanık kokusu veya çalışma düzensizliği varsa cihazı kullanmaya devam etmeyin. Islak elektrik donanımına dokunmadan destek alın. Gaz kokusu da hissediliyorsa düğmelere müdahale etmeden ortamdan ayrılın ve dışarıdan 187’yi arayın. Kaçağı geçici müdahaleyle gizlemek yerine inceleme ve onarım kapsamını netleştirin."
+          ],
+          "links": [{"path": "kombi-calismiyor.html", "label": "Sızıntıya ekran veya çalışma durması eşlik ediyorsa"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Sızıntı bazen duruyorsa yine de bildirmeli miyim?", "answer": "Evet. Hangi kullanımda başlayıp durduğunu aktarın. O anda damlamaması kaynağın giderildiği anlamına gelmez; yeniden akıtmak için cihazı denemeyin."},
+        {"question": "Fotoğraftan değişecek parça kesin söylenebilir mi?", "answer": "Görüntü konumu anlatabilir fakat kaçak kaynağı ve işlem kapsamı için yeterli olmayabilir. Onarım kararı, cihazın uygun kontrolünden sonra açıklanır."}
+      ],
+      "cta": {"heading": "Kaçağın yerini ve oluşma anını paylaşın", "text": "Cihaz, bağlantı veya gider çevresindeki gözleminizi bildirin. Elektrik yakınındaki sızıntıda kullanımı sürdürmeden teknik destek alın."}
+    },
+    {
+      "route": "petek-temizligi.html",
+      "type": "symptom",
+      "device": "petek",
+      "lead": "Peteklerin geç ısınması veya bir bölümünün soğuk kalması her zaman temizlik gerektirmez. Önce etkilenen petekleri ve ısınmanın dağılımını değerlendirmek gerekir.",
+      "description": "Petek temizliği öncesinde tek petek, oda ve tüm tesisat şikâyetini ayırın. Uygunluk kontrolü, işlem kapsamı ve gerçekçi sonuç beklentisiyle servis görüşmesi.",
+      "headline": "Temizlik istemeden önce ısının dağılımını tarif edin",
+      "sections": [
+        {
+          "id": "etkilenen-petekler",
+          "heading": "Tek peteğin durumu ile bütün tesisatı ayırın",
+          "paragraphs": [
+            "Bir odadaki peteğin bir bölümünün soğuk kalması, evdeki bütün peteklerin ısınmamasından farklıdır. Kaç peteğin etkilendiğini ve diğer odaların durumunu belirtin. Kombi sıcak su sağlarken ısıtmanın çalışmaması da ayrı bir cihaz veya tesisat değerlendirmesi gerektirebilir; doğrudan temizlik sonucuna bağlanmaz.",
+            "Dolaşım, vana, tesisat dengesi ve birikintiyle ilişkili durumlar uygun kontrolle ayrılır. Peteğin yüzeyini elleyerek kesin neden belirlenemez. Erişilmesi zor bağlantıları açmak veya sisteme madde eklemek yerine gözlenen dağılımı ve ne zamandır sürdüğünü aktarın."
+          ],
+          "links": [{"path": "kombi-petek-isitmiyor.html", "label": "Peteklerin ısınmaması için diğer değerlendirme başlıkları"}]
+        },
+        {
+          "id": "tesisat-uygunlugu",
+          "heading": "Makineyle işlem öncesinde tesisatın uygunluğu incelenir",
+          "paragraphs": [
+            "Temizlik gerekli görülürse mevcut bağlantılar, erişim ve tesisatın durumu üzerinden iş kapsamı planlanır. Petek sayısı, bulunduğu kat, bilinen kaçak ve daha önce yapılan işlem bilgisi hazırlığı kolaylaştırır. Tesisatın yaşı tek başına işlemin uygunluğunu veya zorunluluğunu göstermez. Gözlenen sızıntıyı randevu notunda saklamayın."
+          ],
+          "links": [{"path": "kombi-su-akitiyor.html", "label": "Cihaz ve bağlantı çevresindeki sızıntıyı ayrıca kaydedin"}]
+        },
+        {
+          "id": "sonuc-ve-kapsam",
+          "heading": "Sabit tasarruf yüzdesi yerine yapılan işi takip edin",
+          "paragraphs": [
+            "Amaç, uygun tesisatta birikintiyle ilişkili dolaşım kaybını azaltmaktır. Her eve aynı yakıt tasarrufu yüzdesi veya bütün odalarda kesin sonuç vaat edilmez. İşlemden önce hangi bölümlerin kapsandığını ve ücretini öğrenin. Sonrasında devam eden şikâyet varsa etkilenen petekleri yeniden tarif ederek, yapılan iş kaydı üzerinden değerlendirme isteyin."
+          ],
+          "links": [{"path": "kombi-bakimi.html", "label": "Kombi bakımının petek temizliğinden farklı kapsamı"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Petek sayısını bilmiyorsam temizlik görüşmesi yapabilir miyim?", "answer": "Evet. Bildiğiniz oda ve etkilenen alan bilgisiyle başlayabilirsiniz. Kesin kapsam, tesisat ve erişim kontrolüyle netleştirilir."},
+        {"question": "Temizlik bütün ısınma sorunlarını çözer mi?", "answer": "Hayır. Şikâyetin nedeni birikinti dışında olabilir. Uygunluk ve neden değerlendirilmeden temizlik tek çözüm diye sunulmaz."}
+      ],
+      "cta": {"heading": "Peteklerinizin ısı dağılımını görüşelim", "text": "Etkilenen odaları, yaklaşık petek sayısını ve önceki işlem tarihini iletin. Temizliğin uygun olup olmadığını kontrol kapsamıyla değerlendirelim."}
+    },
+    {
+      "route": "kombi-hata-kodu.html",
+      "type": "symptom",
+      "device": "kombi",
+      "lead": "Kombi kodunu marka, tam model ve oluştuğu kullanım ile birlikte okuyun. Kodun kelime sırası veya bulunduğunuz ilçe değiştiğinde teknik anlamı değişmez; belirleyici olan cihazın kendi belgesidir.",
+      "description": "Kombi hata kodunu baştaki harf, sıfır ve ek gösterimleriyle kaydedin. Marka/model kapsamını doğrulayarak kod tablosuna, belirti rehberine ve servis görüşmesine geçin.",
+      "headline": "Bir kodu doğru cihaz kaydına bağlayın",
+      "sections": [
+        {
+          "id": "tam-kod-kaydi",
+          "heading": "Gördüğünüz gösterimi kısaltmadan aktarın",
+          "paragraphs": [
+            "Başındaki harfi, sıfırları, nokta ve ek rakamları koruyun. Ekran farklı bilgiler arasında geçiş yapıyorsa yalnız ilk görüntüyü değil gördüğünüz diğer bölümü de not edin. Sıcaklık sayısı veya çalışma durumu her zaman hata değildir; cihazın çalışıp çalışmadığı ve simgeler de önem taşır.",
+            "E1 ve E01 gibi yazımlar sitede ancak ilgili modelin belge kapsamıyla eşleştirilebilir. Bu esneklik E10 gibi farklı bir kodun aynı sayılması anlamına gelmez. Farklı markanın veya kontrolcü neslinin tablosu, benzer gösterim bulunduğu için kendi cihazınıza uygulanmaz."
+          ],
+          "links": [{"path": "model-ariza-kodlari.html", "label": "Tam modele ait kod rehberini seçin"}]
+        },
+        {
+          "id": "model-ve-belge",
+          "heading": "Ürün ailesi ile tam modelin aynı olmadığını gözetin",
+          "paragraphs": [
+            "Dışarıdan okunabilen ürün etiketi, cihazla gelen kılavuz veya ilk çalıştırma belgesi model eşleştirmesine yardım eder. Benzer ön panel fotoğrafı tek başına yeterli değildir. Aynı ürün ailesinde bile ülke, ürün son eki ve kontrol sistemi farklı olabilir. Listede model yoksa bilinmiyor seçeneğiyle belirtinizi anlatabilirsiniz; yabancı bir tablodan kesin anlam üretilmez."
+          ],
+          "links": [{"path": "markalar.html", "label": "Marka ve yayımlanmış model rehberleri"}]
+        },
+        {
+          "id": "kodun-olay-kaydi",
+          "heading": "Kodun yanına kısa bir olay sırası ekleyin",
+          "paragraphs": [
+            "İlk ne zaman görüldüğünü, o anda sıcak su mu petek ısıtması mı kullanıldığını ve kapanma, sızıntı veya farklı ses eşlik edip etmediğini yazın. Kod tek başına parça değişimi kararı değildir. Tekrarlanan reset yerine mevcut gözlemi paylaşın. Patlamalı yanma veya gaz kokusu varsa kod araştırmasıyla oyalanmadan güvenli acil yönlendirmeyi izleyin."
+          ],
+          "links": [{"path": "kombi-atesleme.html", "label": "Sert yanma ve ateşleme şikâyetinde öncelikli bilgi"}, {"path": "kombi-calismiyor.html", "label": "Ekran kapalıysa kod yerine görülen durumu tarif edin"}]
+        }
+      ],
+      "faqs": [
+        {"question": "Kodu biliyor ama modeli bilmiyorsam kesin anlam alabilir miyim?", "answer": "Kesin model açıklaması için kapsam doğrulanmalıdır. Bu sırada yaşadığınız belirtiyle genel ön bilgi alabilir ve ustamızla kontrolü görüşebilirsiniz; model seçmek başvuru şartı değildir."},
+        {"question": "İlçe ve marka birlikte seçilince yeni bir arıza kodu anlamı oluşur mu?", "answer": "Hayır. Konum servis planlamasına, model teknik belge eşleşmesine hizmet eder. Örneğin aynı cihazdaki aynı kodun anlamı mahalle değiştiği için değişmez."}
+      ],
+      "cta": {"heading": "Kod, belirti ve konum bilgisini tek görüşmede iletin", "text": "Tam gösterimi ve olayın oluştuğu kullanımı anlatın. Model eşleşmesi yoksa bunu açık tutarak teknik inceleme için ustamıza ulaşın."}
+    }
+  ]
+}

@@ -35,6 +35,10 @@
         fields.device.value=data.devices[root.dataset.device]?root.dataset.device:'kombi';
         fields.district.replaceChildren(option('','İlçeyi bilmiyorum / listede yok'),...data.districts.map(d=>option(d.name,d.name)));
         fields.district.value=root.dataset.district||'';fillDevice();fillNeighborhoods();
+        const initialBrand=[...fields.brand.options].find(item=>item.value&&norm(item.value)===norm(root.dataset.brand));
+        if(initialBrand){fields.brand.value=initialBrand.value;fillModels();}
+        const initialNeed=device().needs.find(item=>item.path===root.dataset.needPath);
+        if(initialNeed)fields.need.value=initialNeed.name;
         const neighborhood=decodeURIComponent(location.hash).replace(/^#mahalle-/,'');
         for(const item of fields.neighborhood.options)if(slug(item.value)===neighborhood&&item.value)fields.neighborhood.value=item.value;
         fields.code.value='';result.replaceChildren();result.hidden=true;

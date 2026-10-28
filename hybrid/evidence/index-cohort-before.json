@@ -1,0 +1,3407 @@
+{
+  "input_archive_sha256": "1e80b965aea63e83311acd02134d5b478b235f3a6324aa50755136597a959f41",
+  "source_of_index_status": "User supplied Search Console lists; not a current URL Inspection API result.",
+  "cohort_totals": {
+    "indexed": {
+      "count": 44,
+      "missing": [],
+      "sitemap_count": 44,
+      "noindex_count": 0,
+      "canonical_nonself": [],
+      "inbound_median": 36.5,
+      "body_words_median": 474.0
+    },
+    "not_indexed": {
+      "count": 64,
+      "missing": [],
+      "sitemap_count": 64,
+      "noindex_count": 0,
+      "canonical_nonself": [],
+      "inbound_median": 9.0,
+      "body_words_median": 1149.0
+    },
+    "parameterized_contact": 15
+  },
+  "rows": [
+    {
+      "path": "500-evler-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "500 Evler kombi ve klima servisi | Sağlam Teknik",
+      "description": [
+        "500 Evler için kombi/klima bakım, tamir ve servis talebi. Cihaz markası, model ve ilçe/mahalle bilgisiyle randevu planlaması."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/500-evler-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "500 Evler kombi ve klima servisi"
+      ],
+      "body_words": 716,
+      "lead_words": 17,
+      "inbound_pages": 9,
+      "main_sha256": "c86a34a548f4e68052cf64acbff72a6a32ef95e43c924fdc4b5671b65b83f012",
+      "masked_main_sha256": "f9477e23da95918f0842ad1700d9fc91a6be6769ba72c7c4c0c2e56076430e97",
+      "category": "locality"
+    },
+    {
+      "path": "beylikduzu-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Beylikdüzü Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Beylikdüzü (Adnan Kahveci, Barış, Büyükşehir, Cumhuriyet, Dereağzı, Gürpınar) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/beylikduzu-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beylikdüzü kombi servisi"
+      ],
+      "body_words": 1366,
+      "lead_words": 37,
+      "inbound_pages": 17,
+      "main_sha256": "748cac28b96103da30ade2010b7c23d36c011479f1d1b08c69a1efe723eee82b",
+      "masked_main_sha256": "466a15d95b83f7c44da9775360735266bd293338eeac6c4d198471108e510181",
+      "category": "district"
+    },
+    {
+      "path": "kucukcekmece-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Küçükçekmece Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Küçükçekmece (Atakent, Atatürk, Beşyol, Cennet, Cumhuriyet, Fatih) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kucukcekmece-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Küçükçekmece kombi servisi"
+      ],
+      "body_words": 1398,
+      "lead_words": 36,
+      "inbound_pages": 19,
+      "main_sha256": "e42a699c4dfd4d7354e48981cb5adcf6c2bd1a5e4029ce8eedd9ef37c0b9b826",
+      "masked_main_sha256": "30fbb6c7e82bc29481079692c075b5623ffc24ae396b1e8f6698a7df4fb088fe",
+      "category": "district"
+    },
+    {
+      "path": "kombi-tamiri.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi tamiri ve arıza tespiti | Sağlam Teknik",
+      "description": [
+        "Su kaçağı, ateşleme, sıcak su ve ısıtma sorunlarında önce arızanın kaynağı belirlenir; işlem kararı ölçüm ve müşteri onayıyla verilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-tamiri.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi tamiri ve arıza tespiti"
+      ],
+      "body_words": 261,
+      "lead_words": 19,
+      "inbound_pages": 51,
+      "main_sha256": "e5bb4a983fef42c02bd0e9d4a97e5e8ad678931afc57d64a6c99526280889cf5",
+      "masked_main_sha256": "6da166f5636700d7cc78fd95d175902b6c50098756ea6224a8c137851cb95dfd",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "sefakoy-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Sefaköy kombi ve klima servisi | Sağlam Teknik",
+      "description": [
+        "Sefaköy için kombi/klima bakım, tamir ve servis talebi. Cihaz markası, model ve ilçe/mahalle bilgisiyle randevu planlaması."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sefakoy-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Sefaköy kombi ve klima servisi"
+      ],
+      "body_words": 717,
+      "lead_words": 16,
+      "inbound_pages": 15,
+      "main_sha256": "4b8694e569523629a27a6527546a2762df063e6ff3be5f0c08df30aa9f87e790",
+      "masked_main_sha256": "e7e5fefca48ed555fc802a83c4f0bcc9299251327152d5a11e4f37e93492b3ef",
+      "category": "locality"
+    },
+    {
+      "path": "kucukcekmece-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Küçükçekmece Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Küçükçekmece (Atakent, Atatürk, Beşyol, Cennet, Cumhuriyet, Fatih) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kucukcekmece-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Küçükçekmece klima servisi"
+      ],
+      "body_words": 1176,
+      "lead_words": 36,
+      "inbound_pages": 18,
+      "main_sha256": "4a9302ac2a2b06cb62ec2885b4351059b6e8db464707652133e76e5879e0ad32",
+      "masked_main_sha256": "9ddd2d93b945f19a4830f6a10f6f295e69e1889a473813908b4899176df0ef70",
+      "category": "district"
+    },
+    {
+      "path": "esenyurt-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Esenyurt Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Esenyurt (Akevler, Akçaburgaz, Akşemseddin, Ardıçlı, Atatürk, Aşık Veysel) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/esenyurt-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Esenyurt kombi servisi"
+      ],
+      "body_words": 1411,
+      "lead_words": 37,
+      "inbound_pages": 16,
+      "main_sha256": "bb324ffa632f20d67b6df20cc1b5bb448615c130e6a953ffd493cbc2fbf5d55c",
+      "masked_main_sha256": "0ae262ab745486bd27ab8113390ee6c7031d3e8cb24a1fcbfda044237c930c92",
+      "category": "district"
+    },
+    {
+      "path": "basaksehir-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Başakşehir Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Başakşehir (Altınşehir, Bahçeşehir 1. Kısım, Bahçeşehir 2. Kısım, Başak, Başakşehir, Güvercintepe) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/basaksehir-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Başakşehir kombi servisi"
+      ],
+      "body_words": 1363,
+      "lead_words": 40,
+      "inbound_pages": 18,
+      "main_sha256": "23a7bdc9322a96f21d059666f89f7cddaf526f37f0a2542a62453f0e12d3bd20",
+      "masked_main_sha256": "d706a4fe87a353cd6f2759ae2f55b47dc65f8b903d6fcbadd9c7fcb0d99d54d1",
+      "category": "district"
+    },
+    {
+      "path": "bagcilar-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Bağcılar Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Bağcılar (100. Yıl, 15 Temmuz, Barbaros, Bağlar, Demirkapı, Fatih) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bagcilar-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bağcılar kombi servisi"
+      ],
+      "body_words": 1398,
+      "lead_words": 38,
+      "inbound_pages": 16,
+      "main_sha256": "f97e29295e3b35d6596dba15305d8b82200efc5980a3a07b6774e98e1887f719",
+      "masked_main_sha256": "d2b351a68fd6c14141901b57ab9655878473c10e698cf968b9bd25579d85fb3a",
+      "category": "district"
+    },
+    {
+      "path": "bahcelievler-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Bahçelievler Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Bahçelievler (Bahçelievler, Cumhuriyet, Fevzi Çakmak, Hürriyet, Kocasinan, Siyavuşpaşa) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bahcelievler-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bahçelievler kombi servisi"
+      ],
+      "body_words": 1363,
+      "lead_words": 37,
+      "inbound_pages": 19,
+      "main_sha256": "25db6a68d11bcf57b1fcd20b42c924588b1f7a978697fdd1bff2b29706aa7be5",
+      "masked_main_sha256": "6ba56efc3b3f285de29f1c95dff51091d544b9f2ff07073c5e0f4a53f94407c8",
+      "category": "district"
+    },
+    {
+      "path": "klima-montaji.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima montajı | Sağlam Teknik",
+      "description": [
+        "İç ve dış ünitenin konumu, boru güzergâhı, drenaj ve elektrik bağlantısı şartları montajdan önce değerlendirilir. Dış üniteye erişim, kat ve mevcut montaj bilgilerini randevuda belirtin."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-montaji.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima montajı"
+      ],
+      "body_words": 342,
+      "lead_words": 25,
+      "inbound_pages": 45,
+      "main_sha256": "f793b7296cc27e790b54ff20abca28a68f0cb6f585ae06b8a2282b4914268b8e",
+      "masked_main_sha256": "4bcdf265075cea5818a15d20a86e585e1cc78c16bb60438a78b3833c13bb5c67",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "arcelik-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Arçelik klima servisi | Sağlam Teknik",
+      "description": [
+        "Arçelik klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/arcelik-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Arçelik klima servisi"
+      ],
+      "body_words": 462,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "db82ff9739302801f92a9d7da4fc3d99833cdc8dd65dd7c82a4e7552ee3ff01b",
+      "masked_main_sha256": "41535c2c25f2a72c403ec9f0099a30d03bf654be7cda760ca7558acfe5d4e4d6",
+      "category": "brand"
+    },
+    {
+      "path": "beko-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Beko klima servisi | Sağlam Teknik",
+      "description": [
+        "Beko klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/beko-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beko klima servisi"
+      ],
+      "body_words": 471,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "3995d8557de1ea902bd14d0923a4fb5cde13e8cbca0750ff5814a845b73474d0",
+      "masked_main_sha256": "b4a830b1a596d6cb04247edeec8a7699a363ba63b1ab76d071ca3ee1167b1db0",
+      "category": "brand"
+    },
+    {
+      "path": "besiktas-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Beşiktaş Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Beşiktaş (Abbasağa, Akat, Arnavutköy, Balmumcu, Bebek, Cihannüma) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/besiktas-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beşiktaş kombi servisi"
+      ],
+      "body_words": 1401,
+      "lead_words": 36,
+      "inbound_pages": 8,
+      "main_sha256": "0e4f88100dbc632061bd1f7bcb3a1cd81c426663569773af07f4be7f1ed69a5e",
+      "masked_main_sha256": "68b4a1f97faa3f8564d76d958df49490bfca174f0962b8fc146881f01be1227a",
+      "category": "district"
+    },
+    {
+      "path": "sultangazi-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Sultangazi Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Sultangazi (50. Yıl, 75. Yıl, Cebeci, Cumhuriyet, Esentepe, Eski Habipler) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sultangazi-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Sultangazi klima servisi"
+      ],
+      "body_words": 1189,
+      "lead_words": 39,
+      "inbound_pages": 7,
+      "main_sha256": "cd2cfc3342b53919b6df3f0be4e5930e4d19391231ebe0a96fb992deebdffde6",
+      "masked_main_sha256": "66aa54edf96fff86eb5361cade4f89313838498e5db75b014cae36e6f6722e08",
+      "category": "district"
+    },
+    {
+      "path": "daikin-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Daikin klima servisi | Sağlam Teknik",
+      "description": [
+        "Daikin klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/daikin-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Daikin klima servisi"
+      ],
+      "body_words": 453,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "eeba2d5d47f9d097c55cb83fa12b42c5303ca0fa3d7f91b7c5191217386aba85",
+      "masked_main_sha256": "5b0a84d62ec57999f84509bc40ce8805d5fb897889228f9986ed13b870679a53",
+      "category": "brand"
+    },
+    {
+      "path": "beyoglu-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Beyoğlu Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Beyoğlu (Arap Cami, Asmalı Mescid, Bedrettin, Bereketzade, Bostan, Bülbül) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/beyoglu-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beyoğlu klima servisi"
+      ],
+      "body_words": 1211,
+      "lead_words": 38,
+      "inbound_pages": 6,
+      "main_sha256": "8dc668f0388095a0c79c416db2b01b20bca4dce15050d998646b1ca8cebe62bd",
+      "masked_main_sha256": "f3e00d8452a1e91c0bcc63bf5770a7e4edfd59921df0e8c2997ec644a0a3c9b1",
+      "category": "district"
+    },
+    {
+      "path": "arnavutkoy-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Arnavutköy Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Arnavutköy (Adnan Menderes, Anadolu, Arnavutköy Merkez, Atatürk, Baklalı, Balaban) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/arnavutkoy-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Arnavutköy kombi servisi"
+      ],
+      "body_words": 1445,
+      "lead_words": 38,
+      "inbound_pages": 7,
+      "main_sha256": "6257d93c6eb096e5556793c5b9e2680ac612cc24a138d1be9380df8c1f1ec995",
+      "masked_main_sha256": "c3c723d479188bb17bc5e0722b2243491f5284f22154e581af1a96bde1e9d3c9",
+      "category": "district"
+    },
+    {
+      "path": "kombi-petek-isitmiyor.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi petekleri ısıtmıyor | Sağlam Teknik",
+      "description": [
+        "Tek bir radyatörün ısınmamasıyla bütün ısıtma devresinin soğuk kalması aynı kontrol planını gerektirmez."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-petek-isitmiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi petekleri ısıtmıyor"
+      ],
+      "body_words": 210,
+      "lead_words": 13,
+      "inbound_pages": 39,
+      "main_sha256": "694f73cbe02848316861c3df70641809017cc8de3ecdaa3f5bd52d46b346f067",
+      "masked_main_sha256": "166842ea89cc875f2210c760df448ccffce2afd0e10dfc830e74e62b0bd4b0c6",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-gaz-kontrolu.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima gaz ve kaçak kontrolü | Sağlam Teknik",
+      "description": [
+        "Klimanın soğutmaması tek başına gaz eksikliği kanıtı değildir. Gaz işlemi talebinde cihazın etiketi, önceki işlem bilgisi ve mevcut belirti birlikte değerlendirilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-gaz-kontrolu.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima gaz ve kaçak kontrolü"
+      ],
+      "body_words": 330,
+      "lead_words": 21,
+      "inbound_pages": 45,
+      "main_sha256": "838ba182fc35ac79f9ea738878213fe36f4ed291d205d6f3690809f5bae06547",
+      "masked_main_sha256": "601f572d658d58abac829a5a085ec38c06ef27b0be7b24f5926ca9ac2c537a75",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "eca-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "E.C.A. Kombi Servisi | Proteus Premix, Citius, Confeo Tamir & Bakım (E01, F37) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası E.C.A. kombi servisi. Proteus Premix, Citius Premix, Confeo Plus, Calora kombi tamiri, E01, F37, T1 hata kodu çözümü ve bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/eca-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "ECA kombi servisi"
+      ],
+      "body_words": 489,
+      "lead_words": 35,
+      "inbound_pages": 38,
+      "main_sha256": "b2cacfc24b137febbd4c970262f87b5cc23e444bfcf64ada3185623f173d81c0",
+      "masked_main_sha256": "cdc74301b10a718b6fb29713174e9dbf68d9fe66ea14d6783405a4ece7f8e723",
+      "category": "brand"
+    },
+    {
+      "path": "klima-su-akitiyor.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima su akıtıyor veya su damlatıyor | Sağlam Teknik",
+      "description": [
+        "Suyun iç üniteden mi, dış üniteden mi geldiğini belirtmek kontrolün yönünü belirler."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-su-akitiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima su akıtıyor veya su damlatıyor"
+      ],
+      "body_words": 164,
+      "lead_words": 12,
+      "inbound_pages": 39,
+      "main_sha256": "8616fd428e6aa194e312e22bbbef2fce00518e8f33e0a0edb97a42e39baefa21",
+      "masked_main_sha256": "41542e4041293ff1a8c854028a7ff31497ce1bca9f3c862cba16690e5f4018da",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-buzlaniyor.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima buzlanıyor veya borusu buz tutuyor | Sağlam Teknik",
+      "description": [
+        "Görünen buzun yeri ve hangi modda oluştuğu, soğutma şikâyetiyle birlikte değerlendirilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-buzlaniyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima buzlanıyor veya borusu buz tutuyor"
+      ],
+      "body_words": 156,
+      "lead_words": 11,
+      "inbound_pages": 37,
+      "main_sha256": "701ec9a5badf01852a786f809c3a16662c73fe4ecad138fdf205e2f07b547dc7",
+      "masked_main_sha256": "21af2a31d7fee29ff13a1228e64e2e452ecd8a9cd8ceb5aaf8cac0013d25ca15",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "ariza-rehberi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi ve klima arıza rehberi | Sağlam Teknik",
+      "description": [
+        "Kombi ve klima için 48 belirti: su, basınç, sıcak su, ısıtma, soğutma, ses, koku ve hata kodu bilgileri."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/ariza-rehberi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi ve klima arıza rehberi"
+      ],
+      "body_words": 733,
+      "lead_words": 18,
+      "inbound_pages": 202,
+      "main_sha256": "a61cdd421516eba91691192021fd5025d4bbcf2b4b5d738edd03d17e59187207",
+      "masked_main_sha256": "765957ee69d1e662b66ffd782c54937b9d8494bedc2f5603abbd890bfabd9670",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "bolgeler.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "İstanbul Avrupa Yakası hizmet bölgeleri | Sağlam Teknik",
+      "description": [
+        "25 ilçenin 599 mahallesinde konum seçimi ve mobil servis planlaması. Kombi arızası, bakım ve diğer servis talepleri için randevu uygunluğunu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bolgeler.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "İstanbul Avrupa Yakası hizmet bölgeleri"
+      ],
+      "body_words": 0,
+      "lead_words": 0,
+      "inbound_pages": 202,
+      "main_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "masked_main_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima servisi | Sağlam Teknik",
+      "description": [
+        "Soğutma, ısıtma, su damlatma veya ses şikâyetini cihazın modeli ve çalışma koşullarıyla birlikte dinliyoruz. Hangi ünitede ne gördüğünüzü belirtin; kesin işlem ve parça kararı kontrol sonrası verilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima servisi"
+      ],
+      "body_words": 335,
+      "lead_words": 27,
+      "inbound_pages": 202,
+      "main_sha256": "6b7ba46dff2a95875b2f4b1b41e8de63a4e14d55495facad952992fdf345b085",
+      "masked_main_sha256": "5233c4c465eac2f96614b052c38fc70f145565aa3e6bd1bf9b3972d5cfef36a4",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "hakkimizda.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Hakkımızda | Sağlam Teknik",
+      "description": [
+        "Sağlam Teknik: mesleki eğitim ve yeterlilikle desteklenen, markalardan bağımsız kombi, klima ve tesisat hizmeti."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/hakkimizda.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Hakkımızda"
+      ],
+      "body_words": 124,
+      "lead_words": 14,
+      "inbound_pages": 202,
+      "main_sha256": "fbedc6bd692c05386cbc3d64f836341b48197b444e161f97617da74c3ae3d4c1",
+      "masked_main_sha256": "dae9c231f244fc5db12a1051b3ba8e68e5c6ca2df427faef832add6e3058363b",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "klima-tamiri.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima tamiri | Sağlam Teknik",
+      "description": [
+        "Klimanın hiç açılmaması, iç ünitenin çalışıp dış ünitenin durması, su damlatma veya performans düşmesi aynı arıza değildir. Model, hata kodu ve çalışma belirtisi kontrolün kapsamını belirler."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-tamiri.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima tamiri"
+      ],
+      "body_words": 342,
+      "lead_words": 26,
+      "inbound_pages": 52,
+      "main_sha256": "042518f76d6954e3a8b2d19c5253273738447f550683d9ac596c48ecdebf246c",
+      "masked_main_sha256": "2d38c351b16f78429cb481df8938b80e9cadc125b90e7674b73fb381d17ecef1",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-sogutmuyor.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima soğutmuyor veya az soğutuyor | Sağlam Teknik",
+      "description": [
+        "Soğutma zayıfladığında çalışma modu, hava akışı ve sorunun başlangıcı birlikte değerlendirilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-sogutmuyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima soğutmuyor veya az soğutuyor"
+      ],
+      "body_words": 154,
+      "lead_words": 11,
+      "inbound_pages": 42,
+      "main_sha256": "087b48b2cb680413563780762d449a9ba414c0922673875716620bb63e0216c2",
+      "masked_main_sha256": "9e46e9f46ebbaca4462d2d9999d232be5593638023e0fff4e9de7b454ef08847",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "sariyer-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Sarıyer Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Sarıyer (Ayazağa, Bahçeköy Kemer, Bahçeköy Merkez, Bahçeköy Yeni, Baltalimanı, Büyükdere) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sariyer-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Sarıyer klima servisi"
+      ],
+      "body_words": 1220,
+      "lead_words": 39,
+      "inbound_pages": 9,
+      "main_sha256": "43a117e46d810c83b1ea46c6fb34b205397a602c948a8f1bb21f7d06ef418638",
+      "masked_main_sha256": "04176e4f24562a09e9bd3434ee0ad9117d8180006a3c2c048268350ce911f672",
+      "category": "district"
+    },
+    {
+      "path": "bagcilar-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Bağcılar Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Bağcılar (100. Yıl, 15 Temmuz, Barbaros, Bağlar, Demirkapı, Fatih) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bagcilar-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bağcılar klima servisi"
+      ],
+      "body_words": 1169,
+      "lead_words": 38,
+      "inbound_pages": 15,
+      "main_sha256": "3d7ed95c112a775c93fe60b741739a6beb1eb9a914f1f22712d40ce47c0b41fa",
+      "masked_main_sha256": "3c2903e45455b11f455830e84a893fda17ed2c875008739654288102bda2049b",
+      "category": "district"
+    },
+    {
+      "path": "kagithane-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kağıthane Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Kağıthane (Emniyet Evleri, Gültepe, Gürsel, Hamidiye, Harmantepe, Hürriyet) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kagithane-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kağıthane klima servisi"
+      ],
+      "body_words": 1184,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "a48259ec15bedefb2094a48809399df76f9f33922f117fbbced6101936f1e252",
+      "masked_main_sha256": "5d42970b35be45b21947adde7a72b3a43fbd7b2236a2b8daf45d47ff9955d30c",
+      "category": "district"
+    },
+    {
+      "path": "mitsubishi-electric-klima-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Mitsubishi Electric klima servisi | Sağlam Teknik",
+      "description": [
+        "Mitsubishi Electric klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/mitsubishi-electric-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Mitsubishi Electric klima servisi"
+      ],
+      "body_words": 465,
+      "lead_words": 21,
+      "inbound_pages": 36,
+      "main_sha256": "a483cb9c06f866b714656289d50bd2b35243aa22f63a5e7a62dc7edbc39f1519",
+      "masked_main_sha256": "c6a38ba7d8f0b53ae469bbd7ef686897a2f06567f1a43f408b648bd6c709aed8",
+      "category": "brand"
+    },
+    {
+      "path": "demirdokum-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "DemirDöküm Kombi Servisi | Nitromix, Atromix, Atron Tamir & Bakım (F4, F5, F28) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası DemirDöküm kombi servisi. Nitromix, Atromix, Atron, Aden, Nepto kombi tamiri, F4, F5, F10, F22, F28 arıza çözümü ve yıllık bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/demirdokum-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Demirdöküm kombi servisi"
+      ],
+      "body_words": 477,
+      "lead_words": 36,
+      "inbound_pages": 36,
+      "main_sha256": "cf1882f43e8d57565227e6032829789b2012fb0973bb8a4ff37572a852cb5575",
+      "masked_main_sha256": "7e136332b6a4e9a7f5d66b0b0e16920f8be60eee6aa208a63e918a0bd364fbe2",
+      "category": "brand"
+    },
+    {
+      "path": "klima-bakimi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima bakımı ve temizliği | Sağlam Teknik",
+      "description": [
+        "Bakım talebinde son işlem tarihini, iç/dış ünite modelini, varsa koku veya hava akışı şikâyetini paylaşın. Bakım kapsamı cihazın durumuna ve üreticinin bakım gerekliliklerine göre görüşülür."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-bakimi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima bakımı ve temizliği"
+      ],
+      "body_words": 328,
+      "lead_words": 25,
+      "inbound_pages": 45,
+      "main_sha256": "6c3af090b32914ed00adce281d3f0e93850c59b0aa3fae929c2941734f39e4d2",
+      "masked_main_sha256": "5a8f819f8750400837e3f0b35d13239257d333a2af5a10ed384e50ac0f1ce938",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-sesli-calisiyor.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Klima sesli çalışıyor veya titreşim yapıyor | Sağlam Teknik",
+      "description": [
+        "Sesin iç/dış üniteden gelmesi ve ne zaman başlaması servis kontrolünü kolaylaştırır."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-sesli-calisiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima sesli çalışıyor veya titreşim yapıyor"
+      ],
+      "body_words": 162,
+      "lead_words": 11,
+      "inbound_pages": 38,
+      "main_sha256": "31cc6ad821b7a133d49a3c5b10d76eb396d230ab44fac391a3a840240a195980",
+      "masked_main_sha256": "7faf2449741936160941e58dfe1df82a5a30c265fcb1d87383b801d1bb303718",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi servisi | Sağlam Teknik",
+      "description": [
+        "Kombiyle ilgili bakım ve arıza taleplerini cihazın marka, modeli ve bulunduğunuz bölgeye göre değerlendiriyoruz."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi servisi"
+      ],
+      "body_words": 253,
+      "lead_words": 14,
+      "inbound_pages": 202,
+      "main_sha256": "f93b487e582b08fcf80dfeae202af7fe8359f896d5ab18e51901cb01cc20043f",
+      "masked_main_sha256": "263b4c1ee719a330a5af25e3c3ac0a298d983b2530ebdf69e66b0ce6d69db5a2",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "index.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "İstanbul Kombi ve Klima Servisi | Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası kombi bakımı, kombi tamiri, klima servisi ve petek temizliği. Sağlam Teknik ile arızanızı paylaşın, servis planlamasını görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 2,
+      "h1": [
+        "Kombi, klima ",
+        "ve petek servisi."
+      ],
+      "body_words": 0,
+      "lead_words": 0,
+      "inbound_pages": 88,
+      "main_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "masked_main_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "hizmetler.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Hizmetlerimiz | Sağlam Teknik",
+      "description": [
+        "Kombi, klima ve ısıtma tesisatı için bakım, tamir, montaj ve kontrol kapsamlarını inceleyin."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/hizmetler.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Hizmetlerimiz"
+      ],
+      "body_words": 313,
+      "lead_words": 13,
+      "inbound_pages": 202,
+      "main_sha256": "58c50068e17948a2ba4385d4ea5494b45e7f5d9c95a399f325f7bfcd9fb7aebd",
+      "masked_main_sha256": "28d4098f84afa3f6a29a568fbff58aa04f55c0e45cf2dd210c7cde8b9f0f1539",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "aydinlatma.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Gizlilik ve aydınlatma | Sağlam Teknik",
+      "description": [
+        "Servis talebi, müşteri yorumu, AI Usta ve ziyaret bilgileri için veri kullanımı ve iletişim bilgileri."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/aydinlatma.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Gizlilik ve aydınlatma"
+      ],
+      "body_words": 504,
+      "lead_words": 15,
+      "inbound_pages": 202,
+      "main_sha256": "8e0b6aea50b5b25a4497a826cbee17710b06078bf62ea78fcf13601cf584c0ed",
+      "masked_main_sha256": "df5e84f83fcdcb9a4ed323ae86e5f450d3d95092bd89e213c0117e8e23a8217b",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "kombi-sicaklik-ayari.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi sık devreye giriyor veya sıcaklık ayarı tutmuyor | Sağlam Teknik",
+      "description": [
+        "Çalışma süresi ve sıcaklık değişimi; kullanım, tesisat ve cihazın kontrol koşullarıyla birlikte incelenir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-sicaklik-ayari.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi sık devreye giriyor veya sıcaklık ayarı tutmuyor"
+      ],
+      "body_words": 221,
+      "lead_words": 13,
+      "inbound_pages": 38,
+      "main_sha256": "c757fc9d9978dba2fb0a679adaf7a9aecf9e86183080025e66cc23271375124c",
+      "masked_main_sha256": "7b95037b9f872e8e106932cb4d44edd3085ac2d32dccbf3347a703fab4f2b075",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "iletisim.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "İletişim ve servis talebi | Sağlam Teknik",
+      "description": [
+        "Sağlam Teknik kombi ve klima servisi: 0534 622 5515. Telefon, WhatsApp veya servis talep formuyla bölgeniz ve cihazınız için randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/iletisim.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "İletişim ve servis talebi"
+      ],
+      "body_words": 140,
+      "lead_words": 21,
+      "inbound_pages": 202,
+      "main_sha256": "01e94f3a960549bf5fd2338393a71f61c92d9ee86c08dc7655dc5ad8381aa0e3",
+      "masked_main_sha256": "9653cb35ed3718e3952044b901ac2e6967a59af85e686081d9556bc0f9b8efb2",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "markalar.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Kombi ve klima marka rehberi | Sağlam Teknik",
+      "description": [
+        "35 kombi ve 37 klima marka / tedarikçi kaydı. Doğrulanmış model kılavuzları ve servis görüşmesi kapsamı ayrı gösterilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/markalar.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi ve klima marka rehberi"
+      ],
+      "body_words": 1881,
+      "lead_words": 18,
+      "inbound_pages": 82,
+      "main_sha256": "11ebbc666bf2815d75f2feb135a0d4f949b2c0073c04a709fbeabf334570d610",
+      "masked_main_sha256": "aab8598172696e9fc4e4afff7190ff74300a9b96d1cc8c980770b8e04d230d45",
+      "category": "hub_or_business"
+    },
+    {
+      "path": "avcilar-kombi-servisi.html",
+      "group": "indexed",
+      "missing": false,
+      "title": "Avcılar Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Avcılar (Ambarlı, Cihangir, Denizköşkler, Firuzköy, Gümüşpala, Merkez) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/avcilar-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Avcılar kombi servisi"
+      ],
+      "body_words": 1373,
+      "lead_words": 36,
+      "inbound_pages": 17,
+      "main_sha256": "1bb9c8bda2aac905175797d689472a8f8edbb7856fbeafd68b45817c653cf078",
+      "masked_main_sha256": "5bf2e05a77502b5f7ba69734fe274dbf65eca6af0f61a4d95d3d3e18dea1910c",
+      "category": "district"
+    },
+    {
+      "path": "ariston-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Ariston Kombi Servisi | Clas One, Genus One, Cares Tamir & Bakım (501, 108) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Ariston kombi servisi. Clas One, Genus One, Cares Premium, Alteas One kombi tamiri, 501 (5P3), 108, 101 arıza kodu çözümü: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/ariston-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Ariston kombi servisi"
+      ],
+      "body_words": 480,
+      "lead_words": 39,
+      "inbound_pages": 36,
+      "main_sha256": "709440eea67ad8177ddf6079d8db1353effc56f92eb34089e3905122bf400a23",
+      "masked_main_sha256": "6fcf98171c20024bf7afe851d57406b288e767b1d9ac46d07081f7d4d81b167b",
+      "category": "brand"
+    },
+    {
+      "path": "arnavutkoy-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Arnavutköy Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Arnavutköy (Adnan Menderes, Anadolu, Arnavutköy Merkez, Atatürk, Baklalı, Balaban) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/arnavutkoy-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Arnavutköy klima servisi"
+      ],
+      "body_words": 1208,
+      "lead_words": 38,
+      "inbound_pages": 7,
+      "main_sha256": "01e73123d539582a49b877cf90f041fc687e1306cafef501ea2eec198aea8c92",
+      "masked_main_sha256": "f91a12eee86f5e0b43b3f6cc9e937581a3f85b7f661007b6af71aff4968d7535",
+      "category": "district"
+    },
+    {
+      "path": "avcilar-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Avcılar Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Avcılar (Ambarlı, Cihangir, Denizköşkler, Firuzköy, Gümüşpala, Merkez) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/avcilar-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Avcılar klima servisi"
+      ],
+      "body_words": 1135,
+      "lead_words": 36,
+      "inbound_pages": 16,
+      "main_sha256": "a8d9af12b3bffbcd69cc778fbd569f8c12bd86b317a0eef0a45fa2deb520b432",
+      "masked_main_sha256": "284d1ebc2d97a783e87bcfff64afe788c1bb6c93bdabdaaaa4690bcf1088fc79",
+      "category": "district"
+    },
+    {
+      "path": "bahcelievler-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bahçelievler Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Bahçelievler (Bahçelievler, Cumhuriyet, Fevzi Çakmak, Hürriyet, Kocasinan, Siyavuşpaşa) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bahcelievler-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bahçelievler klima servisi"
+      ],
+      "body_words": 1148,
+      "lead_words": 37,
+      "inbound_pages": 18,
+      "main_sha256": "d29e91f778b7e5c54608adae77813b55cb1cdcb08ad1f38d5f918afda731d9e5",
+      "masked_main_sha256": "e9ec060795b584fa6975160bc239a9780279940560a708440afd0e0525afd985",
+      "category": "district"
+    },
+    {
+      "path": "bahcesehir-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bahçeşehir kombi ve klima servisi | Sağlam Teknik",
+      "description": [
+        "Bahçeşehir için kombi/klima bakım, tamir ve servis talebi. Cihaz markası, model ve ilçe/mahalle bilgisiyle randevu planlaması."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bahcesehir-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bahçeşehir kombi ve klima servisi"
+      ],
+      "body_words": 722,
+      "lead_words": 16,
+      "inbound_pages": 15,
+      "main_sha256": "c9a9da16fddb80c121a106abb3510d3820d2343ee3d7c4ebfb8fe49a50804261",
+      "masked_main_sha256": "c1e1308dffcc7e9001e4305bf51ffeffe8278a49f8a33ebb0fccd1be461b8d2c",
+      "category": "locality"
+    },
+    {
+      "path": "bakirkoy-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bakırköy Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Bakırköy (Ataköy 1. Kısım, Ataköy 2. 5. 6. Kısım, Ataköy 3-4-11. Kısım, Ataköy 7-8-9-10. Kısım, Basınköy, Cevizlik) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bakirkoy-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bakırköy klima servisi"
+      ],
+      "body_words": 1187,
+      "lead_words": 46,
+      "inbound_pages": 7,
+      "main_sha256": "d61dc422d69b7370d2c5090deaeeb203e7a047dfaeb76b0cf0375184f5c13975",
+      "masked_main_sha256": "f365f26c537c8aee4be500dd695635dd585a4ce6391d8e24a27ab0d7671fe2ec",
+      "category": "district"
+    },
+    {
+      "path": "bakirkoy-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bakırköy Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Bakırköy (Ataköy 1. Kısım, Ataköy 2. 5. 6. Kısım, Ataköy 3-4-11. Kısım, Ataköy 7-8-9-10. Kısım, Basınköy, Cevizlik) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bakirkoy-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bakırköy kombi servisi"
+      ],
+      "body_words": 1389,
+      "lead_words": 46,
+      "inbound_pages": 16,
+      "main_sha256": "2a18ccee21ef33effbe2a0ad813a60aa5e0fed9cb6eab4cd62af9a90f301362e",
+      "masked_main_sha256": "28cfbe76c1090b62c5988a9bc9a9839193aa2894a0ea164a918bc6022b003548",
+      "category": "district"
+    },
+    {
+      "path": "basaksehir-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Başakşehir Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Başakşehir (Altınşehir, Bahçeşehir 1. Kısım, Bahçeşehir 2. Kısım, Başak, Başakşehir, Güvercintepe) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/basaksehir-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Başakşehir klima servisi"
+      ],
+      "body_words": 1163,
+      "lead_words": 40,
+      "inbound_pages": 9,
+      "main_sha256": "94822629dc566284dbd4d5df6443625a79929a05ce012630a0a92d2bf3cdbb87",
+      "masked_main_sha256": "b69ba47bb158e7c483e91503a01e67ad76e36b3a4be31705725aebf601b7f359",
+      "category": "district"
+    },
+    {
+      "path": "baymak-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Baymak klima servisi | Sağlam Teknik",
+      "description": [
+        "Baymak klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/baymak-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Baymak klima servisi"
+      ],
+      "body_words": 467,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "9b9f5ceb9e0033ac1e38f9a431c7adb77f09158627fe19a1e0945a8ebc0ec027",
+      "masked_main_sha256": "ab6ce96fbb2d6a5af2ce954c540b3f706553db84f8ae62e8a161a7d613e3f6fe",
+      "category": "brand"
+    },
+    {
+      "path": "baymak-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Baymak Kombi Servisi | Duotec, Lambert, Lunatec Bakım & Tamir (E01/E1, E10) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Baymak kombi servisi. Duotec, Lambert LPY, Lunatec, Luna Avant arıza tespiti, E01 (E1), E03, E10 hata kodu çözümü ve bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/baymak-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Baymak kombi servisi"
+      ],
+      "body_words": 489,
+      "lead_words": 40,
+      "inbound_pages": 40,
+      "main_sha256": "71e7f83d548b89737c61861e9d0d841a52f611f13278e63067127d8ac4e4b0c5",
+      "masked_main_sha256": "216763e630b33fe51c7bcf4098b4f86b323d0a4d0e229e1978a524a5814100d4",
+      "category": "brand"
+    },
+    {
+      "path": "bayrampasa-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bayrampaşa Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Bayrampaşa (Altıntepsi, Cevatpaşa, Kartaltepe, Kocatepe, Muratpaşa, Orta) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bayrampasa-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bayrampaşa klima servisi"
+      ],
+      "body_words": 1150,
+      "lead_words": 36,
+      "inbound_pages": 7,
+      "main_sha256": "873b26f8f4769b11e13ea1515e9200783549fa6c7af45d3a0eef8ef47657c2cb",
+      "masked_main_sha256": "7267f8faa12cd69b1be4df4274fed6a85cd4807789c78b032cfb7a25eef5aa66",
+      "category": "district"
+    },
+    {
+      "path": "bayrampasa-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bayrampaşa Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Bayrampaşa (Altıntepsi, Cevatpaşa, Kartaltepe, Kocatepe, Muratpaşa, Orta) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bayrampasa-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bayrampaşa kombi servisi"
+      ],
+      "body_words": 1374,
+      "lead_words": 36,
+      "inbound_pages": 7,
+      "main_sha256": "56c79dd30a49341b5986079439bcf4e252d34361eebd47446e30dab39e8343aa",
+      "masked_main_sha256": "747b2dd570a1edb5d2984c276f9f17f82a2c7edf5178bdd34e7e48090b86bc9a",
+      "category": "district"
+    },
+    {
+      "path": "besiktas-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Beşiktaş Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Beşiktaş (Abbasağa, Akat, Arnavutköy, Balmumcu, Bebek, Cihannüma) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/besiktas-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beşiktaş klima servisi"
+      ],
+      "body_words": 1194,
+      "lead_words": 36,
+      "inbound_pages": 8,
+      "main_sha256": "aaf7a3c07a16589cdff61e89d19f1173ef40d101aab0e0af7b8cc3c013e880fc",
+      "masked_main_sha256": "a41579eee3b88a348ec45136c21d977f96afe51d023ef5b5d08179895eb848ef",
+      "category": "district"
+    },
+    {
+      "path": "beylikduzu-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Beylikdüzü Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Beylikdüzü (Adnan Kahveci, Barış, Büyükşehir, Cumhuriyet, Dereağzı, Gürpınar) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/beylikduzu-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beylikdüzü klima servisi"
+      ],
+      "body_words": 1138,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "1c757f02b2da1ec19f88a18e997d2c0b9f6747f7b710f3e96fefc6ebf2110742",
+      "masked_main_sha256": "13e70393221ede41dac281e27a630b83868c071bb987c43c1fbe27868bc7826f",
+      "category": "district"
+    },
+    {
+      "path": "beyoglu-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Beyoğlu Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Beyoğlu (Arap Cami, Asmalı Mescid, Bedrettin, Bereketzade, Bostan, Bülbül) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/beyoglu-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Beyoğlu kombi servisi"
+      ],
+      "body_words": 1456,
+      "lead_words": 38,
+      "inbound_pages": 6,
+      "main_sha256": "8cf8d135ce5b6f951d3d7ff33e5d2edf921d1528a85df0cd8d48a9fc84d8edae",
+      "masked_main_sha256": "7c2a41f697b052d1a4254852f3910ecda4b366564c7ec78b4c20206f0218aa3b",
+      "category": "district"
+    },
+    {
+      "path": "bosch-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Bosch Kombi Servisi | Condens 2200iW, 2300iW, 2500W Tamir & Bakım (EA, CE, E9) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Bosch kombi servisi. Condens 2200iW, 2300iW, 2500W, Classic kombi tamiri, EA, CE (H07), E9, C6 arıza kodu çözümü ve yıllık bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/bosch-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Bosch kombi servisi"
+      ],
+      "body_words": 483,
+      "lead_words": 36,
+      "inbound_pages": 43,
+      "main_sha256": "cfb0dcada83eb221b9b7957d7ef8af2700d36f539da4ef73713a269cf3f83e3a",
+      "masked_main_sha256": "8ea61332c223447c38920c444241c11ec8d3aee5e2d638d3e773c4a6778852e2",
+      "category": "brand"
+    },
+    {
+      "path": "buderus-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Buderus Kombi Servisi | Logamax Plus GB062, GB122i, U072 Tamir & Bakım (6A, 4C) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Buderus kombi servisi. Logamax Plus GB062, GB122i, GB072, GB172i, U072 kombi tamiri, 6A (227), 6C, 4C, H07 arıza çözümü: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/buderus-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Buderus kombi servisi"
+      ],
+      "body_words": 494,
+      "lead_words": 41,
+      "inbound_pages": 43,
+      "main_sha256": "667a3aa968ee87e36f2d724df54f93cb72b0e5255d813aa234b18ffbc06cdc6c",
+      "masked_main_sha256": "28d7e5695ca15e9e8416fb2bb6350edc4192eeec15baf145985f99fcc733482c",
+      "category": "brand"
+    },
+    {
+      "path": "buyukcekmece-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Büyükçekmece Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Büyükçekmece (19 Mayıs, Ahmediye, Alkent 2000, Atatürk, Bahçelievler, Celaliye) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/buyukcekmece-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Büyükçekmece klima servisi"
+      ],
+      "body_words": 1164,
+      "lead_words": 38,
+      "inbound_pages": 8,
+      "main_sha256": "ca124b1eb19a74abdcdc118dc4c0667ef6a753638490af2fb87bfd5709f2df59",
+      "masked_main_sha256": "49557c986a620feb31463898d9daf3e70002717f9991db3af60c629528878be8",
+      "category": "district"
+    },
+    {
+      "path": "buyukcekmece-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Büyükçekmece Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Büyükçekmece (19 Mayıs, Ahmediye, Alkent 2000, Atatürk, Bahçelievler, Celaliye) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/buyukcekmece-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Büyükçekmece kombi servisi"
+      ],
+      "body_words": 1389,
+      "lead_words": 38,
+      "inbound_pages": 8,
+      "main_sha256": "7560722723f7b32a05b053ea5e3522271618753b3b31a9c69c55d93e1d85ef76",
+      "masked_main_sha256": "9f6aaf8c8cdeb39fc33035f38740718cfb491ea9af717f922746a3780afc74f5",
+      "category": "district"
+    },
+    {
+      "path": "catalca-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Çatalca Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Çatalca (Akalan, Atatürk, Aydınlar, Bahşayiş, Başak, Belgrat) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/catalca-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Çatalca klima servisi"
+      ],
+      "body_words": 1204,
+      "lead_words": 36,
+      "inbound_pages": 7,
+      "main_sha256": "1e1cb92b943c66482fbb3b3f8da8f944edd6427768b7b9ea111042412a701f5c",
+      "masked_main_sha256": "47562ac9802b09503283ee4d9ccc18dd3bae8b40e4bd56272822207dc0f1ffd4",
+      "category": "district"
+    },
+    {
+      "path": "catalca-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Çatalca Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Çatalca (Akalan, Atatürk, Aydınlar, Bahşayiş, Başak, Belgrat) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/catalca-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Çatalca kombi servisi"
+      ],
+      "body_words": 1437,
+      "lead_words": 36,
+      "inbound_pages": 7,
+      "main_sha256": "e5c3a0d56613638e675ede06e4f307d9a1055c9c15dee041f2e3b7f0eebddd9b",
+      "masked_main_sha256": "16f3427a0b1d83a0c6ea7b36c858aecee46c6d65499d84b1cd723945fc74ce38",
+      "category": "district"
+    },
+    {
+      "path": "esenler-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Esenler Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Esenler (15 Temmuz, Atışalanı, Birlik, Davutpaşa, Fatih, Fevzi Çakmak) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/esenler-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Esenler klima servisi"
+      ],
+      "body_words": 1208,
+      "lead_words": 38,
+      "inbound_pages": 7,
+      "main_sha256": "4442ddec4f1a566b3df7932b0879b6e3ecbc5cb11b309d0f799b36b2a7c6e010",
+      "masked_main_sha256": "55621cb54c020647a2ce36acf99206f784f938c2da53b81ae0b8d555294da535",
+      "category": "district"
+    },
+    {
+      "path": "esenler-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Esenler Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Esenler (15 Temmuz, Atışalanı, Birlik, Davutpaşa, Fatih, Fevzi Çakmak) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/esenler-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Esenler kombi servisi"
+      ],
+      "body_words": 1438,
+      "lead_words": 38,
+      "inbound_pages": 7,
+      "main_sha256": "f02fec5f30e27787ecbbd928c67037678a663f07e54c15f72db5e13aee3b9e6b",
+      "masked_main_sha256": "247781475547dc69a46e4f377bafd713683b999cfcd90f8ca2747e69bc9a64fe",
+      "category": "district"
+    },
+    {
+      "path": "esenyurt-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Esenyurt Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Esenyurt (Akevler, Akçaburgaz, Akşemseddin, Ardıçlı, Atatürk, Aşık Veysel) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/esenyurt-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Esenyurt klima servisi"
+      ],
+      "body_words": 1226,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "5ab2a512e76bf0fef429f25e784e836210382e937931a8355fea19bf5137a2d5",
+      "masked_main_sha256": "cf1a03722c6d9ae1705a7303f5a216c695e9f19288dbf520ae94aad66d302f29",
+      "category": "district"
+    },
+    {
+      "path": "eyupsultan-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Eyüpsultan Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Eyüpsultan (5. Levent, Akpınar, Akşemsettin, Alibeyköy, Ağaçlı, Defterdar) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/eyupsultan-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Eyüpsultan klima servisi"
+      ],
+      "body_words": 1208,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "d857a8ca17d112ca2af5c97b4a194a9e57e9ec9da0c0fd59039e78bd5c93348a",
+      "masked_main_sha256": "31b3bcd3e7b9bbe82f8cca3ab606d8fbd916b8c0cf8f4290a09eb65edd75f779",
+      "category": "district"
+    },
+    {
+      "path": "eyupsultan-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Eyüpsultan Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Eyüpsultan (5. Levent, Akpınar, Akşemsettin, Alibeyköy, Ağaçlı, Defterdar) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/eyupsultan-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Eyüpsultan kombi servisi"
+      ],
+      "body_words": 1438,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "c601dbcb8c7c486e228b33828e96a5aa3d7c09c30a63819300161c51ca30a135",
+      "masked_main_sha256": "381977a4b4334af4320b8491e8ab809d384c655aafb87b9cbd5653e0ff729d85",
+      "category": "district"
+    },
+    {
+      "path": "fatih-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Fatih Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Fatih (Aksaray, Akşemsettin, Alemdar, Ali Kuşçu, Atikali, Ayvansaray) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/fatih-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Fatih kombi servisi"
+      ],
+      "body_words": 1468,
+      "lead_words": 37,
+      "inbound_pages": 6,
+      "main_sha256": "bb5ac55731285c7f4a29b82d440358cc8cca990e34a51004a8d3b3567a714b8d",
+      "masked_main_sha256": "c3fb8a4c1914bfd66ef4418a64636e811741a9939e143ee1e8d9e0ef6f889920",
+      "category": "district"
+    },
+    {
+      "path": "gaziosmanpasa-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Gaziosmanpaşa Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Gaziosmanpaşa (Barbaros Hayrettin Paşa, Bağlarbaşı, Fevzi Çakmak, Hürriyet, Karadeniz, Karayolları) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/gaziosmanpasa-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Gaziosmanpaşa klima servisi"
+      ],
+      "body_words": 1183,
+      "lead_words": 39,
+      "inbound_pages": 9,
+      "main_sha256": "d8a020b17744143ef1fd89bdb87ff93722c1059953e5622c6af63cf19f8a99d0",
+      "masked_main_sha256": "58d31cccbef8fbe1cd94096e115ceb222981f966c8faa780d292aea5c7fb780b",
+      "category": "district"
+    },
+    {
+      "path": "gaziosmanpasa-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Gaziosmanpaşa Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Gaziosmanpaşa (Barbaros Hayrettin Paşa, Bağlarbaşı, Fevzi Çakmak, Hürriyet, Karadeniz, Karayolları) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/gaziosmanpasa-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Gaziosmanpaşa kombi servisi"
+      ],
+      "body_words": 1424,
+      "lead_words": 39,
+      "inbound_pages": 9,
+      "main_sha256": "46e4c986664515742836669f26c15430cab7443c88c703f5bf47690ab45d8d78",
+      "masked_main_sha256": "9d32dfd573e2b5eec9e6c6249b3498d011f8bea64116d55b99ba10ef7e9911f8",
+      "category": "district"
+    },
+    {
+      "path": "gungoren-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Güngören Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Güngören (Abdurrahman Nafiz Gürman, Akıncılar, Gençosman, Güneştepe, Güven, Haznedar) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/gungoren-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Güngören klima servisi"
+      ],
+      "body_words": 1185,
+      "lead_words": 38,
+      "inbound_pages": 9,
+      "main_sha256": "7336a92a36af9cea91764da2406249b1163f4c79f73b8a1d02758509a52893e3",
+      "masked_main_sha256": "426d6900419657625d9b6048737226fa29022bed1c3e36f01d6f767fc1728e99",
+      "category": "district"
+    },
+    {
+      "path": "gungoren-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Güngören Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Güngören (Abdurrahman Nafiz Gürman, Akıncılar, Gençosman, Güneştepe, Güven, Haznedar) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/gungoren-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Güngören kombi servisi"
+      ],
+      "body_words": 1418,
+      "lead_words": 38,
+      "inbound_pages": 17,
+      "main_sha256": "281b70279e70969c88a728c5b85d69747d719ba08ffad3902493a3d8074b5dd9",
+      "masked_main_sha256": "8f65be5b27cee92466d060a40c27943d76506a8a4bc055d00573f9b756ea267e",
+      "category": "district"
+    },
+    {
+      "path": "kagithane-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kağıthane Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Kağıthane (Emniyet Evleri, Gültepe, Gürsel, Hamidiye, Harmantepe, Hürriyet) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kagithane-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kağıthane kombi servisi"
+      ],
+      "body_words": 1428,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "ebc6c3c926e3a557cb29b4889780da70c53e10a8b94902c607a68b5c24b03302",
+      "masked_main_sha256": "d7bc6415473a9d6cd18053ff056c349f7e07770015abcac7711754a32f318175",
+      "category": "district"
+    },
+    {
+      "path": "kilyos-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kilyos kombi ve klima servisi | Sağlam Teknik",
+      "description": [
+        "Kilyos için kombi/klima bakım, tamir ve servis talebi. Cihaz markası, model ve ilçe/mahalle bilgisiyle randevu planlaması."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kilyos-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kilyos kombi ve klima servisi"
+      ],
+      "body_words": 724,
+      "lead_words": 16,
+      "inbound_pages": 7,
+      "main_sha256": "df109d18d6bbd9200bbb0a8ab48e73c1976b06af8f7af9dd0638875a4e88fc0c",
+      "masked_main_sha256": "e949f9e3a24982e8f22bdd9e53796f06e3891dbcd3d5a44113831a7abf0827e1",
+      "category": "locality"
+    },
+    {
+      "path": "klima-calismiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Klima çalışmıyor veya kapanıyor | Sağlam Teknik",
+      "description": [
+        "Ekranın durumu, iç/dış ünitenin çalışması ve kapanma zamanı birlikte kaydedilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-calismiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima çalışmıyor veya kapanıyor"
+      ],
+      "body_words": 158,
+      "lead_words": 10,
+      "inbound_pages": 40,
+      "main_sha256": "06dc485b4fcb8768eaab9600cfed0b5d10417724acf1f5a7a4a073d55cc74ee1",
+      "masked_main_sha256": "4c3fe0628330c3ffa4884072f60f56ed50b68cdebaf61542a216c8218aee0f9c",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-hata-kodu.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Klima hata kodu veya kumanda sorunu | Sağlam Teknik",
+      "description": [
+        "Kod ve gösterge ışığı aynı markanın farklı modellerinde farklı anlamlar taşıyabilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-hata-kodu.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima hata kodu veya kumanda sorunu"
+      ],
+      "body_words": 159,
+      "lead_words": 11,
+      "inbound_pages": 76,
+      "main_sha256": "b84101681742f753c42da1524ba8893c67b8f713bd3751cbad6b2a8c2bbb206e",
+      "masked_main_sha256": "d14657698e1f3b93f198dd94441322950d30cc6b3cf3c4e5fd55abdf7a5b9898",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-isitmiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Klima ısıtmıyor veya soğuk üflüyor | Sağlam Teknik",
+      "description": [
+        "Isıtma şikâyetinde cihazın çalışma modu ve kesintinin ne kadar sürdüğü önemlidir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-isitmiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima ısıtmıyor veya soğuk üflüyor"
+      ],
+      "body_words": 159,
+      "lead_words": 11,
+      "inbound_pages": 38,
+      "main_sha256": "f95e7da518defca55d592e8428e85add3a82cc85276e77d2b8620d58f3c4055b",
+      "masked_main_sha256": "46bd6de7906652d69ae959a9373d1a63f1f0fd9380de57a43808f4f960f70e57",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-koku-yapiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Klima koku yapıyor | Sağlam Teknik",
+      "description": [
+        "Nemli koku ile yanık kokusu ayrı değerlendirilir; kokunun ne zaman başladığını belirtin."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-koku-yapiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima koku yapıyor"
+      ],
+      "body_words": 162,
+      "lead_words": 12,
+      "inbound_pages": 37,
+      "main_sha256": "5b4c5fb63734783a5d8ab0a774a43e74eea57b6547dce41563ddcf8d6d917f3b",
+      "masked_main_sha256": "85f4b4bbfa445f1c3c657e26f94c65227ecf5ff70923a274ff1ba84331dc61e9",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "klima-sokumu.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Klima sökümü ve yer değişimi | Sağlam Teknik",
+      "description": [
+        "Taşınma veya yer değişimi için mevcut ve yeni konumu, cihazın modelini ve dış üniteye erişim koşullarını paylaşın. Söküm ve yeniden montajın kapsamı birbirinden ayrı açıklanır."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/klima-sokumu.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Klima sökümü ve yer değişimi"
+      ],
+      "body_words": 336,
+      "lead_words": 25,
+      "inbound_pages": 44,
+      "main_sha256": "2c281cb013c1edf450d5780ed951f34e2c5fa984605891e7548b4f49c9df4594",
+      "masked_main_sha256": "e8cb3f8415934573dedafe6ffe8f47e63d63764e1f303dc03257a300709c1d3f",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-atesleme.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi ateşleme yapmıyor veya alev sönüyor | Sağlam Teknik",
+      "description": [
+        "Ateşleme şikâyeti için marka/model, ekrandaki kod ve sorunun hangi kullanımda oluştuğu birlikte değerlendirilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-atesleme.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi ateşleme yapmıyor veya alev sönüyor"
+      ],
+      "body_words": 218,
+      "lead_words": 13,
+      "inbound_pages": 38,
+      "main_sha256": "e1034a7a118c95d4f80d410135ce8b9c5320cb23b8a61c3b822eb117c5dc9c7d",
+      "masked_main_sha256": "998fda603216bc615955c168a8d10d47fb703fd1488830332f8f4be961c6d989",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-bakimi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi bakımı | Sağlam Teknik",
+      "description": [
+        "Periyodik kombi bakımı, modelin bakım programına uygun kontroller ve cihazın çalışma durumunun değerlendirilmesiyle planlanır."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-bakimi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi bakımı"
+      ],
+      "body_words": 241,
+      "lead_words": 14,
+      "inbound_pages": 45,
+      "main_sha256": "b3d713c5fe85adf87de99ca3addab71fd6f4823d4efea904377f7b1f1b71b74b",
+      "masked_main_sha256": "4b493d2e13daf6540a9a492de14f796e9b1a82be84b57c409dd69097c7991ae4",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-basinci.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi basıncı düşüyor veya yükseliyor | Sağlam Teknik",
+      "description": [
+        "Basınç göstergesindeki değişimin ne zaman oluştuğunu not etmek, cihaz ile tesisatı birlikte değerlendirmeye yardımcı olur."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-basinci.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi basıncı düşüyor veya yükseliyor"
+      ],
+      "body_words": 232,
+      "lead_words": 15,
+      "inbound_pages": 42,
+      "main_sha256": "dff319f7f468d69efb3ca2d01d198839f326e62b69bd0c15c4f911c767dd9275",
+      "masked_main_sha256": "d0fdc0e7c9d8fe2544c41cbb9bed05682864f72a866c5655e7b35bd5b6dad4ff",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-calismiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi çalışmıyor, kapanıyor veya hata veriyor | Sağlam Teknik",
+      "description": [
+        "Ekranın durumu, hata kodu ve kapanmanın ne zaman gerçekleştiği kontrol sırasını belirlemeye yardımcı olur."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-calismiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi çalışmıyor, kapanıyor veya hata veriyor"
+      ],
+      "body_words": 229,
+      "lead_words": 14,
+      "inbound_pages": 40,
+      "main_sha256": "ad1b0df26501afc7fb347d86f7d4c1452a77496fb565e59786079349a8765e65",
+      "masked_main_sha256": "a02bfe1d19afd690c907aff648ce65bb8028db20a8a3f7023b7c48db798708dd",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-sesli-calisiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi sesli çalışıyor veya uğultu yapıyor | Sağlam Teknik",
+      "description": [
+        "Sesin ateşleme, sıcak su ya da ısıtma sırasında ortaya çıkması arıza değerlendirmesinde önemlidir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-sesli-calisiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi sesli çalışıyor veya uğultu yapıyor"
+      ],
+      "body_words": 237,
+      "lead_words": 13,
+      "inbound_pages": 38,
+      "main_sha256": "d90c1a2d293a44f6b8b6fb4841258a0846bb0aa298a45f69bd040e53667e38a1",
+      "masked_main_sha256": "b138c5c6ae6179c9c52326c43eed4e5209182e6b7c2a7aaab66da2b94b237c12",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-sicak-su.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi sıcak su vermiyor veya su dalgalanıyor | Sağlam Teknik",
+      "description": [
+        "Sıcak suyun hiç gelmemesi, debinin az olması ve sıcaklığın değişmesi ayrı belirtiler olarak değerlendirilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-sicak-su.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi sıcak su vermiyor veya su dalgalanıyor"
+      ],
+      "body_words": 225,
+      "lead_words": 14,
+      "inbound_pages": 41,
+      "main_sha256": "2a926f9394fdabb792a5b77a97e0762c8637764e207a616e83141f39de9be4ed",
+      "masked_main_sha256": "b04dfde95f12f318541a1f6c34f933181eda5affcca92845e994fb27c014f974",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "kombi-su-akitiyor.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi su akıtıyor | Sağlam Teknik",
+      "description": [
+        "Sızıntının cihazın altında, bağlantıda veya gider çevresinde görülmesi farklı kontroller gerektirebilir."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-su-akitiyor.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi su akıtıyor"
+      ],
+      "body_words": 218,
+      "lead_words": 11,
+      "inbound_pages": 36,
+      "main_sha256": "6b5c67255092ea110c9bb0386149a88315895bc60cf732cfc4121bb994665e61",
+      "masked_main_sha256": "08aedecceee88853f32e6365adfd9172b3cdc2c825d531debe0ff5f05c3a4065",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "lg-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "LG klima servisi | Sağlam Teknik",
+      "description": [
+        "LG klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/lg-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "LG klima servisi"
+      ],
+      "body_words": 461,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "f3b3504484971bf8dae47e71842effd95ae687c56ebf0d50d9b8c3e441de1b48",
+      "masked_main_sha256": "9084e6f0b2a15c64aab21a4bc2d6fe580637c076c3401a20e1893a1383d0a4ce",
+      "category": "brand"
+    },
+    {
+      "path": "merter-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Merter kombi ve klima servisi | Sağlam Teknik",
+      "description": [
+        "Merter için kombi/klima bakım, tamir ve servis talebi. Cihaz markası, model ve ilçe/mahalle bilgisiyle randevu planlaması."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/merter-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Merter kombi ve klima servisi"
+      ],
+      "body_words": 728,
+      "lead_words": 16,
+      "inbound_pages": 7,
+      "main_sha256": "49605d16dbd1c3a60cbf6955056cf8f661f87bc0b86896f4f0ca8bf782366e0e",
+      "masked_main_sha256": "21474a8d2af7f376a5f7daa3e4d09ac7072e0e3ef2b92da1f82d41c12c19f5f6",
+      "category": "locality"
+    },
+    {
+      "path": "mitsubishi-heavy-industries-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Mitsubishi Heavy Industries klima servisi | Sağlam Teknik",
+      "description": [
+        "Mitsubishi Heavy Industries klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/mitsubishi-heavy-industries-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Mitsubishi Heavy Industries klima servisi"
+      ],
+      "body_words": 470,
+      "lead_words": 22,
+      "inbound_pages": 11,
+      "main_sha256": "77a73c4021b7b9ebbdda167f16c840a27afc5b87b013e8a302f22fc0bdb9e1b2",
+      "masked_main_sha256": "451b2fbc515eb11c989c0bb4f522cd7ebb8a5842501ad12f03f411e68129f210",
+      "category": "brand"
+    },
+    {
+      "path": "petek-temizligi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Petek temizliği ve ısıtma kontrolü | Sağlam Teknik",
+      "description": [
+        "Peteklerin eşit ısınmaması ve tesisat dolaşımı sorunları incelenir; uygun görülürse makineli petek temizliği planlanır."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/petek-temizligi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Petek temizliği ve ısıtma kontrolü"
+      ],
+      "body_words": 249,
+      "lead_words": 14,
+      "inbound_pages": 202,
+      "main_sha256": "1a698bfe9126e6f96c46cd7ce0d60efd129b1eb20b2a60176bb4f17d58076767",
+      "masked_main_sha256": "81f978bac174d7c5d52e1cc3ca24583956158136167bc92026114fe6e7725056",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "samsung-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Samsung klima servisi | Sağlam Teknik",
+      "description": [
+        "Samsung klima bakım ve arıza talepleri için model, belirti ve servis hazırlığı. Sağlam Teknik ile işlem kapsamını ve randevuyu görüşün."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/samsung-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Samsung klima servisi"
+      ],
+      "body_words": 456,
+      "lead_words": 20,
+      "inbound_pages": 36,
+      "main_sha256": "79108265c20c9d6289809517eeefeba1c5a486dab6a7ba8d8534e12a40c73488",
+      "masked_main_sha256": "9e7758ca69694429340e06e98ae311842d59da16c2088684dc76d51f25858f36",
+      "category": "brand"
+    },
+    {
+      "path": "sariyer-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Sarıyer Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Sarıyer (Ayazağa, Bahçeköy Kemer, Bahçeköy Merkez, Bahçeköy Yeni, Baltalimanı, Büyükdere) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sariyer-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Sarıyer kombi servisi"
+      ],
+      "body_words": 1451,
+      "lead_words": 39,
+      "inbound_pages": 9,
+      "main_sha256": "78ccd2baaad4349ea7a8b347f02ac9421e8fe472234d6a75058f89528e70abed",
+      "masked_main_sha256": "b5e7b5a1a16114a4de8357e9d49b9039478cb4c44d5fe2c9342cef6a5c81c17b",
+      "category": "district"
+    },
+    {
+      "path": "silivri-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Silivri Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Silivri (Akören, Alibey, Alipaşa, Bekirli, Beyciler, Büyük Kılıçlı) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/silivri-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Silivri klima servisi"
+      ],
+      "body_words": 1240,
+      "lead_words": 37,
+      "inbound_pages": 7,
+      "main_sha256": "79e7de4aa8dd38012a55b6cfd7f1b461eb9b5867b484f881a8586ababafda21f",
+      "masked_main_sha256": "a41304b8c37be528f88c7550ec66bfbd449aaac765fe486a5ef2194b27448d43",
+      "category": "district"
+    },
+    {
+      "path": "silivri-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Silivri Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Silivri (Akören, Alibey, Alipaşa, Bekirli, Beyciler, Büyük Kılıçlı) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/silivri-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Silivri kombi servisi"
+      ],
+      "body_words": 1443,
+      "lead_words": 37,
+      "inbound_pages": 7,
+      "main_sha256": "f07c5ca2e290fa30c8656f0034e33369516011855682346cc3c9a81f08932b68",
+      "masked_main_sha256": "cd67751b3d2aff548c2422e5f6a8329b1e8a883e8bc4ad4e816d6ba0be4aabe5",
+      "category": "district"
+    },
+    {
+      "path": "sisli-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Şişli Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Şişli (19 Mayıs, Bozkurt, Cumhuriyet, Duatepe, Ergenekon, Esentepe) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sisli-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Şişli klima servisi"
+      ],
+      "body_words": 1187,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "3c4b473c4b2b20898f7aa6ecb8812110f0690c76e05db65c331cea08df0e704d",
+      "masked_main_sha256": "a29a9de956957763d6ae78fd089887c0773e8218d8f4411d756139968a68a4c6",
+      "category": "district"
+    },
+    {
+      "path": "sisli-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Şişli Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Şişli (19 Mayıs, Bozkurt, Cumhuriyet, Duatepe, Ergenekon, Esentepe) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sisli-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Şişli kombi servisi"
+      ],
+      "body_words": 1450,
+      "lead_words": 37,
+      "inbound_pages": 8,
+      "main_sha256": "1a54921fa6da82a5bc5bd05e1dea35a80f4ab38506275596b0674a9e89e2093e",
+      "masked_main_sha256": "87f421a5138df0a09ce8560ac2c2f609644797687561bf171ac214ea14254570",
+      "category": "district"
+    },
+    {
+      "path": "sultangazi-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Sultangazi Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Sultangazi (50. Yıl, 75. Yıl, Cebeci, Cumhuriyet, Esentepe, Eski Habipler) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/sultangazi-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Sultangazi kombi servisi"
+      ],
+      "body_words": 1438,
+      "lead_words": 39,
+      "inbound_pages": 7,
+      "main_sha256": "74ab4fc70445444ac233a051f5077883f5454d11a3eb50bacd3b9cd9fce557f7",
+      "masked_main_sha256": "0523635f17c1f0359c0c7909c3d3f9d9767efba22f5ddc6e7ffee5e90381a9f8",
+      "category": "district"
+    },
+    {
+      "path": "vaillant-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Vaillant Kombi Servisi | ecoTEC & turboTEC Tamir, Bakım (F.28, F.22, F.75) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Vaillant kombi servisi. ecoTEC Pro/Plus/Intro ve turboTEC kombi tamiri, F.28 (F28), F.22 (F22), F.75 arıza kodu çözümü ve bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/vaillant-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Vaillant kombi servisi"
+      ],
+      "body_words": 481,
+      "lead_words": 38,
+      "inbound_pages": 36,
+      "main_sha256": "9b2552ce48fd64390d7d4225f3327f9229a7ce642738eaa92e6c765e50ffa2d6",
+      "masked_main_sha256": "6036ba2e6037403c4fd37af96ba294ccde78fec3534dbb556a7855d7b346193a",
+      "category": "brand"
+    },
+    {
+      "path": "viessmann-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Viessmann Kombi Servisi | Vitodens & Vitopend Tamir, Bakım (F4, F2, EE) - Sağlam Teknik",
+      "description": [
+        "İstanbul Avrupa Yakası Viessmann kombi servisi. Vitodens 050-W, 100-W, 200-W ve Vitopend 100-W kombi tamiri, F4 (F04), F2, EE arıza çözümü ve bakım: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/viessmann-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Viessmann kombi servisi"
+      ],
+      "body_words": 469,
+      "lead_words": 38,
+      "inbound_pages": 36,
+      "main_sha256": "4552b767f7994a71d903376391b5ad516f535a5733bb86370bc5646ca25c3d42",
+      "masked_main_sha256": "53e7fd547da2d30e76b15907a4d3597bbef114e6a6f4d427bb8f6b98271c31f9",
+      "category": "brand"
+    },
+    {
+      "path": "zeytinburnu-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Zeytinburnu Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Zeytinburnu (Beştelsiz, Gökalp, Kazlıçeşme, Maltepe, Merkezefendi, Nuripaşa) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/zeytinburnu-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Zeytinburnu klima servisi"
+      ],
+      "body_words": 1179,
+      "lead_words": 36,
+      "inbound_pages": 8,
+      "main_sha256": "1dc42982b01815d5197d48962e2ff0d99afa62022323147c0623ce26f055072f",
+      "masked_main_sha256": "0ec7dba913a3a40d9dcbc0f2a61258c6b8c51fc5ad25621a5f9c41f12d55378a",
+      "category": "district"
+    },
+    {
+      "path": "zeytinburnu-kombi-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Zeytinburnu Kombi Servisi | Kombi Tamiri, Bakımı ve Arıza Çözümü - Sağlam Teknik",
+      "description": [
+        "Zeytinburnu (Beştelsiz, Gökalp, Kazlıçeşme, Maltepe, Merkezefendi, Nuripaşa) kombi servisi, kombi tamiri, yıllık bakım ve petek temizliği. Baymak (E01/E1), DemirDöküm (F4), Vaillant (F28), E.C.A., Buderus, Bosch arızaları için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/zeytinburnu-kombi-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Zeytinburnu kombi servisi"
+      ],
+      "body_words": 1382,
+      "lead_words": 36,
+      "inbound_pages": 16,
+      "main_sha256": "8af13b2597e384ec9942e933c3d591c23aeb2df404dbc072de9ad7ca196a4494",
+      "masked_main_sha256": "630381a58bfb952a4a59ed8f535396258f5d1f54ed93f9e7ac77640af31455d7",
+      "category": "district"
+    },
+    {
+      "path": "arcelik-kombi-dgk-hp-lcd-ariza-kodlari.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Arçelik DGK HP / HPT LCD · Kombi hata kodları | Sağlam Teknik",
+      "description": [
+        "Arçelik DGK HP / HPT LCD için üretici belgesindeki kodlar, tam model kapsamı ve güvenli gözlem bilgileri. Koddan kesin parça teşhisi yapılmaz."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/arcelik-kombi-dgk-hp-lcd-ariza-kodlari.html"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Arçelik DGK HP / HPT LCD · Kombi hata kodları"
+      ],
+      "body_words": 889,
+      "lead_words": 22,
+      "inbound_pages": 3,
+      "main_sha256": "811bfbc8fa22d9ecf57ae1ba31176667a299c69db283a4f7d0220dba19e43c80",
+      "masked_main_sha256": "460314a9f3fef0c5e23694d051912e6460a8c09ac346efa45f644ed991deb7cc",
+      "category": "model"
+    },
+    {
+      "path": "kombi-hata-kodu.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Kombi hata kodu nasıl okunur ve kaydedilir? | Sağlam Teknik",
+      "description": [
+        "Kombi ekranındaki harf, rakam ve uyarıları doğru kaydedin. Model eşleştirme, tekrar eden hata ve servis görüşmesi için güvenli hazırlık rehberi."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/kombi-hata-kodu.html"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Kombi hata kodu nasıl okunur ve kaydedilir?"
+      ],
+      "body_words": 625,
+      "lead_words": 29,
+      "inbound_pages": 78,
+      "main_sha256": "d8950bf8ac452aeb37e11580c6b6cffedaba66d2ef64893b30926b0c2362c769",
+      "masked_main_sha256": "c10a31345e670dbbc7fda359bd5c427f42b7dbe69b50353a8db107519b60fbfd",
+      "category": "service_or_symptom"
+    },
+    {
+      "path": "regal-klima-r32-inverter-20234676-ariza-kodlari.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Regal A++ R32 Inverter · Klima hata kodları | Sağlam Teknik",
+      "description": [
+        "Regal A++ R32 Inverter — kılavuz 20234676 için üretici belgesindeki kodlar, tam model kapsamı ve güvenli gözlem bilgileri. Koddan kesin parça teşhisi yapılmaz."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/regal-klima-r32-inverter-20234676-ariza-kodlari.html"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Regal A++ R32 Inverter · Klima hata kodları"
+      ],
+      "body_words": 425,
+      "lead_words": 23,
+      "inbound_pages": 1,
+      "main_sha256": "b430e9c559c74aa5ac902df0b703ea52228223877bb479d4e9d6a9ffb3af7576",
+      "masked_main_sha256": "53da9573e3ba22d1400308950e9ca1092a626e4ff8156086671e87f46ebe2685",
+      "category": "model"
+    },
+    {
+      "path": "fatih-klima-servisi.html",
+      "group": "not_indexed",
+      "missing": false,
+      "title": "Fatih Klima Servisi | Klima Bakımı, Tamiri, Montaj ve Gaz Dolumu - Sağlam Teknik",
+      "description": [
+        "Fatih (Aksaray, Akşemsettin, Alemdar, Ali Kuşçu, Atikali, Ayvansaray) klima servisi, R32/R410A klima gaz dolumu, periyodik klima bakımı, söküm-montaj ve arıza onarımı. Daikin, Mitsubishi, Arçelik, Beko, LG, Samsung, Baymak için: 0534 622 55 15."
+      ],
+      "canonical": [
+        "https://saglamkombiklima.com.tr/fatih-klima-servisi.html"
+      ],
+      "robots": [],
+      "in_sitemap": true,
+      "h1_count": 1,
+      "h1": [
+        "Fatih klima servisi"
+      ],
+      "body_words": 1235,
+      "lead_words": 37,
+      "inbound_pages": 6,
+      "main_sha256": "e93cc2a0b1780e6faecbb1258eb3462c38b32916a00b242eb65810d79a92a452",
+      "masked_main_sha256": "f48f67242771edfdea7e60d803d7540fe4abb23eb2002ff298bdf21ef4ea8021",
+      "category": "district"
+    }
+  ],
+  "parameterized_contact": {
+    "count": 15,
+    "canonical": [
+      "https://saglamkombiklima.com.tr/iletisim.html"
+    ],
+    "robots": [],
+    "query_urls_in_sitemap": 0,
+    "same_resource": true,
+    "note": "Distinct form presets, not 15 separate content pages. A query URL canonicalizing to indexed iletisim.html is expected, not a new neighborhood page."
+  },
+  "district_analysis": {
+    "count": 50,
+    "masked_duplicate_lead_groups": [
+      {
+        "count": 25,
+        "pages": [
+          "arnavutkoy-kombi-servisi.html",
+          "avcilar-kombi-servisi.html",
+          "bahcelievler-kombi-servisi.html",
+          "bakirkoy-kombi-servisi.html",
+          "bayrampasa-kombi-servisi.html",
+          "bagcilar-kombi-servisi.html",
+          "basaksehir-kombi-servisi.html",
+          "beylikduzu-kombi-servisi.html",
+          "beyoglu-kombi-servisi.html",
+          "besiktas-kombi-servisi.html",
+          "buyukcekmece-kombi-servisi.html",
+          "esenler-kombi-servisi.html",
+          "esenyurt-kombi-servisi.html",
+          "eyupsultan-kombi-servisi.html",
+          "fatih-kombi-servisi.html",
+          "gaziosmanpasa-kombi-servisi.html",
+          "gungoren-kombi-servisi.html",
+          "kagithane-kombi-servisi.html",
+          "kucukcekmece-kombi-servisi.html",
+          "sariyer-kombi-servisi.html",
+          "silivri-kombi-servisi.html",
+          "sultangazi-kombi-servisi.html",
+          "zeytinburnu-kombi-servisi.html",
+          "catalca-kombi-servisi.html",
+          "sisli-kombi-servisi.html"
+        ]
+      },
+      {
+        "count": 25,
+        "pages": [
+          "arnavutkoy-klima-servisi.html",
+          "avcilar-klima-servisi.html",
+          "bahcelievler-klima-servisi.html",
+          "bakirkoy-klima-servisi.html",
+          "bayrampasa-klima-servisi.html",
+          "bagcilar-klima-servisi.html",
+          "basaksehir-klima-servisi.html",
+          "beylikduzu-klima-servisi.html",
+          "beyoglu-klima-servisi.html",
+          "besiktas-klima-servisi.html",
+          "buyukcekmece-klima-servisi.html",
+          "esenler-klima-servisi.html",
+          "esenyurt-klima-servisi.html",
+          "eyupsultan-klima-servisi.html",
+          "fatih-klima-servisi.html",
+          "gaziosmanpasa-klima-servisi.html",
+          "gungoren-klima-servisi.html",
+          "kagithane-klima-servisi.html",
+          "kucukcekmece-klima-servisi.html",
+          "sariyer-klima-servisi.html",
+          "silivri-klima-servisi.html",
+          "sultangazi-klima-servisi.html",
+          "zeytinburnu-klima-servisi.html",
+          "catalca-klima-servisi.html",
+          "sisli-klima-servisi.html"
+        ]
+      }
+    ],
+    "repeated_long_paragraph_groups": 23,
+    "top_repeated_paragraphs": [
+      {
+        "pages": [
+          "arnavutkoy-kombi-servisi.html",
+          "avcilar-kombi-servisi.html",
+          "bagcilar-kombi-servisi.html",
+          "bahcelievler-kombi-servisi.html",
+          "bakirkoy-kombi-servisi.html",
+          "basaksehir-kombi-servisi.html",
+          "bayrampasa-kombi-servisi.html",
+          "besiktas-kombi-servisi.html",
+          "beylikduzu-kombi-servisi.html",
+          "beyoglu-kombi-servisi.html",
+          "buyukcekmece-kombi-servisi.html",
+          "catalca-kombi-servisi.html",
+          "esenler-kombi-servisi.html",
+          "esenyurt-kombi-servisi.html",
+          "eyupsultan-kombi-servisi.html",
+          "fatih-kombi-servisi.html",
+          "gaziosmanpasa-kombi-servisi.html",
+          "gungoren-kombi-servisi.html",
+          "kagithane-kombi-servisi.html",
+          "kucukcekmece-kombi-servisi.html",
+          "sariyer-kombi-servisi.html",
+          "silivri-kombi-servisi.html",
+          "sisli-kombi-servisi.html",
+          "sultangazi-kombi-servisi.html",
+          "zeytinburnu-kombi-servisi.html"
+        ],
+        "page_count": 25,
+        "masked_text": "<entity> kombi servisi olarak; <entity>, <entity>, <entity>, <entity>, <entity>, <entity> başta olmak üzere <entity> genelindeki tüm mahalle ve semtlerde mesleki belgeleri sunulan mobil teknik ekibimizle hizmet veriyoruz. kombi arıza tespiti, yıllık periyodik kombi bakımı, elektronik anakart tamiri, sirkülasyon pompası, üç yollu vana, genleşme tankı basınç ayarı ve makineli petek temizliği işlemlerinde 1 yıl parça ve işçilik garantisi sunuyoruz. işlem öncesinde arıza kapsamı ve net ücret onayınıza sunulur."
+      },
+      {
+        "pages": [
+          "arnavutkoy-kombi-servisi.html",
+          "avcilar-kombi-servisi.html",
+          "bagcilar-kombi-servisi.html",
+          "bahcelievler-kombi-servisi.html",
+          "bakirkoy-kombi-servisi.html",
+          "basaksehir-kombi-servisi.html",
+          "bayrampasa-kombi-servisi.html",
+          "besiktas-kombi-servisi.html",
+          "beylikduzu-kombi-servisi.html",
+          "beyoglu-kombi-servisi.html",
+          "buyukcekmece-kombi-servisi.html",
+          "catalca-kombi-servisi.html",
+          "esenler-kombi-servisi.html",
+          "esenyurt-kombi-servisi.html",
+          "eyupsultan-kombi-servisi.html",
+          "fatih-kombi-servisi.html",
+          "gaziosmanpasa-kombi-servisi.html",
+          "gungoren-kombi-servisi.html",
+          "kagithane-kombi-servisi.html",
+          "kucukcekmece-kombi-servisi.html",
+          "sariyer-kombi-servisi.html",
+          "silivri-kombi-servisi.html",
+          "sisli-kombi-servisi.html",
+          "sultangazi-kombi-servisi.html",
+          "zeytinburnu-kombi-servisi.html"
+        ],
+        "page_count": 25,
+        "masked_text": "diğer markalar: <entity> genelinde ayrıca <entity> (domiproject, divatech), <entity> (digifel, maestro smart/optimum), <entity> (seradens super, super fit), <entity> (lynx condens, gepard), <entity> (ewa, minerwa), <entity> (victrix tera, alpha), <entity> (ndj premix), <entity>, <entity>, <entity>, <entity> ve <entity> kombiler için de arıza tespiti ve bakım desteği sağlıyoruz."
+      },
+      {
+        "pages": [
+          "arnavutkoy-klima-servisi.html",
+          "avcilar-klima-servisi.html",
+          "bagcilar-klima-servisi.html",
+          "bahcelievler-klima-servisi.html",
+          "bakirkoy-klima-servisi.html",
+          "basaksehir-klima-servisi.html",
+          "bayrampasa-klima-servisi.html",
+          "besiktas-klima-servisi.html",
+          "beylikduzu-klima-servisi.html",
+          "beyoglu-klima-servisi.html",
+          "buyukcekmece-klima-servisi.html",
+          "catalca-klima-servisi.html",
+          "esenler-klima-servisi.html",
+          "esenyurt-klima-servisi.html",
+          "eyupsultan-klima-servisi.html",
+          "fatih-klima-servisi.html",
+          "gaziosmanpasa-klima-servisi.html",
+          "gungoren-klima-servisi.html",
+          "kagithane-klima-servisi.html",
+          "kucukcekmece-klima-servisi.html",
+          "sariyer-klima-servisi.html",
+          "silivri-klima-servisi.html",
+          "sisli-klima-servisi.html",
+          "sultangazi-klima-servisi.html",
+          "zeytinburnu-klima-servisi.html"
+        ],
+        "page_count": 25,
+        "masked_text": "<entity> klima servisi olarak; <entity>, <entity>, <entity>, <entity>, <entity>, <entity> ve tüm <entity> mahallelerinde duvar tipi split, inverter ve salon/kaset tipi klimalar için periyodik antibakteriyel klima bakımı, r32 ve r410a gaz kontrolü/dolumu, vakumlu montaj, söküm-yer değişimi, su akıtma (drenaj) onarımı ve elektronik kart tamiri hizmeti veriyoruz. işlem öncesinde arıza tespiti ve ücret onayınıza sunulur."
+      },
+      {
+        "pages": [
+          "bakirkoy-klima-servisi.html",
+          "bakirkoy-kombi-servisi.html",
+          "beyoglu-klima-servisi.html",
+          "beyoglu-kombi-servisi.html",
+          "kucukcekmece-klima-servisi.html",
+          "kucukcekmece-kombi-servisi.html"
+        ],
+        "page_count": 6,
+        "masked_text": "<entity> belediyesi — mahalleler . mahalle ve adres ayrımları için başvurulan kaynaktır; belediye ile servis firması arasında bağlılık anlamına gelmez."
+      },
+      {
+        "pages": [
+          "avcilar-klima-servisi.html",
+          "avcilar-kombi-servisi.html",
+          "bahcelievler-klima-servisi.html",
+          "bahcelievler-kombi-servisi.html"
+        ],
+        "page_count": 4,
+        "masked_text": "<entity> belediyesi — mahalleler ve muhtarlar . mahalle ve adres ayrımları için başvurulan kaynaktır; belediye ile servis firması arasında bağlılık anlamına gelmez."
+      },
+      {
+        "pages": [
+          "bayrampasa-klima-servisi.html",
+          "bayrampasa-kombi-servisi.html",
+          "zeytinburnu-klima-servisi.html",
+          "zeytinburnu-kombi-servisi.html"
+        ],
+        "page_count": 4,
+        "masked_text": "ibb muhtarlık işleri dairesi — <entity> mahalle muhtarları . mahalle ve adres ayrımları için başvurulan kaynaktır; belediye ile servis firması arasında bağlılık anlamına gelmez."
+      },
+      {
+        "pages": [
+          "fatih-klima-servisi.html",
+          "fatih-kombi-servisi.html",
+          "sariyer-klima-servisi.html",
+          "sariyer-kombi-servisi.html"
+        ],
+        "page_count": 4,
+        "masked_text": "ibb muhtarlık işleri — <entity> mahalle kayıtları . mahalle ve adres ayrımları için başvurulan kaynaktır; belediye ile servis firması arasında bağlılık anlamına gelmez."
+      },
+      {
+        "pages": [
+          "arnavutkoy-klima-servisi.html",
+          "arnavutkoy-kombi-servisi.html"
+        ],
+        "page_count": 2,
+        "masked_text": "<entity> belediyesi — <entity> ve diğer mahalleler . mahalle ve adres ayrımları için başvurulan kaynaktır; belediye ile servis firması arasında bağlılık anlamına gelmez."
+      }
+    ],
+    "closest_cross_cohort_pairs": [
+      {
+        "a": "bayrampasa-kombi-servisi.html",
+        "b": "basaksehir-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3234
+      },
+      {
+        "a": "basaksehir-kombi-servisi.html",
+        "b": "buyukcekmece-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3234
+      },
+      {
+        "a": "bakirkoy-kombi-servisi.html",
+        "b": "basaksehir-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3227
+      },
+      {
+        "a": "bayrampasa-kombi-servisi.html",
+        "b": "beylikduzu-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3222
+      },
+      {
+        "a": "buyukcekmece-kombi-servisi.html",
+        "b": "esenyurt-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3222
+      },
+      {
+        "a": "bahcelievler-kombi-servisi.html",
+        "b": "bayrampasa-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3215
+      },
+      {
+        "a": "beylikduzu-kombi-servisi.html",
+        "b": "buyukcekmece-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3214
+      },
+      {
+        "a": "basaksehir-kombi-servisi.html",
+        "b": "sariyer-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3209
+      },
+      {
+        "a": "bahcelievler-kombi-servisi.html",
+        "b": "bakirkoy-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3208
+      },
+      {
+        "a": "bahcelievler-kombi-servisi.html",
+        "b": "buyukcekmece-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3208
+      },
+      {
+        "a": "bayrampasa-kombi-servisi.html",
+        "b": "esenyurt-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3208
+      },
+      {
+        "a": "basaksehir-kombi-servisi.html",
+        "b": "zeytinburnu-kombi-servisi.html",
+        "masked_body_5gram_jaccard": 0.3208
+      }
+    ]
+  },
+  "all_noindex": [
+    {
+      "path": "404.html",
+      "robots": [
+        "noindex"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "baxi-kombi-combi-2-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "gree-klima-vireo-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "owner-admin.html",
+      "robots": [
+        "noindex,nofollow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "servis-sec.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "servis-takip.html",
+      "robots": [
+        "noindex,nofollow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "termodinamik-kombi-ek-dokunmatik-td20230200-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "york-klima-r-series-dhr18-48-us-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    }
+  ],
+  "limitations": [
+    "No live Search Console access, URL Inspection reason, Google-selected canonical, server access logs or authoritative last-crawl state.",
+    "User dates are historical observations and do not establish current index state.",
+    "Similarity is measurable on this archive but cannot establish the exact cause of a Google indexing decision.",
+    "Word count, unique h2 names, FAQ schema or llms.txt cannot guarantee indexing/ranking."
+  ],
+  "cohort_by_category": {
+    "district": {
+      "indexed": {
+        "count": 15,
+        "median_inbound_pages": 16,
+        "median_body_words": 1363,
+        "paths": [
+          "beylikduzu-kombi-servisi.html",
+          "kucukcekmece-kombi-servisi.html",
+          "kucukcekmece-klima-servisi.html",
+          "esenyurt-kombi-servisi.html",
+          "basaksehir-kombi-servisi.html",
+          "bagcilar-kombi-servisi.html",
+          "bahcelievler-kombi-servisi.html",
+          "besiktas-kombi-servisi.html",
+          "sultangazi-klima-servisi.html",
+          "beyoglu-klima-servisi.html",
+          "arnavutkoy-kombi-servisi.html",
+          "sariyer-klima-servisi.html",
+          "bagcilar-klima-servisi.html",
+          "kagithane-klima-servisi.html",
+          "avcilar-kombi-servisi.html"
+        ]
+      },
+      "not_indexed": {
+        "count": 35,
+        "median_inbound_pages": 8,
+        "median_body_words": 1235,
+        "paths": [
+          "arnavutkoy-klima-servisi.html",
+          "avcilar-klima-servisi.html",
+          "bahcelievler-klima-servisi.html",
+          "bakirkoy-klima-servisi.html",
+          "bakirkoy-kombi-servisi.html",
+          "basaksehir-klima-servisi.html",
+          "bayrampasa-klima-servisi.html",
+          "bayrampasa-kombi-servisi.html",
+          "besiktas-klima-servisi.html",
+          "beylikduzu-klima-servisi.html",
+          "beyoglu-kombi-servisi.html",
+          "buyukcekmece-klima-servisi.html",
+          "buyukcekmece-kombi-servisi.html",
+          "catalca-klima-servisi.html",
+          "catalca-kombi-servisi.html",
+          "esenler-klima-servisi.html",
+          "esenler-kombi-servisi.html",
+          "esenyurt-klima-servisi.html",
+          "eyupsultan-klima-servisi.html",
+          "eyupsultan-kombi-servisi.html",
+          "fatih-kombi-servisi.html",
+          "gaziosmanpasa-klima-servisi.html",
+          "gaziosmanpasa-kombi-servisi.html",
+          "gungoren-klima-servisi.html",
+          "gungoren-kombi-servisi.html",
+          "kagithane-kombi-servisi.html",
+          "sariyer-kombi-servisi.html",
+          "silivri-klima-servisi.html",
+          "silivri-kombi-servisi.html",
+          "sisli-klima-servisi.html",
+          "sisli-kombi-servisi.html",
+          "sultangazi-kombi-servisi.html",
+          "zeytinburnu-klima-servisi.html",
+          "zeytinburnu-kombi-servisi.html",
+          "fatih-klima-servisi.html"
+        ]
+      }
+    },
+    "locality": {
+      "indexed": {
+        "count": 2,
+        "median_inbound_pages": 12.0,
+        "median_body_words": 716.5,
+        "paths": [
+          "500-evler-servisi.html",
+          "sefakoy-servisi.html"
+        ]
+      },
+      "not_indexed": {
+        "count": 3,
+        "median_inbound_pages": 7,
+        "median_body_words": 724,
+        "paths": [
+          "bahcesehir-servisi.html",
+          "kilyos-servisi.html",
+          "merter-servisi.html"
+        ]
+      }
+    },
+    "brand": {
+      "indexed": {
+        "count": 6,
+        "median_inbound_pages": 36.0,
+        "median_body_words": 468.0,
+        "paths": [
+          "arcelik-klima-servisi.html",
+          "beko-klima-servisi.html",
+          "daikin-klima-servisi.html",
+          "eca-kombi-servisi.html",
+          "mitsubishi-electric-klima-servisi.html",
+          "demirdokum-kombi-servisi.html"
+        ]
+      },
+      "not_indexed": {
+        "count": 10,
+        "median_inbound_pages": 36.0,
+        "median_body_words": 475.0,
+        "paths": [
+          "ariston-kombi-servisi.html",
+          "baymak-klima-servisi.html",
+          "baymak-kombi-servisi.html",
+          "bosch-kombi-servisi.html",
+          "buderus-kombi-servisi.html",
+          "lg-klima-servisi.html",
+          "mitsubishi-heavy-industries-klima-servisi.html",
+          "samsung-klima-servisi.html",
+          "vaillant-kombi-servisi.html",
+          "viessmann-kombi-servisi.html"
+        ]
+      }
+    },
+    "service_or_symptom": {
+      "indexed": {
+        "count": 11,
+        "median_inbound_pages": 42,
+        "median_body_words": 221,
+        "paths": [
+          "kombi-tamiri.html",
+          "klima-montaji.html",
+          "kombi-petek-isitmiyor.html",
+          "klima-gaz-kontrolu.html",
+          "klima-su-akitiyor.html",
+          "klima-buzlaniyor.html",
+          "klima-tamiri.html",
+          "klima-sogutmuyor.html",
+          "klima-bakimi.html",
+          "klima-sesli-calisiyor.html",
+          "kombi-sicaklik-ayari.html"
+        ]
+      },
+      "not_indexed": {
+        "count": 14,
+        "median_inbound_pages": 40.5,
+        "median_body_words": 227.0,
+        "paths": [
+          "klima-calismiyor.html",
+          "klima-hata-kodu.html",
+          "klima-isitmiyor.html",
+          "klima-koku-yapiyor.html",
+          "klima-sokumu.html",
+          "kombi-atesleme.html",
+          "kombi-bakimi.html",
+          "kombi-basinci.html",
+          "kombi-calismiyor.html",
+          "kombi-sesli-calisiyor.html",
+          "kombi-sicak-su.html",
+          "kombi-su-akitiyor.html",
+          "petek-temizligi.html",
+          "kombi-hata-kodu.html"
+        ]
+      }
+    },
+    "model": {
+      "indexed": {
+        "count": 0,
+        "median_inbound_pages": null,
+        "median_body_words": null,
+        "paths": []
+      },
+      "not_indexed": {
+        "count": 2,
+        "median_inbound_pages": 2.0,
+        "median_body_words": 657.0,
+        "paths": [
+          "arcelik-kombi-dgk-hp-lcd-ariza-kodlari.html",
+          "regal-klima-r32-inverter-20234676-ariza-kodlari.html"
+        ]
+      }
+    },
+    "hub_or_business": {
+      "indexed": {
+        "count": 10,
+        "median_inbound_pages": 202.0,
+        "median_body_words": 283.0,
+        "paths": [
+          "ariza-rehberi.html",
+          "bolgeler.html",
+          "klima-servisi.html",
+          "hakkimizda.html",
+          "kombi-servisi.html",
+          "index.html",
+          "hizmetler.html",
+          "aydinlatma.html",
+          "iletisim.html",
+          "markalar.html"
+        ]
+      },
+      "not_indexed": {
+        "count": 0,
+        "median_inbound_pages": null,
+        "median_body_words": null,
+        "paths": []
+      }
+    }
+  },
+  "noindex_models": [
+    {
+      "path": "baxi-kombi-combi-2-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "gree-klima-vireo-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "termodinamik-kombi-ek-dokunmatik-td20230200-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "york-klima-r-series-dhr18-48-us-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    }
+  ],
+  "foreign_model_noindex": [
+    {
+      "path": "baxi-kombi-combi-2-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "baxi-kombi-duotec-platinum-ecoblue-uk-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "de-dietrich-kombi-pmc-s-mi-fr-2019-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-c24-c32-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "ferroli-kombi-divatech-d-f24-f32-f37-ru-by-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "gree-klima-vireo-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "midea-klima-xtreme-save-connect-agvi-r32-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "mitsubishi-electric-klima-msz-fx-nl-ca1-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "saunier-duval-kombi-themaplus-condens-h-fr-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "viessmann-klima-vitoclima300s-he-pl-2020-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    },
+    {
+      "path": "york-klima-r-series-dhr18-48-us-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    }
+  ],
+  "other_scope_model_noindex": [
+    {
+      "path": "termodinamik-kombi-ek-dokunmatik-td20230200-ariza-kodlari.html",
+      "robots": [
+        "noindex,follow"
+      ],
+      "sitemap": false
+    }
+  ]
+}

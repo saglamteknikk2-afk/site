@@ -1,0 +1,15 @@
+{
+  "scope": "Actual local Chromium, mobile; no external/provider submission",
+  "brand_preselection_pages": 16,
+  "model_optional": true,
+  "symptom_preselection_pages": 13,
+  "model_code_location_survive_service_handoff": true,
+  "report_rows": 123,
+  "report_filters": [
+    64,
+    44,
+    15
+  ],
+  "mobile_no_overflow": true,
+  "errors": []
+}

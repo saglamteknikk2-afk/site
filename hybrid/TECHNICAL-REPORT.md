@@ -3,6 +3,28 @@
 **Kontrol tarihi:** 29 Ekim 2026  
 **Kapsam:** Kaynak kod, üretim paketi ve güvenli GitHub önizlemesi. Canlı `saglamkombiklima.com.tr` sunucusuna bu çalışmayla yükleme yapılmaz.
 
+## Paylaştığın dizin listesindeki somut farklar ve yeni değişiklikler
+
+29 Ekim'de yeniden yüklediğin ZIP önceki a1.zip ile bayt düzeyinde aynı. Karşılaştırma **44 dizine eklenmiş içerik, 64 eklenmemiş içerik ve 15 parametreli iletişim adresi** üzerinden yapıldı. Durum etiketleri senin listenden alındı; canlı Google URL Denetimi sonucu gibi sunulmaz.
+
+Kaynak ZIP'te 108 içerik adresinin tamamı mevcut, kendi temiz canonical adresini taşıyor ve sitemap'te. Bunlarda noindex engeli yok. “Yok” ifadesi tek başına Google'ın hangi nedenle dışladığını belirtmiyor. Daha uzun metin veya yalnız bağlantı sayısı bu liste için kesin neden göstermez.
+
+| Aynı türde karşılaştırma | Eklenen / eklenmeyen | Gelen farklı HTML sayfası medyanı |
+| --- | --- | --- |
+| İlçe servisi | 15 / 35 | 16 / 8 |
+| Marka servisi | 6 / 10 | 36 / 36 |
+| Hizmet / belirti | 11 / 14 | 42 / 40,5 |
+
+İlçe girişlerindeki isim değişimli kalıplar iki grupta da var. Dizine giren şablonu kopyalamak çözüm olarak seçilmedi. Önceki 55 bölge gövdesi korunarak **16 marka ve 13 arıza/hizmet sayfasının da eski ana anlatımı bütünüyle değiştirildi**. Toplam 84 ayrı ana gövde; 358 bölüm paragrafı ve 168 özel soru-cevap HTML'ye işlendi ve birlikte tekrar kontrolünden geçirildi. Marka gövdesi ürün/belge kapsamını, arıza rehberi ise tek bir belirtinin güvenli değerlendirmesini anlatır.
+
+Bosch/ECA sıcak su bölümlerindeki anlamsal yakınlık ayrı okuyucu tarafından fark edilince Bosch anlatımı önceki kaçak işleminin belge ve onarım onayına çekildi. Viessmann'ın kontrol ünitesi/işlem geçmişi, DemirDöküm'ün ısı dağılımı anlatımından ayrıldı. Klima metinlerinde normal yoğuşma/kaçak ve geçici buz çözme/belirti ayrımları açıklaştırıldı.
+
+15 `iletisim.html?...` adresi ayrı mahalle sayfası değildir. Aynı formun seçimlerini taşır ve dizine eklenmiş temiz `iletisim.html` adresine canonical verir. Bu tercih korundu; sitemap'e kopya formlar eklenmedi. Gerçek mahalle gezinmesi ilçe sayfasındaki ilgili başlığa açılır. Klima montaj/söküm adresleri önceki hizmet kapsamı kararın nedeniyle noindex bilgi sayfası olarak kalır.
+
+`dizin-inceleme.html` listesindeki her adres için eski/yeni canonical, robots, iç bağlantı sayımı ve yapılan değişikliği inceleyebilirsiniz. `icerik-inceleme.html` 84 değişen anlatımı eski/yeni yan yana gösterir. İki inceleme sayfası noindex'tir.
+
+**İşlev hatası da düzeltildi:** Matrisin model, kod ve arıza seçimi servis sayfasına geçerken kaybolabiliyordu. Artık model/kod, ilçe/mahalle, marka ve belirti/işlem servis ekranında, WhatsApp metninde ve servis talebi yükünde korunur. Model isteğe bağlıdır. `/kombi-hata-kodu.h` için üretim Apache ayarına yalnız bu eski yolu kapsayan 301 yönlendirmesi eklendi; hedef mevcut `.html` sayfasıdır.
+
 ## 1. Uygulanan mimari
 
 Çalışma, son yüklenen `a1.zip` içindeki dosyalara uygulanır. Kaynağın SHA-256 özeti:
@@ -29,7 +51,7 @@ Her gövde farklı bir okuyucu tarafından da incelendi. Birbirine fazla yakın 
 
 Editöryal denetim, yer ve marka isimlerini kaldırarak uzun paragraf/cümle tekrarlarını ve yakın kopyaları arar. Yazılmış paragrafların gerçekten yayımlanacak HTML gövdesine işlendiğini, eski ortak blokların kaldırıldığını da kontrol eder. **Bu kontroller Google'ın bir özgünlük puanı değildir.** Ortak menü, iletişim, doğru teknik bilgiler ve model tabloları bu editöryal karşılaştırmanın dışında tutulur; bunları farklı göstermek için gerçekler değiştirilmez.
 
-`icerik-inceleme.html` sayfasında 55 rotanın tamamı için kaldırılan eski özet ve yeni ana anlatım yan yana okunabilir. İnceleme arama dizinine kapalıdır. Böylece yalnızca test sayısı yerine yapılan metin değişikliğinin kendisi incelenebilir.
+`icerik-inceleme.html` sayfasında 55 bölge ve bu sürümde yenilenen 29 marka/arıza rotasının eski anlatımı ve yeni gövdesi yan yana okunabilir. İnceleme arama dizinine kapalıdır. Böylece yalnızca test sayısı yerine yapılan metin değişikliğinin kendisi incelenebilir.
 
 599 mahalle kaydı, kombi ve klima karşılıklarıyla 1.198 ilçe içi başlığa bağlanır. Bölgeler ekranındaki mahalle bağlantıları ortak forma değil ilgili içeriğe ulaşır. Aynı sayfada mahalleye tıklanınca filtredeki mahalle seçimi de güncellenir. Bunlar 1.198 bağımsız mahalle URL'si değildir. Kayıtlar eski sitenin hizmet envanteridir; güncel resmî belediye toplamı iddiası yoktur. Sokak veya bina verisi uydurulmadı.
 
@@ -39,7 +61,7 @@ Komşuluk verisi OpenStreetMap ilçe geometrilerindeki ortak kara sınırlarınd
 
 `hybrid/hubs.py`, bölge → marka/model → belirti rehberi → bölge/hizmet akışlarını HTML bağlantılarıyla kurar. Mevcut kontrol çıktısında 175 sayfada 1.452 bağlamsal bağlantı üretilmiştir. Dizine uygun 187 içerik sayfasının tamamına site içinden ulaşılır; bu envanterde yetim sayfa yoktur. Yönetim, doğrulama, 404 ve kişiye özel takip adresleri içerik sayfası sayılmaz.
 
-İlçe sayfalarında 55 seçim bileşeni bulunur. Cihaz, marka, model, mahalle ve belirti aynı bağlamda ilerler. Model veya özel açıklama zorunlu değildir. Cihaz değiştirilince önceki cihazdan kalan model/kod temizlenir. Bilinmeyen model yazılabilir; kodun anlamı doğrulanamadığında farklı modelden açıklama taşınmaz.
+Bölge sayfalarında 55, yenilenen marka ve arıza sayfalarında 29 seçim bileşeni bulunur. Marka sayfası kendi markasıyla, belirti sayfası ilgili sorunla başlar; ilçe sayfası kendi konumuyla açılır. Diğer seçimler açıktır ve marka hiçbir ilçeyle sınırlandırılmaz. Cihaz, marka, model, mahalle ve belirti aynı bağlamda ilerler. Model veya özel açıklama zorunlu değildir. Cihaz değiştirilince önceki cihazdan kalan model/kod temizlenir. Bilinmeyen model yazılabilir; kodun anlamı doğrulanamadığında farklı modelden açıklama taşınmaz.
 
 JavaScript ve PHP arama tarafındaki bağıl yol uyuşmazlığı giderildi. İlçe/model bulunduğu hâlde genel sayfaya düşme sorunu düzeltildi. Yayımlanmayan bir dosyaya yönlendirme yapılmasını önleyen gerçek dosya denetimi eklendi. Kelime sırası esnekliği belirti/hizmet ifadelerinde kullanılır; model isimleri benzerlik üzerinden gelişigüzel eşitlenmez.
 
@@ -68,7 +90,7 @@ Kaynakta bulunan **86 model arıza tablosu ve 1.443 kod başlığı** korunmuşt
 
 İşletme kimliği tek `https://saglamkombiklima.com.tr/#business` adresinde tutarlıdır. Kullanıcının verdiği **İnönü Mahallesi, Küçükçekmece, İstanbul, TR** adresi `LocalBusiness/HVACBusiness` verisine işlendi. Sokak/bina numarası veya koordinat eklenmedi; adres kapsamı verilenden daha ayrıntılı gösterilmedi. Fiyat aralığı ve değerlendirme puanı uydurulmadı.
 
-Kontrol edilen üretim çıktısında 201 sayfada işletme verisi, uygun 179 sayfada `Service`, 179 sayfada görünür içerikten türetilen 296 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
+Kontrol edilen üretim çıktısında 201 sayfada işletme verisi, uygun 179 sayfada `Service`, 179 sayfada görünür içerikten türetilen 287 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
 
 Sitemap, `llms.txt` ve `assets/hybrid-inventory.json` aynı gerçek canonical envanterinden üretilir. **Bu sürümde sayı 187’dir; 192’ye tamamlamak için hayali sayfa eklenmemiştir.** Önceden noindex olan yabancı pazar rehberlerinin korunan kapsamı sitemap dışında kalır. Ayrıntılı `llms-full.txt` saklanır. Üretim robots kuralları içerik erişimine izin verir; özel dosya ve API engellerini korur.
 
@@ -102,9 +124,9 @@ Bu yerel deneyde aktarılan veri %67,71 azalmış, performans puanı 87’den 93
 ## 7. Kontrol kanıtları ve teslim sınırı
 
 - Statik üretim kabulü: 187 içerik/sitemap adresi, iç dosya/işaret referansları; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
-- 51 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
-- Yerel Chromium’da 204 ziyaretçi sayfası 360 ve 768 pikselde açıldı. Bu taramada JavaScript hatası, kaynak HTTP hatası, bozuk görsel veya yatay taşma görülmedi. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
-- Yeni metinlerin tamamı, 55 gövde ekran görüntüsü, eski/yeni inceleme ekranı, matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
+- 65 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
+- Yerel Chromium’da 204 uygulama sayfası ve 3 rapor, 360 ve 768 pikselde açıldı (414 görünüm). Bulunan marka dizini kimlik tekrarları düzeltildikten sonra aynı tarama tekrarlandı; JavaScript hatası, kaynak HTTP hatası, bozuk görsel, yatay taşma veya tekrarlanan HTML kimliği kalmadı. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
+- Yeni metinlerin tamamı, önceki 55 bölge ve yeni 29 marka/arıza gövdesinin ekran görüntüleri, 84 gövdeli eski/yeni inceleme ve 123 satırlı dizin karşılaştırma ekranı, matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
 
 **Bu kontroller canlı Telegram teslimi, Gemini cevabı, sunucudaki form kaydı veya Search Console sonucu değildir.** GitHub önizlemesi bilerek noindex durumundadır; form, konum ve sağlayıcı gönderimleri kapalıdır. Üretim ZIP’i canlı sunucu için ayrı derlenir ve bu önizleme kısıtlarını taşımaz. Canlı sunucuya otomatik geçiş yapılmaz.
 

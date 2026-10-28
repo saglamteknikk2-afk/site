@@ -41,6 +41,11 @@ class AcceptanceTests(unittest.TestCase):
         files=fixture();files['index.html']=files['index.html'].replace(b'kombi-basinci.html',b'kombi-basinci.html#kod-unknown')
         self.assertTrue(any(x['kind']=='missing_anchor' for x in audit.audit(files,strict=False)['errors']))
 
+    def test_duplicate_section_ids_fail_even_when_the_link_has_a_target(self):
+        files=fixture();files['kombi-basinci.html']=files['kombi-basinci.html'].replace(b'</main>',b'<section id="models">A</section><section id="models">B</section></main>')
+        errors=audit.audit(files,strict=False)['errors']
+        self.assertTrue(any(x['kind']=='duplicate_html_id' and x['id']=='models' for x in errors))
+
     def test_orphan_is_detected(self):
         files=fixture();files['index.html']=files['index.html'].replace(b'href="kombi-basinci.html"',b'href="./"')
         self.assertIn('kombi-basinci.html',audit.audit(files,strict=False)['orphans'])

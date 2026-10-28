@@ -40,14 +40,14 @@ const {chromium}=require('playwright');
   assert((await staticPage.locator('.editorial-body').innerText()).includes('187'));
   await noScript.close();
   await page.goto(new URL('icerik-inceleme.html',base).href,{waitUntil:'networkidle'});
-  assert.equal(await page.locator('[data-review-row]').count(),55);
+  assert.equal(await page.locator('[data-review-row]').count(),84);
   await page.locator('#reviewSearch').fill('Küçükçekmece');
   assert.equal(await page.locator('[data-review-row]:visible').count(),2);
   await page.locator('#reviewOpen').click();
   assert.equal(await page.locator('[data-review-row][open]').count(),2);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'comparison page overflow');
   assert.equal(errors.length,0,errors.join('; '));
-  const evidence={scope:'Actual local Chromium editorial DOM, navigation and no-JavaScript fallback; no provider submission',five_representative_bodies_distinct:true,shared_summaries_absent:true,sidebar_targets:true,same_page_neighborhood_selection:true,static_content_without_javascript:true,comparison_rows:55,comparison_search_and_open:true,mobile_no_overflow:true,errors};
+  const evidence={scope:'Actual local Chromium editorial DOM, navigation and no-JavaScript fallback; no provider submission',five_representative_bodies_distinct:true,shared_summaries_absent:true,sidebar_targets:true,same_page_neighborhood_selection:true,static_content_without_javascript:true,comparison_rows:84,comparison_search_and_open:true,mobile_no_overflow:true,errors};
   if(report)fs.writeFileSync(report,JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence,null,2));
  }finally{await context.close();await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

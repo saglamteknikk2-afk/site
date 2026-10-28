@@ -1,0 +1,576 @@
+{
+  "pages": [
+    {
+      "route": "arcelik-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Arçelik",
+      "lead": "Arçelik klimanız üflüyor fakat oda serinlemiyorsa, hava akışıyla soğutma sonucunu ayrı değerlendirelim. Cihaz türünü, kullandığınız modu ve fark ettiğiniz değişikliği seçerek bakım ya da arıza görüşmesini hazırlayabilirsiniz.",
+      "description": "Arçelik klima için hava akışı, soğutma ve bakım şikâyetlerini ayırın; portatif ve split model kapsamını kontrol edip bölgenizden servis talebi hazırlayın.",
+      "headline": "Üfleme var, konfor yok: Arçelik klima talebini netleştirelim",
+      "sections": [
+        {
+          "id": "hava-akisi",
+          "heading": "Havanın ulaşmadığı yeri anlatın",
+          "paragraphs": [
+            "Üniteden hava geldiğini görmek, odanın istenen sıcaklığa ulaştığını göstermez. Şikâyet tüm odada mı, yalnız belirli bir bölümde mi hissediliyor? Hava akışı eskisine göre zayıfladıysa bunu sıcaklık şikâyetinden ayrı not edin. Kumandadaki seçili mod ve sıcaklık, görüşmede yeniden ayar tahmini yapmak yerine mevcut durumu anlamamıza yardımcı olur.",
+            "Yakın zamanda mobilya yerleşimi veya kullanım alanı değiştiyse bunu da ekleyin. Bu bilgi cihaz kapasitesinin yetersiz olduğunu kanıtlamaz; hava dağılımı ve çalışma koşullarının değerlendirilmesine katkı sağlar. Üniteye ulaşmak için sandalye üzerine çıkmanız gerekmez."
+          ],
+          "links": [
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Soğutma performansı şikâyetini ayırın"
+            }
+          ]
+        },
+        {
+          "id": "arcelik-cihaz-turu",
+          "heading": "09215 P ve 12215 P kaydı portatif cihaz içindir",
+          "paragraphs": [
+            "Arçelik için mevcut kaynaklı kod rehberi, 09215 P ve 12215 P mobil-portatif modellerini kapsar. Bu tabloyu duvar tipi split klimanın tamamına uygulamayın. Taşınabilir cihaz mı, iç ve dış ünitesi ayrı bir sistem mi kullandığınızı belirtmeniz, yanlış ürün belgesine gitmeyi önler.",
+            "Modeli bilmiyorsanız bu aşamayı geçebilirsiniz. Dışarıdan güvenle okunan ürün etiketini sonradan paylaşmak mümkündür; kumandanın üzerindeki numara cihazın tam modelinin yerine geçmez."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Arçelik modelinin belge kapsamını bulun"
+            }
+          ]
+        },
+        {
+          "id": "bakim-mi-onarim-mi",
+          "heading": "Bakım kaydına mevcut arızayı da ekleyin",
+          "paragraphs": [
+            "Düzenli temizlik istiyor ancak aynı zamanda koku, su veya çalışma kesintisi görüyorsanız bunları bakım talebinin içine saklamayın. Son bakım tarihiyle birlikte hangi şikâyetin o işlemden önce, hangisinin sonra başladığını belirtin. Temizlik ve arıza onarımı farklı kapsamlar taşıyabilir.",
+            "İlçe ve mahallenizi seçtiğinizde talep, Arçelik cihaz bilgisiyle birlikte hazırlanır. Kontrolün kapsamı ve önerilen işlem açıklanır; parça değişimi gerektiğinde ayrıca onayınız alınır."
+          ],
+          "links": [
+            {
+              "path": "klima-bakimi.html",
+              "label": "Klima bakımında görüşülecek işlemler"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Arçelik talebiniz için bölgenizi seçin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Arçelik klimam yalnız fan üflüyorsa gaz dolumu mu istemeliyim?",
+          "answer": "Yalnız üfleme gözleminden gaz eksikliği belirlenemez. Seçili modu, serinlemenin ne zaman kaybolduğunu ve hava akışındaki değişimi aktarın. Soğutucuya ilişkin işlem, uygun teknik kontrol sonrası değerlendirilir."
+        },
+        {
+          "question": "Duvar tipi Arçelik cihazım portatif model listesinde yoksa talep açabilir miyim?",
+          "answer": "Açabilirsiniz. Portatif tabloya benzer bir model seçmek yerine modeli bilinmiyor bırakın veya etiket adını yazın. Servis hazırlığı sürer; eşleşmeyen belgeden hata kodu anlamı üretilmez."
+        }
+      ],
+      "cta": {
+        "heading": "Arçelik klimanızda ne değişti?",
+        "text": "Soğutma, üfleme veya bakım ihtiyacınızı seçin; ilçe ve mahallenizle birlikte ustamıza aktaralım."
+      }
+    },
+    {
+      "route": "baymak-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Baymak",
+      "lead": "Baymak klimanın buzlanması, su damlatması ve soğutmaması aynı talepte birbirine karışabilir. İlk gördüğünüz belirtiyi seçin; Elegant Air model bilgisi ve çalışma koşullarıyla görüşmeyi doğru cihaz üzerinden sürdürelim.",
+      "description": "Baymak klima buzlanma, su ve performans talepleri; Elegant Air model kapsamı, gözlem sırası ve İstanbul Avrupa Yakası için servis hazırlığı.",
+      "headline": "Baymak klimada ilk belirtiyi ve ardından gelen değişikliği ayırın",
+      "sections": [
+        {
+          "id": "buz-su-sirasi",
+          "heading": "Önce buz mu gördünüz, sonra su mu geldi?",
+          "paragraphs": [
+            "Baymak klimada buzlanmayla birlikte damlama yaşandıysa olayların sırasını yazın. Cihaz soğuturken mi buz göründü, kapandıktan sonra mı su geldi, hava akışı ne zaman değişti? Bu ayrıntılar tek başına gaz eksikliği, sensör veya drenaj arızası ilan etmek için kullanılmaz; kontrol edilecek durumu ayırır.",
+            "Buzu kazımak, sıcak su dökmek ya da soğutucu bağlantılarına dokunmak çözüm denemesi değildir. Elektrikli bölüme su ulaşıyorsa kullanımı sürdürmeyin. Görünür bilgiyi güvenli mesafeden aktarın."
+          ],
+          "links": [
+            {
+              "path": "klima-buzlaniyor.html",
+              "label": "Buzlanma sırasında güvenli gözlemler"
+            },
+            {
+              "path": "klima-su-akitiyor.html",
+              "label": "Damlama noktasını ayırt edin"
+            }
+          ]
+        },
+        {
+          "id": "elegant-air-kapsami",
+          "heading": "Elegant Air adı kapasite rakamıyla birlikte okunur",
+          "paragraphs": [
+            "Sitedeki Baymak klima belgesi Elegant Air 09, 12, 18 ve 24 modellerini kapsar. Etikette yalnız bir kapasite rakamının benzemesi, başka Baymak serisini bu belgeye dahil etmez. Aile adını ve ürün numarasını birlikte kaydedin.",
+            "Aynı evde Baymak kombi de varsa talep cihazını özellikle klima olarak bırakın. Kombideki basınç bilgisi ve kod tablosu bu talebe aktarılmaz. Uyarının iç ünite ekranında mı yoksa kumandada mı görüldüğünü belirtin."
+          ],
+          "links": [
+            {
+              "path": "klima-hata-kodu.html",
+              "label": "Klima göstergesindeki kodla ilerleyin"
+            }
+          ]
+        },
+        {
+          "id": "degisen-kosullar",
+          "heading": "Her gün aynı anda oluşan kesintiyi kaydedin",
+          "paragraphs": [
+            "Şikâyet yalnız belirli saatlerde veya uzun çalışma sonunda ortaya çıkıyorsa bunu görüşmeye ekleyin. Tek bir duruşla arka arkaya yaşanan duruşlar farklı kayıt edilmelidir. Kumandadan yaptığınız son ayarı biliyorsanız paylaşın; sonucu görmek için cihazı sürekli açıp kapatmayın.",
+            "Bölge seçimi bütün Baymak klima taleplerine açıktır. Mahallenizi ve cihazın bulunduğu konut ya da işyeri bölümünü belirtmeniz, uygun randevu ve işlem kapsamının görüşülmesini kolaylaştırır."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Çalışma kesintisini tarif edin"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Baymak klima için servis bölgesi"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Baymak klimanın buzunu eritmek için tekrar tekrar çalıştırmalı mıyım?",
+          "answer": "Buzlanma sürerken cihazı çalıştırmaya devam etmeyin. Buzu kazımayın veya sıcak suyla eritmeye çalışmayın. Görünen yeri ve başladığı koşulu not edip teknik kontrol isteyin; yeniden çalıştırmada modelin güvenli kullanım açıklaması ve servis değerlendirmesi esas alınır."
+        },
+        {
+          "question": "Elegant Air dışında bir Baymak klima için ne seçmeliyim?",
+          "answer": "Yakın kapasitedeki Elegant Air modelini seçmeniz gerekmez. Model adını yazabilir veya bilinmiyor seçeneğiyle belirti üzerinden devam edebilirsiniz. Kod yorumu ilgili ürünün kendi belgesine bağlı kalır."
+        }
+      ],
+      "cta": {
+        "heading": "Baymak klima belirtisini sırasıyla aktarın",
+        "text": "Buz, su veya duruş gözleminizi paylaşın; modeli biliyorsanız ekleyin ve bölgenizde servis uygunluğunu görüşelim."
+      }
+    },
+    {
+      "route": "beko-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Beko",
+      "lead": "Beko klimanızdan geldiğini düşündüğünüz suyun yerini netleştirerek başlayalım. İç mekâna damlama, dışarıdaki tahliye ve portatif cihazdaki uyarılar ayrı değerlendirilir; kod veya model bilmeden de talep hazırlayabilirsiniz.",
+      "description": "Beko klima su damlatma ve tahliye şikâyetleri için gözlem rehberi; portatif model ayrımı, bakım geçmişi ve ilçe bazında servis talebi.",
+      "headline": "Beko klimada suyun görüldüğü yeri tarif edin",
+      "sections": [
+        {
+          "id": "damlama-noktasi",
+          "heading": "Odada biriken suyla dışarıdaki tahliyeyi karıştırmayın",
+          "paragraphs": [
+            "İç ünitenin altından odaya gelen suyla dışarıdaki tahliye ucundan su çıkması aynı şikâyet değildir. Islanan yüzeyi, suyun cihaz çalışırken mi durduktan sonra mı görüldüğünü ve damlamanın aralıklı mı sürekli mi olduğunu anlatın. Ön görüşmede yalnız bu gözlemden bir parçanın değişmesi gerektiği sonucu çıkarılmaz.",
+            "Su prize, kabloya veya elektronik bölüme yaklaşıyorsa o noktaya dokunmadan destek isteyin. Tıkanıklık aramak için hortumu sökmeyin ya da tahliye hattına basınç uygulamayın."
+          ],
+          "links": [
+            {
+              "path": "klima-su-akitiyor.html",
+              "label": "Klima suyunu bulunduğu yere göre ayırın"
+            }
+          ]
+        },
+        {
+          "id": "portatif-beko",
+          "heading": "20915 P ve 21215 P, split cihazın yerine seçilmez",
+          "paragraphs": [
+            "Mevcut Beko klima kod kaydı 20915 P ve 21215 P mobil-portatif ürünleri içindir. İç ve dış ünitesi ayrı olan bir klimayı bu iki modelden birine benzeterek seçmeyin. Portatif cihazdaki uyarıyla duvar tipi cihazın su şikâyeti aynı rehberden açıklanamaz.",
+            "Etiketteki ürün adını okuyamıyorsanız cihaz türünü söylemeniz başlangıç için yeterlidir. Liste dışındaki model yazılabilir; model bilinmeden servis görüşmesi yapmak da mümkündür. Arçelik ve Beko için benzer görünen ürün adları kodların ortak olduğu anlamına gelmez."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Beko ürün belgesinin sınırlarını inceleyin"
+            }
+          ]
+        },
+        {
+          "id": "islem-sonrasi-damlama",
+          "heading": "Son işlemle şikâyetin başlangıcını yan yana koyun",
+          "paragraphs": [
+            "Bakımın hemen ardından başlayan damlamayla aylardır süren bir şikâyeti ayrı tarif edin. Son işlem tarihini ve varsa servis belgesindeki işlem adını paylaşın. Fotoğraf gerekiyorsa yalnız cihazı ve sorunun yerini gösterin; evrak üzerindeki telefon, adres ve diğer kişisel bilgileri kapatın.",
+            "Kayıtta mahallenizi seçip etkilenen alanı ekleyebilirsiniz. Bakım, drenaj kontrolü ve arıza onarımı arasındaki ihtiyaç yerinde değerlendirilir; kapsam ve ücret açıklanmadan işlem varsayılmaz."
+          ],
+          "links": [
+            {
+              "path": "klima-bakimi.html",
+              "label": "Bakım ile onarım kapsamını görüşün"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Beko klima için ilçe seçin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Beko klimanın dışarıdaki hortumundan su gelmesi arıza mıdır?",
+          "answer": "Soğutma sırasında yoğuşma suyunun belirlenmiş tahliye ucundan dışarı akması tek başına arıza göstergesi değildir. Odaya damlama, alışılmadık noktadan kaçak veya elektrik yakınında su ayrı değerlendirilir. Kullanılan modu ve suyun çıktığı yeri belirtin."
+        },
+        {
+          "question": "Beko cihazımın bakım fişini herkese açık yoruma eklemeli miyim?",
+          "answer": "Hayır. Önceki işlem tarihini ve yapılan işin adını servis görüşmesinde aktarabilirsiniz. Belge göndermek gerekirse adres, telefon ve benzeri kişisel alanları gizleyin; açık yorum bölümüne özel evrak yüklemeyin."
+        }
+      ],
+      "cta": {
+        "heading": "Beko klimanın su şikâyetini birlikte netleştirelim",
+        "text": "Damlama yerini ve ne zaman başladığını ekleyin. İlçe ve mahallenizle kontrol uygunluğunu ustamıza sorun."
+      }
+    },
+    {
+      "route": "daikin-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Daikin",
+      "lead": "Daikin klimada ısıtma talebiyle cihazın verdiği tepkiyi karşılaştıralım. Seçili mod, iç ünitedeki hava ve bekleme sırasında gördüğünüz gösterge; yalnız “çalışmıyor” demekten daha açıklayıcı bir servis kaydı oluşturur.",
+      "description": "Daikin klima ısıtma ve çalışma talepleri; FTX model son eki, iç/dış ünite ayrımı ve arızayı teşhis iddiası olmadan servis hazırlığı.",
+      "headline": "Daikin klimada bekleme ile sürekli performans kaybını ayırın",
+      "sections": [
+        {
+          "id": "isitma-tepkisi",
+          "heading": "Isıtma seçildikten sonra ne oluyor?",
+          "paragraphs": [
+            "Kumandada ısıtma seçildiğini, ünitenin komuta tepki verip vermediğini ve hava üflemesinin nasıl değiştiğini ayrı anlatın. Başlangıçta bekleyen cihazla bir süre çalışıp duran cihaz aynı olay değildir. Gösterge değişiyorsa onu da not edin; bekleme süresinden tek başına arıza kararı verilmez.",
+            "Odanın serin olmasıyla üniteden hiç hava gelmemesini ayırın. Sorunu yeniden üretmek için sık sık mod değiştirmeyin. Cihazın kendi kullanım kılavuzundaki çalışma açıklaması ve mevcut gözlem birlikte değerlendirilmelidir."
+          ],
+          "links": [
+            {
+              "path": "klima-isitmiyor.html",
+              "label": "Isıtma şikâyetindeki farkları inceleyin"
+            }
+          ]
+        },
+        {
+          "id": "daikin-etiket",
+          "heading": "FTX öneki, tam ürün adı değildir",
+          "paragraphs": [
+            "Bu sitedeki Daikin kaynak kaydı FTX25KMV1B ve FTX35KMV1B ürünlerinin EU belgesine dayanır. Yalnız FTX ya da kapasite rakamı görmek, diğer bütün serileri aynı kapsama sokmaz. Ürün adının son harf ve rakamlarını silmeden kaydedin.",
+            "İç ünite modelini dış ünite veya kumanda numarasıyla değiştirmeyin. Farklı ülke, ürün son eki veya seriyle karşılaşıldığında mevcut tablodan kesin kod anlamı çıkarılmaz. Model bulunamazsa belirtiyi ve gördüğünüz uyarıyı saklayarak görüşmeye devam edebilirsiniz."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Daikin için tam model belgesini seçin"
+            }
+          ]
+        },
+        {
+          "id": "iki-unite-gozlemi",
+          "heading": "İçerideki tepkiyi dışarıdaki erişimden ayrı kaydedin",
+          "paragraphs": [
+            "İç ünite açıkken dış ünitenin durumunu bilmiyorsanız bunu bilmediğinizi belirtin. Dış üniteyi görmek için balkondan uzanmak, çatıya çıkmak veya koruyucu kapağı açmak gerekmez. Güvenli konumdan zaten fark ettiğiniz sesi veya duruşu aktarın.",
+            "Tek bir odada mı, farklı cihazlarda da mı aynı şikâyetin olduğunu söyleyin. Servis kaydı ilgili üniteye açılır; diğer cihazlardaki bulgular onunla birleştirilmez. İlçe ve mahalle seçimi sonrası kontrol ve randevu koşullarını görüşebiliriz."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Ünite duruşunu kayda ekleyin"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Daikin klima hizmet bölgenizi bulun"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Daikin ısıtmaya geçerken bekliyorsa mutlaka bozuk mudur?",
+          "answer": "Bazı modellerde ısıtmanın başlangıcında veya kılavuzda tanımlanan buz çözme sırasında geçici üfleme beklemesi olabilir. Sürekli ısıtma kaybı veya hata uyarısı normal diye geçiştirilmez. Tam modeli, göstergeyi ve beklemenin hangi aşamada olduğunu aktararak kendi belgesiyle değerlendirelim."
+        },
+        {
+          "question": "Daikin dış üniteme ulaşamıyorsam kayıt eksik mi kalır?",
+          "answer": "Ulaşmanız gerekmez. İç üniteden güvenle okunan bilgiyle ve gözlemlediğiniz belirtiyle talep açabilirsiniz. Dış ünitenin yeri, erişim hazırlığının servis görüşmesinde değerlendirilmesi için ayrıca not edilir."
+        }
+      ],
+      "cta": {
+        "heading": "Daikin klimanın çalışma sırasını paylaşın",
+        "text": "Modu, ünitenin tepkisini ve varsa göstergeyi seçin; uygun model ve bölge bilgisiyle servis görüşmesini hazırlayalım."
+      }
+    },
+    {
+      "route": "lg-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "LG",
+      "lead": "LG klimanız komut almıyor mu, yoksa komut aldıktan sonra mı duruyor? Kumanda, uygulama ve cihaz ekranında gördüklerinizi ayırarak başlayın; bağlantı sorunu ile fiziksel çalışma şikâyetini aynı kod gibi yorumlamayalım.",
+      "description": "LG klima kumanda, uygulama ve cihaz tepkisini ayıran servis hazırlığı; S09ET belge kapsamı, uyarı kaydı ve bölgenizde kontrol talebi.",
+      "headline": "LG klimanın hangi ekranda ne gösterdiğini belirleyin",
+      "sections": [
+        {
+          "id": "komut-ve-tepki",
+          "heading": "Telefon bağlantısıyla cihazın çalışmasını ayrı anlatın",
+          "paragraphs": [
+            "Bir uygulama kullanıyorsanız telefonda bağlantının kesilmesi, iç ünitenin de arızayla durduğunu tek başına göstermez. Ünitenin üzerinde ışık veya ekran var mı, kumandadan verilen komuta daha önce tepki veriyor muydu? Gördüğünüz durumları birbirine neden olarak bağlamadan sıralayın.",
+            "Kumanda ekranındaki sıcaklık ayarını cihazın verdiği hata kodu diye kaydetmeyin. Uyarının görüldüğü ekranı, yazının tamamını ve tekrarlayıp tekrarlamadığını ekleyin. Elektronik bölüme veya bağlantı kablolarına müdahale etmeden ilerleyebiliriz."
+          ],
+          "links": [
+            {
+              "path": "klima-hata-kodu.html",
+              "label": "Uyarı ekranını doğru tanımlayın"
+            }
+          ]
+        },
+        {
+          "id": "lg-s09et-kaynagi",
+          "heading": "S09ET kaydı bütün LG ürünleri için ortak tablo değildir",
+          "paragraphs": [
+            "Mevcut LG belge kaydı S09ET modelini ve Levant pazar kapsamını taşır. Türkiye'de kullanılan farklı bir LG ürüne yalnız marka aynı diye bu tablonun anlamları uygulanmaz. Cihaz etiketindeki tam ürün bilgisi ve belgenin kapsamı birlikte kontrol edilmelidir.",
+            "Ürün listesinde adınızı bulamazsanız model yazma alanını kullanabilir ya da bilinmiyor seçeneğini bırakabilirsiniz. Kaynak eşleşmesi olmadığı durumda kodun anlamı tamamlanmaz; servis için cihazın davranışı üzerinden bilgi toplanır."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "LG model kaydı ve kaynak kapsamı"
+            }
+          ]
+        },
+        {
+          "id": "onceki-calisma",
+          "heading": "Son düzgün çalışmayı ve ilk kesintiyi karşılaştırın",
+          "paragraphs": [
+            "Şikâyetten önce enerji kesintisi, ayar değişikliği veya başka bir işlem olduğunu biliyorsanız tarih sırasıyla ekleyin. Bir olayın önce gerçekleşmesi, arızanın nedeninin o olduğunu kanıtlamaz. Tek seferlik bir kesintiyle her çalıştırmada tekrarlayan kapanmayı ayırmak daha faydalıdır.",
+            "Soğutma da bozulduysa odadaki sonucu ayrıca belirtin. İlçe ve mahallenizle birlikte bu kayıt ustaya aktarılabilir; servis öncesi yazışmadan kesin kart veya sensör teşhisi yapılmaz."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Tekrarlayan kapanmayı tarif edin"
+            },
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Soğutma sonucunu ayrı değerlendirin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "LG uygulamasındaki bağlantı hatasını klima arıza kodu alanına yazmalı mıyım?",
+          "answer": "Yazıyı paylaşabilirsiniz ancak bunun uygulamada görüldüğünü belirtin. Cihaz ekranındaki kodla aynı kayıt sayılmaz. Ünitenin kumandaya verdiği tepkiyi de ekleyerek bağlantı ve çalışma şikâyetlerini ayıralım."
+        },
+        {
+          "question": "LG S09ET kaynak kaydı varken başka LG modelini neden aynı kabul etmiyoruz?",
+          "answer": "Model, ürün son eki ve belge pazarı değişebilir. Kayıtlı kaynak yalnız belirtilen kapsamı doğrular; farklı ürün için eksik anlamı tahminle tamamlamak doğru olmaz. Belirti üzerinden servis hazırlığı yapmaya devam edebilirsiniz."
+        }
+      ],
+      "cta": {
+        "heading": "LG cihazındaki uyarıyı doğru yere kaydedelim",
+        "text": "Kumanda, uygulama veya ünite ekranını belirtin; çalışma şikâyeti ve bölgenizle birlikte ustamıza ulaşın."
+      }
+    },
+    {
+      "route": "mitsubishi-electric-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Mitsubishi Electric",
+      "lead": "Mitsubishi Electric klima talebinde önce tam marka adını ve hangi ünitenin etkilendiğini belirleyelim. Aynı mekândaki farklı cihazların kodlarını karıştırmadan, model ve kullanım gözlemleriyle servis görüşmesi hazırlayabilirsiniz.",
+      "description": "Mitsubishi Electric klima servis hazırlığı; Electric–Heavy Industries ayrımı, etkilenen ünite kaydı ve MSZ-FX NL-CA1 belge kapsamı.",
+      "headline": "Mitsubishi Electric için doğru cihaz kaydını açın",
+      "sections": [
+        {
+          "id": "electric-markasi",
+          "heading": "Etikette Electric mi, Heavy Industries mi yazıyor?",
+          "paragraphs": [
+            "Yalnız Mitsubishi yazmak iki ayrı marka kaydını ayırmaya yetmez. İç ünitenin dışarıdan görünen etiketinde Mitsubishi Electric yazıyorsa bu talep üzerinden ilerleyin. Heavy Industries cihazı için ayrı marka sayfası bulunur; bir markanın kod anlamı diğerine aktarılmaz.",
+            "İsim net değilse benzer görünen bir model seçmeyin. Model bilinmiyor seçeneğiyle belirtiyi aktarabilir, güvenle okunabilen etiketi daha sonra ekleyebilirsiniz. Kumanda markasının veya üzerindeki parça numarasının cihaz kimliğini tek başına doğrulamadığını da unutmayın."
+          ],
+          "links": [
+            {
+              "path": "mitsubishi-heavy-industries-klima-servisi.html",
+              "label": "Cihazınız Heavy Industries ise ilgili sayfaya geçin"
+            }
+          ]
+        },
+        {
+          "id": "etkilenen-unite",
+          "heading": "Birden fazla klima varsa her şikâyeti kendi ünitesine bağlayın",
+          "paragraphs": [
+            "Bir odadaki cihazın su şikâyetiyle diğer odadaki soğutma kaybını aynı arıza gibi yazmayın. Etkilenen üniteyi bulunduğu bölümle adlandırın; göstergede kod varsa hangi cihazdan okunduğunu belirtin. Ayrı cihazların geçmiş bakım veya parça işlemleri de birbirine karışmamalıdır.",
+            "Birden fazla iç ünitenin aynı dış üniteye bağlı olup olmadığını bilmiyorsanız tahmin etmeniz gerekmez. Bağlantıları takip etmek için kapağı açmayın. Bilmediğiniz sistem ayrıntısı, servis başvurusunu engellemez."
+          ],
+          "links": [
+            {
+              "path": "klima-servisi.html",
+              "label": "Ünite ve şikâyete göre servis kapsamı"
+            }
+          ]
+        },
+        {
+          "id": "nl-ca1-kapsami",
+          "heading": "NL-CA1 kaynak belgesinin ülke sınırını koruyun",
+          "paragraphs": [
+            "Sitedeki Mitsubishi Electric modeli, belirli MSZ-FX NL-CA1 ürünlerinin Kanada belgesine dayanır. Örneğin MSZ-FX09NL-CA1 adındaki son ekler, belgenin ürün tanımının bir parçasıdır. Yalnız MSZ-FX öneki bütün ülkelerdeki cihazların aynı olduğunu göstermez.",
+            "Türkiye cihazında ürün son eki veya belge kapsamı farklıysa kayıtlı tablodan kesin sonuç çıkarılmaz. Ünitenin davranışı ve görülen uyarı saklanır; ilçe ve mahallenizle birlikte uygun kaynak ve yerinde kontrol görüşülür."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Electric modelinin belge kapsamına bakın"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Mitsubishi Electric talebinin bölgesini seçin"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Mitsubishi Electric için Heavy Industries modelini seçmek neden yanlış?",
+          "answer": "Bunlar sitede ayrı marka ve model kayıtlarıdır. Benzer isim, hata tablolarını ortak yapmaz. Etiketteki tam marka bulunamıyorsa bilinmiyor seçeneği kullanılır; başka markaya aktarım yapılarak sonuç üretilmez."
+        },
+        {
+          "question": "Aynı işyerindeki iki Mitsubishi Electric klima için tek arıza anlatımı yeterli mi?",
+          "answer": "Her ünitenin bulunduğu bölümü ve onda görülen belirtiyi ayrı belirtin. Aynı kayıtta birden fazla cihaz görüşülebilir ancak birinden okunan kod diğerinin teşhisi olarak kullanılmamalıdır."
+        }
+      ],
+      "cta": {
+        "heading": "Mitsubishi Electric ünitesini birlikte tanımlayalım",
+        "text": "Etkilenen bölümü, görünen uyarıyı ve hizmet adresinin ilçesini ekleyin; doğru cihaz üzerinden servis planlamasını görüşün."
+      }
+    },
+    {
+      "route": "mitsubishi-heavy-industries-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Mitsubishi Heavy Industries",
+      "lead": "Mitsubishi Heavy Industries klimada yanıp sönen göstergeyi yalnız bir sayı gibi yorumlamayalım. Hangi ışığın nasıl tekrarlandığını ve cihazın o sıradaki davranışını kaydederek doğru model belgesine dayanan bir servis görüşmesi hazırlayalım.",
+      "description": "Mitsubishi Heavy Industries klima için gösterge örüntüsü, SRK model son ekleri ve iç/dış ünite davranışıyla servis talebi hazırlığı.",
+      "headline": "Heavy Industries göstergesini örüntüsüyle kaydedin",
+      "sections": [
+        {
+          "id": "gosterge-oruntusu",
+          "heading": "Işığın adı, tekrar düzeni ve bekleme aralığı birlikte önemlidir",
+          "paragraphs": [
+            "Yanıp sönen ışık gördüğünüzde hangi göstergenin yandığını ve düzenin nasıl tekrarlandığını anlatın. Sürekli yanma, yanıp sönme ve iki gösterge arasındaki sıra ayrı bilgiler olabilir. Yalnız toplam parıltı sayısını yazıp bunun evrensel bir hata kodu olduğunu varsaymayın.",
+            "Güvenli bir yerden kısa video alabiliyorsanız bir tekrar düzenini gösterecek kadar kayıt yeterlidir. Işığı yeniden üretmek için cihazı sürekli yeniden başlatmayın. Herhangi bir gözlem için elektrik bölümüne veya soğutucu bağlantısına yaklaşmanız istenmez."
+          ],
+          "links": [
+            {
+              "path": "klima-hata-kodu.html",
+              "label": "Kod ile gösterge düzenini ayırın"
+            }
+          ]
+        },
+        {
+          "id": "srk-son-ekleri",
+          "heading": "SRK, ZS ve ZSX adlarının devamını da iletin",
+          "paragraphs": [
+            "Mevcut kaynaklar SRK ZS-W ve ZSX-W aileleri ile belirtilen WB ve WT ürünlerini Global/EU belge kapsamıyla listeler. Sadece SRK veya kapasiteyi söylemek, uygun gösterge açıklamasını seçmek için yeterli değildir. Etikette okuduğunuz tam adı kısaltmadan aktarın.",
+            "Mitsubishi Electric tablosu bu ürünlerin yerine kullanılamaz. Ürün son eki ve gösterge düzeni eşleşmiyorsa başka bir tablodaki açıklamayı boşluğa yerleştirmeyiz. Kayıtlı modellerin listesi, markanın eksiksiz ürün envanteri olduğu anlamına gelmez."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Heavy Industries model ve belge seçimi"
+            }
+          ]
+        },
+        {
+          "id": "durus-sirasi",
+          "heading": "Uyarı çıktığında hangi ünite durdu?",
+          "paragraphs": [
+            "İçeride hava kesilip kesilmediğini, ışıkların aynı anda değişip değişmediğini ve uyarıdan önce kullanılan modu belirtin. Dış ünitenin durumunu güvenle göremiyorsanız bilmiyorum demeniz yeterlidir. Çatı veya cephedeki cihazı kontrol etmek müşterinin hazırlık görevi değildir.",
+            "İlk uyarıyla daha sonraki tekrarları tarih sırasıyla kaydetmek kontrol öncesi yararlıdır. Önceden yapılan işlemin adını biliyorsanız ekleyin. Servis bölgeniz seçildiğinde bu gözlemler randevu görüşmesine taşınabilir; yazışma tek başına parça değişimine karar vermez."
+          ],
+          "links": [
+            {
+              "path": "klima-calismiyor.html",
+              "label": "Kapanma ve duruş bilgisini hazırlayın"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Heavy Industries için hizmet bölgesi"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Heavy Industries ışıklarını sayıp internetten benzer kod seçebilir miyim?",
+          "answer": "Bir sayının benzemesi yeterli değildir. Hangi gösterge, hangi sıra ve hangi tam model olduğu birlikte eşleşmelidir. Düzeni kaydedin; kendi ürün belgesi doğrulanmadan buna kesin arıza karşılığı vermeyelim."
+        },
+        {
+          "question": "SRK modelini okuyamadan Heavy Industries servis talebi açılır mı?",
+          "answer": "Açılır. Model bilinmiyor bırakılıp görünen ışık ve cihaz davranışı aktarılabilir. Etiketi okumak için riskli bir noktaya çıkmayın; eksik ürün bilgisi görüşmede güvenli biçimde tamamlanır."
+        }
+      ],
+      "cta": {
+        "heading": "Gösterge düzenini Heavy Industries talebine ekleyin",
+        "text": "Işığın tekrarını ve çalışma sırasını tarif edin; cihazınızın bulunduğu ilçe ve mahalleyle ustamıza danışın."
+      }
+    },
+    {
+      "route": "samsung-klima-servisi.html",
+      "type": "brand",
+      "device": "klima",
+      "brand": "Samsung",
+      "lead": "Samsung klimanızın sesi değiştiyse, sesin geldiği yeri ve başladığı anı birlikte kaydedelim. İlk açılıştaki kısa ses, çalışma boyunca süren titreşim ve soğutma kaybı farklı bilgiler olarak servis görüşmesine eklenebilir.",
+      "description": "Samsung klima ses ve titreşim şikâyetlerinde güvenli gözlem; FJM model kapsamı, çalışma zamanı ve bölge seçimiyle servis hazırlığı.",
+      "headline": "Samsung klimadaki yeni sesi yer ve zamanıyla anlatın",
+      "sections": [
+        {
+          "id": "sesin-zamani",
+          "heading": "Açılış, sürekli çalışma ve kapanış seslerini ayırın",
+          "paragraphs": [
+            "Ses yalnız komut verdiğiniz anda mı geliyor, cihaz çalıştıkça mı artıyor, kapandıktan sonra da duyuluyor mu? Nereden geldiğini güvenle biliyorsanız iç veya dış ünite olarak belirtin. Sesin yeni başlaması ve öncekine göre değişmesi, yalnız yüksek veya normal demekten daha açıklayıcıdır.",
+            "Bir ses kaydından kompresör ya da motorun kesin arızalı olduğu ilan edilemez. Titreşimi durdurmak için cihaza bastırmayın veya bağlantı elemanlarını sıkmayın. Yanık kokusu, duman ya da elektrikli kısımda su varsa ses incelemesini sürdürmek yerine kullanımı bırakıp güvenli destek isteyin."
+          ],
+          "links": [
+            {
+              "path": "klima-sesli-calisiyor.html",
+              "label": "Sesin türü ve oluşma anını kaydedin"
+            }
+          ]
+        },
+        {
+          "id": "samsung-fjm-kapsami",
+          "heading": "FJM belgesi ürün son ekiyle sınırlıdır",
+          "paragraphs": [
+            "Sitedeki Samsung kaydı belirli HSFN ve HSFS duvar tipi ürünlerin Avrupa R410A 50Hz belgesine dayanır. AR09HSFNBWKNET gibi tam ürün adı, yalnız Samsung veya kapasite ifadesinden daha ayırıcıdır. Bu kayıt bütün Samsung klimalarının ortak arıza tablosu değildir.",
+            "Farklı nesil, soğutucu veya pazar bilgisi taşıyan ürüne mevcut belgenin açıklaması doğrudan uygulanmaz. Etiket bilgisini güvenle okuyamıyorsanız model alanını geçip belirtiyle devam edin; benzer adı seçmek zorunda değilsiniz."
+          ],
+          "links": [
+            {
+              "path": "model-ariza-kodlari.html",
+              "label": "Samsung ürününün kayıtlı belgesini kontrol edin"
+            }
+          ]
+        },
+        {
+          "id": "ses-ve-performans",
+          "heading": "Ses değiştiğinde odadaki sonuç da değişti mi?",
+          "paragraphs": [
+            "Soğutma veya ısıtma sonucu aynı kaldıysa bunu belirtin; performans kaybı da varsa hangi anda başladığını ayrı yazın. Sesle sıcaklık değişiminin aynı gün görülmesi, ikisinin nedeninin aynı olduğunu kanıtlamaz. Video gönderecekseniz yalnız ilgili üniteyi ve duyulan sesi kapsaması yeterlidir.",
+            "Talebe cihazın bulunduğu oda veya işyeri bölümünü, son bakım tarihini ve ilçe/mahalleyi ekleyin. Kontrol sonrasında önerilen işin kapsamı açıklanır. Parça değişimi, uzaktan ses yorumuna dayanarak kendiliğinden onaylanmış sayılmaz."
+          ],
+          "links": [
+            {
+              "path": "klima-sogutmuyor.html",
+              "label": "Eşlik eden soğutma şikâyeti"
+            },
+            {
+              "path": "bolgeler.html",
+              "label": "Samsung klima için bölgenizi bulun"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Samsung klimadaki titreşimi elle tutarak kesmeyi denemeli miyim?",
+          "answer": "Hayır. Ünitenin veya bağlantıların üzerine müdahale etmeyin. Titreşimin ne zaman başladığını ve hangi taraftan duyulduğunu güvenli mesafeden aktarın; montaj elemanı veya parça kontrolünü teknik incelemeye bırakın."
+        },
+        {
+          "question": "Samsung klima ses videosunda ne bulunmalı?",
+          "answer": "Güvenle alınabiliyorsa ilgili ünitenin sesi ve çalışma anı yeterlidir. Özel konuşmaları, ev içi kişisel ayrıntıları veya evrakları kayda eklemeyin. Video almak için dış üniteye yaklaşmanız gerekmez."
+        }
+      ],
+      "cta": {
+        "heading": "Samsung klimanın yeni sesini birlikte değerlendirelim",
+        "text": "Sesin geldiği yeri, oluştuğu anı ve performanstaki değişimi belirtin; bölgenizle servis kontrolünü görüşün."
+      }
+    }
+  ]
+}

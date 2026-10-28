@@ -33,18 +33,27 @@ def build(mode='production', source=None):
     from reporting import add_report
     from cache_versions import version_assets
     from editorial_audit import audit_editorial
+    from service_editorial import apply_services, audit_services
+    from redirects import apply_redirects
+    from service_handoff import apply_service_handoff
     metrics={}
     metrics['service_scope']=retire_offers(files)
     metrics['retired_offer_copy']=correct_retired_copy(files)
     metrics['relative_route_base']=correct_routes(files)
     metrics['matching']=apply_matching(files)
     metrics['regions']=apply_regions(files)
+    metrics['service_editorial']=apply_services(files)
+    metrics['service_handoff']=apply_service_handoff(files)
+    metrics['redirects']=apply_redirects(files)
     metrics['hubs']=apply_hubs(files)
     metrics['publication_policy']=apply_publication_policy(files)
     metrics['semantics']=apply_semantics(files)
     metrics['editorial']=audit_editorial(files=files)
+    metrics['combined_editorial']=audit_services(files)
     metrics['performance']=apply_performance(files)
     add_report(files,REPO,metrics,provenance)
+    from index_review import add_index_review
+    metrics['index_review']=add_index_review(files,REPO,metrics)
     # Modules are responsible for indexable HTML, not runtime-only SEO text.
     if mode=='preview':
         files,metrics['preview']=preview_files(files,REPO)

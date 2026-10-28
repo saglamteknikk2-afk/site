@@ -4,7 +4,7 @@ Passing this audit is evidence about the supplied files, not about Google's inde
 ad auction quality, live PHP configuration, Telegram delivery or Gemini accuracy.
 """
 from __future__ import annotations
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit, parse_qs
 import argparse
@@ -26,7 +26,7 @@ ORIGIN = 'https://saglamkombiklima.com.tr/'
 HOSTS = {'saglamkombiklima.com.tr', 'www.saglamkombiklima.com.tr'}
 CONTACT_HOSTS = {'wa.me', 'api.whatsapp.com', 'web.whatsapp.com'}
 EXCLUDE = {'404.html', 'owner-admin.html', 'servis-takip.html', 'servis-sec.html',
-           'teknik-rapor.html', 'technical-report.html', 'rapor.html', 'icerik-inceleme.html'}
+           'teknik-rapor.html', 'technical-report.html', 'rapor.html', 'icerik-inceleme.html', 'dizin-inceleme.html'}
 TEXT_SUFFIXES = {'.js','.php','.json','.txt','.html','.yml','.yaml','.env'}
 SECRET_PATTERNS = {
     'google_api_key': r'AIza[0-9A-Za-z_-]{35}',
@@ -109,6 +109,10 @@ def audit(files:dict[str,bytes],mode='production',baseline=None,strict=True):
             except (ValueError,TypeError):schema_errors.append({'page':name,'kind':'invalid_json_ld'})
         graphs[name]=nodes
     errors.extend(schema_errors)
+    for name,page in docs.items():
+        counts=Counter(e.attrs['id'] for e in page.root.all() if e.attrs.get('id'))
+        for ident,count in counts.items():
+            if count>1:errors.append({'kind':'duplicate_html_id','page':name,'id':ident,'count':count})
     ids={name:{e.attrs['id'] for e in page.root.all() if e.attrs.get('id')}
          | {e.attrs['name'] for e in page.root.all('a') if e.attrs.get('name')}
          for name,page in docs.items()}

@@ -37,9 +37,9 @@ def model_local(m,files):
     if m.get('matchable') is False:return False
     return True
 
-def _widget(region,device,districts):
+def _widget(region,device,districts,brand='',need_path=''):
     name=region['name'];district=name if name in districts else (region.get('districts') or [''])[0]
-    return ('<section class="hybrid-matrix" data-hybrid-matrix data-district="'+html.escape(district,quote=True)+'" data-device="'+device+'" aria-labelledby="hybridMatrixTitle">'
+    return ('<section class="hybrid-matrix" data-hybrid-matrix data-district="'+html.escape(district,quote=True)+'" data-device="'+device+'" data-brand="'+html.escape(brand,quote=True)+'" data-need-path="'+html.escape(need_path,quote=True)+'" aria-labelledby="hybridMatrixTitle">'
       '<h2 id="hybridMatrixTitle">Cihazınıza göre devam edin</h2><p>Marka veya modeli bilmiyorsanız boş bırakabilirsiniz.</p>'
       '<div data-matrix-controls hidden><div class="hybrid-fields"><label>Cihazınız<select data-field="device"><option value="kombi">Kombi</option><option value="klima">Klima</option></select></label>'
       '<label>Marka <span>(isteğe bağlı)</span><select data-field="brand"><option value="">Markayı bilmiyorum</option></select></label>'
@@ -55,6 +55,8 @@ def _widget(region,device,districts):
       '<noscript><p>İlgili marka ve belirti rehberlerini aşağıdaki bağlantılardan açabilirsiniz.</p></noscript></section>')
 
 def apply_hubs(files):
+    from service_editorial import load_services
+    authored_services=load_services()
     data=js_data(files,'assets/servis-verileri.js','ST_SERVICE_DATA')
     models=json.loads(files['assets/verified-faults.json'])['models']
     regions=json.loads(files['assets/hybrid-regions.json'])
@@ -98,7 +100,7 @@ def apply_hubs(files):
         text=files[region_js].decode()
         text=text.replace("if(climate&&record.type==='neighborhood'){", "if(climate&&record.type==='neighborhood'&&record.href.includes('#mahalle-'))return record.href.replace('-kombi-servisi.html','-klima-servisi.html');\n    if(climate&&record.type==='neighborhood'){")
         files[region_js]=text.encode()
-    per_page={};widgets=0
+    per_page={};widgets=0;service_widgets=0
     regional={}
     for r in district_rows:
         for kind in ['kombi','klima']:regional[slug(r['name'])+'-'+kind+'-servisi.html']=(r,kind)
@@ -126,6 +128,13 @@ def apply_hubs(files):
             else:text=text.replace('</main>',widget+'</main>',1)
             widgets+=1
         else:
+            if n in authored_services and '<div data-editorial-service-selector></div>' in text:
+                page=authored_services[n]
+                initial_kind='klima' if page['device']=='klima' else 'kombi'
+                widget=_widget({'name':'','districts':[]},initial_kind,districts,
+                               page.get('brand',''),n if page['type']=='symptom' else '')
+                text=text.replace('<div data-editorial-service-selector></div>',widget,1)
+                service_widgets+=1
             matched=[(b,k) for (k,b),p in brands.items() if p==n]
             current_models=[m for m in models if route(m.get('path'))==n]
             if matched:
@@ -148,7 +157,7 @@ def apply_hubs(files):
         links=[(p,l) for p,l in links if route(p) in eligible and route(p)!=n][:10]
         rendered=block(heading,links,'' if n in regional else 'Hata kodunu cihazın tam modeline göre okuyun; bölge seçimi teknik kodun anlamını değiştirmez.')
         if rendered:text=text.replace('</main>',rendered+'</main>',1);per_page[n]=len(links)
-        if n in regional:
+        if n in regional or n in authored_services:
             assets='<link rel="stylesheet" href="assets/hybrid-matrix.css"><script src="assets/hybrid-matrix.js" defer></script>'
             text=text.replace('</head>',assets+'</head>',1)
         elif rendered:text=text.replace('</head>','<link rel="stylesheet" href="assets/hybrid-matrix.css"></head>',1)
@@ -187,8 +196,15 @@ def apply_hubs(files):
     payload={'schema_version':1,'districts':[{'name':r['name'],'slug':r.get('slug',slug(r['name'])),'neighborhoods':r['neighborhoods']} for r in district_rows],
       'devices':{k:{'label':v['label'],'brands':v['brands'],'needs':[x for x in v['services']+v['symptoms'] if route(x['path']) in eligible and route(x['path']) not in {'klima-montaji.html','klima-sokumu.html'}]} for k,v in data['devices'].items()},
       'brand_routes':[{'device':k,'brand':b,'path':p} for (k,b),p in brands.items()], 'models':data_models,'routes':sorted(eligible)}
+    # These aggregate intents have no single entry (or only narrower aliases) in
+    # the legacy complaint list. Keep their own purpose selected on landing.
+    for path,label in [('kombi-hata-kodu.html','Kombi hata kodu'),
+                       ('klima-hata-kodu.html','Klima hata kodu'),
+                       ('petek-temizligi.html','Petek temizliği')]:
+        kind='klima' if path.startswith('klima-') else 'kombi'
+        payload['devices'][kind]['needs'].insert(0,{'name':label,'path':path,'terms':[]})
     files['assets/hybrid-matrix-data.json']=json.dumps(payload,ensure_ascii=False,separators=(',',':')).encode()
     files['assets/hybrid-matrix.js']=(ROOT/'assets/matrix.js').read_bytes()
     files['assets/hybrid-matrix.css']=(ROOT/'assets/matrix.css').read_bytes()
-    return {'region_widgets':widgets,'contextual_bridge_pages':len(per_page),'contextual_links':sum(per_page.values()),'neighborhood_links_to_content':source_rewrites,
+    return {'region_widgets':widgets,'service_widgets':service_widgets,'contextual_bridge_pages':len(per_page),'contextual_links':sum(per_page.values()),'neighborhood_links_to_content':source_rewrites,
             'local_model_scopes':len(local_models),'indexable_orphans':sorted(eligible-graph()),'formerly_unreachable_connected':sorted(missing),'brand_routes':len(brands)}
