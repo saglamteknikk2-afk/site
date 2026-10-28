@@ -1,0 +1,51 @@
+name: İncelenen SEO ZIP ön izlemesi
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'saglamkombiklima-seo.zip'
+      - 'preview-release/**'
+      - '.github/workflows/seo-package-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: saglam-seo-package-preview
+  cancel-in-progress: true
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: İncelenen paketi güvenli statik ön izlemeye dönüştür
+        run: python preview-release/build_preview.py --output _site
+      - name: Bağlantıları, kaynak sürümünü ve ön izleme sınırlarını doğrula
+        run: |
+          python preview-release/check_preview.py _site
+          node preview-release/test_routes.cjs _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          name: reviewed-seo-preview
+          path: _site
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          artifact_name: reviewed-seo-preview
