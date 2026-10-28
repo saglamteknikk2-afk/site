@@ -31,6 +31,7 @@ def build(mode='production', source=None):
     from performance import apply_performance
     from retired_copy import correct_retired_copy
     from reporting import add_report
+    from cache_versions import version_assets
     metrics={}
     metrics['service_scope']=retire_offers(files)
     metrics['retired_offer_copy']=correct_retired_copy(files)
@@ -46,6 +47,7 @@ def build(mode='production', source=None):
     if mode=='preview':
         files,metrics['preview']=preview_files(files,REPO)
         retain_review(files,REPO)
+    metrics['asset_cache']=version_assets(files)
     stamp(files,mode,provenance,metrics)
     return files,metrics,provenance
 

@@ -85,6 +85,8 @@ Yerel Lighthouse 13.6.0 ile aynı mobil/simüle kısıtlama ayarlarında yapıla
 | Total Blocking Time | 0 ms | 0 ms |
 | CLS | 0 | 0,049 |
 
+Değişen CSS, JavaScript ve filtre verilerinin adreslerine gerçek dosya içeriğinden hesaplanan sürüm özeti eklenir. Böylece yeni HTML açıldığında tarayıcının eski uygulama kodunu önbellekten kullanması önlenir.
+
 Bu yerel deneyde aktarılan veri %67,71 azalmış, performans puanı 87’den 93’e çıkmıştır. Önizlemede LCP öğesi test uyarı şerididir; kaynak sayfadaki LCP öğesinden farklıdır. Bu nedenle 3,2→2,6 sn LCP karşılaştırması canlı üretim sitesinin LCP kazanımı olarak sunulamaz. Önizlemenin Lighthouse SEO puanı 66’dır; kasıtlı noindex/robots kısıtlamasını içerir. Üretim HTML’sinin ayrı yerel Lighthouse SEO denetimi 100 puan almıştır; bu denetimde PHP çalıştırılmamıştır ve sonuç Google’ın sayfaları dizine aldığını göstermez. Bunlar canlı PageSpeed, gerçek kullanıcı Core Web Vitals veya tüm sayfaların hız puanı değildir; “tam puan” sonucu çıkarılamaz.
 
 İlgili servis açılış sayfası, açık iletişim, cihaz/belirti eşleşmesi ve mobil kullanılabilirlik Ads açılış deneyimini destekler. Reklam hesabına bağlanılmadı; kampanya, dönüşüm etiketi veya reklam bütçesi değiştirilmedi. Ads Quality Score ve müşteri dönüşümü ölçülmedi.
@@ -92,7 +94,7 @@ Bu yerel deneyde aktarılan veri %67,71 azalmış, performans puanı 87’den 93
 ## 7. Kontrol kanıtları ve teslim sınırı
 
 - Statik üretim kabulü: 187 içerik/sitemap adresi, 21.195 iç dosya/işaret referansı; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
-- 39 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
+- 42 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
 - Yerel Chromium’da 204 ziyaretçi sayfası 360 ve 768 pikselde açıldı. Bu taramada JavaScript hatası, kaynak HTTP hatası, bozuk görsel veya yatay taşma görülmedi. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
 - Yeni matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
 
