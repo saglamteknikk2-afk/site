@@ -1,0 +1,52 @@
+name: Sağlam Teknik — Güvenli A1 Görsel Ön İzlemesi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/a1_preview_overlay.py'
+      - 'overrides/assets/saglam-onarim.css'
+      - 'overrides/sahadan-gorseller.html'
+      - '.github/workflows/preview-a1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saglam-a1-preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ön izlemeyi oluştur (PHP ve özel veriler yok)
+        run: |
+          python scripts/build_site.py --mode preview --output _site --base-path /site
+          python scripts/a1_preview_overlay.py _site
+          python scripts/check_site.py _site --mode preview --report preview-check.json
+          test ! -f _site/api.php
+          test ! -f _site/saha-api.php
+          test ! -f _site/owner-admin.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: preview
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

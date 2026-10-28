@@ -1,0 +1,16 @@
+/* Sağlam Teknik a1: büyük ana görsel, VIP takip görünümü ve saha galerisi */
+.p-hero-figure .p-hero-photo{width:100%;min-height:340px;max-height:630px;object-fit:cover;object-position:center}
+@media(min-width:900px){.p-hybrid-hero{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:30px}.p-hybrid-hero .p-hero-figure{width:100%;min-width:0}.p-hybrid-hero .p-hero-photo{min-height:440px;aspect-ratio:1.55}}
+@media(max-width:767px){.p-hero-figure .p-hero-photo{min-height:240px;max-height:400px}}
+#ticketTrackingLink.st-tracking-action,#ticketTrackingLink.st-tracking-action:visited{background:#153c30!important;color:#fff9e8!important;border:1px solid #bd9d58!important;text-shadow:none!important;font-weight:700!important;opacity:1!important;display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 18px}
+#ticketTrackingLink.st-tracking-action:hover{background:#225640!important;color:#fff!important}
+.st-field-photos{margin:35px auto 55px;padding:30px;background:#edf3e8;border:1px solid #ccd9c6;border-radius:12px;max-width:1240px}
+.st-field-photos h2,.st-field-photos h1{font:normal clamp(26px,3vw,38px) Georgia,serif;color:#153c30;margin:0 0 12px}
+.st-field-photos p{color:#506354;max-width:760px}
+.st-saha-link,.st-saha-nav-link{color:#153c30;font-weight:700}
+.st-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.st-gallery-card{margin:0;border-radius:9px;overflow:hidden;background:white;border:1px solid #d8e3d2}
+.st-gallery-card img{width:100%;height:230px;object-fit:cover;display:block}
+.st-gallery-card figcaption{padding:13px;font-weight:600;color:#254b3b}
+.st-gallery-card figcaption small{display:block;font-weight:400;color:#617366}
+@media(max-width:700px){.st-gallery-grid{grid-template-columns:1fr}.st-field-photos{margin:22px 15px;padding:20px}}
