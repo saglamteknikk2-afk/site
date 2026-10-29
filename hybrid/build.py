@@ -64,6 +64,10 @@ def build(mode='production', source=None):
     if mode=='preview':
         files,metrics['preview']=preview_files(files,REPO)
         retain_review(files,REPO)
+        # Standalone, non-indexable design studies are never part of the live ZIP.
+        design=HERE/'design-preview'/'ai-usta.html'
+        if design.is_file():
+            files['tasarim/ai-usta.html']=design.read_bytes()
     metrics['asset_cache']=version_assets(files)
     stamp(files,mode,provenance,metrics)
     return files,metrics,provenance
