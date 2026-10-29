@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-29",
+  "method": "Official Turkish product page document link; PDF cover/product applicability and fault appendix inspected. Meanings paraphrased, no professional repair steps reproduced as user actions.",
+  "verified": [
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-pure_1367238.pdf",
+      "title": "ecoTEC pure Montaj ve bakım kılavuzu 0020250678_04",
+      "model_names": [
+        "ecoTEC pure VUW 236/7-2 (H-TR)",
+        "ecoTEC pure VUW 286/7-2 (H-TR)"
+      ],
+      "locator": "Ek D, basılı/PDF s.33–35",
+      "codes": 36
+    },
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-intro-24-28-kw_1471323.pdf",
+      "title": "ecoTEC intro Montaj ve bakım kılavuzu 8000037569_02, 27.01.2026",
+      "model_names": [
+        "ecoTEC intro VUW 24/24 AS/2-1 (H-TR)",
+        "ecoTEC intro VUW 28/28 AS/2-1 (H-TR)"
+      ],
+      "locator": "Ek C, basılı/PDF s.33–37",
+      "codes": 41
+    },
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-plus-26-40-kw_1388976.pdf",
+      "title": "ecoTEC plus Montaj ve bakım kılavuzu 0020282303_08, 12.08.2024",
+      "model_names": [
+        "ecoTEC plus VUW 26CS/1-5 (N-TR)",
+        "ecoTEC plus VUW 32CS/1-5 (N-TR)",
+        "ecoTEC plus VUW 36CS/1-5 (N-TR)",
+        "ecoTEC plus VUW 40CS/1-5 (N-TR)"
+      ],
+      "locator": "Ürün geçerliliği s.7; Ek D, basılı/PDF s.51–65",
+      "codes": 84
+    }
+  ],
+  "important_model_specific_difference": {
+    "pure_F73": "Short circuit warning in water-pressure sensor circuit (0020250678_04 s.34)",
+    "intro_F73": "Water-pressure sensor signal too low (8000037569_02 s.36)",
+    "plus_CS_F73": "Not in Ek D; do not import another generation F.73 into this table."
+  },
+  "unverified_current_source_failures": [
+    {
+      "url": "https://www.vaillant.com.tr/downloads/profesyoneller/ecofit-start-0020237594-05-2332805.pdf",
+      "observed": "Returned ecoFIT plus VU 100AL/1-5 and 150AL/1-5 PDF, not ecoFIT start."
+    },
+    {
+      "url": "https://www.vaillant.com.tr/downloads/profesyoneller/turbotec-pro-plus-0020195895-04-2332823.pdf",
+      "observed": "Returned turboMAG MAG125/145 PDF, not turboTEC."
+    },
+    {
+      "url": "https://www.vaillant.com.tr/downloads/profesyoneller/atmotec-pro-plus-0020195892-04-2332822.pdf",
+      "observed": "Redirected to product hub."
+    },
+    {
+      "url": "https://www.vaillant.com.tr/downloads/profesyoneller/atmotec-turbotec-pro-plus-nesil-3-0020029209-03-2329923.pdf",
+      "observed": "Returned one-page PDF with no extractable manual text."
+    },
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-exclusive-36-kw_1387826.pdf",
+      "observed": "Timed out / inaccessible via web source tool; no verified code definitions added."
+    },
+    {
+      "url": "https://www.vaillant.com.tr/api/download/product/tr/_ecotec-exclusive-36-kw_1366819.pdf",
+      "observed": "Timed out / inaccessible via web source tool; no verified code definitions added."
+    }
+  ],
+  "limitations": "New scopes do not establish all Vaillant current or historical model/code coverage; existing ecoTEC pro source remains separately scoped."
+}

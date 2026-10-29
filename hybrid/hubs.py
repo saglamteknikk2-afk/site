@@ -196,6 +196,8 @@ def apply_hubs(files):
     payload={'schema_version':1,'districts':[{'name':r['name'],'slug':r.get('slug',slug(r['name'])),'neighborhoods':r['neighborhoods']} for r in district_rows],
       'devices':{k:{'label':v['label'],'brands':v['brands'],'needs':[x for x in v['services']+v['symptoms'] if route(x['path']) in eligible and route(x['path']) not in {'klima-montaji.html','klima-sokumu.html'}]} for k,v in data['devices'].items()},
       'brand_routes':[{'device':k,'brand':b,'path':p} for (k,b),p in brands.items()], 'models':data_models,'routes':sorted(eligible)}
+    directory=json.loads(files['assets/model-directory.json'])
+    payload['model_names']=[{k:entry.get(k,'') for k in ('id','device','brand','name','verified_model_id','status')} for entry in directory['entries']]
     # These aggregate intents have no single entry (or only narrower aliases) in
     # the legacy complaint list. Keep their own purpose selected on landing.
     for path,label in [('kombi-hata-kodu.html','Kombi hata kodu'),

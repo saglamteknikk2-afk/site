@@ -1,0 +1,10 @@
+{
+  "scope": "Actual local Chromium; official catalogue names and exact code scopes, no provider submissions",
+  "vaillant_model_names": 35,
+  "vaillant_code_linked_variants": 10,
+  "directory_matrix_ai_share_names": true,
+  "duplicate_cards": false,
+  "new_plus_table_84_codes": true,
+  "model_scoped_code_navigation": true,
+  "errors": []
+}

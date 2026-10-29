@@ -20,8 +20,9 @@
         fields.neighborhood.replaceChildren(option('','Mahallemi bilmiyorum / listede yok'),...(district?.neighborhoods||[]).map(n=>option(n,n)));
       }
       function fillModels(){
+        const names=(data.model_names||[]).filter(m=>m.device===fields.device.value&&norm(m.brand)===norm(fields.brand.value));
         const models=data.models.filter(m=>m.device===fields.device.value&&m.brand===fields.brand.value);
-        fields.model.replaceChildren(option('','Modeli bilmiyorum'),...models.map(m=>option(m.id,m.label)),option('__custom','Modelim listede yok; yazmak istiyorum'));
+        fields.model.replaceChildren(option('','Modeli bilmiyorum'),...(names.length?names.map(m=>option(m.id,m.name)):models.map(m=>option(m.id,m.label))),option('__custom','Modelim listede yok; yazmak istiyorum'));
         fields.customModel.value='';root.querySelector('[data-custom-model-label]').hidden=true;
       }
       function fillDevice(){
@@ -56,8 +57,10 @@
       }
       function show(){
         const kind=fields.device.value,brand=fields.brand.value,district=fields.district.value,neighborhood=fields.neighborhood.value;
-        const model=data.models.find(m=>m.id===fields.model.value&&m.device===kind&&m.brand===brand);
+        const named=(data.model_names||[]).find(m=>m.id===fields.model.value&&m.device===kind&&norm(m.brand)===norm(brand));
+        const model=data.models.find(m=>m.id===(named?.verified_model_id||fields.model.value)&&m.device===kind&&norm(m.brand)===norm(brand));
         const custom=fields.model.value==='__custom'?fields.customModel.value.trim():'';
+        const chosenName=named?.name||model?.label||custom;
         const code=fields.code.value.trim(),need=device().needs.find(n=>n.name===fields.need.value);
         let target=need?.path||data.brand_routes.find(b=>b.brand===brand&&b.device===kind)?.path||kind+'-servisi.html';
         if(district&&!need)target=slug(district)+'-'+kind+'-servisi.html'+(neighborhood?'#mahalle-'+slug(neighborhood):'#bolge-rehberi');
@@ -67,13 +70,13 @@
           if(definition){target=model.path+'#'+definition.anchor;statement.textContent=definition.code+': '+definition.meaning+'. Bu açıklama yalnız seçtiğiniz model belgesinin kapsamındadır.';}
           else {target=model.path+'#kodlar';statement.textContent='Bu kodu seçtiğiniz model tablosunda doğrulayamadık. Kodun ne zaman çıktığını ve eşlik eden belirtiyi not edin; ustamızla birlikte değerlendirelim.';}
         }else if(model){target=model.path+'#kodlar';statement.textContent='Seçtiğiniz modelin belge kapsamını ve kod tablosunu açabilirsiniz.';}
-        else if(code){statement.textContent='Kodu not ettik. Kod anlamını kesinleştirmek için tam model gerekir. Cihazda ne olduğunu da tarif ederek ustamıza sorabilirsiniz; başka modelin kod açıklamasını kullanmıyoruz.';}
+        else if(code){statement.textContent=named?'Seçtiğiniz model adını ve kodu aldık. Bu model için eşleşmiş bir kod belgesi kayıtlı değil. Cihazda ne olduğunu da tarif ederek ustamıza sorabilirsiniz; başka modelin kod açıklamasını kullanmıyoruz.':'Kodu not ettik. Kod anlamını kesinleştirmek için tam model gerekir. Cihazda ne olduğunu da tarif ederek ustamıza sorabilirsiniz; başka modelin kod açıklamasını kullanmıyoruz.';}
         else {statement.textContent='Seçiminize uygun servis bilgilerini ve güvenli gözlem notlarını açın. Yerinde kontrol gerektiren durumları ustamızla değerlendirebilirsiniz.';}
-        const title=document.createElement('h3');title.textContent=[district,neighborhood,brand,model?.label||custom,fields.need.value].filter(Boolean).join(' · ')||device().label+' servis bilgileri';
+        const title=document.createElement('h3');title.textContent=[district,neighborhood,brand,chosenName,fields.need.value].filter(Boolean).join(' · ')||device().label+' servis bilgileri';
         const actions=document.createElement('div');actions.className='hybrid-actions';
         const guide=localLink(target,model?'Model ve arıza rehberini aç →':'İlgili servis rehberini aç →');if(guide)actions.append(guide);
         const call=document.createElement('a');call.href='tel:05346225515';call.textContent='Ustamızı ara';call.dataset.contactIntent='call';actions.append(call);
-        const params=new URLSearchParams({cihaz:kind});for(const [k,v] of Object.entries({ilce:district,mahalle:neighborhood,marka:brand,model:model?.label||custom,ariza:fields.need.value,kod:code}))if(v)params.set(k,v);
+        const params=new URLSearchParams({cihaz:kind});for(const [k,v] of Object.entries({ilce:district,mahalle:neighborhood,marka:brand,model:chosenName,ariza:fields.need.value,kod:code}))if(v)params.set(k,v);
         const ticket=document.createElement('a');ticket.href='servis-sec.html#'+params;ticket.textContent='Bu bilgilerle servis talebi bırak';
         result.replaceChildren(title,statement,actions,ticket);result.hidden=false;
         result.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});

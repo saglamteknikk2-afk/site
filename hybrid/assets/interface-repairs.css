@@ -1,0 +1,36 @@
+/* Semantic controls override body-link colours, including visited/hover states. */
+.hybrid-actions a:not(.hybrid-reset),
+.hybrid-actions button:not(.hybrid-reset),
+.st-tracking-card .st-tracking-action,
+.usta-result-actions>:not(:last-child),
+.usta-result-actions>:only-child {
+  background:#173d31!important;
+  color:#fffdf8!important;
+  border-color:#173d31!important;
+  text-decoration:none!important;
+  -webkit-text-fill-color:#fffdf8;
+}
+.hybrid-actions .hybrid-reset,
+.st-tracking-card .st-tracking-copy,
+.usta-result-actions>:last-child:not(:only-child) {
+  background:#f4f1e8!important;
+  color:#173d31!important;
+  border-color:#173d31!important;
+  text-decoration:none!important;
+  -webkit-text-fill-color:#173d31;
+}
+.hybrid-actions a:not(.hybrid-reset):hover,
+.hybrid-actions button:not(.hybrid-reset):hover,
+.st-tracking-card .st-tracking-action:hover,
+.usta-result-actions>:not(:last-child):hover,
+.usta-result-actions>:only-child:hover {
+  background:#245649!important;
+  color:#fffdf8!important;
+  border-color:#245649!important;
+}
+.hybrid-actions :is(a,button):focus-visible,
+.st-tracking-card :is(a,button):focus-visible,
+.usta-result-actions>:focus-visible {
+  outline:3px solid #b65d30!important;
+  outline-offset:3px;
+}

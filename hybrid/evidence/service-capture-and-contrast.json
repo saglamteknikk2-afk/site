@@ -1,0 +1,851 @@
+{
+  "checks": [
+    {
+      "width": 360,
+      "modelOptions": 37
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "default",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "hover",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "focus",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions a",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "default",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "hover",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "focus",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "default",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "hover",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 360,
+      "selector": ".hybrid-actions button",
+      "state": "focus",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.250364833090185
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "default",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "hover",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        232,
+        237,
+        226
+      ],
+      "ratio": 9.866747166070418
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-btn",
+      "state": "focus",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.250364833090185
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "default",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "hover",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        232,
+        237,
+        226
+      ],
+      "ratio": 9.866747166070418
+    },
+    {
+      "width": 360,
+      "selector": ".at-aside .at-actions a",
+      "state": "focus",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 360,
+      "id": "ticketTrackingLink",
+      "state": "default",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "id": "ticketTrackingLink",
+      "state": "hover",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 360,
+      "id": "ticketTrackingLink",
+      "state": "focus",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 360,
+      "id": "ticketCopyTrackingBtn",
+      "state": "default",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 360,
+      "id": "ticketCopyTrackingBtn",
+      "state": "hover",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 360,
+      "id": "ticketCopyTrackingBtn",
+      "state": "focus",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "modelOptions": 37
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "default",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "hover",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "focus",
+      "text": "İlgili servis rehberini aç →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions a",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "default",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "hover",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "focus",
+      "text": "Arızamı bul →",
+      "id": "",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "default",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "hover",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "selector": ".hybrid-actions button",
+      "state": "focus",
+      "text": "Baştan başla ↺",
+      "id": "",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.250364833090185
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "default",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "hover",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        232,
+        237,
+        226
+      ],
+      "ratio": 9.866747166070418
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-btn",
+      "state": "focus",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "default",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "hover",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.250364833090185
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "focus",
+      "text": "Ustamızı ara",
+      "id": "",
+      "color": "rgb(255, 253, 247)",
+      "background": [
+        18,
+        63,
+        53
+      ],
+      "ratio": 11.545684246321414
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "default",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "hover",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        232,
+        237,
+        226
+      ],
+      "ratio": 9.866747166070418
+    },
+    {
+      "width": 1440,
+      "selector": ".at-aside .at-actions a",
+      "state": "focus",
+      "text": "AI Usta",
+      "id": "",
+      "color": "rgb(18, 63, 53)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.398556207718903
+    },
+    {
+      "width": 1440,
+      "id": "ticketTrackingLink",
+      "state": "default",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "id": "ticketTrackingLink",
+      "state": "hover",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        36,
+        86,
+        73
+      ],
+      "ratio": 8.255313052750092
+    },
+    {
+      "width": 1440,
+      "id": "ticketTrackingLink",
+      "state": "focus",
+      "text": "Servisimi takip et ↗",
+      "color": "rgb(255, 253, 248)",
+      "background": [
+        23,
+        61,
+        49
+      ],
+      "ratio": 11.815946299704637
+    },
+    {
+      "width": 1440,
+      "id": "ticketCopyTrackingBtn",
+      "state": "default",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "id": "ticketCopyTrackingBtn",
+      "state": "hover",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    },
+    {
+      "width": 1440,
+      "id": "ticketCopyTrackingBtn",
+      "state": "focus",
+      "text": "Bağlantıyı kopyala",
+      "color": "rgb(23, 61, 49)",
+      "background": [
+        244,
+        241,
+        232
+      ],
+      "ratio": 10.635587445519086
+    }
+  ],
+  "screenshots": [
+    "vaillant-directory-360.jpg",
+    "kucukcekmece-matrix-360.jpg",
+    "vaillant-directory-1440.jpg",
+    "kucukcekmece-matrix-1440.jpg",
+    "vaillant-kombi-ecotec-pure-236-286-7-2-ariza-kodlari-table.jpg",
+    "vaillant-kombi-ecotec-plus-cs1-5-ariza-kodlari-table.jpg",
+    "demirdokum-kombi-atromix-p20-p24-p28-ft2-tr-ariza-kodlari-table.jpg"
+  ],
+  "errors": [],
+  "passed": true
+}

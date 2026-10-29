@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-29",
+  "models": [],
+  "research": {
+    "checked_at": "2026-10-29",
+    "scope": "Legacy Vaillant TR only: atmoTEC/turboTEC, ecoFIT start, ecoTEC intro AS/1-1",
+    "models_added": 0,
+    "reason": "Manufacturer search index still exposes archived manual text, but current source URLs redirect, return a blank one-page document, or now serve another model/market. No unverified code table was promoted.",
+    "observations": [
+      {
+        "url": "https://www.vaillant.com.tr/downloads/profesyoneller/atmotec-pro-plus-vuw-20-24-28-0020029244-00-2332820.pdf",
+        "current_result": "Redirects to /urunler/; not an accessible installation manual."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/pdf/atmotecproplus-5-814822.pdf",
+        "current_result": "Redirects to /urunler/."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/pdf/atmotec-pro-plus-kullanma-klavuzu-319361.pdf",
+        "current_result": "404 during direct open."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/downloads/profesyoneller/turbotec-pro-plus-vuw-20-24-28-36-0020029214-03-2332821.pdf",
+        "current_result": "Direct open returns one-page PDF with no readable model or code table; not accepted."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/downloads/ecotec-intro-montaj-klavuzu-1953733.pdf",
+        "archived_search_title": "0020289235_04, VUW 18/24 AS/1-1 and VUW 24/28 AS/1-1 TR",
+        "current_result": "Now serves 8000037569_02 dated 27.01.2026, VUW 24/24 AS/2-1 and VUW 28/28 AS/2-1 H-TR. AS/1-1 table cannot be inferred from this source."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/downloads/ecotec-intro-kullanma-klavuzu-1953732.pdf",
+        "current_result": "Now serves the same 44-page AS/2-1 installation manual rather than old AS/1-1 user manual."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/pdf/ecotec-intro-kk-0020289236-06-2142126.pdf",
+        "current_result": "Redirects to /urunler/kombiler-kazanlar/."
+      },
+      {
+        "url": "https://www.vaillant.com.tr/musterilerimize-ozel/urunler/ecof-t-start-yogusmal-kombi-18496.html",
+        "current_result": "Redirects to /urunler/ecofit-plus/ (100/150 kW boilers), not the older ecoFIT start kombi."
+      }
+    ],
+    "third_party_code_pools_used": false,
+    "policy": "Names can remain optional catalogue choices; codes require actual matching model, country and manual revision."
+  }
+}

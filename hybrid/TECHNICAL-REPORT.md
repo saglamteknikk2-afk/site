@@ -3,6 +3,25 @@
 **Kontrol tarihi:** 29 Ekim 2026  
 **Kapsam:** Kaynak kod, üretim paketi ve güvenli GitHub önizlemesi. Canlı `saglamkombiklima.com.tr` sunucusuna bu çalışmayla yükleme yapılmaz.
 
+
+## VIP, müşteri takibi, butonlar ve model kataloğu onarımı
+
+VIP ücret onayı, seçilmiş mahalle arıza metnine eklendiği hâlde aynı formun ham alanıyla karşılaştırıldığı için yanlışlıkla geçersiz oluyordu. Mahalle dahil tutarlı alan görüntüsü kullanılır; değişmeyen otomatik doldurma onayı bozmaz. Gerçek alan değişikliği ve geç gelen eski yanıt yeniden onay gerektirir. Ücret sunucuda imzalanır: 08.00–21.00 2.500 TL, 21.00–08.00 4.000 TL; açık son kabul olmadan kayıt oluşmaz.
+
+Telegram'da kabul, yola çıkış, tahmini dakika ve serbest mesaj işlemleri kalıcı müşteri olaylarına yazılır. Aynı güncellemenin tekrar gelmesi ikinci olay oluşturmaz. Eski bir işin açık yolda kaydı yeni açık operatör güncellemesini engellemez. Grup gizliliğinde süre ve mesaj yanıtının alınması için belirli isteme ForceReply ile yanıt istenir; eski istem başka müşteriye uygulanmaz. Hata Telegram'da açıklanır. Müşteri özel takip ekranı bu olayları API'den okur.
+
+Takip ekranı **sayfayı yeniden yüklemeden 3 saniyede bir** güncellenir; çakışan istekler engellenir, gizli sekmede durur. Günlük rapor **İstanbul saatiyle 23.00 itibarıyla günün toplamı** olarak hazırlanır; gece yarısında yinelenmez. Tam saatinde teslim için mevcut sunucu cron/worker'ı düzenli çalışmalıdır; trafik yedeği yalnız istek geldiğinde çalışabilir. Gerçek sunucunun cron ayarı bu çalışma ortamından değiştirilmedi.
+
+Koyu zemindeki koyu yazılar matris, AI sonuçları ve müşteri takip bağlantısında düzeltildi. Gerçek eski stillerde yaklaşık1,02–1,22:1 olan sorunlu karşıtlıklar; normal, üzerine gelme ve klavye odağı durumlarında en az8,25:1 ölçüldü.
+
+Model tanıma kataloğu, rehber ekranı, AI Usta ve bölge matrisinde ortak kullanılır. Model/seri adları aynı modelin tekrar eden aile kartından ayrılır. Listede bir adın bulunması, o ürünün kodlarının doğrulandığını göstermez. Model bilinmeden veya kullanıcı kendi modelini yazarak ilerleyebilir.
+
+Resmî Türkiye kılavuzlarından **13 yeni belge kapsamı,32 tam model varyantı ve432 modele bağlı kod açıklaması** eklendi. Vaillant pure `/7-2`, intro `AS/2-1` ve plus `CS/1-5`; Demirdöküm Atromix, ademiX/vintomiX AS/2 ve Nitron Condense; belirli Baymak Dolcevita/Duotec/Luna nesilleri ve Protherm Gepard Condens kapsamları belgelidir. Yeni kodlarda anlam, kaynak sayfası ve güvenli gözlem vardır; Vaillant kayıtlarında ayrıca ayrıntılı açıklama bulunur.
+
+Bazı eski Vaillant adresleri artık başka ürünlerin PDF'lerini veya boş/yönlendirilmiş sayfa döndürüyor. Böyle bir adresin eski adına dayanarak yeni kod doğrulaması yapılmadı. **Bütün markaların bütün tarihsel modellerinin kodları doğrulanmış değildir.** Model adı kataloğu ile doğrulanmış kod belgesi ayrı olgulardır. Güncel toplamlar derlemenin `model_catalog` ve `semantics` kayıtlarında bulunur.
+
+Paylaştığın Google yardım metni de her URL'nin dizine alınmasının beklenmediğini açıklar. Parametreli form/alternatif URL'nin ana adreste birleşmesi normal olabilir. “Tarandı” veya “Keşfedildi” etiketi tek başına kopya ya da ceza kanıtı değildir; sitenin gerçek URL Denetimi sonucu yerine genel dokümandan özel teşhis çıkarılmaz.
+
 ## Paylaştığın dizin listesindeki somut farklar ve yeni değişiklikler
 
 29 Ekim'de yeniden yüklediğin ZIP önceki a1.zip ile bayt düzeyinde aynı. Karşılaştırma **44 dizine eklenmiş içerik, 64 eklenmemiş içerik ve 15 parametreli iletişim adresi** üzerinden yapıldı. Durum etiketleri senin listenden alındı; canlı Google URL Denetimi sonucu gibi sunulmaz.
@@ -59,7 +78,7 @@ Komşuluk verisi OpenStreetMap ilçe geometrilerindeki ortak kara sınırlarınd
 
 ## 3. Çapraz bağlantılar ve arama eşleştirmesi
 
-`hybrid/hubs.py`, bölge → marka/model → belirti rehberi → bölge/hizmet akışlarını HTML bağlantılarıyla kurar. Mevcut kontrol çıktısında 175 sayfada 1.452 bağlamsal bağlantı üretilmiştir. Dizine uygun 187 içerik sayfasının tamamına site içinden ulaşılır; bu envanterde yetim sayfa yoktur. Yönetim, doğrulama, 404 ve kişiye özel takip adresleri içerik sayfası sayılmaz.
+`hybrid/hubs.py`, bölge → marka/model → belirti rehberi → bölge/hizmet akışlarını HTML bağlantılarıyla kurar. Mevcut kontrol çıktısında 188 sayfada 1.578 bağlamsal bağlantı üretilmiştir. Dizine uygun 200 içerik sayfasının tamamına site içinden ulaşılır; bu envanterde yetim sayfa yoktur. Yönetim, doğrulama, 404 ve kişiye özel takip adresleri içerik sayfası sayılmaz.
 
 Bölge sayfalarında 55, yenilenen marka ve arıza sayfalarında 29 seçim bileşeni bulunur. Marka sayfası kendi markasıyla, belirti sayfası ilgili sorunla başlar; ilçe sayfası kendi konumuyla açılır. Diğer seçimler açıktır ve marka hiçbir ilçeyle sınırlandırılmaz. Cihaz, marka, model, mahalle ve belirti aynı bağlamda ilerler. Model veya özel açıklama zorunlu değildir. Cihaz değiştirilince önceki cihazdan kalan model/kod temizlenir. Bilinmeyen model yazılabilir; kodun anlamı doğrulanamadığında farklı modelden açıklama taşınmaz.
 
@@ -80,7 +99,7 @@ Ek olarak 875 ilçe × kombi markası seçimi ve 599 mahalle eşleşmesi kontrol
 
 ## 4. Teknik bilgi, yayın kapsamı ve dış bağlantılar
 
-Kaynakta bulunan **86 model arıza tablosu ve 1.443 kod başlığı** korunmuştur. Üretilen katalogdaki 521 yol ve 1.006 kod işareti kontrol edilmiştir. Bu sayılar bütün markaların geçmiş ve güncel bütün modellerinin doğrulandığı anlamına gelmez. Model/belge/pazar kapsamı korunur; doğrulanmamış kodlara kesin anlam eklenmez. Gaz, yangın veya patlama benzeri ateşleme durumlarının güvenli yönlendirmesi sıradan ses açıklamasından önce değerlendirilir.
+Kaynakta bulunan **86 model arıza tablosu ve 1.443 kod başlığı** korunmuştur. Üretilen katalog yolları ve kod işaretleri gerçek dosyalara karşı kontrol edilir. Bu sayılar bütün markaların geçmiş ve güncel bütün modellerinin doğrulandığı anlamına gelmez. Model/belge/pazar kapsamı korunur; doğrulanmamış kodlara kesin anlam eklenmez. Gaz, yangın veya patlama benzeri ateşleme durumlarının güvenli yönlendirmesi sıradan ses açıklamasından önce değerlendirilir.
 
 Üretici kaynakları belge adı, kapsam ve referans bilgisiyle korunur. 2.108 dış web gezinti bağlantısı düz metin referansına çevrilmiştir. Statik kabul kontrolünde WhatsApp dışındaki dış web bağlantısı sıfırdır; telefon ve WhatsApp iletişim katmanı korunur. Bu kural, sunucunun gerekli Gemini veya Telegram API bağlantılarını kaldırmaz.
 
@@ -90,9 +109,9 @@ Kaynakta bulunan **86 model arıza tablosu ve 1.443 kod başlığı** korunmuşt
 
 İşletme kimliği tek `https://saglamkombiklima.com.tr/#business` adresinde tutarlıdır. Kullanıcının verdiği **İnönü Mahallesi, Küçükçekmece, İstanbul, TR** adresi `LocalBusiness/HVACBusiness` verisine işlendi. Sokak/bina numarası veya koordinat eklenmedi; adres kapsamı verilenden daha ayrıntılı gösterilmedi. Fiyat aralığı ve değerlendirme puanı uydurulmadı.
 
-Kontrol edilen üretim çıktısında 201 sayfada işletme verisi, uygun 179 sayfada `Service`, 179 sayfada görünür içerikten türetilen 287 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
+Kontrol edilen üretim çıktısında 214 sayfada işletme verisi, uygun 192 sayfada `Service`, 192 sayfada görünür içerikten türetilen 300 soru-cevap için `FAQPage` vardır. Gizlilik veya yönetim sayfasına ilgisiz servis şeması eklenmez. Eski `#isletme`, `#hizmet` ve soru-cevap referansları yeni kimliklerle uyumlu hâle getirilir. Görünür soru/cevap ile şemadaki metin eşleşmesi denetlenir.
 
-Sitemap, `llms.txt` ve `assets/hybrid-inventory.json` aynı gerçek canonical envanterinden üretilir. **Bu sürümde sayı 187’dir; 192’ye tamamlamak için hayali sayfa eklenmemiştir.** Önceden noindex olan yabancı pazar rehberlerinin korunan kapsamı sitemap dışında kalır. Ayrıntılı `llms-full.txt` saklanır. Üretim robots kuralları içerik erişimine izin verir; özel dosya ve API engellerini korur.
+Sitemap, `llms.txt` ve `assets/hybrid-inventory.json` aynı gerçek canonical envanterinden üretilir. **Bu sürümde sayı 200’dür; 192’ye tamamlamak için hayali sayfa eklenmemiştir.** Önceden noindex olan yabancı pazar rehberlerinin korunan kapsamı sitemap dışında kalır. Ayrıntılı `llms-full.txt` saklanır. Üretim robots kuralları içerik erişimine izin verir; özel dosya ve API engellerini korur.
 
 `llms.txt` işletme özetini, yetkili servis dışı konumu, model/kod sınırlarını, iletişimi ve gerçek içerik listesini sunar. Bu dosya Google’da sıralama kontrolü değildir. FAQ verisinin doğru olması da Google’da zengin sonuç garantisi sağlamaz; Google FAQ zengin sonuç özelliği Mayıs 2026’da sona ermiştir. ChatGPT, Gemini, Claude veya Copilot’un işletmeyi önermesi garanti edilmez.
 
@@ -123,9 +142,9 @@ Bu yerel deneyde aktarılan veri %67,71 azalmış, performans puanı 87’den 93
 
 ## 7. Kontrol kanıtları ve teslim sınırı
 
-- Statik üretim kabulü: 187 içerik/sitemap adresi, iç dosya/işaret referansları; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
-- 65 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki 23 PHP dosyasının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
-- Yerel Chromium’da 204 uygulama sayfası ve 3 rapor, 360 ve 768 pikselde açıldı (414 görünüm). Bulunan marka dizini kimlik tekrarları düzeltildikten sonra aynı tarama tekrarlandı; JavaScript hatası, kaynak HTTP hatası, bozuk görsel, yatay taşma veya tekrarlanan HTML kimliği kalmadı. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
+- Statik üretim kabulü: 200 içerik/sitemap adresi, iç dosya/işaret referansları; yetim içerik, eksik hedef ve schema/metin uyuşmazlığı bulunmadı. Dosya özeti doğrulandı; sınırlı anahtar deseni taramasında eşleşme yoktu.
+- 91 Python birim testi; eşleştirme, bölge verisi, iç bağlantı, schema, yükleme, önbellek sürümleri, emekliye ayrılan servisler ve kabul kuralları. Üretim paketindeki PHP dosyalarının sözdizimi kontrol edildi. Gerçek PHP çözümleyicisinde yedi örnek, JavaScript tarafında 18 örnek ile uyum denetimi geçti. PHP regresyonu özel ayar veya dış ağ gerektirmeden çalıştırıldı.
+- Yerel Chromium’da 217 uygulama sayfası ve 3 rapor, 360 ve 768 pikselde açıldı (440 görünüm). Bulunan marka dizini kimlik tekrarları düzeltildikten sonra aynı tarama tekrarlandı; JavaScript hatası, kaynak HTTP hatası, bozuk görsel, yatay taşma veya tekrarlanan HTML kimliği kalmadı. Son ana sayfa kontrolünde mobil/masaüstü AI Usta ve Yorumlar hedefleri ayrıca açıldı.
 - Yeni metinlerin tamamı, önceki 55 bölge ve yeni 29 marka/arıza gövdesinin ekran görüntüleri, 84 gövdeli eski/yeni inceleme ve 123 satırlı dizin karşılaştırma ekranı, matris seçimleri, model bilinmiyor seçeneği, özel modelin isteğe bağlı kalması, sıfırlama, klavye kullanımı, cihaz değişikliği ve JavaScript geliştirmesi yokken statik içerik kontrol edildi.
 
 **Bu kontroller canlı Telegram teslimi, Gemini cevabı, sunucudaki form kaydı veya Search Console sonucu değildir.** GitHub önizlemesi bilerek noindex durumundadır; form, konum ve sağlayıcı gönderimleri kapalıdır. Üretim ZIP’i canlı sunucu için ayrı derlenir ve bu önizleme kısıtlarını taşımaz. Canlı sunucuya otomatik geçiş yapılmaz.

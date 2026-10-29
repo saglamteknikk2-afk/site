@@ -36,7 +36,12 @@ def build(mode='production', source=None):
     from service_editorial import apply_services, audit_services
     from redirects import apply_redirects
     from service_handoff import apply_service_handoff
+    from runtime_updates import apply_runtime_updates
+    from model_catalog import apply_model_catalog
+    from interface_repairs import apply_interface_repairs
     metrics={}
+    metrics['runtime_updates']=apply_runtime_updates(files)
+    metrics['model_catalog']=apply_model_catalog(files)
     metrics['service_scope']=retire_offers(files)
     metrics['retired_offer_copy']=correct_retired_copy(files)
     metrics['relative_route_base']=correct_routes(files)
@@ -51,6 +56,7 @@ def build(mode='production', source=None):
     metrics['editorial']=audit_editorial(files=files)
     metrics['combined_editorial']=audit_services(files)
     metrics['performance']=apply_performance(files)
+    metrics['interface_repairs']=apply_interface_repairs(files)
     add_report(files,REPO,metrics,provenance)
     from index_review import add_index_review
     metrics['index_review']=add_index_review(files,REPO,metrics)

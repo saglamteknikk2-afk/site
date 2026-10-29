@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "scope": "Actual shipped home submit handler and priority script in Chromium; synthetic API responses",
+  "checks": [
+    {
+      "name": "No fee before first confirmation",
+      "passed": true
+    },
+    {
+      "name": "Selected neighbourhood no longer triggers a false field-change error",
+      "passed": true
+    },
+    {
+      "name": "Quote uses the actual home-composed issue including neighbourhood",
+      "passed": true
+    },
+    {
+      "name": "Fee is visible only in the final review with Talep et",
+      "passed": true
+    },
+    {
+      "name": "Unchecked fee acceptance cannot save a ticket",
+      "passed": true
+    },
+    {
+      "name": "An unchanged autofill/input event preserves the review",
+      "passed": true
+    },
+    {
+      "name": "Final explicit acceptance preserves quote, fee terms and composed address context",
+      "passed": true
+    },
+    {
+      "name": "Standard service still bypasses the VIP quote",
+      "passed": true
+    },
+    {
+      "name": "An unchanged input event during the network wait does not invalidate the quote",
+      "passed": true
+    },
+    {
+      "name": "A genuinely changed neighbourhood discards the late quote and requires a fresh review",
+      "passed": true
+    },
+    {
+      "name": "A new quote is bound to the new neighbourhood instead of accepting the stale one",
+      "passed": true
+    },
+    {
+      "name": "Neighbourhood changes after a review remove the old consent",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript errors",
+      "passed": true
+    }
+  ],
+  "provider_requests": 0,
+  "real_records": 0,
+  "errors": []
+}

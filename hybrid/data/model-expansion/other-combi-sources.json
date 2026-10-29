@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-29",
+  "new_scopes": 10,
+  "model_variants": 24,
+  "code_definitions": 271,
+  "sources": [
+    {
+      "id": "demirdokum-kombi-atromix-p20-p24-p28-ft2-tr",
+      "url": "https://www.demirdokum.com.tr/products-2/atromix/atromix-montaj-klavuzu-1201423.pdf",
+      "locator": "Kapsam: kapak ve §2.3; Ek D, s.33–34",
+      "scope": "Türkiye kılavuzu; P20/P24/P28. Kılavuz bazı kodların ürün donanımına göre görünmeyebileceğini belirtir. Atromix F.75 tanımı basınç anahtarıdır; başka modelin pompa açıklaması buna taşınmaz."
+    },
+    {
+      "id": "demirdokum-kombi-ademix-as2-htr-2025",
+      "url": "https://www.demirdokum.com.tr/downloads/ademix-montaj-ve-bakm-klavuzu-3072083.pdf",
+      "locator": "Kapsam: kapak ve devre şeması; Ek C, s.33–37",
+      "scope": "Yalnız 2025 tarihli AS/2 H-TR varyantları. Eski AS/1 veya yalnız ademiX/vintomiX adı taşıyan cihazlara otomatik atanmaz. Kodlar üretici tablosundaki donanım kapsamıyla değerlendirilir."
+    },
+    {
+      "id": "demirdokum-kombi-vintomix-as2-htr-2025",
+      "url": "https://www.demirdokum.com.tr/downloads/vintomix-montaj-ve-bakm-klavuzu-3072080.pdf",
+      "locator": "Kapsam: kapak ve devre şeması; Ek C, s.33–37",
+      "scope": "Yalnız 2025 tarihli AS/2 H-TR varyantları. Eski AS/1 veya yalnız ademiX/vintomiX adı taşıyan cihazlara otomatik atanmaz. Kodlar üretici tablosundaki donanım kapsamıyla değerlendirilir."
+    },
+    {
+      "id": "demirdokum-kombi-nitron-condense-24-28-htr-hep",
+      "url": "https://www.demirdokum.com.tr/downloads/products-1/nitron-condense-0020219190-07-1499366.pdf",
+      "locator": "§2.3 s.7; Ek C, s.30",
+      "scope": "Türkiye ürünleri: 0010019369,0010019370,0010020296,0010020297. F04 bu belgede ateşlemedir; Nitromix/Atromix F.04 varsayımıyla birleştirilmez."
+    },
+    {
+      "id": "baymak-kombi-dolcevita-dpy-24-28-33-42-45-fi",
+      "url": "https://www.baymak.com.tr/media/2893/300032123-kullanma-kilavuzu-dolcevita-dpy-24-28-33-42-45_tr_r2.pdf",
+      "locator": "Kapak ve ürün fişi s.18; §7.1 Hata kodları, s.17",
+      "scope": "Dolcevita DPY Fi varyantları; DPY Compact ve Felice farklı belge kayıtlarıdır. F41 çalışma durumudur, tek başına arızalı parça belirtmez."
+    },
+    {
+      "id": "baymak-kombi-dolcevita-dpy-compact-24-30",
+      "url": "https://www.baymak.com.tr/media/5497/dolce-vita-dpy-compact-tam-yogusmali-kombi-kullanma-kilavuzu.pdf",
+      "locator": "Kapak; §7.1 Hata kodları, s.18",
+      "scope": "Yalnız DPY Compact 24/30 belgesi. Genel DPY veya Baymak Duotec Compact adına aynı tablo otomatik taşınmaz."
+    },
+    {
+      "id": "baymak-kombi-duotec-compact-24-2018",
+      "url": "https://www.baymak.com.tr/media/2889/300032317-kullanma-kilavuzu-baymak-duotec-compact-24_r1_28122018.pdf",
+      "locator": "Kapak/ürün fişi s.18; §7.1 Hata kodları, s.17",
+      "scope": "Yalnız 2018 tarihli 300032317 Rev.1 belgesinin Duotec Compact 24 ürünü. 24–30 ailesinin 2024 kılavuzu bu kayıtla eşitlenmez."
+    },
+    {
+      "id": "baymak-kombi-dolcevita-felice-240-310",
+      "url": "https://www.baymak.com.tr/media/4085/dolcevita-felice-yogusmali-kombi-kullanma-kilavuzu.pdf",
+      "locator": "Kapak; §7.1 Hata kodları, s.16",
+      "scope": "Yalnız Dolcevita Felice 240/310. DPY/DPY Compact ürünleriyle model adı benzerliği üzerinden kod eşleştirilmez."
+    },
+    {
+      "id": "baymak-kombi-luna-avant-24-fx",
+      "url": "https://www.baymak.com.tr/media/4057/baymak-luna-avant-24-fx-yogusmali-kombi-kullanma-kilavuzu.pdf",
+      "locator": "Kapak; §7.1 E tipi s.18, F tipi s.19–20",
+      "scope": "Luna Avant 24 Fx; mevcut Luna Avant 24 LN kaydı farklı üründür. F40/F47 bu Fx belgesinde su basınç anahtarı uyarısıdır; diğer serilerin F40 açıklaması kullanılmaz."
+    },
+    {
+      "id": "protherm-kombi-gepard-condens-20-24-ktv-fc3-htr",
+      "url": "https://www.protherm.com.tr/_temp/5684d2b0-37f0-4fa0-9af9-bf23d4a2ceb4.pdf",
+      "locator": "§2.3 s.6 (ürünler 0010028064/0010028065); Ek D, s.26",
+      "scope": "Yalnız 20/24 KTV-FC/3 H-TR. Üreticinin Ek D tablosundaki kod başlıkları esas alınır; aynı tabloda açıklama/neden sütunlarında görülen metin uyumsuzlukları teşhis olarak aktarılmaz. Lynx, Jaguar veya Gepard farklı nesillerine bu kod tablosu otomatik taşınmaz."
+    }
+  ],
+  "not_added": [
+    {
+      "name": "Baymak Duotec Compact 24/30 new 2024",
+      "reason": "Official 300038181 Rev.01 PDF exceeds web parser content-size limit; the readable 2018 Compact24 manual was included with explicit version only."
+    },
+    {
+      "name": "Baymak Novadens 24/28 (2023)",
+      "reason": "Official source was located but current PDF text layer is empty; no code table copied from a different Novadens generation."
+    },
+    {
+      "name": "Bosch Condens 2200i W GC2201iW24C23",
+      "reason": "Official Turkey installation manual6721839338 was read; it shows an example227 display, not a full model code-meaning table. No generic2300i code pool transferred."
+    },
+    {
+      "name": "ECA Confeo Plus / Calora Premix older manuals",
+      "reason": "Official indexed old media PDFs currently returned404 on direct retrieval; names remain catalogue-only until an accessible matching source exists."
+    }
+  ],
+  "important_differences": [
+    {
+      "model": "Atromix",
+      "code": "F.75",
+      "meaning": "Basınç anahtarı (presostat)"
+    },
+    {
+      "model": "ademiX/vintomiX AS/2",
+      "code": "F.75",
+      "meaning": "Pompa / su eksikliği"
+    },
+    {
+      "model": "Nitron Condense",
+      "code": "F04",
+      "meaning": "Ateşleme arızası"
+    },
+    {
+      "model": "Luna Avant24Fx",
+      "code": "F40",
+      "meaning": "Su basınç anahtarı"
+    }
+  ]
+}

@@ -1,0 +1,549 @@
+{
+  "scope": "Real Chromium computed CSS on actual legacy stylesheet bundle and semantic controls; no provider calls",
+  "before": {
+    "model": {
+      "color": "rgb(18, 63, 53)",
+      "background": "rgb(32, 77, 61)",
+      "ratio": 1.224938726793957
+    },
+    "call": {
+      "color": "rgb(18, 63, 53)",
+      "background": "rgb(32, 77, 61)",
+      "ratio": 1.224938726793957
+    },
+    "reset": {
+      "color": "rgb(32, 77, 61)",
+      "background": "rgb(237, 242, 229)",
+      "ratio": 8.415632984666942
+    },
+    "aiPrimary": {
+      "color": "rgb(18, 63, 53)",
+      "background": "rgb(18, 63, 53)",
+      "ratio": 1
+    },
+    "aiSecondary": {
+      "color": "rgb(18, 63, 53)",
+      "background": "rgba(0, 0, 0, 0)",
+      "ratio": 1.7881306565296733
+    },
+    "ticketTrackingLink": {
+      "color": "rgb(18, 63, 53)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 1.0227946296644754
+    },
+    "ticketCopyTrackingBtn": {
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(255, 253, 248)",
+      "ratio": 11.815946299704637
+    }
+  },
+  "contrast_checks": 63,
+  "min_ratio": 8.255313052750092,
+  "all_text_contrast_at_least_4_5": true,
+  "checks": [
+    {
+      "id": "model",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "model",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "model",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "call",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "reset",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiPrimary",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiPrimary",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "aiPrimary",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiSecondary",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "default",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "hover",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "focus",
+      "width": 360,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "model",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "model",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "model",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "call",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "reset",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiPrimary",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiPrimary",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "aiPrimary",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiSecondary",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "default",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "hover",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "focus",
+      "width": 768,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "model",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "model",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "model",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "call",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "call",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "reset",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "reset",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiPrimary",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiPrimary",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "aiPrimary",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "aiSecondary",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "aiSecondary",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(36, 86, 73)",
+      "ratio": 8.255313052750092
+    },
+    {
+      "id": "ticketTrackingLink",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(255, 253, 248)",
+      "background": "rgb(23, 61, 49)",
+      "ratio": 11.815946299704637
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "default",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "hover",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    },
+    {
+      "id": "ticketCopyTrackingBtn",
+      "state": "focus",
+      "width": 1440,
+      "color": "rgb(23, 61, 49)",
+      "background": "rgb(244, 241, 232)",
+      "ratio": 10.635587445519086
+    }
+  ]
+}

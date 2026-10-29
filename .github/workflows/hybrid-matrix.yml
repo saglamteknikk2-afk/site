@@ -54,7 +54,10 @@ jobs:
           node hybrid/tests/matrix_browser.cjs http://127.0.0.1:8766/ build/matrix-browser.json
           node hybrid/tests/editorial_browser.cjs http://127.0.0.1:8766/ build/editorial-browser.json
           node hybrid/tests/index_browser.cjs http://127.0.0.1:8766/ build/index-browser.json
+          node hybrid/tests/model_catalog_browser.cjs http://127.0.0.1:8766/ build/model-catalog-browser.json
           node hybrid/tests/diagnostics_loader_browser.cjs _site build/diagnostics-browser.json
+          node hybrid/tests/vip_confirmation_browser.cjs build/production build/vip-confirmation-browser.json
+          node hybrid/tests/interface_browser.cjs build/baseline build/interface-browser.json
       - name: Üretim paketini önizleme indirme alanına ekle
         run: |
           mkdir -p _site/indir
